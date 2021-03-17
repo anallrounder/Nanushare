@@ -25,5 +25,10 @@ public class NanuController {
 		mav.addObject("list", nservice.memberList(mvo));
 		return mav;
 	}
+	
+	@GetMapping("/index")
+	public String index() {
+		return "charity/index";
+	}
 
 }
