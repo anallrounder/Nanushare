@@ -9,7 +9,9 @@ import com.share.nanu.VO.MemberVO;
 import com.share.nanu.service.NanuService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 @Controller
 public class NanuController {
