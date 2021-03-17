@@ -1,5 +1,6 @@
 package com.share.nanu.controller;
 
+import org.apache.logging.slf4j.SLF4JLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,23 +10,20 @@ import com.share.nanu.VO.MemberVO;
 import com.share.nanu.service.NanuService;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @AllArgsConstructor
 @Controller
 public class NanuController {
-	
+
 	@Autowired
 	private NanuService nservice;
-	
+
 	@GetMapping("/mem")
-	public ModelAndView name(ModelAndView mav,MemberVO mvo) {
+	public ModelAndView name(ModelAndView mav, MemberVO mvo) {
+
 		mav.setViewName("home");
 		mav.addObject("list", nservice.memberList(mvo));
 		return mav;
 	}
-	
-	
 
 }
