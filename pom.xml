@@ -25,17 +25,6 @@
 	</repositories>
 	
 	<dependencies>
-	
-	<!-- jstl -->
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-		
 	<!-- 오라클 JDBC 드라이버 -->
 		<dependency>
 			<groupId>oracle</groupId>
@@ -48,6 +37,18 @@
          <artifactId>ojdbc8</artifactId>
          <scope>runtime</scope>
       </dependency>
+	
+	<!-- jstl -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		
+	
 		
 		<!-- Spring Security -->
 		<!-- <dependency>

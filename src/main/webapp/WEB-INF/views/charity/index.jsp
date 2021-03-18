@@ -13,15 +13,15 @@
     <title>Charity</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.css">
-    <link rel="stylesheet" href="/resources/css/fontawesome-all.css">
-    <link rel="stylesheet" href="/resources/css/flaticon.css">
-    <link rel="stylesheet" href="/resources/css/slick-slider.css">
-    <link rel="stylesheet" href="/resources/css/fancybox.css">
-    <link href="/resources/css/jplayer.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" href="/resources/css/color.css">
-    <link rel="stylesheet" href="/resources/css/responsive.css">
+    <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
+    <link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
+    <link rel="stylesheet" href="/resources/charity/css/flaticon.css">
+    <link rel="stylesheet" href="/resources/charity/css/slick-slider.css">
+    <link rel="stylesheet" href="/resources/charity/css/fancybox.css">
+    <link href="/resources/charity/css/jplayer.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/charity/css/style.css">
+    <link rel="stylesheet" href="/resources/charity/css/color.css">
+    <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
 </head>
 
@@ -59,7 +59,7 @@
         <div class="charity-main-header">
             <div class="container">
                 <div class="row">
-                    <aside class="col-3"><a href="index.html" class="charity-logo"><img src="/resources/images/logo.png" alt=""></a></aside>
+                    <aside class="col-3"><a href="index.html" class="charity-logo"><img src="/resources/charity/images/logo.png" alt=""></a></aside>
                     <aside class="col-9">
                         <div class="float-right">
                             <a href="#menu" class="menu-link active"><span></span></a>
@@ -126,7 +126,7 @@
         
         <div class="charity-banner-layer">
             <span class="charity-banner-transparent"></span>
-            <img src="/resources/extra-images/banner-1.jpg" alt="">
+            <img src="/resources/charity/extra-images/banner-1.jpg" alt="">
             <div class="charity-banner-caption">
                 <div class="container">
                     <h1>Charity Start your future Cause Help <span class="charity-color">The Poeple</span></h1>
@@ -140,7 +140,7 @@
         </div>
         <div class="charity-banner-layer">
             <span class="charity-banner-transparent"></span>
-            <img src="/resources/extra-images/banner-2.jpg" alt="">
+            <img src="/resources/charity/extra-images/banner-2.jpg" alt="">
             <div class="charity-banner-caption align-left-caption">
                 <div class="container">
                     <h1>Charity Start your future Cause Help <span class="charity-color">The Poeple</span></h1>
@@ -201,7 +201,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <figure class="short-text-thumb"><img src="/resources/extra-images/short-text-thumb-1.jpg" alt=""></figure>
+                        <figure class="short-text-thumb"><img src="/resources/charity/extra-images/short-text-thumb-1.jpg" alt=""></figure>
                     </div>
                     <div class="col-md-6 charity-short-text">
                         <h2>We are served since 35 years to helple people with trust</h2>
@@ -260,7 +260,7 @@
                         <div class="charity-causes charity-cause-grid">
                             <ul class="row">
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/cause-grid-1.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/cause-grid-1.jpg" alt=""></a>
                                         <figcaption><a href="#" class="charity-cause-grid-hover"><i class="fa fa-users"></i> 21 Donors</a></figcaption>
                                     </figure>
                                     <div data-width='90' data-target='95' class="charity-cause-progressbar"></div>
@@ -274,7 +274,7 @@
                                     </div>
                                 </li>
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/cause-grid-2.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/cause-grid-2.jpg" alt=""></a>
                                         <figcaption><a href="#" class="charity-cause-grid-hover"><i class="fa fa-users"></i> 21 Donors</a></figcaption>
                                     </figure>
                                     <div data-width='60' data-target='60' class="charity-cause-progressbar"></div>
@@ -288,7 +288,7 @@
                                     </div>
                                 </li>
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/cause-grid-3.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/cause-grid-3.jpg" alt=""></a>
                                         <figcaption><a href="#" class="charity-cause-grid-hover"><i class="fa fa-users"></i> 21 Donors</a></figcaption>
                                     </figure>
                                     <div data-width='45' data-target='45' class="charity-cause-progressbar"></div>
@@ -356,7 +356,7 @@
                         <div class="charity-event charity-event-grid">
                             <ul class="row">
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/event-grid-1.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/event-grid-1.jpg" alt=""></a>
                                         <figcaption>
                                             15 <span>Jan</span>
                                         </figcaption>
@@ -372,7 +372,7 @@
                                     </div>
                                 </li>
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/event-grid-2.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/event-grid-2.jpg" alt=""></a>
                                         <figcaption>
                                             19 <span>Dec</span>
                                         </figcaption>
@@ -388,7 +388,7 @@
                                     </div>
                                 </li>
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/event-grid-3.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/event-grid-3.jpg" alt=""></a>
                                         <figcaption>
                                             23 <span>NOV</span>
                                         </figcaption>
@@ -422,66 +422,66 @@
                         <div class="charity-gallery charity-simple-gallery">
                             <ul class="row">
                                 <li class="col-md-2 px-0">
-                                    <figure><a href="#"><img src="/resources/extra-images/home-gallery-1.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/home-gallery-1.jpg" alt=""></a>
                                         <figcaption>
                                             <span></span>
-                                            <a data-fancybox="gallery" href="/resources/extra-images/home-gallery-1.jpg"><i class="fa fa-search-plus"></i></a>
+                                            <a data-fancybox="gallery" href="/resources/charity/extra-images/home-gallery-1.jpg"><i class="fa fa-search-plus"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
                                 <li class="col-md-4 px-0">
-                                    <figure><a href="#"><img src="/resources/extra-images/home-gallery-5.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/home-gallery-5.jpg" alt=""></a>
                                         <figcaption>
                                             <span></span>
-                                            <a data-fancybox="gallery" href="/resources/extra-images/home-gallery-5.jpg"><i class="fa fa-search-plus"></i></a>
+                                            <a data-fancybox="gallery" href="/resources/charity/extra-images/home-gallery-5.jpg"><i class="fa fa-search-plus"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
                                 <li class="col-md-2 px-0">
-                                    <figure><a href="#"><img src="/resources/extra-images/home-gallery-2.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/home-gallery-2.jpg" alt=""></a>
                                         <figcaption>
                                             <span></span>
-                                            <a data-fancybox="gallery" href="/resources/extra-images/home-gallery-2.jpg"><i class="fa fa-search-plus"></i></a>
+                                            <a data-fancybox="gallery" href="/resources/charity/extra-images/home-gallery-2.jpg"><i class="fa fa-search-plus"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
                                 <li class="col-md-4 px-0">
-                                    <figure><a href="#"><img src="/resources/extra-images/home-gallery-6.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/home-gallery-6.jpg" alt=""></a>
                                         <figcaption>
                                             <span></span>
-                                            <a data-fancybox="gallery" href="/resources/cextra-images/home-gallery-6.jpg"><i class="fa fa-search-plus"></i></a>
+                                            <a data-fancybox="gallery" href="/resources/charity/cextra-images/home-gallery-6.jpg"><i class="fa fa-search-plus"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
                                 <li class="col-md-4 px-0">
-                                    <figure><a href="#"><img src="/resources/extra-images/home-gallery-7.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/home-gallery-7.jpg" alt=""></a>
                                         <figcaption>
                                             <span></span>
-                                            <a data-fancybox="gallery" href="/resources/extra-images/home-gallery-7.jpg"><i class="fa fa-search-plus"></i></a>
+                                            <a data-fancybox="gallery" href="/resources/charity/extra-images/home-gallery-7.jpg"><i class="fa fa-search-plus"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
                                 <li class="col-md-2 px-0">
-                                    <figure><a href="#"><img src="/resources/extra-images/home-gallery-3.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/home-gallery-3.jpg" alt=""></a>
                                         <figcaption>
                                             <span></span>
-                                            <a data-fancybox="gallery" href="/resources/extra-images/home-gallery-3.jpg"><i class="fa fa-search-plus"></i></a>
+                                            <a data-fancybox="gallery" href="/resources/charity/extra-images/home-gallery-3.jpg"><i class="fa fa-search-plus"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
                                 <li class="col-md-2 px-0">
-                                    <figure><a href="#"><img src="/resources/extra-images/home-gallery-4.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/home-gallery-4.jpg" alt=""></a>
                                         <figcaption>
                                             <span></span>
-                                            <a data-fancybox="gallery" href="/resources/extra-images/home-gallery-4.jpg"><i class="fa fa-search-plus"></i></a>
+                                            <a data-fancybox="gallery" href="/resources/charity/extra-images/home-gallery-4.jpg"><i class="fa fa-search-plus"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
                                 <li class="col-md-4 px-0">
-                                    <figure><a href="#"><img src="/resources/extra-images/home-gallery-8.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/home-gallery-8.jpg" alt=""></a>
                                         <figcaption>
                                             <span></span>
-                                            <a data-fancybox="gallery" href="/resources/extra-images/home-gallery-8.jpg"><i class="fa fa-search-plus"></i></a>
+                                            <a data-fancybox="gallery" href="/resources/charity/extra-images/home-gallery-8.jpg"><i class="fa fa-search-plus"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
@@ -504,7 +504,7 @@
                         <div class="charity-team charity-simple-team">
                             <ul class="row">
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/simple-team-1.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/simple-team-1.jpg" alt=""></a>
                                         <figcaption>
                                             <div class="charity-simple-team-media">
                                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -521,7 +521,7 @@
                                     </figure>
                                 </li>
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/simple-team-2.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/simple-team-2.jpg" alt=""></a>
                                         <figcaption>
                                             <div class="charity-simple-team-media">
                                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -538,7 +538,7 @@
                                     </figure>
                                 </li>
                                 <li class="col-md-4">
-                                    <figure><a href="#"><img src="/resources/extra-images/simple-team-3.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/simple-team-3.jpg" alt=""></a>
                                         <figcaption>
                                             <div class="charity-simple-team-media">
                                                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -598,7 +598,7 @@
                         <div class="charity-blog charity-simple-blog">
                             <ul class="row">
                                 <li class="col-md-6">
-                                    <figure><a href="#"><img src="/resources/extra-images/blog-simple-1.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/blog-simple-1.jpg" alt=""></a>
                                         <figcaption>
                                             <time datetime="2008-02-14 20:00" class="charity-bgcolor">18 <span>AUG</span></time>
                                             <a href="#" class="blog-link-hover"><i class="fa fa-link"></i></a>
@@ -616,7 +616,7 @@
                                     </div>
                                 </li>
                                 <li class="col-md-6">
-                                    <figure><a href="#"><img src="/resources/extra-images/blog-simple-2.jpg" alt=""></a>
+                                    <figure><a href="#"><img src="/resources/charity/extra-images/blog-simple-2.jpg" alt=""></a>
                                         <figcaption>
                                             <time datetime="2008-02-14 20:00" class="charity-bgcolor">12 <span>JAN</span></time>
                                             <a href="#" class="blog-link-hover"><i class="fa fa-link"></i></a>
@@ -693,14 +693,14 @@
                         <div class="charity-footer-title"> <h2>Recent News</h2> </div>
                         <ul>
                             <li>
-                                <figure><a href="#"><img src="/resources/extra-images/recent-news-widget-1.jpg" alt=""></a></figure>
+                                <figure><a href="#"><img src="/resources/charity/extra-images/recent-news-widget-1.jpg" alt=""></a></figure>
                                 <div class="widget_recent_news_text">
                                     <h6><a href="#">Praesent sit amet tellus sed qum biben dum faucus</a></h6>
                                     <span>22 Sept, 2016</span>
                                 </div>
                             </li>
                             <li>
-                                <figure><a href="#"><img src="/resources/extra-images/recent-news-widget-2.jpg" alt=""></a></figure>
+                                <figure><a href="#"><img src="/resources/charity/extra-images/recent-news-widget-2.jpg" alt=""></a></figure>
                                 <div class="widget_recent_news_text">
                                     <h6><a href="#">Morbi pulvinar faucibus urna, sit amet euisd nulla.</a></h6>
                                     <span>22 Sept, 2016</span>
@@ -711,14 +711,14 @@
                     <aside class="col-md-4 widget widget_gallery">
                         <div class="charity-footer-title"> <h2>Our Gallery</h2> </div>
                         <ul>
-                            <li><a data-fancybox="gallery" href="/resources/extra-images/widget-gallery-1.jpg"><img src="/resources/extra-images/widget-gallery-1.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/extra-images/widget-gallery-2.jpg"><img src="/resources/extra-images/widget-gallery-2.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/extra-images/widget-gallery-3.jpg"><img src="/resources/extra-images/widget-gallery-3.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/extra-images/widget-gallery-4.jpg"><img src="/resources/extra-images/widget-gallery-4.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/extra-images/widget-gallery-5.jpg"><img src="/resources/extra-images/widget-gallery-5.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/extra-images/widget-gallery-6.jpg"><img src="/resources/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/extra-images/widget-gallery-7.jpg"><img src="/resources/extra-images/widget-gallery-7.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/extra-images/widget-gallery-8.jpg"><img src="/resources/extra-images/widget-gallery-8.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/charity/extra-images/widget-gallery-1.jpg"><img src="/resources/charity/extra-images/widget-gallery-1.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/charity/extra-images/widget-gallery-2.jpg"><img src="/resources/charity/extra-images/widget-gallery-2.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/charity/extra-images/widget-gallery-3.jpg"><img src="/resources/charity/extra-images/widget-gallery-3.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/charity/extra-images/widget-gallery-4.jpg"><img src="/resources/charity/extra-images/widget-gallery-4.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/charity/extra-images/widget-gallery-5.jpg"><img src="/resources/charity/extra-images/widget-gallery-5.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/charity/extra-images/widget-gallery-6.jpg"><img src="/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/charity/extra-images/widget-gallery-7.jpg"><img src="/resources/charity/extra-images/widget-gallery-7.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/charity/extra-images/widget-gallery-8.jpg"><img src="/resources/charity/extra-images/widget-gallery-8.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
                         </ul>
                     </aside>
                 </div>
@@ -757,17 +757,17 @@
     </div>
 
     <!-- jQuery -->
-    <script src="/resources/script/jquery.js"></script>
-    <script src="/resources/script/popper.min.js"></script>
-    <script src="/resources/script/bootstrap.min.js"></script>
-    <script src="/resources/script/slick.slider.min.js"></script>
-    <script src="/resources/script/progressbar.js"></script>
-    <script src="/resources/script/fancybox.min.js"></script>
-    <script src="/resources/script/jquery.countdown.min.js"></script>
+    <script src="/resources/charity/script/jquery.js"></script>
+    <script src="/resources/charity/script/popper.min.js"></script>
+    <script src="/resources/charity/script/bootstrap.min.js"></script>
+    <script src="/resources/charity/script/slick.slider.min.js"></script>
+    <script src="/resources/charity/script/progressbar.js"></script>
+    <script src="/resources/charity/script/fancybox.min.js"></script>
+    <script src="/resources/charity/script/jquery.countdown.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="/resources/script/jquery.jplayer.js"></script>
-    <script src="/resources/script/jplayer.playlist.js"></script>
-    <script src="/resources/script/functions.js"></script>
+    <script src="/resources/charity/script/jquery.jplayer.js"></script>
+    <script src="/resources/charity/script/jplayer.playlist.js"></script>
+    <script src="/resources/charity/script/functions.js"></script>
 </body>
 
 </html>
