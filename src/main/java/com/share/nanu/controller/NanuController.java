@@ -1,7 +1,11 @@
 package com.share.nanu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,5 +47,20 @@ public class NanuController {
 		mav.setViewName("/join");
 		return mav;
 	}
+	
+	@PostMapping("/memberJoin")
+	public ResponseEntity<String> memberJoin(@RequestBody MemberVO mvo) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			nservice.memberJoin(mvo);
+			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;
+	}
+		
 
 }

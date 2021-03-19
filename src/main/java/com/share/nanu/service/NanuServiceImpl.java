@@ -8,6 +8,7 @@ import com.share.nanu.VO.MemberVO;
 import com.share.nanu.mapper.NanuMapper;
 
 import lombok.AllArgsConstructor;
+import oracle.net.aso.n;
 
 @AllArgsConstructor
 @Service
@@ -22,6 +23,13 @@ public class NanuServiceImpl implements NanuService {
 	public List<MemberVO> memberList(MemberVO mvo) {
 		
 		return nmapper.getlist(mvo);
+	}
+
+
+
+	@Override
+	public void memberJoin(MemberVO mvo) {
+		nmapper.memberJoin(mvo);
 	}
 
 }

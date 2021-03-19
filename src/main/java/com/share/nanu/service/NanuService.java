@@ -7,4 +7,6 @@ import com.share.nanu.VO.MemberVO;
 public interface NanuService {
 
 	List<MemberVO> memberList(MemberVO mvo);
+
+	public void memberJoin(MemberVO mvo);
 }

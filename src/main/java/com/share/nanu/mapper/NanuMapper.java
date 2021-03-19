@@ -10,5 +10,9 @@ import com.share.nanu.VO.MemberVO;
 public interface NanuMapper {
 
 	public List<MemberVO> getlist(MemberVO mvo);
+	
+	MemberVO getMember(String username); // 유저정보 가져오기
+
+	public void memberJoin(MemberVO mvo);
 
 }
