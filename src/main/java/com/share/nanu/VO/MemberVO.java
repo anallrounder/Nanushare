@@ -17,13 +17,16 @@ public class MemberVO {
 	private int dntcnt; // 후원금기부횟수
 	private int itemdntcnt; // 물품기부횟수
 	private String phone; // 핸드폰번호
+	private char enable;//스프링 시큐리티
+	private List<AuthVO> authList; //권한 리스트
 
 	public MemberVO() {
 		super();
 	}
 
 	public MemberVO(String member_id, String pw, String name, String gender, Date birth, String signuppath, int pntnum,
-			String authname, String bklist, int dntcnt, int itemdntcnt, String phone) {
+			String authname, String bklist, int dntcnt, int itemdntcnt, String phone, char enable,
+			List<AuthVO> authList) {
 		super();
 		this.member_id = member_id;
 		this.pw = pw;
@@ -37,6 +40,24 @@ public class MemberVO {
 		this.dntcnt = dntcnt;
 		this.itemdntcnt = itemdntcnt;
 		this.phone = phone;
+		this.enable = enable;
+		this.authList = authList;
+	}
+
+	public char getEnable() {
+		return enable;
+	}
+
+	public void setEnable(char enable) {
+		this.enable = enable;
+	}
+
+	public List<AuthVO> getAuthList() {
+		return authList;
+	}
+
+	public void setAuthList(List<AuthVO> authList) {
+		this.authList = authList;
 	}
 
 	public String getMember_id() {

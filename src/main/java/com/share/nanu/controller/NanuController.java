@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.share.nanu.VO.MemberVO;
+import com.share.nanu.service.MemberService;
 import com.share.nanu.service.NanuService;
 
 import lombok.AllArgsConstructor;
@@ -22,38 +23,53 @@ public class NanuController {
 
 	@Autowired
 	private NanuService nservice;
-
-	@GetMapping("/mem")
-	public ModelAndView name(ModelAndView mav, MemberVO mvo) {
-
-		mav.setViewName("home");
-		mav.addObject("list", nservice.memberList(mvo));
-		return mav;
-	}
 	
-	@GetMapping("/index")
+	@Autowired
+	private MemberService mservice;
+
+	
+	@GetMapping("/index") //메인페이지
 	public String index() {
 		return "charity/index";
 	}
 	
-	@GetMapping("/login") //로그인 이동
+	@GetMapping("/login") //로그인 페이지
 	public ModelAndView login(ModelAndView mav) {
 		mav.setViewName("/loginForm/Loginindex");
 		return mav;
 	}
 	
-	@GetMapping("/joinForm") //가입 이동
+	@GetMapping("/member/slogin")//로그인성공
+	public ModelAndView slogin(ModelAndView mav) {
+		mav.setViewName("/slogin");
+		return mav;
+	}
+	
+	@GetMapping("/member/logout")//로그아웃
+	public ModelAndView ologin(ModelAndView mav) {
+		mav.setViewName("/logout");
+		return mav;
+	}
+	
+	@GetMapping("/denied")//접근거부
+	public ModelAndView denied(ModelAndView mav) {
+		mav.setViewName("/denied");
+		return mav;
+	}
+	
+	
+	@GetMapping("/joinForm") //회원가입 이동
 	public ModelAndView loginForm(ModelAndView mav) {
 		mav.setViewName("/join");
 		return mav;
 	}
 	
-	@PostMapping("/memberJoin")
+	@PostMapping("/memberJoin")//가입처리
 	public ResponseEntity<String> memberJoin(@RequestBody MemberVO mvo) {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			nservice.memberJoin(mvo);
+			mservice.addMember(mvo);
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -61,6 +77,8 @@ public class NanuController {
 		}
 		return entity;
 	}
+	
+	
 		
 
 }

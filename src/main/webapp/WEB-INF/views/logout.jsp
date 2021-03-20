@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+   ty/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	로그인성공
+	로그아웃
 </body>
 </html>

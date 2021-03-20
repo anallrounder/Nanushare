@@ -4,18 +4,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.share.nanu.mapper.NanuMapper">
 
+	<resultMap type="com.share.nanu.VO.MemberVO" id="MemberVO">
+		<result property="username" column="member_id" />
+		<result property="password" column="pw" />
+		<result property="enabled" column="enable" />
+		<collection property="authList" resultMap="auth"></collection>
+	</resultMap>
 
-	<select id="getlist" resultType="com.share.nanu.VO.MemberVO">
+	<resultMap type="com.share.nanu.VO.AuthVO" id="auth">
+		<result property="username" column="member_id" />
+		<result property="authority" column="authrole" />
+	</resultMap>
+
+	<select id="getMember" resultMap="MemberVO">
+		<![CDATA[
+			select * from member, auth where member.member_id = auth.member_id and member.member_id=#{username}
+		]]>
+	</select>
+
+
+
+	<select id="memberJoin" resultType="com.share.nanu.VO.MemberVO">
 	<![CDATA[ 
-			select * from member 
+			insert into member (member_id,pw,name,gender,birth,signuppath,authname,phone,enable)
+				 values(#{member_id},#{pw},#{name},#{gender},#{birth},'home','회원',#{phone},'1') 
 		]]>
 	</select>
 	
-	
-	<select id="memberJoin" resultType="com.share.nanu.VO.MemberVO">
+	<select id="insertAuth" resultType="com.share.nanu.VO.AuthVO">
 	<![CDATA[ 
-			insert into member (member_id,pw,name,gender,birth,signuppath,pntnum,authname,bklist,dntcnt,itemdntcnt,phone)
-				 values(#{member_id},#{pw},#{name},#{gender},#{birth},'home',null,#{authname},null,,null,null,#{phone}) 
+			insert into auth (authidx,member_id,authrole)
+				 values(AUTH_SEQ.nextval,#{member_id},'ROLE_USER') 
 		]]>
 	</select>
 
