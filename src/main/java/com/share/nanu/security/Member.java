@@ -18,26 +18,25 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Member extends User{
+public class Member extends User {
 
-	
 	private MemberVO mvo;
-	
-	//부모 생성자 호출
+
+	// 부모 생성자 호출
 	public Member(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-		
+
 		super(username, password, authorities);
-		
+
 	}
-	
+
 	public Member(MemberVO mvo) {
 		super(mvo.getMember_id(), mvo.getPw(), getAuth(mvo));
 		this.mvo = mvo;
 	}
-	
-	//유저 권한 목록
+
+	// 유저 권한 목록
 	private static Collection<? extends GrantedAuthority> getAuth(MemberVO mvo) {
-		
+
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 		for (AuthVO auth : mvo.getAuthList()) {

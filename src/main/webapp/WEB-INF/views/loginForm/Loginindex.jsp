@@ -33,12 +33,14 @@
 					<div class="login-wrap p-0">
 		      	<h3 class="mb-4 text-center">Have an account?</h3>
 		      	
+		      	
+		      	
 		      	<form action="/member/slogin" class="signin-form" method="get">
 		      		<div class="form-group">
-		      			<input type="email" id="username" name="username" class="form-control" placeholder="Username" required>
+		      			<input type="email" id="id" name="username" class="form-control" placeholder="Username" required>
 		      		</div>
 	            <div class="form-group">
-	              <input id="password-field" id="password" name="password" type="password" class="form-control" placeholder="Password" required>
+	              <input id="password-field" id="pw" name="password" type="password" class="form-control" placeholder="Password" required>
 	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 	            </div>
 	            <div class="form-group">
@@ -55,7 +57,10 @@
 									<a href="#" style="color: #fff">Forgot Password</a>
 								</div>
 	            </div>
+	             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	          </form>
+	          
+	          
 	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
 	          <div class="social d-flex text-center">
 	          	<a href="/joinForm" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> 회원가입</a>

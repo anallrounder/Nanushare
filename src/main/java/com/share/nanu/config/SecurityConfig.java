@@ -1,13 +1,18 @@
 package com.share.nanu.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.share.nanu.security.MemberDetailsService;
 
 import lombok.AllArgsConstructor;
 
@@ -15,6 +20,8 @@ import lombok.AllArgsConstructor;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -32,15 +39,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.formLogin()
 			.loginPage("/login")
+			.loginProcessingUrl("/member/slogin")
+			.usernameParameter("username")
+			.passwordParameter("password")
 			.defaultSuccessUrl("/member/slogin").permitAll()
 		.and()
 			.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-				.logoutSuccessUrl("/member/logout")
-				.invalidateHttpSession(true)
+			.logoutUrl("/member/logout")
+			.logoutSuccessUrl("/login")
 		.and()
 			.exceptionHandling()
 			.accessDeniedPage("/denied");
+		
+		
 	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	
+	
 
 }
