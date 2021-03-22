@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="authrole" column="authrole" />
 	</resultMap>
 
-	<select id="getMember" resultMap="memberMap">
+	<select id="getMember" parameterType="String" resultMap="memberMap">
 		<![CDATA[
 			select *
 			from member, auth

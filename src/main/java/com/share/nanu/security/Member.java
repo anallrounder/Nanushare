@@ -41,6 +41,7 @@ public class Member extends User {
 
 		for (AuthVO auth : mvo.getAuthList()) {
 			authorities.add(new SimpleGrantedAuthority(auth.getAuthrole()));
+			
 		}
 
 		return authorities;
