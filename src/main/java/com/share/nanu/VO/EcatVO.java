@@ -1,5 +1,8 @@
 package com.share.nanu.VO;
 
+import lombok.ToString;
+
+@ToString
 public class EcatVO {
 	private int ecat_num; // 이벤트 카테고리 분류번호
 	private String ename; // 이벤트명

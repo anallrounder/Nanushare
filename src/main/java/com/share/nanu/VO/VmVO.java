@@ -1,5 +1,8 @@
 package com.share.nanu.VO;
 
+import lombok.ToString;
+
+@ToString
 public class VmVO {
 
 	private int vmindex; // 자판기인덱스

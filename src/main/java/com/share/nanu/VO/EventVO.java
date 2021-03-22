@@ -2,6 +2,9 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
+import lombok.ToString;
+
+@ToString
 public class EventVO {
 	private int e_idx; // 로그기록idx
 	private int ecat_num; // 이벤트 카테고리 분류번호

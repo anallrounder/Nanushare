@@ -1,5 +1,8 @@
 package com.share.nanu.VO;
 
+import lombok.ToString;
+
+@ToString
 public class BoardqnaVO {
 	private String bprivate; // 비공개여부
 	private int b_index; // 인덱스
