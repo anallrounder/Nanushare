@@ -1,5 +1,7 @@
 package com.share.nanu.controller;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,62 +25,57 @@ public class NanuController {
 
 	@Autowired
 	private NanuService nservice;
-	
+
 	@Autowired
 	private MemberService mservice;
-
 	
-	@GetMapping("/index") //메인페이지
-	public String index() {
-		return "charity/index";
+	@GetMapping("/")
+	public ModelAndView home(ModelAndView mav) {
+		mav.setViewName("/index");
+		return mav;
 	}
-	
-	@GetMapping("/login") //로그인 페이지
+
+	@GetMapping("/login") // 로그인 페이지
 	public ModelAndView login(ModelAndView mav) {
+		log.info("로그인 폼으로 이동");
 		mav.setViewName("/loginForm/Loginindex");
 		return mav;
 	}
-	
-	@GetMapping("/member/slogin")//로그인성공
+
+	@GetMapping("/member/slogin") // 로그인성공
 	public ModelAndView slogin(ModelAndView mav) {
+		log.info("로그인 성공");
 		mav.setViewName("/slogin");
 		return mav;
 	}
 	
-	@GetMapping("/member/logout")//로그아웃
+
+	@GetMapping("/member/logout") // 로그아웃
 	public ModelAndView ologin(ModelAndView mav) {
 		mav.setViewName("/logout");
 		return mav;
 	}
-	
-	@GetMapping("/denied")//접근거부
-	public ModelAndView denied(ModelAndView mav) {
-		mav.setViewName("/denied");
-		return mav;
-	}
-	
-	
-	@GetMapping("/joinForm") //회원가입 이동
+
+	@GetMapping("/joinForm") // 회원가입 이동
 	public ModelAndView loginForm(ModelAndView mav) {
+		log.info("회원가입 폼으로 이동");
 		mav.setViewName("/join");
 		return mav;
 	}
-	
-	@PostMapping("/memberJoin")//가입처리
+
+	@PostMapping("/memberJoin") // 회원 가입처리
 	public ResponseEntity<String> memberJoin(@RequestBody MemberVO mvo) {
+		log.info("회원 가입 처리");
 		ResponseEntity<String> entity = null;
-		
+
 		try {
 			mservice.addMember(mvo);
-			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
-			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
 		}
 		return entity;
 	}
-	
-	
-		
 
 }

@@ -35,7 +35,7 @@
 		      	
 		      	
 		      	
-		      	<form action="/member/slogin" class="signin-form" method="get">
+		      	<form action="/member/slogin" class="signin-form" method="post">
 		      		<div class="form-group">
 		      			<input type="email" id="id" name="username" class="form-control" placeholder="Username" required>
 		      		</div>
@@ -65,7 +65,9 @@
 	          <div class="social d-flex text-center">
 	          	<a href="/joinForm" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> sign up</a>
 	          	<a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> kakao</a>
-	          	<a href="" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> naver</a>
+	          	<a href="/oauth2/authorization/naver" class="px-2 py-2 ml-md-1 rounded">
+	          		<span class="ion-logo-twitter mr-2"></span>naver</a>
+	          	<!-- href="/aouth2/aouthorization/naver" 를 호출하면 provider의 authorization-uri호출  -->
 	          </div>
 		      </div>
 				</div>

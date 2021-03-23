@@ -39,6 +39,7 @@
 				//var gender = $("#gender").val();
 				var birth = $("#birth").val();
 				var phone = $("#phone").val();
+				var signuppath = $("#signuppath").val();
 				//var authname = $('input[name="authname"]:checked').val();
 				//var authname = $("#authname").val();
 				
@@ -50,7 +51,8 @@
 						name : name,
 						gender : gender,
 						birth : birth,
-						phone : phone
+						phone : phone,
+						signuppath : signuppath
 						//authname : authname
 				};
 				
@@ -89,9 +91,10 @@
 		pw	: <input type="password" id="pw"> <br>
 		이름 : <input type="text" id="name"> <br>
 		성별 : <label> <input type="radio" name="gender" id = "gender" value="M">남자 </label>
-			 <label> <input type="radio" name="gender" id="gender" value="W">여자</label><br>
-		생일 : <input type="date" id="birth"> <br>
-		연락처 : <input type="text" id="phone"> <br>
+			 <label> <input type="radio" name="gender" id="gender" value="W">여자</label><br/>
+		생일 : <input type="date" id="birth"> <br/>
+		연락처 : <input type="text" id="phone"> <br/>
+		<input type="hidden" name="signuppath"  id="signuppath" value="home"><br/>
 		<!-- <label> <input type="radio" name="authname" id = "authname" value="관리자">관리자 </label>
 		<label> <input type="radio" name="authname" id="authname" value="회원">회원</label><br> -->
 		<input type="submit" value="가입">

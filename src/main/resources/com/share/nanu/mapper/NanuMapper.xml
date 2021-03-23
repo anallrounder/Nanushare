@@ -35,12 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 
-
-
 	<select id="memberJoin" resultType="com.share.nanu.VO.MemberVO">
 	<![CDATA[ 
 			insert into member (member_id,pw,name,gender,birth,signuppath,authname,phone,enable)
-				 values(#{member_id},#{pw},#{name},#{gender},#{birth},'home','회원',#{phone},'1') 
+				 values(#{member_id},#{pw},#{name},#{gender},#{birth},#{signuppath},'회원',#{phone},'1') 
 		]]>
 	</select>
 	

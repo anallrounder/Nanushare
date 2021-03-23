@@ -3,15 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<script type="text/javascript">
-
-
-</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	로그인성공
+메인
+<a href="/login">로그인폼</a>
+
 </body>
 </html>
