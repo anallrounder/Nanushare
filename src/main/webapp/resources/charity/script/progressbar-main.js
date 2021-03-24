@@ -52,7 +52,7 @@
 		}
 
 		// Render the progress bar
-		// 메인에서 수치 % 빼고 사용
+		// 메인에서 수치 progress + % 빼고 사용
 		if ( settings.animation ) {
 			overlay += '<span class="bar" style="background-color:' + settings.barColor + ';"><span class="progress-percent" style="line-height:' + settings.height + 'px;">' + '</span></span>';
 		}
@@ -65,6 +65,7 @@
 		if ( settings.percentage ) {
 			overlay += '';
 		}
+		
 
 		// End
 		overlay += '</div></div>';
@@ -82,7 +83,7 @@
 		$( '.progressbar.animate' ).each( function() {
 			var position = $( this ).offset().top; // .offset()은 선택한 요소의 좌표를 가져오거나 특정 좌표로 이동시킴
 
-			if ( ( $(window).scrollTop() + doc_height - 60 ) > position ) {
+			if (( $(window).scrollTop() + doc_height - 60 ) > position ) {
 				var progress = $( this ).data( 'width' ) + "%";
 
 				$( this ).removeClass( 'animate' );
