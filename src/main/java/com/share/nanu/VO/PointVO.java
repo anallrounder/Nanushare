@@ -2,6 +2,9 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
+import lombok.ToString;
+
+@ToString
 public class PointVO {
 
 	private int pnt_num; // 포인트번호 pk
