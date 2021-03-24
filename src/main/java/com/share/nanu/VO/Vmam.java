@@ -1,5 +1,8 @@
 package com.share.nanu.VO;
 
+import lombok.ToString;
+
+@ToString
 public class Vmam {
 
 	private int vmindex; //vm index
