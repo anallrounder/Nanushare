@@ -45,13 +45,13 @@
 		// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열
 		var positions = [ 
 			{
-			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vmindex == 1}"><strong>${dao.branch}</c:if></c:forEach></div>',
+			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's111'}"><strong>${dao.branch}</c:if></c:forEach></div>',
 			latlng : new kakao.maps.LatLng(37.5700928, 126.9835591)	
 		}, {
-			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vmindex == 6}"><strong>${dao.branch}</c:if></c:forEach></div>',
+			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's222'}"><strong>${dao.branch}</c:if></c:forEach></div>',
 			latlng : new kakao.maps.LatLng(37.5660156, 126.9828097)
 		}, {
-			content :'<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vmindex == 11}"><strong>${dao.branch}</c:if></c:forEach></div>',
+			content :'<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's333'}"><strong>${dao.branch}</c:if></c:forEach></div>',
 			latlng : new kakao.maps.LatLng(37.5697172, 126.9773686)
 		}];
 		</script>
