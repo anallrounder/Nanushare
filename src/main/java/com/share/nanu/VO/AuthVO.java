@@ -1,9 +1,12 @@
 package com.share.nanu.VO;
 
+import lombok.ToString;
+
+@ToString
 public class AuthVO {
 
 	private int authidx; // 권한번호
-	private String member_id;
+	private String member_id; //아이디
 	private String authrole; // 권한이름
 
 	public AuthVO(int authidx, String member_id, String authrole) {

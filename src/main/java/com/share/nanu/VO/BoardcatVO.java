@@ -1,5 +1,8 @@
 package com.share.nanu.VO;
 
+import lombok.ToString;
+
+@ToString
 public class BoardcatVO {
 
 	private int bcat_num; // 게시판 분류번호

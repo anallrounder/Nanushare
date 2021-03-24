@@ -1,7 +1,11 @@
 package com.share.nanu.VO;
 
 import java.sql.Date;
+import java.util.List;
 
+import lombok.ToString;
+
+@ToString
 public class MemberVO {
 
 	private String member_id; // 아이디
@@ -11,18 +15,25 @@ public class MemberVO {
 	private Date birth; // 생일
 	private String signuppath; // 가입경로
 	private int pntnum; // 포인트번호
-	private String authname; // 등급이름
+	private int authnum; // 등급번호
 	private String bklist; // 블랙리스트
 	private int dntcnt; // 후원금기부횟수
 	private int itemdntcnt; // 물품기부횟수
 	private String phone; // 핸드폰번호
+	private char enable;// 스프링 시큐리티
+	private List<AuthVO> authList; // 권한 리스트
 
 	public MemberVO() {
 		super();
 	}
 
 	public MemberVO(String member_id, String pw, String name, String gender, Date birth, String signuppath, int pntnum,
-			String authname, String bklist, int dntcnt, int itemdntcnt, String phone) {
+<<<<<<< HEAD
+			String authname, String bklist, int dntcnt, int itemdntcnt, String phone, char enable,
+			List<AuthVO> authList) {
+=======
+			int authnum, String bklist, int dntcnt, int itemdntcnt, String phone) {
+>>>>>>> origin/dev_bee
 		super();
 		this.member_id = member_id;
 		this.pw = pw;
@@ -31,11 +42,13 @@ public class MemberVO {
 		this.birth = birth;
 		this.signuppath = signuppath;
 		this.pntnum = pntnum;
-		this.authname = authname;
+		this.authnum = authnum;
 		this.bklist = bklist;
 		this.dntcnt = dntcnt;
 		this.itemdntcnt = itemdntcnt;
 		this.phone = phone;
+		this.enable = enable;
+		this.authList = authList;
 	}
 
 	public String getMember_id() {
@@ -94,12 +107,12 @@ public class MemberVO {
 		this.pntnum = pntnum;
 	}
 
-	public String getAuthname() {
-		return authname;
+	public int getAuthnum() {
+		return authnum;
 	}
 
-	public void setAuthname(String authname) {
-		this.authname = authname;
+	public void setAuthnum(int authnum) {
+		this.authnum = authnum;
 	}
 
 	public String getBklist() {
@@ -132,6 +145,22 @@ public class MemberVO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public char getEnable() {
+		return enable;
+	}
+
+	public void setEnable(char enable) {
+		this.enable = enable;
+	}
+
+	public List<AuthVO> getAuthList() {
+		return authList;
+	}
+
+	public void setAuthList(List<AuthVO> authList) {
+		this.authList = authList;
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.share.nanu.VO;
 
+import lombok.ToString;
+
+@ToString
 public class PaycatVO {
 	private int pcat_num; // 결제방법분류번호
 	private String pmethod; // 결제방법
