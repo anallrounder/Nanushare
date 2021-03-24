@@ -24,26 +24,6 @@ public class MemberVO {
 		super();
 	}
 
-	public MemberVO(String member_id, String pw, String name, String gender, Date birth, String signuppath, int pntnum,
-			String authname, String bklist, int dntcnt, int itemdntcnt, String phone, char enable,
-			List<AuthVO> authList) {
-		super();
-		this.member_id = member_id;
-		this.pw = pw;
-		this.name = name;
-		this.gender = gender;
-		this.birth = birth;
-		this.signuppath = signuppath;
-		this.pntnum = pntnum;
-		this.authname = authname;
-		this.bklist = bklist;
-		this.dntcnt = dntcnt;
-		this.itemdntcnt = itemdntcnt;
-		this.phone = phone;
-		this.enable = enable;
-		this.authList = authList;
-	}
-
 	public String getMember_id() {
 		return member_id;
 	}
@@ -153,6 +133,26 @@ public class MemberVO {
 	}
 
 	public void setAuthList(List<AuthVO> authList) {
+		this.authList = authList;
+	}
+
+	public MemberVO(String member_id, String pw, String name, String gender, Date birth, String signuppath, int pntnum,
+			String authname, String bklist, int dntcnt, int itemdntcnt, String phone, char enable,
+			List<AuthVO> authList) {
+		super();
+		this.member_id = member_id;
+		this.pw = pw;
+		this.name = name;
+		this.gender = gender;
+		this.birth = birth;
+		this.signuppath = signuppath;
+		this.pntnum = pntnum;
+		this.authname = authname;
+		this.bklist = bklist;
+		this.dntcnt = dntcnt;
+		this.itemdntcnt = itemdntcnt;
+		this.phone = phone;
+		this.enable = enable;
 		this.authList = authList;
 	}
 
