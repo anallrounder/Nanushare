@@ -52,9 +52,11 @@
 		}
 
 		// Render the progress bar
+		// 메인에서 수치 % 빼고 사용
 		if ( settings.animation ) {
-			overlay += '<span class="bar" style="background-color:' + settings.barColor + ';"><span class="progress-percent" style="line-height:' + settings.height + 'px;">' + progress + '%</span></span>';
+			overlay += '<span class="bar" style="background-color:' + settings.barColor + ';"><span class="progress-percent" style="line-height:' + settings.height + 'px;">' + '</span></span>';
 		}
+	
 		else {
 			overlay += '<span class="bar" style="width:' + progress + '%;background-color:' + settings.barColor + ';"></span>';
 		}
@@ -76,8 +78,9 @@
 
 		var doc_height = $(window).height();
 
+		// for 문
 		$( '.progressbar.animate' ).each( function() {
-			var position = $( this ).offset().top;
+			var position = $( this ).offset().top; // .offset()은 선택한 요소의 좌표를 가져오거나 특정 좌표로 이동시킴
 
 			if ( ( $(window).scrollTop() + doc_height - 60 ) > position ) {
 				var progress = $( this ).data( 'width' ) + "%";
@@ -94,9 +97,9 @@
 		});
 
 	};
-
+/*
 	// Looking for an animation element in the view
-	$(window).scroll(function() {
+	$(document).ready(function() {
 
 		if ( $( '.progressbar.animate' ).length < 1 ) {
 			return;
@@ -106,6 +109,61 @@
 		animate();
 
 	});
+*/
+	/*
+	document 가 ready가 됐을때 
+
+	.tab-pane 얘가 hasClass('active') -> animate 
+  		-> result : 처음에 보여주는 day progress bar가 실행됨
+	*/
+
+	
+	$(document).ready(function() {
+	
+		var tab = $('.tab-pane.active').find('.progressbar.animate');
+		console.log(tab);
+		
+		var doc_height = $(window).height();
+		var position = tab.offset().top; // .offset()은 선택한 요소의 좌표를 가져오거나 특정 좌표로 이동시킴
+		if ( ( $(window).scrollTop() + doc_height - 60 ) > position ) {
+			var progress = tab.data( 'width' ) + "%";
+
+			tab.removeClass( 'animate' );
+			tab.find( '.bar' ).css('opacity', '0.1');
+
+			tab.find( '.bar' ).animate({
+				width : progress,
+				opacity : 1
+			}, 3000 );
+		}
+	});
+	
+	
+	var animateTemp = function() {
+
+		var doc_height = $(window).height();
+
+		$( '.progressbar.animate' ).each( function() {
+			var position = $( this ).offset().top; // .offset()은 선택한 요소의 좌표를 가져오거나 특정 좌표로 이동시킴
+
+			if ( ( $(window).scrollTop() + doc_height - 60 ) > position ) {
+				var progress = $( this ).data( 'width' ) + "%";
+
+				$( this ).removeClass( 'animate' );
+				$( this ).find( '.bar' ).css('opacity', '0.1');
+
+				$( this ).find( '.bar' ).animate({
+					width : progress,
+					opacity : 1
+				}, 3000 );
+			}
+
+		});
+
+	};
+	
+	
+
 
 
 })(jQuery);

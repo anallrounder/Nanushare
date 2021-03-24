@@ -3872,6 +3872,21 @@ blockquote {
     color: #ababab;
     margin-bottom: 10px;
 }
+
+.charity-copyright p {
+    float: left;
+    color: #ababab;
+    margin-bottom: 10px;
+}
+
+.charity-copyright p a { color: #ababab; }
+
+.charity-copyright span {
+    float: left;
+    color: #ababab;
+    margin-bottom: 10px;
+}
+
 .charity-copyright ul {
     float: right;
 }

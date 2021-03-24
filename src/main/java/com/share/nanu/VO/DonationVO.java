@@ -2,9 +2,12 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
+import lombok.ToString;
+
+@ToString
 public class DonationVO {
 
-	private int dnt_paynum; // 기부번호, idx, 로그기록
+	private long dnt_paynum; // 기부번호, idx, 로그기록
 	private String member_id;
 	private int dntprice; // 기부금액
 	private Date dntdate; // 기부날짜
@@ -16,7 +19,7 @@ public class DonationVO {
 		super();
 	}
 
-	public DonationVO(int dnt_paynum, String member_id, int dntprice, Date dntdate, String dntstat, String pg,
+	public DonationVO(long dnt_paynum, String member_id, int dntprice, Date dntdate, String dntstat, String pg,
 			int pcat_num) {
 		super();
 		this.dnt_paynum = dnt_paynum;
@@ -28,11 +31,11 @@ public class DonationVO {
 		this.pcat_num = pcat_num;
 	}
 
-	public int getDnt_paynum() {
+	public long getDnt_paynum() {
 		return dnt_paynum;
 	}
 
-	public void setDnt_paynum(int dnt_paynum) {
+	public void setDnt_paynum(long dnt_paynum) {
 		this.dnt_paynum = dnt_paynum;
 	}
 
