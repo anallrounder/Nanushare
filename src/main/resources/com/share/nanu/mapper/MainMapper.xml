@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- select sum(dntprice) from donation where TO_CHAR(dntdate,'yyyy-mm-dd') > sysdate-1 order by dnt_paynum asc -->
+<mapper namespace="com.share.nanu.mapper.MainMapper">
+	
+	<select id="dayMoney" resultType="com.share.nanu.VO.DonationVO">
+	<![CDATA[ 
+		select * from donation where TO_CHAR(dntdate,'yyyy-mm-dd') > sysdate-1 and dntstat='Y' order by dnt_paynum asc
+	]]>
+	</select>
+	
+	<select id="weekMoney" resultType="com.share.nanu.VO.DonationVO">
+	<![CDATA[ 
+		select sum(dntprice) from donation where dntdate >= '2021-03-16' and dntdate < to_char(sysdate,'YYYYMMDD') GROUP BY to_char(dntdate, 'YYYYMM')
+	]]>
+	</select>
+	
+	<select id="getvm" resultType="com.share.nanu.VO.VmVO">
+	<![CDATA[ 
+		select * from vm
+	]]>
+	</select>
+
+</mapper>
