@@ -4,16 +4,22 @@ import java.util.Map;
 
 public class NaverUserInfo implements OAuth2UserInfo {
 
-	private Map<String, Object> attributes;
+	private Map<String, Object> attributes; //oauth2 유저의 getAttributes
 
 	public NaverUserInfo(Map<String, Object> attributes) {
 		this.attributes = attributes;
 	}
 
 	// 네이버 프로필 가져오기
+	
+	@Override
+	public String getProviderId() { //소셜의 고유 식별 정보
+		
+		return (String) attributes.get("id");
+	}
 
 	@Override
-	public String getProvider() { // 가입경로
+	public String getProvider() { // 가입경로 ex) google, naber, kakao 등등
 
 		return "naver";
 	}
@@ -54,5 +60,7 @@ public class NaverUserInfo implements OAuth2UserInfo {
 
 		return (String) attributes.get("mobile");
 	}
+
+	
 
 }

@@ -3,6 +3,8 @@ package com.share.nanu.provider;
 public interface OAuth2UserInfo {
 
 	// 소셜에서 가져올 정보
+	String getProviderId(); //소셜의 고유 식별자, 아이디x
+	
 	String getProvider(); // 소셜 이름 ex) naver,kakao 등
 
 	String getEmail();// 이메일

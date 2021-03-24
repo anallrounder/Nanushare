@@ -29,7 +29,7 @@ public class NanuController {
 	@Autowired
 	private MemberService mservice;
 	
-	@GetMapping("/")
+	@GetMapping({"/",""})
 	public ModelAndView home(ModelAndView mav) {
 		mav.setViewName("/index");
 		return mav;
@@ -52,7 +52,8 @@ public class NanuController {
 
 	@GetMapping("/member/logout") // 로그아웃
 	public ModelAndView ologin(ModelAndView mav) {
-		mav.setViewName("/logout");
+		log.info("로그아웃");
+		mav.setViewName("/");
 		return mav;
 	}
 
