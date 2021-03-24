@@ -73,7 +73,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 		}
 
-		return new MemberDetails(mvo, oauth2User.getAttributes());+
+		return new MemberDetails(mvo, oauth2User.getAttributes());
 	}
 
 }
