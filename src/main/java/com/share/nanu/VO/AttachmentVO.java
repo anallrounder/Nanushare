@@ -1,5 +1,8 @@
 package com.share.nanu.VO;
 
+import lombok.ToString;
+
+@ToString
 public class AttachmentVO {
 
 	private int attach_num; // 첨부파일 번호

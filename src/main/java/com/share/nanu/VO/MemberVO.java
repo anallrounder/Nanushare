@@ -3,6 +3,9 @@ package com.share.nanu.VO;
 import java.sql.Date;
 import java.util.List;
 
+import lombok.ToString;
+
+@ToString
 public class MemberVO {
 
 	private String member_id; // 아이디

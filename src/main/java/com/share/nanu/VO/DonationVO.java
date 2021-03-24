@@ -2,6 +2,9 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
+import lombok.ToString;
+
+@ToString
 public class DonationVO {
 
 	private long dnt_paynum; // 기부번호, idx, 로그기록
