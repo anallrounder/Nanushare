@@ -1,8 +1,5 @@
 package com.share.nanu.VO;
 
-import lombok.ToString;
-
-@ToString
 public class AuthVO {
 
 	private int authidx; // 권한번호

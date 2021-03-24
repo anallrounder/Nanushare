@@ -2,9 +2,6 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
-import lombok.ToString;
-
-@ToString
 public class MemberVO {
 
 	private String member_id; // 아이디
@@ -14,7 +11,7 @@ public class MemberVO {
 	private Date birth; // 생일
 	private String signuppath; // 가입경로
 	private int pntnum; // 포인트번호
-	private int authnum; // 등급번호
+	private String authname; // 등급이름
 	private String bklist; // 블랙리스트
 	private int dntcnt; // 후원금기부횟수
 	private int itemdntcnt; // 물품기부횟수
@@ -25,7 +22,7 @@ public class MemberVO {
 	}
 
 	public MemberVO(String member_id, String pw, String name, String gender, Date birth, String signuppath, int pntnum,
-			int authnum, String bklist, int dntcnt, int itemdntcnt, String phone) {
+			String authname, String bklist, int dntcnt, int itemdntcnt, String phone) {
 		super();
 		this.member_id = member_id;
 		this.pw = pw;
@@ -34,7 +31,7 @@ public class MemberVO {
 		this.birth = birth;
 		this.signuppath = signuppath;
 		this.pntnum = pntnum;
-		this.authnum = authnum;
+		this.authname = authname;
 		this.bklist = bklist;
 		this.dntcnt = dntcnt;
 		this.itemdntcnt = itemdntcnt;
@@ -97,12 +94,12 @@ public class MemberVO {
 		this.pntnum = pntnum;
 	}
 
-	public int getAuthnum() {
-		return authnum;
+	public String getAuthname() {
+		return authname;
 	}
 
-	public void setAuthnum(int authnum) {
-		this.authnum = authnum;
+	public void setAuthname(String authname) {
+		this.authname = authname;
 	}
 
 	public String getBklist() {

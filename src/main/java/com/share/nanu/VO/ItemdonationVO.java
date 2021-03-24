@@ -2,9 +2,6 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
-import lombok.ToString;
-
-@ToString
 public class ItemdonationVO {
 	private int idnt_num; // 기부 번호, 기부 idx
 	private Date idntdate; // 기부날짜

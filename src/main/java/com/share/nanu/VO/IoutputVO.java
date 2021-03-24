@@ -2,9 +2,6 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
-import lombok.ToString;
-
-@ToString
 public class IoutputVO {
 	private int iout_num; // 출고번호
 	private String vm_num; // 자판기 고유 번호

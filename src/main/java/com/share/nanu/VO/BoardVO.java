@@ -2,9 +2,6 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
-import lombok.ToString;
-
-@ToString
 public class BoardVO {
 
 	private int b_index; // 게시판 index, 로그

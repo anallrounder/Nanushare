@@ -2,9 +2,6 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
-import lombok.ToString;
-
-@ToString
 public class PointVO {
 
 	private String member_id; // 아이디
@@ -12,23 +9,13 @@ public class PointVO {
 	private int prtpnt; // 참여포인트
 	private int dntpnt; // 기부한포인트
 	private int totalpnt; // 총누적포인트
-	private int e_idx; // 이벤트인덱스private int pnt_num
-	private int pnt_num;
-	
-
-	public int getPnt_num() {
-		return pnt_num;
-	}
-
-	public void setPnt_num(int pnt_num) {
-		this.pnt_num = pnt_num;
-	}
+	private int e_idx; // 이벤트인덱스
 
 	public PointVO() {
 		super();
 	}
 
-	public PointVO(String member_id, Date pdate, int prtpnt, int dntpnt, int totalpnt, int e_idx, int pnt_num) {
+	public PointVO(String member_id, Date pdate, int prtpnt, int dntpnt, int totalpnt, int e_idx) {
 		super();
 		this.member_id = member_id;
 		this.pdate = pdate;
@@ -36,7 +23,6 @@ public class PointVO {
 		this.dntpnt = dntpnt;
 		this.totalpnt = totalpnt;
 		this.e_idx = e_idx;
-		this.pnt_num = pnt_num;
 	}
 
 	public String getMember_id() {
