@@ -19,7 +19,7 @@ public class NaverUserInfo implements OAuth2UserInfo {
 	}
 
 	@Override
-	public String getProvider() { // 가입경로 ex) google, naber, kakao 등등
+	public String getProvider() { // 가입경로 ex) google, naver, kakao 등등
 
 		return "naver";
 	}

@@ -48,6 +48,10 @@ public class MemberDetails implements UserDetails, OAuth2User {
 
 		return authorities;
 	}
+	
+	public MemberVO getmember() {
+		return mvo;
+	}
 
 	@Override
 	public String getPassword() { // 패스워드 리턴
