@@ -3,9 +3,6 @@ package com.share.nanu.VO;
 import java.sql.Date;
 import java.util.List;
 
-import lombok.ToString;
-
-@ToString
 public class MemberVO {
 
 	private String member_id; // 아이디
@@ -15,7 +12,7 @@ public class MemberVO {
 	private Date birth; // 생일
 	private String signuppath; // 가입경로
 	private int pntnum; // 포인트번호
-	private int authnum; // 등급번호
+	private String authname; // 등급이름
 	private String bklist; // 블랙리스트
 	private int dntcnt; // 후원금기부횟수
 	private int itemdntcnt; // 물품기부횟수
@@ -25,30 +22,6 @@ public class MemberVO {
 
 	public MemberVO() {
 		super();
-	}
-
-	public MemberVO(String member_id, String pw, String name, String gender, Date birth, String signuppath, int pntnum,
-<<<<<<< HEAD
-			String authname, String bklist, int dntcnt, int itemdntcnt, String phone, char enable,
-			List<AuthVO> authList) {
-=======
-			int authnum, String bklist, int dntcnt, int itemdntcnt, String phone) {
->>>>>>> origin/dev_bee
-		super();
-		this.member_id = member_id;
-		this.pw = pw;
-		this.name = name;
-		this.gender = gender;
-		this.birth = birth;
-		this.signuppath = signuppath;
-		this.pntnum = pntnum;
-		this.authnum = authnum;
-		this.bklist = bklist;
-		this.dntcnt = dntcnt;
-		this.itemdntcnt = itemdntcnt;
-		this.phone = phone;
-		this.enable = enable;
-		this.authList = authList;
 	}
 
 	public String getMember_id() {
@@ -107,12 +80,12 @@ public class MemberVO {
 		this.pntnum = pntnum;
 	}
 
-	public int getAuthnum() {
-		return authnum;
+	public String getAuthname() {
+		return authname;
 	}
 
-	public void setAuthnum(int authnum) {
-		this.authnum = authnum;
+	public void setAuthname(String authname) {
+		this.authname = authname;
 	}
 
 	public String getBklist() {
@@ -160,6 +133,26 @@ public class MemberVO {
 	}
 
 	public void setAuthList(List<AuthVO> authList) {
+		this.authList = authList;
+	}
+
+	public MemberVO(String member_id, String pw, String name, String gender, Date birth, String signuppath, int pntnum,
+			String authname, String bklist, int dntcnt, int itemdntcnt, String phone, char enable,
+			List<AuthVO> authList) {
+		super();
+		this.member_id = member_id;
+		this.pw = pw;
+		this.name = name;
+		this.gender = gender;
+		this.birth = birth;
+		this.signuppath = signuppath;
+		this.pntnum = pntnum;
+		this.authname = authname;
+		this.bklist = bklist;
+		this.dntcnt = dntcnt;
+		this.itemdntcnt = itemdntcnt;
+		this.phone = phone;
+		this.enable = enable;
 		this.authList = authList;
 	}
 

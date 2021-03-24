@@ -136,7 +136,7 @@
                         </div>
                     </aside> -->
                 </div>
-            </div>s
+            </div>
             <aside>
             	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign up</a>
 				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign in</a>
@@ -149,9 +149,8 @@
     <!-- Banner -->
     <section style="background-color: #222222">
     <div class="container-fluid px-0 ">  <!-- <div class="container-fluid px-0"> 은 왼쪽여백 아예 없게 하는것-->
-	    
 	    <div class="row" >
-		   <div class="col-9">
+		   <aside class="col-9">
 		   
 			    <div class="charity-banner" style="overflow: hidden;zoom: 1;position:relative;z-index:1">
 			        
@@ -215,17 +214,15 @@
 			        </div>
 			    </div>
 			    
-		    </div>
-		    
-		    		<div class="col-3">
+		    </aside>
+		    		<aside class="col-3">
 						<div class="row" >
 						   <div class="charity-main-section charity_counter_full" style="left: -20px; height: 563px;">
+					            
 					            <span class="black-transparent"  style="/* background-color: white;  */ border: 1px solid white;">
-					            <div class="container-fluid">
-					            
-					            
+					           	 <div class="container">
 					                <div class="row">
-					                    <div class="col-md-10">
+					                    <div class="col-md-12">
 							             <ul class="nav nav-pills" role="tablist" style="font-size: 16px; padding-left: 60px;">
 							            	 
 										    <li class="nav-item">
@@ -241,8 +238,9 @@
 										      <a class="nav-link" data-toggle="pill" href="#years">Year</a>
 										    </li>
 										  </ul>
-										  
+									</div>	  
 										    <!-- Tab panes -->
+										  <div class="col-md-12">
 										  <div class="tab-content">
 										    <div id="day" class="container tab-pane active">
 										      <div class="charity-counter" id="counter">
@@ -274,13 +272,13 @@
 					                        	</ul> -->
 					                        	
 					                        	<!-- 2. 수평! -->
-					                        	<ul class="row" > <!-- style="transform: translateY(30px); -->
+					                        	<ul> <!-- style="transform: translateY(30px); -->
 					                        		<c:forEach var="result" items="${daymoney}">
 	 													<c:set var="total" value= "${total + result.dntprice}"/>
 	 												</c:forEach>
 						                                <li> <!-- class="bar-move" style=" "  -->
 						                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px;"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-						                                    <i class="counter-value" data-count="${total}" style="content: none; top: 125px; left: -15px; color: white;">0</i>
+						                                    <i class="counter-value" data-count="${total}" style="content: none; top: 125px; left: -15px; color: white;"></i>
 						                                    <!-- <small>Donators</small> -->
 						                                </li>
 						                        
@@ -295,9 +293,16 @@
 							                            	<div class="clearfix"></div>
 							                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
 							                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-							                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"오늘의 기부액 : <c:out value="${total}"></c:out>"</span>
+							                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"오늘의 기부액 :
+							                        			<c:choose>
+							                        				<c:when test="${total > 0}">
+							                        					<c:out value="${total}"></c:out>
+							                        				</c:when>
+							                        				<c:otherwise>
+							                        					<c:out value="0"></c:out>
+							                        				</c:otherwise>
+							                        			</c:choose>"</span>
 							                        		</div>
-							                        		
 						                                </li>
 						                               
 					                        	</ul>
@@ -306,7 +311,7 @@
 										    </div>
 										    <div id="week" class="container tab-pane fade">
 										        <div class="charity-counter" id="counter">
-										        <ul class="row" > <!-- style="transform: translateY(30px); -->
+										        <ul> <!-- style="transform: translateY(30px); -->
 					                                <li> <!-- class="bar-move" style=" "  -->
 					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
 					                                    <i class="counter-value" data-count="100500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
@@ -319,21 +324,20 @@
 						                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
 							                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
 							                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
-							                                <div data-width= '80' class="charity-cause-progressbar"></div>
+							                                <div data-width= "${total}" class="charity-cause-progressbar"></div>
 						                           		</div>
 						                            	<div class="clearfix"></div>
 						                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
 						                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
 						                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"이번주 기부액 : 100500"</span>
 						                        		</div>
-						                        		
 					                                </li>
 					                        	</ul>
 											</div>
 										    </div>
 										    <div id="month" class="container tab-pane fade">
 										       <div class="charity-counter" id="counter">
-										        <ul class="row" > <!-- style="transform: translateY(30px); -->
+										        <ul> <!-- style="transform: translateY(30px); -->
 					                                <li> <!-- class="bar-move" style=" "  -->
 					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
 					                                    <i class="counter-value" data-count="500500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
@@ -360,9 +364,9 @@
 										  </div>
 										  <div id="years" class="container tab-pane fade">
 										       <div class="charity-counter" id="counter">
-										        <ul class="row" > <!-- style="transform: translateY(30px); -->
+										        <ul> <!-- style="transform: translateY(30px); -->
 					                                <li> <!-- class="bar-move" style=" "  -->
-					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px""></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
+					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
 					                                    <i class="counter-value" data-count="1500500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
 					                                    <!-- <small>Donators</small> -->
 					                                </li>
@@ -385,22 +389,16 @@
 					                        	</ul>
 											</div>
 										  </div>
-										
-										
-										 
-										 
 					                </div>
-					          
-					                
 					             </div>
-					             </div>
+								</div>
 							</div>
 							</span>
 		    			</div>
 		    		</div>
+		    		</aside>
 				</div>
 			</div>
-		</div>
 	</section>
 	<!-- Banner -->
 	
@@ -934,8 +932,8 @@
             </div>
         </div> -->
         <!-- Main Section -->
-<!-- 
-    </div> -->
+
+    </div> 
     <!-- Content -->
 
     <!-- Footer -->
@@ -1004,9 +1002,9 @@
                     <aside class="col-md-4 widget widget_gallery">
                         <div class="charity-footer-title"> <h2>Our Share</h2> </div>
                         <ul>
-                            <li><a data-fancybox="gallery" href="/resources/picture/all.jpg"><img src="/resources/picture/all.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+                           <!--  <li><a data-fancybox="gallery" href="/resources/picture/all.jpg"><img src="/resources/picture/all.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
                             <li><a data-fancybox="gallery" href="/resources/picture/si.png"><img src="/resources/picture/si.png" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/picture/sb.png"><img src="/resources/picture/sb.png" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/picture/sb.png"><img src="/resources/picture/sb.png" alt=""> <i class="fa fa-plus"></i> </a></li> -->
                             <li><a data-fancybox="gallery" href="/resources/picture/ji.png"> <img src="/resources/picture/ji.png" alt=""><i class="fa fa-plus"></i> </a></li>
                             <li><a data-fancybox="gallery" href="/resources/picture/hj.png"><img src="/resources/picture/hj.png" alt=""> <i class="fa fa-plus"></i> </a></li>
                             <li><a data-fancybox="gallery" href="/resources/picture/hs.png"><img src="/resources/picture/hs.png" alt=""> <i class="fa fa-plus"></i> </a></li>

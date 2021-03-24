@@ -1,8 +1,5 @@
 package com.share.nanu.VO;
 
-import lombok.ToString;
-
-@ToString
 public class IteminvenVO {
 	private int icat_num; // 물품 분류 번호
 	private String iname; // 물품명

@@ -1,8 +1,5 @@
 package com.share.nanu.VO;
 
-import lombok.ToString;
-
-@ToString
 public class LottoVO {
 	private String lottosuccess; // 로또 성공여부
 	private int e_idx; // 이벤트종류인덱스

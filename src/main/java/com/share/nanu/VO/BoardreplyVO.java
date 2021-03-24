@@ -2,9 +2,6 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
-import lombok.ToString;
-
-@ToString
 public class BoardreplyVO {
 
 	private int r_num;

@@ -43,17 +43,20 @@
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 		// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열
-		var positions = [ {
-			content : '<div>종로점</div>',
-			latlng : new kakao.maps.LatLng(37.5700928, 126.9835591)
+		var positions = [ 
+			{
+			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vmindex == 1}"><strong>${dao.branch}</c:if></c:forEach></div>',
+			latlng : new kakao.maps.LatLng(37.5700928, 126.9835591)	
 		}, {
-			content : '<div>을지로역점</div>',
+			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vmindex == 6}"><strong>${dao.branch}</c:if></c:forEach></div>',
 			latlng : new kakao.maps.LatLng(37.5660156, 126.9828097)
 		}, {
-			content : '<div>광화문점</div>',
+			content :'<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vmindex == 11}"><strong>${dao.branch}</c:if></c:forEach></div>',
 			latlng : new kakao.maps.LatLng(37.5697172, 126.9773686)
 		}];
-
+		</script>
+	
+		<script>
 		for (var i = 0; i < positions.length; i++) {
 			// 마커 생성
 			var marker = new kakao.maps.Marker({

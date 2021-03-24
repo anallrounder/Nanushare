@@ -2,9 +2,6 @@ package com.share.nanu.VO;
 
 import java.sql.Date;
 
-import lombok.ToString;
-
-@ToString
 public class PointVO {
 
 	private int pnt_num; // 포인트번호 pk
@@ -22,7 +19,6 @@ public class PointVO {
 	
 	public PointVO(int pnt_num, String member_id, Date pdate, int prtpnt, int dntpnt, int totalpnt, int e_idx,
 			int nowpnt) {
-		super();
 		this.pnt_num = pnt_num;
 		this.member_id = member_id;
 		this.pdate = pdate;
