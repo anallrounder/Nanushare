@@ -45,7 +45,7 @@ public class NanuController {
 	@GetMapping("/member/slogin") // 로그인성공
 	public ModelAndView slogin(ModelAndView mav) {
 		log.info("로그인 성공");
-		mav.setViewName("/slogin");
+	;	mav.setViewName("/slogin");
 		return mav;
 	}
 	
