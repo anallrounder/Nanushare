@@ -68,8 +68,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 																								// 변환, yyyy-mm-dd형식으로
 																								// 포맷팅
 
-			nmapper.memberJoin(mvo);
-			nmapper.insertAuth(mvo);
+			nmapper.memberJoin(mvo); //가입정보 디비에 입력
+			nmapper.insertAuth(mvo);// 권한 db에 입력
 			mvo = nmapper.getMember(userInfo.getProviderId());
 
 		}

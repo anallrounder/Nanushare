@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().permitAll()
 		.and()
 			.formLogin()
-			.loginPage("/login").permitAll()// 인증이 필요하면 로그인으로 이동
+			.loginPage("/").permitAll()// 인증이 필요하면 로그인으로 이동
 			.loginProcessingUrl("/member/slogin")
 			.usernameParameter("username")
 			.passwordParameter("password")
