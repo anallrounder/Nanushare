@@ -1,21 +1,15 @@
 package com.share.nanu.controller;
 
-import java.util.Iterator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.share.nanu.VO.MemberVO;
-import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -29,28 +23,12 @@ public class AccountController {
 	@Autowired
 	private MemberService mservice;
 
-	@GetMapping("/user")
-	public @ResponseBody String user(@AuthenticationPrincipal MemberDetails memberDetails) {
-		System.out.println("Principal : " + memberDetails);
-		System.out.println("OAuth2 : " + memberDetails.getmember().getSignuppath());
-		// iterator 순차 출력 해보기
-		Iterator<? extends GrantedAuthority> iter = memberDetails.getAuthorities().iterator();
-		while (iter.hasNext()) {
-			GrantedAuthority auth = iter.next();
-			System.out.println(auth.getAuthority());
-		}
-
-		return "유저 페이지입니다.";
-	}
-	
 	@GetMapping("/signUpForm") // 가입페이지 이동
 	public ModelAndView jointest(ModelAndView mav) {
-		log.info("회원가입 테스트 폼으로 이동");
+		log.info("회원가입 폼으로 이동");
 		mav.setViewName("/signUpForm/signUpForm");
 		return mav;
 	}
-	
-	
 
 	@GetMapping({ "/", "" }) // 로그인 페이지
 	public ModelAndView home(ModelAndView mav) {
@@ -59,15 +37,12 @@ public class AccountController {
 		return mav;
 	}
 
-	
-
 	@GetMapping("/member/logout") // 로그아웃
 	public ModelAndView ologin(ModelAndView mav) {
 		log.info("로그아웃");
 		mav.setViewName("/loginForm/Loginindex");
 		return mav;
 	}
-
 
 	@PostMapping("/memberJoin") // 회원 가입처리
 	public ResponseEntity<String> memberJoin(@RequestBody MemberVO mvo) {

@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <%-- <sec:csrfMetaTags/> --%>
 <!-- 헤더 안에 추가  -->
 <!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
@@ -13,7 +13,7 @@
 <meta name="_csrf_header" content="${_csrf.headerName}">
   
   	<title>Sign Up</title>
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	
   	
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,20 +26,19 @@
 	
 	<script type="text/javascript">
 	/*js에서 csrf토큰, 헤더 등록  */
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
-	$(document).ajaxSend(function(e, xhr, options) {
-	    xhr.setRequestHeader(header, token);
-	});
+	
 	
 	 $(document).ready(function(){
+		 
 		 var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function(e, xhr, options) {
+			    xhr.setRequestHeader(header, token);
+			});
+		
 
 			$('#mjoin').submit(function(event) {
 				event.preventDefault();
-			
-				
 				
 				var member_id = $("#member_id").val();
 				var pw = $("#pw").val();
@@ -70,7 +69,7 @@
 						console.log(result);
 						if(result == "SUCCESS"){
 							console.log("success");
-							$(location).attr('href',"${pageContext.request.contextPath}");
+							$(location).attr('href',"${pageContext.request.contextPath}/");
 							
 						}
 					},
@@ -105,7 +104,7 @@
 		      		
 			      		<div class="form-group mb-3">
 			      			<label class="label" for="email">Email Address</label>
-			      			<input type="text" id="member_id" class="form-control" placeholder="johndoe@gmail.com">
+			      			<input type="email" id="member_id"  class="form-control" placeholder="johndoe@gmail.com">
 			      			<span class="icon fa fa-paper-plane-o"></span>
 			      		</div>
 		      		
@@ -117,17 +116,23 @@
 		            	</div>
 	            
 	            
-		           	   <div class="form-group mb-3">
+		           	   <!-- <div class="form-group mb-3">
 			              <label class="label" for="password">Password</label>
 			              <input id="password-confirm" type="password" class="form-control" placeholder="Password">
 			              <span toggle="#password-confirm" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 			              <span class="icon fa fa-lock"></span>
-		               </div>
+		               </div> -->
 		      		
 		      		  <div class="form-group mb-3">
 		      			  <label class="label" for="name">Name</label>
 		      			  <input id="name" type="text" class="form-control" placeholder="John Doe">
 		      			  <span class="icon fa fa-user-o"></span>	      			
+		      		  </div>
+		      		  
+		      		  <div class="form-group mb-3">
+		      			 <label class="label" for="name">Phone</label>
+		      			 <input type="text" id="phone" class="form-control" placeholder="01012345678">
+		      			 <span class="icon fa fa-user-o"></span>
 		      		  </div>
 		      		
 		      		  <div class="form-group mb-3">
@@ -140,17 +145,14 @@
 			 			 <label class="label" for="name">BIRTHDAY</label>
 						 <input type="date" id="birth"> <br/>
 		      		  </div>
-		      			
-		      		  <div class="form-group mb-3">
-		      			 <label class="label" for="name">Phone</label>
-		      			 <input type="text" id="phone" class="form-control" placeholder="01012345678">
-		      			 <span class="icon fa fa-user-o"></span>
-		      		  </div>
-		      		
-	            	            
+		      		  
+		      		  <input type="hidden" id="signuppath" value="home">
+		      		  <!-- 가입경로는 히든으로 표시, 자체가입자는 반드시 signuppath에 home 입력 -->
+		      		            
 	            <div class="form-group">
 	            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
 	            </div>
+	            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	          </form>
 	          <p>I'm already a member! <a data-toggle="tab" href="/">Sign In</a></p>
 	        </div>

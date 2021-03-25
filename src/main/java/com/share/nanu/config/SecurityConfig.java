@@ -31,22 +31,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 
-		web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**"); //설정한 경로들은 스프링 시큐리티에서 모두 통과
+		web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**","/scss/**"); //설정한 경로들은 스프링 시큐리티에서 모두 통과
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-			
-			.antMatchers("/member/**").authenticated()
-			//.antMatchers("/member/**").access("hasRole('USER')")
+			.antMatchers("/**").permitAll()			
+			.antMatchers("/member/**").access("hasRole('USER')")
 			.antMatchers("/admin/**").access("hasRole('ADMIN')")	
 			.anyRequest().permitAll()
 		.and()
 			.formLogin()
-			.loginPage("/").permitAll()// 인증이 필요하면 로그인으로 이동
-			.loginProcessingUrl("/member/slogin")
+			.loginPage("/")// 인증이 필요하면 로그인으로 이동
+			.loginProcessingUrl("/login")
 			.usernameParameter("username")
 			.passwordParameter("password")
 			.defaultSuccessUrl("/",true)
