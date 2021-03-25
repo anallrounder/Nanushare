@@ -42,6 +42,15 @@ public class AccountController {
 
 		return "유저 페이지입니다.";
 	}
+	
+	@GetMapping("/signUpForm") // 가입페이지 이동
+	public ModelAndView jointest(ModelAndView mav) {
+		log.info("회원가입 테스트 폼으로 이동");
+		mav.setViewName("/signUpForm/signUpForm");
+		return mav;
+	}
+	
+	
 
 	@GetMapping({ "/", "" }) // 로그인 페이지
 	public ModelAndView home(ModelAndView mav) {
@@ -50,13 +59,7 @@ public class AccountController {
 		return mav;
 	}
 
-	@GetMapping("/member/slogin") // 로그인성공
-	public ModelAndView slogin(ModelAndView mav) {
-		log.info("로그인 성공");
-		;
-		mav.setViewName("/slogin");
-		return mav;
-	}
+	
 
 	@GetMapping("/member/logout") // 로그아웃
 	public ModelAndView ologin(ModelAndView mav) {
@@ -65,12 +68,6 @@ public class AccountController {
 		return mav;
 	}
 
-	@GetMapping("/joinForm") // 회원가입 이동
-	public ModelAndView loginForm(ModelAndView mav) {
-		log.info("회원가입 폼으로 이동");
-		mav.setViewName("/join");
-		return mav;
-	}
 
 	@PostMapping("/memberJoin") // 회원 가입처리
 	public ResponseEntity<String> memberJoin(@RequestBody MemberVO mvo) {

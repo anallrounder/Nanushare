@@ -63,7 +63,7 @@
 	          
 	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
 	          <div class="social d-flex text-center">
-	          	<a href="/joinForm" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> sign up</a>
+	          	<a href="/signUpForm" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> sign up</a>
 	          	<a href="/oauth2/authorization/kakao" class="px-2 py-2 mr-md-1 rounded">
 	          		<span class="ion-logo-facebook mr-2"></span> kakao</a>
 	          		
