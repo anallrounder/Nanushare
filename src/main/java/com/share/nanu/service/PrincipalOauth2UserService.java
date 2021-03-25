@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.mapper.NanuMapper;
+import com.share.nanu.provider.KakaoUserInfo;
 import com.share.nanu.provider.NaverUserInfo;
 import com.share.nanu.provider.OAuth2UserInfo;
 import com.share.nanu.security.MemberDetails;
@@ -21,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
-	//DefaultOAuth2UserService는 OAuth2UserService의 구현체
+	// DefaultOAuth2UserService는 OAuth2UserService의 구현체
 
 	@Autowired
 	private NanuMapper nmapper;
@@ -44,11 +45,16 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 		if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
 			// getRegistrationId로 어떤 oauth로 로그인했는지 확인 가능
-			log.info("naver 요청");
-			userInfo = new NaverUserInfo((Map)oauth2User.getAttributes().get("response"));
+
+			userInfo = new NaverUserInfo((Map) oauth2User.getAttributes().get("response"));
+
+		} else if (userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
+
+			userInfo = new KakaoUserInfo((Map) oauth2User.getAttributes());
 		}
 
 		MemberVO mvo = nmapper.getMember(userInfo.getProviderId()); // 이미 가입이 되어있는지 조회
+
 		if (mvo == null) {// 가입되어 있지 않다면 가입진행
 			mvo = new MemberVO();
 			mvo.setMember_id(userInfo.getProviderId());
@@ -56,11 +62,12 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			mvo.setPw(userInfo.getProvider() + "_" + userInfo.getProviderId()); // 비밀번호를 임의로 provider+providerId 로 생성
 			mvo.setSignuppath(userInfo.getProvider());
 			mvo.setName(userInfo.getName());
-			mvo.setPhone(userInfo.getMobile());
 			mvo.setGender(userInfo.getGender());
+			mvo.setPhone(userInfo.getMobile());
 			mvo.setBirth(Date.valueOf(userInfo.getBirthyear() + "-" + userInfo.getBirthday())); // string 을 오라클의 Date로
 																								// 변환, yyyy-mm-dd형식으로
 																								// 포맷팅
+
 			nmapper.memberJoin(mvo);
 			nmapper.insertAuth(mvo);
 			mvo = nmapper.getMember(userInfo.getProviderId());

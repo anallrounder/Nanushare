@@ -64,7 +64,9 @@
 	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
 	          <div class="social d-flex text-center">
 	          	<a href="/joinForm" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> sign up</a>
-	          	<a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> kakao</a>
+	          	<a href="/oauth2/authorization/kakao" class="px-2 py-2 mr-md-1 rounded">
+	          		<span class="ion-logo-facebook mr-2"></span> kakao</a>
+	          		
 	          	<a href="/oauth2/authorization/naver" class="px-2 py-2 ml-md-1 rounded">
 	          		<span class="ion-logo-twitter mr-2"></span>naver</a>
 	          	<!-- href="/aouth2/aouthorization/naver" 를 호출하면 provider의 authorization-uri호출  -->

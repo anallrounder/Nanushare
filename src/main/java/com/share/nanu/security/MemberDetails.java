@@ -66,7 +66,7 @@ public class MemberDetails implements UserDetails, OAuth2User {
 	}
 
 	@Override
-	public boolean isAccountNonExpired() { // 계정만료?
+	public boolean isAccountNonExpired() { // 계정만료? true -> 아니오 false ->예
 
 		return true;
 	}
