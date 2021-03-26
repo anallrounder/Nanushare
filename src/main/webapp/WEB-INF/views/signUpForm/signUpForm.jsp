@@ -251,9 +251,9 @@
 									}
 									
 								},
-								errorElement : 'span',
-								errorClass : 'error',
-								errorPlacement : function(error, element) { /* 에러메세지의 위치 수정 가능 */
+								errorElement : 'span', /* 디폴트는 lable 태그 lable->span 으로 수정 */
+								errorClass : 'error', /* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
+								errorPlacement : function(error, element) { /* 에러메세지의 위치 수정 가능 , 참고 블로그 https://goodteacher.tistory.com/163*/
 									if(element.is(":radio") || element.is(":text") || element.is(":password") 
 											|| element.is(":text")){
 										element.parent().after(error);
