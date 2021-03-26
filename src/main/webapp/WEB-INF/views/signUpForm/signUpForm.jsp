@@ -36,6 +36,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/resources/signUpForm/css/style.css">
+    
+    <style type="text/css">
+    	.error {
+    		color : red;   	
+    	}
+    </style>
 
     <script type="text/javascript">
         /*js에서 csrf토큰, 헤더 등록  */
@@ -119,16 +125,18 @@
 							<fieldset>
 							<!-- <legend>Input Information</legend> legend 태그는 제목 설정 태그 -->
 							
-                            <div class="form-group mb-3">
-                                <label class="label" for="member_id">Email Address</label>
-                                <input type="email" id="member_id" name="member_id" class="form-control"  placeholder="XXXXX@gmail.com" >
-                                
+                            <div class="form-group mb-3">                           	
+                                <label class="label" for="member_id">Email Address</label>                                                                                                                               
+                                <input type="text" id="member_id" name="member_id" class="form-control" placeholder="XXXXX@gmail.com" >                                                          
                                 <span class="icon fa fa-paper-plane-o"></span>
+                                 
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="label" for="pw">Password</label>
                                 <input id="pw" name="pw" type="password" class="form-control" placeholder="Password" >                             
+                                
+                                
                                 <span class="icon fa fa-lock"></span>
                             </div>
 
@@ -243,8 +251,17 @@
 									}
 									
 								},
-								errorElement : 'span'
-								
+								errorElement : 'span',
+								errorClass : 'error',
+								errorPlacement : function(error, element) { /* 에러메세지의 위치 수정 가능 */
+									if(element.is(":radio") || element.is(":text") || element.is(":password") 
+											|| element.is(":text")){
+										element.parent().after(error);
+									}else{
+										element.after(error);
+									}
+								}
+													
 																
 							}); 
 							$.validator.addMethod("passwordCK",  function( value, element ) {
