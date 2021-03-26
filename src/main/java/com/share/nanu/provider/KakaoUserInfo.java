@@ -11,7 +11,6 @@ public class KakaoUserInfo implements OAuth2UserInfo {
 	}
 
 	// 네이버 프로필 가져오기
-
 	@Override
 	public String getProviderId() { // 소셜의 고유 식별 정보
 
