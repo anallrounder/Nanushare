@@ -14,6 +14,8 @@
     <!-- jquery validation method cdn -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js">
     </script>
+    <link rel="shortcut icon" type="image/x-icon" 
+    	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> <!-- 웹페이지 탭 로고이미지 삽입  -->
 
 
     <%-- <sec:csrfMetaTags/> --%>
@@ -192,7 +194,8 @@
 										minlength : 2
 									},									
 									phone : {
-										required : true
+										required : true,
+										number : true
 									},									
 									gender :{
 										required : true
@@ -224,7 +227,8 @@
 										minlength : '2글자 이상 입력해 주세요.'
 									},									
 									phone : {
-										required : '핸드폰 번호를 입력해 주세요.'
+										required : '핸드폰 번호를 입력해 주세요.',
+										number : '숫자만 입력해 주세요.'
 									},									
 									gender :{
 										required : '성별을 선택해 주세요.'
