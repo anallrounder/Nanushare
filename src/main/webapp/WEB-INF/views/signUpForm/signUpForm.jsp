@@ -121,7 +121,8 @@
 							
                             <div class="form-group mb-3">
                                 <label class="label" for="member_id">Email Address</label>
-                                <input type="email" id="member_id" name="member_id" class="form-control" placeholder="XXXXX@gmail.com" >
+                                <input type="email" id="member_id" name="member_id" class="form-control"  placeholder="XXXXX@gmail.com" >
+                                
                                 <span class="icon fa fa-paper-plane-o"></span>
                             </div>
 
@@ -174,6 +175,9 @@
 							$("#mjoin").validate({
 								
 								rules:{ /* 각 태그의 규칙을 설정 */
+									/*함수 정의 https://offbyone.tistory.com/50 참고주소 */
+									/* 비밀번호 특수문자 https://yoo-hyeok.tistory.com/82  */
+									/* 공식 문서 https://jqueryvalidation.org/ */
 									/* html의 input태그의 name=""에 설정한 값과 같아야한다.  */
 									member_id :{
 										required : true, /* 필수인가? true는 yes를 의미 */
@@ -238,7 +242,8 @@
 										date : '날자형식이 아닙니다.'
 									}
 									
-								}
+								},
+								errorElement : 'span'
 								
 																
 							}); 
