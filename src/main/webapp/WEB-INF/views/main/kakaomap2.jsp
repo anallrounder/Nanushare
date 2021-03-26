@@ -45,18 +45,25 @@
 		// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열
 		var positions = [ 
 			{
-			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's111'}"><strong>${dao.branch}</c:if></c:forEach></div>',
+			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's111'}">'
+						+'<p style="font-weight: bold; font-size: 18px;">${dao.branch}</p><c:forEach items="${dao.vmamlist}" var="dto">'
+							+'<p>${dto.iname} : ${dto.vm_amount}</p></c:forEach></c:if></c:forEach></div>',
 			latlng : new kakao.maps.LatLng(37.5700928, 126.9835591)	
 		}, {
-			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's222'}"><strong>${dao.branch}</c:if></c:forEach></div>',
+			content : '<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's222'}">'
+			+'<p style="font-weight: bold; font-size: 18px;">${dao.branch}</p><c:forEach items="${dao.vmamlist}" var="dto">'
+			+'<p>${dto.iname} : ${dto.vm_amount}</p></c:forEach></c:if></c:forEach></div>',
 			latlng : new kakao.maps.LatLng(37.5660156, 126.9828097)
 		}, {
-			content :'<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's333'}"><strong>${dao.branch}</c:if></c:forEach></div>',
+			content :'<div><c:forEach var="dao" items="${mapvm}"><c:if test="${dao.vm_num == 's333'}">'
+			+'<p style="font-weight: bold; font-size: 18px;">${dao.branch}</p><c:forEach items="${dao.vmamlist}" var="dto">'
+			+'<p>${dto.iname} : ${dto.vm_amount}</p></c:forEach></c:if></c:forEach></div>',
 			latlng : new kakao.maps.LatLng(37.5697172, 126.9773686)
 		}];
-		</script>
-	
-		<script>
+		
+		
+		var infowindow;
+		
 		for (var i = 0; i < positions.length; i++) {
 			// 마커 생성
 			var marker = new kakao.maps.Marker({
@@ -65,23 +72,36 @@
 			});
 
 			// 마커에 표시할 인포윈도우를 생성 
-			var infowindow = new kakao.maps.InfoWindow({
+			infowindow = new kakao.maps.InfoWindow({
 				content : positions[i].content, // 인포윈도우에 표시할 내용
 				removable : true
 			});
-
-			// 마커에 클릭이벤트를 등록합
+			
+		
+			// 마커에 클릭이벤트를 등록
 			kakao.maps.event.addListener(marker, 'click', makeClick(map,
 					marker, infowindow));
-
-		}
+			
+		};
+		
 
 		// 인포윈도우를 표시하는 클로저를 만드는 함수
 		function makeClick(map, marker, infowindow) {
 			return function() {
+				//closeInfoWindow();
 				infowindow.open(map, marker);
+				
 			};
-		}
+		};
+
+		/* function closeInfoWindow() {
+			for(var idx =0; idx <infowindow.content.length; idx++) {
+				infowindow.content[idx].close();
+				cosole.log(infowindow.content[idx]);
+			};
+		}; */
+
+
 	</script>
 
 </body>
