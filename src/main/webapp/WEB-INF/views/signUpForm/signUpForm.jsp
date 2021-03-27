@@ -62,9 +62,9 @@
                 var member_id = $("#member_id").val();
                 var pw = $("#pw").val();
                 var name = $("#name").val();
-                var gender = $('input[name="gender"]:checked').val();
-                var birth = $("#birth").val();
-                var phone = $("#phone").val();
+                //var gender = $('input[name="gender"]:checked').val();
+               // var birth = $("#birth").val();
+               // var phone = $("#phone").val();
                 var signuppath = $("#signuppath").val();
 
                 var memberJoin = {
@@ -72,9 +72,9 @@
                     member_id: member_id,
                     pw: pw,
                     name: name,
-                    gender: gender,
-                    birth: birth,
-                    phone: phone,
+                   // gender: gender,
+                    //birth: birth,
+                   // phone: phone,
                     signuppath: signuppath
                 };
 
@@ -150,7 +150,7 @@
                                 <span class="icon fa fa-user-o"></span>
                             </div>
 
-                            <div class="form-group mb-3">
+                           <!--  <div class="form-group mb-3">
                                 <label class="label" for="phone">Phone</label>
                                 <input type="text" id="phone" name="phone" class="form-control" placeholder="01012345678" >
                                 <span class="icon fa fa-user-o"></span>
@@ -165,7 +165,7 @@
                             <div class="form-group mb-3">
                                 <label class="label" for="birth" >BIRTHDAY</label>
                                 <input type="date" id="birth" name="birth" > <br />
-                            </div>
+                            </div> -->
 
                             <input type="hidden" id="signuppath" value="home">
                             <!-- 가입경로는 히든으로 표시, 자체가입자는 반드시 signuppath에 home 입력 -->
@@ -189,16 +189,7 @@
 										email : true, /* 이메일 형식인가? */
 										remote : "${pageContext.request.contextPath}/IdCheck"
 										/* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
-										 /* remote : { 
 										
-											url : "${pageContext.request.contextPath}/IdCheck",
-											type : "POST",
-											data : {
-												member_id : function() {
-													return $("#member_id").val();
-												}
-											}										
-										}  */
 									},									
 									pw :{
 										required : true,
@@ -213,8 +204,8 @@
 									name : {
 										required : true,
 										minlength : 2
-									},									
-									phone : {
+									}									
+									/* phone : {
 										required : true,
 										number : true
 									},									
@@ -224,7 +215,7 @@
 									birth : {
 										required : true,
 										date : true
-									}
+									} */
 									
 								},
 								messages:{ /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
@@ -247,8 +238,8 @@
 									name : {
 										required : '이름을 입력해 주세요.',
 										minlength : '2글자 이상 입력해 주세요.'
-									},									
-									phone : {
+									}									
+									/* phone : {
 										required : '핸드폰 번호를 입력해 주세요.',
 										number : '숫자만 입력해 주세요. ex)01012345678'
 									},									
@@ -258,14 +249,24 @@
 									birth : {
 										required : '생년 월일을 입력해 주세요.',
 										date : '날자형식이 아닙니다.'
-									}
+									} */
 									
 								},
 								errorElement : 'span', /* 디폴트는 lable 태그 lable->span 으로 수정 */
 								errorClass : 'error', /* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
-								errorPlacement : function(error, element) { /* 에러메세지의 위치 수정 가능 , 참고 블로그 https://goodteacher.tistory.com/163*/
+								
+								/* 에러메세지의 위치 수정 가능 , 참고 블로그 https://goodteacher.tistory.com/163*/
+								/* errorPlacement : function(error, element) { 
 									if(element.is(":radio") || element.is(":text") || element.is(":password") 
 											|| element.is(":text")  ){
+										element.parent().after(error);
+									}else{
+										element.after(error);
+									}
+								} */
+								
+								errorPlacement : function(error, element) { 
+									if(element.is(":text") || element.is(":password")										  ){
 										element.parent().after(error);
 									}else{
 										element.after(error);

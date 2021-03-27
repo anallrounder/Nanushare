@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.userService(principalOauth2UserService) 
 		//로그인 성공 시 수행 할 UserService 구현체 지정, 엑세스토큰 + 사용자프로필정보 같이 받음
 		.and()
-			.defaultSuccessUrl("/member/slogin"); //소셜 로그인이 성공하면 이동할 주소
+			.defaultSuccessUrl("/"); //소셜 로그인이 성공하면 이동할 주소
 		
 		
 	}

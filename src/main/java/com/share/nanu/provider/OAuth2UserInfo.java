@@ -11,12 +11,12 @@ public interface OAuth2UserInfo {
 
 	String getName();// 이름
 
-	String getGender();// 성별
+	//String getGender();// 성별
 
-	String getBirthday();// 생일
+	//String getBirthday();// 생일
 
-	String getMobile();// 핸드폰 번호
+	//String getMobile();// 핸드폰 번호
 
-	String getBirthyear();// 출생연도
+	//String getBirthyear();// 출생연도
 
 }

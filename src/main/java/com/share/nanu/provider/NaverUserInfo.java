@@ -36,31 +36,25 @@ public class NaverUserInfo implements OAuth2UserInfo {
 		return (String) attributes.get("name");
 	}
 
-	@Override
-	public String getGender() {// 성별
-
-		return (String) attributes.get("gender");
-	}
-
-	@Override
-	public String getBirthday() {// 생일 -> 월/일
-
-		return (String) attributes.get("birthday");
-	}
-
-	@Override
-	public String getBirthyear() { // 생일 -> 년도
-
-		return (String) attributes.get("birthyear");
-
-	}
-
-	@Override
-	public String getMobile() { // 핸드폰 번호
-
-		return (String) attributes.get("mobile");
-	}
-
+	/*
+	 * @Override public String getGender() {// 성별
+	 * 
+	 * return (String) attributes.get("gender"); }
+	 * 
+	 * @Override public String getBirthday() {// 생일 -> 월/일
+	 * 
+	 * return (String) attributes.get("birthday"); }
+	 * 
+	 * @Override public String getBirthyear() { // 생일 -> 년도
+	 * 
+	 * return (String) attributes.get("birthyear");
+	 * 
+	 * }
+	 * 
+	 * @Override public String getMobile() { // 핸드폰 번호
+	 * 
+	 * return (String) attributes.get("mobile"); }
+	 */
 	
 
 }

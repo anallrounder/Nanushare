@@ -53,24 +53,23 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			userInfo = new KakaoUserInfo((Map) oauth2User.getAttributes());
 		}
 
-		MemberVO mvo = nmapper.getMember(userInfo.getProviderId()); // 이미 가입이 되어있는지 조회
+		MemberVO mvo = nmapper.getMember(userInfo.getEmail()); // 이미 가입이 되어있는지 조회
 
 		if (mvo == null) {// 가입되어 있지 않다면 가입진행
 			mvo = new MemberVO();
-			mvo.setMember_id(userInfo.getProviderId());
+			mvo.setMember_id(userInfo.getEmail());
 			// 소셜은 로그인창에 아이디와 비밀번호를 입력하여 로그인하지 않기때문에 아이디 컬럼에 고유식별자 삽입
 			mvo.setPw(userInfo.getProvider() + "_" + userInfo.getProviderId()); // 비밀번호를 임의로 provider+providerId 로 생성
 			mvo.setSignuppath(userInfo.getProvider());
 			mvo.setName(userInfo.getName());
-			mvo.setGender(userInfo.getGender());
-			mvo.setPhone(userInfo.getMobile());
-			mvo.setBirth(Date.valueOf(userInfo.getBirthyear() + "-" + userInfo.getBirthday())); // string 을 오라클의 Date로
-																								// 변환, yyyy-mm-dd형식으로
-																								// 포맷팅
-
+			/*
+			 * mvo.setGender(userInfo.getGender()); mvo.setPhone(userInfo.getMobile());
+			 * mvo.setBirth(Date.valueOf(userInfo.getBirthyear() + "-" +
+			 * userInfo.getBirthday())); // string 을 오라클의 Date로 // 변환, yyyy-mm-dd형식으로 // 포맷팅
+			 */
 			nmapper.memberJoin(mvo); //가입정보 디비에 입력
 			nmapper.insertAuth(mvo);// 권한 db에 입력
-			mvo = nmapper.getMember(userInfo.getProviderId());
+			mvo = nmapper.getMember(userInfo.getEmail());
 
 		}
 
