@@ -46,8 +46,8 @@
     <script type="text/javascript">
         /*js에서 csrf토큰, 헤더 등록  */
 
-
-        $(document).ready(function() {
+		//$(document).ready(function()
+        $(function() {
 
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
@@ -100,8 +100,45 @@
                     }
                 }); //ajax			
             });
+            
+            var isCertification = false;
+            var key = "";
+            $('#certification').click(function() { // 인증버튼 클릭시 입력한 이메일로 인증 번호를 해당 이메일로 전송
+            	var mail = $("#member_id").val(); // 인증받을 이메일 주소
+            	$.ajax({
+            		type : 'post',
+            		url : '${pageContext.request.contextPath}/sendMail',
+            		data : {
+            			mail : mail
+            		},
+            		dataType : 'json',
+            		async : "false",
+            		success : function(data){
+            			console.log(data.key);
+            			key = data.key;
+            		}
+            		
+            	});
+            	alert("인증번호가 해당 메일로 전송되었습니다.");
+            	isCertification = true; // 추후 인증 여부를 확인하기 위한 값.
+    			
+    		});
+            
+            $('#compare').on("propertychange change keyup paste input", function() {
+        		if ($("#compare").val() == key) {
+        				$("#compare-text").text("인증 성공!").css("color","black");
+        				isCertification = true;
+        		} else {
+        			$("#compare-text").text("불일치!").css("color","red");
+        			isCertification = false;
+        		}
+        	});
 
         }); // end ready()
+        
+     
+        
+   
     </script>
 
 
@@ -128,8 +165,15 @@
                             <div class="form-group mb-3">                           	
                                 <label class="label" for="member_id">Email Address</label>                                                                                                                               
                                 <input type="text" id="member_id" name="member_id" class="form-control" placeholder="XXXXX@gmail.com" >                                                          
-                                <span class="icon fa fa-paper-plane-o"></span>
-                                 
+                                <span class="icon fa fa-paper-plane-o"></span>                                
+                            </div>
+                            <input type="button" id="certification" value="인증">
+                            
+                            <div class="form-group mb-3">                           	
+                                <label class="label" for="compare">Email Address Certification</label>                                                                                                                               
+                                <input type="text" id="compare" class="form-control" placeholder="인증키 입력" >
+                                <span id="compare-text" style="display: none">불일치</span>                                                          
+                                <span class="icon fa fa-paper-plane-o"></span>                                
                             </div>
 
                             <div class="form-group mb-3">
@@ -277,7 +321,9 @@
 							}); 
 							$.validator.addMethod("passwordCK",  function( value, element ) { //어째서인지 ?는 특수문자 취급을 못 하고있다.
 								   return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
-								});	
+								});
+							
+							
 						</script>
                         <p>I'm already a member! <a data-toggle="tab" href="${pageContext.request.contextPath}/">Sign In</a></p>
                     </div>

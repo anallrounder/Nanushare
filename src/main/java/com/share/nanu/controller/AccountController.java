@@ -1,13 +1,20 @@
 package com.share.nanu.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +35,9 @@ public class AccountController {
 
 	@Autowired
 	private MemberService mservice;
+	
+	@Autowired 
+	private JavaMailSender javaMailSender;
 
 	private NanuService nservice;
 
@@ -69,7 +79,7 @@ public class AccountController {
 		return entity;
 	}
 
-	@GetMapping("/IdCheck")
+	@GetMapping("/IdCheck") //이메일 중복 체크
 	public void IdCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		log.info("중복 이메일 체크");
 		response.setContentType("application/json"); // 응답을 줄때 타입은 json형태로 응답
@@ -80,5 +90,39 @@ public class AccountController {
 		//jquery validation plugin 에서 remote 는 반드시 true 또는 false를 넘겨줘야 한다.
 
 	}
+	
+	
+	@PostMapping("/sendMail")
+	public Map<String, Object> SendMail(String mail, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Random random = new Random();
+		String key = "";
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		// SimpleMailMessage
+		// setTo() 받는사람 주소
+		// setFrom() 보내는사람 주소, 해당 함수를 호출하지 않는다면 application.properties에 작성한 username으로 세팅
+		//setSubject() 제목
+		//setText() 메시지 내용
+		// 나머지 기능은 문서 참조 https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/SimpleMailMessage.html
+		//mailSender.send 실제 메일 발송 부분
+		message.setTo(mail); // 스크립트에서 보낸 메일
+		
+		for (int i = 0; i < 3; i++) {
+			int index = random.nextInt(25) + 65; //A~Z 까지 랜덤 알파벳 생성
+			key += (char)index;
+		}
+		int numIndex = random.nextInt(8999) + 1000; //4자리 정수 생성
+		key += numIndex;
+		message.setSubject("인증번호 입력을 위한 메일 전송");
+		message.setText("인증 번호" + key);
+		javaMailSender.send(message);
+		map.put("key", key);
+		return map;
+		
+	}
+	
+	
+	
 
 }
