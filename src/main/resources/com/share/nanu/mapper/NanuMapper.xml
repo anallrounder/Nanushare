@@ -48,5 +48,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 values(AUTH_SEQ.nextval,#{member_id},'ROLE_USER') 
 		]]>
 	</select>
+	
+	<select id="idcheck" resultType="com.share.nanu.VO.MemberVO">
+		<![CDATA[
+			select member_id
+			from member
+			where member_id=#{memberId}
+		]]>
+	</select>
+	
+	
 
 </mapper>

@@ -134,12 +134,9 @@
 
                             <div class="form-group mb-3">
                                 <label class="label" for="pw">Password</label>
-                                <input id="pw" name="pw" type="password" class="form-control" placeholder="Password" >                             
-                                
-                                
+                                <input id="pw" name="pw" type="password" class="form-control" placeholder="Password" >                                                            
                                 <span class="icon fa fa-lock"></span>
                             </div>
-
 
                             <div class="form-group mb-3">
                                 <label class="label" for="pw">Password Confirm</label>
@@ -189,7 +186,16 @@
 									/* html의 input태그의 name=""에 설정한 값과 같아야한다.  */
 									member_id :{
 										required : true, /* 필수인가? true는 yes를 의미 */
-										email : true /* 이메일 형식인가? */
+										email : true, /* 이메일 형식인가? */
+										remote : { /* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
+											url : "${pageContext.request.contextPath}/IdCheck",
+											type : "POST",
+											data : {
+												member_id : function() {
+													return $("#member_id").val();
+												}
+											}										
+										}
 									},									
 									pw :{
 										required : true,
@@ -222,13 +228,14 @@
 									
 									member_id :{
 										required : '이메일을 입력해 주세요.',
-										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com'
+										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
+										remote : $("#member_id").val()+'는 이미 사용중인 이메일 입니다.'
 									},									
 									pw :{
 										required : '비밀번호를 입력해 주세요.',
-										passwordCK : '비밀번호는 영문자, 숫자, 특수문자를 조합하여 입력해야 합니다.',
-										minlength : '비밃런호는 최소 4글자 이상 입력해 주세요.',
-										maxlength : '비밃런호는 최대 12글자 까지 입력이 가능합니다.'
+										passwordCK : '비밀번호는 영문자, 숫자, 특수문자를 조합하여 입력해야 합니다. ex)?는 사용할 수 없습니다.',
+										minlength : '비밀번호는 최소 4글자 이상 입력해 주세요.',
+										maxlength : '비밀번호는 최대 12글자 까지 입력이 가능합니다.'
 									},
 									pwConfirm : {
 										required : '비밀번호를 입력해 주세요.',
@@ -240,7 +247,7 @@
 									},									
 									phone : {
 										required : '핸드폰 번호를 입력해 주세요.',
-										number : '숫자만 입력해 주세요.'
+										number : '숫자만 입력해 주세요. ex)01012345678'
 									},									
 									gender :{
 										required : '성별을 선택해 주세요.'
@@ -255,7 +262,7 @@
 								errorClass : 'error', /* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
 								errorPlacement : function(error, element) { /* 에러메세지의 위치 수정 가능 , 참고 블로그 https://goodteacher.tistory.com/163*/
 									if(element.is(":radio") || element.is(":text") || element.is(":password") 
-											|| element.is(":text")){
+											|| element.is(":text")  ){
 										element.parent().after(error);
 									}else{
 										element.after(error);
@@ -264,7 +271,7 @@
 													
 																
 							}); 
-							$.validator.addMethod("passwordCK",  function( value, element ) {
+							$.validator.addMethod("passwordCK",  function( value, element ) { //어째서인지 ?는 특수문자 취급을 못 하고있다.
 								   return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
 								});	
 						</script>
