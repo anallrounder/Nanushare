@@ -120,19 +120,21 @@
             		
             	});
             	alert("인증번호가 해당 메일로 전송되었습니다.");
-            	isCertification = true; // 추후 인증 여부를 확인하기 위한 값.
+            	$("#compare").css("display","block");
+            	$("#compare-text").css("display","block");
+            	
     			
-    		});
+    		});//certification end
             
             $('#compare').on("propertychange change keyup paste input", function() {
         		if ($("#compare").val() == key) {
-        				$("#compare-text").text("인증 성공!").css("color","black");
+        				$("#compare-text").text("인증에 성공하셨습니다.").css("color","black");
         				isCertification = true;
         		} else {
-        			$("#compare-text").text("불일치!").css("color","red");
+        			$("#compare-text").text("인증에 실패하셨습니다.").css("color","red");
         			isCertification = false;
         		}
-        	});
+        	});// compare end
 
         }); // end ready()
         
@@ -171,10 +173,10 @@
                             
                             <div class="form-group mb-3">                           	
                                 <label class="label" for="compare">Email Address Certification</label>                                                                                                                               
-                                <input type="text" id="compare" class="form-control" placeholder="인증키 입력" >
-                                <span id="compare-text" style="display: none">불일치</span>                                                          
+                                <input type="text" id="compare" class="form-control" placeholder="인증키 입력" >                                                                                         
                                 <span class="icon fa fa-paper-plane-o"></span>                                
                             </div>
+                            <span id="compare-text" style="display: none">불일치</span>
 
                             <div class="form-group mb-3">
                                 <label class="label" for="pw">Password</label>
@@ -325,7 +327,7 @@
 							
 							
 						</script>
-                        <p>I'm already a member! <a data-toggle="tab" href="${pageContext.request.contextPath}/">Sign In</a></p>
+                       
                     </div>
                 </div>
             </div>
