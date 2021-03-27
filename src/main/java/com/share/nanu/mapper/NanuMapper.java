@@ -13,7 +13,7 @@ public interface NanuMapper {
 
 	public void insertAuth(MemberVO mvo); // 회원 권한 저장
 
-	public MemberVO idcheck(String memberId);// id check
+	public MemberVO idcheck(String memberId);// 이메일 체크
 
 	
 

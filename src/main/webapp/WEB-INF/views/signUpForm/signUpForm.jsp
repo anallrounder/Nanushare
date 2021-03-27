@@ -187,7 +187,10 @@
 									member_id :{
 										required : true, /* 필수인가? true는 yes를 의미 */
 										email : true, /* 이메일 형식인가? */
-										remote : { /* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
+										remote : "${pageContext.request.contextPath}/IdCheck"
+										/* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
+										 /* remote : { 
+										
 											url : "${pageContext.request.contextPath}/IdCheck",
 											type : "POST",
 											data : {
@@ -195,7 +198,7 @@
 													return $("#member_id").val();
 												}
 											}										
-										}
+										}  */
 									},									
 									pw :{
 										required : true,
@@ -229,7 +232,7 @@
 									member_id :{
 										required : '이메일을 입력해 주세요.',
 										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
-										remote : $("#member_id").val()+'는 이미 사용중인 이메일 입니다.'
+										remote :'이미 사용중인 이메일 입니다.'
 									},									
 									pw :{
 										required : '비밀번호를 입력해 주세요.',
