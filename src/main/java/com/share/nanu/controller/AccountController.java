@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,9 @@ public class AccountController {
 
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	private NanuService nservice;
 
@@ -136,6 +140,10 @@ public class AccountController {
 		ResponseEntity<String> entity = null;
 		
 		try {
+			String password = mvo.getPw();
+			String encode = bCryptPasswordEncoder.encode(password);
+			mvo.setPw(encode);
+			
 			nservice.changePw(mvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
