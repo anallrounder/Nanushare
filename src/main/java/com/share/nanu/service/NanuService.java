@@ -8,4 +8,6 @@ public interface NanuService {
 
 	public boolean idCheck(String memberId); // 아이디 중복 체크
 
+	public void changePw(MemberVO mvo); //비밀번호 변경
+
 }

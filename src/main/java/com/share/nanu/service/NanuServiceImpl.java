@@ -30,4 +30,9 @@ public class NanuServiceImpl implements NanuService {
 
 	}
 
+	@Override
+	public void changePw(MemberVO mvo) {//비밀번호 변경
+		nmapper.changePw(mvo);
+	}
+
 }

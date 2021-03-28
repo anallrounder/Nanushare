@@ -35,8 +35,8 @@ public class AccountController {
 
 	@Autowired
 	private MemberService mservice;
-	
-	@Autowired 
+
+	@Autowired
 	private JavaMailSender javaMailSender;
 
 	private NanuService nservice;
@@ -79,49 +79,72 @@ public class AccountController {
 		return entity;
 	}
 
-	@GetMapping("/IdCheck") //이메일 중복 체크
+	@GetMapping("/IdCheck") // 이메일 중복 체크
 	public void IdCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		log.info("중복 이메일 체크");
 		response.setContentType("application/json"); // 응답을 줄때 타입은 json형태로 응답
 		String memberId = request.getParameter("member_id"); // 웹페이지에서 받은 member_id 를 memberId 변수에 저장
-		boolean idcheck = nservice.idCheck(memberId); //웹에서 받은 아이디가 존재하는지 db에서 검사
-		log.info("member_id 존재 여부 : " + idcheck); //true면 중복 되는 member_id가 없다. false면 이미 member_id가 존재
-		response.getWriter().append(idcheck ? "true" : "false"); 
-		//jquery validation plugin 에서 remote 는 반드시 true 또는 false를 넘겨줘야 한다.
+		boolean idcheck = nservice.idCheck(memberId); // 웹에서 받은 아이디가 존재하는지 db에서 검사
+		log.info("member_id 존재 여부 : " + idcheck); // true면 중복 되는 member_id가 없다. false면 이미 member_id가 존재
+		response.getWriter().append(idcheck ? "true" : "false");
+		// jquery validation plugin 에서 remote 는 반드시 true 또는 false를 넘겨줘야 한다.
 
 	}
-	
-	
-	@PostMapping("/sendMail")
+
+	@PostMapping("/sendMail") // 이메일 인증
 	public Map<String, Object> SendMail(String mail, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Random random = new Random();
 		String key = "";
-		
+
 		SimpleMailMessage message = new SimpleMailMessage();
 		// SimpleMailMessage
 		// setTo() 받는사람 주소
-		// setFrom() 보내는사람 주소, 해당 함수를 호출하지 않는다면 application.properties에 작성한 username으로 세팅
-		//setSubject() 제목
-		//setText() 메시지 내용
-		// 나머지 기능은 문서 참조 https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/SimpleMailMessage.html
-		//mailSender.send 실제 메일 발송 부분
+		// setFrom() 보내는사람 주소, 해당 함수를 호출하지 않는다면 application.properties에 작성한 username으로
+		// 세팅
+		// setSubject() 제목
+		// setText() 메시지 내용
+		// 나머지 기능은 문서 참조
+		// https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/SimpleMailMessage.html
+		// mailSender.send 실제 메일 발송 부분
 		message.setTo(mail); // 스크립트에서 보낸 메일
-		
+
 		for (int i = 0; i < 3; i++) {
-			int index = random.nextInt(25) + 65; //A~Z 까지 랜덤 알파벳 생성
-			key += (char)index;
+			int index = random.nextInt(25) + 65; // A~Z 까지 랜덤 알파벳 생성
+			key += (char) index;
 		}
-		int numIndex = random.nextInt(8999) + 1000; //4자리 정수 생성
+		int numIndex = random.nextInt(8999) + 1000; // 4자리 정수 생성
 		key += numIndex;
 		message.setSubject("인증번호 입력을 위한 메일 전송");
 		message.setText("인증 번호" + key);
 		javaMailSender.send(message);
 		map.put("key", key);
 		return map;
-		
+
+	}
+
+	@GetMapping("/forgotPassword") //비밀번호 찾기 폼으로 이동
+	public ModelAndView forgotPassword(ModelAndView mav) {
+		log.info("비밀번호 찾기");
+		mav.setViewName("/forgotPassword");
+		return mav;
 	}
 	
+	@PostMapping("/changePw")// 비밀번호 변경처리
+	public ResponseEntity<String> changePw(@RequestBody MemberVO mvo) {
+		log.info("비밀번호 변경 처리");
+		ResponseEntity<String> entity = null;
+		
+		try {
+			nservice.changePw(mvo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;
+	}
 	
 	
 
