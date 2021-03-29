@@ -52,7 +52,7 @@ public class AccountController {
 		return mav;
 	}
 
-	@GetMapping({ "/", "" }) // 로그인 페이지
+	@GetMapping("/loginPage") // 로그인 페이지
 	public ModelAndView home(ModelAndView mav) {
 		log.info("로그인 폼으로 이동");
 		mav.setViewName("/loginForm/Loginindex");
