@@ -31,10 +31,37 @@
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script>
+	<!-- <script>
 		$( function() {
 		  $( "#datepicker" ).datepicker();
 		} );
+	</script> -->
+	<!-- 	<script>
+	 /* 현재 날짜를 받아오기 위한 작업 */
+	 document.getElementById('#currentDate').valueAsDate = new Date();
+	 /*  또 다른 방법:  document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10); */
+	</script> -->
+	<script>
+		$(function() {
+		    $('input.calendar').pignoseCalendar({
+				format: 'YYYY-MM-DD' // date format string. (2017-02-02)
+				init : function ( context )  { 
+			        / ** 
+			         * @params context PignoseCalendarContext 
+			         * @returns void 
+			         * /
+
+			         // 이것은 연결 요소이며 $ ( '. calendar')의 각 요소와 정확히 동일합니다. 
+			         var  $ this  =  $ ( this ) ;
+
+			         //`context` 변수에서 대상 요소를 얻을 수 있습니다. 
+			         var  $ element  =  context . 요소 ;
+
+			         // 달력 요소도 얻을 수 있습니다. 달력보기 DOM입니다. 
+			         var  $ calendar  =  context . 달력 ; 
+			    } 
+			});
+		});
 	</script>
 	 
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
@@ -62,11 +89,7 @@
 			});
 		});
 	</script>
-	<script>
-	 /* 현재 날짜를 받아오기 위한 작업 */
-	 document.getElementById('currentDate').valueAsDate = new Date();
-	 /*  또 다른 방법:  document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10); */
-	</script>
+
 
 </head>
 
@@ -200,14 +223,17 @@
                 <div class="row">
                     <div class="col-md-9">
                         <div class="charity-team-warp">
-                            <figure><img src="${pageContext.request.contextPath}/resources/charity/extra-images/team-detail-img.png" alt=""></figure>
-                            <h3>Julai Martyn</h3>
-                            <span>Co-Director</span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamcorper condime ntum Ut imperdiet lobortis et mollis neque placerat non. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+                           
+                            <h3>물품 나누기 신청</h3>
+                            <span class="mb-3">Product donation form</span>
+                            <figure><img src="${pageContext.request.contextPath}/resources/charity/donation-images/heart.jpg" alt=""></figure><!-- 788x355 -->
+                             
+                            <p>후원 회원 여러분, 나누셰어 프로젝트의 물품 나누기에 동참해주셔서 감사합니다. <br>이전 페이지의 물품 나누기 안내사항을 다시 한 번 꼭 확인해 주시고 신청서 작성 부탁드립니다. <br>
+                            감사합니다.</p>
                             <div class="charity-team-contact">
                                 <ul class="chaity-contact-info">
                                     <li>
-                                        <h6>Phone:</h6>
+                                        <h6>물품 후원 관련:</h6>
                                         <span>+123 45 678</span>
                                     </li>
                                     <li>
@@ -215,69 +241,17 @@
                                         <a href="mailto:name@email.com">info@example.com</a>
                                     </li>
                                 </ul>
-                                <div class="charity-blog-social">
-                                 <ul>
-                                    <li><a href="https://www.facebook.com/" class="fab fa-facebook"></a></li>
-                                    <li><a href="https://twitter.com/login" class="fab fa-twitter"></a></li>
-                                    <li><a href="https://www.linkedin.com/uas/login" class="fab fa-linkedin"></a></li>
-                                    <li><a href="https://www.youtube.com/" class="fab fa-youtube"></a></li>
-                                    <li><a href="https://vine.co/" class="fab fa-vine"></a></li>
-                                 </ul>
-                              </div>
+                             
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamcorper condimentu m. Ut imperdiet lobortis ex, vitae tempor dolor viverra quis. Aliquam sodales eu leo id molestie. Maecenasu llamcorper malesuada arcu, in lobortis mauris feugiat sed. Duis placerat maximus felis, et mollis neque pl acerat non. </p>
+                           <!--  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamcorper condimentu m. Ut imperdiet lobortis ex, vitae tempor dolor viverra quis. Aliquam sodales eu leo id molestie. Maecenasu llamcorper malesuada arcu, in lobortis mauris feugiat sed. Duis placerat maximus felis, et mollis neque pl acerat non. </p>
                             <blockquote>Curabitur lacus dui, convallis quis arcu vel, sagittis vulputate elit. Nullam ex libero, imp rdiet  lib ndit ac, tempor ac magna. In finibus libero vitae ex tincidunt pharetr.</blockquote>
-                            <p>Nulla molestie leo non arcu porta, in dictum dui rutrum. Cras ipsum lectus, ullamcorper vel lacus et, condim entum rhoncus felis. Sed vulputate augue id malesuada maximus.</p>
+                            <p>Nulla molestie leo non arcu porta, in dictum dui rutrum. Cras ipsum lectus, ullamcorper vel lacus et, condim entum rhoncus felis. Sed vulputate augue id malesuada maximus.</p> -->
                         </div>
                         <!--// company-timeline \\-->
-                        <div class="charity-team-timeline">
-                          <div class="widget_title"><h2>We Need Your Help</h2></div>
-                          <ul>
-                             <li>
-                                <div class="charity-image">
-                                   <i class="icon-users-group"></i>
-                                   <span></span>
-                                </div>
-                                <div class="charity-team-timeline-text">
-                                   <h6>We want to help as many as we can</h6>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
-                                </div>
-                             </li>
-                             <li>
-                                <div class="charity-image">
-                                   <i class="icon-donation"></i>
-                                   <span></span>
-                                </div>
-                                <div class="charity-team-timeline-text">
-                                   <h6>We want to help as many as we can</h6>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
-                                </div>
-                             </li>
-                             <li>
-                                <div class="charity-image">
-                                   <i class="icon-books-stack-of-three"></i>
-                                   <span></span>
-                                </div>
-                                <div class="charity-team-timeline-text">
-                                   <h6>We want to help as many as we can</h6>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
-                                </div>
-                             </li>
-                             <li>
-                                <div class="charity-image">
-                                   <i class="icon-heart"></i>
-                                   <span></span>
-                                </div>
-                                <div class="charity-team-timeline-text">
-                                   <h6>We want to help as many as we can</h6>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
-                                </div>
-                             </li>
-                          </ul>
-                        </div>
-                        <!--// company-timeline \\-->
+                        
+                        
                         <!--// volunteer-form \\-->
-                        <div class="widget_title"><h2>물품 나눔 신청서</h2></div>
+                        <div class="widget_title mt-4"><h2>물품 나눔 신청서</h2></div>
                        
                         <div class="charity-volunteer-form">
                            <form>
@@ -296,7 +270,9 @@
                                     <li >
                                         <label>신청 날짜:</label>    
                                         <div class="chrity-full-form"><!-- class="charity-select-date" -->
-                                        <input type="date" id="currentDate" name="idntdate">
+                                      <!--   Date1_current:<input type="date" id="currentDate" name="idntdate"> -->
+                                      <!--   Date2_ui: <input type="date" id="datepicker" name="idntdate"> -->
+                                      <input type="text" id="text-calendar" class="calendar" />
                                     	</div>
                                     </li>
                                     
@@ -314,15 +290,15 @@
                                         </div>
                                     </li>
                                     
-                                    <li class="chrity-full-form">
+                                    <li class="chrity-full-form" id="selectDirect">
                                     <label>수량선택:</label>
-                                    	<div><input type="text" id="selectDirect" name="donaamount" disabled /></div>
+                                    	<div><input type="text" name="donaamount" disabled /></div>
                                     </li>
                                     <li class="charity-select-form">   
                                         <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 											자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
 											결국 input box에 입력된 값이 form을 넘길 때 수량값으로 넘어가게 된다. -->
-                                      	  <div class="charity-select-two">
+                                      	  <div class="charity-select-two"  >
 											<select id="selectBox" name="amount" onchange="changeSelection()">
 												<option value="0"> 수량선택</option>
 												<option value="9">*직접입력*</option>
@@ -337,10 +313,10 @@
                                     </li>
                                     
                                 </ul>
-                                <hr>
+                                
                                 <button type="submit" class="charity-sub-btn" id="btnSend" ><i class="fa fa-save"> 신청서 전송</i></button>
                                 <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시선택하기</i></button>
-								<button type="button" class="charity-sub-btn" onclick="location.href='/donation/item/main"><i class="fa fa-arrow-left"> 이전화면으로</i></button><!-- 확인필요 -->
+								<button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/item/main"><i class="fa fa-arrow-left"> 이전화면으로</i></button><!-- 확인필요 -->
                             </form>
                         </div>
                         <!--// volunteer-form \\-->
@@ -348,18 +324,22 @@
                             <ul>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    <h5>Email Us At:</h5>
+                                    <h5>Email:</h5>
                                     <a href="mailto:name@email.com">info@example.com</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-phone"></i>
-                                    <h5>Call Us At:</h5>
+                                    <h5>물품 후원 관련:</h5>
                                     <span>+(091)61 3146 8728</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <aside class="col-md-3">
+                        
+                        
+                        <!-- 여기서부터 우측 배너 손 안댔음! -->
+                        
                         
                         <!-- Widget Search -->
                         <div class="widget widget_search">
