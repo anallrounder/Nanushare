@@ -39,7 +39,7 @@ public class AccountController {
 
 	@Autowired
 	private JavaMailSender javaMailSender;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -119,31 +119,31 @@ public class AccountController {
 		}
 		int numIndex = random.nextInt(8999) + 1000; // 4자리 정수 생성
 		key += numIndex;
-		message.setSubject("Nanushare 인증번호 전송"); //보낼 메일 제목
-		message.setText("인증 번호  " + key); //보낼 메일 내용
+		message.setSubject("Nanushare 인증번호 전송"); // 보낼 메일 제목
+		message.setText("인증 번호  " + key); // 보낼 메일 내용
 		javaMailSender.send(message);
 		map.put("key", key);
 		return map;
 
 	}
 
-	@GetMapping("/forgotPassword") //비밀번호 찾기 폼으로 이동
+	@GetMapping("/forgotPassword") // 비밀번호 찾기 폼으로 이동
 	public ModelAndView forgotPassword(ModelAndView mav) {
 		log.info("비밀번호 찾기");
 		mav.setViewName("/forgotPassword");
 		return mav;
 	}
-	
-	@PostMapping("/changePw")// 비밀번호 변경처리
+
+	@PostMapping("/changePw") // 비밀번호 변경처리
 	public ResponseEntity<String> changePw(@RequestBody MemberVO mvo) {
 		log.info("비밀번호 변경 처리");
 		ResponseEntity<String> entity = null;
-		
+
 		try {
 			String password = mvo.getPw();
 			String encode = bCryptPasswordEncoder.encode(password);
 			mvo.setPw(encode);
-			
+
 			nservice.changePw(mvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
@@ -153,7 +153,5 @@ public class AccountController {
 		}
 		return entity;
 	}
-	
-	
 
 }
