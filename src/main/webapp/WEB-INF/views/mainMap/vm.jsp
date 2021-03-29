@@ -85,8 +85,7 @@
                 
                 $('#urlsub').click(function() {
                 	
-                	location.href = address;
-                	
+                		location.href = address;
                 });
                 
             });
