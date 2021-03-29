@@ -59,12 +59,6 @@ public class AccountController {
 		return mav;
 	}
 
-	/*
-	 * @PostMapping("/member/logout") // 로그아웃 public ModelAndView
-	 * logout(ModelAndView mav) { log.info("로그아웃");
-	 * mav.setViewName("/mainMap/mainview"); return mav; }
-	 */
-
 	@PostMapping("/memberJoin") // 회원 가입처리
 	public ResponseEntity<String> memberJoin(@RequestBody MemberVO mvo) {
 		// get은 body가 존재하지 않기때문에 requestBody는 post만 사용가능
