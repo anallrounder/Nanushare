@@ -495,9 +495,10 @@
                         <!-- Widget Archive -->
                         <div class="widget widget_archive">
                             <div class="widget_title"><h2>Calender Archives</h2></div>
-                            <span style="font-size: 18px;"><a href="404.html"><i class="fa fa-map-marker-alt"></i>&nbsp; 종각점</a></span><br><br>
-                            <span style="font-size: 18px;"><a href="404.html"><i class="fa fa-map-marker-alt"></i>&nbsp; 을지로입구역점</a></span><br><br>
-                            <span style="font-size: 18px;"><a href="404.html"><i class="fa fa-map-marker-alt"></i>&nbsp; 광화문점</a></span>
+                            <c:forEach items="${mapvm}" var="cat">
+                            <span style="font-size: 18px;" class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
+                            	<i class="fa fa-map-marker-alt"></i>&nbsp; ${cat.branch}</span><br><br>
+                           </c:forEach>
                            <!--  <ul>
                                 <li><a href="404.html"><i class="fa fa-map-marker-alt"></i>종각점</a></li>
                                 <li><a href="404.html">을지로입구역점</a></li>
