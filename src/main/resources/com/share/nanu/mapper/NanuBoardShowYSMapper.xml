@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.nanu.mapper.NanuBoardShowYSMapper">
+	
+	
+	<!-- 인증게시판 리스트 -->
+	<select id="getlist" resultType="com.share.nanu.VO.BoardVO">
+		<![CDATA[ 
+			select * from board where bcat_num = 2
+		]]>
+	</select>
+
+	<!-- 인증게시판 페이징 리스트 -->
+	<select id="getlistWithPaging" resultType="com.share.nanu.VO.BoardVO">
+		<![CDATA[
+			select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from board where bcat_num = 2 order by b_index desc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount} 
+		]]>
+	</select>
+	
+	<!-- 게시물 총 개수  -->
+	<select id="getTotalCount" resultType="int">
+	  <![CDATA[
+	 	 select count(*) from board where bcat_num = 2 
+	   ]]>
+	</select>
+	
+	<!-- 인증게시판 컨텐트뷰 -->
+	<select id="read" resultType="com.share.nanu.VO.BoardVO">
+		<![CDATA[
+	     	select * from board where bcat_num = 2 and b_index = #{b_index}
+	   ]]>
+	</select>
+	
+	<!-- 인증게시판 조회수 카운트 +1 hitUpdate -->
+	<update id="hitUpdate">
+		 <![CDATA[
+	      update board set bhit = bhit +1 where b_index = #{b_index}
+	   ]]>
+	</update>
+	
+	<!-- 게시글 수정 modify-->
+ 	<update id="modify">
+		<![CDATA[
+	    	update board set btitle = #{btitle}, bcontent = #{bcontent} where b_index = #{b_index}
+		]]>
+	</update> 
+	
+	<!-- 글 삭제 -->
+	<delete id="delete">
+	   <![CDATA[
+	     	delete from board where b_index = #{b_index}
+	   ]]>
+	</delete>
+	
+	
+	<!-- write insert -->
+	<!--  'Ulric@naver.com'로 테스트, 실제로는 로그인 사용자 정보 받아와서 넣어야함. 아직 미구현상태라 이렇게 테스트함 -->
+	<insert id="insert">
+  		<![CDATA[
+			insert into board (b_index, member_id, btitle, bcontent, bhit, bcat_num) 
+			values (board_seq.nextval, 'Ulric@naver.com', #{btitle}, #{bcontent}, 0, 2)
+ 		]]>
+	</insert>
+	
+	<!-- 이미지 업로드 -->
+	<insert id="uploadFile" parameterType="HashMap">
+	 <![CDATA[
+	    INSERT INTO
+	       IMGTEST VALUES (Attachment_seq.nextval, #{originname}, #{path})
+		]]>
+	</insert>
+	
+</mapper>
+
+
