@@ -59,12 +59,11 @@ public class AccountController {
 		return mav;
 	}
 
-	@GetMapping("/member/logout") // 로그아웃
-	public ModelAndView logout(ModelAndView mav) {
-		log.info("로그아웃");
-		mav.setViewName("/mainMap/mainview");
-		return mav;
-	}
+	/*
+	 * @PostMapping("/member/logout") // 로그아웃 public ModelAndView
+	 * logout(ModelAndView mav) { log.info("로그아웃");
+	 * mav.setViewName("/mainMap/mainview"); return mav; }
+	 */
 
 	@PostMapping("/memberJoin") // 회원 가입처리
 	public ResponseEntity<String> memberJoin(@RequestBody MemberVO mvo) {

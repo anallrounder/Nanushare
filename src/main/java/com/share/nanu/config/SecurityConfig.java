@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.defaultSuccessUrl("/main",true)
 		.and()
 			.logout()
-			.logoutUrl("/member/logout") //로그아웃하면 메인페이지로 이동
+			.logoutUrl("/member/logout") //로그아웃하면 메인페이지로 이동						
 			.logoutSuccessUrl("/main")
 			.invalidateHttpSession(true).permitAll()
 		.and()

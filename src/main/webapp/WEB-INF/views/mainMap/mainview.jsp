@@ -147,7 +147,11 @@
 			</sec:authorize>
 
 			<sec:authorize access="isAuthenticated()"> <!-- 로그인됐을때 버튼 header -->
-				<a href="${pageContext.request.contextPath}/member/logout"class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a>
+				<%-- <a href="${pageContext.request.contextPath}/member/logout"class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a> --%>
+				<form action="/member/logout" method="post">
+					<input type="submit" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;" value="로그아웃">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</form>
 				<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 0px; margin: -75px 140px 0px 0px;">마이페이지</a>
 			</sec:authorize>
 			
