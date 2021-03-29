@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 
 <head>
 
@@ -24,8 +22,20 @@
     <link rel="stylesheet" href="/resources/charity/css/style.css">
     <link rel="stylesheet" href="/resources/charity/css/color.css">
     <link rel="stylesheet" href="/resources/charity/css/responsive.css">
+	
+	<!-- SIDE BAR 1 CSS -->
+    <link rel="stylesheet" href="/resources/sidebar/css/styles.css">
     
-    <style>
+    <!-- Google Font: Source Sans Pro -->
+ 	 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+ 	 <link rel="stylesheet" href="/resources/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+ 	 <link rel="stylesheet" href="/resources/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+  	<link rel="stylesheet" href="/resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+	
+	<style>
    	/* 	.bar-move {
    		transform: translateY(-150px);
    		transition-duration: 2s;
@@ -33,12 +43,11 @@
    		}
      */
     </style>
-  
-
+	
 </head>
 
-<body class="home">
-    <!-- Header -->
+<body>
+     <!-- Header -->
     <header id="charity-header" class="charity-header-one" style="position:relative;z-index:2">
      
         <!-- Top Strip -->
@@ -55,8 +64,8 @@
                                     <!-- <li class="active"><a href="index.html">Home</a></li> -->
                                     <li style="padding: 0px 40px 0px 70px"><a href="#" style="font-size: 20px;">나누셰어란?</a>
                                         <ul class="children">
-                                            <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
+                                            <li><a href="event-list.html">나누셰어 소개</a></li>
+                                            <li><a href="event-grid.html">찾아오셰어</a></li>
                                         <!--     <li><a href="event-detail.html">Event Detail</a></li> -->
                                         </ul>
                                     </li>
@@ -69,8 +78,8 @@
                                     </li>
                                     <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나누기</a>
                                         <ul class="children">
-                                            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
+                                            <li><a href="blog-large.html">물품 나누기</a></li>
+                                            <li><a href="blog-medium.html">돈기부여하기</a></li>
                                             <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
                                         </ul>
                                     </li>
@@ -138,327 +147,180 @@
                     </aside> -->
                 </div>
             </div>
-
-			<sec:authorize access="isAnonymous()">
-				<aside>
-            	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">회원가입</a>
-				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">로그인</a>
+            <aside>
+            	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign up</a>
+				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign in</a>
 			</aside>
-			</sec:authorize>
-
-			<sec:authorize access="isAuthenticated()">
-				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a>
-				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">마이 페이지</a>
-			</sec:authorize>
-		</div>
+        </div>
         <!-- Top Strip -->
     </header>
     <!-- Header -->
 
+
     <!-- Banner -->
-    <section style="background-color: #222222">
-    <div class="container-fluid px-0 ">  <!-- <div class="container-fluid px-0"> 은 왼쪽여백 아예 없게 하는것-->
-	    <div class="row" >
-		   <aside class="col-9">
-		   
-			    <div class="charity-banner" style="overflow: hidden;zoom: 1;position:relative;z-index:1">
-			        
-			        <div class="charity-banner-layer" >
-			            <span class="charity-banner-transparent"></span>
-			           <img src="/resources/picture/donation.jpg" alt="">
-			            <div class="charity-banner-caption align-left-caption">
-			                <div class="container">
-			                    <h1><span class="charity-color ">함께할수록 </span><br>커지는 기쁨 </h1>
-			                    <div class="clearfix"></div>
-			                    <p>같이할수록 커지는 가치 <br>함께하실래요?</p>
-			                    <div class="clearfix"></div>
-			                   <!--  <a href="#">Learn More</a> -->
-			                    <a href="#">Donate Now</a>
-			                </div>
-			            </div>
-			        </div>
-			    
-			        
-			        <div class="charity-banner-layer">
-			            <span class="charity-banner-transparent"></span>
-			            <img src="/resources/picture/love.jpg" alt="" height="auto">
-			            <div class="charity-banner-caption align-left-caption">
-			                <div class="container">
-			                    <h1>세상을 바꾸는<span class="charity-color"><br>따뜻한 온기</span></h1>
-			                    <div class="clearfix"></div>
-			                    <p>여러분의 작은 관심과 따뜻한 온기가 누군가에게는 <br>따뜻한 희망이 됩니다</p>
-			                    <div class="clearfix"></div>
-			                   <!--  <a href="#">Learn More</a> -->
-			                    <a href="#">Donate Now</a>
-			                </div>
-			            </div>
-			        </div>
-			        <div class="charity-banner-layer">
-			            <span class="charity-banner-transparent"></span>
-			            <img src="/resources/picture/mask.jpg" alt="">
-			            <div class="charity-banner-caption align-left-caption">
-			                <div class="container">
-			                    <h1>누군가에게 도움이 된다는<span class="charity-color"><br>작은 행복</span></h1>
-			                    <div class="clearfix"></div>
-			                    <p>큰 돈을 기부하지않아도 많은 물건을 주지 않아도 <br> 누군가에게 도움이 된다는 일이 행복한 일임을 새삼 알았습니다</p>
-			                    <div class="clearfix"></div>
-			                    <a href="#">Learn More</a>
-			                    <a href="#">Donate Now</a>
-			                </div>
-			            </div>
-			        </div>
-			        <div class="charity-banner-layer">
-			            <span class="charity-banner-transparent"></span>
-			            <img src="/resources/picture/smile.jpg" alt="">
-			            <div class="charity-banner-caption align-left-caption">
-			                <div class="container">
-			                    <h1>나누셰어의 <span class="charity-color"><br>선한 바람 </span></h1>
-			                    <div class="clearfix"></div>
-			                    <p>다른 후원사이트에 비해서 나누셰어는 정말 믿을 수 있는 것 같아요</p>
-			                    <div class="clearfix"></div>
-			                    <a href="#">Learn More</a>
-			                    <a href="#">Donate Now</a>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			    
-		    </aside>
-		    		<aside class="col-3">
-						<div class="row" >
-						   <div class="charity-main-section charity_counter_full" style="left: -20px; height: 563px;">
-					            
-					            <span class="black-transparent"  style="/* background-color: white;  */ border: 1px solid white;">
-					           	 <div class="container">
-					                <div class="row">
-					                    <div class="col-md-12">
-							             <ul class="nav nav-pills" role="tablist" style="font-size: 16px; padding-left: 60px;">
-							            	 
-										    <li class="nav-item">
-										      <a class="nav-link active" data-toggle="pill" href="#day">Day</a>
-										    </li>
-										    <li class="nav-item">
-										      <a class="nav-link" data-toggle="pill" href="#week">Week</a>
-										    </li>
-										    <li class="nav-item">
-										      <a class="nav-link" data-toggle="pill" href="#month">Month</a>
-										    </li>
-										    <li class="nav-item">
-										      <a class="nav-link" data-toggle="pill" href="#years">Year</a>
-										    </li>
-										  </ul>
-									</div>	  
-										    <!-- Tab panes -->
-										  <div class="col-md-12">
-										  <div class="tab-content">
-										    <div id="day" class="container tab-pane active">
-										      <div class="charity-counter" id="counter">
-					                         <!-- 1안: 수직! -->
-					                            <!-- <ul class="row" > style="transform: translateY(30px);
-					                                <li> class="bar-move" style=" " 
-					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 20px; top: 180px; left: 255px;"></i>transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear;
-					                                    <i class="counter-value" data-count="3250" style="content: none; top: 250px; left: 150px; color: white;">0</i>
-					                                    <small>Donators</small>
-					                                </li>
-					                        
-					                                <li>
-					                                	<div class="charity-donation-parallex" >
-						                            	<div class="clearfix"></div>
-						                            	<div class="charity-causestrip-section" style="transform: rotate(-90deg);">
-							                                <span class="charity-left-section">Raised: <small>3250₩</small></span>
-							                                <span class="charity-right-section">Goal: <small>5000₩</small></span>
-							                                <div data-width= '80' class="charity-cause-progressbar"  style=" writing-mode: vertical; text-orientation: upright; position:relative;"></div>
-						                           		</div>
-						                            	<div class="clearfix"></div>
-						                          		  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a>
-						                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-						                        		</div>
-						                        		
-					                                </li>
-					                                <li>
-					                                	<span class="charity-color" style="font-size: 30px; margin-left: 70px;">"오늘의 기부액 : 3250"</span>
-					                                </li>
-					                        	</ul> -->
-					                        	
-					                        	<!-- 2. 수평! -->
-					                        	<ul> <!-- style="transform: translateY(30px); -->
-					                        		<c:forEach var="result" items="${daymoney}">
-	 													<c:set var="total" value= "${total + result.dntprice}"/>
-	 												</c:forEach>
-						                                <li> <!-- class="bar-move" style=" "  -->
-						                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px;"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-						                                    <i class="counter-value" data-count="${total}" style="content: none; top: 125px; left: -15px; color: white;"></i>
-						                                    <!-- <small>Donators</small> -->
-						                                </li>
-						                        
-						                                <li>
-						                                	<div class="charity-donation-parallex" >
-							                            	<div class="clearfix"></div>
-							                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
-								                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
-								                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
-								                                <div data-width= '80' class="charity-cause-progressbar"></div>
-							                           		</div>
-							                            	<div class="clearfix"></div>
-							                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
-							                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-							                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"오늘의 기부액 :
-							                        			<c:choose>
-							                        				<c:when test="${total > 0}">
-							                        					<c:out value="${total}"></c:out>
-							                        				</c:when>
-							                        				<c:otherwise>
-							                        					<c:out value="0"></c:out>
-							                        				</c:otherwise>
-							                        			</c:choose>"</span>
-							                        		</div>
-						                                </li>
-						                               
-					                        	</ul>
-											</div>
-										      
-										    </div>
-										    <div id="week" class="container tab-pane fade">
-										        <div class="charity-counter" id="counter">
-										        <ul> <!-- style="transform: translateY(30px); -->
-					                                <li> <!-- class="bar-move" style=" "  -->
-					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-					                                    <i class="counter-value" data-count="100500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
-					                                    <!-- <small>Donators</small> -->
-					                                </li>
-					                        
-					                                <li>
-					                                	<div class="charity-donation-parallex" >
-						                            	<div class="clearfix"></div>
-						                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
-							                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
-							                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
-							                                <div data-width= "${total}" class="charity-cause-progressbar"></div>
-						                           		</div>
-						                            	<div class="clearfix"></div>
-						                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
-						                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-						                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"이번주 기부액 : 100500"</span>
-						                        		</div>
-					                                </li>
-					                        	</ul>
-											</div>
-										    </div>
-										    <div id="month" class="container tab-pane fade">
-										       <div class="charity-counter" id="counter">
-										        <ul> <!-- style="transform: translateY(30px); -->
-					                                <li> <!-- class="bar-move" style=" "  -->
-					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-					                                    <i class="counter-value" data-count="500500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
-					                                    <!-- <small>Donators</small> -->
-					                                </li>
-					                        
-					                                <li>
-					                                	<div class="charity-donation-parallex" >
-						                            	<div class="clearfix"></div>
-						                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
-							                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
-							                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
-							                                <div data-width= '80' class="charity-cause-progressbar"></div>
-						                           		</div>
-						                            	<div class="clearfix"></div>
-						                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
-						                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-						                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"이번달 기부액 : 500500"</span>
-						                        		</div>
-						                        		
-					                                </li>
-					                        	</ul>
-											</div>
-										  </div>
-										  <div id="years" class="container tab-pane fade">
-										       <div class="charity-counter" id="counter">
-										        <ul> <!-- style="transform: translateY(30px); -->
-					                                <li> <!-- class="bar-move" style=" "  -->
-					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-					                                    <i class="counter-value" data-count="1500500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
-					                                    <!-- <small>Donators</small> -->
-					                                </li>
-					                        
-					                                <li>
-					                                	<div class="charity-donation-parallex" >
-						                            	<div class="clearfix"></div>
-						                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
-							                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
-							                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
-							                                <div data-width= '80' class="charity-cause-progressbar"></div>
-						                           		</div>
-						                            	<div class="clearfix"></div>
-						                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
-						                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-						                        		<span class="charity-color"  style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"올해 기부액 : 1500500"</span>
-						                        		</div>
-						                        		
-					                                </li>
-					                        	</ul>
-											</div>
-										  </div>
-					                </div>
-					             </div>
-								</div>
-							</div>
-							</span>
-		    			</div>
-		    		</div>
-		    		</aside>
-				</div>
-			</div>
-	</section>
-	<!-- Banner -->
-	
-    <!-- Content -->
-    <div class="charity-main-content">
-        
-        <!-- Main Section -->
-        <!-- <div class="charity-main-section charity-modren-services-full">
-            <div class="container-fluid">
-                <div class="charity-services charity-modren-services">
-                    <ul class="row">
-                        <li class="col px-0">
-                            <div class="charity-modren-services-wrap">
-                              <i class="fas fa-users"></i>
-                              <h2>Protect Children</h2>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam dui velit, posuere a volutpat amet. dolor sit amet.</p>
-                            </div>
-                        </li>
-                        <li class="col px-0">
-                            <div class="charity-modren-services-wrap">
-                              <i class="fas fa-book"></i>
-                              <h2>Free Education</h2>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam dui velit, posuere a volutpat amet. dolor sit amet.</p>
-                            </div>
-                        </li>
-                        <li class="col px-0">
-                            <div class="charity-modren-services-wrap">
-                              <i class="fas fa-handshake"></i>
-                              <h2>Give Shelter</h2>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Etiam dui velit, posuere a volutpat amet. dolor sit amet.</p>
-                            </div>
-                        </li>
-                    </ul>
+    <div class="charity-subheader">
+        <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1> 기부 성향 테스트 </h1>
                 </div>
             </div>
-        </div> -->
-        <!-- Main Section -->
+        </div>
+    </div>
+   
+    <!-- Main Sidebar Container
+ 		 <aside class="main-sidebar sidebar-dark-primary elevation-4"> -->
+    <!-- Brand Logo 
+    <a href="index3.html" class="brand-link">
+      <img src="/resources/nanulogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light"> 이벤트 </span>
+    </a> -->
+     <!-- Sidebar Menu 
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    -->
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library 
+         
+          <li class="nav-item">
+            <a href="/resources/pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                출석체크
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                테스트
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/resources/pages/charts/chartjs.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> 기부 성향 테스트 </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/resources/pages/charts/flot.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> 동물상 테스트 </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/resources/pages/charts/inline.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> 타로 운세 </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
+           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tree"></i>
+              <p>
+                게임
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/UI/general.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> 퍼즐 맞추기 </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/UI/icons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> 테트리스 </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/UI/buttons.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> 로또 맞추기 </p>
+                </a>
+              </li>
+            </ul>
+          </li>-->
+          
+    <!-- Banner -->
+	   <div class="l-navbar" id="navbar">
+        <nav class="nav">
+            <div>
+                <div class="nav__brand">
+                    <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                    <aside ><a href="${pageContext.request.contextPath}/main" class="charity-logo" style="width:100px;height:50px; margin: 0px 0px 0px 0px;"><img src="/resources/nanulogo.png" alt=""></a></aside>
+                    <a href="#" class="nav__logo"> 이벤트 </a>
+                </div>
+                
+                <div class="nav__list">
+                    <a href="#" class="nav__link active">
+                        <ion-icon name="calendar-outline" class="nav__icon"></ion-icon>
+                        <span class="nav_name"> 출석체크 </span>
+                    </a>
+                    
+                    <div href="#" class="nav__link collapse">
+                        <ion-icon name="images-outline" class="nav__icon"></ion-icon>
+                        <span class="nav_name"> 테스트 </span>
+
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                        <ul class="collapse__menu">
+                            <a href="#" class="collapse__sublink"> 기부성향테스트 </a>
+                            <a href="#" class="collapse__sublink"> 동물상테스트 </a>
+                            <a href="#" class="collapse__sublink"> 타로운세 </a>
+                        </ul>
+                    </div>
+
+                    <div href="#" class="nav__link collapse">
+                        <ion-icon name="game-controller-outline" class="nav__icon"></ion-icon>
+                        <span class="nav_name"> 게임 </span>
+
+                        <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                        <ul class="collapse__menu">
+                            <a href="#" class="collapse__sublink"> 퍼즐맞추기 </a>
+                            <a href="#" class="collapse__sublink"> 테트리스 </a>
+                            <a href="#" class="collapse__sublink"> 로또맞추기 </a>
+                        </ul>
+                    </div>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Content -->
+    <div class="charity-main-content">
 
         <!-- Main Section -->
         <div class="charity-main-section">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9 bottom-spacer">
-                    
-                        <div class="charity-event-map">
-                            <div class="widget_title"><h2><i class="fa fa-inbox"></i>&nbsp; NanuShare Box Location</h2></div>
-                            <div id="map" style="height: 600px;">
-                            <c:import url="kakaomap2.jsp"/> </div>
-                        </div>
 
-                        <div class="charity-post-tags">
+                        <figure class="charity-event-thumb">
+                            <img src="/resources/charity/extra-images/event-detail-img.png" alt="">
+                        </figure>
+
+
+                        <div class="charity-event-rich-editor">
+                            <h1><b> 내 기부성향은 과연 어떨까? </b></h1>
+                            <h2> 각 항목에 맞는 문항을 체크하여 확인해보세요!</h2>
+                   
+                        </div>
+                        
+                        <button type="button" class="btn btn-success"> 테스트 시작하기 </button>
+                        
+                        <ul class="charity-event-option-two">
+                        </ul>
+                         <div class="charity-post-tags">
                             <div class="charity-tags">
                                 <span>Tags:</span>
                                 <a href="404.html">charity </a>
@@ -488,63 +350,7 @@
                         </div>
 
                     </div>
-                    <aside class="col-md-3">
-                        
-                        <!-- Widget Search -->
-                        <div class="widget widget_search">
-                            <div class="widget_title"><h2>Search Here</h2></div>
-                            <form>
-                                <input type="text" placeholder="Search Here">
-                                <input type="submit" value="">
-                                <i class="fa fa-search"></i>
-                            </form>
-                        </div>
-                        <!-- Widget Search -->
-                     
-                        <!-- Widget Archive -->
-                        <div class="widget widget_archive">
-                            <div class="widget_title"><h2>Calender Archives</h2></div>
-                            <c:forEach items="${mapvm}" var="cat">
-                            <span style="font-size: 18px;" class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
-                            	<i class="fa fa-map-marker-alt"></i>&nbsp; ${cat.branch}</span><br><br>
-                           </c:forEach>
-                           <!--  <ul>
-                                <li><a href="404.html"><i class="fa fa-map-marker-alt"></i>종각점</a></li>
-                                <li><a href="404.html">을지로입구역점</a></li>
-                                <li><a href="404.html">광화문점</a></li>
-                            </ul> -->
-                        </div>
-                        <!-- Widget Archive -->
-                        
-                          <!-- Widget Event -->
-                        <div class="widget widget_events">
-                            <div class="widget_title"><h2>Upcoming ShareBox</h2></div>
-                            <ul>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">22 Jun</time>
-                                    <div class="charity-events">
-                                       <h6><a href="event-detail.html">강남역점</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 서울 서초구 서초동 1318-10</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">13 July</time>
-                                    <div class="charity-events">
-                                       <h6><a href="event-detail.html">용산역점</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 서울 용산구 한강대로 23길 55</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">20 July</time>
-                                    <div class="charity-events">
-                                       <h6><a href="event-detail.html">시청역점</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 서울 중구 태평로 1가 54-3</a>
-                                    </div>
-                                </li>
-                             </ul>
-                        </div>
-                        <!-- Widget Event -->
-                    </aside>
+                  
                 </div>
             </div>
         </div>
@@ -1069,6 +875,31 @@
     <script src="/resources/charity/script/jquery.jplayer.js"></script>
     <script src="/resources/charity/script/jplayer.playlist.js"></script>
     <script src="/resources/charity/script/functions-main.js"></script> <!-- fuctions 복붙해서 사용 -->
+    
+    <!-- IONICONS -->
+    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+    
+    <!-- JS -->
+    <script src="/resources/assets/js/main.js"></script>
+    
+    <!-- jQuery -->
+<script src="/resources/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/resources/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="/resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/resources/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/resources/dist/js/demo.js"></script>
+
 </body>
 
 </html>
+                      
