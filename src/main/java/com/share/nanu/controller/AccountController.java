@@ -62,7 +62,7 @@ public class AccountController {
 	@GetMapping("/member/logout") // 로그아웃
 	public ModelAndView ologin(ModelAndView mav) {
 		log.info("로그아웃");
-		mav.setViewName("/loginForm/Loginindex");
+		mav.setViewName("/mainMap/mainview");
 		return mav;
 	}
 
