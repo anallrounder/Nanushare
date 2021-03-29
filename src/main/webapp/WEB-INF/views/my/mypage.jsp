@@ -42,6 +42,10 @@ p {
 li {
 	list-style: none;
 }
+
+li:nth-child(2) {
+	color: lime;
+}
 </style>
 
 
@@ -50,9 +54,19 @@ li {
 
 </head>
 <style>
-.charity-simple-blog-text {
-	height: 170px;
+
+
+.charity-simple-blog-text:nth-child(1) {
+height: 170px;
 	width: 400px;
+	float: left;
+	border-color: lightgray;
+}
+
+.charity-simple-blog-text:nth-child(2) {
+height: 80px;
+	width: 320px;
+	float: right;
 	border-color: lightgray;
 }
 </style>
@@ -131,76 +145,75 @@ li {
 
 
 
-	 <!-- Header -->
-    <header id="charity-header" class="charity-header-one" style="position:relative;z-index:2">
-     
-        <!-- Top Strip -->
-        <div class="charity-top-strip">
-        <aside ><a href="${pageContext.request.contextPath}/main" class="charity-logo" style="width:200px;height:100px; margin: 0px 0px 0px 20px;"><img src="/resources/nanulogo.png" alt=""></a></aside>
-            <div class="container">
-                <div class="row">
-                    <aside class="col-12">
-                        <div class="float-center">
-                            <a href="#menu" class="menu-link active"><span></span></a>
-                            <nav id="menu" class="menu charity-navigation">
-                            
-                                <ul>
-                                    <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                                    <li style="padding: 0px 40px 0px 70px"><a href="#" style="font-size: 20px;">나누셰어란?</a>
-                                        <ul class="children">
-                                            <li><a href="event-list.html">나누셰어 소개</a></li>
-                                            <li><a href="event-grid.html">찾아오셰어</a></li>
-                                        <!--     <li><a href="event-detail.html">Event Detail</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔함 안내</a>
-                                       <!--  <ul class="children">
+	<!-- Header -->
+	<header id="charity-header" class="charity-header-one"
+		style="position:relative;z-index:2"> <!-- Top Strip -->
+	<div class="charity-top-strip">
+		<aside> <a href="${pageContext.request.contextPath}/main"
+			class="charity-logo"
+			style="width: 200px; height: 100px; margin: 0px 0px 0px 20px;"><img
+			src="/resources/nanulogo.png" alt=""></a></aside>
+		<div class="container">
+			<div class="row">
+				<aside class="col-12">
+				<div class="float-center">
+					<a href="#menu" class="menu-link active"><span></span></a>
+					<nav id="menu" class="menu charity-navigation">
+
+					<ul>
+						<!-- <li class="active"><a href="index.html">Home</a></li> -->
+						<li style="padding: 0px 40px 0px 70px"><a href="#"
+							style="font-size: 20px;">나누셰어란?</a>
+							<ul class="children">
+								<li><a href="${pageContext.request.contextPath}/menu/about">나누셰어
+										소개</a></li>
+								<li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
+								<!--     <li><a href="event-detail.html">Event Detail</a></li> -->
+							</ul></li>
+						<li style="padding: 0px 40px 0px 30px"><a href="#"
+							style="font-size: 20px;">나눔함 안내</a> <!--  <ul class="children">
                                             <li><a href="cause-list.html">Cause List</a></li>
                                             <li><a href="cause-grid.html">Cause Grid</a></li>
                                             <li><a href="cause-detail.html">Cause Detail</a></li>
-                                        </ul> -->
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나누기</a>
-                                        <ul class="children">
-                                            <li><a href="blog-large.html">물품 나누기</a></li>
-                                            <li><a href="blog-medium.html">돈기부여하기</a></li>
-                                            <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔 인증</a>
-                                       <!--  <ul class="children">
+                                        </ul> --></li>
+						<li style="padding: 0px 40px 0px 30px"><a href="#"
+							style="font-size: 20px;">나누기</a>
+							<ul class="children">
+								<li><a href="blog-large.html">물품 나누기</a></li>
+								<li><a href="blog-medium.html">돈기부여하기</a></li>
+								<!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
+							</ul></li>
+						<li style="padding: 0px 40px 0px 30px"><a href="#"
+							style="font-size: 20px;">나눔 인증</a> <!--  <ul class="children">
                                             <li><a href="team-grid.html">Team Grid</a></li>
                                             <li><a href="team-classic.html">Team Classic</a></li>
                                             <li><a href="team-detail.html">Team Detail</a></li>
-                                        </ul> -->
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">이벤트</a>
-                                        <ul class="children">
-                                            <li><a href="about.html">출석체크</a></li>
-                                            <li><a href="prayer-list.html">테스트</a></li>
-                                            <li><a href="prayer-grid.html">게임</a></li>
-                                           <!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
+                                        </ul> --></li>
+						<li style="padding: 0px 40px 0px 30px"><a href="#"
+							style="font-size: 20px;">이벤트</a>
+							<ul class="children">
+								<li><a href="about.html">출석체크</a></li>
+								<li><a href="prayer-list.html">테스트</a></li>
+								<li><a href="prayer-grid.html">게임</a></li>
+								<!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
                                             <li><a href="404.html">404 Error</a></li>
                                             <li><a href="search-result.html">Search Result</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="contact-us.html" style="font-size: 20px;">더하기</a>
-                                     	<ul class="children">
-                                            <li><a href="about.html">공지사항</a></li>
-                                            <li><a href="prayer-list.html">문의하기</a></li>
-                                    	</ul>
-                                    </li>	
-                              
-                         
-                                </ul>
-                               <!--  <span class="float-right">
+							</ul></li>
+						<li style="padding: 0px 40px 0px 30px"><a
+							href="contact-us.html" style="font-size: 20px;">더하기</a>
+							<ul class="children">
+								<li><a href="about.html">공지사항</a></li>
+								<li><a href="prayer-list.html">문의하기</a></li>
+							</ul></li>
+
+
+					</ul>
+					<!--  <span class="float-right">
                                     <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a>
                           			<a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a>
-                                </span> -->
-                             
-                            </nav>
-                            
-                         <!--    <ul class="charity-header-options" style="text-align: center">
+                                </span> --> </nav>
+
+					<!--    <ul class="charity-header-options" style="text-align: center">
                                 <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i></a></li>
                                 <li><a href="#"><i class="fab fa-opencart"></i></a> <div class="charity-cart-box"> <p>No products in the cart.</p> </div> </li>
              
@@ -209,13 +222,13 @@ li {
                                 
                             </ul>
                              -->
-                          
-                        </div>
-                        
-                    </aside>
-                    
-                  
-            <!--     <aside class="col-12"> 
+
+				</div>
+
+				</aside>
+
+
+				<!--     <aside class="col-12"> 
                         <div class="float-right">
                           <ul class="charity-social-network">
                               <li><a href="#" class="fab fa-facebook-f"></a></li>
@@ -229,16 +242,26 @@ li {
                          
                         </div>
                     </aside> -->
-                </div>
-            </div>
-            <aside>
-            	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign up</a>
-				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign in</a>
-			</aside>
-        </div>
-        <!-- Top Strip -->
-    </header>
+			</div>
+		</div>
+		<aside> <a href="#" class="charity-strip-btn charity-bgcolor"
+			style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign
+			up</a> <a href="#" class="charity-strip-btn charity-bgcolor"
+			style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign
+			in</a> </aside>
+	</div>
+	<!-- Top Strip --> </header>
 
+	<!-- Banner -->
+	<div class="charity-subheader">
+		<span class="black-transparent"></span>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Banner -->
 
 
 	<!-- sessionScope.id 안될때 -->
@@ -265,10 +288,8 @@ li {
 		<div class="charity-main-section">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-9">
+					<div class="col-md-12">
 						<div class="charity-rich-editor charity-cause-detail">
-
-							<figure> <a>나의프로필올곳</a> <figcaption> </figcaption> </figure>
 
 							<div class="charity-simple-blog-text">
 								<ul class="charity-simple-blog-options">
@@ -303,35 +324,18 @@ li {
 									class="charity-simple-blog-btn">프로필 관리</a> <a href="#"
 									class="charity-simple-blog-btn">기부영수증</a>
 							</div>
-							<div class="charity-simple-blog-text">
+							<div class="charity-simple-blog-text" style="background-color:lightgrey;">
 								<ul class="charity-simple-blog-options">
 
 									<table>
 										<tr>
-											<td></td>
-										</tr>
-
-										<tr>
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none;"></td>
-
 											<td
 												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">
-
-												나의 포인트 : 수정중</td>
-										</tr>
-										<tr>
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none;"></td>
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;"></td>
-										</tr>
+												나의 포인트 : 수정중     <a href="#" class="charity-simple-blog-btn" style="float : right;">기부하기</a></td>
+										</tr>										
 									</table>
-								</ul> <a href="#"
-								class="charity-simple-blog-btn">기부하기</a>
+								</ul>
 							</div>
-
-
 							<!-- 여기까지 -->
 							<div class="charity-cause-donate">
 								<div class="skillst">
@@ -365,7 +369,7 @@ li {
 
 									<ul class="nav nav-tabs">
 										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="abc">나의 문의내역</a></li>
+											data-toggle="tab" href="#abc">나의 문의내역</a></li>
 										<li class="nav-item"><a class="nav-link"
 											data-toggle="tab" href="#def">나의 인증내역</a></li>
 										<li class="nav-item"><a class="nav-link"
