@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- select sum(dntprice) from donation where TO_CHAR(dntdate,'yyyy-mm-dd') > sysdate-1 order by dnt_paynum asc -->
+
+<mapper namespace="com.share.nanu.mapper.NoticeBoardMapper">
+	
+	<!-- 게시판 리스트 -->
+	<select id="getlist" resultType="com.share.nanu.VO.BoardVO">
+		<![CDATA[ 
+			select * from board where bcat_num = 3
+		]]>
+	</select>
+
+	<!-- 게시판 페이징 리스트 -->
+	<select id="getlistWithPaging" resultType="com.share.nanu.VO.BoardVO">
+		 <![CDATA[
+			select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from board where bcat_num = 3 order by b_index desc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount} 
+		]]>
+	</select>
+	
+	<!-- 게시물 총 개수  -->
+	<select id="getTotalCount" resultType="int">
+	  <![CDATA[
+	 	 select count(*) from board where bcat_num = 3
+	   ]]>
+	</select>
+	
+	<!-- 게시판 컨텐트뷰 -->
+	<select id="read" resultType="com.share.nanu.VO.BoardVO">
+		<![CDATA[
+	     	select * from board where bcat_num = 3 and b_index = #{b_index}
+	   ]]>
+	</select>
+	
+	<!-- 인증게시판 조회수 카운트 +1 hitUpdate -->
+	<update id="hitUpdate">
+		 <![CDATA[
+	      update board set bhit = bhit +1 where b_index = #{b_index}
+	   ]]>
+	</update>
+	
+	<!-- 게시글 수정 modify-->
+ 	<update id="modify">
+		<![CDATA[
+	    	update board set btitle = #{btitle}, bcontent = #{bcontent} where b_index = #{b_index}
+		]]>
+	</update> 
+	
+	<!-- 글 삭제 -->
+	<delete id="delete">
+	   <![CDATA[
+	     	delete from board where b_index = #{b_index}
+	   ]]>
+	</delete>
+	
+	
+</mapper>
