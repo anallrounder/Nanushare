@@ -37,5 +37,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from vm, vmam where vm.vm_num = vmam.vm_num
 	]]>
 	</select>
+	
+	<select id="getvmcat" resultType="com.share.nanu.VO.VmVO">
+	<![CDATA[ 
+		select * from vm
+	]]>
+	</select>
+	
+	<select id="getvmiven" resultType="com.share.nanu.VO.Vmam">
+	<![CDATA[ 
+		select iname from vmam group by iname 
+	]]>
+	</select>
+	
+	<select id="getoffvm" resultType="com.share.nanu.VO.Vmam">
+	<![CDATA[ 
+		select * from vmam where vm_num = #{vm_num} and iname =#{iname}
+	]]>
+	</select>
+	
+	<update id="outAmount">
+	<![CDATA[ 
+		update vmam set vm_amount = vm_amount-2 where vm_num = #{vm_num} and iname = #{iname}
+	]]>
+	</update>
 
 </mapper>
