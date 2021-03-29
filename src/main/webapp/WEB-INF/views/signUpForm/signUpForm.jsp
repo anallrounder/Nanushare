@@ -14,8 +14,14 @@
     <!-- jquery validation method cdn -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js">
     </script>
+    
     <link rel="shortcut icon" type="image/x-icon" 
     	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> <!-- 웹페이지 탭 로고이미지 삽입  -->
+    
+    <!-- bootstrap -->	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 
     <%-- <sec:csrfMetaTags/> --%>
@@ -56,7 +62,7 @@
             });
 
 
-            $('#mjoin').submit(function(event) {
+            $('#mjoin').submit(function(event) { // 가입처리
                 event.preventDefault();
 
                 var member_id = $("#member_id").val();
@@ -93,7 +99,7 @@
                         }
                     },
                     error: function(e) {
-                        alert("fail");
+                        alert("가입 정보를 빠짐없이 입력해 주세요.");
 
                         console.log(result);
                         console.log(e);
@@ -105,21 +111,28 @@
             var key = "";
             $('#certification').click(function() { // 인증버튼 클릭시 입력한 이메일로 인증 번호를 해당 이메일로 전송
             	var mail = $("#member_id").val(); // 인증받을 이메일 주소
-            	$.ajax({
-            		type : 'post',
-            		url : '${pageContext.request.contextPath}/sendMail',
-            		data : {
-            			mail : mail
-            		},
-            		dataType : 'json',
-            		async : "false",
-            		success : function(data){
-            			console.log(data.key);
-            			key = data.key;
-            		}
-            		
-            	});
-            	alert("인증번호가 해당 메일로 전송되었습니다.");
+            	if (mail == "") {
+        			alert("메일 주소가 입력되지 않았습니다.");
+        		} else {
+	            	$.ajax({
+	            		type : 'post',
+	            		url : '${pageContext.request.contextPath}/sendMail',
+	            		data : {
+	            			mail : mail
+	            		},
+	            		dataType : 'json',
+	            		async : "false",
+	            		success : function(data){
+	            			console.log(data.key);
+	            			key = data.key;
+	            		}
+	            		
+	            	});
+        		}
+            	if(mail != ""){
+            		alert("인증번호가 해당 메일로 전송되었습니다.");
+            	}
+            	
             	$("#compare").css("display","block");
             	$("#compare-text").css("display","block");
             	
@@ -135,6 +148,20 @@
         			isCertification = false;
         		}
         	});// compare end
+        	
+            /* $("#submit-btn").click(function(){
+        		if(isCertification==false){ //인증이 완료되지 않았다면
+        			alert("메일 인증이 완료되지 않았습니다.");
+        		}
+        	}); */
+        	
+            $("#submit-btn").click(function submitCheck(){ //폼에서 submit을 진행했을대 메일인증이 되어있지 않다면 페이지전환을 할 수 없다.
+        		if(isCertification==false){
+        			alert("메일 인증이 완료되지 않았습니다.");
+        			return false;
+        		}else
+        			true;
+        	});
 
         }); // end ready()
         
@@ -159,39 +186,42 @@
                     <div class="login-wrap">
                         <h3 class="text-center mb-4">Create Your Account</h3>
                         <form id="mjoin" action="${pageContext.request.contextPath}/memberJoin" 
-                        	class="signup-form" method="post" novalidate> 
+                        	class="signup-form" method="post" onsubmit="return submitCheck();" novalidate> 
                         	<!-- novalidate -> 브라우저에서 제공하는 validate를 끄겠다. 그리고 jquery validation plugin 사용 -->
 							<fieldset>
 							<!-- <legend>Input Information</legend> legend 태그는 제목 설정 태그 -->
 							
                             <div class="form-group mb-3">                           	
-                                <label class="label" for="member_id">Email Address</label>                                                                                                                               
-                                <input type="text" id="member_id" name="member_id" class="form-control" placeholder="XXXXX@gmail.com" >                                                          
+                                <label class="label" for="member_id">이메일 주소</label>                                                                                                                               
+                                <input type="text" id="member_id" name="member_id" class="form-control" placeholder="이메일을 입력해 주세요." >                                                          
                                 <span class="icon fa fa-paper-plane-o"></span>                                
                             </div>
-                            <input type="button" id="certification" value="인증">
-                            
+                            <div style="float: right;">
+                            	<button type="button" id="certification" class="btn btn-warning">인증번호 전송</button>
+                            	<!-- <input type="button" id="certification" value="인증번호 전송"> -->
+                            </div>
+                            <br/>
                             <div class="form-group mb-3">                           	
-                                <label class="label" for="compare">Email Address Certification</label>                                                                                                                               
-                                <input type="text" id="compare" class="form-control" placeholder="인증키 입력" >                                                                                         
+                                <label class="label" for="compare">이메일 인증번호</label>                                                                                                                               
+                                <input type="text" id="compare" class="form-control" placeholder="인증키를 입력해 주세요." >                                                                                         
                                 <span class="icon fa fa-paper-plane-o"></span>                                
                             </div>
                             <span id="compare-text" style="display: none">불일치</span>
 
                             <div class="form-group mb-3">
-                                <label class="label" for="pw">Password</label>
-                                <input id="pw" name="pw" type="password" class="form-control" placeholder="Password" >                                                            
+                                <label class="label" for="pw">비밀번호</label>
+                                <input id="pw" name="pw" type="password" class="form-control" placeholder="비밀번호를 입력해 주세요." >                                                            
                                 <span class="icon fa fa-lock"></span>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label class="label" for="pw">Password Confirm</label>
-                                <input name="pwConfirm" type="password" class="form-control" placeholder="Password Confirm" >                                
+                                <label class="label" for="pw">비밀번호 확인</label>
+                                <input name="pwConfirm" type="password" class="form-control" placeholder="비밀번호를 입력해 주세요." >                                
                                 <span class="icon fa fa-lock"></span>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label class="label" for="name">Name</label>
+                                <label class="label" for="name">이름</label>
                                 <input id="name" name="name" type="text" class="form-control" placeholder="홍길동" >
                                 <span class="icon fa fa-user-o"></span>
                             </div>
@@ -217,7 +247,7 @@
                             <!-- 가입경로는 히든으로 표시, 자체가입자는 반드시 signuppath에 home 입력 -->
 
                             <div class="form-group">
-                                <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
+                                <button type="submit" id="submit-btn" class="form-control btn btn-primary submit px-3">Sign Up</button>
                             </div>
                             </fieldset>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

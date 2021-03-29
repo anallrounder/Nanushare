@@ -8,7 +8,7 @@ public class AttachmentVO {
 	private int attach_num; // 첨부파일 번호
 	private String originname; // 원본파일 이름
 	private String path; // 첨부파일 경로
-	private String extension; // 확장자
+	//private String extension; // 확장자
 	private int b_index; // idx,로그기록
 
 	public AttachmentVO() {
@@ -20,7 +20,7 @@ public class AttachmentVO {
 		this.attach_num = attach_num;
 		this.originname = originname;
 		this.path = path;
-		this.extension = extension;
+		//this.extension = extension;
 		this.b_index = b_index;
 	}
 
@@ -48,6 +48,7 @@ public class AttachmentVO {
 		this.path = path;
 	}
 
+	/*
 	public String getExtension() {
 		return extension;
 	}
@@ -55,7 +56,7 @@ public class AttachmentVO {
 	public void setExtension(String extension) {
 		this.extension = extension;
 	}
-
+	 */
 	public int getB_index() {
 		return b_index;
 	}

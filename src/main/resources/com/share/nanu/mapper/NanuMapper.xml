@@ -57,6 +57,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	<select id="changePw" resultType="com.share.nanu.VO.MemberVO">
+		<![CDATA[
+			update member set pw=#{pw} where member_id=#{member_id}
+		]]>
+	</select>
+	
 	
 
 </mapper>

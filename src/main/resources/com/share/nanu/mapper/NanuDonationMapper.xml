@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.nanu.mapper.NanuDonationMapper">
+
+	<!-- 물품신청서 회원정보 불러오기 _ 아래는 현재 테스트용 쿼리문임 현재 로그인한 회원정보 불러오기로 추후 변경해야함 -->
+	<select id="readMember" resultType="com.share.nanu.VO.MemberVO">
+		<![CDATA[ 
+				select * from member where member_id = 'Ulric@naver.com'
+		]]>
+	</select>
+
+	<!-- @Insert("insert into mvc_board (bid, bname, btitle, bcontent, bhit, bgroup, bstep, bindent)
+	values (mvc_board_seq.nextval, #{bname}, #{btitle}, #{bcontent}, 0, mvc_board_seq.currval, 0, 0)") -->
+
+		<!-- 오늘날짜 자동입력으로 테스트함 -->
+<!-- 	<select id="saveForm" resultType="com.share.nanu.VO.ItemdonationVO">
+		<![CDATA[ 
+			insert into itemdonation(idnt_num, member_id, donaamount, icat_num)
+			values(ITEMDONATION_SEQ.nextval,  #{member_id}, #{donaamount}, #{icat_num})
+		]]>
+	</select> -->
+	
+	<!-- 물품신청서 디비 저장 -->
+ 	 <insert id="saveForm" >
+		<![CDATA[ 
+			insert into itemdonation(idnt_num, idntdate, member_id, donaamount, icat_num)
+			values(ITEMDONATION_SEQ.nextval, #{idntdate},  #{member_id}, #{donaamount}, #{icat_num})
+		]]>
+	</insert> 
+	
+	<!-- 물품신청서 전송시 회원테이블에 물품신청 횟수 카운트 countIDnt -->
+ 	<update id="countIDnt" >
+		<![CDATA[ 
+			UPDATE member SET ITEMDNTCNT = ITEMDNTCNT + 1 where member_id = 'Ulric@naver.com'
+		]]>
+	</update> 
+
+	<!-- 포인트 나눔 페이지 point + member 조인해서 불러오기 -->
+	<resultMap id="Point" type="com.share.nanu.VO.PointVO">
+		<id column="pnt_num" property="pnt_num" />
+		<result column="member_id" property="member_id" />
+		<result column="pdate" property="pdate" />
+		<result column="prtpnt" property="prtpnt" />
+		<result column="dntpnt" property="dntpnt" />
+		<result column="totalpnt" property="totalpnt" /> 
+		<result column="e_idx" property="e_idx" />
+		<result column="nowpnt" property="nowpnt" />
+	</resultMap>
+	
+	<resultMap id="MemberPointResult" type="com.share.nanu.VO.MemberPointVO">
+ 		<id column="member_id" property="member_id" />
+ 		<result column="name" property="name" />
+ 		<collection property="pointList" resultMap="Point" javaType="java.util.List" />
+	</resultMap>
+
+	<!-- select * from member m, point p where m.member_id = p.member_id and m.member_id='Ulric@naver.com' -->
+	<select id="getMP" resultMap="MemberPointResult">
+		<![CDATA[ 
+			select * from (
+					select m.member_id, m.name, p.pnt_num, p.totalpnt, p.nowpnt from member m, point p 
+					where m.member_id = p.member_id and m.member_id = 'Ulric@naver.com' order by p.pnt_num desc
+				) 
+			where rownum =1
+		]]>
+	</select>  
+	
+	<!-- insert into point(pnt_num, member_id, pdate, prtpnt, dntpnt, totalpnt)
+	values(POINT_SEQ.nextval, #{member_id}, sysdate, 0, #{dntpnt}, #{totalpnt}) -->
+	
+	<!-- 포인트 기부시 포인트 테이블에 기부포인트, 누적포인트 내역 insert -->
+	<insert id="donatePoint" >
+		<![CDATA[ 
+			insert into point(pnt_num, member_id, pdate, prtpnt, dntpnt, totalpnt, nowpnt)
+			values(POINT_SEQ.nextval, #{member_id}, sysdate, 0, #{dntpnt}, #{totalpnt}, #{totalpnt}-#{dntpnt})
+		]]>
+	</insert>  
+	
+	<!-- 포인트 기부시 회원테이블에 물품신청 횟수 카운트 countPDnt -->
+  	<update id="countPDnt" >
+		<![CDATA[ 
+			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = 'Ulric@naver.com'
+		]]>
+	</update>  
+
+</mapper>
+
+

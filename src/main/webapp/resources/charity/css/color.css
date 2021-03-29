@@ -66,8 +66,15 @@ ul li:hover .charity-grid-prayer-btn,
 .charity-volunteer-form form ul li input[type="submit"],
 .charity-select-two:after,
 .charity-about-btn,
+.charity-main-btn, /* 혜선생성 */
+
 .charity-partner-slider .slick-arrow:hover {
     background-color: #2a786b;
+}
+
+.charity-sub-btn,  
+.charity-click-btn /* 혜선생성 */ {
+    background-color: #2a9f89;
 }
 
 .charity-border-color,
