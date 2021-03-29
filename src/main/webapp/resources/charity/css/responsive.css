@@ -165,7 +165,7 @@
 	.charity-sermon-player { display: none; }
 	.charity-list-prayer ul li figure ~ .charity-prayer-list-text { margin: 0px; float: left; width: 100%; padding-bottom: 40px; }
 	.charity-list-prayer ul li figure,.charity-prayer-list-option > li { width: 100%; }
-	.charity-team-timeline { display: none; }
+	.charity-team-timeline { width: 100%; }
 	.charity-volunteer-form form ul .charity-select-form { width: 100%; }
 	.charity-team-contactus { display: none; }
 	.searchmodal .modal-dialog { width: 100%; }
