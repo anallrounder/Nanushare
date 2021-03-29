@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.nanu.mapper.MyPageMapper">
+
+	<select id="loginCheck" resultType="com.share.nanu.VO.MemberVO">
+		SELECT member_id, pw
+		FROM
+		member
+		WHERE member_id = #{member_id}
+
+	</select>
+
+
+
+	<select id="viewMember" resultType="com.share.nanu.VO.MemberVO">
+		SELECT *
+		FROM member
+		WHERE
+		member_id = #{member_id}
+
+	</select>
+
+	<select id="mygetlist1" resultType="com.share.nanu.VO.BoardVO">
+	<![CDATA[ 
+			select * from board where bcat_num=1
+		]]>
+	</select>
+
+	<select id="mygetlist2" resultType="com.share.nanu.VO.BoardVO">
+	<![CDATA[ 
+			select * from board where bcat_num=2
+		]]>
+	</select>
+<!-- 	<select id="mygetlist3" resultType="com.share.nanu.VO.BoardVO">
+	<![CDATA[ 
+			select * from board where bcat_num=3
+		]]>
+	</select>
+	<select id="mygetlist4" resultType="com.share.nanu.VO.BoardVO">
+	<![CDATA[ 
+			select * from board where bcat_num=4
+		]]>
+	</select> -->
+
+
+	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging1">
+
+	<![CDATA[
+	select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from board where bcat_num = 1 order by b_index desc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount}
+]]>
+	</select>
+
+	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging2">
+
+	<![CDATA[
+	select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from board where bcat_num = 2 order by b_index desc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount}
+]]>
+	</select>
+<!-- <select resultType="com.share.nanu.VO.BoardVO" id="getPaging3">
+
+	<![CDATA[
+	select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from board where bcat_num = 3 order by b_index desc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount}
+]]>
+	</select>
+
+<select resultType="com.share.nanu.VO.BoardVO" id="getPaging4">
+
+	<![CDATA[
+	select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from board where bcat_num = 4 order by b_index desc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount}
+]]>
+	</select> -->
+
+
+	<!-- <select resultType="com.share.nanu.VO.BoardVO" id="mygetlist2"> <![CDATA[ 
+		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]> </select> 
+		<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist3"> <![CDATA[ 
+		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]> </select> 
+		<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist4"> <![CDATA[ 
+		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]> </select> -->
+
+	<select resultType="int" id="getTotalCnt1">
+		select count(*) from board where
+		bcat_num=1
+	</select>
+
+	<select resultType="int" id="getTotalCnt2">
+		select count(*) from board where
+		bcat_num=2
+	</select>
+<!-- <select resultType="int" id="getTotalCnt3">
+		select count(*) from board where
+		bcat_num=3
+	</select>
+	<select resultType="int" id="getTotalCnt4">
+		select count(*) from board where
+		bcat_num=4
+	</select> -->
+
+
+
+
+
+	<!-- 나눔내역 -->
+	<resultMap id="itemdonationVO"
+		type="com.share.nanu.VO.ItemdonationVO">
+		<id property="idnt_num" column="idnt_num" />
+		<result property="idntdate" column="idntdate" />
+		<result property="member_id" column="member_id" />
+		<result property="donaamount" column="donaamount" />
+		<result property="icat_num" column="icat_num" />
+	</resultMap>
+	<resultMap id="iteminvenVO"
+		type="com.share.nanu.VO.IteminvenVO">
+		<id property="icat_num" column="icat_num" />
+		<result property="iname" column="iname" />
+		<result property="iamount" column="iamount" />
+		<collection property="dona" javaType="java.util.List"
+			resultMap="itemdonationVO" />
+	</resultMap>
+	<!--resultType : 결과반환 Object, parameterType : 조회결과 Object -->
+	<select id="mygetlist3" resultMap="iteminvenVO">
+<![CDATA[ select * from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntdate desc]]>
+	</select>
+
+
+
+	<!-- 댓글내역 -->
+	<resultMap id="boardreplyVO"
+		type="com.share.nanu.VO.BoardreplyVO">
+		<id property="r_num" column="r_num" />
+		<result property="icat_num" column="icat_num" />
+		<result property="rcontent" column="rcontent" />
+		<result property="rdate" column="rdate" />
+		<result property="rid" column="rid" />
+	</resultMap>
+	<resultMap id="boardVO" type="com.share.nanu.VO.Board_ListVO">
+		<id property="b_index" column="b_index" />
+		<result property="btitle" column="btitle" />
+		<collection property="reply" javaType="java.util.List"
+			resultMap="boardreplyVO" />
+	</resultMap>
+	<select id="mygetlist4" resultMap="boardVO">
+	<![CDATA[ 
+	select * from board a, boardreply b where a.b_index = b.b_index]]>
+	</select>
+
+
+	<!-- 회원정보수정 -->
+	<select id="memberModifyGET"
+		resultType="com.share.nanu.VO.MemberVO" parameterType="String"><!-- parameterType="String" -->
+		<![CDATA[SELECT *
+		FROM member where member_id = #{member_id}]]>
+
+	</select>
+
+	<update id="memberModifyPOST">
+		<![CDATA[
+		UPDATE member
+		SET name = #{name}, pw = #{pw}, phone = #{phone}
+		where member_id = #{member_id}]]>
+	</update>
+
+
+
+	<!-- 회원탈퇴 - 다시 재가입이 안되게 delete가 아닌 update로 구현? -->
+	<delete id="memberDelete">
+		delete from member
+		SET enable=2
+		where
+		member_id =
+		#{member_id} and pw=#{pw} and name=#{name}
+	</delete>
+</mapper>
