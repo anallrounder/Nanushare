@@ -53,7 +53,7 @@
                             
                                 <ul>
                                     <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                                    <li style="padding: 0px 40px 0px 70px"><a href="#" style="font-size: 20px;">나누셰어란?</a>
+                                    <li style="padding: 0px 40px 0px 70px"><a href="${pageContext.request.contextPath}/menu/about" style="font-size: 20px;">나누셰어란?</a>
                                         <ul class="children">
                                             <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
                                             <li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
@@ -67,7 +67,7 @@
                                             <li><a href="cause-detail.html">Cause Detail</a></li>
                                         </ul> -->
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나누기</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/donation/item/main" style="font-size: 20px;">나누기</a>
                                         <ul class="children">
                                             <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
                                             <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>

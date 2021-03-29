@@ -66,33 +66,68 @@
                                             <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
                                         </ul>
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔 인증</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/board/shows/list" style="font-size: 20px;">나눔 인증</a>
                                        <!--  <ul class="children">
                                             <li><a href="team-grid.html">Team Grid</a></li>
                                             <li><a href="team-classic.html">Team Classic</a></li>
                                             <li><a href="team-detail.html">Team Detail</a></li>
                                         </ul> -->
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">이벤트</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/event/check"style="font-size: 20px;">이벤트</a>
                                         <ul class="children">
-                                            <li><a href="about.html">출석체크</a></li>
-                                            <li><a href="prayer-list.html">테스트</a></li>
-                                            <li><a href="prayer-grid.html">게임</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/check">출석체크</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/test">테스트</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/game">게임</a></li>
                                            <!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
                                             <li><a href="404.html">404 Error</a></li>
                                             <li><a href="search-result.html">Search Result</a></li> -->
                                         </ul>
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="contact-us.html" style="font-size: 20px;">더하기</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/restful/notice" style="font-size: 20px;">더하기</a>
                                      	<ul class="children">
-                                            <li><a href="about.html">공지사항</a></li>
-                                            <li><a href="prayer-list.html">문의하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/restful/qna">문의하기</a></li>
                                     	</ul>
                                     </li>	
+                              
+                         
                                 </ul>
+                               <!--  <span class="float-right">
+                                    <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a>
+                          			<a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a>
+                                </span> -->
+                             
                             </nav>
+                            
+                         <!--    <ul class="charity-header-options" style="text-align: center">
+                                <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i></a></li>
+                                <li><a href="#"><i class="fab fa-opencart"></i></a> <div class="charity-cart-box"> <p>No products in the cart.</p> </div> </li>
+             
+                                <li> <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a></li>
+                          		<li><a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a></li>
+                                
+                            </ul>
+                             -->
+                          
                         </div>
+                        
                     </aside>
+                    
+                  
+            <!--     <aside class="col-12"> 
+                        <div class="float-right">
+                          <ul class="charity-social-network">
+                              <li><a href="#" class="fab fa-facebook-f"></a></li>
+                              <li><a href="#" class="fab fa-google"></a></li>
+                              <li><a href="#" class="fab fa-pinterest-p"></a></li>
+                              <li><a href="#" class="fab fa-linkedin-in"></a></li>
+                              <li><a href="#" class="fab fa-twitter"></a></li>
+                          </ul>
+                          <a href="#" class="charity-strip-btn charity-bgcolor" >Sign up</a>
+                          <a href="#" class="charity-strip-btn charity-bgcolor">Sign in</a>
+                         
+                        </div>
+                    </aside> -->
                 </div>
             </div>
 
