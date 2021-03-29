@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.share.nanu.VO.DonationVO;
 import com.share.nanu.VO.VmVO;
+import com.share.nanu.VO.Vmam;
 import com.share.nanu.mapper.MainMapper;
 
 import lombok.AllArgsConstructor;
@@ -35,5 +36,30 @@ public class MainServiceImpl implements MainService {
 		// TODO Auto-generated method stub
 		return mainmapper.getvm();
 	}
+
+	@Override
+	public List<VmVO> getvmcat() {
+		// TODO Auto-generated method stub
+		return mainmapper.getvmcat();
+	}
+
+	@Override
+	public List<Vmam> getvminven() {
+		// TODO Auto-generated method stub
+		return mainmapper.getvmiven();
+	}
+
+	@Override
+	public List<VmVO> getoffvm(Vmam vmamvo) {
+		// TODO Auto-generated method stub
+		return mainmapper.getoffvm(vmamvo);
+	}
+
+	@Override
+	public void itemOut(String vm_num, String iname) {
+		// TODO Auto-generated method stub
+		mainmapper.outAmount(vm_num, iname);
+	}
+
 
 }

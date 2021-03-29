@@ -50,7 +50,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 		} else if (userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
 
-			userInfo = new KakaoUserInfo((Map) oauth2User.getAttributes());
+			userInfo = new KakaoUserInfo(oauth2User.getAttributes());
 		}
 
 		MemberVO mvo = nmapper.getMember(userInfo.getProviderId()); // 이미 가입이 되어있는지 조회
