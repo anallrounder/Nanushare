@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+<!-- font-awesome 부트스트랩 이모티콘 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 </head>
 
 <style>
@@ -32,102 +35,111 @@
 </style>
 <body>
 	<!-- Header -->
-	<header id="charity-header" class="charity-header-one"> <!-- Top Strip -->
+	<header id="charity-header" class="charity-header-one"
+		style="position:relative;z-index:2"> <!-- Top Strip -->
 	<div class="charity-top-strip">
+		<aside> <a href="${pageContext.request.contextPath}/main"
+			class="charity-logo"
+			style="width: 200px; height: 100px; margin: 0px 0px 0px 20px;"><img
+			src="/resources/nanulogo.png" alt=""></a></aside>
 		<div class="container">
 			<div class="row">
-				<aside class="col-6 charity-strip-text">
-				<p>Explore The charity</p>
-				<span><i class="fas fa-phone fa-rotate-90"></i> 123 456 789</span> <span><i
-					class="far fa-envelope"></i> <a
-					href="/resources/charity/mailto:name@email.com">info@example.com</a></span>
-				</aside>
-				<aside class="col-6"> </aside>
-			</div>
-		</div>
-	</div>
-	<!-- Top Strip --> <!-- Main Header -->
-	<div class="charity-main-header">
-		<div class="container">
-			<div class="row">
-				<aside class="col-3"> <a
-					href="/resources/charity/index.html" class="charity-logo"><img
-					src="/resources/charity/images/logo.png" alt=""></a></aside>
-				<aside class="col-9">
-				<div class="float-right">
-					<a href="/resources/charity/#menu" class="menu-link active"><span></span></a>
+				<aside class="col-12">
+				<div class="float-center">
+					<a href="#menu" class="menu-link active"><span></span></a>
 					<nav id="menu" class="menu charity-navigation">
+
 					<ul>
-						<li class="active"><a href="/resources/charity/index.html">Home</a></li>
-						<li><a href="/resources/charity/#">Events</a>
+						<!-- <li class="active"><a href="index.html">Home</a></li> -->
+						<li style="padding: 0px 40px 0px 70px"><a href="#"
+							style="font-size: 20px;">나누셰어란?</a>
 							<ul class="children">
-								<li><a href="/resources/charity/event-list.html">Event
-										List</a></li>
-								<li><a href="/resources/charity/event-grid.html">Event
-										Grid</a></li>
-								<li><a href="/resources/charity/event-detail.html">Event
-										Detail</a></li>
+								<li><a href="${pageContext.request.contextPath}/menu/about">나누셰어
+										소개</a></li>
+								<li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
+								<!--     <li><a href="event-detail.html">Event Detail</a></li> -->
 							</ul></li>
-						<li><a href="/resources/charity/#">Causes</a>
+						<li style="padding: 0px 40px 0px 30px"><a href="#"
+							style="font-size: 20px;">나눔함 안내</a> <!--  <ul class="children">
+                                            <li><a href="cause-list.html">Cause List</a></li>
+                                            <li><a href="cause-grid.html">Cause Grid</a></li>
+                                            <li><a href="cause-detail.html">Cause Detail</a></li>
+                                        </ul> --></li>
+						<li style="padding: 0px 40px 0px 30px"><a href="#"
+							style="font-size: 20px;">나누기</a>
 							<ul class="children">
-								<li><a href="/resources/charity/cause-list.html">Cause
-										List</a></li>
-								<li><a href="/resources/charity/cause-grid.html">Cause
-										Grid</a></li>
-								<li><a href="/resources/charity/cause-detail.html">Cause
-										Detail</a></li>
+								<li><a href="blog-large.html">물품 나누기</a></li>
+								<li><a href="blog-medium.html">돈기부여하기</a></li>
+								<!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
 							</ul></li>
-						<li><a href="/resources/charity/#">Blog</a>
+						<li style="padding: 0px 40px 0px 30px"><a href="#"
+							style="font-size: 20px;">나눔 인증</a> <!--  <ul class="children">
+                                            <li><a href="team-grid.html">Team Grid</a></li>
+                                            <li><a href="team-classic.html">Team Classic</a></li>
+                                            <li><a href="team-detail.html">Team Detail</a></li>
+                                        </ul> --></li>
+						<li style="padding: 0px 40px 0px 30px"><a href="#"
+							style="font-size: 20px;">이벤트</a>
 							<ul class="children">
-								<li><a href="/resources/charity/blog-large.html">Cause
-										List</a></li>
-								<li><a href="/resources/charity/blog-medium.html">Cause
-										Grid</a></li>
-								<li><a href="/resources/charity/blog-detail.html">Cause
-										Detail</a></li>
+								<li><a href="about.html">출석체크</a></li>
+								<li><a href="prayer-list.html">테스트</a></li>
+								<li><a href="prayer-grid.html">게임</a></li>
+								<!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
+                                            <li><a href="404.html">404 Error</a></li>
+                                            <li><a href="search-result.html">Search Result</a></li> -->
 							</ul></li>
-						<li><a href="/resources/charity/#">Team</a>
+						<li style="padding: 0px 40px 0px 30px"><a
+							href="contact-us.html" style="font-size: 20px;">더하기</a>
 							<ul class="children">
-								<li><a href="/resources/charity/team-grid.html">Team
-										Grid</a></li>
-								<li><a href="/resources/charity/team-classic.html">Team
-										Classic</a></li>
-								<li><a href="/resources/charity/team-detail.html">Team
-										Detail</a></li>
+								<li><a href="about.html">공지사항</a></li>
+								<li><a href="prayer-list.html">문의하기</a></li>
 							</ul></li>
-						<li><a href="/resources/charity/#">Pages</a>
-							<ul class="children">
-								<li><a href="/resources/charity/about.html">About Us</a></li>
-								<li><a href="/resources/charity/prayer-list.html">Prayer
-										List</a></li>
-								<li><a href="/resources/charity/prayer-grid.html">Prayer
-										Grid</a></li>
-								<li><a href="/resources/charity/prayer-detail.html">Prayer
-										Detail</a></li>
-								<li><a href="/resources/charity/404.html">404 Error</a></li>
-								<li><a href="/resources/charity/search-result.html">Search
-										Result</a></li>
-							</ul></li>
-						<li><a href="/resources/charity/contact-us.html">Contact</a></li>
+
+
 					</ul>
-					</nav>
-					<ul class="charity-header-options">
-						<li><a href="/resources/charity/#" data-toggle="modal"
-							data-target="#searchModal"><i class="fas fa-search"></i></a></li>
-						<li><a href="/resources/charity/#"><i
-								class="fab fa-opencart"></i></a>
-							<div class="charity-cart-box">
-								<p>No products in the cart.</p>
-							</div></li>
-					</ul>
+					<!--  <span class="float-right">
+                                    <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a>
+                          			<a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a>
+                                </span> --> </nav>
+
+					<!--    <ul class="charity-header-options" style="text-align: center">
+                                <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i></a></li>
+                                <li><a href="#"><i class="fab fa-opencart"></i></a> <div class="charity-cart-box"> <p>No products in the cart.</p> </div> </li>
+             
+                                <li> <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a></li>
+                          		<li><a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a></li>
+                                
+                            </ul>
+                             -->
+
 				</div>
+
 				</aside>
+
+
+				<!--     <aside class="col-12"> 
+                        <div class="float-right">
+                          <ul class="charity-social-network">
+                              <li><a href="#" class="fab fa-facebook-f"></a></li>
+                              <li><a href="#" class="fab fa-google"></a></li>
+                              <li><a href="#" class="fab fa-pinterest-p"></a></li>
+                              <li><a href="#" class="fab fa-linkedin-in"></a></li>
+                              <li><a href="#" class="fab fa-twitter"></a></li>
+                          </ul>
+                          <a href="#" class="charity-strip-btn charity-bgcolor" >Sign up</a>
+                          <a href="#" class="charity-strip-btn charity-bgcolor">Sign in</a>
+                         
+                        </div>
+                    </aside> -->
 			</div>
 		</div>
+		<aside> <a href="#" class="charity-strip-btn charity-bgcolor"
+			style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign
+			up</a> <a href="#" class="charity-strip-btn charity-bgcolor"
+			style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign
+			in</a> </aside>
 	</div>
-	<!-- Main Header --> </header>
-	<!-- Header -->
-
+	<!-- Top Strip --> </header>
 
 
 	<!-- Banner -->
@@ -135,9 +147,7 @@
 		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<h1>찾아오셰어 페이지입니다</h1>
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -159,20 +169,27 @@
 							<div class="container">
 								<div class="row">
 
-									<div class="col-md-8">
+									<div class="col-md-12">
 										<div class="charity-aboutus-text">
-											<h2>주소/연락처</h2>
+											<i class="fas fa-phone fa-2x"> 연락처</i>
+
+											<h6>
+												<br>대표전화 02-722-1481 <br><br><br>
+											</h6>
+											<br> <br> <i class="fas fa-clock fa-2x"> 영업시간</i>
+											<h6>
+												<br>월-금 10:00 ~ 17:00 | 주말 및 공휴일 휴무 | 점심시간 오후 12:00 ~
+												13:00<br><br><br>
+											</h6>
+											<br> <br> <i class="fas fa-map-marker-alt fa-2x">
+												주소</i>
+											<h6>
+												<br> 도로명 주소 : (우)03164 서울특별시 종로구 종로 2가 종로69<br>
+											</h6>
 											<p>
-												도로명 주소 : (우)03164 서울특별시 종로구 종로 2가 종로69<br> 대표전화
-												02-722-1481
+												<img src="/resources/my/찾아오셰어지도.PNG" height="2727"
+													width="1680.75">
 											</p>
-											<br> <br>
-											<h2>영업시간</h2>
-											<p>월-금 10:00 ~ 17:00 | 주말 및 공휴일 휴무 | 점심시간 오후 12:00 ~
-												13:00</p>
-											<br> <br>
-											<h2>약도</h2>
-											<p>약도그림이 들어갑니다</p>
 										</div>
 									</div>
 
