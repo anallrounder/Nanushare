@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang="ko">
 
@@ -54,8 +55,8 @@
                                     <!-- <li class="active"><a href="index.html">Home</a></li> -->
                                     <li style="padding: 0px 40px 0px 70px"><a href="#" style="font-size: 20px;">나누셰어란?</a>
                                         <ul class="children">
-                                            <li><a href="event-list.html">나누셰어 소개</a></li>
-                                            <li><a href="event-grid.html">찾아오셰어</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
                                         <!--     <li><a href="event-detail.html">Event Detail</a></li> -->
                                         </ul>
                                     </li>
@@ -68,8 +69,8 @@
                                     </li>
                                     <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나누기</a>
                                         <ul class="children">
-                                            <li><a href="blog-large.html">물품 나누기</a></li>
-                                            <li><a href="blog-medium.html">돈기부여하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
                                             <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
                                         </ul>
                                     </li>
@@ -137,11 +138,19 @@
                     </aside> -->
                 </div>
             </div>
-            <aside>
-            	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign up</a>
-				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign in</a>
+
+			<sec:authorize access="isAnonymous()">
+				<aside>
+            	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">회원가입</a>
+				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">로그인</a>
 			</aside>
-        </div>
+			</sec:authorize>
+
+			<sec:authorize access="isAuthenticated()">
+				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a>
+				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">마이 페이지</a>
+			</sec:authorize>
+		</div>
         <!-- Top Strip -->
     </header>
     <!-- Header -->
