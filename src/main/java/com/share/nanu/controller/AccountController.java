@@ -119,8 +119,8 @@ public class AccountController {
 		}
 		int numIndex = random.nextInt(8999) + 1000; // 4자리 정수 생성
 		key += numIndex;
-		message.setSubject("인증번호 입력을 위한 메일 전송");
-		message.setText("인증 번호  " + key);
+		message.setSubject("Nanushare 인증번호 전송"); //보낼 메일 제목
+		message.setText("인증 번호  " + key); //보낼 메일 내용
 		javaMailSender.send(message);
 		map.put("key", key);
 		return map;
