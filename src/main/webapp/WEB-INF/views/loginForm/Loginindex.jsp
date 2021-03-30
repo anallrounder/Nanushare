@@ -15,25 +15,6 @@
     	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
     
-    <script type="text/javascript">
-    
-		    var imgArray = new Array();
-		    imgArray[0] = "IMG_1.PNG";
-		    imgArray[1] = "IMG_2.PNG";
-		    imgArray[2] = "IMG_3.PNG";
-		    imgArray[3] = "IMG_4.PNG";
-		    imgArray[4] = "IMG_5.PNG";
-		    imgArray[5] = "IMG_6.PNG";
-		    imgArray[6] = "IMG_7.PNG";
-		    imgArray[7] = "IMG_8.PNG";
-		    
-		  function showImage() {
-			var imgnum = Math.round(Math.random()*8)+1;
-			var objImg = document.getElementById("introimg"); 
-			objImg.src=imgArray[imgNum]; 
-			setTimeout(showImage,5000);			
-		}    
-   </script>   
 </head>
 
 <body class="img js-fullheight" style="background-image: url(/resources/loginform/images/bg.jpg);">
