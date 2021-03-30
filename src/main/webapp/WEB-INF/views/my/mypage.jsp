@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,95 +57,42 @@ li:nth-child(2) {
 
 </head>
 <style>
-
-
 .charity-simple-blog-text:nth-child(1) {
-height: 170px;
+	height: 170px;
 	width: 400px;
 	float: left;
 	border-color: lightgray;
 }
 
 .charity-simple-blog-text:nth-child(2) {
-height: 80px;
+	height: 80px;
 	width: 320px;
 	float: right;
 	border-color: lightgray;
 }
 </style>
 <body>
-	<script>
-		/* 페이징 */
-		var $setRows = $('#setRows');
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-		$setRows
-				.submit(function(e) {
-					e.preventDefault();
-					var rowPerPage = $('[name="rowPerPage"]').val() * 1;// 1 을  곱하여 문자열을 숫자형로 변환
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// 표시하는 글 수를 바꾸면 이벤트 처리를 해서 다시 리스트를 불러온다.
 
-					//		console.log(typeof rowPerPage);
+			$("#startPage").change(function() {
 
-					var zeroWarning = 'Sorry, but we cat\'t display "0" rows page. + \nPlease try again.'
-					if (!rowPerPage) {
-						alert(zeroWarning);
-						return;
-					}
-					$('#nav').remove();
-					var $ghi = $('#ghi');
+				// 		alert("select change!");
 
-					$asd.after('<div id="nav">');
+				location = "my/mypage?"
 
-					var $tr = $($ghi).find('tbody tr');
-					var rowTotals = $tr.length;
-					//	console.log(rowTotals);
+				+ "page=1" // 페이지 전달한다.
 
-					var pageTotal = Math.ceil(rowTotals / rowPerPage);
-					var i = 0;
+				+ "&startPage=" + $("#startPage").val() // 페이지 당 글수 전달
 
-					for (; i < pageTotal; i++) {
-						$('<a href="#"></a>').attr('rel', i).html(i + 1)
-								.appendTo('#nav');
-					}
+			});
 
-					$tr.addClass('off-screen').slice(0, rowPerPage)
-							.removeClass('off-screen');
-
-					var $pagingLink = $('#nav a');
-					$pagingLink.on('click', function(evt) {
-						evt.preventDefault();
-						var $this = $(this);
-						if ($this.hasClass('active')) {
-							return;
-						}
-						$pagingLink.removeClass('active');
-						$this.addClass('active');
-
-						// 0 => 0(0*4), 4(0*4+4)
-						// 1 => 4(1*4), 8(1*4+4)
-						// 2 => 8(2*4), 12(2*4+4)
-						// 시작 행 = 페이지 번호 * 페이지당 행수
-						// 끝 행 = 시작 행 + 페이지당 행수
-
-						var currPage = $this.attr('rel');
-						var startItem = currPage * rowPerPage;
-						var endItem = startItem + rowPerPage;
-
-						$tr.css('opacity', '0.0').addClass('off-screen').slice(
-								startItem, endItem).removeClass('off-screen')
-								.animate({
-									opacity : 1
-								}, 300);
-
-					});
-
-					$pagingLink.filter(':first').addClass('active');
-
-				});
-
-		$setRows.submit();
+		});
 	</script>
-
-
 
 
 	<!-- Header -->
@@ -307,15 +257,18 @@ height: 80px;
 												style="border-top: none; border-bottom: none; border-left: none; border-right: none;"></td>
 
 											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">
+												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">아이디
+												: <sec:authentication property="principal.member.member_id" />
 
-												회원아이디:${user.member_id}</td>
+											</td>
 										</tr>
 										<tr>
 											<td
 												style="border-top: none; border-bottom: none; border-left: none; border-right: none;"></td>
 											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">이름:${user.name}</td>
+												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">이름
+												: <sec:authentication property="principal.member.name" />
+											</td>
 										</tr>
 									</table>
 								</ul>
@@ -324,15 +277,19 @@ height: 80px;
 									class="charity-simple-blog-btn">프로필 관리</a> <a href="#"
 									class="charity-simple-blog-btn">기부영수증</a>
 							</div>
-							<div class="charity-simple-blog-text" style="background-color:lightgrey;">
+							<div class="charity-simple-blog-text"
+								style="background-color: lightgrey;">
 								<ul class="charity-simple-blog-options">
 
 									<table>
 										<tr>
 											<td
 												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">
-												나의 포인트 : 수정중     <a href="#" class="charity-simple-blog-btn" style="float : right;">기부하기</a></td>
-										</tr>										
+												나의 포인트 : <sec:authentication
+													property="principal.member.dntcnt" /> <a href="#"
+												class="charity-simple-blog-btn" style="float: right;">기부하기</a>
+											</td>
+										</tr>
 									</table>
 								</ul>
 							</div>
@@ -343,12 +300,15 @@ height: 80px;
 									<!-- <h6>
 										data-width를 바꾸면 %가 달라짐 그림추가<span>해야함</span>
 									</h6> -->
-									<img src="/resources/my/그림1.png" height="80" width="80">
-									<img src="/resources/my/그림2.png" height="80" width="80">
-									<img src="/resources/my/그림3.png" height="80" width="80">
-									<img src="/resources/my/그림4.png" height="80" width="80">
-									<img src="/resources/my/그림5.png" height="80" width="80">
-									<img src="/resources/my/그림6.png" height="80" width="80">
+									<img src="/resources/my/그림1.png" height="80" width="80"
+										"style="max-width: 100%;""> <img
+										src="/resources/my/그림2.png" height="80" width="80"
+										"style="max-width: 100%;""> <img
+										src="/resources/my/그림3.png" height="80" width="80"
+										"style="max-width: 100%;""> <img
+										src="/resources/my/그림4.png" height="80" width="80"> <img
+										src="/resources/my/그림5.png" height="80" width="80"> <img
+										src="/resources/my/그림6.png" height="80" width="80">
 									<!-- <h6 class="skillst-right">
 										막대바가 <span>올곳</span>
 									</h6> -->
@@ -362,6 +322,110 @@ height: 80px;
 
 
 
+
+						<!-- 여기 (XXXXX)-->
+
+						<%-- 
+
+						<div class="container">
+
+							<div class="panel panel-default">
+
+								<div class="panel-heading">
+
+									<span>게시판 리스트</span>
+
+
+								</div>
+
+								<div class="panel-body">
+
+									<table class="table">
+
+										<thead>
+
+											<tr>
+
+												<th>아이디</th>
+												<th>나눔제목</th>
+												<th>조회수</th>
+												<th>날짜</th>
+
+											</tr>
+
+										</thead>
+
+										<tbody>
+											<c:forEach items="${list2}" var="list2">
+												<tr>
+
+													<td>${list2.member_id}</td>
+													<td>${list2.btitle}</td>
+													<!-- 제목누르면 해당 글내용으로 이동링크 -->
+													<td>${list2.bhit}</td>
+													<td>${list2.bdate}</td>
+													<td>${list2.bcat_num}</td>
+												</tr>
+											</c:forEach>
+
+										</tbody>
+
+										<tfoot>
+
+											<tr>
+
+												<td colspan="3">
+
+													<ul class="pagination">
+
+														<li class="page-item"><c:if test="${pageMaker.prev}">
+																<a class="page-link"
+																	href="mypage${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+															</c:if></li>
+
+														<li class="page-item"><c:forEach
+																begin="${pageMaker.startPage }"
+																end="${pageMaker.endPage }" var="idx">
+																<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+																<a href="mypage${pageMaker.makeQuery(idx)}">${idx}</a>
+															</c:forEach></li>
+
+
+														<li class="page-item"><c:if
+																test="${pageMaker.next && pageMaker.endPage > 0}">
+																<a class="page-link"
+																	href="mypage${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+																</a>
+															</c:if></li>
+													</ul>
+
+												</td>
+
+											</tr>
+
+
+										</tfoot>
+
+									</table>
+
+								</div>
+
+							</div>
+
+						</div>
+
+
+
+
+
+ --%>
+
+
+
+
+
+
+						<!-- 여기 -->
 
 						<div class="container">
 							<div class="row">
@@ -380,12 +444,12 @@ height: 80px;
 									<div class="tab-content">
 										<div class="tab-pane fade show active" id="abc">
 											<table>
-												<form action="" id="setRows">
+												<!-- <form action="" id="setRows">
 													<p>
 														showing <input type="text" name="rowPerPage" value="3">
 														item per page
 													</p>
-												</form>
+												</form> -->
 												<div>
 													<br>
 												</div>
@@ -397,16 +461,23 @@ height: 80px;
 													<th>날짜</th>
 
 												</tr>
+												<!-- 로그인한 회원의 글 정보만 받아오기 -->
 												<c:forEach items="${list1}" var="list1">
-													<tr>
+													<sec:authentication property="principal" var="pinfo" />
+													<sec:authorize access="isAuthenticated()">
+														<c:if test="${pinfo.username eq list1.member_id}">
+															<tr>
+																<td>${list1.member_id}</td>
 
-														<td>${list1.member_id}</td>
-														<td>${list1.btitle}</td>
-														<!-- 제목누르면 해당 글내용으로 이동링크 -->
-														<td>${list1.bhit}</td>
-														<td>${list1.bdate}</td>
+																<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
+																<td>${list1.btitle}</td>
+																<!-- 제목누르면 해당 글내용으로 이동링크 -->
+																<td>${list1.bhit}</td>
+																<td>${list1.bdate}</td>
 
-													</tr>
+															</tr>
+														</c:if>
+													</sec:authorize>
 												</c:forEach>
 											</table>
 											<!-- 페이징 -->
@@ -467,16 +538,21 @@ height: 80px;
 												</tr>
 
 
+												<!-- 로그인한 회원의 글 정보만 받아오기 -->
 												<c:forEach items="${list2}" var="list2">
-													<tr>
-
-														<td>${list2.member_id}</td>
-														<td>${list2.btitle}</td>
-														<!-- 제목누르면 해당 글내용으로 이동링크 -->
-														<td>${list2.bhit}</td>
-														<td>${list2.bdate}</td>
-														<td>${list2.bcat_num}</td>
-													</tr>
+													<sec:authentication property="principal" var="pinfo" />
+													<sec:authorize access="isAuthenticated()">
+														<c:if test="${pinfo.username eq list2.member_id}">
+															<tr>
+																<td>${list2.member_id}</td>
+																<td>${list2.btitle}</td>
+																<!-- 제목누르면 해당 글내용으로 이동링크 -->
+																<td>${list2.bhit}</td>
+																<td>${list2.bdate}</td>
+																<td>${list2.bcat_num}</td>
+															</tr>
+														</c:if>
+													</sec:authorize>
 												</c:forEach>
 											</table>
 											<!-- 페이징 -->
@@ -544,20 +620,25 @@ height: 80px;
 
 												</tr>
 
-
 												<c:set var="list3" value="${list3}" />
 												<c:forEach items="${list3}" var="dao3" varStatus="status">
 													<c:forEach items="${dao3.dona}" var="dto3"
 														varStatus="status">
-														<tr>
+														<sec:authentication property="principal" var="pinfo" />
+														<sec:authorize access="isAuthenticated()">
+															<c:if test="${pinfo.username eq dto3.member_id}">
+																<tr>
 
-															<td>${dao3.iname}</td>
-															<td>${dto3.idntdate}</td>
+																	<td>${dao3.iname}</td>
+																	<td>${dto3.idntdate}</td>
 
-															<!-- 제목누르면 해당 글내용으로 이동링크 -->
-															<td>${dto3.donaamount}</td>
-															<td>${dto3.member_id}</td>
-														</tr>
+																	<!-- 제목누르면 해당 글내용으로 이동링크 -->
+																	<td>${dto3.donaamount}</td>
+																	<td>${dto3.member_id}</td>
+
+																</tr>
+															</c:if>
+														</sec:authorize>
 													</c:forEach>
 												</c:forEach>
 											</table>
@@ -611,14 +692,19 @@ height: 80px;
 												<c:forEach items="${list4}" var="dao4" varStatus="status">
 													<c:forEach items="${dao4.reply}" var="dto4"
 														varStatus="status">
-														<tr>
-															<td>${dto4.r_num}</td>
-															<td>${dto4.rcontent}</td>
-															<!-- 제목누르면 해당 글내용으로 이동링크 -->
-															<td>${dto4.rdate}</td>
-															<td>${dto4.rid}</td>
-															<td>${dao4.b_index}</td>
-														</tr>
+														<sec:authentication property="principal" var="pinfo" />
+														<sec:authorize access="isAuthenticated()">
+															<c:if test="${pinfo.username eq dto4.rid}">
+																<tr>
+																	<td>${dto4.r_num}</td>
+																	<td>${dto4.rcontent}</td>
+																	<!-- 제목누르면 해당 글내용으로 이동링크 -->
+																	<td>${dto4.rdate}</td>
+																	<td>${dto4.rid}</td>
+																	<td>${dao4.b_index}</td>
+																</tr>
+															</c:if>
+														</sec:authorize>
 													</c:forEach>
 												</c:forEach>
 											</table>
