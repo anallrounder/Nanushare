@@ -31,13 +31,13 @@ public class NanuServiceImpl implements NanuService {
 	}
 
 	@Override
-	public void changePw(MemberVO mvo) {//비밀번호 변경
+	public void changePw(MemberVO mvo) {// 비밀번호 변경
 		nmapper.changePw(mvo);
 	}
 
-	@Override//이메일 찾기 (member_id)
-	public String getMember_id(String mail) {
-		
+	@Override
+	public MemberVO findEmail(String mail) {
+
 		return nmapper.findEmail(mail);
 	}
 

@@ -1,5 +1,7 @@
 package com.share.nanu.mapper;
 
+import java.lang.reflect.Member;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.share.nanu.VO.MemberVO;
@@ -17,7 +19,13 @@ public interface NanuMapper {
 
 	public void changePw(MemberVO mvo); //비밀번호변경
 
-	public String findEmail(String mail); //이메일 찾기(member_id)
+	public MemberVO findEmail(String mail);
+
+	
+
+	
+
+	
 
 	
 

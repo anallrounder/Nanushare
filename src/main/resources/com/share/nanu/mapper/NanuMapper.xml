@@ -58,15 +58,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<select id="changePw" resultType="com.share.nanu.VO.MemberVO">
+	<select id="changePw"  resultType="com.share.nanu.VO.MemberVO">
 		<![CDATA[
 			update member set pw=#{pw} where member_id=#{member_id}
 		]]>
 	</select>
 	
-	<select id="findEmail" parameterType="String" resultType="com.share.nanu.VO.MemberVO">
+	<select id="findEmail"  resultType="com.share.nanu.VO.MemberVO">
 		<![CDATA[
-			select member_id from member where subemail=${mail}
+			select member_id from member where subemail=#{mail}
 		]]>
 	</select>
 	

@@ -77,14 +77,17 @@
                         success: function(data) {
                             console.log(data.findEmail);
                             findEmail = data.findEmail;
+                            if (mail != "") {
+                                alert("아이디가 해당 메일로 전송되었습니다.");
+                            }
                         }
 
                     });
                 }
                 
-                if (mail != "") {
+                /* if (mail != "") {
                     alert("아이디가 해당 메일로 전송되었습니다.");
-                }
+                } */
 
             }); //certification end
         });
@@ -106,13 +109,13 @@
                     <div class="login-wrap">
                         <h3 class="text-center mb-4">Find Email</h3>
                         <form id="findEmail" action="${pageContext.request.contextPath}/main" 
-                        	class="signup-form" method="post" onsubmit="return submitCheck();" novalidate> 
+                        	class="signup-form" method="post"  novalidate> 
                         	<!-- novalidate -> 브라우저에서 제공하는 validate를 끄겠다. 그리고 jquery validation plugin 사용 -->
 							<fieldset>
 							<!-- <legend>Input Information</legend> legend 태그는 제목 설정 태그 -->
 							
                             <div class="form-group mb-3">                           	
-                                <label class="label" for="member_id">이메일 주소</label>                                                                                                                               
+                                <label class="label" for="subemail">이메일 주소</label>                                                                                                                               
                                 <input type="text" id="subemail" name="subemail" class="form-control" placeholder="이메일을 입력해 주세요." >                                                          
                                 <span class="icon fa fa-paper-plane-o"></span>                                
                             </div>                         
@@ -124,14 +127,12 @@
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         </form>
                         <script>
-							$("#forgotpw").validate({
+							$("#findEmail").validate({
 								
 								rules:{ 
 									subemail :{
 										required : true, /* 필수인가? true는 yes를 의미 */
-										email : true, /* 이메일 형식인가? */
-										remote : "${pageContext.request.contextPath}/IdCheck"
-										/* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
+										email : true /* 이메일 형식인가? */
 										
 									}									
 									
@@ -140,8 +141,8 @@
 									
 									subemail :{
 										required : '이메일을 입력해 주세요.',
-										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
-										remote :'이미 사용중인 이메일 입니다.'
+										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com'
+										
 									}									
 									
 								},
