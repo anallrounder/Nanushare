@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>로그인</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
-                        <h3 class="mb-4 text-center">Have an account?</h3>
+                       <!--  <h3 class="mb-4 text-center">Have an account?</h3> -->
                         <form action="/login" class="signin-form" method="post">
                             <div class="form-group">
                                 <input type="email" id="id" name="username" class="form-control" placeholder="Username" required>
@@ -47,8 +47,10 @@
                                     </label>
                                 </div>
                                 <div class="w-50 text-md-right">
-                                    <a href="/forgotPassword" style="color: #fff">Forgot Password</a>
+                                    <a href="/forgotPW" style="color: #fff">Forgot Password</a><br/>
+                                    <a href="/forgotEmail" style="color: #fff">Forgot Email</a>
                                 </div>
+                                
                             </div>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         </form>

@@ -120,11 +120,24 @@ public class AccountController {
 
 	}
 
-	@GetMapping("/forgotPassword") // 비밀번호 찾기 폼으로 이동
+	@GetMapping("/forgotPW") // 비밀번호 찾기 폼으로 이동
 	public ModelAndView forgotPassword(ModelAndView mav) {
 		log.info("비밀번호 찾기");
-		mav.setViewName("/forgotPassword");
+		mav.setViewName("/forgotPW");
 		return mav;
+	}
+	
+	@GetMapping("/forgotEmail") // 이메일 찾기 폼으로 이동
+	public ModelAndView forgotEmail(ModelAndView mav) {
+		log.info("이메일 찾기");
+		mav.setViewName("/forgotEmail");
+		return mav;
+	}
+	
+	@PostMapping("/findEmail") // 이메일 인증
+	public Map<String, Object> findEmail(String mail, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		return map;
 	}
 
 	@PostMapping("/changePw") // 비밀번호 변경처리
