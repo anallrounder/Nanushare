@@ -169,7 +169,6 @@
     <div class="container-fluid px-0 ">  <!-- <div class="container-fluid px-0"> 은 왼쪽여백 아예 없게 하는것-->
 	    <div class="row" >
 		   <aside class="col-9">
-		   
 			    <div class="charity-banner" style="overflow: hidden;zoom: 1;position:relative;z-index:1">
 			        
 			        <div class="charity-banner-layer" >
@@ -517,11 +516,7 @@
                             <span style="font-size: 18px;" class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
                             	<i class="fa fa-map-marker-alt"></i>&nbsp; ${cat.branch}</span><br><br>
                            </c:forEach>
-                           <!--  <ul>
-                                <li><a href="404.html"><i class="fa fa-map-marker-alt"></i>종각점</a></li>
-                                <li><a href="404.html">을지로입구역점</a></li>
-                                <li><a href="404.html">광화문점</a></li>
-                            </ul> -->
+                           
                         </div>
                         <!-- Widget Archive -->
                         
