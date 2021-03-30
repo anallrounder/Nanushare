@@ -126,17 +126,26 @@ public class AccountController {
 		mav.setViewName("/forgotPW");
 		return mav;
 	}
-	
+
 	@GetMapping("/forgotEmail") // 이메일 찾기 폼으로 이동
 	public ModelAndView forgotEmail(ModelAndView mav) {
 		log.info("이메일 찾기");
 		mav.setViewName("/forgotEmail");
 		return mav;
 	}
-	
-	@PostMapping("/findEmail") // 이메일 인증
-	public Map<String, Object> findEmail(String mail, HttpSession session) {
+
+	@PostMapping("/sendFindEmail") // 아이디 찾기, 이메일로 가입 이메일 전송
+	public Map<String, Object> findEmail(String mail, HttpSession session, MemberVO mvo) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(mail); // 스크립트에서 보낸 메일
+		String findEmail = nservice.getMember_id(mail);
+		log.info("findEmail - "+findEmail);			
+		message.setSubject("Nanushare 이메일찾기"); // 보낼 메일 제목
+		message.setText("가입 이메일 : " + findEmail); // 보낼 메일 내용
+		javaMailSender.send(message);
+		map.put("findEmail", findEmail);
+
 		return map;
 	}
 

@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="itemdntcnt" column="itemdntcnt" />
 		<result property="phone" column="phone" />
 		<result property="enable" column="enable" />
+		<result property="subemail" column="subemail" />
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
 
@@ -37,8 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="memberJoin" resultType="com.share.nanu.VO.MemberVO">
 	<![CDATA[ 
-			insert into member (member_id,pw,name,signuppath,pntnum,authname,bklist,dntcnt,itemdntcnt,enable)
-				 values(#{member_id},#{pw},#{name},#{signuppath},point_seq.nextval,'회원','N',0,0,'1') 
+			insert into member (member_id,pw,name,signuppath,pntnum,authname,bklist,dntcnt,itemdntcnt,enable,subemail)
+				 values(#{member_id},#{pw},#{name},#{signuppath},point_seq.nextval,'회원','N',0,0,'1',#{subemail}) 
 		]]>
 	</select>
 	
@@ -60,6 +61,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="changePw" resultType="com.share.nanu.VO.MemberVO">
 		<![CDATA[
 			update member set pw=#{pw} where member_id=#{member_id}
+		]]>
+	</select>
+	
+	<select id="findEmail" parameterType="String" resultType="com.share.nanu.VO.MemberVO">
+		<![CDATA[
+			select member_id from member where subemail=${mail}
 		]]>
 	</select>
 	

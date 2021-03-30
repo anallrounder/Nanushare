@@ -68,6 +68,7 @@
                 var member_id = $("#member_id").val();
                 var pw = $("#pw").val();
                 var name = $("#name").val();
+                var subemail = $("#subemail").val();
                 //var gender = $('input[name="gender"]:checked').val();
                // var birth = $("#birth").val();
                // var phone = $("#phone").val();
@@ -81,6 +82,7 @@
                    // gender: gender,
                     //birth: birth,
                    // phone: phone,
+                   subemail : subemail,
                     signuppath: signuppath
                 };
 
@@ -94,7 +96,7 @@
                         console.log(result);
                         if (result == "SUCCESS") {
                             console.log("success");
-                            $(location).attr('href', "${pageContext.request.contextPath}/");
+                            $(location).attr('href', "${pageContext.request.contextPath}/loginPage");
 
                         }
                     },
@@ -207,6 +209,12 @@
                                 <span class="icon fa fa-paper-plane-o"></span>                                
                             </div>
                             <span id="compare-text" style="display: none">불일치</span>
+                            
+                            <div class="form-group mb-3">                           	
+                                <label class="label" for="subemail">서브 이메일 주소</label>                                                                                                                               
+                                <input type="text" id="subemail" name="subemail" class="form-control" placeholder="서브 이메일을 입력해 주세요." >                                                          
+                                <span class="icon fa fa-paper-plane-o"></span>                                
+                            </div>
 
                             <div class="form-group mb-3">
                                 <label class="label" for="pw">비밀번호</label>
@@ -266,7 +274,12 @@
 										remote : "${pageContext.request.contextPath}/IdCheck"
 										/* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
 										
-									},									
+									},
+									subemail : {
+										required : true,
+										email : true,
+										
+									},
 									pw :{
 										required : true,
 										passwordCK : true,
@@ -300,7 +313,11 @@
 										required : '이메일을 입력해 주세요.',
 										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
 										remote :'이미 사용중인 이메일 입니다.'
-									},									
+									},
+									subemail : {
+										required : '이메일을 입력해 주세요.',
+										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com'
+									},
 									pw :{
 										required : '비밀번호를 입력해 주세요.',
 										passwordCK : '비밀번호는 영문자, 숫자, 특수문자를 조합하여 입력해야 합니다. ex)?는 사용할 수 없습니다.',

@@ -10,4 +10,6 @@ public interface NanuService {
 
 	public void changePw(MemberVO mvo); //비밀번호 변경
 
+	public String getMember_id(String mail); //이메일(member_id) 찾기 세컨드 이메일로
+
 }

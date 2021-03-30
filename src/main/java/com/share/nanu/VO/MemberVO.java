@@ -22,6 +22,7 @@ public class MemberVO {
 	private String phone; // 핸드폰번호
 	private char enable;// 스프링 시큐리티
 	private List<AuthVO> authList; // 권한 리스트
+	private String subemail;
 
 	public MemberVO() {
 		super();
@@ -139,9 +140,17 @@ public class MemberVO {
 		this.authList = authList;
 	}
 
+	public String getSubemail() {
+		return subemail;
+	}
+
+	public void setSubemail(String subemail) {
+		this.subemail = subemail;
+	}
+
 	public MemberVO(String member_id, String pw, String name, String gender, Date birth, String signuppath, int pntnum,
 			String authname, String bklist, int dntcnt, int itemdntcnt, String phone, char enable,
-			List<AuthVO> authList) {
+			List<AuthVO> authList, String subemail) {
 		super();
 		this.member_id = member_id;
 		this.pw = pw;
@@ -157,6 +166,9 @@ public class MemberVO {
 		this.phone = phone;
 		this.enable = enable;
 		this.authList = authList;
+		this.subemail = subemail;
 	}
+
+	
 
 }

@@ -35,4 +35,10 @@ public class NanuServiceImpl implements NanuService {
 		nmapper.changePw(mvo);
 	}
 
+	@Override//이메일 찾기 (member_id)
+	public String getMember_id(String mail) {
+		
+		return nmapper.findEmail(mail);
+	}
+
 }

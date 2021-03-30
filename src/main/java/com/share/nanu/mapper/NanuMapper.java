@@ -17,6 +17,10 @@ public interface NanuMapper {
 
 	public void changePw(MemberVO mvo); //비밀번호변경
 
+	public String findEmail(String mail); //이메일 찾기(member_id)
+
+	
+
 	
 
 }

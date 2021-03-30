@@ -60,24 +60,23 @@
             });
             
         	
-            var isCertification = false;
-            var key = "";
+            
             $('#findEmail').click(function() { // 버튼 클릭시 입력한 이메일로 아이디에 해당하는 이메일을 해당 이메일로 전송
-                var mail = $("#member_id").val(); // 인증받을 이메일 주소
+                var mail = $("#subemail").val(); // 인증받을 이메일 주소
                 if (mail == "") {
                     alert("메일 주소가 입력되지 않았습니다.");
                 } else {
                     $.ajax({
                         type: 'post',
-                        url: '${pageContext.request.contextPath}/findEmail',
+                        url: '${pageContext.request.contextPath}/sendFindEmail',
                         data: {
                             mail: mail
                         },
                         dataType: 'json',
                         async: "false",
                         success: function(data) {
-                            console.log(data.key);
-                            key = data.key;
+                            console.log(data.findEmail);
+                            findEmail = data.findEmail;
                         }
 
                     });
@@ -106,7 +105,7 @@
                 <div class="col-md-7 col-lg-5">
                     <div class="login-wrap">
                         <h3 class="text-center mb-4">Find Email</h3>
-                        <form id="findEmail" action="${pageContext.request.contextPath}/findEmail" 
+                        <form id="findEmail" action="${pageContext.request.contextPath}/main" 
                         	class="signup-form" method="post" onsubmit="return submitCheck();" novalidate> 
                         	<!-- novalidate -> 브라우저에서 제공하는 validate를 끄겠다. 그리고 jquery validation plugin 사용 -->
 							<fieldset>
@@ -114,7 +113,7 @@
 							
                             <div class="form-group mb-3">                           	
                                 <label class="label" for="member_id">이메일 주소</label>                                                                                                                               
-                                <input type="text" id="member_id" name="member_id" class="form-control" placeholder="이메일을 입력해 주세요." >                                                          
+                                <input type="text" id="subemail" name="subemail" class="form-control" placeholder="이메일을 입력해 주세요." >                                                          
                                 <span class="icon fa fa-paper-plane-o"></span>                                
                             </div>                         
 
@@ -128,7 +127,7 @@
 							$("#forgotpw").validate({
 								
 								rules:{ 
-									member_id :{
+									subemail :{
 										required : true, /* 필수인가? true는 yes를 의미 */
 										email : true, /* 이메일 형식인가? */
 										remote : "${pageContext.request.contextPath}/IdCheck"
@@ -139,7 +138,7 @@
 								},
 								messages:{ /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
 									
-									member_id :{
+									subemail :{
 										required : '이메일을 입력해 주세요.',
 										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
 										remote :'이미 사용중인 이메일 입니다.'
