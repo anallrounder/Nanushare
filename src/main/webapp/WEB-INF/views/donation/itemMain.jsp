@@ -1,6 +1,6 @@
 <!-- 혜선_ 물품기부 메인페이지_사용예정 뷰 페이지 _ 수정필요함, 테스트중 03.18-->
 
-<%@ page language="java" contentType="text/html; charset=UTF8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -31,134 +31,15 @@
 	<!-- NotoSansKR, Gothic A1 -->
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	
+	<!-- FONT AWSOME -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
     <!-- Header -->
-    <header id="charity-header" class="charity-header-one" style="position:relative;z-index:2">
-     
-        <!-- Top Strip -->
-        <div class="charity-top-strip">
-        <aside ><a href="${pageContext.request.contextPath}/main" class="charity-logo" style="width:200px;height:100px; margin: 0px 0px 0px 20px;"><img src="/resources/nanulogo.png" alt=""></a></aside>
-            <div class="container">
-                <div class="row">
-                    <aside class="col-12">
-                        <div class="float-center">
-                            <a href="#menu" class="menu-link active"><span></span></a>
-                            <nav id="menu" class="menu charity-navigation">
-                            
-                                <ul>
-                                    <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                                    <li style="padding: 0px 40px 0px 70px"><a href="${pageContext.request.contextPath}/menu/about" style="font-size: 20px;">나누셰어란?</a>
-                                        <ul class="children">
-                                            <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
-                                        <!--     <li><a href="event-detail.html">Event Detail</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔함 안내</a>
-                                       <!--  <ul class="children">
-                                            <li><a href="cause-list.html">Cause List</a></li>
-                                            <li><a href="cause-grid.html">Cause Grid</a></li>
-                                            <li><a href="cause-detail.html">Cause Detail</a></li>
-                                        </ul> -->
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/donation/item/main" style="font-size: 20px;">나누기</a>
-                                        <ul class="children">
-                                            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
-                                            <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/board/shows/plist" style="font-size: 20px;">나눔 인증</a>
-                                       <!--  <ul class="children">
-                                            <li><a href="team-grid.html">Team Grid</a></li>
-                                            <li><a href="team-classic.html">Team Classic</a></li>
-                                            <li><a href="team-detail.html">Team Detail</a></li>
-                                        </ul> -->
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/event/check"style="font-size: 20px;">이벤트</a>
-                                        <ul class="children">
-                                            <li><a href="${pageContext.request.contextPath}/event/check">출석체크</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/event/test">테스트</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/event/game">게임</a></li>
-                                           <!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                            <li><a href="search-result.html">Search Result</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/restful/notice" style="font-size: 20px;">더하기</a>
-                                     	<ul class="children">
-                                            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
-                                            <li><a href="${pageContext.request.contextPath}/restful/qna">문의하기</a></li>
-                                    	</ul>
-                                    </li>	
-                              
-                         
-                                </ul>
-                               <!--  <span class="float-right">
-                                    <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a>
-                          			<a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a>
-                                </span> -->
-                             
-                            </nav>
-                            
-                         <!--    <ul class="charity-header-options" style="text-align: center">
-                                <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i></a></li>
-                                <li><a href="#"><i class="fab fa-opencart"></i></a> <div class="charity-cart-box"> <p>No products in the cart.</p> </div> </li>
-             
-                                <li> <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a></li>
-                          		<li><a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a></li>
-                                
-                            </ul>
-                             -->
-                          
-                        </div>
-                        
-                    </aside>
-                    
-                  
-            <!--     <aside class="col-12"> 
-                        <div class="float-right">
-                          <ul class="charity-social-network">
-                              <li><a href="#" class="fab fa-facebook-f"></a></li>
-                              <li><a href="#" class="fab fa-google"></a></li>
-                              <li><a href="#" class="fab fa-pinterest-p"></a></li>
-                              <li><a href="#" class="fab fa-linkedin-in"></a></li>
-                              <li><a href="#" class="fab fa-twitter"></a></li>
-                          </ul>
-                          <a href="#" class="charity-strip-btn charity-bgcolor" >Sign up</a>
-                          <a href="#" class="charity-strip-btn charity-bgcolor">Sign in</a>
-                         
-                        </div>
-                    </aside> -->
-                </div>
-            </div>
-
-			<sec:authorize access="isAnonymous()"> <!-- all 버튼 header -->
-				<aside>
-            	<a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">회원가입</a>
-				<a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 15px; margin: -75px 140px 0px 0px;">로그인</a>
-			</aside>
-			</sec:authorize>
-
-			<sec:authorize access="isAuthenticated()"> <!-- 로그인됐을때 버튼 header -->
-				<%-- <a href="${pageContext.request.contextPath}/member/logout"class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a> --%>
-				<form action="/member/logout" method="post">
-					<input type="submit" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;" value="로그아웃">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				</form>
-				<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 0px; margin: -75px 140px 0px 0px;">마이페이지</a>
-			</sec:authorize>
-			
-			<sec:authorize access="hasRole('ADMIN')"> <!-- 관리자 버튼 header -->
-				<a href="${pageContext.request.contextPath}/member/logout" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a>
-				<a href="${pageContext.request.contextPath}/admin/Donation" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">관리자 페이지</a>
-			</sec:authorize>
-
-		</div>
-        <!-- Top Strip -->
-    </header>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
 
     <!-- Banner -->
@@ -236,7 +117,8 @@
 	                          <ul>
 	                             <li>
 	                                <div class="charity-image">
-	                                   <i class="icon-users-group"></i>
+	                                   <i class="icon-donation"></i><!-- fas fa-head-side-mask -->
+	                                   <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 	                                   <span></span>
 	                                </div>
 	                                <div class="charity-item-text">
@@ -476,97 +358,7 @@
     <!-- Content -->
 
     <!-- Footer -->
-    <footer id="charity-footer" class="charity-footer-one">
-
-        <!-- Footer Newslatter -->
-        <div class="charity-newslatter">
-            <div class="container">
-                <div class="row">
-                    <aside class="col-md-6">
-                        <h2>Sign up for newslatter</h2>
-                        <p>Submit your email and stay in tuch by notify our news and stay with us</p>
-                    </aside>
-                    <aside class="col-md-6">
-                        <form>
-                            <input type="text" placeholder="Enter Your Email">
-                            <label>
-                                <input type="submit" value="Subscribe Now">
-                                <i class="far fa-paper-plane"></i>
-                            </label>
-                        </form>
-                    </aside>
-                </div>
-            </div>
-        </div>
-        <!-- Footer Newslatter -->
-        
-        <!-- Footer Widget -->
-        <div class="charity-footer-widget">
-            <div class="container">
-                <div class="row">
-                    <aside class="col-md-4 widget widget_usefull_links">
-                        <div class="charity-footer-title"> <h2>Quick Links</h2> </div>
-                        <ul>
-                            <li><a href="#">Causes</a></li>
-                            <li><a href="#">Donors</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Latest News</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Volunteers</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">Newsletter</a></li>
-                            <li><a href="#">Events</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-md-4 widget widget_recent_news">
-                        <div class="charity-footer-title"> <h2>Recent News</h2> </div>
-                        <ul>
-                            <li>
-                                <figure><a href="#"><img src="extra-images/recent-news-widget-1.jpg" alt=""></a></figure>
-                                <div class="widget_recent_news_text">
-                                    <h6><a href="#">Praesent sit amet tellus sed qum biben dum faucus</a></h6>
-                                    <span>22 Sept, 2016</span>
-                                </div>
-                            </li>
-                            <li>
-                                <figure><a href="#"><img src="extra-images/recent-news-widget-2.jpg" alt=""></a></figure>
-                                <div class="widget_recent_news_text">
-                                    <h6><a href="#">Morbi pulvinar faucibus urna, sit amet euisd nulla.</a></h6>
-                                    <span>22 Sept, 2016</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </aside>
-                    <aside class="col-md-4 widget widget_gallery">
-                        <div class="charity-footer-title"> <h2>Our Gallery</h2> </div>
-                        <ul>
-                            <li><a data-fancybox="gallery" href="extra-images/widget-gallery-1.jpg"><img src="/resources/extra-images/widget-gallery-1.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="extra-images/widget-gallery-2.jpg"><img src="/resources/extra-images/widget-gallery-2.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="extra-images/widget-gallery-3.jpg"><img src="/resources/extra-images/widget-gallery-3.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="extra-images/widget-gallery-4.jpg"><img src="/resources/extra-images/widget-gallery-4.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="extra-images/widget-gallery-5.jpg"><img src="/resources/extra-images/widget-gallery-5.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="extra-images/widget-gallery-6.jpg"><img src="/resources/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="extra-images/widget-gallery-7.jpg"><img src="/resources/extra-images/widget-gallery-7.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="extra-images/widget-gallery-8.jpg"><img src="/resources/extra-images/widget-gallery-8.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                        </ul>
-                    </aside>
-                </div>
-                <!-- CopyRight -->
-                <div class="charity-copyright">
-                    <a href="#" class="back-top charity-bgcolor"><i class="fa fa-angle-up"></i></a>
-                    <p>Â© 2018, All Right Reserved - by </p>
-                    <ul>
-                        <li><a href="404.html">Terms and conditions</a></li>
-                        <li><a href="404.html">Privacy policy</a></li>
-                    </ul>
-                </div>
-                <!-- CopyRight -->
-            </div>
-        </div>
-        <!-- Footer Widget -->
-
-    </footer>
+    <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
     <!-- Footer -->
 
     <!-- Search Modal -->
@@ -585,7 +377,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- jQuery -->
     <script src="/resources/script/jquery.js"></script>

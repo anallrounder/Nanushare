@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <insert id="saveForm" >
 		<![CDATA[ 
 			insert into itemdonation(idnt_num, idntdate, member_id, donaamount, icat_num)
-			values(ITEMDONATION_SEQ.nextval, #{idntdate},  #{member_id}, #{donaamount}, #{icat_num})
+			values(ITEMDONATION_SEQ.nextval, sysdate,  #{member_id}, #{donaamount}, #{icat_num})
 		]]>
 	</insert> 
 	

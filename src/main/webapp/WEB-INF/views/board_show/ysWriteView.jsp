@@ -1,5 +1,5 @@
 <!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
-<%@ page language="java" contentType="text/html; charset=UTF8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
@@ -29,109 +29,7 @@
 
 <body>
     <!-- Header -->
-    <header id="charity-header" class="charity-header-one" style="position:relative;z-index:2">
-     
-        <!-- Top Strip -->
-        <div class="charity-top-strip">
-        <aside ><a href="${pageContext.request.contextPath}/main" class="charity-logo" style="width:200px;height:100px; margin: 0px 0px 0px 20px;"><img src="/resources/nanulogo.png" alt=""></a></aside>
-            <div class="container">
-                <div class="row">
-                    <aside class="col-12">
-                        <div class="float-center">
-                            <a href="#menu" class="menu-link active"><span></span></a>
-                            <nav id="menu" class="menu charity-navigation">
-                            
-                                <ul>
-                                    <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                                    <li style="padding: 0px 40px 0px 70px"><a href="#" style="font-size: 20px;">나누셰어란?</a>
-                                        <ul class="children">
-                                            <li><a href="event-list.html">나누셰어 소개</a></li>
-                                            <li><a href="event-grid.html">찾아오셰어</a></li>
-                                        <!--     <li><a href="event-detail.html">Event Detail</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔함 안내</a>
-                                       <!--  <ul class="children">
-                                            <li><a href="cause-list.html">Cause List</a></li>
-                                            <li><a href="cause-grid.html">Cause Grid</a></li>
-                                            <li><a href="cause-detail.html">Cause Detail</a></li>
-                                        </ul> -->
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나누기</a>
-                                        <ul class="children">
-                                            <li><a href="blog-large.html">물품 나누기</a></li>
-                                            <li><a href="blog-medium.html">돈기부여하기</a></li>
-                                            <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔 인증</a>
-                                       <!--  <ul class="children">
-                                            <li><a href="team-grid.html">Team Grid</a></li>
-                                            <li><a href="team-classic.html">Team Classic</a></li>
-                                            <li><a href="team-detail.html">Team Detail</a></li>
-                                        </ul> -->
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">이벤트</a>
-                                        <ul class="children">
-                                            <li><a href="about.html">출석체크</a></li>
-                                            <li><a href="prayer-list.html">테스트</a></li>
-                                            <li><a href="prayer-grid.html">게임</a></li>
-                                           <!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                            <li><a href="search-result.html">Search Result</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="contact-us.html" style="font-size: 20px;">더하기</a>
-                                     	<ul class="children">
-                                            <li><a href="about.html">공지사항</a></li>
-                                            <li><a href="prayer-list.html">문의하기</a></li>
-                                    	</ul>
-                                    </li>	
-                         
-                                </ul>
-                               <!--  <span class="float-right">
-                                    <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a>
-                          			<a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a>
-                                </span> -->
-                             
-                            </nav>
-                            
-                         <!--    <ul class="charity-header-options" style="text-align: center">
-                                <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i></a></li>
-                                <li><a href="#"><i class="fab fa-opencart"></i></a> <div class="charity-cart-box"> <p>No products in the cart.</p> </div> </li>
-             
-                                <li> <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a></li>
-                          		<li><a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a></li>
-                                
-                            </ul>
-                             -->
-                        </div>
-                    </aside>
-                    
-                  
-            <!--     <aside class="col-12"> 
-                        <div class="float-right">
-                          <ul class="charity-social-network">
-                              <li><a href="#" class="fab fa-facebook-f"></a></li>
-                              <li><a href="#" class="fab fa-google"></a></li>
-                              <li><a href="#" class="fab fa-pinterest-p"></a></li>
-                              <li><a href="#" class="fab fa-linkedin-in"></a></li>
-                              <li><a href="#" class="fab fa-twitter"></a></li>
-                          </ul>
-                          <a href="#" class="charity-strip-btn charity-bgcolor" >Sign up</a>
-                          <a href="#" class="charity-strip-btn charity-bgcolor">Sign in</a>
-                         
-                        </div>
-                    </aside> -->
-                </div>
-            </div>
-            <aside>
-            	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign up</a>
-				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign in</a>
-			</aside>
-        </div>
-        <!-- Top Strip -->
-    </header>
+    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
     
     <!-- Banner -->
@@ -155,24 +53,14 @@
         <div class="charity-main-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9">
-                <!--         <form method="post" class="myform" action="process-form.php">
-                            <div class="charity-contact-form"> charity-rich-editor
-                                <ul class="row">
-                                    <li class="col-md-6"><input type="text" placeholder="First Name" name="name" required></li>
-                                    <li class="col-md-6"><input type="text" placeholder="Last Name" name="name" required></li>
-                                    <li class="col-md-6"><input type="text" placeholder="Email" name="email" required></li>
-                                    <li class="col-md-6"><input type="text" placeholder="Phone Number" name="number" required></li>
-                                    <li class="col-md-12"><textarea placeholder="Messages" name="Message"></textarea></li>
-                                    <li class="col-md-12"><input type="submit" value="Submit Request"> <span class="output_message"></span> </li>
-                                </ul>
-                            </div>
-                        </form> -->
+              		 <div class="col-md-9">
+               
                        <form action="write" method="post" enctype="multipart/form-data" >
-                       <%-- <input type="hidden" name="b_index" value="${modify_view.b_index}" > --%>
                      	   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	                       <div class="charity-contact-form">
-	                           <h4><span>Title</span><input type="text" name="btitle" placeholder="제목을 작성하세요."></h4><hr><br>
+	                           <h4><span>Title</span>
+	                           <input type="text" name="btitle" placeholder="제목을 작성하세요." ></h4>
+	                           <br>
 	                           <br>
 	                           <h4>Images</h4>
 	                           <%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
@@ -193,140 +81,14 @@
 	                        </div>
                         </form>
                         
-                      <!--   a href="plist" -->
+                      	<!--   a href="plist" -->
                         <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="plist" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>
                         <br><br>
-                        
-                       <!-- 이전, 다음 글 보기 -->
-                       <%--  <div class="charity-prenxt-post">
-                            <ul>
-                                <li class="charity-prev-post">
-                                    <figure>
-                                        <a href="404.html"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/post-img1.png" alt=""></a>
-                                    </figure>
-                                    <div class="charity-prev-artical">
-                                        <a href="404.html" class="charity-post-arrow"><i class="fa fa-angle-double-left"></i>이전 글</a>
-                                        <h3><a href="404.html">Duis arcu lectus, interdum quisi sodales</a></h3>
-                                    </div>
-                                </li>
-                                
-                                
-                                <li class="charity-next-post">
-                                    <figure>
-                                        <a href="404.html"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/post-img2.png" alt=""></a>
-                                    </figure>
-                                    <div class="charity-next-artical">
-                                        <a href="404.html" class="charity-post-arrow">다음 글<i class="fa fa-angle-double-right"></i></a>
-                                        <h3><a href="404.html">Duis arcu lectus, interdum quisi sodales</a></h3>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> --%>
-                       
-                        
-                    <%--     <div class="widget_title"><h2>Admin Post</h2></div>
-                        <div class="charity-admin-post">
-                            <figure>
-                                <a href="404.html"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/admin-post-img.png" alt=""></a>
-                                <figcaption>
-                                    <h6><a href="404.html">Mickey Ror</a></h6>
-                                    <span>Founder</span>
-                                </figcaption>
-                            </figure>
-                            <div class="charity-admin-post-text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultricies dolor libero, eu fermentum ante tristique fermentum. Vestibulum maximus ornare facilisis. Etiam id vulp utate dolor. Class aptent taciti sociosqu ad litor.</p>
-                                <ul class="charity-admin-social">
-                                    <li>
-                                        <a href="https://www.facebook.com/" class="fab fa-facebook"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.twitter.com/" class="fab fa-twitter"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.youtube.com/" class="fab fa-youtube"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.vimeo.com/" class="fab fa-vine"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> --%>
-                        
-                        <!-- 댓글  -->
-                       <%--  <div class="widget_title"><h2>Comments</h2></div>
-                        <div class="comments-area">
-                            <!--// coments \\-->
-                            <ul class="comment-list">
-                                <li>
-                                    <div class="thumb-list">
-                                        <figure><img alt="" src="${pageContext.request.contextPath}/resources/charity/extra-images/comment-img1.png"></figure>
-                                        <div class="text-holder">
-                                            <h6>Cynthia Sachmidt</h6>
-                                            <time class="post-date" datetime="2008-02-14 20:00">June 16, 2017 at 2:10 pm</time>
-                                            <a class="comment-reply-link" href="#"><i class="fa fa-share"></i> Reply</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel consequat tellus augue tortor, vitae volutpat ante. Proin tellus augue, dignissim vel lorem ut, vulpu sit amet, co tate laoreet enim.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- #comment-## -->
-                                <li>
-                                    <div class="thumb-list">
-                                        <figure><img alt="" src="${pageContext.request.contextPath}/resources/charity/extra-images/comment-img2.png"></figure>
-                                        <div class="text-holder">
-                                            <h6>George Baily</h6>
-                                            <time class="post-date" datetime="2008-02-14 20:00">June 16, 2017 at 2:10 pm</time>
-                                            <a class="comment-reply-link" href="#"><i class="fa fa-share"></i> Reply</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel consequat tellus augue tortor, vitae volutpat ante. Proin tellus augue, dignissim vel lorem ut, vulpu sit amet, co tate laoreet enim.</p>
-                                        </div>
-                                    </div>
-                                    <ul class="children">
-                                        <li>
-                                            <div class="thumb-list">
-                                                <figure><img alt="" src="${pageContext.request.contextPath}/resources/charity/extra-images/comment-img3.png"></figure>
-                                                <div class="text-holder">
-                                                    <h6>Sareena Marchant</h6>
-                                                    <time class="post-date" datetime="2008-02-14 20:00">June 16, 2017 at 2:10 pm</time>
-                                                    <a class="comment-reply-link" href="#"><i class="fa fa-share"></i> Reply</a>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel consequat tellus augue tortor, vitae volutpat ante. Proin tellus augue, dignissim vel lorem ut, vulpu sit amet, co tate laoreet enim.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- #comment-## -->
-                                    </ul>
-                                    <!-- .children -->
-                                </li>
-                                <!-- #comment-## -->
-                            </ul>
-                            <!--// coments \\-->
-                        </div> --%>
-                        <!--// comment-respond \\-->
-                       <!--  <div class="widget_title"><h2>Leave a Comment</h2></div>
-                        <div class="comment-respond">
-                            <form>
-                                <p>
-                                    <label>Name:</label>
-                                    <input type="text" value="Enter name*" onblur="if(this.value == '') { this.value ='Enter name*'; }" onfocus="if(this.value =='Enter name*') { this.value = ''; }">
-                                </p>
-                                <p>
-                                    <label>Email:</label>
-                                    <input type="text" value="Enter email*" onblur="if(this.value == '') { this.value ='Enter email*'; }" onfocus="if(this.value =='Enter email*') { this.value = ''; }">
-                                </p>
-                                <p class="charity-respond-full-form">
-                                    <label>Comment:</label>
-                                    <textarea name="comment" placeholder="Type your comment*" class="commenttextarea"></textarea>
-                                </p>
-                                <p class="form-submit">
-                                    <input name="submit" class="submit" value="Submit" type="submit">
-                                    <input name="comment_post_ID" value="99" id="comment_post_ID" type="hidden">
-                                </p>
-                            </form>
-                        </div> -->
-                        <!--// comment-respond \\-->
-                    </div>
-
+                 
+                    </div>		     
+                </div>
+             </div> 
+		</div>
                     <aside class="col-md-3">
                         
                         <!-- Widget Search -->
