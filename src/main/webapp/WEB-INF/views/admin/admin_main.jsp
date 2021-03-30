@@ -22,15 +22,40 @@
     <link rel="stylesheet" href="/resources/charity/css/flaticon.css">
     <link rel="stylesheet" href="/resources/charity/css/slick-slider.css">
     <link rel="stylesheet" href="/resources/charity/css/fancybox.css">
-    <link href="css/jplayer.css" rel="/resources/charity/stylesheet">
-    <link rel="stylesheet" href="/resources/charity/style.css">
+    <link href="/resources/charity/css/jplayer.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/charity/css/style.css">
     <link rel="stylesheet" href="/resources/charity/css/color.css">
     <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="/resources/AdminLTE-master/plugins/fontawesome-free/css/all.min.css">
+  <!-- IonIcons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/resources/AdminLTE-master/dist/css/adminlte.min.css">
+  
+  <!--탭처리2  -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<style>
+p {
+	margin: 20px 0px;
+}
+
+li {
+	list-style: none;
+}
+
+li:nth-child(2) {
+	color: lime;
+}
+</style>
 
 </head>
 <body>
-<!-- Header -->
+    <!-- Header -->
     <header id="charity-header" class="charity-header-one" style="position:relative;z-index:2">
      
         <!-- Top Strip -->
@@ -45,7 +70,7 @@
                             
                                 <ul>
                                     <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                                    <li style="padding: 0px 40px 0px 70px"><a href="#" style="font-size: 20px;">나누셰어란?</a>
+                                    <li style="padding: 0px 40px 0px 70px"><a href="${pageContext.request.contextPath}/menu/about" style="font-size: 20px;">나누셰어란?</a>
                                         <ul class="children">
                                             <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
                                             <li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
@@ -59,7 +84,7 @@
                                             <li><a href="cause-detail.html">Cause Detail</a></li>
                                         </ul> -->
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나누기</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/donation/item/main" style="font-size: 20px;">나누기</a>
                                         <ul class="children">
                                             <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
                                             <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
@@ -130,18 +155,6 @@
                     </aside> -->
                 </div>
             </div>
-
-			<sec:authorize access="isAnonymous()"> <!-- all 버튼 header -->
-				<aside>
-            	<a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">회원가입</a>
-				<a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 15px; margin: -75px 140px 0px 0px;">로그인</a>
-			</aside>
-			</sec:authorize>
-
-			<sec:authorize access="isAuthenticated()"> <!-- 로그인됐을때 버튼 header -->
-				<a href="${pageContext.request.contextPath}/member/logout"class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a>
-				<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 0px; margin: -75px 140px 0px 0px;">마이페이지</a>
-			</sec:authorize>
 			
 			<sec:authorize access="hasRole('ADMIN')"> <!-- 관리자 버튼 header -->
 				<a href="${pageContext.request.contextPath}/member/logout" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a>
@@ -153,240 +166,226 @@
     </header>
     <!-- Header -->
     
-      <!-- Content -->
+    <!-- Banner -->
+	<div class="charity-subheader">
+		<span class="black-transparent"></span>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>관리자 페이지</h1>
+	                <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</p>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- Banner -->
+	
+	
+    <!-- Content -->
     <div class="charity-main-content">
 
         <!-- Main Section -->
         <div class="charity-main-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9">
-                        <div class="charity-team-warp">
-                            <figure><img src="extra-images/team-detail-img.png" alt=""></figure>
-                            <h3>Julai Martyn</h3>
-                            <span>Co-Director</span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamcorper condime ntum Ut imperdiet lobortis et mollis neque placerat non. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-                            <div class="charity-team-contact">
-                                <ul class="chaity-contact-info">
-                                    <li>
-                                        <h6>Phone:</h6>
-                                        <span>+123 45 678</span>
-                                    </li>
-                                    <li>
-                                        <h6>Email:</h6>
-                                        <a href="mailto:name@email.com">info@example.com</a>
-                                    </li>
-                                </ul>
-                                <div class="charity-blog-social">
-                                 <ul>
-                                    <li><a href="https://www.facebook.com/" class="fab fa-facebook"></a></li>
-                                    <li><a href="https://twitter.com/login" class="fab fa-twitter"></a></li>
-                                    <li><a href="https://www.linkedin.com/uas/login" class="fab fa-linkedin"></a></li>
-                                    <li><a href="https://www.youtube.com/" class="fab fa-youtube"></a></li>
-                                    <li><a href="https://vine.co/" class="fab fa-vine"></a></li>
-                                 </ul>
-                              </div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamcorper condimentu m. Ut imperdiet lobortis ex, vitae tempor dolor viverra quis. Aliquam sodales eu leo id molestie. Maecenasu llamcorper malesuada arcu, in lobortis mauris feugiat sed. Duis placerat maximus felis, et mollis neque pl acerat non. </p>
-                            <blockquote>Curabitur lacus dui, convallis quis arcu vel, sagittis vulputate elit. Nullam ex libero, imp rdiet  lib ndit ac, tempor ac magna. In finibus libero vitae ex tincidunt pharetr.</blockquote>
-                            <p>Nulla molestie leo non arcu porta, in dictum dui rutrum. Cras ipsum lectus, ullamcorper vel lacus et, condim entum rhoncus felis. Sed vulputate augue id malesuada maximus.</p>
-                        </div>
-                        <!--// company-timeline \\-->
-                        <div class="charity-team-timeline">
-                          <div class="widget_title"><h2>We Need Your Help</h2></div>
-                          <ul>
-                             <li>
-                                <div class="charity-image">
-                                   <i class="icon-users-group"></i>
-                                   <span></span>
-                                </div>
-                                <div class="charity-team-timeline-text">
-                                   <h6>We want to help as many as we can</h6>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
-                                </div>
-                             </li>
-                             <li>
-                                <div class="charity-image">
-                                   <i class="icon-donation"></i>
-                                   <span></span>
-                                </div>
-                                <div class="charity-team-timeline-text">
-                                   <h6>We want to help as many as we can</h6>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
-                                </div>
-                             </li>
-                             <li>
-                                <div class="charity-image">
-                                   <i class="icon-books-stack-of-three"></i>
-                                   <span></span>
-                                </div>
-                                <div class="charity-team-timeline-text">
-                                   <h6>We want to help as many as we can</h6>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
-                                </div>
-                             </li>
-                             <li>
-                                <div class="charity-image">
-                                   <i class="icon-heart"></i>
-                                   <span></span>
-                                </div>
-                                <div class="charity-team-timeline-text">
-                                   <h6>We want to help as many as we can</h6>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
-                                </div>
-                             </li>
-                          </ul>
-                        </div>
-                        <!--// company-timeline \\-->
+                    <div class="col-md-12">
+                        
                         <!--// volunteer-form \\-->
-                        <div class="widget_title"><h2>Become a Volunteer</h2></div>
-                        <div class="charity-volunteer-form">
-                            <form>
-                                <ul>
-                                    <li>
-                                        <label>Name:</label>
-                                        <input type="text" value="Enter name*" onblur="if(this.value == '') { this.value ='Enter name*'; }" onfocus="if(this.value =='Enter name*') { this.value = ''; }"></li>
-                                    <li>
-                                        <label>Email:</label>
-                                        <input type="text" value="Enter email*" onblur="if(this.value == '') { this.value ='Enter email*'; }" onfocus="if(this.value =='Enter email*') { this.value = ''; }"></li>
-                                    <li class="charity-select-form">
-                                        <label>Country:</label>
-                                        <div class="charity-select-two">
-                                            <select>
-                                                <option value="">Enter country*</option>
-                                                <option value="pakistan">counter name</option>
-                                                <option value="india">counter name</option>
-                                                <option value="usa">counter name</option>
-                                                <option value="student">counter name</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="charity-select-form">
-                                        <label>State / Region:</label>
-                                        <div class="charity-select-two">
-                                            <select>
-                                                <option value="">Enter State*</option>
-                                                <option value="pakistan">state name</option>
-                                                <option value="india">state name</option>
-                                                <option value="usa">state name</option>
-                                                <option value="student">state name</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="charity-select-form">
-                                        <label>City:</label>
-                                        <div class="charity-select-two">
-                                            <select>
-                                                <option value="">Enter city*</option>
-                                                <option value="pakistan">city name</option>
-                                                <option value="india">city name</option>
-                                                <option value="usa">city name</option>
-                                                <option value="student">city name</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                    <li class="chrity-full-form">
-                                        <label>Address:</label>
-                                        <input type="text" value="Enter address line*" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }"></li>
-                                    <li>
-                                        <label>Zip / Postal Code:</label>
-                                        <input type="text" value="Enter code*" onblur="if(this.value == '') { this.value ='Enter code*'; }" onfocus="if(this.value =='Enter code*') { this.value = ''; }"></li>
-                                    <li>
-                                        <label>Phone:</label>
-                                        <input type="text" value="Enter number*" onblur="if(this.value == '') { this.value ='Enter number*'; }" onfocus="if(this.value =='Enter number*') { this.value = ''; }"></li>
-                                    <li class="chrity-full-form">
-                                        <label>Describe Your Self:</label>
-                                        <textarea placeholder="Type here*" ></textarea></li>
-                                    <li><input type="submit" value="Send Inquiry"></li>
-                                </ul>
-                            </form>
+                        <div class="widget_title"><h2>회원 관리</h2></div>
+                        <div class="charity-volunteer-form" >
+                         
+									<ul class="nav nav-tabs" style="text-align: center;">
+										<li class="nav-item"><a class="nav-link active"
+											data-toggle="tab" href="#abc">기본 정보</a></li>
+										<li class="nav-item"><a class="nav-link"
+											data-toggle="tab" href="#def">물품 기부</a></li>
+										<li class="nav-item"><a class="nav-link"
+											data-toggle="tab" href="#ghi">돈기부여</a></li>
+										<li class="nav-item"><a class="nav-link"
+											data-toggle="tab" href="#jkl">포인트</a></li>
+											<li class="nav-item"><a class="nav-link"
+											data-toggle="tab" href="#jkl">문의 내역</a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane fade show active" id="abc">
+										
+											<table>
+												<div>
+													<br>
+												</div>
+												 <!--// volunteer-form \\-->
+						                            <form>
+							                            <tr>
+							                               <th>아이디</th>
+							                               <th>이름</th>
+							                               <th>가입경로</th>
+							                               <th>후원금기부횟수</th>
+							                               <th>물품기부횟수</th>
+							                               <th>블랙리스트 여부</th>
+						                               	</tr>
+						                                
+						                                <c:forEach items="${memberControl}" var="member">
+						                                 <tr>
+							                               <th><a href="member_view?member_id=${member.member_id}">${member.member_id}</a></th>
+							                               <th>${member.name}</th>
+							                               <th>${member.signuppath}</th>
+							                               <th>${member.dntcnt}</th>
+							                               <th>${member.itemdntcnt}</th>
+							                               <th>${member.bklist}</th>
+						                               	</tr>
+						                                </c:forEach>
+						                            </form>
+						                                   
+						                        <!--// volunteer-form \\-->
+											</table>
+											<button type="submit">회원 정보 수정</button>
+											<!-- 페이징 -->
+											<div id="nav">
+												<a href="#" rel="0" class="active">1</a>
+											</div>
+											
+
+										</div>
+										<div class="tab-pane fade" id="def">
+											<table>
+
+												<div>
+													<br>
+												</div>
+												<tr>
+
+													<th>아이디</th>
+													<th>인증제목</th>
+													<th>조회수</th>
+													<th>날짜</th>
+													<th>분류번호</th>
+												</tr>
+
+
+												<c:forEach items="${list2}" var="list2">
+													<tr>
+														<td>${list2.member_id}</td>
+														<td>${list2.btitle}</td>
+														<!-- 제목누르면 해당 글내용으로 이동링크 -->
+														<td>${list2.bhit}</td>
+														<td>${list2.bdate}</td>
+														<td>${list2.bcat_num}</td>
+													</tr>
+												</c:forEach>
+											</table>
+											<!-- 페이징 -->
+											<div id="nav">
+												<ul class="startItem">
+
+													<li class="active"><a><<</a></li>
+
+													<li class="active"><a><</a></li>
+
+													<li class="active"><a>1</a></li>
+
+													<li class="currPage" data-page="2"><a>2</a></li>
+
+													<li class="currPage" data-page="3"><a>3</a></li>
+
+													<li class="active"><a>></a></li>
+
+													<li class="active"><a>>></a></li>
+
+												</ul>
+											</div>
+										
+										</div>
+										<div class="tab-pane fade" id="ghi">
+											<table>
+												<div>
+													<br>
+												</div>
+												<tr>
+													<th>물품이름</th>
+													<th>날짜</th>
+
+													<th>수량</th>
+													<th>아이디</th>
+
+												</tr>
+
+
+												<c:set var="list3" value="${list3}" />
+												<c:forEach items="${list3}" var="dao3" varStatus="status">
+													<c:forEach items="${dao3.dona}" var="dto3"
+														varStatus="status">
+														<tr>
+
+															<td>${dao3.iname}</td>
+															<td>${dto3.idntdate}</td>
+
+															<!-- 제목누르면 해당 글내용으로 이동링크 -->
+															<td>${dto3.donaamount}</td>
+															<td>${dto3.member_id}</td>
+														</tr>
+													</c:forEach>
+												</c:forEach>
+											</table>
+											<div id="nav">
+												<a href="#" rel="0" class="active">1</a>
+											</div>
+											
+										</div>
+										<div class="tab-pane fade" id="jkl">
+											<table>
+												<div>
+													<br>
+												</div>
+												<tr>
+
+													<th>번호</th>
+													<th>댓글내용</th>
+													<th>날짜</th>
+													<th>아이디</th>
+													<th>분류번호</th>
+												</tr>
+												<c:set var="list4" value="${list4}" />
+												<c:forEach items="${list4}" var="dao4" varStatus="status">
+													<c:forEach items="${dao4.reply}" var="dto4"
+														varStatus="status">
+														<tr>
+															<td>${dto4.r_num}</td>
+															<td>${dto4.rcontent}</td>
+															<!-- 제목누르면 해당 글내용으로 이동링크 -->
+															<td>${dto4.rdate}</td>
+															<td>${dto4.rid}</td>
+															<td>${dao4.b_index}</td>
+														</tr>
+													</c:forEach>
+												</c:forEach>
+											</table>
+											<div id="nav">
+												<a href="#" rel="0" class="active">1</a>
+											</div>
+											
+										</div>
+									</div>
+						
+
                         </div>
                         <!--// volunteer-form \\-->
                         <div class="charity-team-contactus">
+                       
                             <ul>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    <h5>Email Us At:</h5>
-                                    <a href="mailto:name@email.com">info@example.com</a>
+                                    <h5>돌아가기</h5>
+                                <!--     <a href="mailto:name@email.com">info@example.com</a> -->
                                 </li>
                                 <li>
                                     <i class="fa fa-phone"></i>
-                                    <h5>Call Us At:</h5>
-                                    <span>+(091)61 3146 8728</span>
+                                    <h5>회원 삭제</h5>
+                                    <!-- <span>+(091)61 3146 8728</span> -->
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <aside class="col-md-3">
-                        
-                        <!-- Widget Search -->
-                        <div class="widget widget_search">
-                            <div class="widget_title"><h2>Search Here</h2></div>
-                            <form>
-                                <input type="text" placeholder="Search Here">
-                                <input type="submit" value="">
-                                <i class="fa fa-search"></i>
-                            </form>
-                        </div>
-                        <!-- Widget Search -->
-                        <!-- Widget Archive -->
-                        <div class="widget widget_archive">
-                            <div class="widget_title"><h2>Calender Archives</h2></div>
-                            <ul>
-                                <li><a href="404.html">13 August 2017</a></li>
-                                <li><a href="404.html">28 September 2017</a></li>
-                                <li><a href="404.html">19 May 2017</a></li>
-                                <li><a href="404.html">03 March 2017</a></li>
-                                <li><a href="404.html">28 February 2017</a></li>
-                            </ul>
-                        </div>
-                        <!-- Widget Archive -->
-                        <!-- Widget Event -->
-                        <div class="widget widget_events">
-                            <div class="widget_title"><h2>Upcoming Events</h2></div>
-                            <ul>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">22 Aug</time>
-                                    <div class="charity-events">
-                                       <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">13 Sep</time>
-                                    <div class="charity-events">
-                                       <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">07 Dec</time>
-                                    <div class="charity-events">
-                                       <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-                                    </div>
-                                </li>
-                             </ul>
-                        </div>
-                        <!-- Widget Event -->
-                        <!-- Widget Gallery -->
-                        <div class="widget widget_gallery">
-                            <div class="widget_title"> <h2>Our Gallery</h2> </div>
-                            <ul>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-1.jpg"><img src="extra-images/widget-gallery-1.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-2.jpg"><img src="extra-images/widget-gallery-2.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-3.jpg"><img src="extra-images/widget-gallery-3.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-4.jpg"><img src="extra-images/widget-gallery-4.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-5.jpg"><img src="extra-images/widget-gallery-5.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-6.jpg"><img src="extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-7.jpg"><img src="extra-images/widget-gallery-7.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-8.jpg"><img src="extra-images/widget-gallery-8.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                                <li><a data-fancybox="gallery" href="extra-images/widget-gallery-6.jpg"><img src="extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            </ul>
-                        </div>
-                        <!-- Widget Gallery -->
-
-                    </aside>
                 </div>
             </div>
         </div>
@@ -394,7 +393,8 @@
 
     </div>
     <!-- Content -->
-	
+</div>
+<!-- ./wrapper -->	
 	
 	  <!-- Footer -->
     <footer id="charity-footer" class="charity-footer-one">
@@ -507,7 +507,7 @@
         </div>
     </div>
 
-    <!-- jQuery -->
+ <!-- jQuery -->
     <script src="/resources/charity/script/jquery.js"></script>
     <script src="/resources/charity/script/popper.min.js"></script>
     <script src="/resources/charity/script/bootstrap.min.js"></script>
@@ -519,5 +519,18 @@
     <script src="/resources/charity/script/jquery.jplayer.js"></script>
     <script src="/resources/charity/script/jplayer.playlist.js"></script>
     <script src="/resources/charity/script/functions-main.js"></script> <!-- fuctions 복붙해서 사용 -->
+    
+ 
+<!-- Bootstrap -->
+<script src="/resources/AdminLTE-master/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="/resources/AdminLTE-master/dist/js/adminlte.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+<script src="/resources/AdminLTE-master/plugins/chart.js/Chart.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/resources/AdminLTE-master/dist/js/demo.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="/resources/AdminLTE-master/dist/js/pages/dashboard3.js"></script>
 </body>
 </html>
