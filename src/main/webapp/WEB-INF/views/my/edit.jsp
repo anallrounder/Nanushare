@@ -181,6 +181,21 @@ li {
 .buttonbutton {
 	text-align: center;
 }
+
+label {
+	display: block;
+	/* width: 90px; */
+	text-align: left;
+}
+
+input {
+	
+	width: 300px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	/* To harmonize the look & feel of text field border */
+	border: 1px solid #999;
+}
 </style>
 
 
@@ -330,24 +345,24 @@ li {
 						<div class="charity-fancy-title">
 							<h2>프로필 수정</h2>
 						</div>
+						<div style="margin: 0 auto" align="center">
+							<form id="mjoin" action='<c:url value='/my/myprofile'/>'
+								class="myform" method="post" novalidate>
 
-						<form id="mjoin" action='<c:url value='/my/myprofile'/>'
-							class="myform" method="post" novalidate>
+								<ul class="charity-contact-form">
 
-							<ul class="charity-contact-form">
+									<!-- <ul class="row"> -->
 
-								<!-- <ul class="row"> -->
+									<label>아이디 <input type="text" placeholder="Email"
+										name="member_id" id="member_id" value="${modifyId}"
+										readonly="readonly" required>
+									</label>
 
-								<label>아이디 <input type="text" placeholder="Email"
-									name="member_id" id="member_id" value="${modifyId}"
-									readonly="readonly" required>
-								</label>
+									<label>이름<input type="text" name="name" id="name"
+										placeholder="Name" value="${modifyName}" required>
+									</label>
 
-								<label>이름<input type="text" name="name" id="name"
-									placeholder="Name" value="${modifyName}" required>
-								</label>
-
-								<%-- <li class="col-md-6">핸드폰 정보 <input type="text"
+									<%-- <li class="col-md-6">핸드폰 정보 <input type="text"
 											placeholder="Phone Number" name="phone" id="phone"
 											value="${modifyPhone}" required>
 										</li>
@@ -355,25 +370,27 @@ li {
 											placeholder="gender" name="gender" id="gender"
 											class="form-control" required>
 										</li> --%>
-								<label>변경할 비밀번호 입력<input type="password"
-									placeholder="Password" name="pw" id="pwd1" class="form-control"
-									required>
-								</label>
-								<label>비밀번호 확인<input type="password"
-									placeholder="Confirm Password" name="pwConfirm" id="pw"
-									class="form-control" required>
-								</label>
-							</ul>
-							<div class="buttonbutton">
-								<!-- </ul> -->
-								<button type="button"
-									onclick="location.href='${pageContext.request.contextPath}/my/drop'"
-									class="charity-simple-blog-btn">회원 탈퇴</button>
-								<button type="button" onclick="location.href='/my/mypage'"
-									class="charity-simple-blog-btn">처음으로</button>
-								<button type="button" id="submit" onclick="modifyMember()"
-									class="charity-simple-blog-btn">수정완료</button>
-							</div>
+									<label>변경할 비밀번호 입력<input type="password"
+										placeholder="Password" name="pw" id="pwd1"
+										class="form-control" required>
+									</label>
+									<label>비밀번호 확인<input type="password"
+										placeholder="Confirm Password" name="pwConfirm" id="pw"
+										class="form-control" required>
+									</label>
+								</ul>
+						</div>
+
+						<div class="buttonbutton">
+							<!-- </ul> -->
+							<button type="button"
+								onclick="location.href='${pageContext.request.contextPath}/my/drop'"
+								class="charity-simple-blog-btn">회원 탈퇴</button>
+							<button type="button" onclick="location.href='/my/mypage'"
+								class="charity-simple-blog-btn">처음으로</button>
+							<button type="button" id="submit" onclick="modifyMember()"
+								class="charity-simple-blog-btn">수정완료</button>
+						</div>
 
 
 						</form>

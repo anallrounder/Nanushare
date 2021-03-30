@@ -28,6 +28,11 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+<!-- SIDE BAR 1 CSS -->
+<link rel="stylesheet" href="/resources/sidebar/css/styles.css">
+
+
 </head>
 
 <style>
@@ -38,7 +43,6 @@
 ​h3 {
 	text-align: center;
 }
-
 </style>
 <body>
 	<!-- Header -->
@@ -160,7 +164,51 @@
 			</div>
 		</div>
 	</div>
+
 	<!-- Banner -->
+	<!--sidebar  -->
+	<div class="l-navbar" id="navbar">
+		<nav class="nav">
+		<div>
+			<div class="nav__brand">
+				<ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+				<a href="#" class="nav__logo"> 이벤트 </a>
+			</div>
+			<div class="nav__list">
+				<a href="#" class="nav__link active"> <ion-icon
+						name="calendar-outline" class="nav__icon"></ion-icon> <span
+					class="nav_name"> 출석체크 </span>
+				</a>
+
+
+				<div href="#" class="nav__link collapse">
+					<ion-icon name="images-outline" class="nav__icon"></ion-icon>
+					<span class="nav_name"> 테스트 </span>
+
+					<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+					<ul class="collapse__menu">
+						<a href="#" class="collapse__sublink"> 기부성향테스트 </a>
+						<a href="#" class="collapse__sublink"> 동물상테스트 </a>
+						<a href="#" class="collapse__sublink"> 타로운세 </a>
+					</ul>
+				</div>
+
+				<div href="#" class="nav__link collapse">
+					<ion-icon name="game-controller-outline" class="nav__icon"></ion-icon>
+					<span class="nav_name"> 게임 </span>
+
+					<ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+					<ul class="collapse__menu">
+						<a href="#" class="collapse__sublink"> 퍼즐맞추기 </a>
+						<a href="#" class="collapse__sublink"> 테트리스 </a>
+						<a href="#" class="collapse__sublink"> 로또맞추기 </a>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
 
 	<!-- Content -->
 	<div class="charity-main-content">
@@ -177,20 +225,21 @@
 						<div class="charity-main-section charity-aboutus-text-full">
 							<div class="container">
 								<div class="row">
-									<div class="col-md-12" style="background-color: lightgray; text-align:center;">
+									<div class="col-md-12"
+										style="background-color: lightgray; text-align: center;">
 										<h3>나누셰어는</h3>
 										<h3>함께 나누면서 변화를 만들어가는</h3>
 										<h3>공유 플랫폼입니다.</h3>
-										<h3><i>"나누셰어와 함께 나누세요"</i></h3>
-										<img src="/resources/my/about그림.png" height="559;" max-width="100%;">
+										<h3>
+											<i>"나누셰어와 함께 나누세요"</i>
+										</h3>
+										<img src="/resources/my/about그림.png" height="559;"
+											max-width="100%;">
 									</div>
 									<div>
 										<div class="charity-aboutus-text">
-											<br>
-											<br>
-											<br>
-											<br> <i class="fas fa-hand-holding-heart fa-2x">
-												나누셰어 의미</i>
+											<br> <br> <br> <br> <i
+												class="fas fa-hand-holding-heart fa-2x"> 나누셰어 의미</i>
 											<h6>
 												<br>나눔이란 가진 것을 공유하는 것으로 나누면 두 배가 되는 사회를 꿈꾸는 사람들이 모여
 												"나누셰어" 프로젝트가 시작되었습니다. 나눔과 더불어 사는 것을 더 많은 사람들과 함께 실천해 좀 더 나은
