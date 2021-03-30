@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.share.nanu.VO.Vmam;
 import com.share.nanu.service.MainService;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +27,7 @@ public class NanuMainController {
 	public ModelAndView nanumain(ModelAndView mov) throws Exception {
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
 		
-		mov.setViewName("mainMap/mainview"); 
+		mov.setViewName("mainMap/mainContent"); 
 		/* mov.setViewName("test"); */
 		mov.addObject("daymoney", mainService.getMoney()); // 당일 후원 금액 로그기록(통계)
 		//mov.addObject("weekmoney", mainService.getWeekMoney()); 

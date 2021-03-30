@@ -1,26 +1,15 @@
 package com.share.nanu.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-import com.share.nanu.VO.Board_ListVO;
-import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.page.Criteria;
-import com.share.nanu.page.pageVO;
-import com.share.nanu.service.MyPageService;
+import com.share.nanu.service.AdminPageService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -29,10 +18,22 @@ import lombok.AllArgsConstructor;
 public class AdminPageController {
 
 	@Autowired
-	private MyPageService mgservice;
+	private AdminPageService adminPgService;
 	
 	@GetMapping("/Donation")
-	public ModelAndView adminDM(ModelAndView mov) {
+	public ModelAndView adminDM(ModelAndView mov, MemberVO member, Criteria cri) {
+		
+		mov.setViewName("admin/admin_main");
+		mov.addObject("memberControl", adminPgService.getMember());
+		
+		return mov;
+	}
+	
+	@GetMapping("/member_view")
+	public ModelAndView member_view(ModelAndView mov, MemberVO member, Criteria cri) {
+		
+		mov.setViewName("admin/member_view");
+		mov.addObject("memberView", adminPgService.getMemberView(member.getMember_id()));
 		
 		return mov;
 	}
