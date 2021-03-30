@@ -2,6 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!doctype html>
 <html lang="en">
@@ -48,10 +49,10 @@
                             
                                 <ul>
                                     <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                                    <li style="padding: 0px 40px 0px 70px"><a href="#" style="font-size: 20px;">나누셰어란?</a>
+                                    <li style="padding: 0px 40px 0px 70px"><a href="${pageContext.request.contextPath}/menu/about" style="font-size: 20px;">나누셰어란?</a>
                                         <ul class="children">
-                                            <li><a href="event-list.html">나누셰어 소개</a></li>
-                                            <li><a href="event-grid.html">찾아오셰어</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
                                         <!--     <li><a href="event-detail.html">Event Detail</a></li> -->
                                         </ul>
                                     </li>
@@ -62,36 +63,37 @@
                                             <li><a href="cause-detail.html">Cause Detail</a></li>
                                         </ul> -->
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나누기</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/donation/item/main" style="font-size: 20px;">나누기</a>
                                         <ul class="children">
-                                            <li><a href="blog-large.html">물품 나누기</a></li>
-                                            <li><a href="blog-medium.html">돈기부여하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
                                             <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
                                         </ul>
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔 인증</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/board/shows/plist" style="font-size: 20px;">나눔 인증</a>
                                        <!--  <ul class="children">
                                             <li><a href="team-grid.html">Team Grid</a></li>
                                             <li><a href="team-classic.html">Team Classic</a></li>
                                             <li><a href="team-detail.html">Team Detail</a></li>
                                         </ul> -->
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">이벤트</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/event/check"style="font-size: 20px;">이벤트</a>
                                         <ul class="children">
-                                            <li><a href="about.html">출석체크</a></li>
-                                            <li><a href="prayer-list.html">테스트</a></li>
-                                            <li><a href="prayer-grid.html">게임</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/check">출석체크</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/test">테스트</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/game">게임</a></li>
                                            <!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
                                             <li><a href="404.html">404 Error</a></li>
                                             <li><a href="search-result.html">Search Result</a></li> -->
                                         </ul>
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="contact-us.html" style="font-size: 20px;">더하기</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/restful/notice" style="font-size: 20px;">더하기</a>
                                      	<ul class="children">
-                                            <li><a href="about.html">공지사항</a></li>
-                                            <li><a href="prayer-list.html">문의하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/restful/qna">문의하기</a></li>
                                     	</ul>
                                     </li>	
+                              
                          
                                 </ul>
                                <!--  <span class="float-right">
@@ -110,7 +112,9 @@
                                 
                             </ul>
                              -->
+                          
                         </div>
+                        
                     </aside>
                     
                   
@@ -130,11 +134,29 @@
                     </aside> -->
                 </div>
             </div>
-            <aside>
-            	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign up</a>
-				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign in</a>
+
+			<sec:authorize access="isAnonymous()"> <!-- all 버튼 header -->
+				<aside>
+            	<a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">회원가입</a>
+				<a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 15px; margin: -75px 140px 0px 0px;">로그인</a>
 			</aside>
-        </div>
+			</sec:authorize>
+
+			<sec:authorize access="isAuthenticated()"> <!-- 로그인됐을때 버튼 header -->
+				<%-- <a href="${pageContext.request.contextPath}/member/logout"class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a> --%>
+				<form action="/member/logout" method="post">
+					<input type="submit" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;" value="로그아웃">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</form>
+				<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 0px; margin: -75px 140px 0px 0px;">마이페이지</a>
+			</sec:authorize>
+			
+			<sec:authorize access="hasRole('ADMIN')"> <!-- 관리자 버튼 header -->
+				<a href="${pageContext.request.contextPath}/member/logout" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a>
+				<a href="${pageContext.request.contextPath}/admin/Donation" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">관리자 페이지</a>
+			</sec:authorize>
+
+		</div>
         <!-- Top Strip -->
     </header>
     <!-- Header -->
@@ -331,9 +353,11 @@
 								</div>
                                 <a href="/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a>
                          </div>
-                            
-                        
                     </div>
+                    
+                    
+                    
+                    
                     <aside class="col-md-3">
                         
                         <!-- Widget Search -->

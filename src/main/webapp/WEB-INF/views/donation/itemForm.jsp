@@ -2,6 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!doctype html>
 <html lang="en">
@@ -26,67 +27,65 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
     
-    <!--  date  -->
+    <!--  date ui test 아마도 안쓸듯.  -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<!-- <script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+	
+	<!-- 데이트픽커 test -->
+	<!-- <script> 
 		$( function() {
 		  $( "#datepicker" ).datepicker();
 		} );
 	</script> -->
-	<!-- 	<script>
-	 /* 현재 날짜를 받아오기 위한 작업 */
-	 document.getElementById('#currentDate').valueAsDate = new Date();
-	 /*  또 다른 방법:  document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10); */
-	</script> -->
+	
+	<!-- 현재 날짜를 받아오기 위한 작업 test -->
 	<script>
-/* 		$(function() {
-		    $('.charity-volunteer-form > form > ul > li > #text-calenda').pignoseCalendar({/*  .charity-volunteer-form > form > ul > li > #text-calenda *//*  input.calendar */
-				format: 'YYYY-MM-DD' // date format string. (2017-02-02)
-				init : function ( context )  { 
-			        / ** 
-			         * @params context PignoseCalendarContext 
-			         * @returns void 
-			         * /
-
-			         // 이것은 연결 요소이며 $ ( '. calendar')의 각 요소와 정확히 동일합니다. 
-			         var  $ this  =  $ ( this ) ;
-
-			         //`context` 변수에서 대상 요소를 얻을 수 있습니다. 
-			         var  $ element  =  context . 요소 ;
-
-			         // 달력 요소도 얻을 수 있습니다. 달력보기 DOM입니다. 
-			         var  $ calendar  =  context . 달력 ; 
-			    } 
-			});
-		}); */
+	/*  document.getElementById('#currentDate').valueAsDate = new Date(); */
+	/*  또 다른 방법:  document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10); */
 	</script>
-	 <script>
-	 $.datepicker.setDefaults({
-	        dateFormat: 'yy-mm-dd',	//날짜 포맷이다. 보통 yy-mm-dd 를 많이 사용하는것 같다.
-	        prevText: '이전 달',	// 마우스 오버시 이전달 텍스트
-	        nextText: '다음 달',	// 마우스 오버시 다음달 텍스트
-	        closeText: '닫기', // 닫기 버튼 텍스트 변경
-	        currentText: '오늘', // 오늘 텍스트 변경
-	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더중 월 표시를 위한 부분
-	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더 중 월 표시를 위한 부분
-	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],	//한글 캘린더 요일 표시 부분
-	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],	//한글 요일 표시 부분
-	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],	// 한글 요일 표시 부분
-	        showMonthAfterYear: true,	// true : 년 월  false : 월 년 순으로 보여줌
-	        yearSuffix: '년',	//
-	        showButtonPanel: true,	// 오늘로 가는 버튼과 달력 닫기 버튼 보기 옵션
-//	        buttonImageOnly: true,	// input 옆에 조그만한 아이콘으로 캘린더 선택가능하게 하기
-//	        buttonImage: "images/calendar.gif",	// 조그만한 아이콘 이미지
-//	        buttonText: "Select date"	// 조그만한 아이콘 툴팁
-	    });
-	 $( "#datepicker1" ).datepicker( "setDate", "2020-02-01" );	//날짜 변경
-	 $( "#datepicker1" ).datepicker( "getDate" );	//현재 선택되어 있는 날짜 가져오기 (Date 형으로 반환)
-	 </script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+	
+	<!-- 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드 -->
 	<script type="text/javascript">
+	/* This script and many more are available free online at
+	The JavaScript Source!! http://javascript.internet.com
+	Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
+		
+		 function autoDate () {
+			var tDay = new Date();
+			var tMonth = tDay.getMonth()+1;
+			var tDate = tDay.getDate();
+			if ( tMonth < 10) tMonth = "0"+tMonth;
+			if ( tDate < 10) tDate = "0"+tDate;
+			document.getElementById("tDate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
+		 }
+	
+		// Multiple onload function created by: Simon Willison
+		// http://simonwillison.net/2004/May/26/addLoadEvent/
+		function addLoadEvent(func) {
+		  var oldonload = window.onload;
+		  if (typeof window.onload != 'function') {
+		    window.onload = func;
+		  } else {
+		    window.onload = function() {
+		      if (oldonload) {
+		        oldonload();
+		      }
+		      func();
+		    }
+		  }
+		}
+		
+		addLoadEvent(function() {
+		  autoDate();
+		}); 
+	</script>
+	
+
+	<!-- 물품수량 셀렉트 박스에서 직접입력 및 인풋박스에 셀렉트한 수량이 입력되어 넘어가도록 하는 자바스크립트 코드 -->
+	<script type="text/javascript"> 
 		function changeSelection(){
 			if(document.sendForm.amount.options[document.sendForm.amount.selectedIndex].value == '0'){
 				 document.sendForm.donaamount.disabled = true;
@@ -110,8 +109,40 @@
 			});
 		});
 	</script>
+	
 
-
+	<!-- date picker에서 선택한 값 인풋박스에 넣기
+		참고:  https://blog.jaeyoon.io/2017/10/js-datepicker.html -->
+	<!-- <style>
+	/* 	body {
+			display: flex; justify-content: center; padding: 3em 0
+		} */ 
+		
+		/* input {
+			padding: 1em 1.5em; font-size:1.2em
+		} */
+		input[type="date"]::-webkit-calendar-picker-indicator,
+		input[type="date"]::-webkit-inner-spin-button {
+		    display: none;
+	    	appearance: none;
+		}
+	</style>
+	
+	date picker input에 넣기
+	<script>
+	var picker = new Pikaday({ 
+		  field: document.getElementById('datepicker'),
+		  format: 'yyyy-MM-dd',
+		  
+		  /* datepicker 라이브러리에 따라 다르지만 string 타입으로 리턴, date type input이 인식할 수 있는 string 형태로 변환 */
+		  toString(date, format) {
+		    let day = ("0" + date.getDate()).slice(-2);
+		    let month = ("0" + (date.getMonth() + 1)).slice(-2);
+		    let year = date.getFullYear();
+		    return `${year}-${month}-${day}`;
+		  }
+	});	
+	</script> -->
 </head>
 
 <body>
@@ -130,10 +161,10 @@
                             
                                 <ul>
                                     <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                                    <li style="padding: 0px 40px 0px 70px"><a href="#" style="font-size: 20px;">나누셰어란?</a>
+                                    <li style="padding: 0px 40px 0px 70px"><a href="${pageContext.request.contextPath}/menu/about" style="font-size: 20px;">나누셰어란?</a>
                                         <ul class="children">
-                                            <li><a href="event-list.html">나누셰어 소개</a></li>
-                                            <li><a href="event-grid.html">찾아오셰어</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
                                         <!--     <li><a href="event-detail.html">Event Detail</a></li> -->
                                         </ul>
                                     </li>
@@ -144,36 +175,37 @@
                                             <li><a href="cause-detail.html">Cause Detail</a></li>
                                         </ul> -->
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나누기</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/donation/item/main" style="font-size: 20px;">나누기</a>
                                         <ul class="children">
-                                            <li><a href="blog-large.html">물품 나누기</a></li>
-                                            <li><a href="blog-medium.html">돈기부여하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
                                             <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
                                         </ul>
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔 인증</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/board/shows/plist" style="font-size: 20px;">나눔 인증</a>
                                        <!--  <ul class="children">
                                             <li><a href="team-grid.html">Team Grid</a></li>
                                             <li><a href="team-classic.html">Team Classic</a></li>
                                             <li><a href="team-detail.html">Team Detail</a></li>
                                         </ul> -->
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">이벤트</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/event/check"style="font-size: 20px;">이벤트</a>
                                         <ul class="children">
-                                            <li><a href="about.html">출석체크</a></li>
-                                            <li><a href="prayer-list.html">테스트</a></li>
-                                            <li><a href="prayer-grid.html">게임</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/check">출석체크</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/test">테스트</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/event/game">게임</a></li>
                                            <!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
                                             <li><a href="404.html">404 Error</a></li>
                                             <li><a href="search-result.html">Search Result</a></li> -->
                                         </ul>
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="contact-us.html" style="font-size: 20px;">더하기</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/restful/notice" style="font-size: 20px;">더하기</a>
                                      	<ul class="children">
-                                            <li><a href="about.html">공지사항</a></li>
-                                            <li><a href="prayer-list.html">문의하기</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/restful/qna">문의하기</a></li>
                                     	</ul>
                                     </li>	
+                              
                          
                                 </ul>
                                <!--  <span class="float-right">
@@ -192,7 +224,9 @@
                                 
                             </ul>
                              -->
+                          
                         </div>
+                        
                     </aside>
                     
                   
@@ -212,15 +246,32 @@
                     </aside> -->
                 </div>
             </div>
-            <aside> 
-            	<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign up</a>
-				<a href="#" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign in</a>
+
+			<sec:authorize access="isAnonymous()"> <!-- all 버튼 header -->
+				<aside>
+            	<a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">회원가입</a>
+				<a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 15px; margin: -75px 140px 0px 0px;">로그인</a>
 			</aside>
-        </div>
+			</sec:authorize>
+
+			<sec:authorize access="isAuthenticated()"> <!-- 로그인됐을때 버튼 header -->
+				<%-- <a href="${pageContext.request.contextPath}/member/logout"class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a> --%>
+				<form action="/member/logout" method="post">
+					<input type="submit" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;" value="로그아웃">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</form>
+				<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 0px; margin: -75px 140px 0px 0px;">마이페이지</a>
+			</sec:authorize>
+			
+			<sec:authorize access="hasRole('ADMIN')"> <!-- 관리자 버튼 header -->
+				<a href="${pageContext.request.contextPath}/member/logout" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">로그아웃</a>
+				<a href="${pageContext.request.contextPath}/admin/Donation" class="charity-strip-btn charity-bgcolor" style="width:75px;height:40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">관리자 페이지</a>
+			</sec:authorize>
+
+		</div>
         <!-- Top Strip -->
     </header>
     <!-- Header -->
-
     <!-- Banner -->
     <div class="charity-subheader">
         <span class="black-transparent"></span>
@@ -228,7 +279,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>물품나눔 신청서 작성</h1>
-                    <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</p>
+                    <p>Product donation: Application Form</p>
                 </div>
             </div>
         </div>
@@ -246,7 +297,7 @@
                         <div class="charity-team-warp">
                            
                             <h3>물품 나누기 신청</h3>
-                            <span class="mb-3">Product donation form</span>
+                            <span class="mb-3">Product donation _ Application Form</span>
                             <figure><img src="${pageContext.request.contextPath}/resources/charity/donation-images/heart.jpg" alt=""></figure><!-- 788x355 -->
                              
                             <p>후원 회원 여러분, 나누셰어 프로젝트의 물품 나누기에 동참해주셔서 감사합니다. <br>이전 페이지의 물품 나누기 안내사항을 다시 한 번 꼭 확인해 주시고 신청서 작성 부탁드립니다. <br>
@@ -264,9 +315,7 @@
                                 </ul>
                              
                             </div>
-                           <!--  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamcorper condimentu m. Ut imperdiet lobortis ex, vitae tempor dolor viverra quis. Aliquam sodales eu leo id molestie. Maecenasu llamcorper malesuada arcu, in lobortis mauris feugiat sed. Duis placerat maximus felis, et mollis neque pl acerat non. </p>
-                            <blockquote>Curabitur lacus dui, convallis quis arcu vel, sagittis vulputate elit. Nullam ex libero, imp rdiet  lib ndit ac, tempor ac magna. In finibus libero vitae ex tincidunt pharetr.</blockquote>
-                            <p>Nulla molestie leo non arcu porta, in dictum dui rutrum. Cras ipsum lectus, ullamcorper vel lacus et, condim entum rhoncus felis. Sed vulputate augue id malesuada maximus.</p> -->
+                          
                         </div>
                         <!--// company-timeline \\-->
                         
@@ -277,7 +326,7 @@
                         <div class="charity-volunteer-form"> <!-- .charity-volunteer-form > form > ul > li > #text-calendar -->
                            <form name="sendForm" method="post" action="formAction">
                            <input type="hidden" name="member_id" value="${memberInfo.member_id}">
-                                <ul>
+                                <ul class="mt-4">
                                     <li>
                                         <label>아이디(Email): </label>
                                         <input type="text" value="${memberInfo.member_id}"  readonly ></li>
@@ -291,11 +340,15 @@
                                    
                                     <li>
                                         <label>신청 날짜:</label>    
-                                        <!-- <div class="chrity-full-form"> --><!-- class="charity-select-date" -->
-	                                   		<!--   Date1_current:<input type="date" id="currentDate" name="idntdate"> -->
-	                                   		<!--   Date2_ui: <input type="date" id="datepicker" name="idntdate"> -->
-                                  			<input class="chrity-full-form" type="text" id="datepicker1" class="calendar" />
-                                    	<!-- </div> -->
+                                        <div class="chrity-full-form"> <!-- class="charity-select-date" -->
+                                        	<!-- readonly 작성시 수정은 불가하고 읽기만 가능하다. -->
+	                                   		<input name="tName" type="text" id="tDate" readonly>
+	                                   		
+	                                   		<!-- 실패 <input id="datepicker" type="date"> -->
+	                                   		<!-- 오늘날짜 받아오기 test <input type="date" id="currentDate" name="idntdate"> -->
+	                                   		<!-- jQuery-UI test1: <input type="date" id="datepicker" name="idntdate"> -->
+                                  			<!-- jQuery-UI test2: <input class="chrity-full-form" type="text" id="datepicker1" class="calendar" /> -->
+                                    	</div> 
                                     </li>
                                     
                                     <li class="charity-select-form">
@@ -312,16 +365,18 @@
                                          </div> 
                                     </li>
                                     
-                                    <li class="chrity-full-form" >
+                                    <li><!-- class="chrity-full-form" -->
                                     	<label>수량선택:</label>
                                    		<input type="text" name="donaamount" id="selectDirect" disabled />
                                     </li>
-                                    <li class="charity-select-form">   
-                                        <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
+                                    <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 											자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
 											결국 input box에 입력된 값이 form을 넘길 때 수량값으로 넘어가게 된다. -->
+                                    
+                                    <li class="charity-select-form">   
+                                    	<label>(select)</label>
 										<div class="charity-select-two"> 
-											<select class="charity-select-two" id="selectBox" name="amount" onchange="changeSelection()">
+											<select id="selectBox" name="amount" onchange="changeSelection()">
 												<option value="0"> 물품 수량 선택</option>
 												<option value="9">*직접입력*</option>
 												<option value="10">10</option>
@@ -335,10 +390,15 @@
                                     </li>
                                     
                                 </ul>
-                                
-                                <button type="submit" class="charity-sub-btn" id="btnSend" ><i class="fa fa-save"> 신청서 전송</i></button>
-                                <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시선택하기</i></button>
-								<button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/item/main"><i class="fa fa-arrow-left"> 이전화면으로</i></button><!-- 확인필요 -->
+                                <div class="charity-team-contactus mt-3">
+	                                <button type="submit" class="charity-sub-btn" id="btnSend" ><i class="fa fa-save"> 신청서 전송</i></button>
+	                              <!--   각각의 inputbox초기화하는 방법: https://codepen.io/eond/pen/epYpMw \
+	                                	date는 초기화 되지 않도록 만들고 싶어서 일부만 초기화를 제외하는 방법 찾는중
+	                                	$(input박스가 있는 곳을 감싸고 있는 객체의 ID).find('input[type=text]').each(function(){ $(this).val(''); });
+									   참고: https://alwayslifegoseon.tistory.com/119 -->
+	                                <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시선택하기</i></button>
+									<button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/item/main'"><i class="fa fa-arrow-left"> 이전화면으로</i></button><!-- 확인필요 -->
+                           		</div>
                             </form>
                         </div>
                         <!--// volunteer-form \\-->

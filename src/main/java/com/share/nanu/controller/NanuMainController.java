@@ -1,12 +1,16 @@
 package com.share.nanu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import com.share.nanu.VO.Vmam;
+import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.MainService;
 
 import lombok.AllArgsConstructor;
@@ -24,8 +28,15 @@ public class NanuMainController {
 	
 	// 메인페이지
 	@RequestMapping("/main")
-	public ModelAndView nanumain(ModelAndView mov) throws Exception {
+	public ModelAndView nanumain(ModelAndView mov ,@AuthenticationPrincipal MemberDetails md) throws Exception {
+		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
+		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - "+ md.getmember().getName());
+			mov.addObject("username",md.getmember().getName());
+		}
+		mov.setViewName("mainMap/mainview"); 
+
 		
 		mov.setViewName("mainMap/mainContent"); 
 		/* mov.setViewName("test"); */

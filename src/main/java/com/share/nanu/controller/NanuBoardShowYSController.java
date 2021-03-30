@@ -36,15 +36,15 @@ public class NanuBoardShowYSController {
 	private NanuBoardShowYSService nbsService;
 	
 	// 인증게시판 리스트 test
-	@GetMapping("/list")
+	@GetMapping("/testlist")
 	public String boardShowYS(Model model) {
 		log.info("인증게시판 리스트 컨트롤러");
-		model.addAttribute("list", nbsService.getlist());
+		model.addAttribute("testlist", nbsService.getlist());
 		return "board_show/yourSupportList";
 	}
 	
 	// 인증게시판 페이징 list
-	@GetMapping("/plist")
+	@GetMapping("/list")
 	public String boardShowPaging(Criteria cri, Model model) throws Exception {
 		log.debug("인증게시판 컨트롤러 페이징 리스트");
 		model.addAttribute("plist", nbsService.getlist(cri));
