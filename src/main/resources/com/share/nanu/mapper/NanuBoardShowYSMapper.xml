@@ -35,14 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="read" resultType="com.share.nanu.VO.BoardVO">
 		<![CDATA[
 	     	select * from board where bcat_num = 2 and b_index = #{b_index}
-	   ]]>
+		]]>
 	</select>
 	
 	<!-- 인증게시판 조회수 카운트 +1 hitUpdate -->
 	<update id="hitUpdate">
-		 <![CDATA[
+		<![CDATA[
 	      update board set bhit = bhit +1 where b_index = #{b_index}
-	   ]]>
+		]]>
 	</update>
 	
 	<!-- 게시글 수정 modify-->
@@ -73,7 +73,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="uploadFile" parameterType="HashMap">
 	 <![CDATA[
 	    INSERT INTO
-	       IMGTEST VALUES (Attachment_seq.nextval, #{originname}, #{path})
+	   	   insert into attachment
+	       attachment VALUES (attachment_seq.nextval, #{originname}, #{path}, b_index, board_seq.currval)
 		]]>
 	</insert>
 	

@@ -42,8 +42,8 @@
 	 /*  또 다른 방법:  document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10); */
 	</script> -->
 	<script>
-		$(function() {
-		    $('input.calendar').pignoseCalendar({
+/* 		$(function() {
+		    $('.charity-volunteer-form > form > ul > li > #text-calenda').pignoseCalendar({/*  .charity-volunteer-form > form > ul > li > #text-calenda *//*  input.calendar */
 				format: 'YYYY-MM-DD' // date format string. (2017-02-02)
 				init : function ( context )  { 
 			        / ** 
@@ -61,9 +61,30 @@
 			         var  $ calendar  =  context . 달력 ; 
 			    } 
 			});
-		});
+		}); */
 	</script>
-	 
+	 <script>
+	 $.datepicker.setDefaults({
+	        dateFormat: 'yy-mm-dd',	//날짜 포맷이다. 보통 yy-mm-dd 를 많이 사용하는것 같다.
+	        prevText: '이전 달',	// 마우스 오버시 이전달 텍스트
+	        nextText: '다음 달',	// 마우스 오버시 다음달 텍스트
+	        closeText: '닫기', // 닫기 버튼 텍스트 변경
+	        currentText: '오늘', // 오늘 텍스트 변경
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더중 월 표시를 위한 부분
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더 중 월 표시를 위한 부분
+	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],	//한글 캘린더 요일 표시 부분
+	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],	//한글 요일 표시 부분
+	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],	// 한글 요일 표시 부분
+	        showMonthAfterYear: true,	// true : 년 월  false : 월 년 순으로 보여줌
+	        yearSuffix: '년',	//
+	        showButtonPanel: true,	// 오늘로 가는 버튼과 달력 닫기 버튼 보기 옵션
+//	        buttonImageOnly: true,	// input 옆에 조그만한 아이콘으로 캘린더 선택가능하게 하기
+//	        buttonImage: "images/calendar.gif",	// 조그만한 아이콘 이미지
+//	        buttonText: "Select date"	// 조그만한 아이콘 툴팁
+	    });
+	 $( "#datepicker1" ).datepicker( "setDate", "2020-02-01" );	//날짜 변경
+	 $( "#datepicker1" ).datepicker( "getDate" );	//현재 선택되어 있는 날짜 가져오기 (Date 형으로 반환)
+	 </script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
 	<script type="text/javascript">
 		function changeSelection(){
@@ -253,8 +274,9 @@
                         <!--// volunteer-form \\-->
                         <div class="widget_title mt-4"><h2>물품 나눔 신청서</h2></div>
                        
-                        <div class="charity-volunteer-form">
-                           <form>
+                        <div class="charity-volunteer-form"> <!-- .charity-volunteer-form > form > ul > li > #text-calendar -->
+                           <form name="sendForm" method="post" action="formAction">
+                           <input type="hidden" name="member_id" value="${memberInfo.member_id}">
                                 <ul>
                                     <li>
                                         <label>아이디(Email): </label>
@@ -267,18 +289,18 @@
                                         <label>연락처:</label>
                                         <input type="text" value="${memberInfo.phone}" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }"></li>
                                    
-                                    <li >
+                                    <li>
                                         <label>신청 날짜:</label>    
-                                        <div class="chrity-full-form"><!-- class="charity-select-date" -->
-                                      <!--   Date1_current:<input type="date" id="currentDate" name="idntdate"> -->
-                                      <!--   Date2_ui: <input type="date" id="datepicker" name="idntdate"> -->
-                                      <input type="text" id="text-calendar" class="calendar" />
-                                    	</div>
+                                        <!-- <div class="chrity-full-form"> --><!-- class="charity-select-date" -->
+	                                   		<!--   Date1_current:<input type="date" id="currentDate" name="idntdate"> -->
+	                                   		<!--   Date2_ui: <input type="date" id="datepicker" name="idntdate"> -->
+                                  			<input class="chrity-full-form" type="text" id="datepicker1" class="calendar" />
+                                    	<!-- </div> -->
                                     </li>
                                     
                                     <li class="charity-select-form">
                                         <label>믈품선택:</label>
-                                        <div class="charity-select-two">
+                                        <div class="charity-select-two"> 
                                             <select name="icat_num">
                                                 <option value="">물품 종류 선택</option>
                                                 <option value="1">마스크</option>
@@ -287,20 +309,20 @@
                                                 <option value="4">문구류</option>
                                                 <option value="4">손세정제</option>
                                             </select>
-                                        </div>
+                                         </div> 
                                     </li>
                                     
-                                    <li class="chrity-full-form" id="selectDirect">
-                                    <label>수량선택:</label>
-                                    	<div><input type="text" name="donaamount" disabled /></div>
+                                    <li class="chrity-full-form" >
+                                    	<label>수량선택:</label>
+                                   		<input type="text" name="donaamount" id="selectDirect" disabled />
                                     </li>
                                     <li class="charity-select-form">   
                                         <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 											자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
 											결국 input box에 입력된 값이 form을 넘길 때 수량값으로 넘어가게 된다. -->
-                                      	  <div class="charity-select-two"  >
-											<select id="selectBox" name="amount" onchange="changeSelection()">
-												<option value="0"> 수량선택</option>
+										<div class="charity-select-two"> 
+											<select class="charity-select-two" id="selectBox" name="amount" onchange="changeSelection()">
+												<option value="0"> 물품 수량 선택</option>
 												<option value="9">*직접입력*</option>
 												<option value="10">10</option>
 												<option value="20">20</option>
@@ -309,7 +331,7 @@
 												<option value="50">50</option>
 												<option value="100">100</option>
 											</select>
-                                        </div>
+										</div>
                                     </li>
                                     
                                 </ul>
@@ -363,6 +385,7 @@
                             </ul>
                         </div>
                         <!-- Widget Archive -->
+                        
                         <!-- Widget Event -->
                         <div class="widget widget_events">
                             <div class="widget_title"><h2>Upcoming Events</h2></div>
