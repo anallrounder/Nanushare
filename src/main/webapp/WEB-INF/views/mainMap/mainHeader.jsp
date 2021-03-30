@@ -22,17 +22,20 @@
      
         <!-- Top Strip -->
         <div class="charity-top-strip">
-        <aside><a href="${pageContext.request.contextPath}/main" class="charity-logo" style="width:200px;height:100px; margin: 0px 0px 0px 20px;"><img src="/resources/nanulogo.png" alt=""></a></aside>
-            <div class="container">
+            <div class="container-fluid px-0">
                 <div class="row">
-                    <aside class="col-12">
+                 <div class="col-3">
+                 	<a href="${pageContext.request.contextPath}/main" class="charity-logo" style="width:200px;height:100px; margin: 0px 0px 0px 20px;"><img src="/resources/nanulogo.png" alt=""></a>
+                 </div>
+                 
+                 <div class="col-6">
                         <div class="float-center">
                             <a href="#menu" class="menu-link active"><span></span></a>
                             <nav id="menu" class="menu charity-navigation">
                             
                                 <ul>
                                     <!-- <li class="active"><a href="index.html">Home</a></li> -->
-                                    <li style="padding: 0px 40px 0px 70px"><a href="${pageContext.request.contextPath}/menu/about" style="font-size: 20px;">나누셰어란?</a>
+                                    <li style="padding: 0px 40px 0px 50px"><a href="${pageContext.request.contextPath}/menu/about" style="font-size: 20px;">나누셰어란?</a>
                                         <ul class="children">
                                             <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
                                             <li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
@@ -98,34 +101,73 @@
                          <!--    </ul> -->
                             
                           </div>
-                    </aside>
-                    
-                 
-               
+                    </div>
+                    <div class="col-3">
+                    <div class="charity-logo">
+		             <!-- all 버튼 header -->
+		           <sec:authorize access="isAnonymous()"> 
+		            
+		            	<a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" style="width:90px;height:40px; white-space: nowrap; padding: 13px 0px 0px 20px; margin: -10px -310px 0px 0px;">로그인</a>
+						<a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor" style="width:90px;height:40px; white-space: nowrap; padding: 13px 10px 0px 15px; margin: -10px -420px 0px 0px;">회원가입</a>
+				   
+				 </sec:authorize>
+				
+				
+				 <!-- 로그인됐을때 버튼 header -->
+				<sec:authorize access="hasRole('USER')">
+					<c:forEach items="${username}" var="username">
+	                   <a href="#" style="white-space: nowrap; margin: 0px 450px 0px 100px; color: #ffffff; font-size: 16px; float: right;">${username}님</a>
+	                </c:forEach> 
+					<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor" style="width:90px; height:40px; white-space: nowrap; padding: 12px 0px 0px 7px; margin: -35px 300px 0px 0px;">마이페이지</a>
+
+					<form action="/member/logout" method="post" id="mlogout">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+						<a href="#"
+							class="charity-strip-btn charity-bgcolor"
+							onclick="document.getElementById('mlogout').submit();"
+							style="width: 90px; height: 40px; white-space: nowrap; padding: 13px 0px 0px 15px; margin: -35px -200px 0px 0px;">로그아웃</a>
+					</form>
+				</sec:authorize>
+							
+				<!-- 관리자 버튼 header -->			
+				<sec:authorize access="hasRole('ADMIN')"> 
+						
+					<c:forEach items="${username}" var="username">
+                    	<p style="white-space: nowrap;  margin: 0px 450px 0px 100px; color: #ffffff; font-size: 16px; float: right;">${username}님</p>
+                    </c:forEach> 
+					<a href="${pageContext.request.contextPath}/admin/Donation" class="charity-strip-btn charity-bgcolor" style="width:95px;height:40px; white-space: nowrap; padding: 12px 0px 0px 3px; margin: -35px 300px 0px 0px;">관리자페이지</a>
+					<form action="/member/logout" method="post" id="mlogout">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<a
+							href="#"
+							class="charity-strip-btn charity-bgcolor"
+							onclick="document.getElementById('mlogout').submit();"
+							style="width: 90px; height: 40px; white-space: nowrap; padding: 13px 0px 0px 15px; margin: -35px -200px 0px 0px;">로그아웃</a>
+						
+					</form>
+				</sec:authorize>
+				</span>
+			</div>
+               </div>
                 </div>
             </div>
             
-            <aside class="col-12"> 
-                        <ul class="charity-header-options"> 
-                         <!--  <ul class="charity-social-network">
-                              <li><a href="#" class="fab fa-facebook-f"></a></li>
-                              <li><a href="#" class="fab fa-google"></a></li>
-                              <li><a href="#" class="fab fa-pinterest-p"></a></li>
-                              <li><a href="#" class="fab fa-linkedin-in"></a></li>
-                              <li><a href="#" class="fab fa-twitter"></a></li>
-                          </ul>  -->
-                          
+          <!--   <aside class="col-12"> 
+                        <ul class="charity-header-options">  -->
                           <!-- all 버튼 header -->
-                          <sec:authorize access="isAnonymous()"> 	
+                        <%--   <sec:authorize access="isAnonymous()"> 	
                         
                           <li><a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 13px 0px 0px 3px; margin: -90px 0px 0px 0px;">로그인</a></li>
                           <li><a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 13px 0px 0px 0px; margin: -90px 0px 0px 0px;">회원가입</a></li>
                          </sec:authorize>
-                         
+                          --%>
                          
                          <!-- 로그인됐을때 버튼 header -->
-                         <sec:authorize access="hasRole('USER')"> 
-                          	<li><p style="white-space: nowrap; margin: -85px 10px 0px 0px; color: #ffffff; font-size: 16px">***님</p></li>
+                       <%--   <sec:authorize access="hasRole('USER')">
+                        
+				             <c:forEach items="${username}" var="username">
+                          	<li><p style="white-space: nowrap; margin: -85px 10px 0px 0px; color: #ffffff; font-size: 16px">${username}님</p></li>
+                          	</c:forEach> 
 							<li><a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 12px 0px 0px 6px; margin: -90px 0px 0px 0px;">마이페이지</a></li>
 							
 							<li><form action="/member/logout" method="post" id="mlogout">
@@ -137,13 +179,16 @@
 									style="width: 70px; height: 40px; white-space: nowrap; padding: 13px 0px 0px 0px; margin: -90px 0px 0px 0px;">로그아웃</a>
 						
 							</form></li>
-						</sec:authorize>
+						</sec:authorize> --%>
 						
 							<!-- 관리자 버튼 header -->
-						<sec:authorize access="hasRole('ADMIN')"> 
-							<li><p style="white-space: nowrap; margin: -85px 10px 0px 0px; color: #ffffff; font-size: 16px">***님</p></li>
+						<%-- <sec:authorize access="hasRole('ADMIN')"> 
+						
+						<c:forEach items="${username}" var="username">
+                          	<li><p style="white-space: nowrap; margin: -85px 10px 0px 0px; color: #ffffff; font-size: 16px">${username}님</p></li>
+                          	</c:forEach> 
 							<li><a href="${pageContext.request.contextPath}/admin/Donation" class="charity-strip-btn charity-bgcolor" style="width:70px;height:40px; white-space: nowrap; padding: 12px 0px 0px 6px; margin: -90px 0px 0px 0px;">관리자페이지</a></li>
-							<li class="charity-strip-btn charity-bgcolor"><form action="/member/logout" method="post" id="mlogout">
+							<li><form action="/member/logout" method="post" id="mlogout">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 								<a
 									href="#"
@@ -155,7 +200,7 @@
 						</sec:authorize>
                          </ul>
                     </aside>  
-		</div>
+		</div> --%>
         <!-- Top Strip -->
     </header>
     <!-- Header -->
