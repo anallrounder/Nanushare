@@ -28,7 +28,6 @@
 </head>
 
 <body class="home">
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/mainMap/mainview.jsp
     <!-- Header -->
     <header id="charity-header" class="charity-header-one" style="position:relative;z-index:2">
      
@@ -161,9 +160,9 @@
         <!-- Top Strip -->
     </header>
     <!-- Header -->
-=======
+
    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
->>>>>>> daf153897b062a6fb2afa68ad879dca58b210f60:src/main/webapp/WEB-INF/views/mainMap/mainContent.jsp
+
 
     <!-- Banner -->
     <section style="background-color: #222222">
