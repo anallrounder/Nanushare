@@ -20,7 +20,7 @@ public class AdminPageController {
 	@Autowired
 	private AdminPageService adminPgService;
 	
-	@GetMapping("/Donation")
+	@GetMapping("/donation")
 	public ModelAndView adminDM(ModelAndView mov, MemberVO member, Criteria cri) {
 		
 		mov.setViewName("admin/admin_main");

@@ -25,10 +25,17 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 	private NanuDonationMapper ndmapper;
 
 	// 물품신청서 회원 정보 불러오기
-	@Override
+	/*@Override
 	public MemberVO getMember(String member_id) {
 		log.info("service---getMember ------호출");
 		return ndmapper.readMember(member_id);
+	}
+	*/
+
+	@Override
+	public List<MemberVO> getMember() {
+		log.info("service---getMember ------호출");
+		return  ndmapper.readMember();
 	}
 
 	// 물품신청서 테이블에 저장
@@ -66,6 +73,7 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 		log.info("service---donatePoint ------호출");
 		ndmapper.donatePoint(pvo);
 	}
+
 
 	
 
