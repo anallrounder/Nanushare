@@ -85,8 +85,17 @@ jQuery(document).ready(function($) {  //https://programmer93.tistory.com/34
         return false;
     });
     
-    // 나눔함 안내 메뉴 탭 누르면 map위치로 스크롤
+    // 나눔함 안내 메뉴 탭 누르면 map위치로 스크롤(main 탭)
      jQuery('.mainMap-top').on("click", function() {
+     	
+        jQuery('html, body').animate({
+            scrollTop: $('.charity-event-map').offset().top
+        }, 600);
+        return false;
+    });
+    
+     // 나눔함 안내 메뉴 탭 누르면 map위치로 스크롤(footer 나눔함 링크)
+     jQuery('.footerMap').on("click", function() {
      	
         jQuery('html, body').animate({
             scrollTop: $('.charity-event-map').offset().top

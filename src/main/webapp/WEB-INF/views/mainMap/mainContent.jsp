@@ -53,7 +53,7 @@ li {
 								<div class="charity-banner-caption align-left-caption">
 									<div class="container">
 										<h1>
-											<span class="charity-color ">함께할수록 </span><br>커지는 기쁨
+											<span class="charity-color">함께할수록 </span><br>커지는 기쁨
 										</h1>
 										<div class="clearfix"></div>
 										<p>
