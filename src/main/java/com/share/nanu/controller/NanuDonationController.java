@@ -46,12 +46,14 @@ public class NanuDonationController {
 	*/
 	
 	// 물품 신청서 작성 페이지 itemForm.jsp -> 로그인 사용자용
+	
 	@GetMapping("/item/form") 
 	public String itemForm(MemberVO mvo, Model model) throws Exception {
 		log.debug("controller -- itemForm -- 호출");
-		model.addAttribute("memberInfo", ndservice.getMember());
+		model.addAttribute("list1", ndservice.getMember());
 		return "donation/itemForm";
 	}
+	
 	
 	// 물품 나눔 후 정보 디비입력 + 수정 테이블에 따로따로 입력해야함 
 	@PostMapping("/item/formAction")

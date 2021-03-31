@@ -14,7 +14,7 @@ import com.share.nanu.VO.PointVO;
 public interface NanuDonationMapper {
 	
 	/* 물품 기부 */
-	public List<MemberVO> readMember();// 물품신청서 회원 정보 불러오기 - 로그인
+	public List<MemberVO> readMember();// 물품신청서 회원 정보 불러오기 - 로그인 사용자 용 test중
 	
 	public MemberVO readMember(String member_id); // 물품신청서 회원 정보 불러오기
 	public void saveForm(ItemdonationVO idvo); // 물품신청서 디비 입력
