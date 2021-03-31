@@ -183,7 +183,7 @@
 		                                </div>
 		                                <div class="charity-item-text">
 		                                   <h6>손 세정제: </h6>
-		                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus felis ut ullamc entum. Ut imperdiet lobortis ex.</p>
+		                                   <p>코로나19 감염 확산에 따른 국가적 재난 극복에 동참하고, 지역 주민들의 어려움을 함께 나누기 위해 </p>
 		                                </div>
 									</li>
 								</ul>
