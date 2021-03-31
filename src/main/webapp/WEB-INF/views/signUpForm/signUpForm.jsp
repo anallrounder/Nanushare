@@ -90,13 +90,14 @@
                     type: "POST",
                     url: $(this).attr("action"),
                     cache: false,
+                    dataType : text,
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify(memberJoin),
                     success: function(result) {
                         console.log(result);
                         if (result == "SUCCESS") {
                             console.log("success");
-                            $(location).attr('href', "${pageContext.request.contextPath}/loginPage");
+                           // $(location).attr('href', "${pageContext.request.contextPath}/loginPage");
 
                         }
                     },

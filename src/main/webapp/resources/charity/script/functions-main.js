@@ -1,20 +1,22 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {  //https://programmer93.tistory.com/34
 
     // Banner Slider Function
     $('.charity-banner').slick({
-      dots: false,
-      infinite: true,
-      prevArrow: "<span class='slick-arrow-left'><i class='fa fa-angle-left'></i></span>",
-      nextArrow: "<span class='slick-arrow-right'><i class='fa fa-angle-right'></i></span>",
-      speed: 1000,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      responsive: [
+      dots: true, //스크롤바 아래 점으로 페이지네이션 여부
+      infinite: true, //무한반복 옵션
+      prevArrow: "<span class='slick-arrow-left'><i class='fa fa-angle-left'></i></span>", //이전화살표 모양 설정
+      nextArrow: "<span class='slick-arrow-right'><i class='fa fa-angle-right'></i></span>", //다음화살표 모양 설정
+      speed: 1000, //다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간
+      autoplay: true, //자동 스크롤 사용 여부 
+      autoplaySpeed: 2000, //자동 스크롤시 다음으로 넘어가는데 걸리는 시간
+      slidesToShow: 1, //한 화면에 보여질 컨텐츠 개수
+      slidesToScroll: 1, //스크롤 한번에 움직일 컨텐츠 개수
+      dotClass: "slick-dots", //아래 나오는 페이지네이션(점) css class 지정
+      
+      responsive: [ //반응형 웹 구현
         {
-          breakpoint: 1024,
-          settings: {
+          	breakpoint: 1024, //화면 사이즈 1024px
+          	settings: { //위에 옵션이 디폴트, 여기에 추가하면 추가되는걸로 변경
             slidesToShow: 1,
             slidesToScroll: 1,
             infinite: true,
@@ -82,6 +84,27 @@ jQuery(document).ready(function($) {
         }, 800);
         return false;
     });
+    
+        // 나눔함 안내 메뉴 탭 누르면 map위치로 스크롤(main 탭)
+     jQuery('.mainMap-top').on("click", function() {
+         
+        jQuery('html, body').animate({
+            scrollTop: $('.charity-event-map').offset().top
+        }, 600);
+        return false;
+    });
+    
+     // 나눔함 안내 메뉴 탭 누르면 map위치로 스크롤(footer 나눔함 링크)
+     jQuery('.footerMap').on("click", function() {
+         
+        jQuery('html, body').animate({
+            scrollTop: $('.charity-event-map').offset().top
+        }, 600);
+        return false;
+    });
+    
+    
+    
     //***************************
     // Countdown Function
     //***************************

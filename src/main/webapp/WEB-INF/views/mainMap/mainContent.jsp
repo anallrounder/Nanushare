@@ -25,110 +25,135 @@
     <link rel="stylesheet" href="/resources/charity/css/color.css">
     <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+<style>
+li {
+	list-style: none;
+}
+</style>
+
 </head>
 
 <body class="home">
-<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 
     <!-- Banner -->
     <section style="background-color: #222222">
-    <div class="container-fluid px-0 ">  <!-- <div class="container-fluid px-0"> 은 왼쪽여백 아예 없게 하는것-->
-	    <div class="row" >
-		   <aside class="col-9">
-			    <div class="charity-banner" style="overflow: hidden;zoom: 1;position:relative;z-index:1">
-			        
-			        <div class="charity-banner-layer" >
-			            <span class="charity-banner-transparent"></span>
-			           <img src="/resources/picture/donation.jpg" alt="">
-			            <div class="charity-banner-caption align-left-caption">
-			                <div class="container">
-			                    <h1><span class="charity-color ">함께할수록 </span><br>커지는 기쁨 </h1>
-			                    <div class="clearfix"></div>
-			                    <p>같이할수록 커지는 가치 <br>함께하실래요?</p>
-			                    <div class="clearfix"></div>
-			                   <!--  <a href="#">Learn More</a> -->
-			                    <a href="#">Donate Now</a>
-			                </div>
-			            </div>
-			        </div>
-			    
-			        
-			        <div class="charity-banner-layer">
-			            <span class="charity-banner-transparent"></span>
-			            <img src="/resources/picture/love.jpg" alt="" height="auto">
-			            <div class="charity-banner-caption align-left-caption">
-			                <div class="container">
-			                    <h1>세상을 바꾸는<span class="charity-color"><br>따뜻한 온기</span></h1>
-			                    <div class="clearfix"></div>
-			                    <p>여러분의 작은 관심과 따뜻한 온기가 누군가에게는 <br>따뜻한 희망이 됩니다</p>
-			                    <div class="clearfix"></div>
-			                   <!--  <a href="#">Learn More</a> -->
-			                    <a href="#">Donate Now</a>
-			                </div>
-			            </div>
-			        </div>
-			        <div class="charity-banner-layer">
-			            <span class="charity-banner-transparent"></span>
-			            <img src="/resources/picture/mask.jpg" alt="">
-			            <div class="charity-banner-caption align-left-caption">
-			                <div class="container">
-			                    <h1>누군가에게 도움이 된다는<span class="charity-color"><br>작은 행복</span></h1>
-			                    <div class="clearfix"></div>
-			                    <p>큰 돈을 기부하지않아도 많은 물건을 주지 않아도 <br> 누군가에게 도움이 된다는 일이 행복한 일임을 새삼 알았습니다</p>
-			                    <div class="clearfix"></div>
-			                    <a href="#">Learn More</a>
-			                    <a href="#">Donate Now</a>
-			                </div>
-			            </div>
-			        </div>
-			        <div class="charity-banner-layer">
-			            <span class="charity-banner-transparent"></span>
-			            <img src="/resources/picture/smile.jpg" alt="">
-			            <div class="charity-banner-caption align-left-caption">
-			                <div class="container">
-			                    <h1>나누셰어의 <span class="charity-color"><br>선한 바람 </span></h1>
-			                    <div class="clearfix"></div>
-			                    <p>다른 후원사이트에 비해서 나누셰어는 정말 믿을 수 있는 것 같아요</p>
-			                    <div class="clearfix"></div>
-			                    <a href="#">Learn More</a>
-			                    <a href="#">Donate Now</a>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			    
-		    </aside>
-		    		<aside class="col-3">
-						<div class="row" >
-						   <div class="charity-main-section charity_counter_full" style="left: -20px; height: 563px;">
-					            
-					            <span class="black-transparent"  style="/* background-color: white;  */ border: 1px solid white;">
-					           	 <div class="container">
-					                <div class="row">
-					                    <div class="col-md-12">
-							             <ul class="nav nav-pills" role="tablist" style="font-size: 16px; padding-left: 60px;">
-							            	 
-										    <li class="nav-item">
-										      <a class="nav-link active" data-toggle="pill" href="#day">Day</a>
-										    </li>
-										    <li class="nav-item">
-										      <a class="nav-link" data-toggle="pill" href="#week">Week</a>
-										    </li>
-										    <li class="nav-item">
-										      <a class="nav-link" data-toggle="pill" href="#month">Month</a>
-										    </li>
-										    <li class="nav-item">
-										      <a class="nav-link" data-toggle="pill" href="#years">Year</a>
-										    </li>
-										  </ul>
-									</div>	  
-										    <!-- Tab panes -->
-										  <div class="col-md-12">
-										  <div class="tab-content">
-										    <div id="day" class="container tab-pane active">
-										      <div class="charity-counter" id="counter">
-					                         <!-- 1안: 수직! -->
-					                            <!-- <ul class="row" > style="transform: translateY(30px);
+        <div class="container-fluid px-0 ">
+            <!-- <div class="container-fluid px-0"> 은 왼쪽여백 아예 없게 하는것-->
+            <div class="row">
+                <div class="col-9">
+                    <div class="float-center">
+                        <div class="charity-banner"
+                            style="overflow: hidden; zoom: 1; position: relative; z-index: 1">
+
+                            <div class="charity-banner-layer">
+                                <span class="charity-banner-transparent"></span> <img
+                                    src="/resources/picture/donation.jpg" alt="">
+                                <div class="charity-banner-caption align-left-caption">
+                                    <div class="container">
+                                        <h1>
+                                            <span class="charity-color">함께할수록 </span><br>커지는 기쁨
+                                        </h1>
+                                        <div class="clearfix"></div>
+                                        <p>
+                                            같이할수록 커지는 가치 <br>함께하실래요?
+                                        </p>
+                                        <div class="clearfix"></div>
+                                        <!--  <a href="#">Learn More</a> -->
+                                        <a href="#">Donate Now</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="charity-banner-layer">
+                                <span class="charity-banner-transparent"></span> <img
+                                    src="/resources/picture/love.jpg" alt="" height="auto">
+                                <div class="charity-banner-caption align-left-caption">
+                                    <div class="container">
+                                        <h1>
+                                            세상을 바꾸는<span class="charity-color"><br>따뜻한 온기</span>
+                                        </h1>
+                                        <div class="clearfix"></div>
+                                        <p>
+                                            여러분의 작은 관심과 따뜻한 온기가 누군가에게는 <br>따뜻한 희망이 됩니다
+                                        </p>
+                                        <div class="clearfix"></div>
+                                        <!--  <a href="#">Learn More</a> -->
+                                        <a href="#">Donate Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="charity-banner-layer">
+                                <span class="charity-banner-transparent"></span> <img
+                                    src="/resources/picture/mask.jpg" alt="">
+                                <div class="charity-banner-caption align-left-caption">
+                                    <div class="container">
+                                        <h1>
+                                            누군가에게 도움이 된다는<span class="charity-color"><br>작은
+                                                행복</span>
+                                        </h1>
+                                        <div class="clearfix"></div>
+                                        <p>
+                                            큰 돈을 기부하지않아도 많은 물건을 주지 않아도 <br> 누군가에게 도움이 된다는 일이 행복한 일임을
+                                            새삼 알았습니다
+                                        </p>
+                                        <div class="clearfix"></div>
+                                        <a href="#">Learn More</a> <a href="#">Donate Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="charity-banner-layer">
+                                <span class="charity-banner-transparent"></span> <img
+                                    src="/resources/picture/smile.jpg" alt="">
+                                <div class="charity-banner-caption align-left-caption">
+                                    <div class="container">
+                                        <h1>
+                                            나누셰어의 <span class="charity-color"><br>선한 바람 </span>
+                                        </h1>
+                                        <div class="clearfix"></div>
+                                        <p>다른 후원사이트에 비해서 나누셰어는 정말 믿을 수 있는 것 같아요</p>
+                                        <div class="clearfix"></div>
+                                        <a href="#">Learn More</a> <a href="#">Donate Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="float-center">
+
+                        <div class="charity-main-section charity_counter_full" style="left: -20px; height: 563px;">
+                            <span class="black-transparent" style="border: 1px solid white;">
+                                <br>
+                                <ul class="nav nav-pills" role="tablist" style="font-size: 16px; padding-left: 100px;">
+
+                                    <li class="nav-item"><a class="nav-link active"
+                                        data-toggle="pill" href="#day"><p class="text-white">Day</p></a>
+                                    </li>
+
+                                    <li class="nav-item"><a class="nav-link"
+                                        data-toggle="pill" href="#week"><p class="text-white">Week</p></a>
+                                    </li>
+
+                                    <li class="nav-item"><a class="nav-link"
+                                        data-toggle="pill" href="#month"><p class="text-white">Month</p></a>
+                                    </li>
+
+                                    <li class="nav-item"><a class="nav-link"
+                                        data-toggle="pill" href="#years"><p class="text-white">Year</p></a>
+                                    </li>
+
+                                </ul> <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="day" class="container tab-pane active">
+                                        <div class="charity-counter" id="counter">
+                                            <!-- 1안: 수직! -->
+                                            <!-- <ul class="row" > style="transform: translateY(30px);
 					                                <li> class="bar-move" style=" " 
 					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 20px; top: 180px; left: 255px;"></i>transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear;
 					                                    <i class="counter-value" data-count="3250" style="content: none; top: 250px; left: 150px; color: white;">0</i>
@@ -154,110 +179,153 @@
 					                                </li>
 					                        	</ul> -->
 					                        	
-					                        	<!-- 2. 수평! -->
-					                        	<ul> <!-- style="transform: translateY(30px); -->
-					                        		<c:forEach var="result" items="${daymoney}">
-	 													<c:set var="total" value= "${total + result.dntprice}"/>
-	 												</c:forEach>
-						                                <li> <!-- class="bar-move" style=" "  -->
-						                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px;"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-						                                    <i class="counter-value" data-count="${total}" style="content: none; top: 125px; left: -15px; color: white;"></i>
-						                                    <!-- <small>Donators</small> -->
-						                                </li>
-						                        
-						                                <li>
-						                                	<div class="charity-donation-parallex" >
-							                            	<div class="clearfix"></div>
-							                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
-								                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
+					                        <!-- 2. 수평! -->
+                                            <ul>
+                                                <!-- style="transform: translateY(30px); -->
+                                                <c:forEach var="result" items="${daymoney}">
+                                                    <c:set var="total" value="${total + result.dntprice}" />
+                                                </c:forEach>
+                                                <li>
+                                                    <!-- class="bar-move" style=" "  --> <i
+                                                    class="icon-donation2 charity-bgcolor"
+                                                    style="font-size: 25px; top: 55px; left: 65px;"></i> <!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
+                                                    <i class="counter-value" data-count="${total}"
+                                                    style="content: none; top: 125px; left: -15px; color: white;"></i>
+                                                    <!-- <small>Donators</small> -->
+                                                </li>
+
+                                                <li>
+                                                    <div class="charity-donation-parallex">
+                                                        <div class="clearfix"></div>
+                                                        <div class="charity-causestrip-section"
+                                                            style="padding-top: 80px; margin-left: 60px;">
+                                                            <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
 								                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
-								                                <div data-width= '80' class="charity-cause-progressbar"></div>
-							                           		</div>
-							                            	<div class="clearfix"></div>
-							                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
-							                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-							                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"오늘의 기부액 :
-							                        			<c:choose>
-							                        				<c:when test="${total > 0}">
-							                        					<c:out value="${total}"></c:out>
-							                        				</c:when>
-							                        				<c:otherwise>
-							                        					<c:out value="0"></c:out>
-							                        				</c:otherwise>
-							                        			</c:choose>"</span>
-							                        		</div>
-						                                </li>
-						                               
-					                        	</ul>
-											</div>
-										      
-										    </div>
-										    <div id="week" class="container tab-pane fade">
-										        <div class="charity-counter" id="counter">
-										        <ul> <!-- style="transform: translateY(30px); -->
-					                                <li> <!-- class="bar-move" style=" "  -->
-					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-					                                    <i class="counter-value" data-count="100500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
-					                                    <!-- <small>Donators</small> -->
-					                                </li>
-					                        
-					                                <li>
-					                                	<div class="charity-donation-parallex" >
-						                            	<div class="clearfix"></div>
-						                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
-							                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
+								                                
+								                                
+								                                
+								                                
+								                                                                                            <div data-width='80' class="charity-cause-progressbar"></div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
+                                                        <span class="charity-center-section"
+                                                            style="font-size: 50px; visibility: hidden;">오늘의
+                                                            온기: 3250₩</span> <span class="charity-color"
+                                                            style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"오늘의
+                                                            기부액 : <c:choose>
+                                                                <c:when test="${total > 0}">
+                                                                    <c:out value="${total}"></c:out>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <c:out value="0"></c:out>
+                                                                </c:otherwise>
+                                                            </c:choose>"
+                                                        </span>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div id="week" class="container tab-pane fade">
+                                        <div class="charity-counter" id="counter">
+                                            <ul>
+                                                <!-- style="transform: translateY(30px); -->
+                                                <li>
+                                                    <!-- class="bar-move" style=" "  --> <i
+                                                    class="icon-donation2 charity-bgcolor"
+                                                    style="font-size: 25px; top: 55px; left: 65px"></i> <!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
+                                                    <i class="counter-value" data-count="100500"
+                                                    style="content: none; top: 125px; left: -15px; color: white;">0</i>
+                                                    <!-- <small>Donators</small> -->
+                                                </li>
+
+                                                <li>
+                                                    <div class="charity-donation-parallex">
+                                                        <div class="clearfix"></div>
+                                                        <div class="charity-causestrip-section"
+                                                            style="padding-top: 80px; margin-left: 60px;">
+                                                            <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
+							                                
+							                                
+							                                
 							                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
-							                                <div data-width= "${total}" class="charity-cause-progressbar"></div>
-						                           		</div>
-						                            	<div class="clearfix"></div>
-						                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
-						                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-						                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"이번주 기부액 : 100500"</span>
-						                        		</div>
-					                                </li>
-					                        	</ul>
-											</div>
-										    </div>
-										    <div id="month" class="container tab-pane fade">
-										       <div class="charity-counter" id="counter">
-										        <ul> <!-- style="transform: translateY(30px); -->
-					                                <li> <!-- class="bar-move" style=" "  -->
-					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-					                                    <i class="counter-value" data-count="500500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
-					                                    <!-- <small>Donators</small> -->
-					                                </li>
-					                        
-					                                <li>
-					                                	<div class="charity-donation-parallex" >
-						                            	<div class="clearfix"></div>
-						                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
-							                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
+							                              
+							                              
+							                              
+							                                                                                           <div data-width="${total}"
+                                                                class="charity-cause-progressbar"></div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
+                                                        <span class="charity-center-section"
+                                                            style="font-size: 50px; visibility: hidden;">오늘의
+                                                            온기: 3250₩</span> <span class="charity-color"
+                                                            style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"이번주
+                                                            기부액 : 100500"</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="month" class="container tab-pane fade">
+                                        <div class="charity-counter" id="counter">
+                                            <ul>
+                                                <!-- style="transform: translateY(30px); -->
+                                                <li>
+                                                    <!-- class="bar-move" style=" "  --> <i
+                                                    class="icon-donation2 charity-bgcolor"
+                                                    style="font-size: 25px; top: 55px; left: 65px"></i> <!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
+                                                    <i class="counter-value" data-count="500500"
+                                                    style="content: none; top: 125px; left: -15px; color: white;">0</i>
+                                                    <!-- <small>Donators</small> -->
+                                                </li>
+
+                                                <li>
+                                                    <div class="charity-donation-parallex">
+                                                        <div class="clearfix"></div>
+                                                        <div class="charity-causestrip-section"
+                                                            style="padding-top: 80px; margin-left: 60px;">
+                                                            <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
 							                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
-							                                <div data-width= '80' class="charity-cause-progressbar"></div>
-						                           		</div>
-						                            	<div class="clearfix"></div>
-						                          		 <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
-						                        		<span class="charity-center-section" style="font-size: 50px; visibility: hidden;">오늘의 온기: 3250₩</span>
-						                        		<span class="charity-color" style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"이번달 기부액 : 500500"</span>
-						                        		</div>
-						                        		
-					                                </li>
-					                        	</ul>
-											</div>
-										  </div>
-										  <div id="years" class="container tab-pane fade">
-										       <div class="charity-counter" id="counter">
-										        <ul> <!-- style="transform: translateY(30px); -->
-					                                <li> <!-- class="bar-move" style=" "  -->
-					                                    <i class="icon-donation2 charity-bgcolor" style="font-size: 25px; top: 55px; left: 65px"></i><!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
-					                                    <i class="counter-value" data-count="1500500" style="content: none; top: 125px; left: -15px; color: white;">0</i>
-					                                    <!-- <small>Donators</small> -->
-					                                </li>
-					                        
-					                                <li>
-					                                	<div class="charity-donation-parallex" >
-						                            	<div class="clearfix"></div>
-						                            	<div class="charity-causestrip-section"  style="padding-top: 80px; margin-left: 60px;">
+							                                
+							                                
+							                                                                                           <div data-width='80' class="charity-cause-progressbar"></div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <!--  <a href="#" class="charity-donation-parallex-btn" style="position: absolute; top: 350px; left: 120px;">Make Donation</a> -->
+                                                        <span class="charity-center-section"
+                                                            style="font-size: 50px; visibility: hidden;">오늘의
+                                                            온기: 3250₩</span> <span class="charity-color"
+                                                            style="font-size: 25px; margin-left: 60px; margin-top: -70px;">"이번달
+                                                            기부액 : 500500"</span>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="years" class="container tab-pane fade">
+                                        <div class="charity-counter" id="counter">
+                                            <ul>
+                                                <!-- style="transform: translateY(30px); -->
+                                                <li>
+                                                    <!-- class="bar-move" style=" "  --> <i
+                                                    class="icon-donation2 charity-bgcolor"
+                                                    style="font-size: 25px; top: 55px; left: 65px"></i> <!-- transform: translateY(150px); transition-duration: 2s; transition-timing-function: linear; -->
+                                                    <i class="counter-value" data-count="1500500"
+                                                    style="content: none; top: 125px; left: -15px; color: white;">0</i>
+                                                    <!-- <small>Donators</small> -->
+                                                </li>
+
+                                                <li>
+                                                    <div class="charity-donation-parallex">
+                                                        <div class="clearfix"></div>
+                                                        <div class="charity-causestrip-section"
+                                                            style="padding-top: 80px; margin-left: 60px;">
+							                              
 							                              <!--   <span class="charity-left-section">Raised: <small>3250₩</small></span>
 							                                <span class="charity-right-section">Goal: <small>5000₩</small></span> -->
 							                                <div data-width= '80' class="charity-cause-progressbar"></div>
@@ -273,15 +341,12 @@
 											</div>
 										  </div>
 					                </div>
+					                </span>
 					             </div>
 								</div>
 							</div>
-							</span>
+							</div>
 		    			</div>
-		    		</div>
-		    		</aside>
-				</div>
-			</div>
 	</section>
 	<!-- Banner -->
 	
@@ -377,7 +442,7 @@
                      
                         <!-- Widget Archive -->
                         <div class="widget widget_archive">
-                            <div class="widget_title"><h2>Calender Archives</h2></div>
+                            <div class="widget_title"><h2>Current ShareBox</h2></div>
                             <c:forEach items="${mapvm}" var="cat">
                             <span style="font-size: 18px;" class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
                             	<i class="fa fa-map-marker-alt"></i>&nbsp; ${cat.branch}</span><br><br>
@@ -393,22 +458,22 @@
                                 <li>
                                     <time datetime="2008-02-14 20:00">22 Jun</time>
                                     <div class="charity-events">
-                                       <h6><a href="event-detail.html">강남역점</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 서울 서초구 서초동 1318-10</a>
+                                       <h6>강남역점</h6>
+                                       <p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 서초구 서초동 1318-10</p>
                                     </div>
                                 </li>
                                 <li>
                                     <time datetime="2008-02-14 20:00">13 July</time>
                                     <div class="charity-events">
-                                       <h6><a href="event-detail.html">용산역점</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 서울 용산구 한강대로 23길 55</a>
+                                       <h6>용산역점</h6>
+                                       <p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 용산구 한강대로 23길 55</p>
                                     </div>
                                 </li>
                                 <li>
                                     <time datetime="2008-02-14 20:00">20 July</time>
                                     <div class="charity-events">
-                                       <h6><a href="event-detail.html">시청역점</a></h6>
-                                       <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 서울 중구 태평로 1가 54-3</a>
+                                       <h6>시청역점</h6>
+                                      <p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 중구 태평로 1가 54-3</p>
                                     </div>
                                 </li>
                              </ul>
