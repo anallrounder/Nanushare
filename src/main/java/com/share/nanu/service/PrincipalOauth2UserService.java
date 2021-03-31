@@ -62,6 +62,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			mvo.setPw(userInfo.getProvider() + "_" + userInfo.getProviderId()); // 비밀번호를 임의로 provider+providerId 로 생성
 			mvo.setSignuppath(userInfo.getProvider());
 			mvo.setName(userInfo.getName());
+			mvo.setSubemail("unknown");
 			/*
 			 * mvo.setGender(userInfo.getGender()); mvo.setPhone(userInfo.getMobile());
 			 * mvo.setBirth(Date.valueOf(userInfo.getBirthyear() + "-" +
