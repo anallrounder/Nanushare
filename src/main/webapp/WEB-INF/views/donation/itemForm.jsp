@@ -12,11 +12,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- jquery validation cdn-->
     <!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
-    <!-- jquery validation method cdn -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js">
-   </script>
+    
 	
 	
     <!-- meta tags -->
@@ -390,7 +386,11 @@
                                     <button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/item/main'"><i class="fa fa-arrow-left"> 이전화면으로</i></button><!-- 확인필요 -->
                                 </div>
                             </form>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
+    <!-- jquery validation method cdn -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js">
+   </script>
                             <script>
                                 $("#sendForm").validate({
 
