@@ -51,14 +51,14 @@
                         <div class="charity-footer-title"> <h2>Quick Links</h2> 
                         </div>
                         <ul>
-                            <li><a href="#">나누셰어란</a></li>
-                            <li><a href="#">나눔함 안내</a></li>
-                            <li><a href="#">물품 나누기</a></li>
-                            <li><a href="#">돈기부여하기</a></li>
-                            <li><a href="#">나눔인증</a></li>
-                            <li><a href="#">이벤트</a></li>
-                            <li><a href="#">공지사항</a></li>
-                            <li><a href="#">문의하기</a></li>
+                            <li><a href="${pageContext.request.contextPath}/menu/about">나누셰어란</a></li>
+                            <li class="footerMap"><a href="#">나눔함 안내</a></li>
+                            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
+                            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/shows/list">나눔인증</a></li>
+                            <li><a href="${pageContext.request.contextPath}/event/check">이벤트</a></li>
+                            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
+                            <li><a href="${pageContext.request.contextPath}/restful/qna">문의하기</a></li>
                         </ul>
                     </aside>
                     <aside class="col-md-4 widget widget_recent_news">
