@@ -7,9 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 물품신청서 회원정보 불러오기 _ 아래는 현재 테스트용 쿼리문임 현재 로그인한 회원정보 불러오기로 추후 변경해야함 -->
 	<select id="readMember" resultType="com.share.nanu.VO.MemberVO">
 		<![CDATA[ 
-				select * from member where member_id = 'Ulric@naver.com'
+				select * from member 
 		]]>
 	</select>
+<!-- 	select * from member where member_id = 'Ulric@naver.com' -->
+
 
 	<!-- @Insert("insert into mvc_board (bid, bname, btitle, bcontent, bhit, bgroup, bstep, bindent)
 	values (mvc_board_seq.nextval, #{bname}, #{btitle}, #{bcontent}, 0, mvc_board_seq.currval, 0, 0)") -->

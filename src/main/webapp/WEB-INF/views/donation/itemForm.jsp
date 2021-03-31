@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!doctype html>
 <html lang="en">
@@ -236,6 +237,40 @@
                         </div>
                         <!--// company-timeline \\-->
                         
+                      <!--   희재씨 mypage.jsp 참고 -->
+                      <!-- 로그인한 회원의 글 정보만 받아오기 -->
+					<%-- 	<c:forEach items="${list1}" var="list1">
+							<sec:authentication property="principal" var="pinfo" />
+							<sec:authorize access="isAuthenticated()">
+								<c:if test="${pinfo.username eq list1.member_id}">
+									<tr>
+										<td>${list1.member_id}</td>
+		
+										<td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td>
+										<td>${list1.btitle}</td>
+										<!-- 제목누르면 해당 글내용으로 이동링크 -->
+										<td>${list1.bhit}</td>
+										<td>${list1.bdate}</td>
+		
+									</tr>
+								</c:if>
+							</sec:authorize>
+						</c:forEach> --%>
+						
+					<!-- 수정하기 전 부분 복사 해둠 -->
+                     <%--   <li>
+                           <label>아이디(Email): </label>
+                           <input type="text" value="${memberInfo.member_id}"  readonly >
+                       </li>
+                       <li>
+                           <label>이름:</label>
+                           <input type="text" value="${memberInfo.name}" onblur="if(this.value == '') { this.value ='Enter name*'; }" onfocus="if(this.value =='Enter name*') { this.value = ''; }" readonly>
+                       </li>
+                       <li class="chrity-full-form">
+                           <label>연락처:</label>
+                           <input type="text" value="${memberInfo.phone}" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }">
+                       </li>
+		                          --%> 
                         
                         <!--// volunteer-form \\-->
                         <div class="widget_title mt-4"><h2>물품 나눔 신청서</h2></div>
@@ -245,17 +280,26 @@
                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                            <input type="hidden" name="member_id" value="${memberInfo.member_id}">
                                 <ul class="mt-4">
-                                    <li>
-                                        <label>아이디(Email): </label>
-                                        <input type="text" value="${memberInfo.member_id}"  readonly ></li>
-                                    <li>
-                                        <label>이름:</label>
-                                        <input type="text" value="${memberInfo.name}" onblur="if(this.value == '') { this.value ='Enter name*'; }" onfocus="if(this.value =='Enter name*') { this.value = ''; }" readonly></li>
-                                    
-                                    <li class="chrity-full-form">
-                                        <label>연락처:</label>
-                                        <input type="text" value="${memberInfo.phone}" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }"></li>
-                                   
+									<c:forEach items="${memberInfo}" var="list1">
+									<sec:authentication property="principal" var="minfo" />
+										<sec:authorize access="isAuthenticated()">
+											<c:if test="${minfo.username eq list1.member_id}">
+			                                    <li>
+			                                        <label>아이디(Email): </label>
+			                                        <input type="text" value="${list1.member_id}"  readonly >
+			                                    </li>
+			                                    <li>
+			                                        <label>이름:</label>
+			                                        <input type="text" value="${list1.name}" onblur="if(this.value == '') { this.value ='Enter name*'; }" onfocus="if(this.value =='Enter name*') { this.value = ''; }" readonly>
+			                                   	
+			                                    </li>
+			                                    <li class="chrity-full-form">
+			                                        <label>연락처:</label>
+			                                        <input type="text" value="${list1.phone}" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }">
+			                                    </li>
+		                                    </c:if>
+										</sec:authorize>	
+                                    </c:forEach>
                                     <li>
                                         <label>신청 날짜:</label>    
                                         <div class="chrity-full-form"> <!-- class="charity-select-date" -->
