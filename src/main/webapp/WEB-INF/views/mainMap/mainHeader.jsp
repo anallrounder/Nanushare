@@ -42,7 +42,7 @@
                                         <!--     <li><a href="event-detail.html">Event Detail</a></li> -->
                                         </ul>
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a class="mainMap-top" href="#" style="font-size: 20px; display: scroll;">나눔함 안내</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="#" style="font-size: 20px;">나눔함 안내</a>
                                        <!--  <ul class="children">
                                             <li><a href="cause-list.html">Cause List</a></li>
                                             <li><a href="cause-grid.html">Cause Grid</a></li>
@@ -56,7 +56,7 @@
                                             <!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
                                         </ul>
                                     </li>
-                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/board/shows/list" style="font-size: 20px; ">나눔 인증</a>
+                                    <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/board/shows/list" style="font-size: 20px;">나눔 인증</a>
                                        <!--  <ul class="children">
                                             <li><a href="team-grid.html">Team Grid</a></li>
                                             <li><a href="team-classic.html">Team Classic</a></li>
