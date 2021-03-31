@@ -17,7 +17,7 @@
     
 </head>
 
-<body class="img js-fullheight" style="background-image: url(/resources/loginform/images/bg.jpg);">
+<body class="img js-fullheight" style="background-image: url(/resources/loginform/images/img_2.jpg);">
 
 	  <section class="ftco-section">
         <div class="container">
