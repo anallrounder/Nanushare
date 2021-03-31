@@ -8,12 +8,24 @@
 <html lang="en">
 
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- jquery validation cdn-->
+    <!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
+    <!-- jquery validation method cdn -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js">
+   </script>
+	
+	
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	
 
+	
     <title>물품나눔 신청서</title>
 
     <!-- CSS -->
@@ -26,21 +38,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+    
+    
 
     <!--  date ui test 아마도 안쓸듯.  -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-    <!-- jquery validation cdn-->
-    <!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
-    <!-- jquery validation method cdn -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js">
-    </script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+	
+	
 
     <%-- <sec:csrfMetaTags/> --%>
     <!-- 헤더 안에 추가  -->
@@ -96,10 +104,10 @@
         addLoadEvent(function() {
             autoDate();
         });
-    </script>
+    
 
     <!-- 물품수량 셀렉트 박스에서 직접입력 및 인풋박스에 셀렉트한 수량이 입력되어 넘어가도록 하는 자바스크립트 코드 -->
-    <script type="text/javascript">
+    
         function changeSelection() {
             if (document.sendForm.amount.options[document.sendForm.amount.selectedIndex].value == '0') {
                 document.sendForm.donaamount.disabled = true;
@@ -117,7 +125,7 @@
 
 
 
-        $(document).ready(function() {
+        /* $(document).ready(function() { */
          /*    isCertification = false;
 
             $('#selectBox').validate({
@@ -141,7 +149,7 @@
                 $('#selectDirect').removeAttr('disabled');
             });
 
-        });
+        /* }); */
     </script>
 
 
@@ -275,7 +283,7 @@
                                     </li>
 
                                     <li class="charity-select-form">
-                                        <label for="icat_num">믈품선택:</label>
+                                        <label for="itemSelect">믈품선택:</label>
                                         <div class="charity-select-two">
                                             <select  id="itemSelect" name="icat_num">
                                                 <option value="">물품 종류 선택</option>
@@ -298,10 +306,10 @@
 											결국 input box에 입력된 값이 form을 넘길 때 수량값으로 넘어가게 된다. -->
 
                                     <li class="charity-select-form">
-                                        <label for="amount">(select)</label>
+                                        <label for="selectBox">(select)</label>
                                         <div class="charity-select-two">
                                             <select id="selectBox" name="amount" onchange="changeSelection()">
-                                                <option value="0"> 물품 수량 선택</option>
+                                                <option value=""> 물품 수량 선택</option>
                                                 <option value="9">*직접입력*</option>
                                                 <option value="10">10</option>
                                                 <option value="20">20</option>
@@ -344,8 +352,8 @@
                                         donaamount: { // 수량input
                                             required: true,
                                             /* 필수인가? true는 yes를 의미 */
-                                            /* digits: true, */
-                                            number : true,
+                                            digits: true,
+                                            /* number : true, */
                                             /* (양수)숫자만 입력가능 -number와 다른점은 소수와 음수일 경우 false*/
                                             spaceCheck: true,
                                             /* 내가 추가한 validate 메소드 */
@@ -364,8 +372,8 @@
                                         },
                                         donaamount: { // 수량input
                                             required: '수량을 입력해 주세요.',
-                                            /* digits: '숫자만 입력 가능합니다.', */
-                                            number : '숫자만',
+                                            digits: '숫자만 입력 가능합니다.',
+                                            /* number : '숫자만', */
                                             spaceCheck: '공백없이 입력해주세요.',
                                             minlength: '1개 이상으로 입력해 주세요.',
                                             min: '1개 이상으로 입력해 주세요.'
