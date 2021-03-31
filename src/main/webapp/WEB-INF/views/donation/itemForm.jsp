@@ -244,7 +244,7 @@
 
                         </div>
                         <!--// company-timeline \\-->
-<<<<<<< HEAD
+
                         
                       <!--   희재씨 mypage.jsp 참고 -->
                       <!-- 로그인한 회원의 글 정보만 받아오기 -->
@@ -280,11 +280,7 @@
                            <input type="text" value="${memberInfo.phone}" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }">
                        </li>
 		                          --%> 
-                        
-=======
 
-
->>>>>>> master
                         <!--// volunteer-form \\-->
                         <div class="widget_title mt-4">
                             <h2>물품 나눔 신청서</h2>
@@ -297,7 +293,7 @@
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 <input type="hidden" name="member_id" value="${memberInfo.member_id}">
                                 <ul class="mt-4">
-<<<<<<< HEAD
+
 									<c:forEach items="${memberInfo}" var="list1">
 									<sec:authentication property="principal" var="minfo" />
 										<sec:authorize access="isAuthenticated()">
@@ -318,7 +314,7 @@
 		                                    </c:if>
 										</sec:authorize>	
                                     </c:forEach>
-=======
+
                                     <li>
                                         <label>아이디(Email): </label>
                                         <input type="text" value="${memberInfo.member_id}" readonly></li>
@@ -330,7 +326,6 @@
                                         <label>연락처:</label>
                                         <input type="text" value="${memberInfo.phone}" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }"></li>
 
->>>>>>> master
                                     <li>
                                         <label>신청 날짜:</label>
                                         <div class="chrity-full-form">
