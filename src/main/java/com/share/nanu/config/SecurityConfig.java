@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 			.logoutUrl("/member/logout") //로그아웃하면 메인페이지로 이동						
 			.logoutSuccessUrl("/main")
+			.deleteCookies("Nanushare_cooki") //로그아웃시 쿠키 삭제
 			.invalidateHttpSession(true).permitAll()
 		.and()
 			.oauth2Login().loginPage("/loginPage")
