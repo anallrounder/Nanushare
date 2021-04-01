@@ -152,7 +152,7 @@
 
 </head>
 
-<body class="img" style="background-image: url(/resources/signUpForm/images/bg.jpg);">
+<body class="img" style="background-image: url(/resources/signUpForm/images/img_1.jpg);">
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
