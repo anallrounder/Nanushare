@@ -281,7 +281,7 @@
 	                        </div>
 	                    </div>
 	                    
-	                    <!--// 연락처 이메일 \\-->
+	                    <!--// volunteer-form \\-->
                         <div class="charity-team-contactus">
                             <ul>
                            		<li>
@@ -294,13 +294,12 @@
                                     <h5>Email:</h5>
                                     <a href="mailto:name@email.com">info@example.com</a>
                                 </li>
+                                
                             </ul>
                         </div>
-                        <!--\\ 연락처 이메일 //-->
-                    
+	                    
                     </div>
-                    <!-- aside 제외한 왼쪽 컨텐츠 div 끝 -->
-                    
+                   
                    	<!-- 우측 배너  aside -->
 			    	<%@ include file="/WEB-INF/views/board_show/aside.jsp"%>
 			    	<!-- aside end -->

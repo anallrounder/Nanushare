@@ -261,19 +261,21 @@
 						</c:forEach> --%>
 						
 					<!-- 수정하기 전 부분 복사 해둠 -->
-                     <%--   <li>
+                     <%--   
+                      <li>
                            <label>아이디(Email): </label>
-                           <input type="text" value="${memberInfo.member_id}"  readonly >
+                           <input type="text" value="${memberInfo.member_id}" readonly > <!-- readonly 작성시 수정은 불가하고 읽기만 가능하다. -->
+                            
                        </li>
                        <li>
                            <label>이름:</label>
-                           <input type="text" value="${memberInfo.name}" onblur="if(this.value == '') { this.value ='Enter name*'; }" onfocus="if(this.value =='Enter name*') { this.value = ''; }" readonly>
+                           <input type="text" value="${memberInfo.name}" readonly>
                        </li>
                        <li class="chrity-full-form">
                            <label>연락처:</label>
-                           <input type="text" value="${memberInfo.phone}" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }">
+                           <input type="text" value="${memberInfo.phone}" readonly >
                        </li>
-		                          --%> 
+		               --%> 
 
                         <!--// volunteer-form \\-->
                         <div class="widget_title mt-4">
@@ -341,8 +343,8 @@
 
                                     <li>
                                         <!-- class="chrity-full-form" -->
-                                        <label for="selectDirect">수량선택:</label>
-                                        <input type="text" name="donaamount" id="selectDirect" min="1" disabled  />
+                                        <label for="donaamount">수량선택:</label>
+                                        <input type="text" name="donaamount" id="selectDirect" disabled  />
                                     </li>
                                     <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 											자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
