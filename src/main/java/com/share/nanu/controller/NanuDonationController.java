@@ -69,7 +69,13 @@ public class NanuDonationController {
 	public String moneyMain() {
 		log.info("money donation main page 호출");
 		return "donation/moneyMain";
-	}	
+	}
+	
+	@GetMapping("/money/form")
+	public String moneyForm() {		
+		log.info("후원금 기부 페이지 이동");
+		return "donation/moneyForm";
+	}
 	
 	// 포인트 나눔하기 페이지 pointForm.jsp
 	@GetMapping("/money/point")
