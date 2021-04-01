@@ -121,7 +121,15 @@
         </div>
     </div>
     <!-- Banner -->
-
+<%-- 	
+	<%
+	if(session.getAttribute("userID") == null) {
+		session.setAttribute("loginMsg", "게시물 작성은<br>로그인이 필요합니다.");
+		response.sendRedirect("/login");
+		return;
+	}
+	%> --%>
+	
     <!-- Content -->
     <div class="charity-main-content">
 

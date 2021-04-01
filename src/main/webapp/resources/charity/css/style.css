@@ -3196,8 +3196,8 @@ ul li:hover .charity-grid-prayer-hover {
 	.charity-contact-form input[type="submit"], .charity-contact-form input[type="password"],
 	.charity-contact-form textarea {
 	width: 60%;
-	/*   float: left;
-    width: 100%; */
+	float: left;
+    width: 100%; 
 }
 
 .charity-contact-form {

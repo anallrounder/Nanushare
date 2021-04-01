@@ -60,12 +60,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	
-	<!-- write insert -->
+	<!-- 글 작성 write insert -->
 	<!--  'Ulric@naver.com'로 테스트, 실제로는 로그인 사용자 정보 받아와서 넣어야함. 아직 미구현상태라 이렇게 테스트함 -->
 	<insert id="insert">
   		<![CDATA[
-			insert into board (b_index, member_id, btitle, bcontent, bhit, bcat_num) 
-			values (board_seq.nextval, 'Ulric@naver.com', #{btitle}, #{bcontent}, 0, 2)
+			insert into board (b_index, member_id, btitle, bcontent, bhit, bdate, bcat_num) 
+			values (board_seq.nextval, 'Ulric@naver.com', #{btitle}, #{bcontent}, 0, sysdate, 2)
  		]]>
 	</insert>
 	

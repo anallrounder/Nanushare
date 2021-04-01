@@ -1,9 +1,10 @@
 <!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
+
 <%@ page language="java" contentType="text/html; charset=UTF8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -11,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+    
     <title>나누셰어 - 나눔인증</title>
 
     <!-- CSS -->
@@ -24,14 +25,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
-
+	
+	<!-- 웹페이지 탭 로고이미지 삽입  -->
+	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+	
 </head>
 
 <body>
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
-    
     
     <!-- Banner -->
     <div class="charity-subheader">
@@ -51,22 +54,10 @@
     <div class="charity-main-content">
 
         <!-- Main Section -->
-        <div class="charity-main-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-9">
-                <!--         <form method="post" class="myform" action="process-form.php">
-                            <div class="charity-contact-form"> charity-rich-editor
-                                <ul class="row">
-                                    <li class="col-md-6"><input type="text" placeholder="First Name" name="name" required></li>
-                                    <li class="col-md-6"><input type="text" placeholder="Last Name" name="name" required></li>
-                                    <li class="col-md-6"><input type="text" placeholder="Email" name="email" required></li>
-                                    <li class="col-md-6"><input type="text" placeholder="Phone Number" name="number" required></li>
-                                    <li class="col-md-12"><textarea placeholder="Messages" name="Message"></textarea></li>
-                                    <li class="col-md-12"><input type="submit" value="Submit Request"> <span class="output_message"></span> </li>
-                                </ul>
-                            </div>
-                        </form> -->
+		<div class="charity-main-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9">
                        <form action="modify" method="post" >
                        <input type="hidden" name="b_index" value="${modify_view.b_index}" >
 	                       <div class="charity-contact-form">

@@ -1,9 +1,10 @@
 <!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -11,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+
     <title>나누셰어 - 나눔인증</title>
 
     <!-- CSS -->
@@ -61,8 +62,8 @@
                        <form action="write" method="post" enctype="multipart/form-data" >
                      	   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	                       <div class="charity-contact-form">
-	                           <h4><span>Title</span>
-	                           <input type="text" name="btitle" placeholder="제목을 작성하세요." ></h4>
+	                           <h4><span>Title</span></h4>
+	                           <input type="text" name="btitle" placeholder="제목을 작성하세요." >
 	                           <br>
 	                           <br>
 	                           <h4>Images</h4>
