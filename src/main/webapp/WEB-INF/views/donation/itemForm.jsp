@@ -313,7 +313,7 @@
                                     errorClass: 'error',			/* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
 
                                     errorPlacement: function(error, element) {
-                                        if (element.is(":text") /*) {
+                                        if (element.is(":text") ) {
                                             element.parent().after(error);
                                         } else {
                                             element.after(error);
