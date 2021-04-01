@@ -47,8 +47,9 @@
                                     </label>
                                 </div>
                                 <div class="w-50 text-md-right">
+                                	<a href="/forgotEmail" style="color: #fff">Forgot Email</a>
                                     <a href="/forgotPW" style="color: #fff">Forgot Password</a><br/>
-                                    <a href="/forgotEmail" style="color: #fff">Forgot Email</a>
+                                    
                                 </div>
                                 
                             </div>
