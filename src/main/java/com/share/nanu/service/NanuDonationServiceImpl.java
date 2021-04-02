@@ -25,13 +25,13 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 	private NanuDonationMapper ndmapper;
 
 	// 물품신청서 회원 정보 불러오기
-	/*@Override
+	@Override
 	public MemberVO getMember(String member_id) {
 		log.info("service---getMember ------호출");
 		return ndmapper.readMember(member_id);
 	}
-	*/
-
+	
+	// 물품신청서 회원 정보 불러오기 - 로그인 사용자 용 test중
 	@Override
 	public List<MemberVO> getMember() {
 		log.info("service---getMember ------호출");

@@ -1,9 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,6 +52,10 @@ li {
 li:nth-child(2) {
 	color: lime;
 }
+
+#maxmax {
+	max-width: 100%;
+}
 </style>
 
 
@@ -75,7 +82,8 @@ li:nth-child(2) {
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
+	/* 페이징 ajax */
 		$(document).ready(function() {
 			// 표시하는 글 수를 바꾸면 이벤트 처리를 해서 다시 리스트를 불러온다.
 
@@ -92,115 +100,11 @@ li:nth-child(2) {
 			});
 
 		});
-	</script>
+	</script> -->
 
 
 	<!-- Header -->
-	<header id="charity-header" class="charity-header-one"
-		style="position:relative;z-index:2"> <!-- Top Strip -->
-	<div class="charity-top-strip">
-		<aside> <a href="${pageContext.request.contextPath}/main"
-			class="charity-logo"
-			style="width: 200px; height: 100px; margin: 0px 0px 0px 20px;"><img
-			src="/resources/nanulogo.png" alt=""></a></aside>
-		<div class="container">
-			<div class="row">
-				<aside class="col-12">
-				<div class="float-center">
-					<a href="#menu" class="menu-link active"><span></span></a>
-					<nav id="menu" class="menu charity-navigation">
-
-					<ul>
-						<!-- <li class="active"><a href="index.html">Home</a></li> -->
-						<li style="padding: 0px 40px 0px 70px"><a href="#"
-							style="font-size: 20px;">나누셰어란?</a>
-							<ul class="children">
-								<li><a href="${pageContext.request.contextPath}/menu/about">나누셰어
-										소개</a></li>
-								<li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
-								<!--     <li><a href="event-detail.html">Event Detail</a></li> -->
-							</ul></li>
-						<li style="padding: 0px 40px 0px 30px"><a href="#"
-							style="font-size: 20px;">나눔함 안내</a> <!--  <ul class="children">
-                                            <li><a href="cause-list.html">Cause List</a></li>
-                                            <li><a href="cause-grid.html">Cause Grid</a></li>
-                                            <li><a href="cause-detail.html">Cause Detail</a></li>
-                                        </ul> --></li>
-						<li style="padding: 0px 40px 0px 30px"><a href="#"
-							style="font-size: 20px;">나누기</a>
-							<ul class="children">
-								<li><a href="blog-large.html">물품 나누기</a></li>
-								<li><a href="blog-medium.html">돈기부여하기</a></li>
-								<!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
-							</ul></li>
-						<li style="padding: 0px 40px 0px 30px"><a href="#"
-							style="font-size: 20px;">나눔 인증</a> <!--  <ul class="children">
-                                            <li><a href="team-grid.html">Team Grid</a></li>
-                                            <li><a href="team-classic.html">Team Classic</a></li>
-                                            <li><a href="team-detail.html">Team Detail</a></li>
-                                        </ul> --></li>
-						<li style="padding: 0px 40px 0px 30px"><a href="#"
-							style="font-size: 20px;">이벤트</a>
-							<ul class="children">
-								<li><a href="about.html">출석체크</a></li>
-								<li><a href="prayer-list.html">테스트</a></li>
-								<li><a href="prayer-grid.html">게임</a></li>
-								<!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                            <li><a href="search-result.html">Search Result</a></li> -->
-							</ul></li>
-						<li style="padding: 0px 40px 0px 30px"><a
-							href="contact-us.html" style="font-size: 20px;">더하기</a>
-							<ul class="children">
-								<li><a href="about.html">공지사항</a></li>
-								<li><a href="prayer-list.html">문의하기</a></li>
-							</ul></li>
-
-
-					</ul>
-					<!--  <span class="float-right">
-                                    <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a>
-                          			<a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a>
-                                </span> --> </nav>
-
-					<!--    <ul class="charity-header-options" style="text-align: center">
-                                <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i></a></li>
-                                <li><a href="#"><i class="fab fa-opencart"></i></a> <div class="charity-cart-box"> <p>No products in the cart.</p> </div> </li>
-             
-                                <li> <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a></li>
-                          		<li><a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a></li>
-                                
-                            </ul>
-                             -->
-
-				</div>
-
-				</aside>
-
-
-				<!--     <aside class="col-12"> 
-                        <div class="float-right">
-                          <ul class="charity-social-network">
-                              <li><a href="#" class="fab fa-facebook-f"></a></li>
-                              <li><a href="#" class="fab fa-google"></a></li>
-                              <li><a href="#" class="fab fa-pinterest-p"></a></li>
-                              <li><a href="#" class="fab fa-linkedin-in"></a></li>
-                              <li><a href="#" class="fab fa-twitter"></a></li>
-                          </ul>
-                          <a href="#" class="charity-strip-btn charity-bgcolor" >Sign up</a>
-                          <a href="#" class="charity-strip-btn charity-bgcolor">Sign in</a>
-                         
-                        </div>
-                    </aside> -->
-			</div>
-		</div>
-		<aside> <a href="#" class="charity-strip-btn charity-bgcolor"
-			style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign
-			up</a> <a href="#" class="charity-strip-btn charity-bgcolor"
-			style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign
-			in</a> </aside>
-	</div>
-	<!-- Top Strip --> </header>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 
 	<!-- Banner -->
 	<div class="charity-subheader">
@@ -213,17 +117,6 @@ li:nth-child(2) {
 	</div>
 	<!-- Banner -->
 
-
-	<!-- sessionScope.id 안될때 -->
-	<%-- 	<%
-	request.setCharacterEncoding("UTF-8");
-
-	session = request.getSession(true);
-
-	String member_id = request.getParameter("member_id");
-
-	request.getSession().setAttribute("member_id", member_id);
-	%> --%>
 	<%
 	String path = request.getContextPath();
 	%>
@@ -286,7 +179,8 @@ li:nth-child(2) {
 											<td
 												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">
 												나의 포인트 : <sec:authentication
-													property="principal.member.dntcnt" /> <a href="#"
+													property="principal.member.dntcnt" /> <a
+												href="${pageContext.request.contextPath}/donation/money/point"
 												class="charity-simple-blog-btn" style="float: right;">기부하기</a>
 											</td>
 										</tr>
@@ -295,24 +189,22 @@ li:nth-child(2) {
 							</div>
 							<!-- 여기까지 -->
 							<div class="charity-cause-donate">
-								<div class="skillst">
+								<div class="skillst" id="maxmax">
 									<!-- 수정필요 -->
 									<!-- <h6>
 										data-width를 바꾸면 %가 달라짐 그림추가<span>해야함</span>
 									</h6> -->
-									<img src="/resources/my/그림1.png" height="80" width="80"
-										"style="max-width: 100%;""> <img
-										src="/resources/my/그림2.png" height="80" width="80"
-										"style="max-width: 100%;""> <img
-										src="/resources/my/그림3.png" height="80" width="80"
-										"style="max-width: 100%;""> <img
-										src="/resources/my/그림4.png" height="80" width="80"> <img
-										src="/resources/my/그림5.png" height="80" width="80"> <img
-										src="/resources/my/그림6.png" height="80" width="80">
+									<img src="/resources/my/그림1.png" height="80" width="80">
+									<img src="/resources/my/그림2.png" height="80" width="80">
+									<img src="/resources/my/그림3.png" height="80" width="80">
+									<img src="/resources/my/그림4.png" height="80" width="80">
+									<img src="/resources/my/그림5.png" height="80" width="80">
+									<img src="/resources/my/그림6.png" height="80" width="80">
 									<!-- <h6 class="skillst-right">
 										막대바가 <span>올곳</span>
 									</h6> -->
-									<div data-width='60' max='100'
+
+									<div data-width='13' max='100'
 										class="charity-cause-progressbar"></div>
 								</div>
 
@@ -320,112 +212,7 @@ li:nth-child(2) {
 							</div>
 						</div>
 
-
-
-
-						<!-- 여기 (XXXXX)-->
-
-						<%-- 
-
-						<div class="container">
-
-							<div class="panel panel-default">
-
-								<div class="panel-heading">
-
-									<span>게시판 리스트</span>
-
-
-								</div>
-
-								<div class="panel-body">
-
-									<table class="table">
-
-										<thead>
-
-											<tr>
-
-												<th>아이디</th>
-												<th>나눔제목</th>
-												<th>조회수</th>
-												<th>날짜</th>
-
-											</tr>
-
-										</thead>
-
-										<tbody>
-											<c:forEach items="${list2}" var="list2">
-												<tr>
-
-													<td>${list2.member_id}</td>
-													<td>${list2.btitle}</td>
-													<!-- 제목누르면 해당 글내용으로 이동링크 -->
-													<td>${list2.bhit}</td>
-													<td>${list2.bdate}</td>
-													<td>${list2.bcat_num}</td>
-												</tr>
-											</c:forEach>
-
-										</tbody>
-
-										<tfoot>
-
-											<tr>
-
-												<td colspan="3">
-
-													<ul class="pagination">
-
-														<li class="page-item"><c:if test="${pageMaker.prev}">
-																<a class="page-link"
-																	href="mypage${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-															</c:if></li>
-
-														<li class="page-item"><c:forEach
-																begin="${pageMaker.startPage }"
-																end="${pageMaker.endPage }" var="idx">
-																<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																<a href="mypage${pageMaker.makeQuery(idx)}">${idx}</a>
-															</c:forEach></li>
-
-
-														<li class="page-item"><c:if
-																test="${pageMaker.next && pageMaker.endPage > 0}">
-																<a class="page-link"
-																	href="mypage${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-																</a>
-															</c:if></li>
-													</ul>
-
-												</td>
-
-											</tr>
-
-
-										</tfoot>
-
-									</table>
-
-								</div>
-
-							</div>
-
-						</div>
-
-
-
-
-
- --%>
-
-
-
-
-
-
-						<!-- 여기 -->
+						<!-- 나의 ~~ 내역 -->
 
 						<div class="container">
 							<div class="row">
@@ -433,9 +220,12 @@ li:nth-child(2) {
 
 									<ul class="nav nav-tabs">
 										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#abc">나의 문의내역</a></li>
+											data-toggle="tab" href="#abc" data-load="false"
+											data-url="${pageContext.request.contextPath}/my/mypage">나의
+												문의내역</a></li>
 										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#def">나의 인증내역</a></li>
+											data-toggle="tab" href="#def" data-load="true"
+											data-url="http://localhost:8282/my/mypage/_2">나의 인증내역</a></li>
 										<li class="nav-item"><a class="nav-link"
 											data-toggle="tab" href="#ghi">나의 나눔내역</a></li>
 										<li class="nav-item"><a class="nav-link"
@@ -443,309 +233,51 @@ li:nth-child(2) {
 									</ul>
 									<div class="tab-content">
 										<div class="tab-pane fade show active" id="abc">
-											<table>
-												<!-- <form action="" id="setRows">
-													<p>
-														showing <input type="text" name="rowPerPage" value="3">
-														item per page
-													</p>
-												</form> -->
-												<div>
-													<br>
-												</div>
-												<tr>
-
-													<th>아이디</th>
-													<th>나눔제목</th>
-													<th>조회수</th>
-													<th>날짜</th>
-
-												</tr>
-												<!-- 로그인한 회원의 글 정보만 받아오기 -->
-												<c:forEach items="${list1}" var="list1">
-													<sec:authentication property="principal" var="pinfo" />
-													<sec:authorize access="isAuthenticated()">
-														<c:if test="${pinfo.username eq list1.member_id}">
-															<tr>
-																<td>${list1.member_id}</td>
-
-																<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
-																<td>${list1.btitle}</td>
-																<!-- 제목누르면 해당 글내용으로 이동링크 -->
-																<td>${list1.bhit}</td>
-																<td>${list1.bdate}</td>
-
-															</tr>
-														</c:if>
-													</sec:authorize>
-												</c:forEach>
-											</table>
-											<!-- 페이징 -->
-											<div id="nav">
-												<a href="#" rel="0" class="active">1</a>
-											</div>
-											<%-- <!-- 페이징 -->
-											<div class="container">
-												<div class="row">
-													<div class="col">
-														<ul class="pagination justify-content-center">
-															<li class="page-item"><c:if test="${pageMaker.prev}">
-																	<a class="page-link"
-																		href="mypage${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-																</c:if></li>
-
-															<li class="page-item"><c:forEach
-																	begin="${pageMaker.startPage }"
-																	end="${pageMaker.endPage }" var="idx">
-																	<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																	<a href="mypage${pageMaker.makeQuery(idx)}">${idx}</a>
-																</c:forEach></li>
-
-
-															<li class="page-item"><c:if
-																	test="${pageMaker.next && pageMaker.endPage > 0}">
-																	<a class="page-link"
-																		href="mypage${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-																	</a>
-																</c:if></li>
-														</ul>
-													</div>
-
-												</div>
-
-											</div> --%>
+											<jsp:include page="/WEB-INF/views/my/mypage_1.jsp"
+												flush="true">
+												<jsp:param name="list1" value="list1" />
+												<jsp:param name="pinfo" value="pinfo" />
+											</jsp:include>
 
 										</div>
 										<div class="tab-pane fade" id="def">
-											<table>
-
-												<form action="" id="setRows">
-													<p>
-														showing <input type="text" name="rowPerPage" value="3">
-														item per page
-													</p>
-												</form>
-												<div>
-													<br>
-												</div>
-												<tr>
-
-													<th>아이디</th>
-													<th>인증제목</th>
-													<th>조회수</th>
-													<th>날짜</th>
-													<th>분류번호</th>
-												</tr>
-
-
-												<!-- 로그인한 회원의 글 정보만 받아오기 -->
-												<c:forEach items="${list2}" var="list2">
-													<sec:authentication property="principal" var="pinfo" />
-													<sec:authorize access="isAuthenticated()">
-														<c:if test="${pinfo.username eq list2.member_id}">
-															<tr>
-																<td>${list2.member_id}</td>
-																<td>${list2.btitle}</td>
-																<!-- 제목누르면 해당 글내용으로 이동링크 -->
-																<td>${list2.bhit}</td>
-																<td>${list2.bdate}</td>
-																<td>${list2.bcat_num}</td>
-															</tr>
-														</c:if>
-													</sec:authorize>
-												</c:forEach>
-											</table>
-											<!-- 페이징 -->
-											<div id="nav">
-												<ul class="startItem">
-
-													<li class="active"><a><<</a></li>
-
-													<li class="active"><a><</a></li>
-
-													<li class="active"><a>1</a></li>
-
-													<li class="currPage" data-page="2"><a>2</a></li>
-
-													<li class="currPage" data-page="3"><a>3</a></li>
-
-													<li class="active"><a>></a></li>
-
-													<li class="active"><a>>></a></li>
-
-												</ul>
-											</div>
-											<%-- <!-- 페이징 -->
-											<div class="container">
-												<div class="row">
-													<div class="col">
-														<ul class="pagination justify-content-center">
-															<li class="page-item"><c:if test="${pageMaker.prev}">
-																	<a class="page-link"
-																		href="mypage${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-																</c:if></li>
-
-															<li class="page-item"><c:forEach
-																	begin="${pageMaker.startPage }"
-																	end="${pageMaker.endPage }" var="idx">
-																	<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																	<a href="mypage${pageMaker.makeQuery(idx)}">${idx}</a>
-																</c:forEach></li>
-
-
-															<li class="page-item"><c:if
-																	test="${pageMaker.next && pageMaker.endPage > 0}">
-																	<a class="page-link"
-																		href="mypage${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-																	</a>
-																</c:if></li>
-														</ul>
-													</div>
-
-												</div>
-
-											</div> --%>
+											<%-- <jsp:include page="mypage_2.jsp">
+												<jsp:param name="pinfo" value="pinfo"></jsp:param>
+												<jsp:param name="list2" value="list2"></jsp:param>
+											</jsp:include> --%>
+											 <c:import url = "mypage_2.jsp"></c:import>
+											<%-- <%@ include file="/WEB-INF/views/my/mypage_2.jsp"%> --%>
 										</div>
 										<div class="tab-pane fade" id="ghi">
-											<table>
-												<div>
-													<br>
-												</div>
-												<tr>
-													<th>물품이름</th>
-													<th>날짜</th>
-
-													<th>수량</th>
-													<th>아이디</th>
-
-												</tr>
-
-												<c:set var="list3" value="${list3}" />
-												<c:forEach items="${list3}" var="dao3" varStatus="status">
-													<c:forEach items="${dao3.dona}" var="dto3"
-														varStatus="status">
-														<sec:authentication property="principal" var="pinfo" />
-														<sec:authorize access="isAuthenticated()">
-															<c:if test="${pinfo.username eq dto3.member_id}">
-																<tr>
-
-																	<td>${dao3.iname}</td>
-																	<td>${dto3.idntdate}</td>
-
-																	<!-- 제목누르면 해당 글내용으로 이동링크 -->
-																	<td>${dto3.donaamount}</td>
-																	<td>${dto3.member_id}</td>
-
-																</tr>
-															</c:if>
-														</sec:authorize>
-													</c:forEach>
-												</c:forEach>
-											</table>
-											<div id="nav">
-												<a href="#" rel="0" class="active">1</a>
-											</div>
-											<%-- 	<div class="container">
-												<div class="row">
-													<div class="col">
-														<ul class="pagination justify-content-center">
-															<li class="page-item"><c:if test="${pageMaker.prev}">
-																	<a class="page-link"
-																		href="mypage${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-																</c:if></li>
-
-															<li class="page-item"><c:forEach
-																	begin="${pageMaker.startPage }"
-																	end="${pageMaker.endPage }" var="idx">
-																	<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																	<a href="mypage${pageMaker.makeQuery(idx)}">${idx}</a>
-																</c:forEach></li>
-
-
-															<li class="page-item"><c:if
-																	test="${pageMaker.next && pageMaker.endPage > 0}">
-																	<a class="page-link"
-																		href="mypage${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-																	</a>
-																</c:if></li>
-														</ul>
-													</div>
-
-												</div>
-
-											</div> --%>
+											<%@ include file="/WEB-INF/views/my/mypage_3.jsp"%>
 										</div>
 										<div class="tab-pane fade" id="jkl">
-											<table>
-												<div>
-													<br>
-												</div>
-												<tr>
-
-													<th>번호</th>
-													<th>댓글내용</th>
-													<th>날짜</th>
-													<th>아이디</th>
-													<th>분류번호</th>
-												</tr>
-												<c:set var="list4" value="${list4}" />
-												<c:forEach items="${list4}" var="dao4" varStatus="status">
-													<c:forEach items="${dao4.reply}" var="dto4"
-														varStatus="status">
-														<sec:authentication property="principal" var="pinfo" />
-														<sec:authorize access="isAuthenticated()">
-															<c:if test="${pinfo.username eq dto4.rid}">
-																<tr>
-																	<td>${dto4.r_num}</td>
-																	<td>${dto4.rcontent}</td>
-																	<!-- 제목누르면 해당 글내용으로 이동링크 -->
-																	<td>${dto4.rdate}</td>
-																	<td>${dto4.rid}</td>
-																	<td>${dao4.b_index}</td>
-																</tr>
-															</c:if>
-														</sec:authorize>
-													</c:forEach>
-												</c:forEach>
-											</table>
-											<div id="nav">
-												<a href="#" rel="0" class="active">1</a>
-											</div>
-											<%-- 	<div class="container">
-												<div class="row">
-													<div class="col">
-														<ul class="pagination justify-content-center">
-															<li class="page-item"><c:if test="${pageMaker.prev}">
-																	<a class="page-link"
-																		href="mypage${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-																</c:if></li>
-
-															<li class="page-item"><c:forEach
-																	begin="${pageMaker.startPage }"
-																	end="${pageMaker.endPage }" var="idx">
-																	<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																	<a href="mypage${pageMaker.makeQuery(idx)}">${idx}</a>
-																</c:forEach></li>
-
-
-															<li class="page-item"><c:if
-																	test="${pageMaker.next && pageMaker.endPage > 0}">
-																	<a class="page-link"
-																		href="mypage${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-																	</a>
-																</c:if></li>
-														</ul>
-													</div>
-
-												</div>
-
-											</div> --%>
-
+											<%@ include file="/WEB-INF/views/my/mypage_4.jsp"%>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+
+						<script>
+							// 위 ajax를 통한 data.load는 따로 bootstrap에 정의된 기능이 아니기 때문에 구현해야한다.
+							// 메뉴가 선택되기 전의 이벤틀르 가져온다.
+							$('a[data-toggle="tab"]').on('show.bs.tab',
+									function(e) {
+										// 선택되는 요소를 오브젝트화 한다.
+										$this = $(e.target);
+										// data-load가 false의 경우는 content에 data-load를 한다.
+										if (!$this.data("load")) {
+											// tab-content의 id를 취득한다.
+											var id = $this.attr("href");
+											// 페이지 로드를 한다.
+											$(id).load($this.data("url"));
+											// data-load를 true로 변환하여 중복 로딩이 없게 한다.
+											$this.data("load", true);
+										}
+									});
+						</script>
+
 
 						<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 						<script
@@ -778,25 +310,7 @@ li:nth-child(2) {
 		<!-- Content -->
 	</div>
 	<!-- Footer -->
-	<footer id="charity-footer" class="charity-footer-one"> <!-- Footer Widget -->
-	<div class="charity-footer-widget">
-		<div class="container">
-
-			<!-- CopyRight -->
-			<div class="charity-copyright">
-				<a href="/resources/charity/#" class="back-top charity-bgcolor"><i
-					class="fa fa-angle-up"></i></a>
-				<p>© 2018, All Right Reserved - by</p>
-				<ul>
-					<li><a href="/resources/charity/404.html">Terms and
-							conditions</a></li>
-					<li><a href="/resources/charity/404.html">Privacy policy</a></li>
-				</ul>
-			</div>
-			<!-- CopyRight -->
-		</div>
-	</div>
-	<!-- Footer Widget --> </footer>
+	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
 	<!-- Search Modal -->

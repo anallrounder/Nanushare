@@ -4,24 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.share.nanu.mapper.MyPageMapper">
 
-	<select id="loginCheck" resultType="com.share.nanu.VO.MemberVO">
-		SELECT member_id, pw
-		FROM
-		member
-		WHERE member_id = #{member_id}
-
-	</select>
-
-
-
-	<select id="viewMember" resultType="com.share.nanu.VO.MemberVO">
-		SELECT *
-		FROM member
-		WHERE
-		member_id = #{member_id}
-
-	</select>
-
 	<select id="mygetlist1" resultType="com.share.nanu.VO.BoardVO">
 	<![CDATA[ 
 			select * from board where bcat_num=1
@@ -30,10 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="mygetlist2" resultType="com.share.nanu.VO.BoardVO">
 	<![CDATA[ 
-			select * from board where bcat_num=2
+			select * from board where bcat_num=2 order by bdate desc
 		]]>
 	</select>
-<!-- 	<select id="mygetlist3" resultType="com.share.nanu.VO.BoardVO">
+	<!-- <select id="mygetlist3" resultType="com.share.nanu.VO.BoardVO">
 	<![CDATA[ 
 			select * from board where bcat_num=3
 		]]>
@@ -68,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 	) where rnum > (#{pageNum}-1) * #{amount}
 ]]>
 	</select>
-<!-- <select resultType="com.share.nanu.VO.BoardVO" id="getPaging3">
+<!-- 	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging3">
 
 	<![CDATA[
 	select * from (
@@ -80,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 ]]>
 	</select>
 
-<select resultType="com.share.nanu.VO.BoardVO" id="getPaging4">
+	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging4">
 
 	<![CDATA[
 	select * from (
@@ -91,15 +73,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 	) where rnum > (#{pageNum}-1) * #{amount}
 ]]>
 	</select> -->
+<!-- 
 
-
-	<!-- <select resultType="com.share.nanu.VO.BoardVO" id="mygetlist2"> <![CDATA[ 
-		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]> </select> 
-		<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist3"> <![CDATA[ 
-		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]> </select> 
-		<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist4"> <![CDATA[ 
-		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]> </select> -->
-
+	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist2"> <![CDATA[ 
+		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]>
+	</select>
+	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist3"> <![CDATA[ 
+		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]>
+	</select>
+	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist4"> <![CDATA[ 
+		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]>
+	</select>
+ -->
 	<select resultType="int" id="getTotalCnt1">
 		select count(*) from board where
 		bcat_num=1
@@ -107,9 +92,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select resultType="int" id="getTotalCnt2">
 		select count(*) from board where
-		bcat_num=2
+		bcat_num=2 
 	</select>
-<!-- <select resultType="int" id="getTotalCnt3">
+<!-- 	<select resultType="int" id="getTotalCnt3">
 		select count(*) from board where
 		bcat_num=3
 	</select>
@@ -158,6 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap id="boardVO" type="com.share.nanu.VO.Board_ListVO">
 		<id property="b_index" column="b_index" />
 		<result property="btitle" column="btitle" />
+		<result property="bcat_num" column="bcat_num" />
 		<collection property="reply" javaType="java.util.List"
 			resultMap="boardreplyVO" />
 	</resultMap>
@@ -168,17 +154,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 회원정보수정 -->
-	<select id="memberModifyGET"
-		resultType="com.share.nanu.VO.MemberVO" parameterType="String"><!-- parameterType="String" -->
+ 	<!-- <select id="memberModifyGET"
+		resultType="com.share.nanu.VO.MemberVO" parameterType="String">parameterType="String"
 		<![CDATA[SELECT *
 		FROM member where member_id = #{member_id}]]>
 
-	</select>
+	</select>  -->
 
 	<update id="memberModifyPOST">
 		<![CDATA[
 		UPDATE member
-		SET name = #{name}, pw = #{pw}, phone = #{phone}
+		SET name = #{name}, pw = #{pw},subemail = #{subemail}
 		where member_id = #{member_id}]]>
 	</update>
 
@@ -192,4 +178,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		member_id =
 		#{member_id} and pw=#{pw} and name=#{name}
 	</delete>
+
+
+	<!-- 패스워드 체크 -->
+	<select id="passChk" resultType="com.share.nanu.VO.MemberVO">
+		select * from member
+		where pw =
+		#{pw}
+	</select>
+
 </mapper>

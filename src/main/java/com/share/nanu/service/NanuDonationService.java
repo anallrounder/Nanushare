@@ -12,8 +12,8 @@ import com.share.nanu.VO.PointVO;
 public interface NanuDonationService {
 	
 	/* 물품 기부 */
-	public List<MemberVO> getMember(); // 물품신청서 회원 정보 불러오기//로그인한 사용자용
-	//public MemberVO getMember(String member_id); // 물품신청서 회원 정보 불러오기
+	public List<MemberVO> getMember(); // 물품신청서 회원 정보 불러오기//로그인한 사용자용 - 로그인 사용자 용 test중
+	public MemberVO getMember(String member_id); // 물품신청서 회원 정보 불러오기
 	public void saveForm(ItemdonationVO idvo); // 물품신청서 -> 테이블에 저장
 	public void countItemDonation(MemberVO mvo); // 멤버 테이블에 -> 물품기부횟수 카운트 +1
 	

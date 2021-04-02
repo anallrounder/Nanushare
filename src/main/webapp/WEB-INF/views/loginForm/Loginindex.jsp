@@ -17,7 +17,7 @@
     
 </head>
 
-<body class="img js-fullheight" style="background-image: url(/resources/loginform/images/bg.jpg);">
+<body class="img js-fullheight" style="background-image: url(/resources/loginform/images/img_2.jpg);">
 
 	  <section class="ftco-section">
         <div class="container">
@@ -43,12 +43,13 @@
                             </div>
                             <div class="form-group d-md-flex">
                                 <div class="w-50">
-                                    <label class="checkbox-wrap checkbox-primary">Remember Me <input type="checkbox" checked> <span class="checkmark"></span>
+                                    <label class="checkbox-wrap checkbox-primary">Remember Me <input type="checkbox" checked name="Nanushare_rememberMe"> <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="w-50 text-md-right">
-                                    <a href="/forgotPW" style="color: #fff">Forgot Password</a><br/>
-                                    <a href="/forgotEmail" style="color: #fff">Forgot Email</a>
+                                	<a href="/forgotEmail" style="color: #fff">Forgot Email</a><br/>
+                                    <a href="/forgotPW" style="color: #fff">Forgot Password</a>
+                                    
                                 </div>
                                 
                             </div>

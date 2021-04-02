@@ -1,154 +1,157 @@
 package com.share.nanu.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-import com.share.nanu.VO.Board_ListVO;
-import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.page.Criteria;
 import com.share.nanu.page.pageVO;
+import com.share.nanu.security.MemberDetails;
+import com.share.nanu.service.MemberService;
 import com.share.nanu.service.MyPageService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-@Controller
+@RestController
 public class MyPageController {
 
 	@Autowired
 	private MyPageService mgservice;
+
+	@Autowired
+	private MemberService mservice;
+
 //https://onebyone1.tistory.com/61
 	// 마이페이지
 	@GetMapping("/my/mypage")
-	public ModelAndView mypage( HttpServletRequest req, HttpSession session, RedirectAttributes rttr,MemberVO mvo, ModelAndView mav, Criteria cri,IteminvenVO inven, Board_ListVO board) {
+	public ModelAndView mypage(MemberVO mvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {
+		// 헤더에 로그인한 사람 정보 가져오기
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			// log.info("로그인한 사람 이름 - "+ md.getmember().getName());
+			mav.addObject("username", md.getmember().getName());
+		}
+		// mav.setViewName("mainMap/mainview");
+
 		mav.setViewName("/my/mypage");
+		return mav;
+	}
 
-		String member_id = (String) session.getAttribute("member_id");
+	// 나의문의내역
+	@GetMapping("/my/mypage/_1")
+	public ModelAndView ask(MemberVO mvo, ModelAndView mav, Criteria cri) {
+		mav.setViewName("/my/mypage_1");
+		mav.addObject("list1", mgservice.myList1(cri));// 나의문의내역
 
-		//MemberVO mvo = mgservice.readMember(mem);
-
-		mav.addObject("list1", mgservice.myList1(cri));
-		
-		mav.addObject("list2", mgservice.myList2(cri));
-		
-		mav.addObject("list3", mgservice.myList3());
-		
-		mav.addObject("list4", mgservice.myList4());
-		
-		//페이징
+		// 페이징
 		int total = mgservice.getTotalCount1(cri);
-		total = mgservice.getTotalCount2(cri);
-//		total = mgservice.getTotalCount3(cri);
-//		total = mgservice.getTotalCount4(cri);
-		
 		mav.addObject("pageMaker", new pageVO(cri, total));
 
-		
 		return mav;
 	}
 
+	// 나의인증내역
+	@GetMapping("/my/mypage/_2")
+	public ModelAndView content(MemberVO mvo, ModelAndView mav, Criteria cri) {
+		mav.setViewName("/my/mypage_2");
+		mav.addObject("list2", mgservice.myList2(cri));// 나의인증내역
+		// 페이징
+		int total = mgservice.getTotalCount2(cri);
+		mav.addObject("pageMaker", new pageVO(cri, total));
+
+		return mav;
+	}
+
+	// 나의나눔내역
+	@GetMapping("/my/mypage/_3")
+	public ModelAndView dona(MemberVO mvo, ModelAndView mav, Criteria cri) {
+		mav.setViewName("/my/mypage_3");
+
+		mav.addObject("list3", mgservice.myList3(cri));// 나의나눔내역
+		// 페이징
+		int total = mgservice.getTotalCount3(cri);
+		mav.addObject("pageMaker", new pageVO(cri, total));
+
+		return mav;
+	}
+
+	// 나의댓글내역
+	@GetMapping("/my/mypage/_4")
+	public ModelAndView reply(MemberVO mvo, ModelAndView mav, Criteria cri) {
+		mav.setViewName("/my/mypage_4");
+
+		mav.addObject("list1", mgservice.myList4(cri));// 나의문의내역
+		// 페이징
+		int total = mgservice.getTotalCount4(cri);
+
+		mav.addObject("pageMaker", new pageVO(cri, total));
+
+		return mav;
+	}
+
+	// https://melonpeach.tistory.com/49
 	// 프로필 관리로 가는 페이지(수정 전 비밀번호 확인 단계)
 	@GetMapping("/my/myprofile")
-	public ModelAndView myprofile1(ModelAndView mav, MemberVO mvo) {
+	public ModelAndView myprofile(ModelAndView mav) {
 
 		mav.setViewName("/my/myprofile");
-		// mav.addObject("profile", mgservice.myProfile(mvo));
+
 		return mav;
 	}
 
-	// 비밀번호 확인 처리
-	@PostMapping("/my/myprofile")
-	public String myprofile2(String pw, HttpSession session) {
+	// 수정페이지
+	@GetMapping("/my/myprofile/edit")
+	public ModelAndView myprofileedit(ModelAndView mav) {
 
-		String result = null;
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		mav.setViewName("/my/edit");
+		return mav;
+		// return "redirect:home";
+	}
 
-		MemberVO membervo = (MemberVO) session.getAttribute(pw);
+	// 수정페이지
+	@PutMapping("/my/myprofile/edit")
+	public ResponseEntity<String> myprofileedit(@RequestBody MemberVO mvo) {
 
-		if (encoder.matches(pw, membervo.getPw())) {
-			result = "pwcontfirmOK";
-		} else {
-			result = "pwConfirmNO";
+		ResponseEntity<String> entity = null;
+
+		try {
+			mgservice.memberModifyPOST(mvo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 
-		return result;
+		return entity;
 	}
 
-	// 수정하러 프로필 관리로 가는 페이지
-	@GetMapping("/my/myprofile/edit")
-	public String memberModifyGET(HttpServletRequest req, Model model, MemberVO memberVO) {
-		// 로그인이 된 후에 사용가능
-		HttpSession session = req.getSession();
-
-//		// 세션 객체안에 있는 id정보 저장
-//		MemberVO member_id = (MemberVO) session.getAttribute("member_id");
-//
-//		// 서비스안의 회원정보보기 메서드 호출
-//		MemberVO modifyMember = mgservice.membermodifyGET(member_id.getMember_id());
-
-		// 정보저장 후 페이지 이동
-//		model.addAttribute("modifyName", modifyMember.getName());
-//		model.addAttribute("modifyId", modifyMember.getMember_id());
-//		model.addAttribute("modifyPhone", modifyMember.getPhone());
-//		model.addAttribute("modifyPw", modifyMember.getPw());
-
-//		model.addAttribute("modifyName", "aaa");
-//		model.addAttribute("modifyId", "탈퇴할aaa@naver.com");
-//		model.addAttribute("modifyPhone", "01012341234");
-		System.out.println("출력이되나1");
-		return "/my/edit";
-	}
-
-	// 수정 업데이트하고 다시 프로필 페이지로 돌아가는 페이지
-	@PostMapping("/my/myprofile/edit")
-	public String memberModifyPOST(@RequestBody MemberVO memberVO) {
-		System.out.println("출력이되나2-1");
-		mgservice.memberModifyPOST(memberVO);
-		System.out.println("출력이되나2-2");
-		return "/my/mypage";
-	}
-
-	// 탈퇴페이지
-//	@PostMapping("/my/drop")
-//	public ModelAndView myprofiledrop(ModelAndView mav, MemberVO membervo) {
-//
-//		if (membervo.getMember_id() != null && membervo.getMember_id() != "") {
-//			mgservice.memberDelete(membervo);
-//			mav.setViewName("/my/drop");
-//		}
-//		return mav;
-//		//return "redirect:home";
-//	}
-
+	//탈퇴페이지
 	@GetMapping("/my/drop")
-	public void deleteGET(HttpSession session) {
-
-		// 세션제어
-		String member_id = (String) session.getAttribute("member_id");
-//		if(id == null) {
-//			return "redirect:/home";
-//		}
+	public void deleteGET(ModelAndView mvo) {
+		mvo.setViewName("/my/drop");
 
 	}
 
+	//탈퇴페이지
 	@PostMapping("/my/drop")
-	public void deletePOST(@RequestBody MemberVO memberVO, HttpSession session) {
+	public String deletePOST(@RequestBody MemberVO memberVO, HttpSession session) {
 
-		// 서비스객체에서 동착
-		mgservice.memberDelete(memberVO);
+		if (memberVO.getMember_id() != null && memberVO.getMember_id() != "") {
+			mgservice.memberDelete(memberVO);
+			session.invalidate();
 
-		// 세션초기화
-		session.invalidate();
+		}
+		return "redirect:/my/drop";
 	}
 }

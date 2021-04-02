@@ -46,12 +46,14 @@ public class NanuDonationController {
 	*/
 	
 	// 물품 신청서 작성 페이지 itemForm.jsp -> 로그인 사용자용
+	
 	@GetMapping("/item/form") 
 	public String itemForm(MemberVO mvo, Model model) throws Exception {
 		log.debug("controller -- itemForm -- 호출");
-		model.addAttribute("memberInfo", ndservice.getMember());
+		model.addAttribute("list1", ndservice.getMember());
 		return "donation/itemForm";
 	}
+	
 	
 	// 물품 나눔 후 정보 디비입력 + 수정 테이블에 따로따로 입력해야함 
 	@PostMapping("/item/formAction")
@@ -67,7 +69,25 @@ public class NanuDonationController {
 	public String moneyMain() {
 		log.info("money donation main page 호출");
 		return "donation/moneyMain";
-	}	
+	}
+	
+	@GetMapping("/moneyDonationForm") //후원금 기부페이지 이동
+	public String moneyForm() {		
+		log.info("후원금 기부 페이지 이동");
+		return "donation/moneyDonationForm";
+	}
+	
+	@GetMapping("/money/card")
+	public String cardDonation() { //카드결재 모듈
+		log.info("후원금 카드 결제 모듈");
+		return "donation/cardDonation";
+	}
+	
+	@GetMapping("/money/vbank")
+	public String vBankDonation() {//무통장 모듈
+		log.info("후원금 무통장 결제 모듈");
+		return "donation/vBankDonation";
+	}
 	
 	// 포인트 나눔하기 페이지 pointForm.jsp
 	@GetMapping("/money/point")

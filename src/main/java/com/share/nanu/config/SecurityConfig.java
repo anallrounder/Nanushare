@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 			.logoutUrl("/member/logout") //로그아웃하면 메인페이지로 이동						
 			.logoutSuccessUrl("/main")
+			.deleteCookies("Nanushare_cooki") //로그아웃시 쿠키 삭제
 			.invalidateHttpSession(true).permitAll()
 		.and()
 			.oauth2Login().loginPage("/loginPage")
@@ -63,6 +64,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//로그인 성공 시 수행 할 UserService 구현체 지정, 엑세스토큰 + 사용자프로필정보 같이 받음
 		.and()
 			.defaultSuccessUrl("/main"); //소셜 로그인이 성공하면 이동할 주소
+		
+		http
+			.rememberMe()
+			.key("Nanushare")
+			.rememberMeParameter("Nanushare_rememberMe")
+			.rememberMeCookieName("Nanushare_cooki") //f12개발자모드 -> application -> cooki에서 Nanushare_cooki라는 이름으로 쿠키 정보를 확인할 수 있다.
+			.userDetailsService(mservice)
+			.tokenValiditySeconds(1209600); //2주
 		
 		
 	}
