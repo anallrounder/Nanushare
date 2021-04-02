@@ -16,9 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Charity Cause Detail</title>
- <link rel="shortcut icon" type="image/x-icon" 
-    	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> <!-- 웹페이지 탭 로고이미지 삽입  -->
-    	
+
 
 <!-- 탭처리 -->
 <!-- <link rel="stylesheet"
@@ -167,7 +165,7 @@ li:nth-child(2) {
 										</tr>
 									</table>
 								</ul>
-<!-- https://zgundam.tistory.com/51 네이버랑카카오는 ROLE_USER2로 권한을 주고 <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"으로 주는거 어떨지 의논-->
+
 								<a href="${pageContext.request.contextPath}/my/myprofile"
 									class="charity-simple-blog-btn">프로필 관리</a> <a href="#"
 									class="charity-simple-blog-btn">기부영수증</a>
@@ -262,11 +260,9 @@ li:nth-child(2) {
 						</div>
 
 						<script>
-						
-						/* 탭부분 ajax */
 							// 위 ajax를 통한 data.load는 따로 bootstrap에 정의된 기능이 아니기 때문에 구현해야한다.
 							// 메뉴가 선택되기 전의 이벤틀르 가져온다.
-						/* 	$('a[data-toggle="tab"]').on('show.bs.tab',
+							$('a[data-toggle="tab"]').on('show.bs.tab',
 									function(e) {
 										// 선택되는 요소를 오브젝트화 한다.
 										$this = $(e.target);
@@ -279,7 +275,7 @@ li:nth-child(2) {
 											// data-load를 true로 변환하여 중복 로딩이 없게 한다.
 											$this.data("load", true);
 										}
-									}); */
+									});
 						</script>
 
 
