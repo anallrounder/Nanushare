@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 @Service
 public class MyPageServiceImpl implements MyPageService {
 
-	@Autowired
+	@Autowired 
 	private MyPageMapper mgmapper;
 
 	@Autowired

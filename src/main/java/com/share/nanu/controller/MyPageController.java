@@ -158,7 +158,7 @@ public class MyPageController {
 
 	}
 
-	// 탈퇴페이지
+	// 탈퇴페이지 
 	@PostMapping("/my/drop")
 	public String deletePOST(@RequestBody MemberVO memberVO, HttpSession session) {
 
