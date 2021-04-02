@@ -17,7 +17,7 @@ public interface NanuMapper {
 
 	public MemberVO idcheck(String memberId);// 이메일 체크
 
-	public void changePw(MemberVO mvo); //비밀번호변경
+	public void changePw(MemberVO mvo); //회원정보변경
 
 	public MemberVO findEmail(String mail);
 

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 <html>
@@ -9,8 +11,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 
 <title>myprofile_edit</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<!-- 웹페이지 탭 로고이미지 삽입  -->
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -22,134 +29,59 @@
 <link rel="stylesheet" href="/resources/charity/css/style.css">
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 <script type="text/javascript">
-	/* 비밀번호 */
-	/* $(function() {
-		$("#alert-success").hide();
-		$("#alert-danger").hide();
-		$("input").keyup(function() {
-			var pwd1 = $("#pwd1").val();
-			var pw = $("#pw").val();
-			if (pwd1 != "" || pw != "") {
-				if (pwd1 == pw) {
-					$("#alert-success").show();
-					$("#alert-danger").hide();
-					$("#submit").removeAttr("disabled");
-				} else {
-					$("#alert-success").hide();
-					$("#alert-danger").show();
-					$("#submit").attr("disabled", "disabled");
-				}
-			}
-		});
-	}); */
+$(function() {
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+
 	/* 비밀번호 */
 
 	/* ajax를 통한 회원정보 수정처리 */
-	function modifyMember() {
+	 $('#mjoin').submit(function(event) { 
+                event.preventDefault();
+                
 		var name = $("#name").val();
 		var member_id = $("#member_id").val();
-		var gender = $("#gender").val();
+		var subemail = $("#subemail").val();
 		var pw = $("#pw").val();
-		var phone = $("#phone").val();
+		/* var phone = $("#phone").val(); */
 
-		var param = {
+		var memberJoin = {
 			"name" : name,
 			"member_id" : member_id,
-			"gender" : gender,
-			"pw" : pw,
-			"phone" : phone
-		}
+			 "subemail" : subemail,
+			"pw" : pw
+			/* "phone" : phone */
+		};
 
-		if (pw == '') {
-			alert("비밀번호를 올바르게 입력해주세요.");
-		} else {
 			$.ajax({
-				anyne : true,
-				type : 'POST',
-				data : JSON.stringify(param),
-				url : "/my/myprofile/edit",
+				type : 'PUT',
+				 data: JSON.stringify(memberJoin),
+				 url: $(this).attr("action"),
 				dataType : "text",
+				cache: false,
 				contentType : "application/json; charset=UTF-8",
 				success : function(data) {
-					alert("변경이 완료되었습니다.");
-					location.href = "/my/mypage";
+					  console.log(result);
+					  if (result == "SUCCESS") {
+                          console.log("success");
 				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert("ERROR : " + textStatus + " : " + errorThrown);
+				error : function(e) {
+					alert("필수 입력 사항을 입력해주세요.");
+					 console.log(result);
+                     console.log(e);
 				}
-			})
-		}
-
-	}
-</script>
-
-<script type="text/javascript">
-	/*js에서 csrf토큰, 헤더 등록  */
-
-	$(document)
-			.ready(
-					function() {
-
-						var token = $("meta[name='_csrf']").attr("content");
-						var header = $("meta[name='_csrf_header']").attr(
-								"content");
-						$(document).ajaxSend(function(e, xhr, options) {
-							xhr.setRequestHeader(header, token);
-						});
-
-						$('#mjoin')
-								.submit(
-										function(event) {
-											event.preventDefault();
-
-											var member_id = $("#member_id")
-													.val();
-											var pw = $("#pw").val();
-											var name = $("#name").val();
-
-											var memberJoin = {
-
-												member_id : member_id,
-												pw : pw,
-												name : name,
-
-											};
-
-											$
-													.ajax({
-														type : "POST",
-														url : $(this).attr(
-																"action"),
-														cache : false,
-														contentType : 'application/json; charset=utf-8',
-														data : JSON
-																.stringify(memberJoin),
-														success : function(
-																result) {
-															console.log(result);
-															if (result == "SUCCESS") {
-																console
-																		.log("success");
-																$(location)
-																		.attr(
-																				'href',
-																				"${pageContext.request.contextPath}/");
-
-															}
-														},
-														error : function(e) {
-															alert("fail");
-
-															console.log(result);
-															console.log(e);
-														}
-													}); //ajax			
-										});
-
-					}); // end ready()
+			});
+		});
+ });
 </script>
 
 
@@ -189,7 +121,6 @@ label {
 }
 
 input {
-	
 	width: 300px;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -203,123 +134,9 @@ input {
 
 <body>
 	<!-- Header -->
-	<header id="charity-header" class="charity-header-one"
-		style="position: relative; z-index: 2">
-
-		<!-- Top Strip -->
-		<div class="charity-top-strip">
-			<aside>
-				<a href="${pageContext.request.contextPath}/main"
-					class="charity-logo"
-					style="width: 200px; height: 100px; margin: 0px 0px 0px 20px;"><img
-					src="/resources/nanulogo.png" alt=""></a>
-			</aside>
-			<div class="container">
-				<div class="row">
-					<aside class="col-12">
-						<div class="float-center">
-							<a href="#menu" class="menu-link active"><span></span></a>
-							<nav id="menu" class="menu charity-navigation">
-
-								<ul>
-									<!-- <li class="active"><a href="index.html">Home</a></li> -->
-									<li style="padding: 0px 40px 0px 70px"><a href="#"
-										style="font-size: 20px;">나누셰어란?</a>
-										<ul class="children">
-											<li><a
-												href="${pageContext.request.contextPath}/menu/menu_about">나누셰어
-													소개</a></li>
-											<li><a
-												href="${pageContext.request.contextPath}/menu/menu_way">찾아오셰어</a></li>
-											<!--     <li><a href="event-detail.html">Event Detail</a></li> -->
-										</ul></li>
-									<li style="padding: 0px 40px 0px 30px"><a href="#"
-										style="font-size: 20px;">나눔함 안내</a> <!--  <ul class="children">
-                                            <li><a href="cause-list.html">Cause List</a></li>
-                                            <li><a href="cause-grid.html">Cause Grid</a></li>
-                                            <li><a href="cause-detail.html">Cause Detail</a></li>
-                                        </ul> --></li>
-									<li style="padding: 0px 40px 0px 30px"><a href="#"
-										style="font-size: 20px;">나누기</a>
-										<ul class="children">
-											<li><a href="blog-large.html">물품 나누기</a></li>
-											<li><a href="blog-medium.html">돈기부여하기</a></li>
-											<!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
-										</ul></li>
-									<li style="padding: 0px 40px 0px 30px"><a href="#"
-										style="font-size: 20px;">나눔 인증</a> <!--  <ul class="children">
-                                            <li><a href="team-grid.html">Team Grid</a></li>
-                                            <li><a href="team-classic.html">Team Classic</a></li>
-                                            <li><a href="team-detail.html">Team Detail</a></li>
-                                        </ul> --></li>
-									<li style="padding: 0px 40px 0px 30px"><a href="#"
-										style="font-size: 20px;">이벤트</a>
-										<ul class="children">
-											<li><a href="about.html">출석체크</a></li>
-											<li><a href="prayer-list.html">테스트</a></li>
-											<li><a href="prayer-grid.html">게임</a></li>
-											<!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                            <li><a href="search-result.html">Search Result</a></li> -->
-										</ul></li>
-									<li style="padding: 0px 40px 0px 30px"><a
-										href="contact-us.html" style="font-size: 20px;">더하기</a>
-										<ul class="children">
-											<li><a href="about.html">공지사항</a></li>
-											<li><a href="prayer-list.html">문의하기</a></li>
-										</ul></li>
-
-
-								</ul>
-								<!--  <span class="float-right">
-                                    <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a>
-                          			<a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a>
-                                </span> -->
-
-							</nav>
-
-							<!--    <ul class="charity-header-options" style="text-align: center">
-                                <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i></a></li>
-                                <li><a href="#"><i class="fab fa-opencart"></i></a> <div class="charity-cart-box"> <p>No products in the cart.</p> </div> </li>
-             
-                                <li> <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a></li>
-                          		<li><a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a></li>
-                                
-                            </ul>
-                             -->
-
-						</div>
-
-					</aside>
-
-
-					<!--     <aside class="col-12"> 
-                        <div class="float-right">
-                          <ul class="charity-social-network">
-                              <li><a href="#" class="fab fa-facebook-f"></a></li>
-                              <li><a href="#" class="fab fa-google"></a></li>
-                              <li><a href="#" class="fab fa-pinterest-p"></a></li>
-                              <li><a href="#" class="fab fa-linkedin-in"></a></li>
-                              <li><a href="#" class="fab fa-twitter"></a></li>
-                          </ul>
-                          <a href="#" class="charity-strip-btn charity-bgcolor" >Sign up</a>
-                          <a href="#" class="charity-strip-btn charity-bgcolor">Sign in</a>
-                         
-                        </div>
-                    </aside> -->
-				</div>
-			</div>
-			<aside>
-				<a href="#" class="charity-strip-btn charity-bgcolor"
-					style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign
-					up</a> <a href="#" class="charity-strip-btn charity-bgcolor"
-					style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign
-					in</a>
-			</aside>
-		</div>
-		<!-- Top Strip -->
-	</header>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
+
 
 	<!-- Banner -->
 	<div class="charity-subheader">
@@ -327,7 +144,7 @@ input {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>프로필수정하는 페이지 - 여기를 지우면 메뉴가 안보임</h1>
+					<h1>프로필수정하는 페이지</h1>
 				</div>
 			</div>
 		</div>
@@ -346,54 +163,64 @@ input {
 							<h2>프로필 수정</h2>
 						</div>
 						<div style="margin: 0 auto" align="center">
-							<form id="mjoin" action='<c:url value='/my/myprofile'/>'
-								class="myform" method="post" novalidate>
+							<form id="mjoin"
+								action="${pageContext.request.contextPath}/my/mypage"
+								method="put" novalidate>
+								<!-- onsubmit="return check()" -->
 
 								<ul class="charity-contact-form">
+									<li>
+										<!-- <ul class="row"> --> <label>아이디 </label> <input
+										type="text" name="member_id" id="member_id"
+										value="<sec:authentication property="principal.member.member_id"/>"
+										readonly required />
+									</li>
+									<li><label>이름</label> <input type="text" name="name"
+										id="name"
+										value="<sec:authentication property="principal.member.name" />"
+										required></li>
+									<li><label>서브 이메일</label><input type="text"
+										name="subemail" id="subemail"
+										value="<sec:authentication property="principal.member.subemail" />"
+										required></li>
 
-									<!-- <ul class="row"> -->
-
-									<label>아이디 <input type="text" placeholder="Email"
-										name="member_id" id="member_id" value="${modifyId}"
-										readonly="readonly" required>
-									</label>
-
-									<label>이름<input type="text" name="name" id="name"
-										placeholder="Name" value="${modifyName}" required>
-									</label>
-
-									<%-- <li class="col-md-6">핸드폰 정보 <input type="text"
-											placeholder="Phone Number" name="phone" id="phone"
-											value="${modifyPhone}" required>
-										</li>
-										<li class="col-md-6">성별<input type="text"
+									<%-- 	<li class="col-md-6">성별<input type="text"
 											placeholder="gender" name="gender" id="gender"
 											class="form-control" required>
 										</li> --%>
-									<label>변경할 비밀번호 입력<input type="password"
+									<li><label>변경할 비밀번호 입력</label><input type="password"
 										placeholder="Password" name="pw" id="pwd1"
-										class="form-control" required>
-									</label>
-									<label>비밀번호 확인<input type="password"
+										class="form-control" required></li>
+									<li><label>비밀번호 확인</label><input type="password"
 										placeholder="Confirm Password" name="pwConfirm" id="pw"
-										class="form-control" required>
-									</label>
+										class="form-control" required></li>
 								</ul>
+
+								<div class="buttonbutton">
+									<!-- </ul> -->
+									<button type="button"
+										onclick="location.href='${pageContext.request.contextPath}/my/drop'"
+										class="charity-simple-blog-btn">회원 탈퇴</button>
+									<button type="button" onclick="location.href='/my/mypage'"
+										class="charity-simple-blog-btn">처음으로</button>
+
+									<button type="submit" class="charity-simple-blog-btn">수정완료</button>
+									<!-- onclick="modifyMember()" -->
+								</div>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+							</form>
 						</div>
 
-						<div class="buttonbutton">
-							<!-- </ul> -->
-							<button type="button"
-								onclick="location.href='${pageContext.request.contextPath}/my/drop'"
-								class="charity-simple-blog-btn">회원 탈퇴</button>
-							<button type="button" onclick="location.href='/my/mypage'"
-								class="charity-simple-blog-btn">처음으로</button>
-							<button type="button" id="submit" onclick="modifyMember()"
-								class="charity-simple-blog-btn">수정완료</button>
-						</div>
+						<!-- jquery validation cdn-->
+						<!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
+						<script type="text/javascript"
+							src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-
-						</form>
+						<!-- jquery validation method cdn -->
+						<script type="text/javascript"
+							src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js">
+    </script>
 
 
 						<script>
@@ -406,10 +233,10 @@ input {
 													/* 비밀번호 특수문자 https://yoo-hyeok.tistory.com/82  */
 													/* 공식 문서 https://jqueryvalidation.org/ */
 													/* html의 input태그의 name=""에 설정한 값과 같아야한다.  */
-													member_id : {
-														required : true, /* 필수인가? true는 yes를 의미 */
-														email : true
-													/* 이메일 형식인가? */
+														subemail : {
+														required : true,
+														email : true,
+														
 													},
 													pw : {
 														required : true,
@@ -429,13 +256,13 @@ input {
 													
 												messages : { /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
 
-													member_id : {
+													subemail : {
 														required : '이메일을 입력해 주세요.',
 														email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com'
 													},
 													pw : {
 														required : '비밀번호를 입력해 주세요.',
-														passwordCK : '비밀번호는 영문자, 숫자, 특수문자를 조합하여 입력해야 합니다.',
+														passwordCK : '비밀번호는 4~12자로 영문자, 숫자, 특수문자를 조합하여 입력해야 합니다. ex)?는 사용할 수 없습니다.',
 														minlength : '비밃런호는 최소 4글자 이상 입력해 주세요.',
 														maxlength : '비밃런호는 최대 12글자 까지 입력이 가능합니다.'
 													},
@@ -449,7 +276,14 @@ input {
 													},
 													
 												errorElement : 'span'
-
+													errorClass : 'error',
+													errorPlacement : function(error, element) { 
+														if(element.is(":text") || element.is(":password")										  ){
+															element.parent().after(error);
+														}else{
+															element.after(error);
+														}
+													}}
 											});
 							$.validator
 									.addMethod(
@@ -502,27 +336,7 @@ input {
 
 
 <!-- Footer -->
-<footer id="charity-footer" class="charity-footer-one">
-	<!-- Footer Widget -->
-	<div class="charity-footer-widget">
-		<div class="container">
-
-			<!-- CopyRight -->
-			<div class="charity-copyright">
-				<a href="/resources/charity/#" class="back-top charity-bgcolor"><i
-					class="fa fa-angle-up"></i></a>
-				<p>© 2021, All Right Reserved - by</p>
-				<ul>
-					<li><a href="/resources/charity/404.html">Terms and
-							conditions</a></li>
-					<li><a href="/resources/charity/404.html">Privacy policy</a></li>
-				</ul>
-			</div>
-			<!-- CopyRight -->
-		</div>
-	</div>
-	<!-- Footer Widget -->
-</footer>
+<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 <!-- Footer -->
 
 

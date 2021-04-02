@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +11,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+
+<!-- 헤더 안에 추가  -->
+<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
+<!-- js에서 csrf 토큰, 헤더등록 -->
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 
 <title>myprofile.jsp</title>
 
@@ -32,23 +42,34 @@
 
 </head>
 <script type="text/javascript">
+	/* 403에러때문에 넣은 코드 */
+	 $(function() {
+        	
+        	var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+
 	//패스워드 맞는지 확인
-	$.ajax({
+	 $.ajax({
 		url : "${pageContext.request.contextPath}/my/myprofile",
-		type : "POST",
+		type : "GET",
 		headers : {
 			"Content-Type" : "application/json",
-			"X-HTTP-<ethod-Override" : "POST"
+			"X-HTTP-Method-Override" : "GET"
 		},
 		data : pw,
 		datatype : "json",
 		success : function(result) {
-			if (data == "pwConfirmOK") {
+			console.log(result);
+
+			if (result === "pwdChk") {
 				$('#pwMsg').html('');
-				chk1 = true;
+				location.href = "${pageContext.request.contextPath}/my/myprofile/edit";
 			} else {
 				$('#pwMsg').html('');
-				chk1 = false;
+				alert('비밀번호가 일치하지 않습니다.');
 			}
 		},
 
@@ -56,7 +77,42 @@
 			console.log("에러 : " + error)
 		}
 
-	});
+	}); 
+
+	/* 비밀번호체크 */
+	
+	  $('#forgotpw').submit(function(event) { 
+                event.preventDefault();
+
+                var pw = $("#pw").val();             
+
+                var changePw = {
+
+                    pw: pw                                   
+                };
+                $.ajax({
+                    type: "GET",
+                    url: $(this).attr("action"),
+                    cache: false,
+                    /* contentType: 'application/json; charset=utf-8', */
+                    data: JSON.stringify(changePw),
+                    success: function(result) {
+                    	console.log(result);
+                  if (result == "SUCCESS") {
+                 console.log("success");
+                 $(location).attr('href', "${pageContext.request.contextPath}/my/myprofile/edit");
+
+             }
+
+			} ,
+            error: function(e) {
+                alert("비밀번호가 일치하지 않습니다");
+
+                console.log(result);
+                console.log(e);
+            }
+        }); //ajax			
+    });
 </script>
 <style>
 label {
@@ -66,131 +122,26 @@ label {
 }
 
 input {
-    /* To make sure that all text fields have the same font settings
+	/* To make sure that all text fields have the same font settings
        By default, textareas have a monospace font */
-    font: 1em sans-serif;
-
-    /* To give the same size to all text field */
-    width: 300px;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-    /* To harmonize the look & feel of text field border */
-    border: 1px solid #999;
+	font: 1em sans-serif;
+	/* To give the same size to all text field */
+	width: 300px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	/* To harmonize the look & feel of text field border */
+	border: 1px solid #999;
 }
 </style>
 <body>
 	<!-- Header -->
-	<header id="charity-header" class="charity-header-one"
-		style="position: relative; z-index: 2"> <!-- Top Strip -->
-	<div class="charity-top-strip">
-		<aside> <a href="${pageContext.request.contextPath}/main"
-			class="charity-logo"
-			style="width: 200px; height: 100px; margin: 0px 0px 0px 20px;"><img
-			src="/resources/nanulogo.png" alt=""></a> </aside>
-		<div class="container">
-			<div class="row">
-				<aside class="col-12">
-				<div class="float-center">
-					<a href="#menu" class="menu-link active"><span></span></a>
-					<nav id="menu" class="menu charity-navigation">
-
-					<ul>
-						<!-- <li class="active"><a href="index.html">Home</a></li> -->
-						<li style="padding: 0px 40px 0px 70px"><a href="#"
-							style="font-size: 20px;">나누셰어란?</a>
-							<ul class="children">
-								<li><a href="${pageContext.request.contextPath}/menu/about">나누셰어
-										소개</a></li>
-								<li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
-								<!--     <li><a href="event-detail.html">Event Detail</a></li> -->
-							</ul></li>
-						<li style="padding: 0px 40px 0px 30px"><a href="#"
-							style="font-size: 20px;">나눔함 안내</a> <!--  <ul class="children">
-                                            <li><a href="cause-list.html">Cause List</a></li>
-                                            <li><a href="cause-grid.html">Cause Grid</a></li>
-                                            <li><a href="cause-detail.html">Cause Detail</a></li>
-                                        </ul> --></li>
-						<li style="padding: 0px 40px 0px 30px"><a href="#"
-							style="font-size: 20px;">나누기</a>
-							<ul class="children">
-								<li><a href="blog-large.html">물품 나누기</a></li>
-								<li><a href="blog-medium.html">돈기부여하기</a></li>
-								<!-- <li><a href="blog-detail.html">Cause Detail</a></li> -->
-							</ul></li>
-						<li style="padding: 0px 40px 0px 30px"><a href="#"
-							style="font-size: 20px;">나눔 인증</a> <!--  <ul class="children">
-                                            <li><a href="team-grid.html">Team Grid</a></li>
-                                            <li><a href="team-classic.html">Team Classic</a></li>
-                                            <li><a href="team-detail.html">Team Detail</a></li>
-                                        </ul> --></li>
-						<li style="padding: 0px 40px 0px 30px"><a href="#"
-							style="font-size: 20px;">이벤트</a>
-							<ul class="children">
-								<li><a href="about.html">출석체크</a></li>
-								<li><a href="prayer-list.html">테스트</a></li>
-								<li><a href="prayer-grid.html">게임</a></li>
-								<!--  <li><a href="prayer-detail.html">Prayer De1tail</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                            <li><a href="search-result.html">Search Result</a></li> -->
-							</ul></li>
-						<li style="padding: 0px 40px 0px 30px"><a
-							href="contact-us.html" style="font-size: 20px;">더하기</a>
-							<ul class="children">
-								<li><a href="about.html">공지사항</a></li>
-								<li><a href="prayer-list.html">문의하기</a></li>
-							</ul></li>
-
-
-					</ul>
-					<!--  <span class="float-right">
-                                    <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a>
-                          			<a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a>
-                                </span> --> </nav>
-
-					<!--    <ul class="charity-header-options" style="text-align: center">
-                                <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fas fa-search"></i></a></li>
-                                <li><a href="#"><i class="fab fa-opencart"></i></a> <div class="charity-cart-box"> <p>No products in the cart.</p> </div> </li>
-             
-                                <li> <a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign up</a></li>
-                          		<li><a href="#" class="charity-strip-btn charity-bgcolor" style="width:100px;height:30px;">Sign in</a></li>
-                                
-                            </ul>
-                             -->
-
-				</div>
-
-				</aside>
-
-
-				<!--     <aside class="col-12"> 
-                        <div class="float-right">
-                          <ul class="charity-social-network">
-                              <li><a href="#" class="fab fa-facebook-f"></a></li>
-                              <li><a href="#" class="fab fa-google"></a></li>
-                              <li><a href="#" class="fab fa-pinterest-p"></a></li>
-                              <li><a href="#" class="fab fa-linkedin-in"></a></li>
-                              <li><a href="#" class="fab fa-twitter"></a></li>
-                          </ul>
-                          <a href="#" class="charity-strip-btn charity-bgcolor" >Sign up</a>
-                          <a href="#" class="charity-strip-btn charity-bgcolor">Sign in</a>
-                         
-                        </div>
-                    </aside> -->
-			</div>
-		</div>
-		<aside> <a href="#" class="charity-strip-btn charity-bgcolor"
-			style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 0px 0px 6px; margin: -75px 50px 0px 0px;">Sign
-			up</a> <a href="#" class="charity-strip-btn charity-bgcolor"
-			style="width: 70px; height: 40px; white-space: nowrap; padding: 10px 5px 0px 10px; margin: -75px 140px 0px 0px;">Sign
-			in</a> </aside>
-	</div>
-	<!-- Top Strip --> </header>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
 
+
 	<!-- Banner -->
-	<!-- 	<div class="charity-subheader">
+	<div class="charity-subheader">
 		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
@@ -200,7 +151,7 @@ input {
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 	<!-- Banner -->
 
 
@@ -214,40 +165,58 @@ input {
 				<div class="row">
 					<div class="col-md-9">
 
+						<form id="forgotpw"
+							action="${pageContext.request.contextPath}/my/myprofile/edit"
+							method="get">
 
-						<ul class="charity-simple-blog-options">
-
-
-							<div class="charity-contact-form">
-								<ul class="row">
-									<!-- post로 수정해야함 -->
-									<form method="get" class="myform"
-										action="${pageContext.request.contextPath}/my/myprofile/edit">
-										<li class="col-md-6">비밀번호 확인 <input type="password"
-											placeholder="비밀번호를 입력해주세요" name="pw" required></li> <input
-											class="charity-simple-blog-btn" type="submit" value="확인">
-									</form>
-								</ul>
+							<div class="form-group has-feedback">
+								<label class="control-label" for="pw">패스워드</label> <input
+									class="form-control" type="password" id="pwConfirm" name="pw" />
 							</div>
-						</ul>
-
-
-
-						</ul>
-
-						<!-- <div class="form-row  required"
-										data-required-text="암호가 일치하지 않습니다">
-										<li class="col-md-6"><label
-											for="dwfrm_profile_login_passwordconfirm"> <span>
-													비밀번호 확인</span> <span class="required-indicator">*</span>
-										</label> <input class="input-text-pw password required"
-											id="dwfrm_profile_login_passwordconfirm" type="password"
-											name="dwfrm_profile_login_passwordconfirm"
-											placeholder="Confirm Password" value="" maxlength="255"
-											minlength="8" required /></li>
-									</div> -->
-						</ul>
-
+							<div class="form-group has-feedback">
+								<button class="btn btn-success" type="button" id="submit">확인</button>
+							</div>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+						</form>
+						<script>
+						$("#forgotpw").validate({
+								
+								rules:{ /* 각 태그의 규칙을 설정 */
+									/*함수 정의 https://offbyone.tistory.com/50 참고주소 */
+									/* 비밀번호 특수문자 https://yoo-hyeok.tistory.com/82  */
+									/* 공식 문서 https://jqueryvalidation.org/ */
+									/* html의 input태그의 name=""에 설정한 값과 같아야한다.  */
+									pwConfirm : {
+										required : true,
+										equalTo : '#pw'									
+									}
+									
+								},
+								messages:{ /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
+									
+										pwConfirm : {
+										required : '비밀번호를 입력해 주세요.',
+										equalTo : "비밀번호가 일치하지 않습니다."								
+									}									
+									
+									
+								},
+								errorElement : 'span', /* 디폴트는 lable 태그 lable->span 으로 수정 */
+								errorClass : 'error', /* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
+																
+								errorPlacement : function(error, element) { 
+									if(element.is(":text") || element.is(":password")										  ){
+										element.parent().after(error);
+									}else{
+										element.after(error);
+									}
+								}
+													
+																
+							}); 
+							
+							</script>
 
 					</div>
 
@@ -274,25 +243,7 @@ input {
 	<!-- Content -->
 	</div>
 	<!-- Footer -->
-	<footer id="charity-footer" class="charity-footer-one"> <!-- Footer Widget -->
-	<div class="charity-footer-widget">
-		<div class="container">
-
-			<!-- CopyRight -->
-			<div class="charity-copyright">
-				<a href="/resources/charity/#" class="back-top charity-bgcolor"><i
-					class="fa fa-angle-up"></i></a>
-				<p>© 2021, All Right Reserved - by</p>
-				<ul>
-					<li><a href="/resources/charity/404.html">Terms and
-							conditions</a></li>
-					<li><a href="/resources/charity/404.html">Privacy policy</a></li>
-				</ul>
-			</div>
-			<!-- CopyRight -->
-		</div>
-	</div>
-	<!-- Footer Widget --> </footer>
+	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
 	<!-- Search Modal -->
