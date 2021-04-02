@@ -71,23 +71,7 @@ public class NanuDonationController {
 		return "donation/moneyMain";
 	}
 	
-	@GetMapping("/moneyDonationForm") //후원금 기부페이지 이동
-	public String moneyForm() {		
-		log.info("후원금 기부 페이지 이동");
-		return "donation/moneyDonationForm";
-	}
 	
-	@GetMapping("/money/card")
-	public String cardDonation() { //카드결재 모듈
-		log.info("후원금 카드 결제 모듈");
-		return "donation/cardDonation";
-	}
-	
-	@GetMapping("/money/vbank")
-	public String vBankDonation() {//무통장 모듈
-		log.info("후원금 무통장 결제 모듈");
-		return "donation/vBankDonation";
-	}
 	
 	// 포인트 나눔하기 페이지 pointForm.jsp
 	@GetMapping("/money/point")
