@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 
 import com.share.nanu.security.MemberDetailsService;
 import com.share.nanu.service.PrincipalOauth2UserService;
@@ -30,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+		web.httpFirewall(defaultHttpFirewall()); // //(더블슬래시 허용)
 
 		web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**","/scss/**"); //설정한 경로들은 스프링 시큐리티에서 모두 통과
 	}
@@ -74,6 +77,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.tokenValiditySeconds(1209600); //2주
 		
 		
+	}
+	
+	
+	
+	@Bean
+	public HttpFirewall defaultHttpFirewall() { // 더블슬래시 객체 생성
+		return new DefaultHttpFirewall();
 	}
 	
 	//해당 메소드의 리턴되는 오브젝트를 ioc로 등록
