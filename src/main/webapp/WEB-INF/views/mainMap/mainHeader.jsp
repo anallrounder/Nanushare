@@ -18,7 +18,7 @@
 
 <body class="home">
     <!-- Header -->
-    <header id="charity-header" class="charity-header-one" style="position:relative;z-index:2">
+    <header id="charity-header" class="charity-header-one" style="position:relative;z-index:2 ;">
      
         <!-- Top Strip -->
         <div class="charity-top-strip">
@@ -135,7 +135,7 @@
 					<c:forEach items="${username}" var="username">
                     	<p style="white-space: nowrap;  margin: 0px 450px 0px 100px; color: #ffffff; font-size: 16px; float: right;">${username}님</p>
                     </c:forEach> 
-					<a href="${pageContext.request.contextPath}/admin/Donation" class="charity-strip-btn charity-bgcolor" style="width:95px;height:40px; white-space: nowrap; padding: 12px 0px 0px 3px; margin: -35px 300px 0px 0px;">관리자페이지</a>
+					<a href="${pageContext.request.contextPath}/admin/donation" class="charity-strip-btn charity-bgcolor" style="width:95px;height:40px; white-space: nowrap; padding: 12px 0px 0px 3px; margin: -35px 300px 0px 0px;">관리자페이지</a>
 					<form action="/member/logout" method="post" id="mlogout">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<a

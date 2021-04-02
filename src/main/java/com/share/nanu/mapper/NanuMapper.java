@@ -1,7 +1,5 @@
 package com.share.nanu.mapper;
 
-import java.lang.reflect.Member;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.share.nanu.VO.MemberVO;

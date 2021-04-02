@@ -17,5 +17,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	</select>
 	
+	<select id="getHeadItem" resultType="com.share.nanu.VO.IteminvenVO2">
+	<![CDATA[ 
+		select * from iteminven
+	]]>
+	</select>
+	
+	<select id="getVmBranch" resultType="com.share.nanu.VO.VmVO">
+	<![CDATA[ 
+		select * from vm
+	]]>
+	</select>
+	
+	<resultMap type="com.share.nanu.VO.Vmam" id="vmamvo">
+		<id property="vmindex" column="vmindex" />
+		<result property="vm_num" column="vm_num" />
+		<result property="vm_amount" column="vm_amount" />
+		<result property="iname" column="iname" />
+	</resultMap>
+	
+	<resultMap type="com.share.nanu.VO.VmVmamVO" id="vmvo">
+		<id property="vm_num" column="vm_num" />
+		<result property="lat" column="lat" />
+		<result property="lng" column="lng" />
+		<result property="branch" column="branch" />
+		<collection property="vmamlist" javaType="java.util.ArrayList" resultMap="vmamvo" />
+	</resultMap>
+	
+	<select id="getVmVmam" resultMap="vmvo">
+	<![CDATA[ 
+		select * from vm, vmam where vm.vm_num = vmam.vm_num
+	]]>
+	</select>
+	
 
 </mapper>

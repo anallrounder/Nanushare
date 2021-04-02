@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.share.nanu.VO.Vmam;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.MainService;
 

@@ -1,12 +1,9 @@
 package com.share.nanu.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.share.nanu.mapper.NoticeBoardMapper;
 import com.share.nanu.paging.Criteria;
 import com.share.nanu.VO.BoardVO;

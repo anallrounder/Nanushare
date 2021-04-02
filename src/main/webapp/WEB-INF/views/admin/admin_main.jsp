@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -58,12 +59,14 @@ li {
 li:nth-child(2) {
 	color: lime;
 }
+
 </style>
+
 
 </head>
 <body class="hold-transition sidebar-mini">
  
-   <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+   <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp" %>
     
     <!-- Banner -->
 	<div class="charity-subheader">
@@ -85,18 +88,19 @@ li:nth-child(2) {
     
    
  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="margin-top: -50px;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      
+      <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
-      </li>
+      </li> -->
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -105,24 +109,27 @@ li:nth-child(2) {
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">  
     <!-- Brand Logo -->
-    <a href="/resources/AdminLTE-master/index3.html" class="brand-link">
+   <!--  <a href="/resources/AdminLTE-master/index3.html" class="brand-link">
       <img src="/resources/AdminLTE-master/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
+    </a> -->
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
           <img src="/resources/AdminLTE-master/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+        <sec:authorize access="hasRole('ADMIN')"> 
+	          <c:forEach items="${username}" var="username">
+		         <a href="#" class="d-block">${username}님</a>
+		     </c:forEach> 
+	     </sec:authorize>
         </div>
       </div>
-
       
+     
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -130,35 +137,70 @@ li:nth-child(2) {
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Starter Pages
-                <i class="right fas fa-angle-left"></i>
-              </p>
+            <a href="#money" class="nav-link active" data-toggle="tab">
+             <i class="nav-icon fas fa-donate"></i>
+              <p>후원금 관리<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="#m_day" class="nav-link active" data-toggle="tab">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
+                  <p>일별</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#m_week" class="nav-link" data-toggle="tab">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
+                  <p>주별</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#m_month" class="nav-link" data-toggle="tab">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>월별</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#m_year" class="nav-link" data-toggle="tab">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>년별</p>
                 </a>
               </li>
             </ul>
           </li>
+          
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#users" class="nav-link" data-toggle="tab">
+              <i class="nav-icon fas fa-users"></i>
+              <p>회원 관리</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="#items" class="nav-link" data-toggle="tab">
+              <i class="nav-icon fas fa-box-open"></i>
+              <p>재고 관리<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#item_head" class="nav-link" data-toggle="tab">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>본사 재고</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#item_branch" class="nav-link" data-toggle="tab">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>지점 재고</p>
+                </a>
+              </li>
+             </ul>
+          </li>
+          
+          <li class="nav-item">
+            <a href="#boards" class="nav-link" data-toggle="tab">
               <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
+              <p>게시판 관리</p>
             </a>
           </li>
         </ul>
@@ -175,24 +217,12 @@ li:nth-child(2) {
                     <div class="col-md-12">
                         
                         <!--// volunteer-form \\-->
-                        <div class="widget_title"><h2>회원 관리</h2></div>
+                        <br>
+                        
                         <div class="charity-volunteer-form" >
-                         
-									<ul class="nav nav-tabs" style="text-align: center;">
-										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#abc">기본 정보</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#def">물품 기부</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#ghi">돈기부여</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#jkl">포인트</a></li>
-											<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#jkl">문의 내역</a></li>
-									</ul>
 									<div class="tab-content">
-										<div class="tab-pane fade show active" id="abc">
-										
+										<div class="tab-pane fade show active" id="users">
+										<div class="widget_title"><h2>회원 관리</h2></div>
 											<table>
 												<div>
 													<br>
@@ -228,37 +258,68 @@ li:nth-child(2) {
 												<a href="#" rel="0" class="active">1</a>
 											</div>
 											
-
 										</div>
-										<div class="tab-pane fade" id="def">
-											<table>
-
-												<div>
-													<br>
-												</div>
-												<tr>
-
-													<th>아이디</th>
-													<th>인증제목</th>
-													<th>조회수</th>
-													<th>날짜</th>
-													<th>분류번호</th>
-												</tr>
-
-
-												<c:forEach items="${list2}" var="list2">
+										<div class="tab-pane fade" id="item_head">
+											<form action="admin/itemupdate" method="get">
+											<div class="widget_title"><h2>본사 재고</h2></div>
+												<table>
+													<div>
+														<br>
+													</div>
 													<tr>
-														<td>${list2.member_id}</td>
-														<td>${list2.btitle}</td>
-														<!-- 제목누르면 해당 글내용으로 이동링크 -->
-														<td>${list2.bhit}</td>
-														<td>${list2.bdate}</td>
-														<td>${list2.bcat_num}</td>
+														<th>물품명</th>
+														<th>현재 보유량</th>
+														<th>입고량</th>
+														<th>입고일</th>
+														<th>출고량</th>
+														<th>출고일</th>
+														<th>출고지점</th>
 													</tr>
-												</c:forEach>
-											</table>
+	
+													<c:forEach items="${item}" var="headItem">
+													<tr>
+														<td>${headItem.iname}</td> <!-- 물품명 출력  -->
+														<td>${headItem.iamount}</td> <!-- 현재 수량 출력 -->
+														<td> <!-- 입고량 -->
+															<select>
+																<option value="0">0</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</td>
+														<td><input type="text" class="datepicker"></td>
+														<td><!-- 출고량 -->
+															<select> 
+																<option value="0">0</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</td>
+														<td><%@ include file="/WEB-INF/views/admin/datepicker.jsp" %></td>
+															
+														<td><!-- 출고지점 -->
+														
+															<select> 
+															<c:forEach items="${vm}" var="vmvo">
+																<option value="${vmvo.branch}">${vmvo.branch}</option>
+															</c:forEach> 
+															</select>
+														
+														</td>
+													</tr>
+													</c:forEach>
+												</table>
+												
+												<button type="submit">업데이트</button>
+											</form>
 											<!-- 페이징 -->
-											<div id="nav">
+											<!-- <div id="nav">
 												<ul class="startItem">
 
 													<li class="active"><a><<</a></li>
@@ -276,8 +337,38 @@ li:nth-child(2) {
 													<li class="active"><a>>></a></li>
 
 												</ul>
-											</div>
+											</div> -->
 										
+										</div>
+										
+										<div class="tab-pane fade" id="item_branch">
+											<form>
+											<div class="widget_title"><h2>지점 재고</h2></div>
+												<table class="branchI">
+													<div>
+														<br>
+													</div>
+													<tr>
+														<th>No.</th>
+														<th>지점명</th>
+														<th>마스크</th>
+														<th>기저귀</th>
+														<th>생리대</th>
+														<th>문구류</th>
+														<th>손세정제</th>
+													</tr>
+	
+													<c:forEach items="${vvam}" var="vmdao" varStatus="status">
+													<tr>
+														<td>${status.count}</td> <!-- index  -->
+														<td>${vmdao.branch}</td> <!-- 지점명 -->
+														<c:forEach items="${vmdao.vmamlist}" var="list">
+																<td>${list.vm_amount}</td>
+														</c:forEach>
+													</tr>
+													</c:forEach>
+												</table>
+											</form>
 										</div>
 										<div class="tab-pane fade" id="ghi">
 											<table>
@@ -381,8 +472,8 @@ li:nth-child(2) {
 	   <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 
  <!-- jQuery -->
-    <script src="/resources/charity/script/jquery.js"></script>
-    <script src="/resources/charity/script/popper.min.js"></script>
+   <!--  <script src="/resources/charity/script/jquery.js"></script>
+    <script src="/resources/charity/script/popper.min.js"></script> -->
     <script src="/resources/charity/script/bootstrap.min.js"></script>
     <script src="/resources/charity/script/slick.slider.min.js"></script>
     <script src="/resources/charity/script/progressbar-main.js"></script> <!-- progressbar 복붙해서 사용  -->

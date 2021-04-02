@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 
 import com.share.nanu.VO.BoardreplyVO;
-import com.share.nanu.VO.ItemdonationVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.page.Criteria;
