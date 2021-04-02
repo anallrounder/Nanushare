@@ -15,17 +15,18 @@
 	
 	IMP.request_pay({
 	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : 14000,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
+	    pay_method : 'vbank', //결제 수단	    
+	    merchant_uid : 'merchant_' + new Date().getTime(), //가맹점에서 생성/관리하는 고유 주문번호
+	    name : '주문명:결제테스트', //주문명
+	    amount : 14000, //결제금액
+	    buyer_email : 'iamport@siot.do', //구매자 이메일
+	    buyer_name : '구매자이름', //주문자 이름	    
 	    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-	}, function(rsp) {
+	   /*  m_redirect_url은 모바일 결제프로세스가 시작되면서 PG사의 페이지로 redirect되었다가, 
+	    완료 후 다시 사이트로 복귀하기 위해 사용되는 파라메터입니다. 
+	    이 경우, m_redirect_url에 해당되는 서버 핸들러에서 결제여부 체크 및 금액 변조확인이 이루어져야 합니다. 
+	    이를 위해 결제완료 후 랜딩되는 URL은 다음과 같은 추가 파라메터를 가지게 됩니다. */
+	}, function(rsp) { //callback
 	    if ( rsp.success ) {
 	        var msg = '결제가 완료되었습니다.';
 	        msg += '고유ID : ' + rsp.imp_uid;
@@ -38,6 +39,8 @@
 	    }
 	    alert(msg);
 	});
+	
+	
 
 </script>
 
@@ -46,6 +49,10 @@
 </head>
 <body>
 	<!-- 버튼을 눌렀을때 결제가 진행, 결제가완료 되면 db카운트 -->
+	<!-- 서버로 넘겨줄 정보 즉, nanushare db에 저장할 정보 -->
+	<!-- 결제번호, 결제자 아이디, 결제금액, 결제날짜, 
+		결제처리 상태(카드는 즉시 완료 되지만, 무통장은 확인을 해야함),pg사, 결제방법 분류 번호 -->
+	<!-- 1. 카드, 2. 계좌 -->
 	<!-- <form action="">
 		<input type="button" value="후원해라">
 	</form> -->

@@ -87,7 +87,7 @@
                                     <h6 class="skillst-right">Goal: <span>$5000</span></h6>
                                     <div data-width='90' data-target='95' class="charity-cause-progressbar"></div>
                                 </div>
-                                <a href="/donation/money/form" class="charity-plan-btn">후원금 기부하기<i class="fa fa-heart"></i></a>
+                                <a href="/donation/moneyDonationForm" class="charity-plan-btn">후원금 기부하기<i class="fa fa-heart"></i></a>
                                 <ul class="charity-cause-social">
                                    <li><a href="https://www.facebook.com/" class="fab fa-facebook"></a></li>
                                     <li><a href="https://www.twitter.com/" class="fab fa-twitter"></a></li>
