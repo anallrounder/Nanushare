@@ -10,23 +10,40 @@ import com.share.nanu.VO.BoardVO;
 @Mapper
 public interface NoticeBoardMapper {
 	
-	// 일반 리스트
-		public List<BoardVO> getlist(); // 게시판 리스트
-		
-		// 페이징 리스트
-		public List<BoardVO> getlistWithPaging(Criteria cri); // 페이징 리스트
-		public int getTotalCount(Criteria cri); // 게시글 수 카운트
-		
-		// 콘텐트 뷰
-		public BoardVO read(int b_index); // 
-		public void hitUpdate(BoardVO boardVO); // 조회수
-		
-		// 글 수정
-		public void modify(BoardVO boardVO); // 게시글 수정
+	// 게시글 불러오기
+		public List<BoardVO> getList();
 
-		// 글 삭제
-		public void delete(int b_index); // 게시글 삭제
+		// 페이징을 적용한 게시글 불러오기
+		public List<BoardVO> getListWithPaging(Criteria criteria);
+
+		// 페이징이 적용되는 게시글 수 단위
+		public int getTotalCount(Criteria criteria);
+
+		// 글 작성하기
+		public void insert(BoardVO boardVO);
+
+		// 작성글 불러오기
+		public BoardVO read(int bno);
+
+		// 조회수 증가
+		public void upHit(int bno);
+
+		// 작성글 삭제하기
+		public void delete(BoardVO boardVO);
+
+		// AJAX용 작성글 삭제하기
+		public int ajaxDelete(int b_index);
+
+		// 작성글 수정하기
+		public void modify(BoardVO boardVO);
+
+		// 답변글 작성페이지 이동
+		public BoardVO readReply(int bno);
+
+		// 답변글 작성하기
+		public void reply(BoardVO boardVO);
+
+		// 답변글 형태 업데이트하기
+		public void replyShape(BoardVO boardVO);
 		
-		// 글 입력
-		public void insert(BoardVO boardVO); // 게시글 입력
 }

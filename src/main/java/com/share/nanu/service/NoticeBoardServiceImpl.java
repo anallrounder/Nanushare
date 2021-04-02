@@ -1,11 +1,17 @@
 package com.share.nanu.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.share.nanu.mapper.NoticeBoardMapper;
 import com.share.nanu.paging.Criteria;
+
+import com.share.nanu.mapper.NoticeBoardMapper;
+
 import com.share.nanu.VO.BoardVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,63 +21,79 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class NoticeBoardServiceImpl implements NoticeBoardService {
 	
-	@Autowired
-	private NoticeBoardMapper nbMapper;
+	private NoticeBoardMapper mapper;
 	
-	// 게시판 리스트
 	@Override
-	public List<BoardVO> getlist() {
-		log.info("getlist()");
-		return nbMapper.getlist();
+	public List<BoardVO> getList() {
+		log.info("getList...");
+		return mapper.getList();
 	}
 
-	// 페이징 리스트
+	// 페이징을 적용한 게시글 리스트
 	@Override
-	public List<BoardVO> getlist(Criteria cri) {
-		log.info("getlist(cri)");
-		return nbMapper.getlistWithPaging(cri);
+	public List<BoardVO> getList(Criteria criteria) {
+		log.info("getList() WITH criteria: " + criteria);
+		return mapper.getListWithPaging(criteria);
 	}
-	
-	// 페이징 - 게시글 수 카운트
+
+	// 페이징 단위에 적용되는 최대 게시글 단위
 	@Override
-	public int getTotal(Criteria cri) {
-		log.info("getTotal(cri)");
-		return nbMapper.getTotalCount(cri);
+	public int getTotal(Criteria criteria) {
+		log.info("getTotal() WITH criteria: " + criteria);
+		return mapper.getTotalCount(criteria);
 	}
-	
-	// 컨텐트뷰
-	@Override
-	public BoardVO getBoard(int b_index) {
-		log.info("getBoard()");
-		return nbMapper.read(b_index);
-	}
-	
-	// 인증게시판 글 조회수
-	@Override
-	public void uphit(BoardVO boardVO) {
-		log.info("글 조회수 uphit()");
-		nbMapper.hitUpdate(boardVO);
-	}
-	
-	// 수정사항 업데이트
-	@Override
-	public void modifyBoard(BoardVO boardVO) {
-		log.info("글 수정 modifyBoard()");
-		nbMapper.modify(boardVO);
-	}
-	
-	// 글삭제
-	@Override
-	public void deleteBoard(int b_index) {
-		log.info("글 삭제 deleteBoard()");
-		nbMapper.delete(b_index);
-	}
-	
-	// 글쓰기
+
+	// 글작성 페이지
 	@Override
 	public void writeBoard(BoardVO boardVO) {
-		log.info("글 쓰기 writeBoard()");
-		nbMapper.insert(boardVO);
+		mapper.insert(boardVO);
+		log.info("writeBoard()");
+	}
+
+	// 작성글 페이지
+	@Transactional
+	@Override
+	public BoardVO getBoard(int bno) {
+		mapper.upHit(bno);
+		log.info("getBoard()");
+		return mapper.read(bno);
+	}
+
+	// 작성글 삭제
+	@Override
+	public void deleteBoard(BoardVO boardVO) {
+		mapper.delete(boardVO);
+		log.info("deleteBoard()");
+	}
+
+	// AJax를 이용한 작성글 삭제
+	@Override
+	public int remove(int bId) {
+		log.info("remove..........");
+		return mapper.ajaxDelete(bId);
+	}
+
+	// 작성글 수정
+	@Override
+	public void modifyBoard(BoardVO boardVO) {
+		mapper.modify(boardVO);
+		log.info("modifyBoard()");
+	}
+
+	// 답글 페이지
+	@Override
+	public BoardVO getReply(int bno) {
+		log.info("getBoard()");
+		return mapper.readReply(bno);
+	}
+
+	// 답글 수행
+	@Transactional
+	@Override
+	public void replyBoard(BoardVO boardVO) {
+		mapper.reply(boardVO);
+		mapper.replyShape(boardVO);
+		log.info("replyBoard()");
 	}
 	
 }

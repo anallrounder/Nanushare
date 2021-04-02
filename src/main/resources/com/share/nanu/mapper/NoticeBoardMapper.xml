@@ -5,17 +5,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- select sum(dntprice) from donation where TO_CHAR(dntdate,'yyyy-mm-dd') > sysdate-1 order by dnt_paynum asc -->
 
 <mapper namespace="com.share.nanu.mapper.NoticeBoardMapper">
-	
-	<!-- 게시판 리스트 -->
-	<select id="getlist" resultType="com.share.nanu.VO.BoardVO">
-		<![CDATA[ 
-			select * from board where bcat_num = 3
-		]]>
+	<!-- 게시글 불러오기 -->
+	<select id="getList" resultType="com.share.nanu.VO.BoardVO">
+	<![CDATA[
+		SELECT * FROM board where bcat_num = 3
+	]]>
 	</select>
-
-	<!-- 게시판 페이징 리스트 -->
-	<select id="getlistWithPaging" resultType="com.share.nanu.VO.BoardVO">
-		 <![CDATA[
+	
+	<!-- 페이징을 적용한 게시글 불러오기 -->
+	<select id="getListWithPaging" resultType="com.share.nanu.VO.BoardVO">
+		<![CDATA[
 			select * from (
 						select rownum as rnum, a.* 
 		  		from ( 
@@ -25,40 +24,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<!-- 게시물 총 개수  -->
+	<!-- 페이징이 적용되는 게시글 수 단위 -->
 	<select id="getTotalCount" resultType="int">
-	  <![CDATA[
-	 	 select count(*) from board where bcat_num = 3
-	   ]]>
+	<![CDATA[
+		select count(*) from board where bcat_num = 3
+	]]>	
 	</select>
 	
-	<!-- 게시판 컨텐트뷰 -->
+	<!-- 글 작성하기 -->
+	<insert id="insert" >
+	<![CDATA[
+		INSERT INTO board (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) VALUES (mvc_board_seq.nextval, #{bName}, #{bTitle}, #{bContent}, 0, mvc_board_seq.currval, 0, 0)
+	]]>
+	</insert>
+	
+	<!-- 작성글 불러오기 -->
 	<select id="read" resultType="com.share.nanu.VO.BoardVO">
-		<![CDATA[
-	     	select * from board where bcat_num = 3 and b_index = #{b_index}
-	   ]]>
+	<![CDATA[
+		select * from board where bcat_num = 3 and b_index = #{b_index}
+	]]>
 	</select>
 	
-	<!-- 인증게시판 조회수 카운트 +1 hitUpdate -->
-	<update id="hitUpdate">
-		 <![CDATA[
-	      update board set bhit = bhit +1 where b_index = #{b_index}
-	   ]]>
+	<!-- 조회수 증가 -->
+	<update id="upHit">
+	<![CDATA[
+		UPDATE board SET bhit = bhit+1 WHERE b_index = #{b_index}
+	]]>
 	</update>
 	
-	<!-- 게시글 수정 modify-->
- 	<update id="modify">
-		<![CDATA[
-	    	update board set btitle = #{btitle}, bcontent = #{bcontent} where b_index = #{b_index}
-		]]>
-	</update> 
-	
-	<!-- 글 삭제 -->
+	<!-- 작성글 삭제하기 -->
 	<delete id="delete">
-	   <![CDATA[
-	     	delete from board where b_index = #{b_index}
-	   ]]>
+	<![CDATA[
+		DELETE FROM board WHERE b_index = #{b_index}
+	]]>
 	</delete>
+	
+	<!-- AJAX용 작성글 삭제하기 -->
+	<delete id="ajaxDelete">
+	<![CDATA[
+		DELETE FROM board WHERE b_index = #{b_index}
+	]]>
+	</delete>
+	
+	<!-- 작성글 수정하기 -->
+	<update id="modify">
+	<![CDATA[
+		UPDATE board SET member_id = #{member_id}, btitle = #{btitle}, bcontent = #{bcontent} where b_index = #{b_index}
+	]]>
+	</update>
+	
+	<!-- 답변글 작성페이지 이동
+	<select id="readReply" resultType="com.share.nanu.VO.BoardVO">
+	<![CDATA[
+		SELECT * FROM board WHERE b_index = #{bno}
+	]]>
+	</select>
+	
+	답변글 작성하기
+	<insert id="reply" >
+	<![CDATA[
+		INSERT INTO board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) VALUES (mvc_board_seq.nextval, #{bName}, #{bTitle}, #{bContent}, #{bGroup}, #{bStep}+1, #{bIndent}+1)
+	]]>
+	</insert>
+	
+	답변글 형태 업데이트하기
+	<update id="replyShape" >
+	<![CDATA[
+		UPDATE board SET bStep = bStep + 1 WHERE bGroup = #{bGroup}
+	]]>
+	</update> -->
 	
 	
 </mapper>
