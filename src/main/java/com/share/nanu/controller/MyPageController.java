@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,7 +33,9 @@ public class MyPageController {
 	@Autowired
 	private MemberService mservice;
 
-//https://onebyone1.tistory.com/61
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+
 	// 마이페이지
 	@GetMapping("/my/mypage")
 	public ModelAndView mypage(MemberVO mvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {
@@ -109,41 +112,53 @@ public class MyPageController {
 		return mav;
 	}
 
+	@PostMapping("/my/myprofile")
+	public ResponseEntity<String> myprofile2(@AuthenticationPrincipal MemberDetails md) {
+		ResponseEntity<String> entity = null;
+		try {
+			mgservice.checkpw(md.getmember().getMember_id());
+			System.out.println(md.getmember().getMember_id());
+			System.out.println("성공했는지");
+			String password = md.getmember().getPw(); // md.getmember.getPassword()
+			bCryptPasswordEncoder.encode(password);
+			bCryptPasswordEncoder.matches("password", md.getmember().getPw());
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;
+
+	}
+
 	// 수정페이지
 	@GetMapping("/my/myprofile/edit")
 	public ModelAndView myprofileedit(ModelAndView mav) {
 
-		mav.setViewName("/my/edit");
+		mav.setViewName("/my/myprofile/edit");
 		return mav;
 		// return "redirect:home";
 	}
 
 	// 수정페이지
-	@PutMapping("/my/myprofile/edit")
-	public ResponseEntity<String> myprofileedit(@RequestBody MemberVO mvo) {
+	@PutMapping("/my/myprofile/edit/check")
+	public String myprofileedit(@AuthenticationPrincipal MemberDetails md, Model model) {
 
-		ResponseEntity<String> entity = null;
+		model.addAttribute("member_id");
+		// model.addAttribute("member_id",
+		// mgservice.memberModifyPOST(md.getUsername()));
 
-		try {
-			mgservice.memberModifyPOST(mvo);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
+		return "/my/mypage";
 	}
 
-	//탈퇴페이지
+	// 탈퇴페이지
 	@GetMapping("/my/drop")
 	public void deleteGET(ModelAndView mvo) {
 		mvo.setViewName("/my/drop");
 
 	}
 
-	//탈퇴페이지
+	// 탈퇴페이지
 	@PostMapping("/my/drop")
 	public String deletePOST(@RequestBody MemberVO memberVO, HttpSession session) {
 

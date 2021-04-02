@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
@@ -16,7 +16,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Charity Cause Detail</title>
-
+ <link rel="shortcut icon" type="image/x-icon" 
+    	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> <!-- 웹페이지 탭 로고이미지 삽입  -->
+    	
 
 <!-- 탭처리 -->
 <!-- <link rel="stylesheet"
@@ -81,27 +83,6 @@ li:nth-child(2) {
 <body>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- <script type="text/javascript">
-	/* 페이징 ajax */
-		$(document).ready(function() {
-			// 표시하는 글 수를 바꾸면 이벤트 처리를 해서 다시 리스트를 불러온다.
-
-			$("#startPage").change(function() {
-
-				// 		alert("select change!");
-
-				location = "my/mypage?"
-
-				+ "page=1" // 페이지 전달한다.
-
-				+ "&startPage=" + $("#startPage").val() // 페이지 당 글수 전달
-
-			});
-
-		});
-	</script> -->
-
 
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
@@ -260,9 +241,11 @@ li:nth-child(2) {
 						</div>
 
 						<script>
+						
+						/* 탭부분 ajax */
 							// 위 ajax를 통한 data.load는 따로 bootstrap에 정의된 기능이 아니기 때문에 구현해야한다.
 							// 메뉴가 선택되기 전의 이벤틀르 가져온다.
-							$('a[data-toggle="tab"]').on('show.bs.tab',
+						/* 	$('a[data-toggle="tab"]').on('show.bs.tab',
 									function(e) {
 										// 선택되는 요소를 오브젝트화 한다.
 										$this = $(e.target);
@@ -275,7 +258,7 @@ li:nth-child(2) {
 											// data-load를 true로 변환하여 중복 로딩이 없게 한다.
 											$this.data("load", true);
 										}
-									});
+									}); */
 						</script>
 
 

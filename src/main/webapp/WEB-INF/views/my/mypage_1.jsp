@@ -93,14 +93,14 @@
 							begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
 							var="idx">
 							<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-							<a href="_1${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="my/mypage/_1${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach></li>
 
 
 					<li class="page-item"><c:if
 							test="${pageMaker.next && pageMaker.endPage > 0}">
 							<a class="page-link"
-								href="_1${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+								href="my/mypage/_1${pageMaker.makeQuery(pageMaker.endPage +1) }">next
 							</a>
 						</c:if></li>
 				</ul>
