@@ -35,7 +35,7 @@ public interface MyPageMapper {
 	public int getTotalCnt4(Criteria cri);
 
 	// 회원수정
-	public void memberModifyPOST(MemberVO mvo);
+	public void memberModify(MemberVO mvo);
 
 	// 회원탈퇴
 	public MemberVO memberDelete(MemberVO membervo);

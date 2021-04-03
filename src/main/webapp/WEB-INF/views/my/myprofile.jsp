@@ -68,9 +68,7 @@
 			});
 		
 		$('#passwordcheck').submit(function(event) { //비밀번호 변경 처리
-			
-			
-			
+
 			event.preventDefault();/* 이게있어서 폼태그에는 주소 필요x */
 
 			/* var member_id = $("#member_id").val(); */

@@ -31,9 +31,6 @@ public interface MyPageService {
 	public List<BoardreplyVO> myList4(Criteria cri);
 	public int getTotalCount4(Criteria cri);
 
-	//비밀번호체크
-	public void checkpw(String member_id);
-	
 	// 회원수정
 	public void memberModifyPOST(MemberVO mvo);
 

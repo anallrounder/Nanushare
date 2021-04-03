@@ -101,18 +101,8 @@ public class MyPageServiceImpl implements MyPageService {
 
 		return mgmapper.getTotalCnt4(cri);
 	}
-	
 
-	//비밀번호 확인
-	public void checkpw(String username) {
-			      
-		nmapper.getMember(username);
-			
-	     } 
-	  
-	
-
-//회원수정페이지
+	//회원수정
 	@Override
 	public void memberModifyPOST(MemberVO mvo) {
 
@@ -131,7 +121,7 @@ public class MyPageServiceImpl implements MyPageService {
 			member.setPw(bCryptPasswordEncoder.encode(mvo.getPw()));
 		}
 
-		mgmapper.memberModifyPOST(member);
+		mgmapper.memberModify(member);
 	}
 	
 
@@ -141,4 +131,6 @@ public class MyPageServiceImpl implements MyPageService {
 		mvo = nmapper.getMember(mvo.getMember_id());
 		return mgmapper.memberDelete(mvo);
 	}
+
+	
 }

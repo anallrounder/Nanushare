@@ -161,7 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</select>  -->
 
-	<update id="memberModifyPOST">
+	<update id="memberModify">
 		<![CDATA[
 		UPDATE member
 		SET name = #{name}, pw = #{pw},subemail = #{subemail}
@@ -169,14 +169,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 
-
-	<!-- 회원탈퇴 - 다시 재가입이 안되게 delete가 아닌 update로 구현? -->
 	<delete id="memberDelete">
 		delete from member
-		SET enable=2
 		where
-		member_id =
-		#{member_id} and pw=#{pw} and name=#{name}
+		member_id = #{member_id} and pw = #{pw} and name=#{name}
 	</delete>
 
 </mapper>
