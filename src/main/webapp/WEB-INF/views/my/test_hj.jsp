@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<body>
 <div>프로그래스바 참고 https://www.python2.net/questions-309527.htm</div>
 
 
@@ -32,6 +32,6 @@
 
 <div>★★★★★★★★ //소셜로그인한 사람은 회원수정 없이 갈것--버튼에 권한주기 ★★★★★★★★</div>
 <div>//717페이지 -- 본인이 작성한 게시글만 수정가능한것 ==========================</div>
-
+</body>
 </head>
 </html>
