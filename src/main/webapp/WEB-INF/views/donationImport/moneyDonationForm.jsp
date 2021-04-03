@@ -43,6 +43,7 @@ $(function() {
 		       type : 'post',
 			   url : "${pageContext.request.contextPath}/my/test",
 			   contentType : "application/json; charset=UTF-8",
+			   data : 'json',
 			   success : function(data){
 				   console.log(data);
 			   },
