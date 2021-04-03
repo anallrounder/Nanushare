@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
- 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +18,7 @@
 <!-- jquery validation method cdn -->
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-							
+
 
 <!-- meta tags -->
 <meta charset="utf-8">
@@ -59,7 +59,7 @@
 
 <script type="text/javascript">
 	/* 403에러때문에 넣은 코드 */
-	$(function() {
+	$(document).ready(function() {
 
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
@@ -76,40 +76,44 @@
 			var check = {
 
 				/* member_id : member_id, */
-				pwConfirm : pwConfirm /* id --# */
+				pwConfirm : pwConfirm
+			/*주는값이 id --# */
 			};
-		});
+		
 		//패스워드 맞는지 확인 체크
-		$
-				.ajax({
-					type : "POST",
+		$.ajax({
+					type : 'POST',
 					/* 내가 처리할 주소(=현재주소) */
-					url :"${pageContext.request.contextPath}/my/myprofile",
-					cache : false,
+					url : "${pageContext.request.contextPath}/my/myprofile/check",
 					contentType : 'application/json; charset=utf-8',
-					data : JSON.stringify(check),
-					datatype : "json",
+					data: {pwConfirm : pwConfirm},
+					datatype : 'json',
+					/* beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+						console.log("header 실행 " + header + token)
+						xhr.setRequestHeader(header, token);
+					},
+ */
 					success : function(result) {
 						console.log(result);
 
 						if (result == "SUCCESS") {
 							console.log("success");
 							$(location)
-									.attr('href',
-											"${pageContext.request.contextPath}/my/myprofile/edit");
+									.attr('href',"${pageContext.request.contextPath}/my/myprofile/edit");
 							/* 성공할 페이지 */
 
 						}
 					},
 
 					error : function(e) {
+						
 						alert("비밀번호가 일치하지 않습니다.");
 
-						console.log("에러 : " + error);
+						console.log("에러 : " + e);
 					}
 
 				});
-
+		});
 	});
 </script>
 <style>
@@ -162,10 +166,9 @@ input {
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-
-						<form id="passwordcheck"
-							action="#"
-							method="POST"><!-- 폼태그는 어차피 위에서 성공여부로 주소를 줬기때문에 안줘도 상관없다 -->
+<!-- "${pageContext.request.contextPath}/my/myprofile/edit" -->
+						<form id="passwordcheck"  method="GET">
+							<!-- 폼태그는 어차피 위에서 성공여부로 주소를 줬기때문에 안줘도 상관없다 -->
 
 							<div class="form-group has-feedback">
 								<label class="control-label" for="pw">패스워드</label> <input
@@ -180,7 +183,7 @@ input {
 								value="${_csrf.token}" />
 						</form>
 
-						
+
 					</div>
 
 				</div>

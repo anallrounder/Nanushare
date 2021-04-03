@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
 @Service
 public class MyPageServiceImpl implements MyPageService {
 
-	@Autowired 
+	@Autowired
 	private MyPageMapper mgmapper;
 
 	@Autowired
@@ -113,8 +113,10 @@ public class MyPageServiceImpl implements MyPageService {
 	
 
 //회원수정페이지
+//	@Override
+//	public void memberModifyPOST(@RequestBody MemberVO mvo) {
 	@Override
-	public void memberModifyPOST(@RequestBody MemberVO mvo) {
+	public void memberModifyPOST(MemberVO mvo) {
 
 		MemberVO member = nmapper.getMember(mvo.getMember_id());
 		if (mvo.getName() != null) {
@@ -137,7 +139,4 @@ public class MyPageServiceImpl implements MyPageService {
 		mvo = nmapper.getMember(mvo.getMember_id());
 		return mgmapper.memberDelete(mvo);
 	}
-
-
-
 }

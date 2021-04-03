@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
-import com.share.nanu.page.Criteria; 
+import com.share.nanu.page.Criteria;
 
 @Mapper
 public interface MyPageMapper {

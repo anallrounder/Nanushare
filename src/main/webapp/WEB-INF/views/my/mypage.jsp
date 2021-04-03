@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
- 
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,9 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Charity Cause Detail</title>
- <link rel="shortcut icon" type="image/x-icon" 
-    	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> <!-- 웹페이지 탭 로고이미지 삽입  -->
-    	
+
 
 <!-- 탭처리 -->
 <!-- <link rel="stylesheet"
@@ -83,6 +81,27 @@ li:nth-child(2) {
 <body>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- <script type="text/javascript">
+	/* 페이징 ajax */
+		$(document).ready(function() {
+			// 표시하는 글 수를 바꾸면 이벤트 처리를 해서 다시 리스트를 불러온다.
+
+			$("#startPage").change(function() {
+
+				// 		alert("select change!");
+
+				location = "my/mypage?"
+
+				+ "page=1" // 페이지 전달한다.
+
+				+ "&startPage=" + $("#startPage").val() // 페이지 당 글수 전달
+
+			});
+
+		});
+	</script> -->
+
 
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
@@ -159,8 +178,9 @@ li:nth-child(2) {
 										<tr>
 											<td
 												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">
-												나의 포인트 : <sec:authentication
-													property="principal.member.dntcnt" /> <a
+												나의 포인트 :<sec:authentication
+													property="principal.member.dntcnt" />  <%-- <sec:authentication
+													property="principal.point.totalpnt" /> --%> <a
 												href="${pageContext.request.contextPath}/donation/money/point"
 												class="charity-simple-blog-btn" style="float: right;">기부하기</a>
 											</td>
@@ -239,28 +259,6 @@ li:nth-child(2) {
 								</div>
 							</div>
 						</div>
-
-						<script>
-						
-						/* 탭부분 ajax */
-							// 위 ajax를 통한 data.load는 따로 bootstrap에 정의된 기능이 아니기 때문에 구현해야한다.
-							// 메뉴가 선택되기 전의 이벤틀르 가져온다.
-						/* 	$('a[data-toggle="tab"]').on('show.bs.tab',
-									function(e) {
-										// 선택되는 요소를 오브젝트화 한다.
-										$this = $(e.target);
-										// data-load가 false의 경우는 content에 data-load를 한다.
-										if (!$this.data("load")) {
-											// tab-content의 id를 취득한다.
-											var id = $this.attr("href");
-											// 페이지 로드를 한다.
-											$(id).load($this.data("url"));
-											// data-load를 true로 변환하여 중복 로딩이 없게 한다.
-											$this.data("load", true);
-										}
-									}); */
-						</script>
-
 
 						<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 						<script
