@@ -38,7 +38,7 @@ public interface MyPageService {
 	public void memberModifyPOST(MemberVO mvo);
 
 
-	// 회원탈퇴페이지
+	// 회원탈퇴페이지 
 	public MemberVO memberDelete(MemberVO mvo);
 	
 	
