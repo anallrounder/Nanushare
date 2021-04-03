@@ -21,6 +21,7 @@ import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.page.Criteria;
 import com.share.nanu.page.pageVO;
+import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.NanuBoardShowYSService;
 
 import lombok.AllArgsConstructor;
@@ -65,7 +66,7 @@ public class NanuBoardShowYSController {
 	
 	// 인증게시판 컨텐트뷰 - 체크
 	@GetMapping("/content_view")
-	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md, @AuthenticationPrincipal MemberDetails md) throws Exception {
+	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.debug("인증게시판 컨트롤러 컨텐트뷰");
 		nbsService.uphit(boardVO);
 		model.addAttribute("content_view", nbsService.getBoard(boardVO.getB_index()));
