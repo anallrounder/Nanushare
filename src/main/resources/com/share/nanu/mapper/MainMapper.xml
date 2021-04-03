@@ -61,5 +61,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update vmam set vm_amount = vm_amount-2 where vm_num = #{vm_num} and iname = #{iname}
 	]]>
 	</update>
+	
+	<!-- 항목에 대한 수량체크 -->
+	<select id="vmcount" resultType="int"> 
+	<![CDATA[ 
+		select vm_amount from vmam where vm_num = #{vm_num} and iname =#{iname}
+	]]>
+	</select>
 
 </mapper>

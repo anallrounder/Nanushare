@@ -241,6 +241,7 @@
 
 
     <!-- jQuery -->
+    
     <script src="/resources/charity/script/jquery.js"></script>
     <script src="/resources/charity/script/popper.min.js"></script>
    

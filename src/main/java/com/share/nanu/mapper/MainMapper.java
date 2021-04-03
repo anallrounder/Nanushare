@@ -25,4 +25,6 @@ public interface MainMapper {
 
 	public void outAmount(String vm_num, String iname);
 
+	public int vmcount(String vm_num, String iname);
+
 }
