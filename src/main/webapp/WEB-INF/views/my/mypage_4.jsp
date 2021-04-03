@@ -122,21 +122,21 @@ li:nth-child(2) {
 				<ul class="pagination justify-content-center">
 					<li class="page-item"><c:if test="${pageMaker.prev}">
 							<a class="page-link"
-								href="_4${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+								href="${pageContext.request.contextPath}/my/mypage/_4${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
 						</c:if></li>
 
 					<li class="page-item"><c:forEach
 							begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
 							var="idx">
 							<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-							<a href="_4${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="${pageContext.request.contextPath}/my/mypage/_4${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach></li>
 
 
 					<li class="page-item"><c:if
 							test="${pageMaker.next && pageMaker.endPage > 0}">
 							<a class="page-link"
-								href="_4${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+								href="${pageContext.request.contextPath}/my/mypage/_4${pageMaker.makeQuery(pageMaker.endPage +1) }">next
 							</a>
 						</c:if></li>
 				</ul>

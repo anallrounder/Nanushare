@@ -32,6 +32,7 @@ public class NanuMainController {
 		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
 		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			
 			log.info("로그인한 사람 이름 - "+ md.getmember().getName());
 			mov.addObject("username",md.getmember().getName());
 		}

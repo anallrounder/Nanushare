@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,7 +23,9 @@ import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.MemberService;
 import com.share.nanu.service.MyPageService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 public class MyPageController {
@@ -32,7 +36,9 @@ public class MyPageController {
 	@Autowired
 	private MemberService mservice;
 
-//https://onebyone1.tistory.com/61
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+
 	// 마이페이지
 	@GetMapping("/my/mypage")
 	public ModelAndView mypage(MemberVO mvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {
@@ -41,8 +47,6 @@ public class MyPageController {
 			// log.info("로그인한 사람 이름 - "+ md.getmember().getName());
 			mav.addObject("username", md.getmember().getName());
 		}
-		// mav.setViewName("mainMap/mainview");
-
 		mav.setViewName("/my/mypage");
 		return mav;
 	}
@@ -103,48 +107,63 @@ public class MyPageController {
 	// 프로필 관리로 가는 페이지(수정 전 비밀번호 확인 단계)
 	@GetMapping("/my/myprofile")
 	public ModelAndView myprofile(ModelAndView mav) {
-
+		log.info("프로필 페이지 비밀번호 확인 페이지 이동");
 		mav.setViewName("/my/myprofile");
 
 		return mav;
 	}
 
-	// 수정페이지
-	@GetMapping("/my/myprofile/edit")
-	public ModelAndView myprofileedit(ModelAndView mav) {
-
-		mav.setViewName("/my/edit");
-		return mav;
-		// return "redirect:home";
-	}
-
-	// 수정페이지
-	@PutMapping("/my/myprofile/edit")
-	public ResponseEntity<String> myprofileedit(@RequestBody MemberVO mvo) {
+	@PostMapping("/my/myprofile/check")
+	public ResponseEntity<String> myprofile2(@AuthenticationPrincipal MemberDetails md, @RequestBody String pwConfirm) {
 
 		ResponseEntity<String> entity = null;
 
 		try {
-			mgservice.memberModifyPOST(mvo);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 
+			System.out.println(pwConfirm);
+
+			log.info("로그인한 회원의 비밀번호와 패스워드 칸에 입력한 비밀번호 일치하는지 확인");
+			// mgservice.checkpw(md.getUsername());
+			// System.out.println(md.getUsername());			
+			String password = md.getPassword(); // md.getmember.getPassword()
+			
+			System.out.println(bCryptPasswordEncoder.matches(pwConfirm, password));
+			// bCryptPasswordEncoder.matches("pwConfirm", password);
+			if (bCryptPasswordEncoder.matches(pwConfirm, password) == true) { //일치하면 true 리턴 불일치면 false
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			} else {
+				System.out.println("실패");
+				System.out.println();
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
 		}
-
 		return entity;
-	}
-
-	//탈퇴페이지
-	@GetMapping("/my/drop")
-	public void deleteGET(ModelAndView mvo) {
-		mvo.setViewName("/my/drop");
 
 	}
 
-	//탈퇴페이지
-	@PostMapping("/my/drop")
+	@GetMapping("/my/myprofile/edit")
+	public ModelAndView myprofile2(ModelAndView mav) {
+		log.info("피로필 수정 페이지로 이동");
+		mav.setViewName("/my/edit");
+
+		return mav;
+	}
+
+	// 수정페이지
+	@PutMapping("/my/myprofile/edit")
+	public String myprofileedit(@AuthenticationPrincipal MemberDetails md, Model model) {
+
+		model.addAttribute("member_id");
+		// model.addAttribute("member_id",
+		// mgservice.memberModifyPOST(md.getUsername()));
+
+		return "/my/mypage";
+	}
+
+	// 탈퇴페이지
+	@DeleteMapping("/my/drop")
 	public String deletePOST(@RequestBody MemberVO memberVO, HttpSession session) {
 
 		if (memberVO.getMember_id() != null && memberVO.getMember_id() != "") {
@@ -152,6 +171,6 @@ public class MyPageController {
 			session.invalidate();
 
 		}
-		return "redirect:/my/drop";
+		return "/my/drop";
 	}
 }

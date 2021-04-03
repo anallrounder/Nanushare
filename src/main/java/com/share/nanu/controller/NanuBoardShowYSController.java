@@ -1,4 +1,4 @@
-//혜선 인증게시판 컨트롤러 작성 03.22_화ㅣ
+ //혜선 인증게시판 컨트롤러 작성 03.22_화ㅣ
 // https://www.tutorialrepublic.com/twitter-bootstrap-button-generator.php
 package com.share.nanu.controller;
 
@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.page.Criteria;
 import com.share.nanu.page.pageVO;
+import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.NanuBoardShowYSService;
 
 import lombok.AllArgsConstructor;
@@ -45,21 +47,37 @@ public class NanuBoardShowYSController {
 	
 	// 인증게시판 페이징 list
 	@GetMapping("/list")
-	public String boardShowPaging(Criteria cri, Model model) throws Exception {
+	public String boardShowPaging(Criteria cri, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.debug("인증게시판 컨트롤러 페이징 리스트");
 		model.addAttribute("plist", nbsService.getlist(cri));
 		
 		int total = nbsService.getTotal(cri);
 		model.addAttribute("pageMaker", new pageVO(cri, total));
+		
+		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
+		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
+		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+			model.addAttribute("username", md.getmember().getName());
+		}
+		
 		return "board_show/yourSupportList";
 	}
 	
 	// 인증게시판 컨텐트뷰 - 체크
 	@GetMapping("/content_view")
-	public String boardShowContent(BoardVO boardVO, Model model) throws Exception {
+	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.debug("인증게시판 컨트롤러 컨텐트뷰");
 		nbsService.uphit(boardVO);
 		model.addAttribute("content_view", nbsService.getBoard(boardVO.getB_index()));
+		
+		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
+		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
+		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+			model.addAttribute("username", md.getmember().getName());
+		}
+				
 		return "board_show/yourSupportContent";
 	}
 	

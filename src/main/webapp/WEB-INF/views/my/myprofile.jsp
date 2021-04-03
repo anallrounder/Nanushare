@@ -7,11 +7,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- 이건무조건 여기있어야함 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- jquery validation cdn 이거 두개 안되면 폼태그 끝나는 시점 바로 밑에 넣기-->
+<!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+<!-- jquery validation method cdn -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+
 <!-- meta tags -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<%-- <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />  에러 주범??  --%>
 
 <!-- 헤더 안에 추가  -->
 <!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
@@ -41,78 +54,72 @@
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
 </head>
+
+
+
 <script type="text/javascript">
 	/* 403에러때문에 넣은 코드 */
-	 $(function() {
-        	
-        	var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-            $(document).ajaxSend(function(e, xhr, options) {
-                xhr.setRequestHeader(header, token);
-            });
+		$(document).ready(function() {
 
-	//패스워드 맞는지 확인
-	 $.ajax({
-		url : "${pageContext.request.contextPath}/my/myprofile",
-		type : "GET",
-		headers : {
-			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "GET"
-		},
-		data : pw,
-		datatype : "json",
-		success : function(result) {
-			console.log(result);
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+		
+		$('#passwordcheck').submit(function(event) { //비밀번호 변경 처리
+			
+			
+			
+			event.preventDefault();/* 이게있어서 폼태그에는 주소 필요x */
 
-			if (result === "pwdChk") {
-				$('#pwMsg').html('');
-				location.href = "${pageContext.request.contextPath}/my/myprofile/edit";
-			} else {
-				$('#pwMsg').html('');
-				alert('비밀번호가 일치하지 않습니다.');
-			}
-		},
+			/* var member_id = $("#member_id").val(); */
+			var pwConfirm = $("#pwConfirm").val();
 
-		error : function(error) {
-			console.log("에러 : " + error)
-		}
+			var check = {
 
-	}); 
+				/* member_id : member_id, */
+				pwConfirm : pwConfirm
+			/*주는값이 id --# */
+			};
+		
+		//패스워드 맞는지 확인 체크
+		$.ajax({
+					type : 'POST',
+					/* 내가 처리할 주소(=현재주소) */
+					url : "${pageContext.request.contextPath}/my/myprofile/check",
+					contentType : 'application/json; charset=utf-8',
+					data: pwConfirm,
+					async: "false",
+					datatype : 'text',
+					/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+					 /* beforeSend : function(xhr) { 
+						console.log("header 실행 " + header + token)
+						xhr.setRequestHeader(header, token);
+					}, */ 
+ 
+					success : function(result) {
+						console.log(result);
 
-	/* 비밀번호체크 */
-	
-	  $('#forgotpw').submit(function(event) { 
-                event.preventDefault();
+						if (result == "SUCCESS") {
+							console.log("success");
+							$(location)
+									.attr('href',"${pageContext.request.contextPath}/my/myprofile/edit");
+							/* 성공할 페이지 */
 
-                var pw = $("#pw").val();             
+						}
+					},
 
-                var changePw = {
+					error : function(error) {
+						
+						alert("비밀번호가 일치하지 않습니다.");
 
-                    pw: pw                                   
-                };
-                $.ajax({
-                    type: "GET",
-                    url: $(this).attr("action"),
-                    cache: false,
-                    /* contentType: 'application/json; charset=utf-8', */
-                    data: JSON.stringify(changePw),
-                    success: function(result) {
-                    	console.log(result);
-                  if (result == "SUCCESS") {
-                 console.log("success");
-                 $(location).attr('href', "${pageContext.request.contextPath}/my/myprofile/edit");
+						console.log("에러 : " + error);
+					}
 
-             }
-
-			} ,
-            error: function(e) {
-                alert("비밀번호가 일치하지 않습니다");
-
-                console.log(result);
-                console.log(e);
-            }
-        }); //ajax			
-    });
+				}); //ajax end
+		}); //패스워드 체크 스크립트 end
+	});
 </script>
 <style>
 label {
@@ -164,59 +171,23 @@ input {
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-
-						<form id="forgotpw"
-							action="${pageContext.request.contextPath}/my/myprofile/edit"
-							method="get">
+<!-- "${pageContext.request.contextPath}/my/myprofile/edit" -->
+						<form id="passwordcheck" action="${pageContext.request.contextPath}/my/myprofile/edit" method="get">
+							<!-- 폼태그는 어차피 위에서 성공여부로 주소를 줬기때문에 안줘도 상관없다 -->
 
 							<div class="form-group has-feedback">
 								<label class="control-label" for="pw">패스워드</label> <input
-									class="form-control" type="password" id="pwConfirm" name="pw" />
+									class="form-control" type="password" id="pwConfirm"
+									name="pwConfirm" />
 							</div>
+							<!-- name에 똑같이 줘야함 -->
 							<div class="form-group has-feedback">
-								<button class="btn btn-success" type="button" id="submit">확인</button>
+								<button class="btn btn-success" type="submit" id="submit">확인</button>
 							</div>
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
 						</form>
-						<script>
-						$("#forgotpw").validate({
-								
-								rules:{ /* 각 태그의 규칙을 설정 */
-									/*함수 정의 https://offbyone.tistory.com/50 참고주소 */
-									/* 비밀번호 특수문자 https://yoo-hyeok.tistory.com/82  */
-									/* 공식 문서 https://jqueryvalidation.org/ */
-									/* html의 input태그의 name=""에 설정한 값과 같아야한다.  */
-									pwConfirm : {
-										required : true,
-										equalTo : '#pw'									
-									}
-									
-								},
-								messages:{ /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
-									
-										pwConfirm : {
-										required : '비밀번호를 입력해 주세요.',
-										equalTo : "비밀번호가 일치하지 않습니다."								
-									}									
-									
-									
-								},
-								errorElement : 'span', /* 디폴트는 lable 태그 lable->span 으로 수정 */
-								errorClass : 'error', /* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
-																
-								errorPlacement : function(error, element) { 
-									if(element.is(":text") || element.is(":password")										  ){
-										element.parent().after(error);
-									}else{
-										element.after(error);
-									}
-								}
-													
-																
-							}); 
-							
-							</script>
+
 
 					</div>
 
