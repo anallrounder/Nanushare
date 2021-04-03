@@ -41,7 +41,7 @@ public class DonationImportController {
 	}
 	
 	@PostMapping("/cardDonation")
-	public void cardDonation(@RequestBody ) {
+	public void cardDonation() {
 		//@requestBody 는 http요청을 자바객체로 즉, http 요청의 body내용을 자바객체로 매핑
 		//@responseBody 는 자바객체를 http 응답 몸체로 전송 즉, 자바객체를 http 요청의 body내용으로 매핑
 		
