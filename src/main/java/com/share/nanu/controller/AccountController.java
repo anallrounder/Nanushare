@@ -77,13 +77,14 @@ public class AccountController {
 		return entity;
 	}
 
-	@GetMapping("/IdCheck") // 이메일 중복 체크
+	@GetMapping("/IdCheck") // 이메일 중복 체크 validation remote
 	public void IdCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		log.info("중복 이메일 체크");
 		response.setContentType("application/json"); // 응답을 줄때 타입은 json형태로 응답
 		String memberId = request.getParameter("member_id"); // 웹페이지에서 받은 member_id 를 memberId 변수에 저장
 		boolean idcheck = nservice.idCheck(memberId); // 웹에서 받은 아이디가 존재하는지 db에서 검사
 		log.info("member_id 존재 여부 : " + idcheck); // true면 중복 되는 member_id가 없다. false면 이미 member_id가 존재
+		//response.getWriter().append("true");
 		response.getWriter().append(idcheck ? "true" : "false");
 		// jquery validation plugin 에서 remote 는 반드시 true 또는 false를 넘겨줘야 한다.
 
