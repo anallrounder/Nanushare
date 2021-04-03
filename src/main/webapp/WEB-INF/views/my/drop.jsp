@@ -9,18 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>drop.jsp</title>
- <link rel="shortcut icon" type="image/x-icon" 
-    	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> <!-- 웹페이지 탭 로고이미지 삽입  -->
-    	
+<title>Nanushare</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<!-- 웹페이지 탭 로고이미지 삽입  -->
 
-
-<!-- 탭처리 -->
-<link rel="stylesheet"
-	href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
-<script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
-<script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
-<script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -37,10 +30,8 @@
 <!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-  />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <style>
 li {
@@ -52,7 +43,7 @@ table {
 }
 </style>
 
-<script type="text/javascript">
+<script>
 	/* 이용약관 버튼 */
 	function agree() {
 		var chkbox = document.getElementsByName('agree');
@@ -70,10 +61,106 @@ table {
 			alert("모든 약관에 동의해 주세요.")
 		}
 	}
+</script>
+
+<script type="text/javascript">
+
+/* 403에러때문에 넣은 코드 */
+$(document).ready(function() {
+
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
+
+$('#secession').submit(function(event) { //탈퇴 처리
+	event.preventDefault();/* 이게있어서 폼태그에는 주소 필요x */
+
+	/* var member_id = $("#member_id").val(); */
+	var name = $("#name").val();
+	var member_id = $("#member_id").val();
+	var pw = $("#pw").val();
+
+	var check = {
+			"name" : name,
+			"member_id" : member_id,
+			"pw" : pw
+	/*주는값이 id --# */
+	};
+
+//패스워드 맞는지 확인 체크
+$.ajax({
+			type : 'DELETE',
+			/* 내가 처리할 주소(=현재주소) */
+			url : "${pageContext.request.contextPath}/my/drop/check",
+			contentType : 'application/json; charset=utf-8',
+			data: JSON.stringify(check), /* 여기가 컨트롤러로 넘어가는 data {안에넣어주면  = 형식으로 넘어감} */
+			async: "false",
+			/* datatype : 'text', */
+			/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+			 /* beforeSend : function(xhr) { 
+				console.log("header 실행 " + header + token)
+				xhr.setRequestHeader(header, token);
+			}, */ 
+
+			success : function(result) {
+				console.log(result);
+
+				if (result == "SUCCESS") {
+					console.log("success");
+					$(location)
+							.attr('href',"${pageContext.request.contextPath}/main");
+					/* 성공했을때 넘어가는 페이지 */
+
+				}
+			},
+
+			error : function(error) {
+				
+				alert("비밀번호가 일치하지 않습니다.");
+
+				console.log("에러 : " + error);
+			}
+
+		}); //ajax end
+}); //패스워드 체크 스크립트 end
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/* 탈퇴 */
-	$(document).ready(function(e) {
-		$('#secession').click(function() {
+/* 	$(document).ready(function(e) {
+
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+		
+		$('#secession').click(function(event) {
 
 			//패스워드 입력 확인
 			if ($('#pw').val() == '') {
@@ -96,7 +183,7 @@ table {
 			//패스워드 맞는지 확인
 			$.ajax({
 				url : "${pageContext.request.contextPath}/my/drop",
-				type : "POST",
+				type : "DELETE",
 				data : $('#delFrm').serializeArray(),
 				contentType : "application/json; charset=UTF-8",
 				success : function(data) {
@@ -116,15 +203,20 @@ table {
 				}
 			});
 		});
-	});
+	}); */
 </script>
 
 </head>
 
 <body>
-	  <!-- Header -->
-    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
-    <!-- Header -->
+<!-- 약관동의때문에 추가 -->
+ <script src='{% static "js/jquery-1.11.3.min.js" %}'></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<!-- Header -->
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<!-- Header -->
 
 
 	<!-- Banner -->
@@ -192,7 +284,7 @@ table {
 									<br>
 
 									</li>
-									<form action="${pageContext.request.contextPath}/home"
+									<form action="${pageContext.request.contextPath}/home" id="secession"
 										class="myform" method="post">
 										<div class="charity-contact-form">
 											<table border="0">

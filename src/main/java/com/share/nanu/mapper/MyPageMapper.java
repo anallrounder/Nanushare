@@ -34,15 +34,12 @@ public interface MyPageMapper {
 	public List<BoardreplyVO> getPaging4(Criteria cri);
 	public int getTotalCnt4(Criteria cri);
 
-	// 패스워드체크
-	public String checkPw(String username, String password);
-
 	// 회원수정
 	public void memberModifyPOST(MemberVO mvo);
 
 	// 회원탈퇴
 	public MemberVO memberDelete(MemberVO membervo);
-	public String checkPw(String username);
+	
 	
 
 }
