@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,8 +45,6 @@ public class MyPageController {
 			// log.info("로그인한 사람 이름 - "+ md.getmember().getName());
 			mav.addObject("username", md.getmember().getName());
 		}
-		// mav.setViewName("mainMap/mainview");
-
 		mav.setViewName("/my/mypage");
 		return mav;
 	}
@@ -112,16 +111,19 @@ public class MyPageController {
 		return mav;
 	}
 
-	@PostMapping("/my/myprofile")
-	public ResponseEntity<String> myprofile2(@AuthenticationPrincipal MemberDetails md) {
+	@PostMapping("/my/myprofile/check")
+	public ResponseEntity<String> myprofile2(@AuthenticationPrincipal MemberDetails md,String pwConfirm) {
 		ResponseEntity<String> entity = null;
+		System.out.println("성공했는지1");
+		
 		try {
-			mgservice.checkpw(md.getmember().getMember_id());
-			System.out.println(md.getmember().getMember_id());
-			System.out.println("성공했는지");
-			String password = md.getmember().getPw(); // md.getmember.getPassword()
+			//mgservice.checkpw(md.getUsername());
+			//System.out.println(md.getUsername());
+			System.out.println("성공했는지2");
+			String password = md.getPassword(); // md.getmember.getPassword()
 			bCryptPasswordEncoder.encode(password);
-			bCryptPasswordEncoder.matches("password", md.getmember().getPw());
+			System.out.println(bCryptPasswordEncoder.matches("pwConfirm", password));
+			bCryptPasswordEncoder.matches("pwConfirm", password);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -130,18 +132,17 @@ public class MyPageController {
 		return entity;
 
 	}
-
-	// 수정페이지
+	
 	@GetMapping("/my/myprofile/edit")
-	public ModelAndView myprofileedit(ModelAndView mav) {
+	public ModelAndView myprofile2(ModelAndView mav) {
 
-		mav.setViewName("/my/myprofile/edit");
+		mav.setViewName("/my/edit");
+
 		return mav;
-		// return "redirect:home";
 	}
 
 	// 수정페이지
-	@PutMapping("/my/myprofile/edit/check")
+	@PutMapping("/my/myprofile/edit")
 	public String myprofileedit(@AuthenticationPrincipal MemberDetails md, Model model) {
 
 		model.addAttribute("member_id");
@@ -152,14 +153,7 @@ public class MyPageController {
 	}
 
 	// 탈퇴페이지
-	@GetMapping("/my/drop")
-	public void deleteGET(ModelAndView mvo) {
-		mvo.setViewName("/my/drop");
-
-	}
-
-	// 탈퇴페이지 
-	@PostMapping("/my/drop")
+	@DeleteMapping("/my/drop")
 	public String deletePOST(@RequestBody MemberVO memberVO, HttpSession session) {
 
 		if (memberVO.getMember_id() != null && memberVO.getMember_id() != "") {
@@ -167,6 +161,6 @@ public class MyPageController {
 			session.invalidate();
 
 		}
-		return "redirect:/my/drop";
+		return "/my/drop";
 	}
 }
