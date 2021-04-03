@@ -5,8 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
@@ -14,6 +18,7 @@ import com.share.nanu.VO.MemberVO;
 import com.share.nanu.mapper.MyPageMapper;
 import com.share.nanu.mapper.NanuMapper;
 import com.share.nanu.page.Criteria;
+import com.share.nanu.security.MemberDetails;
 
 import lombok.AllArgsConstructor;
 
@@ -21,7 +26,7 @@ import lombok.AllArgsConstructor;
 @Service
 public class MyPageServiceImpl implements MyPageService {
 
-	@Autowired
+	@Autowired 
 	private MyPageMapper mgmapper;
 
 	@Autowired
@@ -96,11 +101,20 @@ public class MyPageServiceImpl implements MyPageService {
 
 		return mgmapper.getTotalCnt4(cri);
 	}
+	
 
+	//비밀번호 확인
+	public void checkpw(String username) {
+			      
+		nmapper.getMember(username);
+			
+	     } 
+	  
+	
 
 //회원수정페이지
 	@Override
-	public void memberModifyPOST(MemberVO mvo) {
+	public void memberModifyPOST(@RequestBody MemberVO mvo) {
 
 		MemberVO member = nmapper.getMember(mvo.getMember_id());
 		if (mvo.getName() != null) {
@@ -115,12 +129,15 @@ public class MyPageServiceImpl implements MyPageService {
 
 		mgmapper.memberModifyPOST(member);
 	}
+	
 
 	// 회원탈퇴페이지
 	@Override
-	public MemberVO memberDelete(MemberVO membervo) {
-
-		return mgmapper.memberDelete(membervo);
+	public MemberVO memberDelete(MemberVO mvo) {
+		mvo = nmapper.getMember(mvo.getMember_id());
+		return mgmapper.memberDelete(mvo);
 	}
+
+
 
 }

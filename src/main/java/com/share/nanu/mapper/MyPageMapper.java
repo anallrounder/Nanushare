@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
-import com.share.nanu.page.Criteria;
+import com.share.nanu.page.Criteria; 
 
 @Mapper
 public interface MyPageMapper {
@@ -35,12 +35,14 @@ public interface MyPageMapper {
 	public int getTotalCnt4(Criteria cri);
 
 	// 패스워드체크
-	public boolean passChk(MemberVO vo);
+	public String checkPw(String username, String password);
 
 	// 회원수정
 	public void memberModifyPOST(MemberVO mvo);
 
 	// 회원탈퇴
 	public MemberVO memberDelete(MemberVO membervo);
+	public String checkPw(String username);
+	
 
 }
