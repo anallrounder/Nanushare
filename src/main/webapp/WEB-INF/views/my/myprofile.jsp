@@ -24,7 +24,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<%-- <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />  에러 주범??  --%>
 
 <!-- 헤더 안에 추가  -->
 <!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
@@ -59,15 +59,18 @@
 
 <script type="text/javascript">
 	/* 403에러때문에 넣은 코드 */
-	$(document).ready(function() {
+		$(document).ready(function() {
 
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});
-
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+		
 		$('#passwordcheck').submit(function(event) { //비밀번호 변경 처리
+			
+			
+			
 			event.preventDefault();/* 이게있어서 폼태그에는 주소 필요x */
 
 			/* var member_id = $("#member_id").val(); */
@@ -86,13 +89,15 @@
 					/* 내가 처리할 주소(=현재주소) */
 					url : "${pageContext.request.contextPath}/my/myprofile/check",
 					contentType : 'application/json; charset=utf-8',
-					data: {pwConfirm : pwConfirm},
-					datatype : 'json',
-					/* beforeSend : function(xhr) { /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+					data: pwConfirm,
+					async: "false",
+					datatype : 'text',
+					/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+					 /* beforeSend : function(xhr) { 
 						console.log("header 실행 " + header + token)
 						xhr.setRequestHeader(header, token);
-					},
- */
+					}, */ 
+ 
 					success : function(result) {
 						console.log(result);
 
@@ -105,15 +110,15 @@
 						}
 					},
 
-					error : function(e) {
+					error : function(error) {
 						
 						alert("비밀번호가 일치하지 않습니다.");
 
-						console.log("에러 : " + e);
+						console.log("에러 : " + error);
 					}
 
-				});
-		});
+				}); //ajax end
+		}); //패스워드 체크 스크립트 end
 	});
 </script>
 <style>
@@ -167,7 +172,7 @@ input {
 				<div class="row">
 					<div class="col-md-9">
 <!-- "${pageContext.request.contextPath}/my/myprofile/edit" -->
-						<form id="passwordcheck"  method="GET">
+						<form id="passwordcheck" action="${pageContext.request.contextPath}/my/myprofile/edit" method="get">
 							<!-- 폼태그는 어차피 위에서 성공여부로 주소를 줬기때문에 안줘도 상관없다 -->
 
 							<div class="form-group has-feedback">
@@ -177,7 +182,7 @@ input {
 							</div>
 							<!-- name에 똑같이 줘야함 -->
 							<div class="form-group has-feedback">
-								<button class="btn btn-success" type="button" id="submit">확인</button>
+								<button class="btn btn-success" type="submit" id="submit">확인</button>
 							</div>
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
