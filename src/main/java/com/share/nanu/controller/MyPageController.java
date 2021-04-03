@@ -23,7 +23,9 @@ import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.MemberService;
 import com.share.nanu.service.MyPageService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 public class MyPageController {
@@ -105,26 +107,34 @@ public class MyPageController {
 	// 프로필 관리로 가는 페이지(수정 전 비밀번호 확인 단계)
 	@GetMapping("/my/myprofile")
 	public ModelAndView myprofile(ModelAndView mav) {
-
+		log.info("프로필 페이지 비밀번호 확인 페이지 이동");
 		mav.setViewName("/my/myprofile");
 
 		return mav;
 	}
 
 	@PostMapping("/my/myprofile/check")
-	public ResponseEntity<String> myprofile2(@AuthenticationPrincipal MemberDetails md,String pwConfirm) {
+	public ResponseEntity<String> myprofile2(@AuthenticationPrincipal MemberDetails md, @RequestBody String pwConfirm) {
+
 		ResponseEntity<String> entity = null;
-		System.out.println("성공했는지1");
-		
+
 		try {
-			//mgservice.checkpw(md.getUsername());
-			//System.out.println(md.getUsername());
-			System.out.println("성공했는지2");
+
+			System.out.println(pwConfirm);
+
+			log.info("로그인한 회원의 비밀번호와 패스워드 칸에 입력한 비밀번호 일치하는지 확인");
+			// mgservice.checkpw(md.getUsername());
+			// System.out.println(md.getUsername());			
 			String password = md.getPassword(); // md.getmember.getPassword()
-			bCryptPasswordEncoder.encode(password);
-			System.out.println(bCryptPasswordEncoder.matches("pwConfirm", password));
-			bCryptPasswordEncoder.matches("pwConfirm", password);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			
+			System.out.println(bCryptPasswordEncoder.matches(pwConfirm, password));
+			// bCryptPasswordEncoder.matches("pwConfirm", password);
+			if (bCryptPasswordEncoder.matches(pwConfirm, password) == true) { //일치하면 true 리턴 불일치면 false
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			} else {
+				System.out.println("실패");
+				System.out.println();
+			}
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
@@ -132,10 +142,10 @@ public class MyPageController {
 		return entity;
 
 	}
-	
+
 	@GetMapping("/my/myprofile/edit")
 	public ModelAndView myprofile2(ModelAndView mav) {
-
+		log.info("피로필 수정 페이지로 이동");
 		mav.setViewName("/my/edit");
 
 		return mav;
