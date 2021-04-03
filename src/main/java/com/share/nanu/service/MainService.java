@@ -22,6 +22,7 @@ public interface MainService {
 
 	public void itemOut(String vm_num, String iname);
 
+	public int vmCount(String vm_num, String iname);
 
 
 	/*

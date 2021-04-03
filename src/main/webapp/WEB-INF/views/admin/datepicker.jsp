@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,17 +11,17 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>  
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-	<script>
+	<!-- <script>
 	$(document).ready(function() {
 		$(".datepicker").datepicker();
 	});
 
-	</script>
+	</script> -->
 
 
 	
 	<style>
-		* {
+		/* * {
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			-webkit-box-sizing: border-box;
@@ -45,9 +46,10 @@
 			border: 1px solid #ECEFF1;
 			padding: 0.5rem 0.75rem;
 			border-radius: 0.5rem;
-		}
+		} */
+		
 		input {
-			font-family: 'Roboto', sans-serif;
+			font-family: 'Roboto', ssans-serif;
 			display:block;
 			border: none;
 			border-radius: 0.25rem;
@@ -101,6 +103,12 @@
 			background-color: #009688;
 			color: white;
 		}
+		
+		/* 일요일 빨간색 처리 */
+		.ui-datepicker-calendar tbody td.ui-datepicker-week-end:first-child a {  
+			color: red; 
+		 }
+
 		.ui-datepicker-header a.ui-corner-all {
 			cursor: pointer;
 			position: absolute;
@@ -134,13 +142,14 @@
 		}
 		.ui-datepicker-title {
 			text-align: center;
-			line-height: 2rem;
+			l`ine-height: 2rem;
 			margin-bottom: 0.25rem;
 			font-size: 0.875rem;
 			font-weight: 500;
 			padding-bottom: 0.25rem;
 		}
 		.ui-datepicker-week-col {
+
 			color: #78909C;
 			font-weight: 400;
 			font-size: 0.75rem;
@@ -150,11 +159,20 @@
 	
 </head>
 <body>
-	<div class="wrapper">
-		<label for="datepicker">Pick a Date
-			<input type="text" class="datepicker" autocomplete="off">
-		</label>	
-	</div>
+	
+	<input type="text" class="datepicker" autocomplete="off" >
+	
+	<script>
+		
+		$('.datepicker').datepicker(); 
+	
+
+			/* dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+		 	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], // 월의 한글 형식.
+			monthNames:[ "1월", "2월", "3월", "4월", "5월", "6월","7월", "8월", "9월", "10월", "11월", "12월" ] // 상단에 월의 한글 형식
+		 */
+			
+	</script> 
 </body>
 
 </html>

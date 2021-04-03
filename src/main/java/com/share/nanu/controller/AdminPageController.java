@@ -44,6 +44,15 @@ public class AdminPageController {
 		return mov;
 	}
 	
+	//dateppicker
+		@GetMapping("/date")
+		public ModelAndView date(ModelAndView mov, MemberVO member, Criteria cri) {
+			
+			mov.setViewName("admin/datepicker");
+			
+			return mov;
+		}
+	
 	//회원관리, 재고관리
 	@GetMapping("/member_view")
 	public ModelAndView member_view(ModelAndView mov, MemberVO member, Criteria cri) {

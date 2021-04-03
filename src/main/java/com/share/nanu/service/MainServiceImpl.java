@@ -61,5 +61,13 @@ public class MainServiceImpl implements MainService {
 		mainmapper.outAmount(vm_num, iname);
 	}
 
+	@Override
+	public int vmCount(String vm_num, String iname) {
+		// TODO Auto-generated method stub
+		return mainmapper.vmcount(vm_num, iname);
+	}
+
+	
+
 
 }

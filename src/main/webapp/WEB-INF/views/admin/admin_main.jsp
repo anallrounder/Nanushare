@@ -6,6 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
+
  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -48,20 +49,136 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <style>
-p {
-	margin: 20px 0px;
-}
+	p {
+		margin: 20px 0px;
+	}
+	
+	li {
+		list-style: none;
+	}
+	
+	li:nth-child(2) {
+		color: lime;
+	}
 
-li {
-	list-style: none;
-}
+	input {
+		font-family: 'Roboto', ssans-serif;
+		display:block;
+		border: none;
+		border-radius: 0.25rem;
+		border: 1px solid transparent;
+		line-height: 1.5rem;
+		padding: 0;
+		font-size: 1rem;
+		color: #607D8B;
+		width: 100%;
+		margin-top: 0.5rem;
+	}
+	input:focus {outline: none;}
+		
+	#ui-datepicker-div {
+		display: none;
+		background-color: #fff;
+		box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.1);
+		margin-top: 0.25rem;
+		border-radius: 0.5rem;
+		padding: 0.5rem;
+	}
+	
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	
+	.ui-datepicker-calendar thead th {
+		padding: 0.25rem 0;
+		text-align: center;
+		font-size: 0.75rem;
+		font-weight: 400;
+		color: #78909C;
+	
+	}
+	.ui-datepicker-calendar tbody td {
+		width: 2.5rem;
+		text-align: center;
+		padding: 0;
+	}
+	
+	.ui-datepicker-calendar tbody td a {
+		display: block;
+		border-radius: 0.25rem;
+		line-height: 2rem;
+		transition: 0.3s all;
+		color: #546E7A;
+		font-size: 0.875rem;
+		text-decoration: none;
+	}
+	
+	.ui-datepicker-calendar tbody td a:hover {	
+		background-color: #E0F2F1;
+	}
+	
+	.ui-datepicker-calendar tbody td a.ui-state-active {
+		background-color: #009688;
+		color: white;
+	}
+		
+	/* 일요일 빨간색 처리 */
+	.ui-datepicker-calendar tbody td.ui-datepicker-week-end:first-child a {  
+		color: red; 
+	 }
 
-li:nth-child(2) {
-	color: lime;
-}
-
+	.ui-datepicker-header a.ui-corner-all {
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		width: 2rem;
+		height: 2rem;
+		margin: 0.5rem;
+		border-radius: 0.25rem;
+		transition: 0.3s all;
+	}
+		
+	.ui-datepicker-header a.ui-corner-all:hover {
+		background-color: #ECEFF1;
+	}
+		
+	.ui-datepicker-header a.ui-datepicker-prev {	
+		left: 0;	
+		background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48cGF0aCBmaWxsPSIjNDI0NzcwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjI4OCA2LjI5NkwzLjIwMiAyLjIxYS43MS43MSAwIDAgMSAuMDA3LS45OTljLjI4LS4yOC43MjUtLjI4Ljk5OS0uMDA3TDguODAzIDUuOGEuNjk1LjY5NSAwIDAgMSAuMjAyLjQ5Ni42OTUuNjk1IDAgMCAxLS4yMDIuNDk3bC00LjU5NSA0LjU5NWEuNzA0LjcwNCAwIDAgMS0xLS4wMDcuNzEuNzEgMCAwIDEtLjAwNi0uOTk5bDQuMDg2LTQuMDg2eiIvPjwvc3ZnPg==");
+		background-repeat: no-repeat;
+		background-size: 0.5rem;
+		background-position: 50%;
+		transform: rotate(180deg);
+	}
+	
+	.ui-datepicker-header a.ui-datepicker-next {
+		right: 0;
+		background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDEzIDEzIj48cGF0aCBmaWxsPSIjNDI0NzcwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjI4OCA2LjI5NkwzLjIwMiAyLjIxYS43MS43MSAwIDAgMSAuMDA3LS45OTljLjI4LS4yOC43MjUtLjI4Ljk5OS0uMDA3TDguODAzIDUuOGEuNjk1LjY5NSAwIDAgMSAuMjAyLjQ5Ni42OTUuNjk1IDAgMCAxLS4yMDIuNDk3bC00LjU5NSA0LjU5NWEuNzA0LjcwNCAwIDAgMS0xLS4wMDcuNzEuNzEgMCAwIDEtLjAwNi0uOTk5bDQuMDg2LTQuMDg2eiIvPjwvc3ZnPg==');
+		background-repeat: no-repeat;
+		background-size: 10px;
+		background-position: 50%;
+	}
+	
+	.ui-datepicker-header a>span {
+		display: none;
+	}
+	
+	.ui-datepicker-title {
+		text-align: center;
+		line-height: 2rem;
+		margin-bottom: 0.25rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+		padding-bottom: 0.25rem;
+	}
+	
+	.ui-datepicker-week-col {
+		color: #78909C;
+		font-weight: 400;
+		font-size: 0.75rem;
+	}
 </style>
-
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -290,8 +407,9 @@ li:nth-child(2) {
 																<option value="50">50</option>
 															</select>
 														</td>
-														<td><input type="text" class="datepicker"></td>
-														<td><!-- 출고량 -->
+														<td><input type="text" class="datepicker" autocomplete="off" ></td>
+
+													<td><!-- 출고량 -->
 															<select> 
 																<option value="0">0</option>
 																<option value="10">10</option>
@@ -301,8 +419,7 @@ li:nth-child(2) {
 																<option value="50">50</option>
 															</select>
 														</td>
-														<td><%@ include file="/WEB-INF/views/admin/datepicker.jsp" %></td>
-															
+														<td><input type="text" class="datepicker"></td>
 														<td><!-- 출고지점 -->
 														
 															<select> 
@@ -490,6 +607,23 @@ li:nth-child(2) {
 
 <!-- AdminLTE App -->
 <script src="/resources/AdminLTE-master/dist/js/adminlte.min.js"></script>
+
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<!-- 위에 script를 추가하면 덮여져서인지 datepicker가 팝업이 아예 안됨 
+https://stackoverflow.com/questions/36207203/uncaught-typeerror-datepicker-is-not-a-functionanonymous-function-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>  
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+$(document).ready(function() { 
+	$('.datepicker').datepicker();
+  });
+	
+	/* dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], // 월의 한글 형식.
+	monthNames:[ "1월", "2월", "3월", "4월", "5월", "6월","7월", "8월", "9월", "10월", "11월", "12월" ] // 상단에 월의 한글 형식
+	*/
+</script>
 
 </body>
 </html>
