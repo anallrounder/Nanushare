@@ -31,7 +31,12 @@
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+	
+<style type="text/css">
+    	.error {
+    		color : red;   	
+    	}
+    </style>
 
 <script type="text/javascript">
 $(function() {
@@ -73,15 +78,19 @@ $(function() {
 					  console.log(result);
 					  if (result == "SUCCESS") {
                           console.log("success");
+					}
 				},
+				
 				error : function(e) {
 					alert("필수 입력 사항을 입력해주세요.");
 					 console.log(result);
                      console.log(e);
 				}
-			});
-		});
- });
+			
+		});//ajax end
+ 	});// mjoin end
+});//function end
+	
 </script>
 
 
@@ -247,12 +256,13 @@ input {
 													},
 													pwConfirm : {
 														required : true,
-														equalTo : '#pw'
+														equalTo : '#pwd1'
 													},
 													name : {
 														required : true,
 														minlength : 2
-													},
+													}
+												},// rules end
 													
 												messages : { /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
 
@@ -273,18 +283,21 @@ input {
 													name : {
 														required : '이름을 입력해 주세요.',
 														minlength : '2글자 이상 입력해 주세요.'
-													},
+													}
+												},// message end
 													
-												errorElement : 'span'
+												errorElement : 'span',
 													errorClass : 'error',
 													errorPlacement : function(error, element) { 
-														if(element.is(":text") || element.is(":password")										  ){
+														if(element.is(":text") || element.is(":password")){										  
 															element.parent().after(error);
-														}else{
+														}
+														else{
 															element.after(error);
 														}
-													}}
-											});
+													}
+												
+											}); //validate end
 							$.validator
 									.addMethod(
 											"passwordCK",

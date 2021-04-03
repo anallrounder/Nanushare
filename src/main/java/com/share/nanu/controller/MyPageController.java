@@ -129,7 +129,7 @@ public class MyPageController {
 			
 			System.out.println(bCryptPasswordEncoder.matches(pwConfirm, password));
 			// bCryptPasswordEncoder.matches("pwConfirm", password);
-			if (bCryptPasswordEncoder.matches(pwConfirm, password) == true) {
+			if (bCryptPasswordEncoder.matches(pwConfirm, password) == true) { //일치하면 true 리턴 불일치면 false
 				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			} else {
 				System.out.println("실패");
