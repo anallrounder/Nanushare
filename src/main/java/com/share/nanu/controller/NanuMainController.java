@@ -3,6 +3,7 @@ package com.share.nanu.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,11 +58,22 @@ public class NanuMainController {
 	
 	// QR로 수량 빼기
 	@GetMapping("/sendQR/{vm_num}/{iname}")  //객체를 전달받기 때문에 POST(?), json ->controller 일땐 post?
-	public String sendQR (@PathVariable String vm_num, @PathVariable String iname) throws Exception {//@RequestParam String machine, @RequestParam String item
+	public String sendQR (@PathVariable String vm_num, @PathVariable String iname, Model model) throws Exception {//@RequestParam String machine, @RequestParam String item
 		
-		mainService.itemOut(vm_num,iname);
+		//수량 체크
+		int remainAmount = mainService.vmCount(vm_num, iname);
 		
-		return "mainMap/itemoutSuccess";
+		if (remainAmount < 2) {
+			model.addAttribute("message", "잔여 수량이 부족합니다.");
+			model.addAttribute("success", false);
+		} else {
+			//수량 2개씩 빼는 함수
+			mainService.itemOut(vm_num,iname);
+			model.addAttribute("message", "물품이 나왔습니다.");
+			model.addAttribute("success", true);
+		}
+
+		return "mainMap/itemoutResult";
 	}
 	
 	
