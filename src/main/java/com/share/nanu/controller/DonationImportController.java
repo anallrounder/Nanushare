@@ -46,7 +46,7 @@ public class DonationImportController {
 	@ResponseBody
 	@SuppressWarnings("unchecked")
 	@PostMapping("/cardDonation")
-	public void cardDonation(@RequestBody String card) {
+	public void cardDonation(@RequestBody String card) { //후원할때 ajax에서 보낸 데이터 db에 저장, member 테이블에서 dntcnt 카운트, +1씩
 		//@requestBody 는 http요청을 자바객체로 즉, http 요청의 body내용을 자바객체로 매핑
 		//@responseBody 는 자바객체를 http 응답 몸체로 전송 즉, 자바객체를 http 요청의 body내용으로 매핑
 		
