@@ -2,7 +2,13 @@
 
 package com.share.nanu.service;
 
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,6 +79,27 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 		log.info("service---donatePoint ------호출");
 		ndmapper.donatePoint(pvo);
 	}
+
+	//UNIXTimeStamp를 data타입으로 변경
+	@Override
+	public String changeUNIXTimeStamp(String paidAt) {
+		
+		long beforPaidAT = Long.parseLong(paidAt);
+		Date date = new Date(beforPaidAT*1000L);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		sdf.setTimeZone(TimeZone.getTimeZone("GM+9"));
+		String afterPaidAt = sdf.format(date);
+		return afterPaidAt;
+	}
+
+	//donation 테이블에 ajax에서 받아온 데이터 insert
+	@Override
+	public void insertCardDona(List<Map<String, Object>> resultMap) {
+		ndmapper.insertCardDona(resultMap);
+	}
+
+	
+	
 
 
 	
