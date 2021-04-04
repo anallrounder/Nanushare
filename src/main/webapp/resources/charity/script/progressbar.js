@@ -4,7 +4,7 @@
 
 		//Default values for progress_bar
 		var defaults = {
-			height : "80",
+			height : "50",
 			backgroundColor : "#272625",
 			barColor : "#ffb607",
 			targetBarColor : "",
@@ -88,7 +88,7 @@
 				$( this ).find( '.bar' ).animate({
 					width : progress,
 					opacity : 1
-				}, 3000 );
+				}, 1200 );
 			}
 
 		});

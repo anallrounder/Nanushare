@@ -54,9 +54,9 @@ public class MyPageController {
 	}
 
 	// 나의문의내역
-	@GetMapping("/my/mypage/_1")
+	@GetMapping("/my/ask")
 	public ModelAndView myAsk(MemberVO mvo, ModelAndView mav, Criteria cri) {
-		mav.setViewName("/my/mypage_1");
+		mav.setViewName("/my/ask");
 		mav.addObject("list1", mgservice.myList1(cri));// 나의문의내역
 		// 페이징
 		int total = mgservice.getTotalCount1(cri);

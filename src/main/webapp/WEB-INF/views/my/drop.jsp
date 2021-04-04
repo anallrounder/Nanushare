@@ -1,14 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
-    <!-- meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 이건무조건 여기있어야함 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- jquery validation cdn 이거 두개 안되면 폼태그 끝나는 시점 바로 밑에 넣기-->
+<!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+<!-- jquery validation method cdn -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%-- <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />  에러 주범??  --%>
+
+<!-- 헤더 안에 추가  -->
+<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
+<!-- js에서 csrf 토큰, 헤더등록 -->
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 
     <title>Nanushare</title>
     <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
@@ -41,7 +63,7 @@
         }
     </style>
 
-    <script>
+     <script>
         /* 이용약관 버튼 */
         function agree() {
             var chkbox = document.getElementsByName('agree');
@@ -60,12 +82,11 @@
             }
         }
     </script>
-
-    <script type="text/javascript">
+ 
+    <script type="text/javascript">  
+    
         /* 403에러때문에 넣은 코드 */
-        $(document)
-            .ready(
-                function() {
+        $(document).ready(function() {
 
                     var token = $("meta[name='_csrf']").attr("content");
                     var header = $("meta[name='_csrf_header']").attr(
@@ -74,128 +95,59 @@
                         xhr.setRequestHeader(header, token);
                     });
 
-                    $('#secession')
-                        .submit(
-                            function(event) { //탈퇴 처리
+                    $('#secession').submit(function(event) { //탈퇴 처리
                                 event.preventDefault();
 
                                 var name = $("#name").val();
-                                var member_id = $("#member_id")
-                                    .val();
+                                var member_id = $("#member_id").val();
                                 var pw = $("#pw").val();
 
-                                var check = {
-                                    "name": name,
-                                    "member_id": member_id,
-                                    "pw": pw
-                                    /*주는값이 id (#) */
-                                };
-
+                                var check = {name:name, 
+                                		member_id:member_id, 
+                                		pw:pw                                
+                                }
                                 //패스워드 맞는지 확인 체크
-                                $
-                                    .ajax({
+                                $.ajax({
                                         type: 'DELETE',
                                         /* 내가 처리할 주소(=현재주소) */
                                         url: "${pageContext.request.contextPath}/my/drop/check",
-                                        contentType: 'application/json; charset=utf-8',
-                                        data: JSON
-                                            .stringify(check),
-                                        async: "false",
-                                        datatype: 'text',
-                                        /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                                        /* beforeSend : function(xhr) { 
-                                        console.log("header 실행 " + header + token)
-                                        xhr.setRequestHeader(header, token);
-                                        }, */
-
-                                        success: function(
-                                            result) {
+                                        contentType: "application/json", /* charset=utf-8' */
+                                        data: JSON.stringify(check),
+                                       /*  async: "false", */
+                                       /*  datatype: 'text', */
+                                       
+                                        success: function(result) {
                                             console.log(result);
 
                                             if (result == "SUCCESS") {
-                                                console
-                                                    .log("success");
+                                            	alert("탈퇴되었습니다. 그동안 이용해주셔서 감사합니다. ");
+                                                console.log("success");
                                                 $(location)
-                                                    .attr(
-                                                        'href',
-                                                        "${pageContext.request.contextPath}/main");
+                                                    .attr('href',"${pageContext.request.contextPath}/main");
                                             }
                                         },
 
                                         error: function(error) {
 
-                                            alert("필수사항을 입력해주세요");
+                                            alert("오류");
 
-                                            console.log("에러 : " +
-                                                error);
+                                            console.log("에러 : " + error);
                                         }
 
                                     }); //ajax end
                             }); //패스워드 체크 스크립트 end
                 });
 
-        /* 탈퇴 */
-        $(document).ready(function(e) {
-
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-            $(document).ajaxSend(function(e, xhr, options) {
-                xhr.setRequestHeader(header, token);
-            });
-
-            /* $('#secession').click(function(event) {
-
-            	//패스워드 입력 확인
-            	if ($('#pw').val() == '') {
-            		alert("패스워드를 입력해 주세요.");
-            		$('#pw').focus();
-            		return;
-            	} else if ($('#pwCheck').val() == '') {
-            		alert("패스워드를 입력해 주세요.");
-            		$('#pwCheck').focus();
-            		return;
-            	}
-
-            	//입력한 패스워드가 같인지 체크
-            	if ($('#passwdCheck').val() != $('#passwd').val()) {
-            		alert("패스워드가 일치하지 않습니다.");
-            		$('#passwdCheck').focus();
-            		return;
-            	} */
-
-            //패스워드 맞는지 확인
-            $.ajax({
-                url: "${pageContext.request.contextPath}/my/drop",
-                type: "DELETE",
-                data: $('#delFrm').serializeArray(),
-                contentType: "application/json; charset=UTF-8",
-                success: function(data) {
-                    if (data == 0) {
-                        alert("패스워드가 틀렸습니다.");
-                        return;
-                    } else {
-                        //탈퇴
-                        var result = confirm('정말 탈퇴 하시겠습니까?');
-                        if (result) {
-                            $('#drop').submit();
-                        }
-                    }
-                },
-                error: function() {
-                    alert("서버 에러.");
-                }
-            });
-            /* }); */
-        });
+       
     </script>
 
 </head>
 
 <body>
-    <!-- 약관동의때문에 추가 -->
-    <script src='{% static "js/jquery-1.11.3.min.js" %}'></script>
+     <!-- 약관동의때문에 추가 -->
+ <!--  <script src='{% static "js/jquery-1.11.3.min.js" %}'></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
@@ -290,7 +242,7 @@
                                                 },
                                                 pw: {
                                                     required: true,
-                                                    passwordCK: true,
+                                                    /* passwordCK: true, */
 
                                                 },
                                                 name: {

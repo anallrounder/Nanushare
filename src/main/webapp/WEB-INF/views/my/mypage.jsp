@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
@@ -10,21 +10,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- 이건무조건 여기있어야함 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- jquery validation cdn 이거 두개 안되면 폼태그 끝나는 시점 바로 밑에 넣기-->
+<!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+<!-- jquery validation method cdn -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+
 <!-- meta tags -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<%-- <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />  에러 주범??  --%>
 
-<title>Charity Cause Detail</title>
+<!-- 헤더 안에 추가  -->
+<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
+<!-- js에서 csrf 토큰, 헤더등록 -->
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+
+<title>Nanushare</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<!-- 웹페이지 탭 로고이미지 삽입  -->
+
 
 
 <!-- 탭처리 -->
-<!-- <link rel="stylesheet"
-	href="http://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
-<script src='http://unpkg.com/jquery@3/dist/jquery.min.js'></script>
-<script src='http://unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
-<script src='http://unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
- -->
+<link rel="stylesheet"
+	href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
+<script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
+<script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
+<script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
+
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
 <link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
@@ -37,258 +61,146 @@
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
 
-<!--탭처리2  -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<style>
-p {
-	margin: 20px 0px;
-}
-
-li {
-	list-style: none;
-}
-
-li:nth-child(2) {
-	color: lime;
-}
-
-#maxmax {
-	max-width: 100%;
-}
-</style>
-
-
-<!--탭처리2  -->
-
 
 </head>
 <style>
-.charity-simple-blog-text:nth-child(1) {
-	height: 170px;
-	width: 400px;
-	float: left;
-	border-color: lightgray;
-}
-
-.charity-simple-blog-text:nth-child(2) {
-	height: 80px;
-	width: 320px;
-	float: right;
-	border-color: lightgray;
-}
+li{
+   list-style:none;
+   }
 </style>
+
 <body>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<!-- <script type="text/javascript">
-	/* 페이징 ajax */
-		$(document).ready(function() {
-			// 표시하는 글 수를 바꾸면 이벤트 처리를 해서 다시 리스트를 불러온다.
-
-			$("#startPage").change(function() {
-
-				// 		alert("select change!");
-
-				location = "my/mypage?"
-
-				+ "page=1" // 페이지 전달한다.
-
-				+ "&startPage=" + $("#startPage").val() // 페이지 당 글수 전달
-
-			});
-
-		});
-	</script> -->
-
-
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<!-- Header -->
+
+
 
 	<!-- Banner -->
 	<div class="charity-subheader">
 		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12"></div>
+				<div class="col-md-12">
+					<h1>mypage</h1>
+
+				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Banner -->
-
-	<%
-	String path = request.getContextPath();
-	%>
-	<%=path%>
-
-
-
-	<!-- Content -->
+<!-- Content --><!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
+	<!-- Main Section -->
+	<div class="charity-main-section">
 
-		<!-- Main Section -->
-		<div class="charity-main-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="charity-rich-editor charity-cause-detail">
-
-							<div class="charity-simple-blog-text">
-								<ul class="charity-simple-blog-options">
-
-									<table>
-										<tr>
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none;"
-												rowspan="3"><img src="/resources/my/프로필사진.PNG"
-												border="0" height="150" width="60"></td>
-										</tr>
-
-										<tr>
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none;"></td>
-
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">아이디
-												: <sec:authentication property="principal.member.member_id" />
-
-											</td>
-										</tr>
-										<tr>
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none;"></td>
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">이름
-												: <sec:authentication property="principal.member.name" />
-											</td>
-										</tr>
-									</table>
-								</ul>
-
-								<a href="${pageContext.request.contextPath}/my/myprofile"
-									class="charity-simple-blog-btn">프로필 관리</a> <a href="#"
-									class="charity-simple-blog-btn">기부영수증</a>
-							</div>
-							<div class="charity-simple-blog-text"
-								style="background-color: lightgrey;">
-								<ul class="charity-simple-blog-options">
-
-									<table>
-										<tr>
-											<td
-												style="border-top: none; border-bottom: none; border-left: none; border-right: none; text-align: left;">
-												나의 포인트 :<sec:authentication
-													property="principal.member.dntcnt" />  <%-- <sec:authentication
-													property="principal.point.totalpnt" /> --%> <a
-												href="${pageContext.request.contextPath}/donation/money/point"
-												class="charity-simple-blog-btn" style="float: right;">기부하기</a>
-											</td>
-										</tr>
-									</table>
-								</ul>
-							</div>
-							<!-- 여기까지 -->
-							<div class="charity-cause-donate">
-								<div class="skillst" id="maxmax">
-									<!-- 수정필요 -->
-									<!-- <h6>
-										data-width를 바꾸면 %가 달라짐 그림추가<span>해야함</span>
-									</h6> -->
-									<img src="/resources/my/그림1.png" height="80" width="80">
-									<img src="/resources/my/그림2.png" height="80" width="80">
-									<img src="/resources/my/그림3.png" height="80" width="80">
-									<img src="/resources/my/그림4.png" height="80" width="80">
-									<img src="/resources/my/그림5.png" height="80" width="80">
-									<img src="/resources/my/그림6.png" height="80" width="80">
-									<!-- <h6 class="skillst-right">
-										막대바가 <span>올곳</span>
-									</h6> -->
-
-									<div data-width='13' max='100'
-										class="charity-cause-progressbar"></div>
+	<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
+	<div class="container">
+		<div class="view-account">
+			<section class="module">
+			<div class="module-inner">
+				<div class="side-bar">
+					<div class="user-info">
+						<img class="img-profile img-circle img-responsive center-block"
+							src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+						<ul class="meta list list-unstyled">
+							<li class="name"><h2><sec:authentication
+													property="principal.member.name" />
+							</h2></li>
+							<li class="email"><sec:authentication property="principal.member.member_id" /></a></li>
+							<li class="activity">Last logged in: Today at 2:18pm</li>
+						</ul>
+					</div>
+					<nav class="side-menu">
+					<ul class="nav">
+						<li class="active"><a href="#"><span class="fa fa-user"></span>
+								Profile</a></li>
+						<li><a href="ask"><span class="fa fa-cog">
+						</span>나의문의내역</a></li>
+						<li><a href="mypage_2"><span class="fa fa-credit-card">
+						</span>나의인증내역</a></li>
+						<li><a href="mypage_3"><span class="fa fa-envelope">
+						</span>나의나눔내역</a></li>
+						<li><a href="mypage_4"><span class="fa fa-th">
+						</span>나의댓글내역</a></li>
+						<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
+								Reminders</a></li> -->
+					</ul>
+					</nav>
+				</div>
+				<div class="content-panel">
+					<h2 class="title">
+						Profile<span class="pro-label label label-warning">PRO</span>
+					</h2>
+					<form class="form-horizontal">
+						<fieldset class="fieldset">
+							<h3 class="fieldset-title">Personal Info</h3>
+							<div class="form-group avatar">
+								<figure class="figure col-md-2 col-sm-3 col-xs-12"> <img
+									class="img-rounded img-responsive"
+									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+								</figure>
+								<div class="form-inline col-md-10 col-sm-9 col-xs-12">
+									<input type="file" class="file-uploader pull-left">
+									<button type="submit"
+										class="btn btn-sm btn-default-alt pull-left">Update
+										Image</button>
 								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 col-sm-3 col-xs-12 control-label">User
+									Name</label>
+								<div class="col-md-10 col-sm-9 col-xs-12">
+									<input type="text" class="form-control" value="Rebecca">
+								</div>
+							</div>
 
-
+							<div class="form-group">
+								<label class="col-md-2 col-sm-3 col-xs-12 control-label">First
+									Name</label>
+								<div class="col-md-10 col-sm-9 col-xs-12">
+									<input type="text" class="form-control" value="Rebecca">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 col-sm-3 col-xs-12 control-label">Last
+									Name</label>
+								<div class="col-md-10 col-sm-9 col-xs-12">
+									<input type="text" class="form-control" value="Sanders">
+								</div>
+							</div>
+						</fieldset>
+						
+						<hr>
+						<div class="form-group">
+							<div
+								class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
+								<input class="btn btn-primary" type="submit"
+									value="Update Profile">
 							</div>
 						</div>
-
-						<!-- 나의 ~~ 내역 -->
-
-						<%--<div class="container">
-							<div class="row">
-								<div class="col">
-
-	  								<ul class="nav nav-tabs">
-										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#abc" data-load="false"
-											data-url="${pageContext.request.contextPath}/my/mypage">나의
-												문의내역</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#def" data-load="true"
-											data-url="http://localhost:8282/my/mypage/_2">나의 인증내역</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#ghi">나의 나눔내역</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#jkl">나의 댓글내역</a></li>
-									</ul>
-									<div class="tab-content">
-										<div class="tab-pane fade show active" id="abc">
-											<jsp:include page="/WEB-INF/views/my/mypage_1.jsp"
-												flush="true">
-												<jsp:param name="list1" value="list1" />
-												<jsp:param name="pinfo" value="pinfo" />
-											</jsp:include>
-
-										</div>
-										<div class="tab-pane fade" id="def">
-											<jsp:include page="mypage_2.jsp"> 
-												<jsp:param name="pinfo" value="pinfo"></jsp:param>
-												<jsp:param name="list2" value="list2"></jsp:param>
-											</jsp:include> 
-											 <c:import url = "mypage_2.jsp"></c:import>
-											  <%@ include file="/WEB-INF/views/my/mypage_2.jsp"%>										</div>
-										 <div class="tab-pane fade" id="ghi">
-											 <%@ include file="/WEB-INF/views/my/mypage_3.jsp"%> 
-										</div>
-										<div class="tab-pane fade" id="jkl">
-											<%@ include file="/WEB-INF/views/my/mypage_4.jsp"%>
-										</div> 
-									</div>
-								</div>
-							</div>
-						</div>--%>
-
-						<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-						<script
-							src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-						<script
-							src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-
-
-					</div>
+					</form>
 				</div>
 			</div>
-
-			<script>
-				$("#mytabs>ul>li>a").each(function(i) {
-					$(this).attr("href", "#mytab" + i)
-				})
-				$("#mytabs>div>div").each(function(i) {
-					$(this).attr("id", "mytab" + i)
-				})
-			</script>
-
-
-
-
-
-			<!-- Main Section -->
-
+			</section>
 		</div>
-		<!-- Content -->
 	</div>
+
+	<script>
+		$("#mytabs>ul>li>a").each(function(i) {
+			$(this).attr("href", "#mytab" + i)
+		})
+		$("#mytabs>div>div").each(function(i) {
+			$(this).attr("id", "mytab" + i)
+		})
+	</script>
+
+	<!-- Main Section -->
+
+	</div>
+	<!-- Content -->
+	</div>
+	
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
@@ -328,5 +240,4 @@ li:nth-child(2) {
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions.js"></script>
 </body>
-
 </html>

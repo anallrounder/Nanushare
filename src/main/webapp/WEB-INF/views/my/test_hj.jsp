@@ -5,7 +5,7 @@
 <head>
 <body>
 <div>프로그래스바 참고 https://www.python2.net/questions-309527.htm</div>
-
+<div>https://1061025.tistory.com/46 프로그래스바, beforesend complete관련</div>
 
 <div>https://wickedmagica.tistory.com/category/JavaScript%20%26%20jQuery?page=5
 	퍼센트 게이지(프로그래스 바) 나타내기 ============ #ffb607</div>
@@ -28,10 +28,13 @@
 <div>//drop : 이름, 아이디, 비밀번호 입력안하면 다음창으로 안넘어가는 것 구현</div>
 <div>// h3{ font-size:10vw; }</div>
 <div>// Ulric@naver.com ㅋㅋㅋ123!</div>
-<div>// aqaq@naver.com a1111</div>
+<div>// aqaq@naver.com qw12!</div>
 
 <div>★★★★★★★★ //소셜로그인한 사람은 회원수정 없이 갈것--버튼에 권한주기 ★★★★★★★★</div>
 <div>//717페이지 -- 본인이 작성한 게시글만 수정가능한것 ==========================</div>
+
+<div>//소셜로그인은 프로필관리까진가지만 수정완료 버튼 안눌리게!</div>
+
 </body>
 </head>
 </html>

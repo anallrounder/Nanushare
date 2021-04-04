@@ -32,7 +32,10 @@
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
-<title>myprofile.jsp</title>
+<title>Nanushare</title>
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+    <!-- 웹페이지 탭 로고이미지 삽입  -->
+
 
 
 <!-- 탭처리 -->
