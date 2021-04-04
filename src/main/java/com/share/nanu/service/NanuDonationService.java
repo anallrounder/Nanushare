@@ -3,6 +3,7 @@
 package com.share.nanu.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.share.nanu.VO.ItemdonationVO;
 import com.share.nanu.VO.MemberPointVO;
@@ -21,6 +22,16 @@ public interface NanuDonationService {
 	public List<MemberPointVO> getMemberPoint(MemberPointVO mvo); // 포인트 나눔 페이지 (포인트+멤버 테이블 조인_ resultMap: point + member) // 포인트정보불러오기
 	public void countPointDonation(MemberVO mvo); // 멤버 테이블에 -> 포인트(후원) 기부횟수 카운트 +1
 	public void donatePoint(PointVO pvo);// 포인트 테이블에 포인트 기부내역 업데이트
+	
+	//UNIXTimeStamp를 data타입으로 변경
+	public String changeUNIXTimeStamp(String paidAt);
+	
+	//donation 테이블에 ajax에서 받아온 데이터 insert
+	public void insertCardDona(List<Map<String, Object>> resultMap);
+	
+	
+	
+	
 	
 
 	
