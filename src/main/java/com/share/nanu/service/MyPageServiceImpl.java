@@ -113,12 +113,14 @@ public class MyPageServiceImpl implements MyPageService {
 	
 
 //회원수정페이지
-//	@Override
-//	public void memberModifyPOST(@RequestBody MemberVO mvo) {
 	@Override
 	public void memberModifyPOST(MemberVO mvo) {
 
 		MemberVO member = nmapper.getMember(mvo.getMember_id());
+		if (mvo.getMember_id() != null) {
+			member.setMember_id(mvo.getMember_id());
+		}
+		
 		if (mvo.getName() != null) {
 			member.setName(mvo.getName());
 		}

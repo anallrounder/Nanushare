@@ -14,7 +14,7 @@
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
-<title>myprofile_edit</title>
+<title>NanuShare</title>
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
 <!-- 웹페이지 탭 로고이미지 삽입  -->
@@ -31,12 +31,12 @@
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
+
 <style type="text/css">
-    	.error {
-    		color : red;   	
-    	}
-    </style>
+.error {
+	color: red;
+}
+</style>
 
 <script type="text/javascript">
 $(function() {
@@ -70,20 +70,29 @@ $(function() {
 			$.ajax({
 				type : 'PUT',
 				 data: JSON.stringify(memberJoin),
-				 url: $(this).attr("action"),
-				dataType : "text",
-				cache: false,
-				contentType : "application/json; charset=UTF-8",
-				success : function(data) {
+				 url : "${pageContext.request.contextPath}/my/myprofile/edit/check",
+				cache : false,
+				contentType: 'application/json',
+			/* 	 data:{
+					 name: name,
+	                 pw: pw,
+	                 member_id : member_id,
+	                 subemail : email                   
+				 } */
+					async: "false", 
+					datatype : 'json',
+				success : function(result) {
 					  console.log(result);
 					  if (result == "SUCCESS") {
                           console.log("success");
+                          $(location)
+							.attr('href',"${pageContext.request.contextPath}/my/mypage");
+                          /* 성공했을때 넘어가는 페이지 */
 					}
 				},
 				
 				error : function(e) {
 					alert("필수 입력 사항을 입력해주세요.");
-					 console.log(result);
                      console.log(e);
 				}
 			
@@ -174,7 +183,7 @@ input {
 						<div style="margin: 0 auto" align="center">
 							<form id="mjoin"
 								action="${pageContext.request.contextPath}/my/mypage"
-								method="put" novalidate>
+								method="get" novalidate>
 								<!-- onsubmit="return check()" -->
 
 								<ul class="charity-contact-form">
@@ -207,11 +216,6 @@ input {
 
 								<div class="buttonbutton">
 									<!-- </ul> -->
-									<button type="button"
-										onclick="location.href='${pageContext.request.contextPath}/my/drop'"
-										class="charity-simple-blog-btn">회원 탈퇴</button>
-									<button type="button" onclick="location.href='/my/mypage'"
-										class="charity-simple-blog-btn">처음으로</button>
 
 									<button type="submit" class="charity-simple-blog-btn">수정완료</button>
 									<!-- onclick="modifyMember()" -->
@@ -219,6 +223,12 @@ input {
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
 							</form>
+							<div>빈칸채우기</div>
+							<button type="button"
+								onclick="location.href='${pageContext.request.contextPath}/my/drop'"
+								class="charity-simple-blog-btn">회원 탈퇴</button>
+							<button type="button" onclick="location.href='/my/mypage'"
+								class="charity-simple-blog-btn">처음으로</button>
 						</div>
 
 						<!-- jquery validation cdn-->
@@ -356,15 +366,17 @@ input {
 
 
 <!-- jQuery -->
-<script src="/resources/charity/script/jquery.js"></script>
-<script src="/resources/charity/script/popper.min.js"></script>
-<script src="/resources/charity/script/bootstrap.min.js"></script>
-<script src="/resources/charity/script/slick.slider.min.js"></script>
-<script src="/resources/charity/script/progressbar.js"></script>
-<script src="/resources/charity/script/fancybox.min.js"></script>
-<script src="/resources/charity/script/jquery.countdown.min.js"></script>
-<script src="/resources/charity/https://maps.googleapis.com/maps/api/js"></script>
-<script src="/resources/charity/script/jquery.jplayer.js"></script>
-
+	<script src="/resources/charity/script/jquery.js"></script>
+	<script src="/resources/charity/script/popper.min.js"></script>
+	<script src="/resources/charity/script/bootstrap.min.js"></script>
+	<script src="/resources/charity/script/slick.slider.min.js"></script>
+	<script src="/resources/charity/script/progressbar.js"></script>
+	<script src="/resources/charity/script/fancybox.min.js"></script>
+	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<script src="/resources/charity/script/jquery.jplayer.js"></script>
+	<script src="/resources/charity/script/jplayer.playlist.js"></script>
+	<script src="/resources/charity/script/functions.js"></script>
 </body>
+
 </html>
