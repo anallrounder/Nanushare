@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 
@@ -52,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.loginProcessingUrl("/login")
 			.usernameParameter("username")
 			.passwordParameter("password")
-			.defaultSuccessUrl("/main",true)
+			.successHandler(successHandler())// a페이지-> b페이지(유저권한이필요) -> 로그인페이지-> b페이지로 이동
+			//.defaultSuccessUrl("/main",true)
 		.and()
 			.logout()
 			.logoutUrl("/member/logout") //로그아웃하면 메인페이지로 이동						
@@ -80,7 +82,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	}
 	
-	
+	@Bean
+	public AuthenticationSuccessHandler successHandler() {
+		return new SuccessHandler("/defaultUrl");
+		
+	}
 	
 	@Bean
 	public HttpFirewall defaultHttpFirewall() { // 더블슬래시 객체 생성
