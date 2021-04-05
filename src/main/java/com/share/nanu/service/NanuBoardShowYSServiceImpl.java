@@ -19,62 +19,62 @@ import lombok.extern.slf4j.Slf4j;
 public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 	
 	@Autowired
-	private NanuBoardShowYSMapper nbsMapper;
+	private NanuBoardShowYSMapper mapper;
 	
 	// 인증게시판 리스트
 	@Override
 	public List<BoardVO> getlist() {
 		log.info("인증게시판 서비스 getlist()");
-		return nbsMapper.getlist();
+		return mapper.getlist();
 	}
 
 	// 페이징 리스트
 	@Override
 	public List<BoardVO> getlist(Criteria cri) {
-		log.info("인증게시판 서비스 페이징 getlist(cir)");
-		return nbsMapper.getlistWithPaging(cri);
+		log.info("인증게시판 서비스 페이징 getlist(cir)"+ cri);
+		return mapper.getlistWithPaging(cri);
 	}
 	
 	// 페이징 - 게시글 수 카운트
 	@Override
 	public int getTotal(Criteria cri) {
 		log.info("인증게시판 서비스 글 갯수 카운트 getTotal(cir)");
-		return nbsMapper.getTotalCount(cri);
+		return mapper.getTotalCount(cri);
 	}
 	
 	// 인증게시판 콘텐트 뷰
 	@Override
 	public BoardVO getBoard(int b_index) {
 		log.info("인증게시판 서비스 콘텐트뷰 getBoard()");
-		return nbsMapper.read(b_index);
+		return mapper.read(b_index);
 	}
 	
 	// 인증게시판 글 조회수
 	@Override
 	public void uphit(BoardVO boardVO) {
 		log.info("인증게시판 서비스 글 조회수 uphit()");
-		nbsMapper.hitUpdate(boardVO);
+		mapper.hitUpdate(boardVO);
 	}
 	
 	// 게시글 수정사항 업데이트
 	@Override
 	public void modifyBoard(BoardVO boardVO) {
 		log.info("인증게시판 서비스 글 수정 modifyBoard()");
-		nbsMapper.modify(boardVO);
+		mapper.modify(boardVO);
 	}
 	
 	// 인증게시판 글 삭제
 	@Override
 	public void deleteBoard(int b_index) {
 		log.info("인증게시판 서비스 글 삭제 deleteBoard()");
-		nbsMapper.delete(b_index);
+		mapper.delete(b_index);
 	}
 	
 	// 글 입력
 	@Override
 	public void writeBoard(BoardVO boardVO) {
 		log.info("인증게시판 서비스 글 입력 writeBoard()");
-		nbsMapper.insert(boardVO);
+		mapper.insert(boardVO);
 	}
 	// 이미지
 	@Override
@@ -83,7 +83,7 @@ public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 		vo.put("attach_num", attach_num);
 		vo.put("originname", originname);
 		vo.put("path", path);
-		nbsMapper.uploadFile(vo);
+		mapper.uploadFile(vo);
 	}
 	
 
