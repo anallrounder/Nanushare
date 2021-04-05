@@ -35,23 +35,25 @@ import lombok.extern.slf4j.Slf4j;
 public class NanuBoardShowYSController {
 
 	@Autowired
-	private NanuBoardShowYSService nbsService;
+	private NanuBoardShowYSService service;
 	
 	// 인증게시판 리스트 test
+	/*
 	@GetMapping("/testlist")
 	public String boardShowYS(Model model) {
 		log.info("인증게시판 리스트 컨트롤러");
-		model.addAttribute("testlist", nbsService.getlist());
+		model.addAttribute("testlist", service.getlist());
 		return "board_show/yourSupportList";
 	}
+	*/
 	
 	// 인증게시판 페이징 list
 	@GetMapping("/list")
 	public String boardShowPaging(Criteria cri, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
-		log.debug("인증게시판 컨트롤러 페이징 리스트");
-		model.addAttribute("plist", nbsService.getlist(cri));
+		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);
+		model.addAttribute("list", service.getlist(cri));
 		
-		int total = nbsService.getTotal(cri);
+		int total = service.getTotal(cri);
 		model.addAttribute("pageMaker", new pageVO(cri, total));
 		
 		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
@@ -68,8 +70,8 @@ public class NanuBoardShowYSController {
 	@GetMapping("/content_view")
 	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.debug("인증게시판 컨트롤러 컨텐트뷰");
-		nbsService.uphit(boardVO);
-		model.addAttribute("content_view", nbsService.getBoard(boardVO.getB_index()));
+		service.uphit(boardVO);
+		model.addAttribute("content_view", service.getBoard(boardVO.getB_index()));
 		
 		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
@@ -85,7 +87,7 @@ public class NanuBoardShowYSController {
 	@GetMapping("/modify_view")
 	public String bsModiview(BoardVO boardVO, Model model) throws Exception {
 		log.debug("인증게시판 컨트롤러 컨텐트뷰");
-		model.addAttribute("modify_view", nbsService.getBoard(boardVO.getB_index()));
+		model.addAttribute("modify_view", service.getBoard(boardVO.getB_index()));
 		return "board_show/ysModifyView";
 	}
 	
@@ -93,7 +95,7 @@ public class NanuBoardShowYSController {
 	@PostMapping("/modify")
 	public String bsModify(BoardVO boardVO) throws Exception {
 		log.info("인증게시판 컨트롤러  -- modify() -- 호출");
-		nbsService.modifyBoard(boardVO);
+		service.modifyBoard(boardVO);
 		return "redirect:content_view"; /* ?b_index=${modify_view.b_index} */
 		//return "redirect:plist";
 	}
@@ -102,7 +104,7 @@ public class NanuBoardShowYSController {
 	@GetMapping("/delete")
 	public String bsDelete(BoardVO boardVO) throws Exception {
 		log.info("인증게시판 컨트롤러 -- delete() -- 호출");
-		nbsService.deleteBoard(boardVO.getB_index());
+		service.deleteBoard(boardVO.getB_index());
 		return "redirect:plist";
 	}
 	
@@ -117,7 +119,7 @@ public class NanuBoardShowYSController {
 	@PostMapping("/write")
 	public String bsWrite(MultipartHttpServletRequest multi, BoardVO boardVO, AttachmentVO attachmentVO, Model model) throws Exception {
 		log.info("인증게시판 컨트롤러  -- write() -- 호출");
-		nbsService.writeBoard(boardVO);
+		service.writeBoard(boardVO);
 		// 멤버아이디를 이렇게 가져오는게 맞을까? 아니다. 받아올수가 없네. 로그인한 사용자 정보를 받아와야함. 일단 테스트는 쿼리문에서 써야겠다.
 		//model.addAttribute("getMember_id", nbsService.getBoard(boardVO.getMember_id()));
 		
@@ -147,7 +149,7 @@ public class NanuBoardShowYSController {
 
 	            mf.get(i).transferTo(new File(savePath)); // 파일 저장
 	 
-	            nbsService.fileUpload(attachmentVO.getAttach_num(), originalfileName, savePath);
+	            service.fileUpload(attachmentVO.getAttach_num(), originalfileName, savePath);
 	            }
 	        }
 		return "redirect:content_view";

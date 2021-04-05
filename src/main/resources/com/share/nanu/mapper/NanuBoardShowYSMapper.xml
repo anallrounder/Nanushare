@@ -16,19 +16,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getlistWithPaging" resultType="com.share.nanu.VO.BoardVO">
 		<![CDATA[
 			select * from (
-						select rownum as rnum, a.* 
+						select /*+ INDEX_DESC(board pk_board) */ 
+						rownum as rn, a.* 
 		  		from ( 
-		    		select * from board where bcat_num = 2 order by b_index desc
-		   	    )a where rownum <= #{pageNum} * #{amount}
-		 	) where rnum > (#{pageNum}-1) * #{amount} 
+		    		select * from board where bcat_num = 2
+		   	    )a where 
+		]]>    
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							btitle like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							bcontent like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							member_id like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim> 
+		<![CDATA[   	    
+		   	    rownum <= #{pageNum} * #{amount}
+		 	) where rn > (#{pageNum}-1) * #{amount} 
 		]]>
 	</select>
 	
 	<!-- 게시물 총 개수  -->
 	<select id="getTotalCount" resultType="int">
-	  <![CDATA[
-	 	 select count(*) from board where bcat_num = 2 
-	   ]]>
+		<![CDATA[
+			select count(*) from board where 
+		]]>	 
+	 	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							btitle like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							bcontent like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							member_id like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>  
+		<![CDATA[	 
+			bcat_num = 2 and b_index > 0 
+		]]>
 	</select>
 	
 	<!-- 인증게시판 컨텐트뷰 -->
