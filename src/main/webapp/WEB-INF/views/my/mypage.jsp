@@ -64,9 +64,9 @@
 
 </head>
 <style>
-li{
-   list-style:none;
-   }
+li {
+	list-style: none;
+}
 </style>
 
 <body>
@@ -89,104 +89,130 @@ li{
 		</div>
 	</div>
 	<!-- Banner -->
-<!-- Content --><!-- Content와 MainSection은 무조건 있어야함 -->
+	<!-- Content -->
+	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
-	<!-- Main Section -->
-	<div class="charity-main-section">
+		<!-- Main Section -->
+		<div class="charity-main-section">
 
-	<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
-	<div class="container">
-		<div class="view-account">
-			<section class="module">
-			<div class="module-inner">
-				<div class="side-bar">
-					<div class="user-info">
-						<img class="img-profile img-circle img-responsive center-block"
-							src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-						<ul class="meta list list-unstyled">
-							<li class="name"><h2><sec:authentication
-													property="principal.member.name" />
-							</h2></li>
-							<li class="email"><sec:authentication property="principal.member.member_id" /></a></li>
-							<li class="activity">Last logged in: Today at 2:18pm</li>
-						</ul>
-					</div>
-					<nav class="side-menu">
-					<ul class="nav">
-						<li class="active"><a href="#"><span class="fa fa-user"></span>
-								Profile</a></li>
-						<li><a href="ask"><span class="fa fa-cog">
-						</span>나의문의내역</a></li>
-						<li><a href="mypage_2"><span class="fa fa-credit-card">
-						</span>나의인증내역</a></li>
-						<li><a href="mypage_3"><span class="fa fa-envelope">
-						</span>나의나눔내역</a></li>
-						<li><a href="mypage_4"><span class="fa fa-th">
-						</span>나의댓글내역</a></li>
-						<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
-								Reminders</a></li> -->
-					</ul>
-					</nav>
-				</div>
-				<div class="content-panel">
-					<h2 class="title">
-						Profile<span class="pro-label label label-warning">PRO</span>
-					</h2>
-					<form class="form-horizontal">
-						<fieldset class="fieldset">
-							<h3 class="fieldset-title">Personal Info</h3>
-							<div class="form-group avatar">
-								<figure class="figure col-md-2 col-sm-3 col-xs-12"> <img
-									class="img-rounded img-responsive"
+			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
+			<div class="container">
+				<div class="view-account">
+					<section class="module">
+					<div class="module-inner">
+						<div class="side-bar">
+							<div class="user-info">
+								<img class="img-profile img-circle img-responsive center-block"
 									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-								</figure>
-								<div class="form-inline col-md-10 col-sm-9 col-xs-12">
-									<input type="file" class="file-uploader pull-left">
-									<button type="submit"
-										class="btn btn-sm btn-default-alt pull-left">Update
-										Image</button>
-								</div>
+								<ul class="meta list list-unstyled">
+									<li class="name"><h2>
+											<sec:authentication property="principal.member.name" />
+										</h2></li>
+									<li class="email"><sec:authentication
+											property="principal.member.member_id" /></a></li>
+									<li class="activity">Last logged in: Today at 2:18pm</li>
+								</ul>
 							</div>
-							<div class="form-group">
-								<label class="col-md-2 col-sm-3 col-xs-12 control-label">User
-									Name</label>
-								<div class="col-md-10 col-sm-9 col-xs-12">
-									<input type="text" class="form-control" value="Rebecca">
-								</div>
-							</div>
+							<nav class="side-menu">
+							<ul class="nav">
+								<li class="active"><a href="#"><span class="fa fa-user"></span>
+										Profile</a></li>
+								<li><a href="ask"><span class="fa fa-cog"> </span>나의문의내역</a></li>
+								<li><a href="mypage_2"><span class="fa fa-credit-card">
+									</span>나의인증내역</a></li>
+								<li><a href="mypage_3"><span class="fa fa-envelope">
+									</span>나의나눔내역</a></li>
+								<li><a href="mypage_4"><span class="fa fa-th"> </span>나의댓글내역</a></li>
+								<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
+								Reminders</a></li> -->
+							</ul>
+							</nav>
+						</div>
+						<div class="content-panel">
+							<h2 class="title">
+								Profile<span class="pro-label label label-warning">PRO</span>
+							</h2>
+							<form class="form-horizontal">
+								<fieldset class="fieldset">
+									<h3 class="fieldset-title">Personal Info</h3>
+									<div class="form-group avatar">
+										<figure class="figure col-md-2 col-sm-3 col-xs-12"> <img
+											class="img-rounded img-responsive"
+											src="https://bootdey.com/img/Content/avatar/avatar1.png"
+											alt=""> </figure>
+										<div class="form-inline col-md-10 col-sm-9 col-xs-12">
+											<input type="file" class="file-uploader pull-left">
+											<button type="submit"
+												class="btn btn-sm btn-default-alt pull-left">Update
+												Image</button>
+										</div>
+									</div>
+									<div class="charity-cause-donate">
+										<div class="skillst" id="maxmax">
+											<!-- 수정필요 -->
+											<!-- <h6>
+										data-width를 바꾸면 %가 달라짐 그림추가<span>해야함</span>
+									</h6> -->
+											<img src="/resources/my/그림1.png" height="80" width="80">
+											<img src="/resources/my/그림2.png" height="80" width="80">
+											<img src="/resources/my/그림3.png" height="80" width="80">
+											<img src="/resources/my/그림4.png" height="80" width="80">
+											<img src="/resources/my/그림5.png" height="80" width="80">
+											<img src="/resources/my/그림6.png" height="80" width="80">
+											<!-- <h6 class="skillst-right">
+										막대바가 <span>올곳</span>
+									</h6> -->
 
-							<div class="form-group">
-								<label class="col-md-2 col-sm-3 col-xs-12 control-label">First
-									Name</label>
-								<div class="col-md-10 col-sm-9 col-xs-12">
-									<input type="text" class="form-control" value="Rebecca">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-2 col-sm-3 col-xs-12 control-label">Last
-									Name</label>
-								<div class="col-md-10 col-sm-9 col-xs-12">
-									<input type="text" class="form-control" value="Sanders">
-								</div>
-							</div>
-						</fieldset>
-						
-						<hr>
-						<div class="form-group">
-							<div
-								class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-								<input class="btn btn-primary" type="submit"
-									value="Update Profile">
+											<div data-width='13' max='100'
+												class="charity-cause-progressbar"></div>
+										</div>
+
+
+									</div>
+
+
+									<div class="form-group">
+										<label class="col-md-2 col-sm-3 col-xs-12 control-label">User
+											Name</label>
+										<div class="col-md-10 col-sm-9 col-xs-12">
+											<input type="text" class="form-control" value="Rebecca">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 col-sm-3 col-xs-12 control-label">First
+											Name</label>
+										<div class="col-md-10 col-sm-9 col-xs-12">
+											<input type="text" class="form-control" value="Rebecca">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 col-sm-3 col-xs-12 control-label">Last
+											Name</label>
+										<div class="col-md-10 col-sm-9 col-xs-12">
+											<input type="text" class="form-control" value="Sanders">
+										</div>
+									</div>
+								</fieldset>
+
+								<hr>
+
+							</form>
+
+							<div class="button mt-2 d-flex flex-row align-items-center">
+								<button class="charity-simple-blog-btn w-100 text-white stats" type="submit"
+									onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+									프로필수정</button>
+								<button
+									class="charity-simple-blog-btn w-100 ml-2 text-white stats">기부영수증</button>
 							</div>
 						</div>
-					</form>
+					</div>
+					</section>
 				</div>
 			</div>
-			</section>
-		</div>
-	</div>
 
-	<script>
+			<script>
 		$("#mytabs>ul>li>a").each(function(i) {
 			$(this).attr("href", "#mytab" + i)
 		})
@@ -195,12 +221,12 @@ li{
 		})
 	</script>
 
-	<!-- Main Section -->
+			<!-- Main Section -->
 
+		</div>
+		<!-- Content -->
 	</div>
-	<!-- Content -->
-	</div>
-	
+
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->

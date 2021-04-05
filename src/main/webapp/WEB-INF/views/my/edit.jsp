@@ -85,6 +85,7 @@ $(function() {
 					  console.log(result);
 					  if (result == "SUCCESS") {
                           console.log("success");
+                          alert("회원 정보가 수정되었습니다. 다시 로그인해주세요.");
                           $(location)
 							.attr('href',"${pageContext.request.contextPath}/my/mypage");
                           /* 성공했을때 넘어가는 페이지 */
