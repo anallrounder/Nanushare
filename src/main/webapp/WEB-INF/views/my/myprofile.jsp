@@ -89,7 +89,7 @@
 					/* 내가 처리할 주소(=현재주소) */
 					url : "${pageContext.request.contextPath}/my/myprofile/check",
 					contentType : 'application/json; charset=utf-8',
-					data: pwConfirm,
+					data: pwConfirm, /* 여기가 컨트롤러로 넘어가는 data {안에넣어주면  = 형식으로 넘어감} */
 					async: "false",
 					datatype : 'text',
 					/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
@@ -105,7 +105,7 @@
 							console.log("success");
 							$(location)
 									.attr('href',"${pageContext.request.contextPath}/my/myprofile/edit");
-							/* 성공할 페이지 */
+							/* 성공했을때 넘어가는 페이지 */
 
 						}
 					},

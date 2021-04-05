@@ -54,8 +54,11 @@ public class AccountController {
 	}
 
 	@GetMapping("/loginPage") // 로그인 페이지
-	public ModelAndView home(ModelAndView mav) {
+	public ModelAndView home(ModelAndView mav, HttpServletRequest request) {
 		log.info("로그인 폼으로 이동");
+		//인증하기전 이전 주소를 기억 하는 로직
+		String referrer = request.getHeader("Referer");//이전 페이지 주소
+		request.getSession().setAttribute("prevPage", referrer);//세션에 이전페이지 주소를 prevPage에 저장
 		mav.setViewName("/loginForm/Loginindex");
 		return mav;
 	}
