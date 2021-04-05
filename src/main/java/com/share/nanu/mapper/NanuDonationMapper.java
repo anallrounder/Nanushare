@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.share.nanu.VO.DonationVO;
 import com.share.nanu.VO.ItemdonationVO;
 import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
@@ -27,7 +28,9 @@ public interface NanuDonationMapper {
 	public void donatePoint(PointVO pvo); // 포인트 기부시 포인트 테이블 업데이트
 
 	//donation 테이블에 ajax에서 받아온 데이터 insert
-	public void insertCardDona(List<Map<String, Object>> resultMap);
+	public void insertCardDona(DonationVO donavo);
+
+	public void updateDntcnt(String member_id);//후원금 기부 횟수 +1
 
 	
 	
