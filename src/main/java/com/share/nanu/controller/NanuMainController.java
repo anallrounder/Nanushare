@@ -70,6 +70,7 @@ public class NanuMainController {
 			//수량 2개씩 빼는 함수
 			mainService.itemOut(vm_num,iname);
 			model.addAttribute("message", "물품이 나왔습니다.");
+			// insert 쿼리 필요 어떤회원이 가져갔는지 추가
 			model.addAttribute("success", true);
 		}
 
