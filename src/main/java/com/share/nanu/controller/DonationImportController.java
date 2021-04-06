@@ -80,7 +80,10 @@ public class DonationImportController {
 		  donavo.setDntstat( (String)(resultMap.get(0).get("status")) );
 		  
 		  ndservice.insertCardDona(donavo);
-		  ndservice.updateDntcnt(donavo.getMember_id());
+		  if((String)(resultMap.get(0).get("status")) == "paid") {
+			  ndservice.updateDntcnt(donavo.getMember_id());
+		  }
+		  
 		  
 		
 	}
@@ -112,7 +115,10 @@ public class DonationImportController {
 		  donavo.setDntstat( (String)(resultMap.get(0).get("status")) );
 		  
 		  ndservice.insertCardDona(donavo);
-		  ndservice.updateDntcnt(donavo.getMember_id());
+		  if((String)(resultMap.get(0).get("status")) == "paid") {
+			  ndservice.updateDntcnt(donavo.getMember_id());
+		  }
+		 
 		
 	}
 		
