@@ -8974,7 +8974,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .charity-modren-services-full { margin: -70px 0px 31px 0px; }
 .latest_causes_full { background-color: #f9f9f9; padding: 70px 0px 50px 0px; margin: 43px 0px 0px 0px; }
-.charity_counter_full { background: url(../extra-images/counter-parallax-bg.jpg); background-attachment: fixed; background-size: contain; padding: 40px 0px 3px 0px; margin-bottom: 70px; }
+.charity_counter_full { background-attachment: fixed; background-size: contain; padding: 40px 0px 3px 0px; margin-bottom: 70px; }
 .charity-event-grid-full { margin-bottom: 40px; }
 .charity-simple-gallery-full { margin-bottom: 69px; }
 .charity-donation-parallex-full { background: url(../extra-images/donation-parallex-bg.jpg); background-attachment: fixed; background-size: cover; padding: 90px 0px 95px 0px; margin-bottom: 71px; }
