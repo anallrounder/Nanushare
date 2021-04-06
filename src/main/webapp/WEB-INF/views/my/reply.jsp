@@ -117,13 +117,13 @@ li {
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>
 										Profile</a></li>
-								<li class="active"><a href="ask"><span
-										class="fa fa-cog"> </span>나의문의내역</a></li>
+								<li><a href="ask"><span class="fa fa-cog"> </span>나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-credit-card">
 									</span>나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-envelope">
 									</span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-th"> </span>나의댓글내역</a></li>
+								<li class="active"><a href="reply"><span
+										class="fa fa-th"> </span>나의댓글내역</a></li>
 								<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
 								Reminders</a></li> -->
 							</ul>
@@ -136,53 +136,52 @@ li {
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-							<h2 class="title">
-								나의 문의 내역<span class="pro-label label label-warning">PRO</span>
-							</h2>
+
 
 
 							<table>
-
 								<div>
 									<br>
 								</div>
 								<tr>
 
-									<!-- <th>아이디</th> -->
-									<th>나눔제목-링크아직X</th>
-									<th>조회수</th>
+									<th>인증게시판 제목</th>
+									<th>나의 댓글</th>
 									<th>날짜</th>
+									<!-- <th>아이디</th> -->
 
 								</tr>
-								<!-- 로그인한 회원의 글 정보만 받아오기 -->
-								<!-- 나의문의내역 -->
-								<c:forEach items="${list1}" var="list1">
-									<sec:authentication property="principal" var="pinfo" />
-									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list1.member_id}">
-											<tr>
-												<%-- <td>${list1.member_id}</td> --%>
-												<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
-												<td><a id="a-content"
-													href="${pageContext.request.contextPath}/my/ask?b_index=${list1.b_index}">${list1.btitle}</a></td>
-												<!-- 제목누르면 해당 글내용으로 이동링크 -->
-												<td>${list1.bhit}</td>
-												<td>${list1.bdate}</td>
+								<!-- 나의댓글내역 -->
+								<c:set var="list4" value="${list4}" />
+								<c:forEach items="${list4}" var="dao4" varStatus="status">
+									<c:forEach items="${dao4.reply}" var="dto4" varStatus="status">
+										<sec:authentication property="principal" var="pinfo" />
+										<sec:authorize access="isAuthenticated()">
+											<c:if test="${pinfo.username eq dto4.rid}">
+												<tr>
+													<td>${dao4.btitle}</td>
+													<td><a id="a-content"
+														href="${pageContext.request.contextPath}/my/reply?b_index=${dao4.b_index}">${dto4.rcontent}</a></td>
+													<!-- 제목누르면 해당 글내용으로 이동링크 -->
+													<td>${dto4.rdate}</td>
+													<%-- <td>${dto4.rid}</td> --%>
 
-											</tr>
-										</c:if>
-									</sec:authorize>
+												</tr>
+											</c:if>
+										</sec:authorize>
+									</c:forEach>
 								</c:forEach>
 							</table>
 
-							<!-- 페이징 -->
+
+
 							<div class="container">
 								<div class="row">
 									<div class="col">
 										<ul class="pagination justify-content-center">
 											<li class="page-item"><c:if test="${pageMaker.prev}">
 													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+														href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
 												</c:if></li>
 
 											<li class="page-item"><c:forEach
@@ -190,14 +189,14 @@ li {
 													var="idx">
 													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
 													<a
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
+														href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(idx)}">${idx}</a>
 												</c:forEach></li>
 
 
 											<li class="page-item"><c:if
 													test="${pageMaker.next && pageMaker.endPage > 0}">
 													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+														href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.endPage +1) }">next
 													</a>
 												</c:if></li>
 										</ul>

@@ -128,7 +128,16 @@ public class MyPageServiceImpl implements MyPageService {
 	// 회원탈퇴페이지
 	@Override
 	public MemberVO memberDelete(MemberVO mvo) {
-		mvo = nmapper.getMember(mvo.getMember_id());
+		MemberVO member = nmapper.getMember(mvo.getMember_id());
+		if (mvo.getName() != null) {
+			member.setName(mvo.getName());
+		}
+		if (mvo.getMember_id() != null) {
+			member.setMember_id(mvo.getMember_id());
+		}
+		if (mvo.getPw() != null) {
+			member.setPw(bCryptPasswordEncoder.encode(mvo.getPw()));
+		}
 		return mgmapper.memberDelete(mvo);
 	}
 

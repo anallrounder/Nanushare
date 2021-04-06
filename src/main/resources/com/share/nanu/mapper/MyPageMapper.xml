@@ -3,30 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.share.nanu.mapper.MyPageMapper">
-
+<!-- 1.나의문의내역 -->
 	<select id="mygetlist1" resultType="com.share.nanu.VO.BoardVO">
 	<![CDATA[ 
 			select * from board where bcat_num=1
 		]]>
 	</select>
-
-	<select id="mygetlist2" resultType="com.share.nanu.VO.BoardVO">
-	<![CDATA[ 
-			select * from board where bcat_num=2 order by bdate desc
-		]]>
-	</select>
-	<!-- <select id="mygetlist3" resultType="com.share.nanu.VO.BoardVO">
-	<![CDATA[ 
-			select * from board where bcat_num=3
-		]]>
-	</select>
-	<select id="mygetlist4" resultType="com.share.nanu.VO.BoardVO">
-	<![CDATA[ 
-			select * from board where bcat_num=4
-		]]>
-	</select> -->
-
-
 	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging1">
 
 	<![CDATA[
@@ -38,7 +20,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 	) where rnum > (#{pageNum}-1) * #{amount}
 ]]>
 	</select>
-
+	<select resultType="int" id="getTotalCnt1">
+		 <![CDATA[select count(*) from board where
+		bcat_num=1]]>
+	</select>
+	
+	
+	
+	
+	<!-- 2.나의인증내역 -->
+	<select id="mygetlist2" resultType="com.share.nanu.VO.BoardVO">
+	<![CDATA[ 
+			select * from board where bcat_num=2 order by bdate desc
+		]]>
+	</select>
 	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging2">
 
 	<![CDATA[
@@ -50,65 +45,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 	) where rnum > (#{pageNum}-1) * #{amount}
 ]]>
 	</select>
-<!-- 	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging3">
-
-	<![CDATA[
-	select * from (
-						select rownum as rnum, a.* 
-		  		from ( 
-		    		select * from board where bcat_num = 3 order by b_index desc
-		   	    )a where rownum <= #{pageNum} * #{amount}
-		 	) where rnum > (#{pageNum}-1) * #{amount}
-]]>
-	</select>
-
-	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging4">
-
-	<![CDATA[
-	select * from (
-						select rownum as rnum, a.* 
-		  		from ( 
-		    		select * from board where bcat_num = 4 order by b_index desc
-		   	    )a where rownum <= #{pageNum} * #{amount}
-		 	) where rnum > (#{pageNum}-1) * #{amount}
-]]>
-	</select> -->
-<!-- 
-
-	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist2"> <![CDATA[ 
-		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]>
-	</select>
-	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist3"> <![CDATA[ 
-		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]>
-	</select>
-	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist4"> <![CDATA[ 
-		select * from board where rnum > (#{pageNum}-1) * #{amount} ]]>
-	</select>
- -->
-	<select resultType="int" id="getTotalCnt1">
-		select count(*) from board where
-		bcat_num=1
-	</select>
-
 	<select resultType="int" id="getTotalCnt2">
-		select count(*) from board where
-		bcat_num=2 
+		<![CDATA[select count(*) from board where
+		bcat_num=2 ]]>
 	</select>
-<!-- 	<select resultType="int" id="getTotalCnt3">
-		select count(*) from board where
-		bcat_num=3
-	</select>
-	<select resultType="int" id="getTotalCnt4">
-		select count(*) from board where
-		bcat_num=4
-	</select> -->
-
-
-
-
-
-	<!-- 나눔내역 -->
-	<resultMap id="itemdonationVO"
+	
+	
+	
+	
+	<!-- 3.나의 나눔내역 -->
+<!-- 	<resultMap id="itemdonationVO"
 		type="com.share.nanu.VO.ItemdonationVO">
 		<id property="idnt_num" column="idnt_num" />
 		<result property="idntdate" column="idntdate" />
@@ -124,15 +70,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="dona" javaType="java.util.List"
 			resultMap="itemdonationVO" />
 	</resultMap>
-	<!--resultType : 결과반환 Object, parameterType : 조회결과 Object -->
+	resultType : 결과반환 Object, parameterType : 조회결과 Object
 	<select id="mygetlist3" resultMap="iteminvenVO">
 <![CDATA[ select * from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntdate desc]]>
 	</select>
+	
+	
+	<select resultType="com.share.nanu.VO.iteminvenVO" id="getPaging3">
 
-
-
-	<!-- 댓글내역 -->
-	<resultMap id="boardreplyVO"
+	<![CDATA[
+	select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from iteminven where bcat_num = 3 order by b_index desc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount}
+]]>
+	</select>
+	
+	<select resultType="int" id="getTotalCnt3">
+		<![CDATA[select count(*) from board where
+		bcat_num=3]]>
+	</select> -->
+	
+	
+	
+	<!-- 4. 나의 댓글내역 -->
+<!-- 	<resultMap id="boardreplyVO"
 		type="com.share.nanu.VO.BoardreplyVO">
 		<id property="r_num" column="r_num" />
 		<result property="icat_num" column="icat_num" />
@@ -151,16 +115,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[ 
 	select * from board a, boardreply b where a.b_index = b.b_index]]>
 	</select>
+	
+	
+	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging4">
+
+	<![CDATA[
+	select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from board where bcat_num = 4 order by b_index desc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount}
+]]>
+	</select>  -->
+	
+	
+	<select resultType="int" id="getTotalCnt4">
+		select count(*) from board where
+		bcat_num=4
+	</select>
+
 
 
 	<!-- 회원정보수정 -->
- 	<!-- <select id="memberModifyGET"
-		resultType="com.share.nanu.VO.MemberVO" parameterType="String">parameterType="String"
-		<![CDATA[SELECT *
-		FROM member where member_id = #{member_id}]]>
-
-	</select>  -->
-
 	<update id="memberModify">
 		<![CDATA[
 		UPDATE member
@@ -168,11 +145,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where member_id = #{member_id}]]>
 	</update>
 
-
+	<!-- 탈퇴 -->
 	<delete id="memberDelete">
-		delete from member
+		<![CDATA[delete from member
 		where
-		member_id = #{member_id} and pw = #{pw} and name=#{name}
+		member_id = #{member_id} and pw = #{pw} and name=#{name}]]>
 	</delete>
 
 </mapper>

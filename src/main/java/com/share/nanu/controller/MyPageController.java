@@ -65,9 +65,9 @@ public class MyPageController {
 	}
 
 	// 나의인증내역
-	@GetMapping("/my/mypage/_2")
+	@GetMapping("/my/content")
 	public ModelAndView myCon(MemberVO mvo, ModelAndView mav, Criteria cri) {
-		mav.setViewName("/my/mypage_2");
+		mav.setViewName("/my/content");
 		mav.addObject("list2", mgservice.myList2(cri));// 나의인증내역
 		// 페이징
 		int total = mgservice.getTotalCount2(cri);
@@ -76,9 +76,9 @@ public class MyPageController {
 	}
 
 	// 나의나눔내역
-	@GetMapping("/my/mypage/_3")
+	@GetMapping("/my/give")
 	public ModelAndView myDona(MemberVO mvo, ModelAndView mav, Criteria cri) {
-		mav.setViewName("/my/mypage_3");
+		mav.setViewName("/my/give");
 		mav.addObject("list3", mgservice.myList3(cri));// 나의나눔내역
 		// 페이징
 		int total = mgservice.getTotalCount3(cri);
@@ -87,10 +87,10 @@ public class MyPageController {
 	}
 
 	// 나의댓글내역
-	@GetMapping("/my/mypage/_4")
+	@GetMapping("/my/reply")
 	public ModelAndView myReply(MemberVO mvo, ModelAndView mav, Criteria cri) {
-		mav.setViewName("/my/mypage_4");
-		mav.addObject("list1", mgservice.myList4(cri));// 나의문의내역
+		mav.setViewName("/my/reply");
+		mav.addObject("list4", mgservice.myList4(cri));// 나의문의내역
 		// 페이징
 		int total = mgservice.getTotalCount4(cri);
 		mav.addObject("pageMaker", new pageVO(cri, total));
@@ -170,16 +170,17 @@ public class MyPageController {
 	//탈퇴
 	@DeleteMapping("/my/drop/check")
 	public ResponseEntity<String> myprofDel(@AuthenticationPrincipal MemberDetails md,@RequestBody MemberVO mvo, HttpSession session) {
-		ResponseEntity<String> entity = null;
-		try {	
-			mgservice.memberDelete(mvo);
-			log.info("탈퇴한 회원 정보 : " + mvo);
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			session.invalidate(); 
-		} catch (Exception e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-			e.printStackTrace();
-			}
-		return entity;
-	}
+		/* public ResponseEntity<String> myprofEdit(@RequestBody MemberVO mvo) { */
+			ResponseEntity<String> entity = null;
+			try {	
+				mgservice.memberDelete(mvo);
+				log.info("탈퇴한 회원정보 : "+ mvo);
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+				//session.invalidate(); 세션날리고 다시 로그인해주세요 창띄우기
+			} catch (Exception e) {
+				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+				e.printStackTrace();
+				}
+			return entity;
+		}
 }

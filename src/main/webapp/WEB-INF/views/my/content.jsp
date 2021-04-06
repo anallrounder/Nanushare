@@ -117,10 +117,9 @@ li {
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>
 										Profile</a></li>
-								<li class="active"><a href="ask"><span
-										class="fa fa-cog"> </span>나의문의내역</a></li>
-								<li><a href="content"><span class="fa fa-credit-card">
-									</span>나의인증내역</a></li>
+								<li><a href="ask"><span class="fa fa-cog"> </span>나의문의내역</a></li>
+								<li class="active"><a href="content"><span
+										class="fa fa-credit-card"> </span>나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-envelope">
 									</span>나의나눔내역</a></li>
 								<li><a href="reply"><span class="fa fa-th"> </span>나의댓글내역</a></li>
@@ -137,11 +136,10 @@ li {
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 							<h2 class="title">
-								나의 문의 내역<span class="pro-label label label-warning">PRO</span>
+								나의 인증 내역<span class="pro-label label label-warning">PRO</span>
 							</h2>
-
-
 							<table>
+
 
 								<div>
 									<br>
@@ -149,31 +147,33 @@ li {
 								<tr>
 
 									<!-- <th>아이디</th> -->
-									<th>나눔제목-링크아직X</th>
+									<th>인증제목</th>
 									<th>조회수</th>
 									<th>날짜</th>
-
+									<!-- 	<th>분류번호</th> -->
 								</tr>
-								<!-- 로그인한 회원의 글 정보만 받아오기 -->
-								<!-- 나의문의내역 -->
-								<c:forEach items="${list1}" var="list1">
+
+
+								<!-- 나의인증내역 -->
+								<c:forEach items="${list2}" var="list2">
 									<sec:authentication property="principal" var="pinfo" />
 									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list1.member_id}">
+										<c:if test="${pinfo.username eq list2.member_id}">
 											<tr>
-												<%-- <td>${list1.member_id}</td> --%>
-												<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
+												<%-- <td>${list2.member_id}</td> --%>
 												<td><a id="a-content"
-													href="${pageContext.request.contextPath}/my/ask?b_index=${list1.b_index}">${list1.btitle}</a></td>
+													href="${pageContext.request.contextPath}/board/shows/content_view?b_index=${list2.b_index}">${list2.btitle}</a></td>
 												<!-- 제목누르면 해당 글내용으로 이동링크 -->
-												<td>${list1.bhit}</td>
-												<td>${list1.bdate}</td>
-
+												<td>${list2.bhit}</td>
+												<td>${list2.bdate}</td>
+												<%-- <td>${list2.bcat_num}</td> --%>
 											</tr>
 										</c:if>
 									</sec:authorize>
 								</c:forEach>
 							</table>
+
+
 
 							<!-- 페이징 -->
 							<div class="container">
@@ -182,7 +182,7 @@ li {
 										<ul class="pagination justify-content-center">
 											<li class="page-item"><c:if test="${pageMaker.prev}">
 													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+														href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
 												</c:if></li>
 
 											<li class="page-item"><c:forEach
@@ -190,14 +190,14 @@ li {
 													var="idx">
 													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
 													<a
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
+														href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
 												</c:forEach></li>
 
 
 											<li class="page-item"><c:if
 													test="${pageMaker.next && pageMaker.endPage > 0}">
 													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+														href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1) }">next
 													</a>
 												</c:if></li>
 										</ul>

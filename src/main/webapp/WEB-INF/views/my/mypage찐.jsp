@@ -41,14 +41,6 @@
 <!-- 웹페이지 탭 로고이미지 삽입  -->
 
 
-
-<!-- 탭처리 -->
-<link rel="stylesheet"
-	href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
-<script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
-<script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
-<script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
-
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
 <link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
@@ -60,15 +52,52 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
 
-</head>
+
+<style type="text/css">
+//
+CSS의 position 속성을 이용하여 두개의 DIV 레이아웃을 겹친다 . .u.i-progressbar {
+	position: relative;
+}
+
+.progress-label {
+	position: absolute;
+	left: 50%;
+	top: 8px;
+	font-weight: bold;
+	margin-left: -40px;
+}
+</style>
 <style>
 li {
 	list-style: none;
 }
 </style>
 
+<script type="text/JavaScript"
+	src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/JavaScript"
+	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+
+var imag = 
+	
+	if(0<=)
+
+
+$.ajax({ 
+	url:"${pageContext.request.contextPath}/my/myprofile",
+	//dataType: "image/jpeg",
+	contentType: "image/png",
+	success: function(data) {
+	$("#maxmax").attr("src", "/resources/my/그림1.png");
+	}
+	}); 
+</script>
+</head>
 <body>
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
@@ -115,102 +144,116 @@ li {
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
-								<li><a href="mypage"><span class="fa fa-user"></span>
-										Profile</a></li>
-								<li class="active"><a href="ask"><span
-										class="fa fa-cog"> </span>나의문의내역</a></li>
+								<li class="active"><a href="mypage"><span
+										class="fa fa-user"></span> Profile</a></li>
+								<li><a href="ask"><span class="fa fa-cog"> </span>나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-credit-card">
 									</span>나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-envelope">
 									</span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-th"> </span>나의댓글내역</a></li>
+								<li><a href="mypage_4"><span class="fa fa-th"> </span>나의댓글내역</a></li>
 								<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
 								Reminders</a></li> -->
 							</ul>
 							</nav>
 						</div>
 						<div class="content-panel">
-
-
-
-							<script
-								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 							<h2 class="title">
-								나의 문의 내역<span class="pro-label label label-warning">PRO</span>
+								Profile<span class="pro-label label label-warning">PRO</span>
 							</h2>
+							<form class="form-horizontal">
+								<fieldset class="fieldset">
+									<h3 class="fieldset-title">Personal Info</h3>
+									<!-- <div class="form-group avatar">
+										<figure class="figure col-md-2 col-sm-3 col-xs-12"> <img
+											class="img-rounded img-responsive"
+											src="https://bootdey.com/img/Content/avatar/avatar1.png"
+											alt=""> </figure>
+										<div class="form-inline col-md-10 col-sm-9 col-xs-12">
+											<input type="file" class="file-uploader pull-left">
+											<button type="submit"
+												class="btn btn-sm btn-default-alt pull-left">Update
+												Image</button>
+										</div>
+									</div> -->
 
+									<div class="container2 mt-5 d-flex justify-content-right">
+										<div class="card p-3">
+											<div class="d-flex align-items-center">
+												<div class="ml-2 auto">
 
-							<table>
+													<span>나의 포인트</span>
+													<h4 class="mb-2 mt-3">
+														<sec:authentication property="principal.member.dntcnt" />
+													</h4>
+													<!-- <div
+												class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats"> -->
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="button mt-2 d-flex flex-row align-items-center">
+										<button class="charity-simple-blog-btn w-30 text-white stats"
+											onclick="${pageContext.request.contextPath}/donation/money/point">
+											기부하기</button>
 
-								<div>
-									<br>
-								</div>
-								<tr>
-
-									<!-- <th>아이디</th> -->
-									<th>나눔제목-링크아직X</th>
-									<th>조회수</th>
-									<th>날짜</th>
-
-								</tr>
-								<!-- 로그인한 회원의 글 정보만 받아오기 -->
-								<!-- 나의문의내역 -->
-								<c:forEach items="${list1}" var="list1">
-									<sec:authentication property="principal" var="pinfo" />
-									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list1.member_id}">
-											<tr>
-												<%-- <td>${list1.member_id}</td> --%>
-												<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
-												<td><a id="a-content"
-													href="${pageContext.request.contextPath}/my/ask?b_index=${list1.b_index}">${list1.btitle}</a></td>
-												<!-- 제목누르면 해당 글내용으로 이동링크 -->
-												<td>${list1.bhit}</td>
-												<td>${list1.bdate}</td>
-
-											</tr>
-										</c:if>
-									</sec:authorize>
-								</c:forEach>
-							</table>
-
-							<!-- 페이징 -->
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if test="${pageMaker.prev}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-												</c:if></li>
-
-											<li class="page-item"><c:forEach
-													begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-													var="idx">
-													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-													<a
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
-												</c:forEach></li>
-
-
-											<li class="page-item"><c:if
-													test="${pageMaker.next && pageMaker.endPage > 0}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-													</a>
-												</c:if></li>
-										</ul>
+									</div>
+									<div
+										class="p-2 mt-2 bg d-flex justify-content-between rounded text-black stats">
+										<div class="d-flex flex-column">
+											<span class="articles">나눔횟수</span> <span class="number1"><sec:authentication
+													property="principal.member.itemdntcnt" /></span>
+										</div>
+										<div class="d-flex flex-column">
+											<span class="followers">기부횟수</span> <span class="number2"><sec:authentication
+													property="principal.member.dntcnt" /></span>
+										</div>
+										<div class="d-flex flex-column">
+											<span class="rating">Rating</span> <span class="number3">8.9</span>
+										</div>
 									</div>
 
-								</div>
+									<div class="charity-cause-donate">
+										<div class="skillst" id="maxmax">
+											<!-- 수정필요 -->
+											<!-- <h6>
+										data-width를 바꾸면 %가 달라짐 그림추가<span>해야함</span>
+									</h6> -->
+											<img src="/resources/my/그림1.png" height="80" width="80">
+											<img src="/resources/my/그림2.png" height="80" width="80">
+											<img src="/resources/my/그림3.png" height="80" width="80">
+											<img src="/resources/my/그림4.png" height="80" width="80">
+											<img src="/resources/my/그림5.png" height="80" width="80">
+											<img src="/resources/my/그림6.png" height="80" width="80">
+											
+											<!-- <h6 class="skillst-right">
+										막대바가 <span>올곳</span>
+									</h6> -->
 
+											<div data-width='11' max='100'
+												class="charity-cause-progressbar"></div>
+										</div>
+									</div>
+
+
+
+
+
+
+								</fieldset>
+
+								<hr>
+
+							</form>
+
+							<div class="button mt-2 d-flex flex-row align-items-center">
+								<button class="charity-simple-blog-btn w-100 text-white stats"
+									type="submit"
+									onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+									프로필수정</button>
+								<button
+									class="charity-simple-blog-btn w-100 ml-2 text-white stats">기부영수증</button>
 							</div>
-
-
-
-
-
 						</div>
 					</div>
 					</section>
@@ -263,7 +306,7 @@ li {
 	<script src="/resources/charity/script/popper.min.js"></script>
 	<script src="/resources/charity/script/bootstrap.min.js"></script>
 	<script src="/resources/charity/script/slick.slider.min.js"></script>
-	<script src="/resources/charity/script/progressbar.js"></script>
+	<script src="/resources/charity/script/progressbar-my.js"></script>
 	<script src="/resources/charity/script/fancybox.min.js"></script>
 	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
