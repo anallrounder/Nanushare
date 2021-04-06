@@ -79,8 +79,8 @@ public class DonationImportController {
 		  donavo.setPaymethod( (String)(resultMap.get(0).get("pay_method")) );
 		  donavo.setDntstat( (String)(resultMap.get(0).get("status")) );
 		  
-		  ndservice.insertCardDona(donavo);
-		  if((String)(resultMap.get(0).get("status")) == "paid") {
+		  ndservice.insertCardDona(donavo); //받아온 데이터 저장
+		  if((String)(resultMap.get(0).get("status")) == "paid") { //결제 상태가 paid(결제완료)면 카운트
 			  ndservice.updateDntcnt(donavo.getMember_id());
 		  }
 		  
