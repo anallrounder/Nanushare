@@ -1,5 +1,6 @@
 package com.share.nanu.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class MyPageController {
 	@GetMapping("/my/mypage")
 	public ModelAndView myPage(MemberVO mvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {
 		System.out.println("마이페이지");
-		
+
 		// 헤더에 로그인한 사람 정보 가져오기
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
 			// log.info("로그인한 사람 이름 - "+ md.getmember().getName());
@@ -55,9 +56,13 @@ public class MyPageController {
 
 	// 나의문의내역
 	@GetMapping("/my/ask")
-	public ModelAndView myAsk(MemberVO mvo, ModelAndView mav, Criteria cri) {
+	public ModelAndView myAsk(MemberVO mvo, ModelAndView mav, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
+		if (md != null) {
+			mav.addObject("username", md.getmember().getName());
+		}
 		mav.setViewName("/my/ask");
 		mav.addObject("list1", mgservice.myList1(cri));// 나의문의내역
+
 		// 페이징
 		int total = mgservice.getTotalCount1(cri);
 		mav.addObject("pageMaker", new pageVO(cri, total));
@@ -66,7 +71,10 @@ public class MyPageController {
 
 	// 나의인증내역
 	@GetMapping("/my/content")
-	public ModelAndView myCon(MemberVO mvo, ModelAndView mav, Criteria cri) {
+	public ModelAndView myCon(MemberVO mvo, ModelAndView mav, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
+		if (md != null) {
+			mav.addObject("username", md.getmember().getName());
+		}
 		mav.setViewName("/my/content");
 		mav.addObject("list2", mgservice.myList2(cri));// 나의인증내역
 		// 페이징
@@ -77,18 +85,27 @@ public class MyPageController {
 
 	// 나의나눔내역
 	@GetMapping("/my/give")
-	public ModelAndView myDona(MemberVO mvo, ModelAndView mav, Criteria cri) {
+	public ModelAndView myDona(MemberVO mvo, ModelAndView mav, Criteria cri,
+			@AuthenticationPrincipal MemberDetails md) {
+		if (md != null) {
+			mav.addObject("username", md.getmember().getName());
+		}
 		mav.setViewName("/my/give");
 		mav.addObject("list3", mgservice.myList3(cri));// 나의나눔내역
 		// 페이징
 		int total = mgservice.getTotalCount3(cri);
 		mav.addObject("pageMaker", new pageVO(cri, total));
+
 		return mav;
 	}
 
 	// 나의댓글내역
 	@GetMapping("/my/reply")
-	public ModelAndView myReply(MemberVO mvo, ModelAndView mav, Criteria cri) {
+	public ModelAndView myReply(MemberVO mvo, ModelAndView mav, Criteria cri,
+			@AuthenticationPrincipal MemberDetails md) {
+		if (md != null) {
+			mav.addObject("username", md.getmember().getName());
+		}
 		mav.setViewName("/my/reply");
 		mav.addObject("list4", mgservice.myList4(cri));// 나의문의내역
 		// 페이징
@@ -142,20 +159,22 @@ public class MyPageController {
 		return mav;
 	}
 
-	//수정
+	// 수정
 	@PutMapping("/my/myprofile/edit/check")
 	public ResponseEntity<String> myprofEdit(@RequestBody MemberVO mvo) {
-		//public ResponseEntity<String> myprofileedit(@AuthenticationPrincipal MemberDetails md, @RequestBody MemberVO mvo) {
+		// public ResponseEntity<String> myprofileedit(@AuthenticationPrincipal
+		// MemberDetails md, @RequestBody MemberVO mvo) {
 		ResponseEntity<String> entity = null;
-		try {	
+
+		try {
 			mgservice.memberModifyPOST(mvo);
-			log.info("수정된 회원정보 : "+ mvo);
+			log.info("수정된 회원정보 : " + mvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			//session.invalidate(); 세션날리고 다시 로그인해주세요 창띄우기
+			// session.invalidate(); 세션날리고 다시 로그인해주세요 창띄우기
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
-			}
+		}
 		return entity;
 	}
 
@@ -165,22 +184,34 @@ public class MyPageController {
 		mav.setViewName("/my/drop");
 		return mav;
 	}
-	
-	
-	//탈퇴
-	@DeleteMapping("/my/drop/check")
-	public ResponseEntity<String> myprofDel(@AuthenticationPrincipal MemberDetails md,@RequestBody MemberVO mvo, HttpSession session) {
-		/* public ResponseEntity<String> myprofEdit(@RequestBody MemberVO mvo) { */
-			ResponseEntity<String> entity = null;
-			try {	
-				mgservice.memberDelete(mvo);
-				log.info("탈퇴한 회원정보 : "+ mvo);
-				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-				//session.invalidate(); 세션날리고 다시 로그인해주세요 창띄우기
-			} catch (Exception e) {
-				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-				e.printStackTrace();
-				}
-			return entity;
+
+	// 탈퇴
+	@PostMapping("/my/drop/check")
+	public ResponseEntity<String> myprofDel(@AuthenticationPrincipal MemberDetails md, @RequestBody MemberVO mvo) {
+		ResponseEntity<String> entity = null;
+		System.out.println("시험"+mvo);
+		log.info("탈퇴체크페이지");
+		try {
+			mgservice.mememberDelete(mvo,md);
+			log.info("탈퇴된 회원정보 : " + mvo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			 //세션날리고 다시 로그인해주세요 창띄우기
+			
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
 		}
+		return entity;
+	}
+	
+	@GetMapping("/abc")
+	public ModelAndView myprofDe2(ModelAndView mav,HttpServletRequest req) {
+		log.info("탈퇴 페이지로 이동");
+		HttpSession session = req.getSession();
+		session.invalidate();
+			
+		mav.setViewName("/mainMap/mainContent");
+		return mav;
+	}
+
 }

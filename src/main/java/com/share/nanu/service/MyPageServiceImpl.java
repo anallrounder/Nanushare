@@ -33,7 +33,7 @@ public class MyPageServiceImpl implements MyPageService {
 	private NanuMapper nmapper;
 
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	BCryptPasswordEncoder encoder;
 
 	// 마이페이지-나의문의
 	@Override
@@ -118,7 +118,7 @@ public class MyPageServiceImpl implements MyPageService {
 			member.setSubemail(mvo.getSubemail());
 		}
 		if (mvo.getPw() != null) {
-			member.setPw(bCryptPasswordEncoder.encode(mvo.getPw()));
+			member.setPw(encoder.encode(mvo.getPw()));
 		}
 
 		mgmapper.memberModify(member);
@@ -126,19 +126,34 @@ public class MyPageServiceImpl implements MyPageService {
 	
 
 	// 회원탈퇴페이지
+//	@Override
+//	public MemberVO memberDelete(MemberVO mvo) {
+//		MemberVO member = nmapper.getMember(mvo.getMember_id());
+//		if (mvo.getName() == member.setName() ) {
+//			member.setName(mvo.getName());
+//		}
+//		if (mvo.getMember_id() != null) {
+//			member.setMember_id(mvo.getMember_id());
+//		}
+//		if (mvo.getPw() != null) {
+//			member.setPw(bCryptPasswordEncoder.encode(mvo.getPw()));
+//		}
+//		return mgmapper.memberDelete(mvo);
+//	}
+
+
 	@Override
-	public MemberVO memberDelete(MemberVO mvo) {
-		MemberVO member = nmapper.getMember(mvo.getMember_id());
-		if (mvo.getName() != null) {
-			member.setName(mvo.getName());
+	public void mememberDelete(MemberVO mvo, @AuthenticationPrincipal MemberDetails md) {
+		
+		System.out.println(mvo.getMember_id());
+		System.out.println(md.getUsername());
+		if(mvo.getMember_id().equals(md.getUsername()) && mvo.getName().equals(md.getmember().getName())
+		){			
+			mgmapper.authdel(mvo);
+			mgmapper.memberDelete(mvo);	
+			
 		}
-		if (mvo.getMember_id() != null) {
-			member.setMember_id(mvo.getMember_id());
-		}
-		if (mvo.getPw() != null) {
-			member.setPw(bCryptPasswordEncoder.encode(mvo.getPw()));
-		}
-		return mgmapper.memberDelete(mvo);
+		
 	}
 
 	

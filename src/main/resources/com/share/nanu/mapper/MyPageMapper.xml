@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 3.나의 나눔내역 -->
-<!-- 	<resultMap id="itemdonationVO"
+	<resultMap id="itemdonationVO"
 		type="com.share.nanu.VO.ItemdonationVO">
 		<id property="idnt_num" column="idnt_num" />
 		<result property="idntdate" column="idntdate" />
@@ -70,13 +70,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="dona" javaType="java.util.List"
 			resultMap="itemdonationVO" />
 	</resultMap>
-	resultType : 결과반환 Object, parameterType : 조회결과 Object
+	<!-- resultType : 결과반환 Object, parameterType : 조회결과 Object -->
 	<select id="mygetlist3" resultMap="iteminvenVO">
 <![CDATA[ select * from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntdate desc]]>
 	</select>
 	
 	
-	<select resultType="com.share.nanu.VO.iteminvenVO" id="getPaging3">
+	<select resultMap="iteminvenVO" id="getPaging3">
 
 	<![CDATA[
 	select * from (
@@ -91,12 +91,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select resultType="int" id="getTotalCnt3">
 		<![CDATA[select count(*) from board where
 		bcat_num=3]]>
-	</select> -->
-	
+	</select>
 	
 	
 	<!-- 4. 나의 댓글내역 -->
-<!-- 	<resultMap id="boardreplyVO"
+	<resultMap id="boardreplyVO"
 		type="com.share.nanu.VO.BoardreplyVO">
 		<id property="r_num" column="r_num" />
 		<result property="icat_num" column="icat_num" />
@@ -117,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging4">
+	<select resultMap="boardVO" id="getPaging4">
 
 	<![CDATA[
 	select * from (
@@ -127,8 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   	    )a where rownum <= #{pageNum} * #{amount}
 		 	) where rnum > (#{pageNum}-1) * #{amount}
 ]]>
-	</select>  -->
-	
+	</select>  
 	
 	<select resultType="int" id="getTotalCnt4">
 		select count(*) from board where
@@ -149,7 +147,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="memberDelete">
 		<![CDATA[delete from member
 		where
-		member_id = #{member_id} and pw = #{pw} and name=#{name}]]>
+		member_id = #{member_id} and name=#{name} ]]>
 	</delete>
+
+<delete id="authdel">
+<![CDATA[DELETE FROM auth WHERE member_id=#{member_id}]]>
+</delete>
 
 </mapper>
