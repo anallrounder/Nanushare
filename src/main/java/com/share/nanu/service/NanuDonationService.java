@@ -2,9 +2,12 @@
 
 package com.share.nanu.service;
 
-import java.util.List;
-import java.util.Map;
 
+import java.sql.Date;
+import java.util.List;
+
+
+import com.share.nanu.VO.DonationVO;
 import com.share.nanu.VO.ItemdonationVO;
 import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
@@ -27,7 +30,10 @@ public interface NanuDonationService {
 	public String changeUNIXTimeStamp(String paidAt);
 	
 	//donation 테이블에 ajax에서 받아온 데이터 insert
-	public void insertCardDona(List<Map<String, Object>> resultMap);
+	public void insertCardDona(DonationVO donavo);
+	
+	//후원금 기부횟수 +1
+	public void updateDntcnt(String member_id);
 	
 	
 	
