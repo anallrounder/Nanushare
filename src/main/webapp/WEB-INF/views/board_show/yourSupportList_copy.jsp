@@ -34,55 +34,6 @@
 	
 	 <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
-	
-	
-	<script type="text/javascript">
-		$(document).reday(function() {
-		/* 	var result = '<c:out value="${result}" />';
-		  	checkModal(result);
-		  	history.replaceState({},null,null);
-		  
-			function checkModal(result) {
-				
-				if (result === '' || history.state) {
-					return;
-				}
-				
-				if (parseInt(result) > 0) {
-					$(".modal-body").html("게시글 " + parseInt(result) + " 번이 등록되었습니다.");
-				}
-				
-				$("#myModal").modal("show");
-			} 
-  
-			
-			$("#regBtn").on("click", function() {
-				self.location = "/board/register";
-			}); */
-	 		
-			/* search */
-			var actionForm = $("#actionForm");
-	
-			$(".paginate_button a").on("click", function(e) {
-				e.preventDefault();  //전송을 막음
-				console.log('click');
-				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-				actionForm.submit();
-			});
-		});
-		
-		// 추가
-	/* 	$(".move").on("click", function(e) {
-
-			e.preventDefault();
-			actionForm
-				.append("<input type='hidden' name='bid' value='"
-					+ $(this).attr("href") + "'>");
-			actionForm.attr("action", "/board/get");
-			actionForm.submit();
-			
-		}); */
-	</script>
 </head>
 
 <body>
@@ -115,50 +66,12 @@
 				<div class="col-md-12">
 					<!-- Widget Search -->
 					<!-- 	<div class="widget_title"><h2>Search Here</h2></div> -->
-					<!-- <div style="float: right;" class="widget widget_search col-md-4">
+					<div style="float: right;" class="widget widget_search col-md-4">
 						<form>
 							<input type="text" placeholder="검색어를 입력하세요."> <input type="submit" value=""> <i class="fa fa-search"></i>
 						</form>
-					</div> -->
-					<!-- Widget Search -->
-					
-					<!-- search start  -->
-					<div class="row" style="clear:right;width:500px;margin:auto">
-						<div class="col-lg-12">
-						<div style="float: right;" class="widget widget_search">
-							<form id="searchForm" action="/board/shows/list" method="get" ><!-- class="navbar-form" -->
-								<div class="input-group">
-									<div class="form-group navbar-left">
-										<select name="type"  class="form-control">
-											<option value="">검색종류</option>
-											<option value="T" ${(pageMaker.cri.type == "T") ? "\"selected\"":"" }>제목</option>
-											<option value="C" ${(pageMaker.cri.type == "C") ? "\"selected\"":"" }>내용</option>
-											<option value="W" ${(pageMaker.cri.type == "W") ? "\"selected\"":"" }>작성자</option>
-											<option value="TC" ${(pageMaker.cri.type == "TC") ? "\"selected\"":"" }>제목과 내용</option>
-										</select>
-									</div>
-									<div class="form-group navbar-right">
-										<input type="text" name="keyword" class="form-control" placeholder="search here" value="${pageMaker.cri.keyword}"/>
-										<!-- <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button> -->
-										<button class="btn btn-default btn-sm">Search</button> 
-										<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-										<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-									</div> 
-									<!-- <button class="btn btn-primary btn-sm">Search</button> -->
-									<!-- <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button> -->
-										<!-- <i class="bi bi-search"></i> -->
-										 
-										<!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-											<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-										</svg>
- -->								
-								</div>
-							</form>
-						</div>
-						</div>
 					</div>
-					<!-- search end -->
-					
+					<!-- Widget Search -->
 					<div  style="float: right;" class="col-md-2">
 						<button  class="charity-click-btn" onclick="location.href='write_view'">나눔 인증글 작성</button>
 					</div>
@@ -172,7 +85,7 @@
 						<div class="charity-blog charity-simple-blog">
 							<ul class="row">
 
-								<c:forEach var="vo" items="${list}">
+								<c:forEach var="vo" items="${plist}">
 									<li class="col-md-6">
 										<figure>
 											<a href="#"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-simple-1.jpg" alt=""></a>
@@ -246,15 +159,6 @@
 						//document.querySelectorAll('p').innerText = truncateText('p', 50); 아래 처럼 써야 작동함
 					    $('.contentclass').text(truncateText('.contentclass', 75));
 						</script>
-						
-						
-						<!-- Pagination + SEARCH -->
-						<form id='actionForm' action="/board/shows/list" method='get'>
-							<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-							<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-							<input type="hidden" name="type" value="${pageMaker.cri.type}"><!-- 추가 -->
-						  	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"><!-- 추가 -->
-						</form>
 						
 						<!-- Pagination -->
 						<div class="charity-pagination">

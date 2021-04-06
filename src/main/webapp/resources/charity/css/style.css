@@ -308,7 +308,7 @@ address {
 }
 
 .charity-main-content {
-	padding: 70px 0 40px;
+	padding: 0px 0 40px;
 }
 /* Header */
 #charity-header, .charity-header-one, .charity-top-strip {
@@ -1087,6 +1087,7 @@ small.charity-cause-raised {
 .charity-counter {
 	float: left;
 	width: 100%;
+
 }
 
 .charity-counter ul li {
@@ -1524,6 +1525,7 @@ ul li:hover .charity-simple-team-media {
 	float: left;
 	width: 100%;
 	text-align: center;
+
 }
 
 .light-black-transparent {

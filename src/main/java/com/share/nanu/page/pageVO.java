@@ -60,8 +60,11 @@ public class pageVO {
 	}
 	
 	public String makeQuery(int page) {
-		UriComponents uriComponentsBuilder =  UriComponentsBuilder.newInstance().queryParam("pageNum", page)
+		UriComponents uriComponentsBuilder =  UriComponentsBuilder.newInstance()
+				.queryParam("pageNum", page)
 				.queryParam("amount", cri.getAmount())
+				.queryParam ("type", cri.getType()) // 검색 추가
+				.queryParam("keyword", cri.getKeyword()) // 검색 추가
 				.build();
 		return uriComponentsBuilder.toUriString();
 	}
