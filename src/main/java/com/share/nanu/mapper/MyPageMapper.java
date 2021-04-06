@@ -10,6 +10,7 @@ import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.page.Criteria;
+import com.share.nanu.security.MemberDetails;
 
 @Mapper
 public interface MyPageMapper {
@@ -36,9 +37,12 @@ public interface MyPageMapper {
 
 	// 회원수정
 	public void memberModify(MemberVO mvo);
-
+	
+	
 	// 회원탈퇴
-	public MemberVO memberDelete(MemberVO membervo);
+	public void memberDelete(MemberVO mvo);
+	public void authdel(MemberVO mvo);
+
 	
 	
 
