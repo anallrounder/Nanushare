@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.rememberMeParameter("Nanushare_rememberMe")
 			.rememberMeCookieName("Nanushare_cooki") //f12개발자모드 -> application -> cooki에서 Nanushare_cooki라는 이름으로 쿠키 정보를 확인할 수 있다.
 			.userDetailsService(mservice)
-			.tokenValiditySeconds(1209600); //2주
+			.tokenValiditySeconds(1209600);//2주
 		
 		
 	}
