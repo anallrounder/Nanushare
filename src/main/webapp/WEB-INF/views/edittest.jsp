@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -13,11 +16,12 @@
   </head>
   <body>
   <form action="">
-    <div id="summernote">
+  	<textarea id="summernote" ></textarea>
+    <!-- <div id="summernote">
     	
-    </div>
+    </div> -->
     <br/>
-    <input type="submit" value="전송">
+    <input type="submit" value="글작성">
     </form>
     
     <script>
