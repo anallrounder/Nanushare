@@ -7,7 +7,18 @@
 @import
 	url('https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i')
 	;
+@font-face {
+    font-family: 'YiSunShinDotumM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 
+@font-face적용방법 https://webclub.tistory.com/261 
+이순신체 웹폰트 가져온 주소 https://noonnu.cc/font_page/66
 /*
+
 01. Theme Typo
 02. Header
         02.1 Top Strip
@@ -75,13 +86,13 @@ body {
 	background-color: #ffffff;
 	color: #313539;
 	font-family: 'Ubuntu', sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 24px;
 }
 
 body h1, body h2, body h3, body h4, body h5, body h6 {
 	color: #333333;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Montserrat', 'YiSunShinDotumM', sans-serif;
 	font-style: normal;
 	line-height: 1.5;
 	letter-spacing: 1.1px;
@@ -89,27 +100,33 @@ body h1, body h2, body h3, body h4, body h5, body h6 {
 }
 
 h1 {
-	font-size: 26px;
+	/* font-size: 26px; */
+	font-size: 28px;
 }
 
 h2 {
-	font-size: 24px;
+	/* font-size: 24px; */
+	font-size: 26px;
 }
 
 h3 {
-	font-size: 22px;
+	/* font-size: 22px; */
+	font-size: 24px;
 }
 
 h4 {
-	font-size: 20px;
+	/* font-size: 20px; */
+	font-size: 22px;
 }
 
 h5 {
-	font-size: 18px;
+	/* font-size: 18px; */
+	font-size: 20px;
 }
 
 h6 {
-	font-size: 16px;
+	/* font-size: 16px; */
+	font-size: 18px;
 }
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
