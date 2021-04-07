@@ -29,11 +29,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 2.나의인증내역 -->
-	<select id="mygetlist2" resultType="com.share.nanu.VO.BoardVO">
+<!-- 	<select id="mygetlist2" resultType="com.share.nanu.VO.BoardVO">
 	<![CDATA[ 
-			select * from board where bcat_num=2 order by bdate desc
+			select * from board where bcat_num=2 
 		]]>
-	</select>
+	</select> -->
+	
 	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging2">
 
 	<![CDATA[
@@ -43,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    		select * from board where bcat_num = 2 order by b_index desc
 		   	    )a where rownum <= #{pageNum} * #{amount}
 		 	) where rnum > (#{pageNum}-1) * #{amount}
-]]>
+	]]>
 	</select>
 	<select resultType="int" id="getTotalCnt2">
 		<![CDATA[select count(*) from board where
@@ -62,17 +63,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="donaamount" column="donaamount" />
 		<result property="icat_num" column="icat_num" />
 	</resultMap>
-	<resultMap id="iteminvenVO"
-		type="com.share.nanu.VO.IteminvenVO">
+	<resultMap id="iteminvenVO" type="com.share.nanu.VO.IteminvenVO">
 		<id property="icat_num" column="icat_num" />
 		<result property="iname" column="iname" />
 		<result property="iamount" column="iamount" />
-		<collection property="dona" javaType="java.util.List"
-			resultMap="itemdonationVO" />
+		<collection property="dona" javaType="java.util.List" resultMap="itemdonationVO" />
 	</resultMap>
 	<!-- resultType : 결과반환 Object, parameterType : 조회결과 Object -->
 	<select id="mygetlist3" resultMap="iteminvenVO">
-<![CDATA[ select * from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntdate desc]]>
+		<![CDATA[ select * from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntdate desc]]>
 	</select>
 	
 	
@@ -80,12 +79,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<![CDATA[
 	select * from (
-						select rownum as rnum, a.* 
+	select rownum as rnum, a.* 
 		  		from ( 
-		    		select * from iteminven where bcat_num = 3 order by b_index desc
+		    		select * from iteminven a,itemdonation b where a.icat_num = b.icat_num 
+                    order by b.idnt_num desc
 		   	    )a where rownum <= #{pageNum} * #{amount}
 		 	) where rnum > (#{pageNum}-1) * #{amount}
-]]>
+	]]>
 	</select>
 	
 	<select resultType="int" id="getTotalCnt3">
