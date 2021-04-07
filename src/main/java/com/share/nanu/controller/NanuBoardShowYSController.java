@@ -37,12 +37,6 @@ public class NanuBoardShowYSController {
 	@Autowired
 	private NanuBoardShowYSService service;
 	
-	@GetMapping("/testEdit")
-	public String testEDit() {
-		log.info("썸머노트 에디트 테스트");
-		return "edittest";
-	}
-	
 	
 	// 인증게시판 리스트 test
 	/*

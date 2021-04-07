@@ -8,23 +8,7 @@
 
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-    <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script> -->
-    
-    
-     <!-- 서머노트를 위해 추가해야할 부분 -->
-  <script src="${pageContext.request.contextPath}/resources/SummerNote/summernote-lite.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/SummerNote/lang/summernote-ko-KR.js"></script>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/SummerNote/summernote-lite.css">
-    
-    
+	 <script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
     
     <!-- meta tags -->
     <meta charset="utf-8">
@@ -43,11 +27,8 @@
 		    $(document).ajaxSend(function(e, xhr, options) {
 		        xhr.setRequestHeader(header, token);
 		    });
-	});
-	   
-	    
-  
-    
+		});
+	 
     
     </script>
 
@@ -123,7 +104,7 @@ $('#bcontent').summernote({
 	                            <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 이미지 저장</i></button>
 	                           <br><br>
 	                           <h4>Content</h4>
-	                           <p><textarea  name="bcontent" placeholder="내용을 작성하세요."></textarea></p>
+	                           <p><textarea id="editor4" name="bcontent" placeholder="내용을 작성하세요."></textarea></p>
 	                           
 	                           <br><br>
 							   <br><hr>
@@ -135,14 +116,7 @@ $('#bcontent').summernote({
 							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 	                        </div>
                         </form>
-                        <script type="text/javascript">
-$('#bcontent').summernote({			
-    placeholder: 'Hello Bootstrap 4',
-    tabsize: 2,
-    height: 500
-  });
-</script>
-      						
+                        <script>CKEDITOR.replace('editor4');</script>
                         
                       	<!--   a href="plist" -->
                         <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="plist" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>
