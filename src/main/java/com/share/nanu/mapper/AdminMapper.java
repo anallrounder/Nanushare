@@ -22,4 +22,12 @@ public interface AdminMapper {
 
 	List<VmVmamVO> getVmVmam();
 
+	void itemHeadUp(int iamount, int icat_num);
+
+	void itemOut(int icat_num, int iamount);
+
+	void itemVmam(String vm_num, int iamount, String iname);
+
+	void itemIoutPut(String vm_num, int iamount, String outputdate, int icat_num);
+
 }

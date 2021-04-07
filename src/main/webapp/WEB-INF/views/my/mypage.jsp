@@ -51,27 +51,19 @@
 <link rel="stylesheet" href="/resources/charity/css/style.css">
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
+<link rel="stylesheet" type="text/css" href="/resources/charity/css/imgblink_hj.css">
 
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
 
 
-<style type="text/css">
-/* CSS의 position 속성을 이용하여 두개의 DIV 레이아웃을 겹친다 . */ 
-.u.i-progressbar {
-	position: relative;
-}
 
-.progress-label {
-	position: absolute;
-	left: 50%;
-	top: 8px;
-	font-weight: bold;
-	margin-left: -40px;
-}
-</style>
 <style>
+
+.maxmax{
+position: relative;
+}
 li {
 	list-style: none;
 }
@@ -83,20 +75,48 @@ li {
 	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 
-var imag = 
+
+
+
+
+	jQuery(document).ready(function() {
+	var barbar = jQuery('.progressbar');
+		var barProgress = <sec:authentication property="principal.member.dntcnt"/>;
+		var test = Number(barProgress+0);
+		getresource(test);
 	
-	if(0<=)
+		//console.log(pg);
+		console.log(typeof(test));
+		
+		function getresource(test){
+			
+			console.log(test);
+		    if (test >= 0 && test<=20) {
+					$(".maxmax").attr('src', '/resources/my/그림1.png').css("left","0%");
+					console.log(barProgress);
+				}if (test > 20 && test<=40) {
+					
+					$(".maxmax").attr("src", "/resources/my/그림2.png").css("left","17%");
+				
+				}if (test > 40 && test<=60) {
+					
+					$(".maxmax").attr("src", "/resources/my/그림3.png").css("left","47%");
+				
+				}if (test > 60 && test<=80) {
+					
+					$(".maxmax").attr("src", "/resources/my/그림4.png").css("left","67%");
+				
+				}if (test > 80 && test<=100) {
+					
+					$(".maxmax").attr("src", "/resources/my/그림5.png").css("left","87%");
+				}
 
+		 } 
 
-$.ajax({ 
-	url:"${pageContext.request.contextPath}/my/myprofile",
-	//dataType: "image/jpeg",
-	contentType: "image/png",
-	success: function(data) {
-	$("#maxmax").attr("src", "/resources/my/그림1.png");
-	}
-	}); 
+	});
+		
 </script>
+
 </head>
 <body>
 	<!-- Header -->
@@ -132,7 +152,9 @@ $.ajax({
 						<div class="side-bar">
 							<div class="user-info">
 								<img class="img-profile img-circle img-responsive center-block"
-									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+									src="/resources/my/프로필사진.PNG" alt="">
+								<!-- 
+									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
 								<ul class="meta list list-unstyled">
 									<li class="name"><h2>
 											<sec:authentication property="principal.member.name" />
@@ -151,7 +173,7 @@ $.ajax({
 									</span>나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-envelope">
 									</span>나의나눔내역</a></li>
-								<li><a href="mypage_4"><span class="fa fa-th"> </span>나의댓글내역</a></li>
+								<li><a href="reply"><span class="fa fa-th"> </span>나의댓글내역</a></li>
 								<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
 								Reminders</a></li> -->
 							</ul>
@@ -194,73 +216,64 @@ $.ajax({
 									</div>
 									<div class="button mt-2 d-flex flex-row align-items-center">
 										<button class="charity-simple-blog-btn w-30 text-white stats"
-											onclick="${pageContext.request.contextPath}/donation/money/point">
+											type="button"
+											onClick="location.href='${pageContext.request.contextPath}/donation/money/point'">
 											기부하기</button>
 
 									</div>
 									<div
-										class="p-2 mt-2 bg d-flex justify-content-between rounded text-black stats">
+										class="p-2 mt-2 bg d-flex justify-content-between rounded text-black stats"
+										style="border-style: dotted;">
 										<div class="d-flex flex-column">
-											<span class="articles">나눔횟수</span> <span class="number1"><sec:authentication
+											<span class="articles">나의 나눔횟수</span> <span class="number1"><sec:authentication
 													property="principal.member.itemdntcnt" /></span>
 										</div>
 										<div class="d-flex flex-column">
-											<span class="followers">기부횟수</span> <span class="number2"><sec:authentication
+											<span class="followers">나의 기부횟수</span> <span class="number2"><sec:authentication
 													property="principal.member.dntcnt" /></span>
 										</div>
-										<div class="d-flex flex-column">
+										<!-- <div class="d-flex flex-column">
 											<span class="rating">Rating</span> <span class="number3">8.9</span>
-										</div>
+										</div> -->
 									</div>
 
+
+									<!-- 프로그래스바 -->
 									<div class="charity-cause-donate">
-										<div class="skillst" id="maxmax">
-											<!-- 수정필요 -->
-											<!-- <h6>
-										data-width를 바꾸면 %가 달라짐 그림추가<span>해야함</span>
-									</h6> -->
-											<img src="/resources/my/그림1.png" height="80" width="80">
-											<img src="/resources/my/그림2.png" height="80" width="80">
-											<img src="/resources/my/그림3.png" height="80" width="80">
-											<img src="/resources/my/그림4.png" height="80" width="80">
-											<img src="/resources/my/그림5.png" height="80" width="80">
-											<img src="/resources/my/그림6.png" height="80" width="80">
-											
-											<!-- <h6 class="skillst-right">
-										막대바가 <span>올곳</span>
-									</h6> -->
+										
 
-											<div data-width='11' max='100'
-												class="charity-cause-progressbar"></div>
+										<div class="progressbar">
+										<img class="maxmax blinking" width="80" height="80">
+											<div class="progress-label"></div>
 										</div>
+
+										<div
+											data-width='<sec:authentication property="principal.member.dntcnt"/>'
+											max='100' class="charity-cause-progressbar"></div>
 									</div>
+						</div>
 
+						</fieldset>
 
+						<hr>
 
+						</form>
 
-
-
-								</fieldset>
-
-								<hr>
-
-							</form>
-
-							<div class="button mt-2 d-flex flex-row align-items-center">
-								<button class="charity-simple-blog-btn w-100 text-white stats"
-									type="submit"
-									onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-									프로필수정</button>
-								<button
-									class="charity-simple-blog-btn w-100 ml-2 text-white stats">기부영수증</button>
-							</div>
+						<div class="button mt-2 d-flex flex-row align-items-center">
+							<button class="charity-simple-blog-btn w-100 text-white stats"
+								type="submit"
+								onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+								프로필수정</button>
+							<button
+								class="charity-simple-blog-btn w-100 ml-2 text-white stats">기부영수증</button>
 						</div>
 					</div>
-					</section>
 				</div>
+				</section>
 			</div>
+		</div>
 
-			<script>
+		<script>
 				$("#mytabs>ul>li>a").each(function(i) {
 					$(this).attr("href", "#mytab" + i)
 				})
@@ -269,10 +282,10 @@ $.ajax({
 				})
 			</script>
 
-			<!-- Main Section -->
+		<!-- Main Section -->
 
-		</div>
-		<!-- Content -->
+	</div>
+	<!-- Content -->
 	</div>
 
 	<!-- Footer -->

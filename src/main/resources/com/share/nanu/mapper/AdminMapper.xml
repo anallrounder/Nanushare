@@ -50,5 +50,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	</select>
 	
+	<update id="itemHeadUp"> <!-- 본사 입고 수량 업데이트 -->
+	<![CDATA[ 
+		update iteminven set iamount = iamount + #{iamount} where icat_num = #{icat_num}
+	]]>
+	</update>
+	
+	<update id="itemOut"> <!-- 본사 수량 빼기 -->
+	<![CDATA[ 
+		update iteminven set iamount = iamount - #{iamount} where icat_num = #{icat_num}
+	]]>
+	</update>
+	
+	<update id="itemVmam"> <!-- 본사에서 추가된 수량 자판기에 넣기 -->
+	<![CDATA[ 
+		update vmam set vm_amount = vm_amount + #{iamount} where vm_num = #{vm_num} and iname = #{iname}
+	]]>
+	</update>
+	
+	<insert id="itemIoutPut">
+	<![CDATA[ 
+		insert into ioutput(iout_num, vm_num, outamount, outputdate, icat_num) values (IOUTPUT_SEQ.nextval, #{vm_num}, #{iamount}, TO_DATE(#{outputdate}, 'MM/dd/yyyy') , #{icat_num})
+	]]>
+	</insert>
 
 </mapper>

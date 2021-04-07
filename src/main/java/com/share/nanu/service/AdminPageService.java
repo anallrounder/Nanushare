@@ -2,6 +2,7 @@ package com.share.nanu.service;
 
 import java.util.List;
 
+import com.share.nanu.VO.AdminItemOutVO;
 import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.VmVO;
@@ -18,5 +19,9 @@ public interface AdminPageService {
 	List<VmVO> getvm();
 
 	List<VmVmamVO> getBranchItem();
+
+	void itemHeadUp(int[] iamount, int[] icat_num);
+
+	void itemOut(AdminItemOutVO adoutvo);
 
 }

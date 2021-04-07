@@ -4,16 +4,12 @@ import java.util.List;
 import lombok.ToString;
 
 @ToString
-public class ItemInvenIoutPutVO {
+public class ItemInvenVmamVO {
 	private int icat_num; // 물품 분류 번호
 	private String iname; // 물품명
 	private int iamount; // 물품 본사 재고수량
-
-	private List<IoutputVO> iout; // 출고(기계번호, 출고량, 출고날짜, 물품분류번호, idx)
-
-	public ItemInvenIoutPutVO() {
-		super();
-	}
+	
+	private List<Vmam> vmam;
 
 	public int getIcat_num() {
 		return icat_num;
@@ -39,21 +35,27 @@ public class ItemInvenIoutPutVO {
 		this.iamount = iamount;
 	}
 
-	public List<IoutputVO> getIout() {
-		return iout;
+	public List<Vmam> getVmam() {
+		return vmam;
 	}
 
-	public void setIout(List<IoutputVO> iout) {
-		this.iout = iout;
+	public void setVmam(List<Vmam> vmam) {
+		this.vmam = vmam;
 	}
 
-	public ItemInvenIoutPutVO(int icat_num, String iname, int iamount, List<IoutputVO> iout) {
+	public ItemInvenVmamVO(int icat_num, String iname, int iamount, List<Vmam> vmam) {
 		super();
 		this.icat_num = icat_num;
 		this.iname = iname;
 		this.iamount = iamount;
-		this.iout = iout;
+		this.vmam = vmam;
 	}
+
+	public ItemInvenVmamVO() {
+		super();
+	} 
+	
+	
 	
 	
 	
