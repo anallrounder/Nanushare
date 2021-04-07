@@ -7,11 +7,49 @@
 <html lang="ko">
 
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script> -->
+    
+    
+     <!-- 서머노트를 위해 추가해야할 부분 -->
+  <script src="${pageContext.request.contextPath}/resources/SummerNote/summernote-lite.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/SummerNote/lang/summernote-ko-KR.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/SummerNote/summernote-lite.css">
+    
+    
+    
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="_csrf" content="${_csrf.token}">
+    <meta name="_csrf_header" content="${_csrf.headerName}">
+    
+    <script type="text/javascript">
+    
+ 
+	   $(function() {
+		   var token = $("meta[name='_csrf']").attr("content");
+		    var header = $("meta[name='_csrf_header']").attr("content");
+		    $(document).ajaxSend(function(e, xhr, options) {
+		        xhr.setRequestHeader(header, token);
+		    });
+	});
+	   
+	    
+  
+    
+    
+    </script>
 
     <title>나누셰어 - 나눔인증</title>
 
@@ -32,6 +70,16 @@
 </head>
 
 <body>
+<!-- <textarea id="bcontent"></textarea>
+
+<script type="text/javascript">
+$('#bcontent').summernote({			
+    placeholder: 'Hello Bootstrap 4',
+    tabsize: 2,
+    height: 500
+  });
+</script> -->
+
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
@@ -49,6 +97,7 @@
         </div>
     </div>
     <!-- Banner -->
+    
 
     <!-- Content -->
     <div class="charity-main-content">
@@ -74,7 +123,9 @@
 	                            <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 이미지 저장</i></button>
 	                           <br><br>
 	                           <h4>Content</h4>
-	                           <p><textarea name="bcontent" placeholder="내용을 작성하세요."></textarea></p><br><br>
+	                           <p><textarea  name="bcontent" placeholder="내용을 작성하세요."></textarea></p>
+	                           
+	                           <br><br>
 							   <br><hr>
 
 	                          <%--  <button type="button" class="charity-sub-btn"><i class="fa fa-eraser" onclick="location.href='delete?b_index=${modify_view.b_index}'"> 글삭제</i></button> --%>
@@ -84,6 +135,14 @@
 							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 	                        </div>
                         </form>
+                        <script type="text/javascript">
+$('#bcontent').summernote({			
+    placeholder: 'Hello Bootstrap 4',
+    tabsize: 2,
+    height: 500
+  });
+</script>
+      						
                         
                       	<!--   a href="plist" -->
                         <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="plist" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>
@@ -133,7 +192,7 @@
     <script src="${pageContext.request.contextPath}/resources/charity/script/progressbar.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/fancybox.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.countdown.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js"></script> -->
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
