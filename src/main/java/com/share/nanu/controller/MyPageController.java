@@ -1,11 +1,14 @@
 package com.share.nanu.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -208,16 +211,31 @@ public class MyPageController {
 	}
 
 	
-	@GetMapping("/my/dropCooki")
-	public ModelAndView deleteCooki(ModelAndView mav, HttpServletResponse response, HttpServletRequest request
-			,@CookieValue(value = "Nanushare_cooki", required = false ) Cookie cooki) {
+	@GetMapping("/deleteCooki")
+	public void deleteCooki(ModelAndView mav, HttpServletResponse response, HttpServletRequest request
+			,@CookieValue(value = "Nanushare_cooki", required = false ) Cookie Nanushare,
+			@CookieValue(value = "JSESSIONID", required = false) Cookie JSESSIONID) throws IOException {
 		log.info("쿠키 삭제");
-		
-		if(cooki != null) {
-			System.out.println(cooki.getName());
-			System.out.println(cooki.getValue());
-			cooki.setMaxAge(0);
-			response.addCookie(cooki);
+		String redirect_url = "/main";
+		//HttpSession session = request.getSession();
+		if(Nanushare != null && JSESSIONID !=null ) {
+			System.out.println(Nanushare.getName());
+			System.out.println(Nanushare.getValue());
+			System.out.println(JSESSIONID.getName());
+			System.out.println(JSESSIONID.getValue());
+			
+			JSESSIONID.setMaxAge(0);
+			JSESSIONID.setSecure(true);
+			JSESSIONID.setHttpOnly(true);
+			JSESSIONID.setPath("/");
+			response.addCookie(JSESSIONID);
+			
+			//session.invalidate();
+			Nanushare.setMaxAge(0);
+			Nanushare.setSecure(true);
+			Nanushare.setHttpOnly(true);
+			Nanushare.setPath("/");
+			response.addCookie(Nanushare);
 		}
 		/*
 		 * Cookie cooki = new Cookie("Nanushare_cooki", null);
@@ -238,9 +256,10 @@ public class MyPageController {
 		 * 
 		 * } }
 		 */
-
-		mav.setViewName("/mainMap/mainContent");
-		return mav;
+		
+		response.sendRedirect(redirect_url);
+		//mav.setViewName("/mainMap/mainContent");
+		//return "redirect:mainMap/mainContent";
 	}
 
 }

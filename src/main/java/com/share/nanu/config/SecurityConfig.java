@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.defaultSuccessUrl("/main"); //소셜 로그인이 성공하면 이동할 주소
 		
 		http
-			.rememberMe()
+			.rememberMe() //remember-Me 쿠키에는 사용자이름, expireTime,md5해시 포함
 			.key("Nanushare")
 			.rememberMeParameter("Nanushare_rememberMe")
 			.rememberMeCookieName("Nanushare_cooki") //f12개발자모드 -> application -> cooki에서 Nanushare_cooki라는 이름으로 쿠키 정보를 확인할 수 있다.
