@@ -11,6 +11,8 @@ import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.VmVO;
 import com.share.nanu.VO.VmVmamVO;
 import com.share.nanu.mapper.AdminMapper;
+import com.share.nanu.paging.Criteria;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,9 +25,17 @@ public class AdminPageServiceImpl implements AdminPageService {
 	@Autowired
 	AdminMapper adminMapper;
 	
+	
 	@Override
-	public List<MemberVO> getMember() {
-		return adminMapper.member();
+	public List<MemberVO> getMember(Criteria cri) {
+		// TODO Auto-generated method stub
+		return adminMapper.member(cri);
+	}
+	
+	@Override
+	public int getTotalCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return adminMapper.getTotalCount(cri);
 	}
 
 	@Override
@@ -67,6 +77,8 @@ public class AdminPageServiceImpl implements AdminPageService {
 			adminMapper.itemIoutPut(adoutvo.getVm_num()[i], adoutvo.getOutputData()[i], adoutvo.getOutDate()[i], adoutvo.getIcat_num()[i]); // 출고 테이블 로그 insert
 		}
 	}
+
+
 	
 
 }
