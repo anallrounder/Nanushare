@@ -111,7 +111,7 @@ table {
 																$(location)
 																		.attr(
 																				'href',
-																				"${pageContext.request.contextPath}/abc");
+																				"${pageContext.request.contextPath}/my/dropCooki");
 																
 															}
 														},

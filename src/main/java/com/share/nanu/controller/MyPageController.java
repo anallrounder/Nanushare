@@ -1,6 +1,8 @@
 package com.share.nanu.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -189,27 +192,53 @@ public class MyPageController {
 	@PostMapping("/my/drop/check")
 	public ResponseEntity<String> myprofDel(@AuthenticationPrincipal MemberDetails md, @RequestBody MemberVO mvo) {
 		ResponseEntity<String> entity = null;
-		System.out.println("시험"+mvo);
+		System.out.println("시험" + mvo);
 		log.info("탈퇴체크페이지");
 		try {
-			mgservice.mememberDelete(mvo,md);
+			mgservice.mememberDelete(mvo, md);
 			log.info("탈퇴된 회원정보 : " + mvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			 //세션날리고 다시 로그인해주세요 창띄우기
-			
+			// 세션날리고 다시 로그인해주세요 창띄우기
+
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
 		}
 		return entity;
 	}
+
 	
-	@GetMapping("/abc")
-	public ModelAndView myprofDe2(ModelAndView mav,HttpServletRequest req) {
-		log.info("탈퇴 페이지로 이동");
-		HttpSession session = req.getSession();
-		session.invalidate();
-			
+	@GetMapping("/my/dropCooki")
+	public ModelAndView deleteCooki(ModelAndView mav, HttpServletResponse response, HttpServletRequest request
+			,@CookieValue(value = "Nanushare_cooki", required = false ) Cookie cooki) {
+		log.info("쿠키 삭제");
+		
+		if(cooki != null) {
+			System.out.println(cooki.getName());
+			System.out.println(cooki.getValue());
+			cooki.setMaxAge(0);
+			response.addCookie(cooki);
+		}
+		/*
+		 * Cookie cooki = new Cookie("Nanushare_cooki", null);
+		 * System.out.println(cooki); cooki.setMaxAge(0); response.addCookie(cooki);
+		 * 
+		 * System.out.println(cooki);
+		 */
+
+		/*
+		 * Cookie[] myCooki = request.getCookies(); if(mav != null) { for (int i = 0; i
+		 * < myCooki.length; i++) { System.out.println(i + "번째 쿠키 이름: " +
+		 * myCooki[i].getName()); System.out.println(i + "번째 쿠키 값: " +
+		 * myCooki[i].getValue());
+		 * 
+		 * if (myCooki[i].getName() == "Nanushare_cooki") { myCooki[i].setMaxAge(0);
+		 * response.addCookie(myCooki[i]); System.out.println("Nanushare_cooki삭제");
+		 * break; } else { System.out.println("Nanushare_cooki가 없습니다."); }
+		 * 
+		 * } }
+		 */
+
 		mav.setViewName("/mainMap/mainContent");
 		return mav;
 	}
