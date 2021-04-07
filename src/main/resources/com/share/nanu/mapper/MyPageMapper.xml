@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select resultMap="iteminvenVO" id="getPaging3">
-
+ 
 	<![CDATA[
 	select * from (
 						select rownum as rnum, a.* 
