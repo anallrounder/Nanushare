@@ -18,12 +18,12 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
-//extends SavedRequestAwareAuthenticationSuccessHandler
+
 public class SuccessHandler implements AuthenticationSuccessHandler {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	private String defaultUrl = "/main";
+	private String defaultUrl = "/main"; //로그인 성공시 이동할 url
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -37,6 +37,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
 
 	protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
+		//a페이지(로그인전) ->b페이지(유저권한필요) -> 로그인페이지로 이동 로그인하여 권한 획득 ->b페이지 이동
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 
 		if (savedRequest != null) {
@@ -48,13 +49,15 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
 
 	}
 
-	protected void clrearAuthenticationAttributes(HttpServletRequest request) {
+	protected void clrearAuthenticationAttributes(HttpServletRequest request) { //로그인 실패 에러 세션 지우기
 		HttpSession session = request.getSession(false);
 		if (session == null)
 			return;
 		session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 	}
 
+	
+	//getter, setter
 	public String getDefaultUrl() {
 		return defaultUrl;
 	}

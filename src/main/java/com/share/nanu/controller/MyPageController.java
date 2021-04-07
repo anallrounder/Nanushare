@@ -216,7 +216,7 @@ public class MyPageController {
 			,@CookieValue(value = "Nanushare_cooki", required = false ) Cookie Nanushare,
 			@CookieValue(value = "JSESSIONID", required = false) Cookie JSESSIONID) throws IOException {
 		log.info("쿠키 삭제");
-		// remember-me 쿠키인 Nanushare_cooki, 톰캣 쿠키인 JSESSIONID 을제거
+		// remember-me 쿠키인 Nanushare_cooki, 톰캣 쿠키인 JSESSIONID을제거
 		//새로고침이 필요하기 때문에 리다이렉트로 전달
 		
 		String redirect_url = "/main"; //리다이렉트로 메인으로 이동할 주소
@@ -242,7 +242,7 @@ public class MyPageController {
 		}
 		
 		
-		response.sendRedirect(redirect_url);
+		response.sendRedirect(redirect_url); //restcontroller는 response를 사용하여야 한다.
 		
 	}
 
