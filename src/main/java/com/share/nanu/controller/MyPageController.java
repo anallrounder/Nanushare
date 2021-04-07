@@ -216,9 +216,12 @@ public class MyPageController {
 			,@CookieValue(value = "Nanushare_cooki", required = false ) Cookie Nanushare,
 			@CookieValue(value = "JSESSIONID", required = false) Cookie JSESSIONID) throws IOException {
 		log.info("쿠키 삭제");
-		String redirect_url = "/main";
-		//HttpSession session = request.getSession();
-		if(Nanushare != null && JSESSIONID !=null ) {
+		// remember-me 쿠키인 Nanushare_cooki, 톰캣 쿠키인 JSESSIONID 을제거
+		//새로고침이 필요하기 때문에 리다이렉트로 전달
+		
+		String redirect_url = "/main"; //리다이렉트로 메인으로 이동할 주소
+		
+		if(Nanushare != null && JSESSIONID !=null ) { //널체크
 			System.out.println(Nanushare.getName());
 			System.out.println(Nanushare.getValue());
 			System.out.println(JSESSIONID.getName());
@@ -230,36 +233,17 @@ public class MyPageController {
 			JSESSIONID.setPath("/");
 			response.addCookie(JSESSIONID);
 			
-			//session.invalidate();
+			
 			Nanushare.setMaxAge(0);
 			Nanushare.setSecure(true);
 			Nanushare.setHttpOnly(true);
 			Nanushare.setPath("/");
 			response.addCookie(Nanushare);
 		}
-		/*
-		 * Cookie cooki = new Cookie("Nanushare_cooki", null);
-		 * System.out.println(cooki); cooki.setMaxAge(0); response.addCookie(cooki);
-		 * 
-		 * System.out.println(cooki);
-		 */
-
-		/*
-		 * Cookie[] myCooki = request.getCookies(); if(mav != null) { for (int i = 0; i
-		 * < myCooki.length; i++) { System.out.println(i + "번째 쿠키 이름: " +
-		 * myCooki[i].getName()); System.out.println(i + "번째 쿠키 값: " +
-		 * myCooki[i].getValue());
-		 * 
-		 * if (myCooki[i].getName() == "Nanushare_cooki") { myCooki[i].setMaxAge(0);
-		 * response.addCookie(myCooki[i]); System.out.println("Nanushare_cooki삭제");
-		 * break; } else { System.out.println("Nanushare_cooki가 없습니다."); }
-		 * 
-		 * } }
-		 */
+		
 		
 		response.sendRedirect(redirect_url);
-		//mav.setViewName("/mainMap/mainContent");
-		//return "redirect:mainMap/mainContent";
+		
 	}
 
 }
