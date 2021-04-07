@@ -62,77 +62,199 @@
 
 
 
+</head>
+<style>
+li {
+	list-style: none;
+}
+</style>
+
 <body>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Header -->
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<!-- Header -->
 
 
 
+	<!-- Banner -->
+	<div class="charity-subheader">
+		<span class="black-transparent"></span>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>mypage</h1>
 
-	<table>
-
-		<div>
-			<br>
+				</div>
+			</div>
 		</div>
-		<tr>
+	</div>
+	<!-- Banner -->
+	<!-- Content -->
+	<!-- Content와 MainSection은 무조건 있어야함 -->
+	<div class="charity-main-content">
+		<!-- Main Section -->
+		<div class="charity-main-section">
 
-			<!-- <th>아이디</th> -->
-			<th>나눔제목-링크아직X</th>
-			<th>조회수</th>
-			<th>날짜</th>
-
-		</tr>
-		<!-- 로그인한 회원의 글 정보만 받아오기 -->
-		<!-- 나의문의내역 -->
-		<c:forEach items="${list1}" var="list1">
-			<sec:authentication property="principal" var="pinfo" />
-			<sec:authorize access="isAuthenticated()">
-				<c:if test="${pinfo.username eq list1.member_id}">
-					<tr>
-						<%-- <td>${list1.member_id}</td> --%>
-						<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
-						<td><a id="a-content"
-						href="${pageContext.request.contextPath}/board/shows/content_view?b_index=${list1.b_index}">${list1.btitle}</a></td>
-				<!-- 제목누르면 해당 글내용으로 이동링크 -->
-						<!-- 제목누르면 해당 글내용으로 이동링크 -->
-						<td>${list1.bhit}</td>
-						<td>${list1.bdate}</td>
-
-					</tr>
-				</c:if>
-			</sec:authorize>
-		</c:forEach>
-	</table>
-
-	<!-- 페이징 -->
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<ul class="pagination justify-content-center">
-					<li class="page-item"><c:if test="${pageMaker.prev}">
-							<a class="page-link"
-								href="${pageContext.request.contextPath}/my/mypage/_1${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-						</c:if></li>
-
-					<li class="page-item"><c:forEach
-							begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-							var="idx">
-							<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-							<a href="${pageContext.request.contextPath}/my/mypage/_1${pageMaker.makeQuery(idx)}">${idx}</a>
-						</c:forEach></li>
+			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
+			<div class="container">
+				<div class="view-account">
+					<section class="module">
+					<div class="module-inner">
+						<div class="side-bar">
+							<div class="user-info">
+								<img class="img-profile img-circle img-responsive center-block"
+									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+								<ul class="meta list list-unstyled">
+									<li class="name"><h2>
+											<sec:authentication property="principal.member.name" />
+										</h2></li>
+									<li class="email"><sec:authentication
+											property="principal.member.member_id" /></a></li>
+									<li class="activity">Last logged in: Today at 2:18pm</li>
+								</ul>
+							</div>
+							<nav class="side-menu">
+							<ul class="nav">
+								<li><a href="mypage"><span class="fa fa-user"></span>
+										Profile</a></li>
+								<li class="active"><a href="ask"><span
+										class="fa fa-cog"> </span>나의문의내역</a></li>
+								<li><a href="content"><span class="fa fa-credit-card">
+									</span>나의인증내역</a></li>
+								<li><a href="give"><span class="fa fa-envelope">
+									</span>나의나눔내역</a></li>
+								<li><a href="reply"><span class="fa fa-th"> </span>나의댓글내역</a></li>
+								<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
+								Reminders</a></li> -->
+							</ul>
+							</nav>
+						</div>
+						<div class="content-panel">
 
 
-					<li class="page-item"><c:if
-							test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a class="page-link"
-								href="${pageContext.request.contextPath}/my/mypage/_1${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-							</a>
-						</c:if></li>
-				</ul>
+
+							<script
+								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+							<h2 class="title">
+								나의 문의 내역<span class="pro-label label label-warning">PRO</span>
+							</h2>
+
+
+							<table>
+
+								<div>
+									<br>
+								</div>
+								<tr>
+
+									<!-- <th>아이디</th> -->
+									<th>나눔제목-링크아직X</th>
+									<th>조회수</th>
+									<th>날짜</th>
+
+								</tr>
+								<!-- 로그인한 회원의 글 정보만 받아오기 -->
+								<!-- 나의문의내역 -->
+								<c:forEach items="${list1}" var="list1">
+									<sec:authentication property="principal" var="pinfo" />
+									<sec:authorize access="isAuthenticated()">
+										<c:if test="${pinfo.username eq list1.member_id}">
+											<tr>
+												<%-- <td>${list1.member_id}</td> --%>
+												<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
+												<td><a id="a-content"
+													href="${pageContext.request.contextPath}/my/ask?b_index=${list1.b_index}">${list1.btitle}</a></td>
+												<!-- 제목누르면 해당 글내용으로 이동링크 -->
+												<td>${list1.bhit}</td>
+												<td>${list1.bdate}</td>
+
+											</tr>
+										</c:if>
+									</sec:authorize>
+								</c:forEach>
+							</table>
+
+							<!-- 페이징 -->
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<ul class="pagination justify-content-center">
+											<li class="page-item"><c:if test="${pageMaker.prev}">
+													<a class="page-link"
+														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+												</c:if></li>
+
+											<li class="page-item"><c:forEach
+													begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+													var="idx">
+													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+													<a
+														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
+												</c:forEach></li>
+
+
+											<li class="page-item"><c:if
+													test="${pageMaker.next && pageMaker.endPage > 0}">
+													<a class="page-link"
+														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+													</a>
+												</c:if></li>
+										</ul>
+									</div>
+
+								</div>
+
+							</div>
+
+
+
+
+
+						</div>
+					</div>
+					</section>
+				</div>
 			</div>
 
-		</div>
+			<script>
+				$("#mytabs>ul>li>a").each(function(i) {
+					$(this).attr("href", "#mytab" + i)
+				})
+				$("#mytabs>div>div").each(function(i) {
+					$(this).attr("id", "mytab" + i)
+				})
+			</script>
 
+			<!-- Main Section -->
+
+		</div>
+		<!-- Content -->
+	</div>
+
+	<!-- Footer -->
+	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
+	<!-- Footer -->
+
+	<!-- Search Modal -->
+	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<a href="/resources/charity/#" class="charity-close-btn"
+						data-dismiss="modal" aria-label="Close"><span
+						aria-hidden="true">&times;</span></a>
+					<form>
+						<input type="text" value="Type Your Keyword"
+							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
+							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
+						<input type="submit" value=""> <i class="fa fa-search"></i>
+					</form>
+				</div>
+
+			</div>
+		</div>
 	</div>
 
 
@@ -149,5 +271,4 @@
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions.js"></script>
 </body>
-
 </html>

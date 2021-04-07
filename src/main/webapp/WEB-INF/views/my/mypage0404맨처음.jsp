@@ -241,51 +241,7 @@ li:nth-child(2) {
 							</div>
 						</div>
 
-						<!-- 나의 ~~ 내역 -->
-
-						<%--<div class="container">
-							<div class="row">
-								<div class="col">
-
-	  								<ul class="nav nav-tabs">
-										<li class="nav-item"><a class="nav-link active"
-											data-toggle="tab" href="#abc" data-load="false"
-											data-url="${pageContext.request.contextPath}/my/mypage">나의
-												문의내역</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#def" data-load="true"
-											data-url="http://localhost:8282/my/mypage/_2">나의 인증내역</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#ghi">나의 나눔내역</a></li>
-										<li class="nav-item"><a class="nav-link"
-											data-toggle="tab" href="#jkl">나의 댓글내역</a></li>
-									</ul>
-									<div class="tab-content">
-										<div class="tab-pane fade show active" id="abc">
-											<jsp:include page="/WEB-INF/views/my/mypage_1.jsp"
-												flush="true">
-												<jsp:param name="list1" value="list1" />
-												<jsp:param name="pinfo" value="pinfo" />
-											</jsp:include>
-
-										</div>
-										<div class="tab-pane fade" id="def">
-											<jsp:include page="mypage_2.jsp"> 
-												<jsp:param name="pinfo" value="pinfo"></jsp:param>
-												<jsp:param name="list2" value="list2"></jsp:param>
-											</jsp:include> 
-											 <c:import url = "mypage_2.jsp"></c:import>
-											  <%@ include file="/WEB-INF/views/my/mypage_2.jsp"%>										</div>
-										 <div class="tab-pane fade" id="ghi">
-											 <%@ include file="/WEB-INF/views/my/mypage_3.jsp"%> 
-										</div>
-										<div class="tab-pane fade" id="jkl">
-											<%@ include file="/WEB-INF/views/my/mypage_4.jsp"%>
-										</div> 
-									</div>
-								</div>
-							</div>
-						</div>--%>
+						
 
 						<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 						<script

@@ -7,20 +7,20 @@ import lombok.ToString;
 @ToString
 public class DonationVO {
 
-	private long dnt_paynum; // 기부번호, idx, 로그기록
+	private String dnt_paynum; // 기부번호, idx, 로그기록
 	private String member_id;
-	private int dntprice; // 기부금액
+	private String dntprice; // 기부금액
 	private Date dntdate; // 기부날짜
 	private String dntstat; // 기부처리상태
 	private String pg; // pg사
-	private int pcat_num; // 기부방식 분류번호
+	private String paymethod; // 기부방식 분류번호
 
 	public DonationVO() {
 		super();
 	}
 
-	public DonationVO(long dnt_paynum, String member_id, int dntprice, Date dntdate, String dntstat, String pg,
-			int pcat_num) {
+	public DonationVO(String dnt_paynum, String member_id, String dntprice, Date dntdate, String dntstat, String pg,
+			String paymethod) {
 		super();
 		this.dnt_paynum = dnt_paynum;
 		this.member_id = member_id;
@@ -28,14 +28,14 @@ public class DonationVO {
 		this.dntdate = dntdate;
 		this.dntstat = dntstat;
 		this.pg = pg;
-		this.pcat_num = pcat_num;
+		this.paymethod = paymethod;
 	}
 
-	public long getDnt_paynum() {
+	public String getDnt_paynum() {
 		return dnt_paynum;
 	}
 
-	public void setDnt_paynum(long dnt_paynum) {
+	public void setDnt_paynum(String dnt_paynum) {
 		this.dnt_paynum = dnt_paynum;
 	}
 
@@ -47,11 +47,11 @@ public class DonationVO {
 		this.member_id = member_id;
 	}
 
-	public int getDntprice() {
+	public String getDntprice() {
 		return dntprice;
 	}
 
-	public void setDntprice(int dntprice) {
+	public void setDntprice(String dntprice) {
 		this.dntprice = dntprice;
 	}
 
@@ -79,12 +79,12 @@ public class DonationVO {
 		this.pg = pg;
 	}
 
-	public int getPcat_num() {
-		return pcat_num;
+	public String getPaymethod() {
+		return paymethod;
 	}
 
-	public void setPcat_num(int pcat_num) {
-		this.pcat_num = pcat_num;
+	public void setPaymethod(String paymethod) {
+		this.paymethod = paymethod;
 	}
 
 }
