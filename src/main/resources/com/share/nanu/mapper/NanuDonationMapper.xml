@@ -80,7 +80,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[ 
 			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = 'Ulric@naver.com'
 		]]>
-	</update>  
+	</update>
+	
+	<!-- 후원금 관련 데이터 db에 저장  -->
+	<select id="insertCardDona" resultType="com.share.nanu.VO.DonationVO">
+		<![CDATA[ 
+			insert into donation(dnt_paynum, member_id, dntprice, dntdate, dntstat, pg, paymethod)
+			values(#{dnt_paynum}, #{member_id},  #{dntprice},  #{dntdate}, #{dntstat}, #{pg}, #{paymethod})
+		]]>
+	</select> 
+	
+	<!-- 후원금 기부시 dntcnt +1 -->
+	<select id="updateDntcnt"  resultType="com.share.nanu.VO.MemberVO">
+		<![CDATA[ 
+			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = #{member_id}
+		]]>
+	</select> 
 
 </mapper>
 

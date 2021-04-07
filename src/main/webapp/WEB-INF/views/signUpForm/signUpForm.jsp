@@ -90,14 +90,14 @@
                     type: "POST",
                     url: $(this).attr("action"),
                     cache: false,
-                    dataType : text,
+                    dataType : 'text',
                     contentType: 'application/json; charset=utf-8',
                     data: JSON.stringify(memberJoin),
                     success: function(result) {
                         console.log(result);
                         if (result == "SUCCESS") {
                             console.log("success");
-                           // $(location).attr('href', "${pageContext.request.contextPath}/loginPage");
+                           $(location).attr('href', "${pageContext.request.contextPath}/main");
 
                         }
                     },
@@ -189,7 +189,7 @@
                     <div class="login-wrap">
                         <h3 class="text-center mb-4">Create Your Account</h3>
                         <form id="mjoin" action="${pageContext.request.contextPath}/memberJoin" 
-                        	class="signup-form" method="post" onsubmit="return submitCheck();" novalidate> 
+                        	class="signup-form" method="post" onsubmit='submitCheck()' novalidate> <!-- onsubmit='submitCheck()' -->
                         	<!-- novalidate -> 브라우저에서 제공하는 validate를 끄겠다. 그리고 jquery validation plugin 사용 -->
 							<fieldset>
 							<!-- <legend>Input Information</legend> legend 태그는 제목 설정 태그 -->
