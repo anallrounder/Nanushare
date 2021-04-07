@@ -7,7 +7,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="member" resultType="com.share.nanu.VO.MemberVO">
 	<![CDATA[ 
-		select * from member
+		select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from member order by member_id asc
+		   	    )a where rownum <= #{pageNum} * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount}
+	]]>
+	</select>
+	
+	<select resultType="int" id="getTotalCount">
+	<![CDATA[
+		select count(*) from member
 	]]>
 	</select>
 	

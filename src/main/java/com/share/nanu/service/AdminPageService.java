@@ -7,10 +7,13 @@ import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.VmVO;
 import com.share.nanu.VO.VmVmamVO;
+import com.share.nanu.paging.Criteria;
 
 public interface AdminPageService {
 
-	List<MemberVO> getMember();
+	List<MemberVO> getMember(Criteria cri);
+	
+	int getTotalCount(Criteria cri);
 
 	List<MemberVO> getMemberView(String member_id);
 
@@ -23,5 +26,9 @@ public interface AdminPageService {
 	void itemHeadUp(int[] iamount, int[] icat_num);
 
 	void itemOut(AdminItemOutVO adoutvo);
+
+	
+
+
 
 }

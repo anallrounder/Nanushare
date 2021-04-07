@@ -8,11 +8,14 @@ import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.VmVO;
 import com.share.nanu.VO.VmVmamVO;
+import com.share.nanu.paging.Criteria;
 
 @Mapper
 public interface AdminMapper {
 
-	List<MemberVO> member();
+	List<MemberVO> member(Criteria cri);
+	
+	int getTotalCount(Criteria cri);
 
 	List<MemberVO> member_view(String member_id);
 
@@ -29,5 +32,9 @@ public interface AdminMapper {
 	void itemVmam(String vm_num, int iamount, String iname);
 
 	void itemIoutPut(String vm_num, int iamount, String outputdate, int icat_num);
+
+	
+
+	
 
 }
