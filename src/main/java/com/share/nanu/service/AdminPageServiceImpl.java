@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.share.nanu.VO.AdminItemOutVO;
 import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.VmVO;
@@ -50,5 +51,22 @@ public class AdminPageServiceImpl implements AdminPageService {
 		// TODO Auto-generated method stub
 		return adminMapper.getVmVmam();
 	}
+	
+	@Override //for문 돌려서 mapper for문 길이만큼 돌리기(사용하는 이유는 값을 다중으로 넣었을때 한번에 넣는게 안되기때문에 쿼리문을 그만큼 돌린기위해서)
+	public void itemHeadUp(int[] iamount, int[] icat_num) {
+		for(int i = 0; i < iamount.length; i++) {
+			adminMapper.itemHeadUp(iamount[i], icat_num[i]);
+		}
+	}
+	
+	@Override
+	public void itemOut(AdminItemOutVO adoutvo) {
+		for(int i = 0; i < adoutvo.getOutputData().length; i++) {
+			adminMapper.itemOut(adoutvo.getIcat_num()[i], adoutvo.getOutputData()[i]); // 본사 재고에서 수량 빼기 update
+			adminMapper.itemVmam(adoutvo.getVm_num()[i], adoutvo.getOutputData()[i], adoutvo.getIname()[i]); // vmam 자판기에 수량 업데이트
+			adminMapper.itemIoutPut(adoutvo.getVm_num()[i], adoutvo.getOutputData()[i], adoutvo.getOutDate()[i], adoutvo.getIcat_num()[i]); // 출고 테이블 로그 insert
+		}
+	}
+	
 
 }

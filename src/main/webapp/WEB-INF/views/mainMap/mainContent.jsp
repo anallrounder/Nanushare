@@ -124,7 +124,7 @@ li {
 	<!-- Banner -->
 	
     <!-- Content-count -->
-    <div class="charity-main-content">
+    <div class="charity-main-content" style="padding: 0px 0 40px;">
         <!-- Main Section -->
         <div class="charity-main-section charity_counter_full">
             <span class="black-transparent"></span>

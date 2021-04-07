@@ -2,8 +2,6 @@ package com.share.nanu.mapper;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.share.nanu.VO.BoardreplyVO;
