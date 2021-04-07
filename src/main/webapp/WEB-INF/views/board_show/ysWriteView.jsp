@@ -51,15 +51,7 @@
 </head>
 
 <body>
-<!-- <textarea id="bcontent"></textarea>
 
-<script type="text/javascript">
-$('#bcontent').summernote({			
-    placeholder: 'Hello Bootstrap 4',
-    tabsize: 2,
-    height: 500
-  });
-</script> -->
 
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
