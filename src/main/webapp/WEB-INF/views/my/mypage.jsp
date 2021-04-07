@@ -92,23 +92,23 @@ li {
 			
 			console.log(test);
 		    if (test >= 0 && test<=20) {
-					$(".maxmax").attr('src', '/resources/my/그림1.png').css("left","13%");
+					$(".maxmax").attr('src', '/resources/my/그림1.png').css("left","0%");
+					console.log(barProgress);
+				}if (test > 20 && test<=40) {
 					
-				}if (test > '20' && test<='40') {
-					
-					$(".maxmax").attr("src", "/resources/my/그림2.png").css("left","33%");;
+					$(".maxmax").attr("src", "/resources/my/그림2.png").css("left","17%");
 				
-				}if (test > '40' && test<='60') {
+				}if (test > 40 && test<=60) {
 					
-					$(".maxmax").attr("src", "/resources/my/그림3.png").css("left","53%");;
+					$(".maxmax").attr("src", "/resources/my/그림3.png").css("left","47%");
 				
-				}if (test < '60' && test>='80') {
+				}if (test > 60 && test<=80) {
 					
-					$(".maxmax").attr("src", "/resources/my/그림4.png").css("left","73%");;
+					$(".maxmax").attr("src", "/resources/my/그림4.png").css("left","67%");
 				
-				}if (test < '80' && test>='100') {
+				}if (test > 80 && test<=100) {
 					
-					$(".maxmax").attr("src", "/resources/my/그림5.png").css("left","93%");;
+					$(".maxmax").attr("src", "/resources/my/그림5.png").css("left","87%");
 				}
 
 		 } 
@@ -243,7 +243,7 @@ li {
 										
 
 										<div class="progressbar">
-										<img class="maxmax blinking">
+										<img class="maxmax blinking" width="80" height="80">
 											<div class="progress-label"></div>
 										</div>
 
