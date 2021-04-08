@@ -282,7 +282,7 @@ li {
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="/resources/charity/script/jquery.jplayer.js"></script>
     <script src="/resources/charity/script/jplayer.playlist.js"></script>
-    <script src="/resources/charity/script/functions-main.js"></script> <!-- fuctions 복붙해서 사용 -->
+    <!-- <script src="/resources/charity/script/functions-main.js"></script>  --><!-- fuctions 복붙해서 사용 -->
 </body>
 
 </html>

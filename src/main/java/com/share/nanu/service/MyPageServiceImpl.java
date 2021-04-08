@@ -17,7 +17,7 @@ import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.mapper.MyPageMapper;
 import com.share.nanu.mapper.NanuMapper;
-import com.share.nanu.page.Criteria;
+import com.share.nanu.mypaging.Criteria;
 import com.share.nanu.security.MemberDetails;
 
 import lombok.AllArgsConstructor;
@@ -101,6 +101,25 @@ public class MyPageServiceImpl implements MyPageService {
 
 		return mgmapper.getTotalCnt4(cri);
 	}
+	
+	// 마이페이지-나의결제
+		@Override
+		public List<BoardreplyVO> myList5() {
+
+			return mgmapper.mygetlist4();
+		}
+
+		@Override
+		public List<BoardreplyVO> myList5(Criteria cri) {
+
+			return mgmapper.getPaging4(cri);
+		}
+
+		@Override
+		public int getTotalCount5(Criteria cri) {
+
+			return mgmapper.getTotalCnt4(cri);
+		}
 
 	//회원수정
 	@Override
@@ -143,13 +162,13 @@ public class MyPageServiceImpl implements MyPageService {
 
 
 	@Override
-	public void mememberDelete(MemberVO mvo, @AuthenticationPrincipal MemberDetails md) {
+	public void memberDelete(MemberVO mvo, @AuthenticationPrincipal MemberDetails md) {
 		
 		System.out.println(mvo.getMember_id());
 		System.out.println(md.getUsername());
 		if(mvo.getMember_id().equals(md.getUsername()) && mvo.getName().equals(md.getmember().getName())
 		){			
-			mgmapper.authdel(mvo);
+			//mgmapper.authdel(mvo);
 			mgmapper.memberDelete(mvo);	
 			
 		}

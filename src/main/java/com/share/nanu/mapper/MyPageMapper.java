@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
-import com.share.nanu.page.Criteria;
+import com.share.nanu.mypaging.Criteria;
 import com.share.nanu.security.MemberDetails;
 
 @Mapper
@@ -35,6 +35,11 @@ public interface MyPageMapper {
 	public List<BoardreplyVO> getPaging4(Criteria cri);
 	public int getTotalCnt4(Criteria cri);
 
+	// 마이페이지 - 나의 댓글
+	public List<BoardreplyVO> mygetlist5();
+	public List<BoardreplyVO> getPaging5(Criteria cri);
+	public int getTotalCnt5(Criteria cri);
+		
 	// 회원수정
 	public void memberModify(MemberVO mvo);
 	

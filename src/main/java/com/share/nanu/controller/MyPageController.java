@@ -24,12 +24,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
-import com.share.nanu.page.Criteria;
-import com.share.nanu.page.pageVO;
+import com.share.nanu.mypaging.Criteria;
+import com.share.nanu.mypaging.pageVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.MemberService;
 import com.share.nanu.service.MyPageService;
+import com.share.nanu.service.NanuDonationService;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +46,10 @@ public class MyPageController {
 
 	@Autowired
 	private MemberService mservice;
-
+	
+	@Autowired
+	private NanuDonationService ndservice;
+	
 	@Autowired
 	BCryptPasswordEncoder encoder;
 	
@@ -52,7 +58,8 @@ public class MyPageController {
 
 	// 마이페이지
 	@GetMapping("/my/mypage")
-	public ModelAndView myPage(MemberVO mvo, ModelAndView mav,@AuthenticationPrincipal MemberDetails md) {
+	public ModelAndView myPage(MemberPointVO mpvo,MemberVO mvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {
+
 		System.out.println("마이페이지");
 		
 		
@@ -62,6 +69,7 @@ public class MyPageController {
 			// log.info("로그인한 사람 이름 - "+ md.getmember().getName());
 			mav.addObject("username", md.getmember().getName()); 
 		}
+		mav.addObject("memberInfo", ndservice.getMemberPoint(mpvo));
 		mav.setViewName("/my/mypage");
 		return mav;
 	}
@@ -125,6 +133,23 @@ public class MyPageController {
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
 	}
+	
+	
+	// 나의결제내역
+		@GetMapping("/my/pay")
+		public ModelAndView myPay(MemberVO mvo, ModelAndView mav, Criteria cri,
+				@AuthenticationPrincipal MemberDetails md) {
+			if (md != null) {
+				mav.addObject("username", md.getmember().getName());
+			}
+			mav.setViewName("/my/pay");
+			mav.addObject("list5", mgservice.myList5(cri));// 나의문의내역
+			// 페이징
+			int total = mgservice.getTotalCount5(cri);
+			mav.addObject("pageMaker", new pageVO(cri, total));
+			return mav;
+		}
+
 
 	// https://melonpeach.tistory.com/49
 	// 프로필 관리로 가는 페이지(수정 전 비밀번호 확인 단계)
@@ -204,7 +229,7 @@ public class MyPageController {
 		System.out.println("시험" + mvo);
 		log.info("탈퇴체크페이지");
 		try {
-			mgservice.mememberDelete(mvo, md);
+			mgservice.memberDelete(mvo, md);
 			log.info("탈퇴된 회원정보 : " + mvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			// 세션날리고 다시 로그인해주세요 창띄우기

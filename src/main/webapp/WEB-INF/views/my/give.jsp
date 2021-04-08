@@ -42,12 +42,6 @@
 
 
 
-<!-- 탭처리 -->
-<link rel="stylesheet"
-	href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
-<script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
-<script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
-<script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -103,28 +97,30 @@ li {
 						<div class="side-bar">
 							<div class="user-info">
 								<img class="img-profile img-circle img-responsive center-block"
-									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+									src="/resources/my/프로필사진.PNG" alt="">
+								<!-- 
+									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
 								<ul class="meta list list-unstyled">
 									<li class="name"><h2>
 											<sec:authentication property="principal.member.name" />
 										</h2></li>
 									<li class="email"><sec:authentication
 											property="principal.member.member_id" /></a></li>
-									<li class="activity">Last logged in: Today at 2:18pm</li>
+									<li class="activity"><sec:authentication property="principal.member.signuppath" />회원</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>
 										Profile</a></li>
-								<li><a href="ask"><span class="fa fa-cog"> </span>나의문의내역</a></li>
-								<li><a href="content"><span class="fa fa-credit-card">
+								<li><a href="ask"><span
+										class="fa fa-question"> </span>나의문의내역</a></li>
+								<li><a href="content"><span class="fa fa-file">
 									</span>나의인증내역</a></li>
-								<li class="active"><a href="give"><span
-										class="fa fa-envelope"> </span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-th"> </span>나의댓글내역</a></li>
-								<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
-								Reminders</a></li> -->
+								<li class="active"><a href="give"><span class="fa fa-handshake">
+									</span>나의나눔내역</a></li>
+								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
+								<li><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
 							</ul>
 							</nav>
 						</div>
@@ -175,7 +171,7 @@ li {
 								</c:forEach>
 							</table>
 
-							<%-- <div class="container">
+							<div class="container">
 								<div class="row">
 									<div class="col">
 										<ul class="pagination justify-content-center">
@@ -203,7 +199,7 @@ li {
 
 								</div>
 
-							</div> --%>
+							</div>
 
 
 
