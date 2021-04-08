@@ -4,18 +4,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.share.nanu.mapper.MyPageMapper">
 	<!-- 1.나의문의내역 -->
-	<select id="mygetlist1" resultType="com.share.nanu.VO.BoardVO">
+	<!-- <select id="mygetlist1" resultType="com.share.nanu.VO.BoardVO">
 	<![CDATA[ 
 			select * from board where bcat_num=1
 		]]>
-	</select>
+	</select> -->
 	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging1">
 
 	<![CDATA[
 	select * from (
 						select rownum as rnum, a.* 
 		  		from ( 
-		    		select * from board where bcat_num = 1 order by b_index desc
+		    		select * from board where bcat_num = 1 and member_id = #{member_id} order by b_index desc
 		   	    )a where rownum <= #{pageNum} * #{amount}
 		 	) where rnum > (#{pageNum}-1) * #{amount}
 ]]>
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 2.나의인증내역 -->
 	<!-- <select id="mygetlist2" resultType="com.share.nanu.VO.BoardVO"> <![CDATA[ 
-		select * from board where bcat_num=2 ]]> </select> -->
+		select * from board where bcat_num=2 where member_id = #{member_id} ]]> </select> -->
 
 	<select resultType="com.share.nanu.VO.BoardVO" id="getPaging2">
 
@@ -37,14 +37,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from (
 						select rownum as rnum, a.* 
 		  		from ( 
-		    		select * from board where bcat_num = 2 order by b_index desc
+		    		select * from board where bcat_num = 2 and member_id = #{member_id} order by b_index desc
 		   	    )a where rownum <= #{pageNum} * #{amount}
 		 	) where rnum > (#{pageNum}-1) * #{amount}
 	]]>
 	</select>
 	<select resultType="int" id="getTotalCnt2">
 		<![CDATA[select count(*) from board where
-		bcat_num=2 ]]>
+		bcat_num=2]]>
 	</select>
 
 
@@ -68,9 +68,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			resultMap="itemdonationVO" />
 	</resultMap>
 	<!-- resultType : 결과반환 Object, parameterType : 조회결과 Object -->
-	<select id="mygetlist3" resultMap="iteminvenVO">
+	<!-- <select id="mygetlist3" resultMap="iteminvenVO">
 		<![CDATA[ select * from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntdate desc]]>
-	</select>
+	</select> -->
 
 
 	<select resultMap="iteminvenVO" id="getPaging3">
@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from (  
 select rownum as rn, a.* from ( 
         select b.IDNT_NUM, b.icat_num, b.member_id, b.idntdate, a.INAME, a.iamount,b.donaamount 
-from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntdate desc
+from iteminven a, itemdonation b where a.icat_num = b.icat_num and  and b.member_id = #{member_id}  order by b.idntdate desc
      )a where rownum <=#{pageNum} * #{amount}
 ) where rn >  (#{pageNum}-1) * #{amount}      
 
@@ -108,10 +108,10 @@ from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntda
 		<collection property="reply" javaType="java.util.List"
 			resultMap="boardreplyVO" />
 	</resultMap>
-	<select id="mygetlist4" resultMap="boardVO">
+	<!-- <select id="mygetlist4" resultMap="boardVO">
 	<![CDATA[ 
 	select * from board a, boardreply b where a.b_index = b.b_index]]>
-	</select>
+	</select> -->
 
 
 	<select resultMap="boardVO" id="getPaging4">
@@ -120,7 +120,7 @@ from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntda
 	select * from (  
 select rownum as rn, a.* from ( 
         select a.rcontent, a.rdate, a.rid, b.b_index, b.btitle, b.bcat_num
-from boardreply a, board b where a.b_index = b.b_index order by a.rdate
+from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order by a.rdate
      )a where rownum <=#{pageNum} * #{amount}
 ) where rn >  (#{pageNum}-1) * #{amount}  
 ]]>
@@ -133,12 +133,12 @@ from boardreply a, board b where a.b_index = b.b_index order by a.rdate
 
 
 	<!-- 5.나의결제내역 -->
-	<select id="mygetlist5"
+	<!-- <select id="mygetlist5"
 		resultType="com.share.nanu.VO.DonationVO">
 	<![CDATA[ 
 			select * from donation
 		]]>
-	</select>
+	</select> -->
 	<select resultType="com.share.nanu.VO.DonationVO"
 		id="getPaging5">
 

@@ -13,7 +13,7 @@ public class Criteria {
 	private String keyword;  // 변수 추가 _ 검색어 작성 내용 저장
 	
 	public Criteria() {
-		this(1, 10);	
+		this(1, 5);	
 	}
 
 	public Criteria(int pageNum, int amount) {

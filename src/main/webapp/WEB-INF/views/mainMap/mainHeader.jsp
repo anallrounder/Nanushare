@@ -244,7 +244,7 @@
     
     <script src="/resources/charity/script/jquery.js"></script>
     <script src="/resources/charity/script/popper.min.js"></script>
-    <script src="/resources/charity/script/functions-main.js"></script><!--추가-->
+    <!-- <script src="/resources/charity/script/functions-main.js"></script> --><!--추가-->
    
 </body>
 
