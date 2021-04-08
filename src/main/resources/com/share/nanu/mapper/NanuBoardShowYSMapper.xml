@@ -16,11 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getlistWithPaging" resultType="com.share.nanu.VO.BoardVO">
 		<![CDATA[
 			select * from (
-						select /*+ INDEX_DESC(board pk_board) */ 
-						rownum as rn, a.* 
-		  		from ( 
-		    		select * from board where bcat_num = 2 
-		   	    )a where 
+				select  
+    					rownum as rn, a.* from ( 
+        					select /*+ INDEX_DESC(board pk_board) */ * from board where bcat_num = 2 
+     			) a where 
 		]]>    
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item='type' collection="typeArr">
