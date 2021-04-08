@@ -178,15 +178,17 @@ li {
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
-								<li class="active"><a href="mypage"><span
-										class="fa fa-user"></span> Profile</a></li>
-								<li><a href="ask"><span class="fa fa-cog"> </span>나의문의내역</a></li>
-								<li><a href="content"><span class="fa fa-credit-card">
+								<li class="active"><a href="mypage"><span class="fa fa-user"></span>
+										Profile</a></li>
+								<li><a href="ask"><span class="fa fa-question">
+									</span>나의문의내역</a></li>
+								<li><a href="content"><span class="fa fa-file">
 									</span>나의인증내역</a></li>
-								<li><a href="give"><span class="fa fa-envelope">
+								<li><a href="give"><span class="fa fa-handshake">
 									</span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-th"> </span>나의댓글내역</a></li>
-								<li><a href="pay"><span class="fa fa-clock-o"></span>나의결제내역</a></li>
+								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
+								<li><a href="pay"><span
+										class="fa fa-credit-card"></span>나의결제내역</a></li>
 							</ul>
 							</nav>
 						</div>
@@ -217,10 +219,13 @@ li {
 
 													<span>나의 포인트</span>
 													<h4 class="mb-2 mt-3">
+													<form action="${pageContext.request.contextPath}/my/ask" method="get">
 														<c:forEach var="vo1" items="${memberInfo}">
-															<c:forEach var="vo2" items="${vo1.pointList}">
-													${vo2.nowpnt}  </c:forEach>
+														
+															 <input type="hidden" value="${vo2.member_id} name="member_id" />
+															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.member_id} , ${vo2.nowpnt}</c:forEach>
 														</c:forEach>
+													</form>
 													</h4>
 													<!-- <div
 												class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats"> -->

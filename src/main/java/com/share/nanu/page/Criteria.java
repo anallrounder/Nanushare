@@ -52,7 +52,7 @@ public class Criteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+	 
 	
 	// 검색을 위해서 함수 추가
 	public String[] getTypeArr() {

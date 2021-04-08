@@ -161,6 +161,7 @@ li {
 									<sec:authentication property="principal" var="pinfo" />
 									<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq list2.member_id}">
+										<%-- <c:if test="${sessionScope.member_id = principal.member_id}"> --%>
 											<tr>
 												<%-- <td>${list2.member_id}</td> --%>
 												<td><a id="a-content"
@@ -170,7 +171,8 @@ li {
 												<td>${list2.bdate}</td>
 												<%-- <td>${list2.bcat_num}</td> --%>
 											</tr>
-										</c:if>
+											</c:if>
+										<%-- </c:if> --%>
 									</sec:authorize>
 								</c:forEach>
 							</table>

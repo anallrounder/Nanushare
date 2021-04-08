@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.mypaging.Criteria;
@@ -74,8 +75,11 @@ public class MyPageController {
 		if (md != null) {
 			mav.addObject("username", md.getmember().getName());
 		}
+		
+		log.info(mvo.getMember_id().toString());
 		mav.setViewName("/my/ask");
-		mav.addObject("list1", mgservice.myList1(cri));// 나의문의내역
+		mav.addObject("list1", mgservice.myList1(cri, mvo.getMember_id()));// 나의문의내역
+		
 
 		// 페이징
 		int total = mgservice.getTotalCount1(cri);
@@ -90,6 +94,9 @@ public class MyPageController {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.setViewName("/my/content");
+		
+		mav.addObject("memberid", md.getmember().getMember_id());
+		
 		mav.addObject("list2", mgservice.myList2(cri));// 나의인증내역
 		// 페이징
 		int total = mgservice.getTotalCount2(cri);

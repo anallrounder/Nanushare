@@ -112,21 +112,23 @@ li {
 										</h2></li>
 									<li class="email"><sec:authentication
 											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication property="principal.member.signuppath" />회원</li>
+									<li class="activity"><sec:authentication
+											property="principal.member.signuppath" />회원</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>
 										Profile</a></li>
-								<li><a href="ask"><span
-										class="fa fa-question"> </span>나의문의내역</a></li>
+								<li><a href="ask"><span class="fa fa-question">
+									</span>나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
 									</span>나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-handshake">
 									</span>나의나눔내역</a></li>
 								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
-								<li class="active"><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
+								<li class="active"><a href="pay"><span
+										class="fa fa-credit-card"></span>나의결제내역</a></li>
 							</ul>
 							</nav>
 						</div>
@@ -151,25 +153,27 @@ li {
 
 									<!-- <th>아이디</th> -->
 									<th>아이디</th>
-									<th>조회수</th>
+									<!-- <th>조회수</th> -->
 									<th>날짜</th>
 									<th>조회수</th>
 									<th>날짜</th>
+									<th>결제취소</th>
 
 								</tr>
 								<!-- 로그인한 회원의 글 정보만 받아오기 -->
 								<!-- 나의문의내역 -->
-								<c:forEach items="${list5}" var="list5">
+								<c:forEach items="${list5}" var="list5" varStatus="status">
 									<sec:authentication property="principal" var="pinfo" />
 									<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq list5.member_id}">
 											<tr>
 												<td>${list5.member_id}</td>
-												<td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td>
-												<td>${list5.dntprice}</td>
+												<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td>
+												 --%><td>${list5.dntprice}</td>
 												<td>${list5.dntdate}</td>
 												<td>${list5.paymathod}</td>
-
+												<!-- <td><button class="paycc" type="button">
+														결제취소</button></td> -->
 											</tr>
 										</c:if>
 									</sec:authorize>
@@ -183,7 +187,7 @@ li {
 										<ul class="pagination justify-content-center">
 											<li class="page-item"><c:if test="${pageMaker.prev}">
 													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+														href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
 												</c:if></li>
 
 											<li class="page-item"><c:forEach
@@ -191,14 +195,14 @@ li {
 													var="idx">
 													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
 													<a
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
+														href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(idx)}">${idx}</a>
 												</c:forEach></li>
 
 
 											<li class="page-item"><c:if
 													test="${pageMaker.next && pageMaker.endPage > 0}">
 													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+														href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.endPage +1) }">next
 													</a>
 												</c:if></li>
 										</ul>
