@@ -51,7 +51,8 @@
 <link rel="stylesheet" href="/resources/charity/css/style.css">
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
-<link rel="stylesheet" type="text/css" href="/resources/charity/css/imgblink_hj.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/charity/css/imgblink_hj.css">
 
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -60,10 +61,10 @@
 
 
 <style>
-
-.maxmax{
-position: relative;
+.maxmax {
+	position: relative;
 }
+
 li {
 	list-style: none;
 }
@@ -74,47 +75,57 @@ li {
 <script type="text/JavaScript"
 	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
+	jQuery(document)
+			.ready(
+					function() {
+						var barbar = jQuery('.progressbar');
+						var barProgress = <sec:authentication property="principal.member.dntcnt"/>;
+						var test = Number(barProgress + 0);
+						getresource(test);
 
+						//console.log(pg);
+						console.log(typeof (test));
 
+						function getresource(test) {
 
+							console.log(test);
+							if (test >= 0 && test <= 20) {
+								$(".maxmax").attr('src',
+										'/resources/my/그림1.png').css("left",
+										"0%");
+								console.log(barProgress);
+							}
+							if (test > 20 && test <= 40) {
 
+								$(".maxmax").attr("src",
+										"/resources/my/그림2.png").css("left",
+										"17%");
 
-	jQuery(document).ready(function() {
-	var barbar = jQuery('.progressbar');
-		var barProgress = <sec:authentication property="principal.member.dntcnt"/>;
-		var test = Number(barProgress+0);
-		getresource(test);
-	
-		//console.log(pg);
-		console.log(typeof(test));
-		
-		function getresource(test){
-			
-			console.log(test);
-		    if (test >= 0 && test<=20) {
-					$(".maxmax").attr('src', '/resources/my/그림1.png').css("left","0%");
-					console.log(barProgress);
-				}if (test > 20 && test<=40) {
-					
-					$(".maxmax").attr("src", "/resources/my/그림2.png").css("left","17%");
-				
-				}if (test > 40 && test<=60) {
-					
-					$(".maxmax").attr("src", "/resources/my/그림3.png").css("left","47%");
-				
-				}if (test > 60 && test<=80) {
-					
-					$(".maxmax").attr("src", "/resources/my/그림4.png").css("left","67%");
-				
-				}if (test > 80 && test<=100) {
-					
-					$(".maxmax").attr("src", "/resources/my/그림5.png").css("left","87%");
-				}
+							}
+							if (test > 40 && test <= 60) {
 
-		 } 
+								$(".maxmax").attr("src",
+										"/resources/my/그림3.png").css("left",
+										"47%");
 
-	});
-		
+							}
+							if (test > 60 && test <= 80) {
+
+								$(".maxmax").attr("src",
+										"/resources/my/그림4.png").css("left",
+										"67%");
+
+							}
+							if (test > 80 && test <= 100) {
+
+								$(".maxmax").attr("src",
+										"/resources/my/그림5.png").css("left",
+										"87%");
+							}
+
+						}
+
+					});
 </script>
 
 </head>
@@ -161,7 +172,8 @@ li {
 										</h2></li>
 									<li class="email"><sec:authentication
 											property="principal.member.member_id" /></a></li>
-									<li class="activity">Last logged in: Today at 2:18pm</li>
+									<li class="activity"><sec:authentication
+											property="principal.member.signuppath" />회원</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
@@ -174,8 +186,7 @@ li {
 								<li><a href="give"><span class="fa fa-envelope">
 									</span>나의나눔내역</a></li>
 								<li><a href="reply"><span class="fa fa-th"> </span>나의댓글내역</a></li>
-								<!-- <li><a href="#"><span class="fa fa-clock-o"></span>
-								Reminders</a></li> -->
+								<li><a href="pay"><span class="fa fa-clock-o"></span>나의결제내역</a></li>
 							</ul>
 							</nav>
 						</div>
@@ -206,7 +217,10 @@ li {
 
 													<span>나의 포인트</span>
 													<h4 class="mb-2 mt-3">
-														<sec:authentication property="principal.member.dntcnt" />
+														<c:forEach var="vo1" items="${memberInfo}">
+															<c:forEach var="vo2" items="${vo1.pointList}">
+													${vo2.nowpnt}  </c:forEach>
+														</c:forEach>
 													</h4>
 													<!-- <div
 												class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats"> -->
@@ -240,10 +254,10 @@ li {
 
 									<!-- 프로그래스바 -->
 									<div class="charity-cause-donate">
-										
+
 
 										<div class="progressbar">
-										<img class="maxmax blinking" width="80" height="80">
+											<img class="maxmax blinking" width="80" height="80">
 											<div class="progress-label"></div>
 										</div>
 
@@ -274,13 +288,13 @@ li {
 		</div>
 
 		<script>
-				$("#mytabs>ul>li>a").each(function(i) {
-					$(this).attr("href", "#mytab" + i)
-				})
-				$("#mytabs>div>div").each(function(i) {
-					$(this).attr("id", "mytab" + i)
-				})
-			</script>
+			$("#mytabs>ul>li>a").each(function(i) {
+				$(this).attr("href", "#mytab" + i)
+			})
+			$("#mytabs>div>div").each(function(i) {
+				$(this).attr("id", "mytab" + i)
+			})
+		</script>
 
 		<!-- Main Section -->
 
@@ -326,5 +340,6 @@ li {
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
 </body>
 </html>

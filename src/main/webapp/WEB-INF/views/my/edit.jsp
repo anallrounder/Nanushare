@@ -163,7 +163,7 @@ input {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>프로필수정하는 페이지</h1>
+					<h1>프로필 수정하는 페이지</h1>
 				</div>
 			</div>
 		</div>
