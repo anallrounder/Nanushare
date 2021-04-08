@@ -25,7 +25,6 @@ public class AdminPageServiceImpl implements AdminPageService {
 	@Autowired
 	AdminMapper adminMapper;
 	
-	
 	@Override
 	public List<MemberVO> getMember(Criteria cri) {
 		// TODO Auto-generated method stub
@@ -62,6 +61,7 @@ public class AdminPageServiceImpl implements AdminPageService {
 		return adminMapper.getVmVmam();
 	}
 	
+	// 본사입고관리
 	@Override //for문 돌려서 mapper for문 길이만큼 돌리기(사용하는 이유는 값을 다중으로 넣었을때 한번에 넣는게 안되기때문에 쿼리문을 그만큼 돌린기위해서)
 	public void itemHeadUp(int[] iamount, int[] icat_num) {
 		for(int i = 0; i < iamount.length; i++) {
@@ -69,6 +69,7 @@ public class AdminPageServiceImpl implements AdminPageService {
 		}
 	}
 	
+	// 본사재고관리(출고 db테이블 insert, update)
 	@Override
 	public void itemOut(AdminItemOutVO adoutvo) {
 		for(int i = 0; i < adoutvo.getOutputData().length; i++) {

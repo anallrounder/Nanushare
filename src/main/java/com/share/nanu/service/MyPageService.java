@@ -2,8 +2,6 @@ package com.share.nanu.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;

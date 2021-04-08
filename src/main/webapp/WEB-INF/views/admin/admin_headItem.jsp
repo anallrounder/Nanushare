@@ -149,7 +149,7 @@
             </a>
           </li>
           
-          <li class="nav-item"><%-- ${pageContext.request.contextPath}/admin/item --%>
+          <li class="nav-item menu-open"><%-- ${pageContext.request.contextPath}/admin/item --%>
             <a href="#" class="nav-link active" data-toggle="tab">
               <i class="nav-icon fas fa-box-open"></i>
               <p>재고 관리<i class="right fas fa-angle-left"></i></p>

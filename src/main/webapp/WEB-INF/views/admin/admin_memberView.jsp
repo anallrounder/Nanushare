@@ -81,6 +81,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+  
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -88,7 +89,7 @@
   <!-- Main Sidebar Container -->
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">  
-  
+
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -109,13 +110,13 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/admin/donation" class="nav-link">
+            <a href="#" class="nav-link" data-toggle="tab">
              <i class="nav-icon fas fa-donate"></i>
               <p>후원금 관리<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#m_day" class="nav-link" data-toggle="tab">
+                <a href="/admin/donation" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>일별</p>
                 </a>
@@ -142,14 +143,14 @@
           </li>
           
           <li class="nav-item">
-            <a href="/admin/member" class="nav-link">
+            <a href="/admin/member" class="nav-link active" data-toggle="tab">
               <i class="nav-icon fas fa-users"></i>
               <p>회원 관리</p>
             </a>
           </li>
           
-          <li class="nav-item menu-open"><%-- ${pageContext.request.contextPath}/admin/item --%>
-            <a href="#" class="nav-link active" data-toggle="tab">
+          <li class="nav-item"><%-- ${pageContext.request.contextPath}/admin/item --%>
+            <a href="#" class="nav-link" data-toggle="tab">
               <i class="nav-icon fas fa-box-open"></i>
               <p>재고 관리<i class="right fas fa-angle-left"></i></p>
             </a>
@@ -161,7 +162,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#item_branch" class="nav-link active" data-toggle="tab">
+                <a href="/admin/branchItem" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>지점 재고</p>
                 </a>
@@ -192,35 +193,52 @@
                         <br>
                         
                         <div class="charity-volunteer-form" >
-									<div class="tab-content">
-										<div class="tab-pane fade show active" id="item_branch">
-											<form>
-											<div class="widget_title"><h2>지점 재고</h2></div>
-												<table class="branchI">
+									<!-- <div class="tab-content">
+										<div class="tab-pane fade show active" id="users"> -->
+										<div class="widget_title"><h2>회원 관리</h2></div>
+										
 													<br>
-													<tr>
-														<th>No.</th>
-														<th>지점명</th>
-														<th>마스크</th>
-														<th>기저귀</th>
-														<th>생리대</th>
-														<th>문구류</th>
-														<th>손세정제</th>
-													</tr>
-	
-													<c:forEach items="${vvam}" var="vmdao" varStatus="status">
-													<tr>
-														<td>${status.count}</td> <!-- index  -->
-														<td>${vmdao.branch}</td> <!-- 지점명 -->
-														<c:forEach items="${vmdao.vmamlist}" var="list">
-																<td>${list.vm_amount}</td>
-														</c:forEach>
-													</tr>
-													</c:forEach>
-												</table>
-											</form>
-										</div>
+												 <!--// volunteer-form \\-->
+						                            <form>
+							                          <table>
+							                          	<tr>
+							                               <th>아이디</th>
+							                               <th>${memberView.member_id}</th>
+							                            </tr>
+							                            
+							                            <tr>
+							                               <th>이름</th>
+							                               <th>${memberView.name}</th>
+							                            </tr>
+							                            
+							                            <tr>
+							                               <th>가입경로</th>
+							                               <th>${memberView.signuppath}</th>
+							                            </tr>
+							                            
+							                            <tr>
+							                               <th>후원금기부횟수</th>
+							                               <th>${memberView.dntcnt}</th>
+							                            </tr>
+							                            
+							                            <tr>
+							                               <th>물품기부횟수</th>
+							                               <th>${memberView.itemdntcnt}</th>
+							                            </tr>
+							                            
+							                            <tr>
+							                               <th>블랙리스트 여부</th>
+							                               <th>${memberView.bklist}</th>
+							                            </tr>
+							                           </table>
+						                            </form>
+						                                   
+						                        <!--// volunteer-form \\-->
+										
+											<button type="submit">회원 정보 수정</button>
 											
+											
+										</div>
 									</div>
                         </div>
                         <!--// volunteer-form \\-->
@@ -241,8 +259,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
         <!-- Main Section -->
 
     </div>
