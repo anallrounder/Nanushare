@@ -81,13 +81,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
-      <!-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li> -->
+   
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -95,12 +89,7 @@
   <!-- Main Sidebar Container -->
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">  
-    <!-- Brand Logo -->
-   <!--  <a href="/resources/AdminLTE-master/index3.html" class="brand-link">
-      <img src="/resources/AdminLTE-master/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a> -->
-
+    
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -120,14 +109,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active" data-toggle="tab">
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-toggle="tab">
              <i class="nav-icon fas fa-donate"></i>
               <p>후원금 관리<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#m_day" class="nav-link active" data-toggle="tab">
+                <a href="/admin/donation" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>일별</p>
                 </a>
@@ -161,13 +150,13 @@
           </li>
           
           <li class="nav-item"><%-- ${pageContext.request.contextPath}/admin/item --%>
-            <a href="#" class="nav-link" data-toggle="tab">
+            <a href="#" class="nav-link active" data-toggle="tab">
               <i class="nav-icon fas fa-box-open"></i>
               <p>재고 관리<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/headItem" class="nav-link">
+                <a href="#item_head" class="nav-link active" data-toggle="tab">
                   <i class="far fa-circle nav-icon"></i>
                   <p>본사 재고</p>
                 </a>
@@ -205,9 +194,8 @@
                         
                         <div class="charity-volunteer-form" >
 									<div class="tab-content">
-										
-										<%-- <div class="tab-pane fade" id="m_day">
-											<form action="/admin/itemupdate" method="post">
+										<div class="tab-pane fade show active" id="item_head">
+											<form action="/admin/itemupdate" method="get">
 											<div class="widget_title"><h2>입고 관리</h2></div>
 												<table>
 													<tr>
@@ -241,7 +229,7 @@
 												<br><br><br>
 												</form>
 												
-												<form action="${pageContext.request.contextPath}/admin/itemOutupdate" method="post">
+												<form action="${pageContext.request.contextPath}/admin/itemOutupdate" method="get">
 												<div class="widget_title"><h2>출고 관리</h2></div>
 												<c:forEach items="${vm}" var="vmvo">
 												</c:forEach>
@@ -296,37 +284,9 @@
 												<button type="submit">업데이트</button>
 											</form>
 										</div>
-										
-										<div class="tab-pane fade" id="item_branch">
-											<form>
-											<div class="widget_title"><h2>지점 재고</h2></div>
-												<table class="branchI">
-													<div>
-														<br>
-													</div>
-													<tr>
-														<th>No.</th>
-														<th>지점명</th>
-														<th>마스크</th>
-														<th>기저귀</th>
-														<th>생리대</th>
-														<th>문구류</th>
-														<th>손세정제</th>
-													</tr>
-	
-													<c:forEach items="${vvam}" var="vmdao" varStatus="status">
-													<tr>
-														<td>${status.count}</td> <!-- index  -->
-														<td>${vmdao.branch}</td> <!-- 지점명 -->
-														<c:forEach items="${vmdao.vmamlist}" var="list">
-																<td>${list.vm_amount}</td>
-														</c:forEach>
-													</tr>
-													</c:forEach>
-												</table>
-											</form>
-										</div> --%>
 									</div>
+						
+
                         </div>
                         <!--// volunteer-form \\-->
                         <div class="charity-team-contactus">
@@ -381,6 +341,17 @@
 https://stackoverflow.com/questions/36207203/uncaught-typeerror-datepicker-is-not-a-functionanonymous-function-->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>  
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+$(document).ready(function() { 
+	$('.datepicker').datepicker();
+  });
+	
+	/* dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
+	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], // 월의 한글 형식.
+	monthNames:[ "1월", "2월", "3월", "4월", "5월", "6월","7월", "8월", "9월", "10월", "11월", "12월" ] // 상단에 월의 한글 형식
+	*/
+</script>
 
 </body>
 </html>

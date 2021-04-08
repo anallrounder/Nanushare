@@ -81,13 +81,6 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
-      <!-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li> -->
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -95,12 +88,7 @@
   <!-- Main Sidebar Container -->
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">  
-    <!-- Brand Logo -->
-   <!--  <a href="/resources/AdminLTE-master/index3.html" class="brand-link">
-      <img src="/resources/AdminLTE-master/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a> -->
-
+  
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -120,14 +108,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active" data-toggle="tab">
+          <li class="nav-item">
+            <a href="/admin/donation" class="nav-link">
              <i class="nav-icon fas fa-donate"></i>
               <p>후원금 관리<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#m_day" class="nav-link active" data-toggle="tab">
+                <a href="#m_day" class="nav-link" data-toggle="tab">
                   <i class="far fa-circle nav-icon"></i>
                   <p>일별</p>
                 </a>
@@ -161,7 +149,7 @@
           </li>
           
           <li class="nav-item"><%-- ${pageContext.request.contextPath}/admin/item --%>
-            <a href="#" class="nav-link" data-toggle="tab">
+            <a href="#" class="nav-link active" data-toggle="tab">
               <i class="nav-icon fas fa-box-open"></i>
               <p>재고 관리<i class="right fas fa-angle-left"></i></p>
             </a>
@@ -173,7 +161,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/branchItem" class="nav-link">
+                <a href="#item_branch" class="nav-link active" data-toggle="tab">
                   <i class="far fa-circle nav-icon"></i>
                   <p>지점 재고</p>
                 </a>
@@ -205,105 +193,11 @@
                         
                         <div class="charity-volunteer-form" >
 									<div class="tab-content">
-										
-										<%-- <div class="tab-pane fade" id="m_day">
-											<form action="/admin/itemupdate" method="post">
-											<div class="widget_title"><h2>입고 관리</h2></div>
-												<table>
-													<tr>
-														<th>No.</th>
-														<th>물품명</th>
-														<th>현재 보유량</th>
-														<th>입고량</th>
-														<!-- <th>입고일</th> -->
-													</tr>
-	
-													<c:forEach items="${item}" var="headItem">
-													<tr>
-														<td><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
-														<td>${headItem.iname}</td> <!-- 물품명 출력  -->
-														<td>${headItem.iamount}</td> <!-- 현재 수량 출력 -->
-														<td> <!-- 입고량 -->
-															<select name="inputData">
-																<option value="0">0</option>
-																<option value="10">10</option>
-																<option value="20">20</option>
-																<option value="30">30</option>
-																<option value="40">40</option>
-																<option value="50">50</option>
-															</select>
-														</td>
-														<!-- <td><input type="text" class="datepicker" autocomplete="off" ></td> -->
-													</tr>
-													</c:forEach>
-												</table><br>
-												<button type="submit">업데이트</button>
-												<br><br><br>
-												</form>
-												
-												<form action="${pageContext.request.contextPath}/admin/itemOutupdate" method="post">
-												<div class="widget_title"><h2>출고 관리</h2></div>
-												<c:forEach items="${vm}" var="vmvo">
-												</c:forEach>
-												<table>
-													<tr>
-														<th>No.</th>
-														<th>물품명</th>
-														<th>현재 보유량</th>
-														<th>출고량</th>
-														<th>출고일</th>
-														<th>출고지점</th>
-														<th>출고 자판기</th>
-													</tr>
-	
-													<c:forEach items="${item}" var="headItem">
-													<tr>
-														<td><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
-														<td><input type="hidden" value="${headItem.iname}" name="iname">${headItem.iname}</td> <!-- 물품명 출력  -->
-														<td>${headItem.iamount}</td><!-- 현재 수량 출력 -->
-														<td>
-														<!-- 출고량 -->
-															<select name="outputData"> 
-																<option value="0">0</option>
-																<option value="10">10</option>
-																<option value="20">20</option>
-																<option value="30">30</option>
-																<option value="40">40</option>
-																<option value="50">50</option>
-															</select>
-														</td>
-														<td><input type="text" class="datepicker" name="outDate"></td>
-														<td>
-														<!-- 출고지점 -->
-															<select name="branch"> 
-															<c:forEach items="${vm}" var="vmvo">
-																<option value="${vmvo.branch}">${vmvo.branch}</option>
-															</c:forEach> 
-															</select>
-														</td>
-														<td>
-														<!-- 출고 자판기 번호 -->
-															<select name="vm_num"> 
-															<c:forEach items="${vm}" var="vmvo">
-																<option value="${vmvo.vm_num}">${vmvo.vm_num}</option>
-															</c:forEach> 
-															</select>
-														</td>
-													</tr>
-													</c:forEach>
-												</table>
-												
-												<button type="submit">업데이트</button>
-											</form>
-										</div>
-										
-										<div class="tab-pane fade" id="item_branch">
+										<div class="tab-pane fade show active" id="item_branch">
 											<form>
 											<div class="widget_title"><h2>지점 재고</h2></div>
 												<table class="branchI">
-													<div>
-														<br>
-													</div>
+													<br>
 													<tr>
 														<th>No.</th>
 														<th>지점명</th>
@@ -325,7 +219,8 @@
 													</c:forEach>
 												</table>
 											</form>
-										</div> --%>
+										</div>
+											
 									</div>
                         </div>
                         <!--// volunteer-form \\-->

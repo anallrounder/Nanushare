@@ -38,6 +38,10 @@ public interface MyPageService {
 	
 	//public void memberDelete(MemberVO mvo, MemberDetails md);
 	void mememberDelete(MemberVO mvo, MemberDetails md);
+	
+	
+	
+	
 
 	// 회원탈퇴페이지
 

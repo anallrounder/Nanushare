@@ -18,7 +18,8 @@ import com.share.nanu.VO.AdminItemOutVO;
 import com.share.nanu.VO.ItemInvenVmamVO;
 import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
-import com.share.nanu.page.Criteria;
+import com.share.nanu.paging.Criteria;
+import com.share.nanu.paging.PageVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.AdminPageService;
 
@@ -41,22 +42,43 @@ public class AdminPageController {
 		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 	
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-			
 			mov.addObject("username", md.getmember().getName());
 		}
 		
 		mov.setViewName("admin/admin_main");
-		mov.addObject("memberControl", adminPgService.getMember());
+		//mov.addObject("memberControl", adminPgService.getMember());
 		mov.addObject("item", adminPgService.getHeadItem()); //본사 물품 조회(iteminven)
 		mov.addObject("vm", adminPgService.getvm()); // vm 지점명 조회
 		mov.addObject("vvam", adminPgService.getBranchItem()); //지점 물품 조회 (vm + vmam)
 		
 		return mov;
 	}
-
+	
 	//회원관리
+	@GetMapping("/member")
+	public ModelAndView memberControl(ModelAndView mov, MemberVO member, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
+		
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			mov.addObject("username", md.getmember().getName());
+		}
+		
+		mov.setViewName("admin/admin_member");
+		mov.addObject("memberControl", adminPgService.getMember(cri));
+
+		// 페이징
+		int total = adminPgService.getTotalCount(cri);
+		mov.addObject("pageMaker", new PageVO(cri, total));
+		
+		return mov;
+	}
+
+	//회원관리(회원한명당 조회)
 	@GetMapping("/member_view")
-	public ModelAndView member_view(ModelAndView mov, MemberVO member, Criteria cri) {
+	public ModelAndView member_view(ModelAndView mov, MemberVO member, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
+		
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			mov.addObject("username", md.getmember().getName());
+		}
 		
 		mov.setViewName("admin/member_view");
 		mov.addObject("memberView", adminPgService.getMemberView(member.getMember_id()));
@@ -65,16 +87,36 @@ public class AdminPageController {
 		return mov;
 	}
 	
-	//재고관리 조회
-	@GetMapping("/item") 
-	public ModelAndView item (ModelAndView mov, MemberVO member) {
-		log.info("item start");
+	//재고관리 본사 재고 조회
+	@GetMapping("/headItem") 
+	public ModelAndView headItem (ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md) {
+
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			mov.addObject("username", md.getmember().getName());
+		}
 		
-		mov.setViewName("admin/admin_item");
+		log.info("headItem start");
+		
+		mov.setViewName("admin/admin_headItem");
 		mov.addObject("item", adminPgService.getHeadItem()); //본사 물품 조회(iteminven)
 		mov.addObject("vm", adminPgService.getvm()); // vm 지점명 조회
-		mov.addObject("vvam", adminPgService.getBranchItem()); //지점 물품 조회 (vm + vmam)
 	  
+		return mov;
+	}
+	
+	//재고관리 지점 재고 조회
+	@GetMapping("/branchItem") 
+	public ModelAndView branchItem (ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md) {
+		
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			mov.addObject("username", md.getmember().getName());
+		}
+		
+		log.info("branchItem start");
+			
+		mov.setViewName("admin/admin_branchItem");
+		mov.addObject("vvam", adminPgService.getBranchItem()); //지점 물품 조회 (vm + vmam)
+		  
 		return mov;
 	}
 	 
@@ -90,7 +132,7 @@ public class AdminPageController {
 		adminPgService.itemHeadUp(iamount, icat_num);
 		log.info("입고 업데이트");
 		
-	  return "redirect:/admin/donation"; 
+	  return "redirect:/admin/headItem"; 
 	
 	}
 	
@@ -98,25 +140,10 @@ public class AdminPageController {
 	@GetMapping("/itemOutupdate")
 	public String itemHeadOut (AdminItemOutVO adoutvo) { // 받는 값을 하나의 command객체로 만들어서 담은 다음 호출함
 		
-		for(int i = 0; i < adoutvo.getOutputData().length; i++) {
-			log.info(String.valueOf(adoutvo.getIcat_num()[i])); // 본사 재고에서 수량 빼기 update
-			log.info(String.valueOf(adoutvo.getOutputData()[i]));
-			//adminMapper.itemVmam(adoutvo.getVm_num()[i], adoutvo.getOutputData()[i], adoutvo.getIname()[i]); // vmam 자판기에 수량 업데이트
-			log.info("-------------자판기번호------------");
-			log.info(String.valueOf(adoutvo.getVm_num()[i]));
-			log.info("-------------지점명------------");
-			log.info(String.valueOf(adoutvo.getBranch()[i]));
-			log.info("-------------물품명------------");
-			log.info(String.valueOf(adoutvo.getIname()[i]));
-			log.info("-------------날짜------------");
-			log.info(String.valueOf(adoutvo.getOutDate()[i]));
-		
-		}
-		
 		adminPgService.itemOut(adoutvo);
 		log.info("출고 업데이트");
 		
-		return "redirect:/admin/donation"; 
+		return "redirect:/admin/headItem"; 
 		
 	}
 	 

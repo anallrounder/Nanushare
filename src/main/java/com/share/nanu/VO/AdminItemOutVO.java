@@ -1,7 +1,5 @@
 package com.share.nanu.VO;
 
-import java.sql.Date;
-
 import lombok.ToString;
 
 @ToString
