@@ -58,11 +58,8 @@ public class MyPageController {
 
 	// 마이페이지
 	@GetMapping("/my/mypage")
-<<<<<<< HEAD
 	public ModelAndView myPage(MemberPointVO mpvo,MemberVO mvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {
-=======
-	public ModelAndView myPage(MemberVO mvo, ModelAndView mav,@AuthenticationPrincipal MemberDetails md) {
->>>>>>> master_lhj
+
 		System.out.println("마이페이지");
 		
 		
