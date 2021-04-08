@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.mapper.NanuBoardShowYSMapper;
 import com.share.nanu.page.Criteria;
@@ -77,14 +78,27 @@ public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 		mapper.insert(boardVO);
 	}
 	// 이미지
+	/*
+	 * @Override public void fileUpload(int attach_num, String originname, String
+	 * path) { HashMap<String, Object> vo = new HashMap<>(); vo.put("attach_num",
+	 * attach_num); vo.put("originname", originname); vo.put("path", path);
+	 * mapper.uploadFile(vo); }
+	 */
+	
+	//게시판 글번호
 	@Override
-	public void fileUpload(int attach_num, String originname, String path) {
-		HashMap<String, Object> vo = new HashMap<>();
-		vo.put("attach_num", attach_num);
-		vo.put("originname", originname);
-		vo.put("path", path);
-		mapper.uploadFile(vo);
+	public int getBindex(BoardVO boardVO) {
+		
+		return mapper.getBindex(boardVO);
 	}
+	
+	//이미지 첨부
+	@Override
+	public void fileUpload(AttachmentVO attachmentVO) {
+		mapper.uploadFile(attachmentVO);
+	}
+	
+	
 	
 
 }

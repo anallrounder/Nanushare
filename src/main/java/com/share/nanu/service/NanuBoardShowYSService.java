@@ -2,6 +2,7 @@ package com.share.nanu.service;
 
 import java.util.List;
 
+import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.page.Criteria;
 
@@ -28,7 +29,10 @@ public interface NanuBoardShowYSService {
 	public void writeBoard(BoardVO boardVO); // 글 비 저장
 	
 	//이미지 첨부
-	public void fileUpload(int attach_num, String originalfileName, String savePath);
+	public void fileUpload(AttachmentVO attachmentVO);
+	
+	//게시판 글번호 가져오기
+	public int getBindex(BoardVO boardVO);
 	
 	
 

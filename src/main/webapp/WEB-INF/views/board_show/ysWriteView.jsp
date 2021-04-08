@@ -95,7 +95,7 @@
 	                           <p>이미지 첨부하기 :
 							   		<input type="file" name="file" multiple="multiple"/>
 	                            </p>
-	                            <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 이미지 저장</i></button>
+	                            <!-- <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 이미지 저장</i></button> -->
 	                           <br><br>
 	                           <h4>Content</h4>
 	                           <p><textarea id="editor4" name="bcontent" placeholder="내용을 작성하세요."></textarea></p>
@@ -110,8 +110,8 @@
 							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 	                        </div>
                         </form>
-                        <!-- <script>CKEDITOR.replace('editor4');</script> -->
-                        <script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/my/board/shows/imageUpload'});</script>
+                        <script>CKEDITOR.replace('editor4');</script>
+                       <!--  <script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/my/board/shows/imageUpload'});</script> -->
 
 
                         

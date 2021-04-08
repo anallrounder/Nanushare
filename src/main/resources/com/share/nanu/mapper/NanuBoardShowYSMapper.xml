@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from board where bcat_num = 2
 		]]>
 	</select>
-
+<!-- /*+ INDEX_DESC(board pk_board) */ -->
 	<!-- 인증게시판 페이징 리스트 -->
 	<select id="getlistWithPaging" resultType="com.share.nanu.VO.BoardVO">
 		<![CDATA[
@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						select /*+ INDEX_DESC(board pk_board) */ 
 						rownum as rn, a.* 
 		  		from ( 
-		    		select * from board where bcat_num = 2
+		    		select * from board where bcat_num = 2 
 		   	    )a where 
 		]]>    
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
@@ -106,18 +106,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert">
   		<![CDATA[
 			insert into board (b_index, member_id, btitle, bcontent, bhit, bdate, bcat_num) 
-			values (board_seq.nextval, 'Ulric@naver.com', #{btitle}, #{bcontent}, 0, sysdate, 2)
+			values (board_seq.nextval, #{member_id}, #{btitle}, #{bcontent}, 0, sysdate, 2)
  		]]>
 	</insert>
 	
 	<!-- 이미지 업로드 -->
-	<insert id="uploadFile" parameterType="HashMap">
+	<select id="uploadFile" resultType="com.share.nanu.VO.AttachmentVO">
 	 <![CDATA[
-	    INSERT INTO
-	   	   insert into attachment
-	       attachment VALUES (attachment_seq.nextval, #{originname}, #{path}, b_index, board_seq.currval)
+	    
+	   	   insert into attachment VALUES (attachment_seq.nextval, #{originname}, #{path}, #{extension}, #{b_index})
 		]]>
-	</insert>
+	</select>
+	
+	<!-- 게시판 글번호 -->
+	<select id="getBindex"  resultType="int">
+		<![CDATA[ 
+			select * from (
+        select b_index from board where member_id = #{member_id}  and bcat_num = 2 order by b_index desc
+   	 		) 
+				where rownum =1
+		]]>
+	</select>
 	
 </mapper>
 
