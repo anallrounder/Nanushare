@@ -203,6 +203,7 @@
 												 <!--// volunteer-form \\-->
 						                            <form>
 							                            <tr>
+							                               <th>No.</th>
 							                               <th>아이디</th>
 							                               <th>이름</th>
 							                               <th>가입경로</th>
@@ -211,8 +212,9 @@
 							                               <th>블랙리스트 여부</th>
 						                               	</tr>
 						                                
-						                                <c:forEach items="${memberControl}" var="member">
+						                                <c:forEach items="${memberControl}" var="member" varStatus="status">
 						                                 <tr>
+						                                   <th>${status.count}</th>
 							                               <th><a href="member_view?member_id=${member.member_id}">${member.member_id}</a></th>
 							                               <th>${member.name}</th>
 							                               <th>${member.signuppath}</th>

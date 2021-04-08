@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -80,6 +81,19 @@ public class AdminPageController {
 		return mov;
 	}
 	
+	// 회원관리(블랙리스트 변경)
+	@PostMapping("/member_bk")
+	public String member_bk(MemberVO member) throws Exception {
+		
+		log.info(member.getMember_id().toString());
+		
+		adminPgService.upBkCheck(member.getBklist(), member.getMember_id());
+		log.info("블랙리스트 업데이트");
+			
+		return "redirect:/admin/member";
+	}
+	
+	
 	// 재고관리-본사 재고 조회
 	@GetMapping("/headItem") 
 	public ModelAndView headItem (ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md) {
@@ -114,7 +128,7 @@ public class AdminPageController {
 	}
 	 
 	// 재고관리-본사 입고 업데이트 -> post으로 비꿔야 url이 좀 깔끔할것같은데 시간되면 방법 찾아보기
-	@GetMapping("/itemupdate") 
+	@PostMapping("/itemupdate") 
 	public String itemHeadUp (@RequestParam("inputData") int[] iamount, @RequestParam("icat_num") int[] icat_num) {
 		
 		// jsp에서 값이 어떻게 나오는지 확인하기 위한 작업 -> 배열로 넘어옴 & db에서 값이 int였는데 String으로 계속 변수 타입을 지정해서 처음에 안넘어간것 배열을 써주지않으면 하나의값만 불러옴
@@ -130,7 +144,7 @@ public class AdminPageController {
 	}
 	
 	//재고관리-본사 출고 업데이트 -> put으로 바꿔야 url이 좀 깔끔할것같은데 시간되면 방법 찾아보기
-	@GetMapping("/itemOutupdate")
+	@PostMapping("/itemOutupdate")
 	public String itemHeadOut (AdminItemOutVO adoutvo) { // 받는 값을 하나의 command객체로 만들어서 담은 다음 호출함(join x)
 		
 		adminPgService.itemOut(adoutvo);

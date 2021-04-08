@@ -14,7 +14,8 @@ public interface AdminPageService {
 	// 관리자페이지-회원관리
 	List<MemberVO> getMember(Criteria cri);
 	int getTotalCount(Criteria cri);
-	List<MemberVO> getMemberView(String member_id);
+	MemberVO getMemberView(String member_id);
+	void upBkCheck(String bklist, String member_id);
 
 	//관리자페이지-본사재고관리(조회)
 	List<IteminvenVO2> getHeadItem();
@@ -28,6 +29,7 @@ public interface AdminPageService {
 	
 	//관리자페이지-본사재고관리(출고 업데이트)
 	void itemOut(AdminItemOutVO adoutvo);
+	
 
 	
 

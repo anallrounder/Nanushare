@@ -17,7 +17,9 @@ public interface AdminMapper {
 	
 	int getTotalCount(Criteria cri);
 
-	List<MemberVO> member_view(String member_id);
+	MemberVO member_view(String member_id);
+	
+	void upBkCheck(String bklist, String member_id);
 
 	List<IteminvenVO2> getHeadItem();
 
@@ -32,6 +34,8 @@ public interface AdminMapper {
 	void itemVmam(String vm_num, int iamount, String iname);
 
 	void itemIoutPut(String vm_num, int iamount, String outputdate, int icat_num);
+
+	
 
 	
 

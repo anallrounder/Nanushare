@@ -27,20 +27,26 @@ public class AdminPageServiceImpl implements AdminPageService {
 	
 	@Override
 	public List<MemberVO> getMember(Criteria cri) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.member(cri);
 	}
 	
 	@Override
 	public int getTotalCount(Criteria cri) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.getTotalCount(cri);
 	}
 
 	@Override
-	public List<MemberVO> getMemberView(String member_id) {
-		// TODO Auto-generated method stub
+	public MemberVO getMemberView(String member_id) {
+
 		return adminMapper.member_view(member_id);
+	}
+	
+	@Override
+	public void upBkCheck(String bklist, String member_id) {
+		
+		adminMapper.upBkCheck(bklist, member_id);
 	}
 
 	@Override
@@ -51,13 +57,13 @@ public class AdminPageServiceImpl implements AdminPageService {
 
 	@Override
 	public List<VmVO> getvm() {
-		// TODO Auto-generated method stub
+
 		return adminMapper.getVmBranch();
 	}
 
 	@Override
 	public List<VmVmamVO> getBranchItem() {
-		// TODO Auto-generated method stub
+
 		return adminMapper.getVmVmam();
 	}
 	
@@ -78,6 +84,8 @@ public class AdminPageServiceImpl implements AdminPageService {
 			adminMapper.itemIoutPut(adoutvo.getVm_num()[i], adoutvo.getOutputData()[i], adoutvo.getOutDate()[i], adoutvo.getIcat_num()[i]); // 출고 테이블 로그 insert
 		}
 	}
+
+
 
 
 	

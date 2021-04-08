@@ -10,9 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from (
 						select rownum as rnum, a.* 
 		  		from ( 
-		    		select * from member order by member_id asc
+		    		select * from member where ENABLE != '2' order by member_id asc 
 		   	    )a where rownum <= #{pageNum} * #{amount}
-		 	) where rnum > (#{pageNum}-1) * #{amount}
+		 	) where rnum > (#{pageNum}-1) * #{amount} 
 	]]>
 	</select>
 	
@@ -27,6 +27,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member where member_id = #{member_id}
 	]]>
 	</select>
+	
+	<update id="upBkCheck"> <!--회원 블랙리스트 여부 변경-->
+	<![CDATA[ 
+		update member set bklist = #{bklist} where member_id = #{member_id}
+	]]>
+	</update>
 	
 	<select id="getHeadItem" resultType="com.share.nanu.VO.IteminvenVO2">
 	<![CDATA[ 

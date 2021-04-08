@@ -16,6 +16,10 @@
 
 <html>
 <head>
+
+	<meta name="_csrf" content="${_csrf.token}">
+	<meta name="_csrf_header" content="${_csrf.headerName}">
+	
 <title>Admin Page</title>
 
  <!-- meta tags -->
@@ -195,7 +199,7 @@
                         <div class="charity-volunteer-form" >
 									<div class="tab-content">
 										<div class="tab-pane fade show active" id="item_head">
-											<form action="/admin/itemupdate" method="get">
+											<form action="/admin/itemupdate" method="post">
 											<div class="widget_title"><h2>입고 관리</h2></div>
 												<table>
 													<tr>
@@ -226,10 +230,11 @@
 													</c:forEach>
 												</table><br>
 												<button type="submit">업데이트</button>
+												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 												<br><br><br>
 												</form>
 												
-												<form action="${pageContext.request.contextPath}/admin/itemOutupdate" method="get">
+												<form action="${pageContext.request.contextPath}/admin/itemOutupdate" method="post">
 												<div class="widget_title"><h2>출고 관리</h2></div>
 												<c:forEach items="${vm}" var="vmvo">
 												</c:forEach>
@@ -282,6 +287,7 @@
 												</table>
 												
 												<button type="submit">업데이트</button>
+												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											</form>
 										</div>
 									</div>

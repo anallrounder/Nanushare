@@ -16,6 +16,14 @@
 
 <html>
 <head>
+
+<!-- 헤더 안에 추가  -->
+<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
+<!-- js에서 csrf 토큰, 헤더등록 -->
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+
+
 <title>Admin Page</title>
 
  <!-- meta tags -->
@@ -143,7 +151,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="/admin/member" class="nav-link active" data-toggle="tab">
+            <a href="/admin/member" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>회원 관리</p>
             </a>
@@ -199,43 +207,58 @@
 										
 													<br>
 												 <!--// volunteer-form \\-->
-						                            <form>
+						                            <form action="${pageContext.request.contextPath}/admin/member_bk" method="post">
 							                          <table>
 							                          	<tr>
 							                               <th>아이디</th>
-							                               <th>${memberView.member_id}</th>
+							                               <td><input type="hidden" value="${memberView.member_id}" name="member_id">${memberView.member_id}</td>
 							                            </tr>
 							                            
 							                            <tr>
 							                               <th>이름</th>
-							                               <th>${memberView.name}</th>
+							                               <td>${memberView.name}</td>
 							                            </tr>
 							                            
 							                            <tr>
 							                               <th>가입경로</th>
-							                               <th>${memberView.signuppath}</th>
+							                               <td>${memberView.signuppath}</td>
 							                            </tr>
 							                            
 							                            <tr>
 							                               <th>후원금기부횟수</th>
-							                               <th>${memberView.dntcnt}</th>
+							                               <td>${memberView.dntcnt}</td>
 							                            </tr>
 							                            
 							                            <tr>
 							                               <th>물품기부횟수</th>
-							                               <th>${memberView.itemdntcnt}</th>
+							                               <td>${memberView.itemdntcnt}</td>
 							                            </tr>
 							                            
 							                            <tr>
 							                               <th>블랙리스트 여부</th>
-							                               <th>${memberView.bklist}</th>
+															
+     														<!-- <input type="radio" name="testInput" value="test2"/> -->
+							                               <td>
+								                               <label class="radio-inline">
+								                               	<input type="radio" id="bklistCheck" name="bklist" value="Y" <c:if test="${memberView.bklist eq 'Y'}">checked="checked"</c:if>/>Y
+								                               </label>	
+
+								                               <label class="radio-inline">
+																<input type="radio" name="bklist" value="N" <c:if test="${memberView.bklist eq 'N'}">checked="checked"</c:if>/>N
+								                               </label>
+								                             <!--   <span id="checkOk" style="display:none; color:red;">블랙리스트 체크가 완료되었습니다</span> -->
+								                           </td>
+							                               
 							                            </tr>
 							                           </table>
+							                           
+							                           <button type="submit">회원 정보 수정</button>
+							                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						                            </form>
 						                                   
 						                        <!--// volunteer-form \\-->
 										
-											<button type="submit">회원 정보 수정</button>
+											
 											
 											
 										</div>
@@ -292,6 +315,29 @@
 https://stackoverflow.com/questions/36207203/uncaught-typeerror-datepicker-is-not-a-functionanonymous-function-->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>  
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script>
+
+$(document).ready(function() {
+	$("#bklistCheck").click(function(event){
+			alert("블랙리스트로 변경되었습니다");
+	});
+
+   
+});
+
+/* function bkCheck() {  //체크했을때 밑에 바로 글씨 나오게 하는 함수
+  var checkBox = document.getElementById("bklistCheck");
+  var text = document.getElementById("checkOk");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+} */
+</script>
+
 
 </body>
 </html>
