@@ -8,7 +8,9 @@
 
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	 <script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+	
+	<!-- ckeditor -->
+	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
     
     <!-- meta tags -->
     <meta charset="utf-8">
@@ -108,7 +110,10 @@
 							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 	                        </div>
                         </form>
-                        <script>CKEDITOR.replace('editor4');</script>
+                        <!-- <script>CKEDITOR.replace('editor4');</script> -->
+                        <script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/my/board/shows/imageUpload'});</script>
+
+
                         
                       	<!--   a href="plist" -->
                         <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="plist" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>

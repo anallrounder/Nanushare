@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -51,16 +52,25 @@ public class MyPageController {
 	
 	@Autowired
 	BCryptPasswordEncoder encoder;
+	
+	
+	
 
 	// 마이페이지
 	@GetMapping("/my/mypage")
+<<<<<<< HEAD
 	public ModelAndView myPage(MemberPointVO mpvo,MemberVO mvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {
+=======
+	public ModelAndView myPage(MemberVO mvo, ModelAndView mav,@AuthenticationPrincipal MemberDetails md) {
+>>>>>>> master_lhj
 		System.out.println("마이페이지");
-
+		
+		
+		
 		// 헤더에 로그인한 사람 정보 가져오기
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
 			// log.info("로그인한 사람 이름 - "+ md.getmember().getName());
-			mav.addObject("username", md.getmember().getName());
+			mav.addObject("username", md.getmember().getName()); 
 		}
 		mav.addObject("memberInfo", ndservice.getMemberPoint(mpvo));
 		mav.setViewName("/my/mypage");

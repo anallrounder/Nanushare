@@ -39,6 +39,17 @@ public interface MyPageService {
 
 	// 회원수정
 	public void memberModifyPOST(MemberVO mvo);
+<<<<<<< HEAD
+=======
+	
+	
+	//public void memberDelete(MemberVO mvo, MemberDetails md);
+	void mememberDelete(MemberVO mvo, MemberDetails md);
+	
+	
+	
+	
+>>>>>>> master_lhj
 
 	// 회원탈퇴페이지
 	public void memberDelete(MemberVO mvo, MemberDetails md);
