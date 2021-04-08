@@ -2,10 +2,17 @@ package com.share.nanu.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
@@ -30,14 +37,14 @@ public class MyPageServiceImpl implements MyPageService {
 	BCryptPasswordEncoder encoder;
 
 	// 마이페이지-나의문의
-	@Override
-	public List<MemberVO> myList1() {
-		return mgmapper.mygetlist1();
-	}
+//	@Override
+//	public List<MemberVO> myList1() {
+//		return mgmapper.mygetlist1();
+//	}
 
 	@Override
-	public List<MemberVO> myList1(Criteria cri) {
-		return mgmapper.getPaging1(cri);
+	public List<BoardVO> myList1(Criteria cri, String member_id) {
+		return mgmapper.getPaging1(cri, member_id);
 	}
 
 	@Override
@@ -46,10 +53,10 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	// 마이페이지-나의인증
-	@Override
-	public List<MemberVO> myList2() {
-		return mgmapper.mygetlist2();
-	}
+//	@Override
+//	public List<MemberVO> myList2() {
+//		return mgmapper.mygetlist2();
+//	}
 
 	@Override
 	public List<MemberVO> myList2(Criteria cri) {
@@ -62,10 +69,10 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	// 마이페이지-나의나눔
-	@Override
-	public List<IteminvenVO> myList3() {
-		return mgmapper.mygetlist3();
-	}
+//	@Override
+//	public List<IteminvenVO> myList3() {
+//		return mgmapper.mygetlist3();
+//	}
 
 	@Override
 	public List<IteminvenVO> myList3(Criteria cri) {
@@ -78,11 +85,11 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	// 마이페이지-나의댓글
-	@Override
-	public List<BoardreplyVO> myList4() {
-
-		return mgmapper.mygetlist4();
-	}
+//	@Override
+//	public List<BoardreplyVO> myList4() {
+//
+//		return mgmapper.mygetlist4();
+//	}
 
 	@Override
 	public List<BoardreplyVO> myList4(Criteria cri) {
@@ -97,22 +104,22 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 	
 	// 마이페이지-나의결제
-		@Override
-		public List<BoardreplyVO> myList5() {
-
-			return mgmapper.mygetlist4();
-		}
+//		@Override
+//		public List<BoardreplyVO> myList5() {
+//
+//			return mgmapper.mygetlist4();
+//		}
 
 		@Override
 		public List<BoardreplyVO> myList5(Criteria cri) {
 
-			return mgmapper.getPaging4(cri);
+			return mgmapper.getPaging5(cri);
 		}
 
 		@Override
 		public int getTotalCount5(Criteria cri) {
 
-			return mgmapper.getTotalCnt4(cri);
+			return mgmapper.getTotalCnt5(cri);
 		}
 
 	//회원수정
