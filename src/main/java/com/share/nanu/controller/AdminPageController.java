@@ -1,22 +1,14 @@
 package com.share.nanu.controller;
 
-import java.sql.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.share.nanu.VO.AdminItemOutVO;
-import com.share.nanu.VO.ItemInvenVmamVO;
-import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.paging.Criteria;
 import com.share.nanu.paging.PageVO;
@@ -54,16 +46,16 @@ public class AdminPageController {
 		return mov;
 	}
 	
-	//회원관리
+	// 회원관리-조회
 	@GetMapping("/member")
 	public ModelAndView memberControl(ModelAndView mov, MemberVO member, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
 		
-		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+		if (md != null) {
 			mov.addObject("username", md.getmember().getName());
 		}
 		
 		mov.setViewName("admin/admin_member");
-		mov.addObject("memberControl", adminPgService.getMember(cri));
+		mov.addObject("memberControl", adminPgService.getMember(cri)); 
 
 		// 페이징
 		int total = adminPgService.getTotalCount(cri);
@@ -72,26 +64,27 @@ public class AdminPageController {
 		return mov;
 	}
 
-	//회원관리(회원한명당 조회)
+	// 회원관리(회원한명당 조회)
 	@GetMapping("/member_view")
-	public ModelAndView member_view(ModelAndView mov, MemberVO member, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
+	public ModelAndView member_view(ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		
-		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+		if (md != null) {
 			mov.addObject("username", md.getmember().getName());
 		}
 		
-		mov.setViewName("admin/member_view");
+		mov.setViewName("admin/admin_memberView");
 		mov.addObject("memberView", adminPgService.getMemberView(member.getMember_id()));
 		
+		log.info(member.getMember_id());
 		
 		return mov;
 	}
 	
-	//재고관리 본사 재고 조회
+	// 재고관리-본사 재고 조회
 	@GetMapping("/headItem") 
 	public ModelAndView headItem (ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md) {
 
-		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+		if (md != null) {
 			mov.addObject("username", md.getmember().getName());
 		}
 		
@@ -104,11 +97,11 @@ public class AdminPageController {
 		return mov;
 	}
 	
-	//재고관리 지점 재고 조회
+	// 재고관리-지점 재고 조회
 	@GetMapping("/branchItem") 
 	public ModelAndView branchItem (ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md) {
 		
-		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+		if (md != null) { 
 			mov.addObject("username", md.getmember().getName());
 		}
 		
@@ -120,7 +113,7 @@ public class AdminPageController {
 		return mov;
 	}
 	 
-	//본사 입고 업데이트 -> post으로 비꿔야 url이 좀 깔끔할것같은데 시간되면 방법 찾아보기
+	// 재고관리-본사 입고 업데이트 -> post으로 비꿔야 url이 좀 깔끔할것같은데 시간되면 방법 찾아보기
 	@GetMapping("/itemupdate") 
 	public String itemHeadUp (@RequestParam("inputData") int[] iamount, @RequestParam("icat_num") int[] icat_num) {
 		
@@ -136,9 +129,9 @@ public class AdminPageController {
 	
 	}
 	
-	//본사 출고 업데이트 -> put으로 바꿔야 url이 좀 깔끔할것같은데 시간되면 방법 찾아보기
+	//재고관리-본사 출고 업데이트 -> put으로 바꿔야 url이 좀 깔끔할것같은데 시간되면 방법 찾아보기
 	@GetMapping("/itemOutupdate")
-	public String itemHeadOut (AdminItemOutVO adoutvo) { // 받는 값을 하나의 command객체로 만들어서 담은 다음 호출함
+	public String itemHeadOut (AdminItemOutVO adoutvo) { // 받는 값을 하나의 command객체로 만들어서 담은 다음 호출함(join x)
 		
 		adminPgService.itemOut(adoutvo);
 		log.info("출고 업데이트");
