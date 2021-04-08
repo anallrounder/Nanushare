@@ -58,12 +58,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[ 
 			select * from (
 					select m.member_id, m.name, p.pnt_num, p.totalpnt, p.nowpnt from member m, point p 
-					where m.member_id = p.member_id and m.member_id = 'Ulric@naver.com' order by p.pnt_num desc
+					where m.member_id = p.member_id order by p.pnt_num desc
 				) 
 			where rownum =1
 		]]>
 	</select>  
-	
+		<!-- select * from (
+					select m.member_id, m.name, p.pnt_num, p.totalpnt, p.nowpnt from member m, point p 
+					where m.member_id = p.member_id and m.member_id = 'Ulric@naver.com' order by p.pnt_num desc
+				) 
+			where rownum =1 -->
 	<!-- insert into point(pnt_num, member_id, pdate, prtpnt, dntpnt, totalpnt)
 	values(POINT_SEQ.nextval, #{member_id}, sysdate, 0, #{dntpnt}, #{totalpnt}) -->
 	
