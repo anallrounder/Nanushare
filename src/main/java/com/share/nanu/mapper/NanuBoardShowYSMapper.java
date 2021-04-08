@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.page.Criteria;
 
@@ -32,6 +33,12 @@ public interface NanuBoardShowYSMapper {
 	public void insert(BoardVO boardVO); // 게시글 입력
 	
 	// 이미지 업로드
-	public void uploadFile(HashMap<String, Object> vo);
+	/* public void uploadFile(HashMap<String, Object> vo); */
+	
+	//게시판 글번호
+	public int getBindex(BoardVO boardVO);
+	
+	//이미지 업로드
+	public void uploadFile(AttachmentVO attachmentVO);
 
 }

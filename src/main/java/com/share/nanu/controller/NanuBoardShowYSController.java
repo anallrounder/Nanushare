@@ -1,8 +1,10 @@
- //혜선 인증게시판 컨트롤러 작성 03.22_화ㅣ
+//혜선 인증게시판 컨트롤러 작성 03.22_화ㅣ
 // https://www.tutorialrepublic.com/twitter-bootstrap-button-generator.php
 package com.share.nanu.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -36,54 +39,52 @@ public class NanuBoardShowYSController {
 
 	@Autowired
 	private NanuBoardShowYSService service;
-	
-	
+
 	// 인증게시판 리스트 test
 	/*
-	@GetMapping("/testlist")
-	public String boardShowYS(Model model) {
-		log.info("인증게시판 리스트 컨트롤러");
-		model.addAttribute("testlist", service.getlist());
-		return "board_show/yourSupportList";
-	}
-	*/
-	
+	 * @GetMapping("/testlist") public String boardShowYS(Model model) {
+	 * log.info("인증게시판 리스트 컨트롤러"); model.addAttribute("testlist",
+	 * service.getlist()); return "board_show/yourSupportList"; }
+	 */
+
 	// 인증게시판 페이징 list
 	@GetMapping("/list")
-	public String boardShowPaging(Criteria cri, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
+	public String boardShowPaging(Criteria cri, Model model, @AuthenticationPrincipal MemberDetails md)
+			throws Exception {
 		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);
 		model.addAttribute("list", service.getlist(cri));
-		
+
 		int total = service.getTotal(cri);
 		model.addAttribute("pageMaker", new pageVO(cri, total));
-		
-		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
+
+		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
-		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
 			log.info("로그인한 사람 이름 - " + md.getmember().getName());
 			model.addAttribute("username", md.getmember().getName());
 		}
-		
+
 		return "board_show/yourSupportList";
 	}
-	
+
 	// 인증게시판 컨텐트뷰 - 체크
 	@GetMapping("/content_view")
-	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
+	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md)
+			throws Exception {
 		log.debug("인증게시판 컨트롤러 컨텐트뷰");
 		service.uphit(boardVO);
 		model.addAttribute("content_view", service.getBoard(boardVO.getB_index()));
-		
-		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
+
+		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
-		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
 			log.info("로그인한 사람 이름 - " + md.getmember().getName());
 			model.addAttribute("username", md.getmember().getName());
 		}
-				
+
 		return "board_show/yourSupportContent";
 	}
-	
+
 	// 수정창 보기 - 체크
 	@GetMapping("/modify_view")
 	public String bsModiview(BoardVO boardVO, Model model) throws Exception {
@@ -91,16 +92,16 @@ public class NanuBoardShowYSController {
 		model.addAttribute("modify_view", service.getBoard(boardVO.getB_index()));
 		return "board_show/ysModifyView";
 	}
-	
+
 	// 수정 내용 업데이트 -> 오류남. 수정해야함
 	@PostMapping("/modify")
 	public String bsModify(BoardVO boardVO) throws Exception {
 		log.info("인증게시판 컨트롤러  -- modify() -- 호출");
 		service.modifyBoard(boardVO);
 		return "redirect:content_view"; /* ?b_index=${modify_view.b_index} */
-		//return "redirect:plist";
+		// return "redirect:plist";
 	}
-	
+
 	// 게시글 삭제 - 체크
 	@GetMapping("/delete")
 	public String bsDelete(BoardVO boardVO) throws Exception {
@@ -108,62 +109,82 @@ public class NanuBoardShowYSController {
 		service.deleteBoard(boardVO.getB_index());
 		return "redirect:plist";
 	}
-	
+
 	// 글작성 페이지
 	@GetMapping("/write_view")
 	public String vsWriteView(Model model) throws Exception {
 		log.debug("인증게시판 컨트롤러  -- write_view() -- 호출");
 		return "board_show/ysWriteView";
 	}
-	
+
 	// 글 작성 -> 로그인한 사용자의 아이디를 어떻게 불러올 것인가 고민해봐야한다.
-	//@AuthenticationPrincipal MemberDetails md 로 현재 로그인 되어 있는 유저의 정보를 받아올 수 있다.
-	//md.getusername() --> 로그인 되어 있는 유저의 member_id -->MemberDetails 참조
-	//가져와서 board.setMember_id(md.getusername) boardVO 객체에 로그인 되어 있는 유저 member_id저장
-	//서비스에 boardVO를 넘겨주고 DB에 저장
+	// @AuthenticationPrincipal MemberDetails md 로 현재 로그인 되어 있는 유저의 정보를 받아올 수 있다.
+	// md.getusername() --> 로그인 되어 있는 유저의 member_id -->MemberDetails 참조
+	// 가져와서 board.setMember_id(md.getusername) boardVO 객체에 로그인 되어 있는 유저 member_id저장
+	// 서비스에 boardVO를 넘겨주고 DB에 저장
 	@PostMapping("/write")
-	public String bsWrite(MultipartHttpServletRequest multi, BoardVO boardVO, AttachmentVO attachmentVO, Model model) throws Exception {
+	public String bsWrite( MultipartHttpServletRequest multiple, 
+			BoardVO boardVO, AttachmentVO attachmentVO, Model model, @AuthenticationPrincipal MemberDetails md)
+			throws Exception {
 		log.info("인증게시판 컨트롤러  -- write() -- 호출");
+		String loginMember = md.getUsername();
+		boardVO.setMember_id(loginMember); //로그인한 사람
 		service.writeBoard(boardVO);
 		// 멤버아이디를 이렇게 가져오는게 맞을까? 아니다. 받아올수가 없네. 로그인한 사용자 정보를 받아와야함. 일단 테스트는 쿼리문에서 써야겠다.
-		//model.addAttribute("getMember_id", nbsService.getBoard(boardVO.getMember_id()));
-		
-		
-		//그날그날 구분하기 쉽게 폴더를 그날 날짜로 만들 예정
-		
-		
-		
+		// model.addAttribute("getMember_id",
+		// nbsService.getBoard(boardVO.getMember_id()));
+
 		log.info("fileUpload");
 		// 이미지 저장 절대경로
-		//String path = "C:\\Users\\Hyeseon\\eclipse-workspace\\Nanushare\\src\\main\\webapp\\resources\\attachment";
-		String path = "C:\\Users\\Slim 5\\바탕 화면\\폴더\\eclipse-workspace\\Nanu\\src\\main\\webapp\\resources\\attachment";
-		
-		File dir = new File(path);
-	  	if(!dir.isDirectory()) {
-	  		dir.mkdir();
-	  	}
-	  			  	
-	  	List<MultipartFile> mf = multi.getFiles("file");
-	  	if(mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
-	  		
-	  	}else {
-	  		for(int i = 0; i < mf.size(); i++) { //파일명 중복 처리
-	  			
-	  			UUID uuid = UUID.randomUUID();
-	  			//본래 파일명
-	  			String originalfileName = mf.get(i).getOriginalFilename();		  		
-	  			String ext = FilenameUtils.getExtension(originalfileName);
-	  			//저장 될 파일명
-	  			//String savefileName=uuid+"."+ext; 
-  		
-	  			String savePath = path +"\\" + originalfileName; // 저장 될 파일 경로
+		// "C:\\Users\\Hyeseon\\eclipse-workspace\\Nanushare\\src\\main\\webapp\\resources\\attachment";
+		// String path = "C:\\Users\\Slim 5\\바탕
+		// 화면\\폴더\\eclipse-workspace\\Nanu\\src\\main\\webapp\\resources\\attachment";
 
-	            mf.get(i).transferTo(new File(savePath)); // 파일 저장
-	 
-	            service.fileUpload(attachmentVO.getAttach_num(), originalfileName, savePath);
-	            }
-	        }
+		String path = multiple.getSession().getServletContext().getRealPath("/resources/attachment");
+		System.out.println("1. " + path);
+
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String datefolder = sdf.format(dt).toString();
+		System.out.println("2. "+datefolder);
+		
+		path = path+"\\" + datefolder;
+		System.out.println("3. "+path);
+		//File dir = new File("C:/", datefolder);
+
+		File dir = new File(path);
+		System.out.println("4. "+dir);
+		if (!dir.isDirectory()) {
+			dir.mkdir();
+		}
+
+		List<MultipartFile> mf = multiple.getFiles("file");
+		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+
+		} else {
+			for (int i = 0; i < mf.size(); i++) { // 파일명 중복 처리
+
+				UUID uuid = UUID.randomUUID();
+				// 본래 파일명
+				String originalfileName = mf.get(i).getOriginalFilename();// 원본이름
+				String extension = FilenameUtils.getExtension(originalfileName);//확장자
+				// 저장 될 파일명
+				// String savefileName=uuid+"."+ext;
+
+				String savePath = path + "\\" + originalfileName; // 저장 될 파일 경로
+
+				mf.get(i).transferTo(new File(savePath)); // 파일 저장
+				
+				
+				attachmentVO.setOriginname(originalfileName);
+				attachmentVO.setPath(savePath);
+				attachmentVO.setExtension(extension);
+				attachmentVO.setB_index(service.getBindex(boardVO));
+
+				service.fileUpload(attachmentVO);
+			}
+		}
 		return "redirect:content_view";
 	}
-	
+
 }
