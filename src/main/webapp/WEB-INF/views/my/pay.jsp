@@ -119,14 +119,14 @@ li {
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>
 										Profile</a></li>
-								<li class="active"><a href="ask"><span
+								<li><a href="ask"><span
 										class="fa fa-question"> </span>나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
 									</span>나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-handshake">
 									</span>나의나눔내역</a></li>
 								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
-								<li><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
+								<li class="active"><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
 							</ul>
 							</nav>
 						</div>
@@ -138,7 +138,7 @@ li {
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 							<h2 class="title">
-								나의 문의 내역<span class="pro-label label label-warning">PRO</span>
+								나의 결제 내역<span class="pro-label label label-warning">PRO</span>
 							</h2>
 
 
@@ -150,25 +150,25 @@ li {
 								<tr>
 
 									<!-- <th>아이디</th> -->
-									<th>나눔제목-링크아직X</th>
+									<th>아이디</th>
+									<th>조회수</th>
+									<th>날짜</th>
 									<th>조회수</th>
 									<th>날짜</th>
 
 								</tr>
 								<!-- 로그인한 회원의 글 정보만 받아오기 -->
 								<!-- 나의문의내역 -->
-								<c:forEach items="${list1}" var="list1">
+								<c:forEach items="${list5}" var="list5">
 									<sec:authentication property="principal" var="pinfo" />
 									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list1.member_id}">
+										<c:if test="${pinfo.username eq list5.member_id}">
 											<tr>
-												<%-- <td>${list1.member_id}</td> --%>
-												<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
-												<td><a id="a-content"
-													href="${pageContext.request.contextPath}/my/ask?b_index=${list1.b_index}">${list1.btitle}</a></td>
-												<!-- 제목누르면 해당 글내용으로 이동링크 -->
-												<td>${list1.bhit}</td>
-												<td>${list1.bdate}</td>
+												<td>${list5.member_id}</td>
+												<td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td>
+												<td>${list5.dntprice}</td>
+												<td>${list5.dntdate}</td>
+												<td>${list5.paymathod}</td>
 
 											</tr>
 										</c:if>

@@ -5,7 +5,7 @@ import java.util.List;
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
-import com.share.nanu.page.Criteria;
+import com.share.nanu.mypaging.Criteria;
 import com.share.nanu.security.MemberDetails;
 
 public interface MyPageService {
@@ -30,14 +30,15 @@ public interface MyPageService {
 	public List<BoardreplyVO> myList4(Criteria cri);
 	public int getTotalCount4(Criteria cri);
 
+	// 마이페이지-나의댓글
+	public List<BoardreplyVO> myList5();
+	public List<BoardreplyVO> myList5(Criteria cri);
+	public int getTotalCount5(Criteria cri);
+
 	// 회원수정
 	public void memberModifyPOST(MemberVO mvo);
-	
-	
-	//public void memberDelete(MemberVO mvo, MemberDetails md);
-	void mememberDelete(MemberVO mvo, MemberDetails md);
 
 	// 회원탈퇴페이지
+	public void memberDelete(MemberVO mvo, MemberDetails md);
 
-		
 }

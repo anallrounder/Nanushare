@@ -154,8 +154,8 @@ input {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>프로필 수정 전 비밀번호 확인 페이지</h1>
-					<p>https://yeahajeong.tistory.com/91</p>
+					<h1>비밀번호 확인 페이지</h1>
+					
 				</div>
 			</div>
 		</div>
