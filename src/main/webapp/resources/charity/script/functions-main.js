@@ -226,7 +226,7 @@ jQuery('.charity-cause-progressbar').progressBar({
 
 // Counter
 var a = 0;
-$(document).ready(function() {
+$(window).scroll(function()  {
 
   var oTop = $('#counter').offset().top - window.innerHeight;
   if (a == 0 && $(window).scrollTop() > oTop) {
