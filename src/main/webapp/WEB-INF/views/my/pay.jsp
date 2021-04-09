@@ -60,6 +60,11 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+<!-- 부트스트랩 아이콘 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 
 </head>
@@ -154,37 +159,44 @@ li {
 									<!-- <th>아이디</th> -->
 									<th>아이디</th>
 									<!-- <th>조회수</th> -->
-									<th>날짜</th>
-									<th>조회수</th>
-									<th>날짜</th>
+									<th>금액</th>
+									<th>결제날짜</th>
+									<th>결제방법</th>
 									<th>결제취소</th>
-
 								</tr>
+								<c:if test="${empty list5}">
+									<tr>
+										<td colspan="5" align="center">작성된 글이 없습니다</td>
+									</tr>
+								</c:if>
+
+
 								<!-- 로그인한 회원의 글 정보만 받아오기 -->
 								<!-- 나의문의내역 -->
-								<c:forEach items="${list5}" var="list5" varStatus="status">
-									<sec:authentication property="principal" var="pinfo" />
+								<c:if test="${! empty list5}">
+									<c:forEach items="${list5}" var="list5" varStatus="status">
+										<%-- <sec:authentication property="principal" var="pinfo" />
 									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list5.member_id}">
-											<tr>
-												<td>${list5.member_id}</td>
-												<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td>
-												 --%><td>${list5.dntprice}</td>
-												<td>${list5.dntdate}</td>
-												<td>${list5.paymathod}</td>
-												<!-- <td><button class="paycc" type="button">
-														결제취소</button></td> -->
-											</tr>
-										</c:if>
-									</sec:authorize>
-								</c:forEach>
+										<c:if test="${pinfo.username eq list5.member_id}"> --%>
+										<tr>
+											<td>${list5.member_id}</td>
+											<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td>
+												 --%>
+											<td><i class="fa fa-krw" aria-hidden="true"></i>${list5.dntprice}</td>
+											<td><fmt:formatDate value="${list5.dntdate}" type="both"
+													dateStyle="full" timeStyle="full" /></td>
+											<td>${list5.paymethod}</td>
+											<td><button class="paycc" type="button">결제취소</button></td>
+										</tr>
+										<%-- </c:if>
+									</sec:authorize> --%>
+									</c:forEach>
+								</c:if>
 							</table>
 
 							<!-- 페이징 -->
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<ul class="pagination justify-content-center">
+							<div class="charity-pagination">
+								<ul class="page-numbers">
 											<li class="page-item"><c:if test="${pageMaker.prev}">
 													<a class="page-link"
 														href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
@@ -198,7 +210,6 @@ li {
 														href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(idx)}">${idx}</a>
 												</c:forEach></li>
 
-
 											<li class="page-item"><c:if
 													test="${pageMaker.next && pageMaker.endPage > 0}">
 													<a class="page-link"
@@ -206,10 +217,7 @@ li {
 													</a>
 												</c:if></li>
 										</ul>
-									</div>
-
-								</div>
-
+									
 							</div>
 
 
@@ -274,6 +282,7 @@ li {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
+
 </body>
 </html>

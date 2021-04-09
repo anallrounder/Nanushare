@@ -106,19 +106,20 @@ li {
 										</h2></li>
 									<li class="email"><sec:authentication
 											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication property="principal.member.signuppath" />회원</li>
+									<li class="activity"><sec:authentication
+											property="principal.member.signuppath" />회원</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>
 										Profile</a></li>
-								<li><a href="ask"><span
-										class="fa fa-question"> </span>나의문의내역</a></li>
+								<li><a href="ask"><span class="fa fa-question">
+									</span>나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
 									</span>나의인증내역</a></li>
-								<li class="active"><a href="give"><span class="fa fa-handshake">
-									</span>나의나눔내역</a></li>
+								<li class="active"><a href="give"><span
+										class="fa fa-handshake"> </span>나의나눔내역</a></li>
 								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
 								<li><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
 							</ul>
@@ -148,82 +149,88 @@ li {
 									<!-- <th>아이디</th> -->
 
 								</tr>
+								<c:if test="${empty list3}">
+									<tr>
+										<td colspan="5" align="center">작성된 글이 없습니다</td>
+									</tr>
+								</c:if>
+
 								<!-- 나의나눔내역 -->
-								<c:set var="list3" value="${list3}" />
-								<c:forEach items="${list3}" var="dao3" varStatus="status">
-									<c:forEach items="${dao3.dona}" var="dto3" varStatus="status">
-										<sec:authentication property="principal" var="pinfo" />
-										<sec:authorize access="isAuthenticated()">
-											<c:if test="${pinfo.username eq dto3.member_id}">
-												<tr>
+								<c:if test="${! empty list3}">
+									<c:set var="list3" value="${list3}" />
+									<c:forEach items="${list3}" var="dao3" varStatus="status">
+										<c:forEach items="${dao3.dona}" var="dto3" varStatus="status">
+											<sec:authentication property="principal" var="pinfo" />
+											<sec:authorize access="isAuthenticated()">
+												<c:if test="${pinfo.username eq dto3.member_id}">
+													<tr>
 
-													<td>${dao3.iname}</td>
-													<td>${dto3.idntdate}</td>
+														<td>${dao3.iname}</td>
+														<td>${dto3.idntdate}</td>
 
-													<!-- 제목누르면 해당 글내용으로 이동링크 -->
-													<td>${dto3.donaamount}</td>
-													<%-- <td>${dto3.member_id}</td> --%>
+														<!-- 제목누르면 해당 글내용으로 이동링크 -->
+														<td>${dto3.donaamount}</td>
+														<%-- <td>${dto3.member_id}</td> --%>
 
-												</tr>
-											</c:if>
-										</sec:authorize>
+													</tr>
+												</c:if>
+											</sec:authorize>
+										</c:forEach>
 									</c:forEach>
-								</c:forEach>
+								</c:if>
 							</table>
 
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if test="${pageMaker.prev}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-												</c:if></li>
+							<div class="charity-pagination">
+								<ul class="page-numbers">
+									<li class="page-item"><c:if test="${pageMaker.prev}">
+											<a class="page-link"
+												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+										</c:if></li>
 
-											<li class="page-item"><c:forEach
-													begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-													var="idx">
-													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-													<a href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(idx)}">${idx}</a>
-												</c:forEach></li>
+									<li class="page-item"><c:forEach
+											begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+											var="idx">
+											<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+											<a
+												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(idx)}">${idx}</a>
+										</c:forEach></li>
 
 
-											<li class="page-item"><c:if
-													test="${pageMaker.next && pageMaker.endPage > 0}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-													</a>
-												</c:if></li>
-										</ul>
-									</div>
+									<li class="page-item"><c:if
+											test="${pageMaker.next && pageMaker.endPage > 0}">
+											<a class="page-link"
+												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+											</a>
+										</c:if></li>
 
-								</div>
-
+								</ul>
 							</div>
 
-
-
-
-
 						</div>
+
+
+
+
+
 					</div>
-					</section>
 				</div>
+				</section>
 			</div>
-
-			<script>
-				$("#mytabs>ul>li>a").each(function(i) {
-					$(this).attr("href", "#mytab" + i)
-				})
-				$("#mytabs>div>div").each(function(i) {
-					$(this).attr("id", "mytab" + i)
-				})
-			</script>
-
-			<!-- Main Section -->
-
 		</div>
-		<!-- Content -->
+
+		<script>
+			$("#mytabs>ul>li>a").each(function(i) {
+				$(this).attr("href", "#mytab" + i)
+			})
+			$("#mytabs>div>div").each(function(i) {
+				$(this).attr("id", "mytab" + i)
+			})
+		</script>
+
+		<!-- Main Section -->
+
+	</div>
+	<!-- Content -->
 	</div>
 
 	<!-- Footer -->
@@ -263,6 +270,7 @@ li {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
+
 </body>
 </html>

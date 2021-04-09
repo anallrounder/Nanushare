@@ -373,7 +373,7 @@ table {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions.js"></script>
+	    <script src="/resources/charity/script/functions-main.js"></script>
 </body>
 
 </html>

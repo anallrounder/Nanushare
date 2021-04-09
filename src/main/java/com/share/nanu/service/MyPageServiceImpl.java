@@ -37,35 +37,46 @@ public class MyPageServiceImpl implements MyPageService {
 	BCryptPasswordEncoder encoder;
 
 	// 마이페이지-나의문의
+	@Override
+	public List<BoardVO> myList1(Criteria cri,String member_id) {
+		//member.setMember_id(mvo.getMember_id());
+		return mgmapper.mygetlist1(cri,member_id);
+	}
+
 //	@Override
-//	public List<MemberVO> myList1() {
-//		return mgmapper.mygetlist1();
+//	public List<BoardVO> myList1(Criteria cri,String member_id) {
+//		return mgmapper.getPaging1(cri,member_id);
 //	}
 
 	@Override
-	public List<BoardVO> myList1(Criteria cri, String member_id) {
-		return mgmapper.getPaging1(cri, member_id);
+	public int getTotalCount1(Criteria cri,String member_id) {
+		return mgmapper.getTotalCnt1(cri,member_id);
 	}
-
-	@Override
-	public int getTotalCount1(Criteria cri) {
-		return mgmapper.getTotalCnt1(cri);
-	}
-
+	
 	// 마이페이지-나의인증
+	@Override
+	public List<BoardVO> myList2(Criteria cri,String member_id) {
+		// TODO Auto-generated method stub
+		return mgmapper.mygetlist2(cri,member_id);
+	}
+
+	
+	/*
+	 * public List<BoardVO> myList2(MemberDetails md) {
+	 * System.out.println("3.인증내역 넘어감???"); MemberVO member =
+	 * nmapper.getMember(md.getUsername()); if (md.getUsername() != null) {
+	 * member.setMember_id(md.getUsername()); System.out.println("4.인증내역 넘어감???" +
+	 * md.getUsername()); System.out.println("4.인증내역 넘어감???"); } return
+	 * mgmapper.mygetlist2(md); }
+	 */
 //	@Override
-//	public List<MemberVO> myList2() {
-//		return mgmapper.mygetlist2();
+//	public List<BoardVO> myList2(Criteria cri) {
+//		return mgmapper.getPaging2(cri);
 //	}
 
 	@Override
-	public List<MemberVO> myList2(Criteria cri) {
-		return mgmapper.getPaging2(cri);
-	}
-
-	@Override
-	public int getTotalCount2(Criteria cri) {
-		return mgmapper.getTotalCnt2(cri);
+	public int getTotalCount2(Criteria cri,String member_id) {
+		return mgmapper.getTotalCnt2(cri,member_id);
 	}
 
 	// 마이페이지-나의나눔
@@ -75,13 +86,13 @@ public class MyPageServiceImpl implements MyPageService {
 //	}
 
 	@Override
-	public List<IteminvenVO> myList3(Criteria cri) {
-		return mgmapper.getPaging3(cri);
+	public List<IteminvenVO> myList3(Criteria cri,String member_id) {
+		return mgmapper.mygetlist3(cri,member_id);
 	}
 
 	@Override
-	public int getTotalCount3(Criteria cri) {
-		return mgmapper.getTotalCnt3(cri);
+	public int getTotalCount3(Criteria cri,String member_id) {
+		return mgmapper.getTotalCnt3(cri,member_id);
 	}
 
 	// 마이페이지-나의댓글
@@ -92,15 +103,15 @@ public class MyPageServiceImpl implements MyPageService {
 //	}
 
 	@Override
-	public List<BoardreplyVO> myList4(Criteria cri) {
+	public List<BoardreplyVO> myList4(Criteria cri,String member_id) {
 
-		return mgmapper.getPaging4(cri);
+		return mgmapper.mygetlist4(cri,member_id);
 	}
 
 	@Override
-	public int getTotalCount4(Criteria cri) {
+	public int getTotalCount4(Criteria cri,String rid) {
 
-		return mgmapper.getTotalCnt4(cri);
+		return mgmapper.getTotalCnt4(cri,rid);
 	}
 	
 	// 마이페이지-나의결제
@@ -111,17 +122,19 @@ public class MyPageServiceImpl implements MyPageService {
 //		}
 
 		@Override
-		public List<BoardreplyVO> myList5(Criteria cri) {
+		public List<BoardreplyVO> myList5(Criteria cri,String member_id) {
 
-			return mgmapper.getPaging5(cri);
+			return mgmapper.mygetlist5(cri,member_id);
 		}
 
 		@Override
-		public int getTotalCount5(Criteria cri) {
+		public int getTotalCount5(Criteria cri,String member_id) {
 
-			return mgmapper.getTotalCnt5(cri);
+			return mgmapper.getTotalCnt5(cri,member_id);
 		}
 
+		
+		
 	//회원수정
 	@Override
 	public void memberModifyPOST(MemberVO mvo) {
@@ -177,8 +190,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	
-	
-	
+
 
 	
 }
