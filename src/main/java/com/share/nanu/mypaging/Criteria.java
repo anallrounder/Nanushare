@@ -1,5 +1,6 @@
 package com.share.nanu.mypaging;
 
+
 import lombok.ToString;
 
 @ToString
@@ -8,9 +9,13 @@ public class Criteria {
 	private int pageNum;
 	private int amount;
 	
+	
 	// 검색 위해서 type, keyword 변수 추가
 	private String type;  // 변수 추가 _ 셀렉트 종류 (내용, 제목, 작성자)
 	private String keyword;  // 변수 추가 _ 검색어 작성 내용 저장
+	
+	
+	//private MemberDetails md;
 	
 	public Criteria() {
 		this(1, 5);	
@@ -19,6 +24,7 @@ public class Criteria {
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
 		this.amount = amount;
+		
 	}
 	
 	public void setPageNum(int pageNum) {
@@ -58,4 +64,14 @@ public class Criteria {
 	public String[] getTypeArr() {
 		return type == null? new String[] {}: type.split("");
 	}
+
+	/*
+	 * public MemberDetails getMd() { return md; }
+	 * 
+	 * public void setMd(MemberDetails md) { this.md = md; }
+	 */
+	
+	
+
+	
 }

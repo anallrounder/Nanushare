@@ -3,6 +3,8 @@ package com.share.nanu.mypaging;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.share.nanu.security.MemberDetails;
+
 import lombok.ToString;
 
 @ToString
@@ -14,6 +16,7 @@ public class pageVO {
 	
 	private int total;
 	private Criteria cri;
+
 	
 	// Getters
 	public int getStartPage() {
@@ -44,6 +47,7 @@ public class pageVO {
 		this.cri = cri;
 		this.total = total;
 		
+		
 		this.endPage = (int) (Math.ceil(cri.getPageNum() / 5.0) * 5);
 		
 		this.startPage = this.endPage -4;
@@ -58,12 +62,14 @@ public class pageVO {
 		
 		this.next = this.endPage < realEnd;
 	}
-	
+
+
 	public String makeQuery(int page) {
 		UriComponents uriComponentsBuilder =  UriComponentsBuilder.newInstance()
 				.queryParam("pageNum", page)
 				.queryParam("amount", cri.getAmount())
-				.queryParam ("type", cri.getType()) // 검색 추가
+				//.queryParam("md",md.getUsername())
+				.queryParam("type", cri.getType()) // 검색 추가
 				.queryParam("keyword", cri.getKeyword()) // 검색 추가
 				.build();
 		return uriComponentsBuilder.toUriString();

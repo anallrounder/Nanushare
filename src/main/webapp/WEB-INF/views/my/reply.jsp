@@ -154,7 +154,15 @@ li {
 									<!-- <th>아이디</th> -->
 
 								</tr>
+								
+								<c:if test="${empty list4}">
+									<tr>
+										<td colspan="5" align="center">작성된 글이 없습니다</td>
+									</tr>
+								</c:if>
+								
 								<!-- 나의댓글내역 -->
+								<c:if test="${! empty list4}">
 								<c:set var="list4" value="${list4}" />
 								<c:forEach items="${list4}" var="dao4" varStatus="status">
 									<c:forEach items="${dao4.reply}" var="dto4" varStatus="status">
@@ -174,14 +182,13 @@ li {
 										</sec:authorize>
 									</c:forEach>
 								</c:forEach>
+								</c:if>
 							</table>
 
 
 
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<ul class="pagination justify-content-center">
+							<div class="charity-pagination">
+								<ul class="page-numbers">
 											<li class="page-item"><c:if test="${pageMaker.prev}">
 													<a class="page-link"
 														href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
@@ -203,9 +210,7 @@ li {
 													</a>
 												</c:if></li>
 										</ul>
-									</div>
-
-								</div>
+								
 
 							</div>
 
@@ -271,6 +276,7 @@ li {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
+
 </body>
 </html>

@@ -54,7 +54,8 @@ public class DonationImportController {
 	@ResponseBody
 	@SuppressWarnings("unchecked")
 	@PostMapping("/cardDonation")
-	public void cardDonation(@RequestBody String card,DonationVO donavo) throws ParseException { //후원할때 ajax에서 보낸 데이터 db에 저장, member 테이블에서 dntcnt 카운트, +1씩
+	public void cardDonation(@RequestBody String card,DonationVO donavo) throws ParseException { 
+		//후원할때 ajax에서 보낸 데이터 db에 저장, member 테이블에서 dntcnt 카운트, +1씩
 		//@requestBody 는 http요청을 자바객체로 즉, http 요청의 body내용을 자바객체로 매핑
 		//@responseBody 는 자바객체를 http 응답 몸체로 전송 즉, 자바객체를 http 요청의 body내용으로 매핑
 		log.info("카드결제 호출");
@@ -64,8 +65,16 @@ public class DonationImportController {
 		  
 		  //paid_at을 유닉스 타임 스탬프로 받아와서 db에 입력하기 위해 data타입으로 바꾸는 로직 
 		  String paidAt = String.valueOf(resultMap.get(0).get("paid_at")); //paid_at은 int타입 아임포트 문서에 number라고 정의되어 있음
+		  String payMethod = String.valueOf(resultMap.get(0).get("pay_method"));
 		  String changePaidAt =  ndservice.changeUNIXTimeStamp(paidAt);
 		  System.out.println(changePaidAt);
+		  System.out.println(payMethod);
+		  
+		  if(payMethod != null) {
+			  if(payMethod.equals("point")) {
+				  payMethod = "pay";
+			  }
+		  }
 			
 		  Date dateChangePaidAt = Date.valueOf(changePaidAt); //문자열로 반환된 날짜를 sql date 형식으로 지정
 		  String amount = String.valueOf(resultMap.get(0).get("amount"));//int 타입을 String으로 캐스팅	
@@ -76,7 +85,7 @@ public class DonationImportController {
 		  donavo.setDntprice( amount );
 		  donavo.setDntdate( dateChangePaidAt );
 		  donavo.setPg( (String)(resultMap.get(0).get("pg_provider")) );
-		  donavo.setPaymethod( (String)(resultMap.get(0).get("pay_method")) );
+		  donavo.setPaymethod( payMethod );
 		  donavo.setDntstat( (String)(resultMap.get(0).get("status")) );
 		  
 		  ndservice.insertCardDona(donavo); //받아온 데이터 저장

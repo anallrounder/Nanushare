@@ -25,10 +25,31 @@
  
 	   $(function() {
 		   var token = $("meta[name='_csrf']").attr("content");
-		    var header = $("meta[name='_csrf_header']").attr("content");
-		    $(document).ajaxSend(function(e, xhr, options) {
-		        xhr.setRequestHeader(header, token);
-		    });
+           var header = $("meta[name='_csrf_header']").attr("content");
+           $(document).ajaxSend(function(e, xhr, options) {
+               xhr.setRequestHeader(header, token);
+           });
+           
+           
+           CKEDITOR.replace('editor4',{
+           		filebrowserUploadUrl:'${pageContext.request.contextPath}/my/board/shows/imageUpload',
+           		height:"450", //textArea 높이
+           		enterMode: "2", //엔터할때 <br> 1. p, 2. br, 3. div
+           		uiColor : "#FFFFFF" //인터페이스 컬러
+           		//skin : ""
+           	});
+           
+           window.parent.CKEDITOR.tools.callFunction(" +
+        		  callback + 
+        		  ",'" + fileUrl + "','이미지를 업로드 하였습니다.'")
+
+           
+           
+           //window.parent.CKEDITOR.tools.callFunction("이미지업로드")
+           
+		    
+		    
+		     
 		});
 	 
     
@@ -83,8 +104,8 @@
                 <div class="row">
               		 <div class="col-md-9">
                
-                       <form action="write" method="post" enctype="multipart/form-data" >
-                     	   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                       <form action="${pageContext.request.contextPath}/my/board/shows/write" method="post" enctype="multipart/form-data" >
+                     	   
 	                       <div class="charity-contact-form">
 	                           <h4><span>Title</span></h4>
 	                           <input type="text" name="btitle" placeholder="제목을 작성하세요." >
@@ -92,7 +113,8 @@
 	                           <br>
 	                           <h4>Images</h4>
 	                           <%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
-	                           <p>이미지 첨부하기 :
+	                           <p>썸네일 이미지 첨부하기 :
+	                           	<br/>
 							   		<input type="file" name="file" multiple="multiple"/>
 	                            </p>
 	                            <!-- <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 이미지 저장</i></button> -->
@@ -109,9 +131,10 @@
 							   <!-- charity-main-btn -->
 							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 	                        </div>
+	                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         </form>
-                        <script>CKEDITOR.replace('editor4');</script>
-                       <!--  <script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/my/board/shows/imageUpload'});</script> -->
+                        <!-- <script>CKEDITOR.replace('editor4');</script> -->
+                        
 
 
                         
