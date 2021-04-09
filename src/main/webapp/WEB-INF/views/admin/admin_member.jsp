@@ -171,10 +171,31 @@
           </li>
           
           <li class="nav-item">
-            <a href="#boards" class="nav-link" data-toggle="tab">
+            <a href="#" class="nav-link" data-toggle="tab">
               <i class="nav-icon fas fa-th"></i>
-              <p>게시판 관리</p>
+              <p>게시판 관리<i class="right fas fa-angle-left"></i></p>
             </a>
+            
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/restful/notice" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>공지사항</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/restful/qna" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>문의게시판</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/board/shows/list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>인증게시판</p>
+                </a>
+              </li>
+             </ul>
           </li>
         </ul>
       </nav>
@@ -227,55 +248,37 @@
 						                                   
 						                        <!--// volunteer-form \\-->
 											</table>
-											<button type="submit">회원 정보 수정</button>
-											<!-- 페이징 -->
-											<div class="container">
-												<div class="row">
-													<div class="col">
-														<ul class="pagination justify-content-center">
-															<li class="page-item"><c:if test="${pageMaker.prev}">
-																	<a class="page-link" href="${pageContext.request.contextPath}/admin/member${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-																</c:if>
-															</li>
+							
+											<!-- Pagination -->
+											<div class="charity-pagination">
+												<ul class="page-numbers">
+													<li>
+													<c:if test="${pageMaker.prev}">
+														<a class="previous page-numbers" href="${pageContext.request.contextPath}/admin/member${pageMaker.makeQuery(pageMaker.startPage - 1) }"><i class="fa fa-angle-left"></i>prev</a>
+													</c:if>
+													</li>
 				
-															<li class="page-item">
-															<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-																<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																	<a href="${pageContext.request.contextPath}/admin/member${pageMaker.makeQuery(idx)}">${idx}</a>
-																</c:forEach>
-															</li>
+													<li>
+														<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+															<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+																<a href="${pageContext.request.contextPath}/admin/member${pageMaker.makeQuery(idx)}">${idx}</a>
+														</c:forEach>
+													</li>
 				
-				
-															<li class="page-item">
-																<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-																	<a class="page-link" href="${pageContext.request.contextPath}/admin/member${pageMaker.makeQuery(pageMaker.endPage +1) }">next</a>
-																</c:if></li>
-														</ul>
-													</div>
-				
-												</div>
-				
+													<li>
+														<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+															<a class="next page-numbers" href="${pageContext.request.contextPath}/admin/member${pageMaker.makeQuery(pageMaker.endPage +1) }">next<i class="fa fa-angle-right"></i></a>
+														</c:if>
+													</li>
+												</ul>
 											</div>
+											<!-- Pagination -->
 											
 										</div>
 									</div>
                         </div>
                         <!--// volunteer-form \\-->
-                        <div class="charity-team-contactus">
-                       
-                            <ul>
-                                <li>
-                                    <i class="fa fa-envelope"></i>
-                                    <h5>돌아가기</h5>
-                                <!--     <a href="mailto:name@email.com">info@example.com</a> -->
-                                </li>
-                                <li>
-                                    <i class="fa fa-phone"></i>
-                                    <h5>회원 삭제</h5>
-                                    <!-- <span>+(091)61 3146 8728</span> -->
-                                </li>
-                            </ul>
-                        </div>
+                     
                     </div>
                 </div>
             </div>

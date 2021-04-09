@@ -90,5 +90,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into ioutput(iout_num, vm_num, outamount, outputdate, icat_num) values (IOUTPUT_SEQ.nextval, #{vm_num}, #{iamount}, TO_DATE(#{outputdate}, 'MM/dd/yyyy') , #{icat_num})
 	]]>
 	</insert>
+	
+	
+	<!-- 회원관리-물품내역 -->
+	<resultMap id="itemdonationVO" type="com.share.nanu.VO.ItemdonationVO">
+		<id property="idnt_num" column="idnt_num" />
+		<result property="idntdate" column="idntdate" />
+		<result property="member_id" column="member_id" />
+		<result property="donaamount" column="donaamount" />
+		<result property="icat_num" column="icat_num" />
+	</resultMap>
+	
+	<resultMap id="iteminvenVO" type="com.share.nanu.VO.IteminvenVO">
+		<id property="icat_num" column="icat_num" />
+		<result property="iname" column="iname" />
+		<result property="iamount" column="iamount" />
+		<collection property="dona" javaType="java.util.List" resultMap="itemdonationVO" />
+	</resultMap>
+
+	<select resultMap="iteminvenVO" id="getMemberItemDona">
+	<![CDATA[
+	
+	select * from (  
+		select rownum as rn, a.* from ( 
+        	select b.IDNT_NUM, b.icat_num, b.member_id, b.idntdate, a.INAME, a.iamount, b.donaamount 
+				from iteminven a, itemdonation b where a.icat_num = b.icat_num and b.member_id = #{member_id} order by b.idntdate desc
+     		)a where rownum <= #{cri.pageNum} * #{cri.amount}
+	) where rn >  (#{cri.pageNum}-1) * #{cri.amount}      
+	]]>
+	</select>
+	
+	<select resultType="int" id="getItemCount">
+	<![CDATA[
+		select count(*) from itemdonation where member_id= #{member_id}
+	]]>
+	</select>
+	
+	<select id="getMemberMoneyDona" resultType="com.share.nanu.VO.DonationVO">
+	<![CDATA[ 
+		select * from (
+						select rownum as rnum, a.* 
+		  		from ( 
+		    		select * from donation where member_id = #{member_id} order by member_id asc 
+		   	    )a where rownum <= #{cri.pageNum} * #{cri.amount}
+		 	) where rnum > (#{cri.pageNum}-1) * #{cri.amount} 
+	]]>
+	</select>
+	
+	<select resultType="int" id="getMoneyCount">
+	<![CDATA[
+		select count(*) from donation where member_id= #{member_id}
+	]]>
+	</select>
+	
 
 </mapper>

@@ -17,9 +17,13 @@
 <html>
 <head>
 
-	<meta name="_csrf" content="${_csrf.token}">
-	<meta name="_csrf_header" content="${_csrf.headerName}">
-	
+<!-- 헤더 안에 추가  -->
+<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
+<!-- js에서 csrf 토큰, 헤더등록 -->
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+
+
 <title>Admin Page</title>
 
  <!-- meta tags -->
@@ -85,7 +89,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-   
+  
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -93,7 +97,7 @@
   <!-- Main Sidebar Container -->
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">  
-    
+
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -147,20 +151,20 @@
           </li>
           
           <li class="nav-item">
-            <a href="/admin/member" class="nav-link">
+            <a href="/admin/member" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>회원 관리</p>
             </a>
           </li>
           
-          <li class="nav-item menu-open"><%-- ${pageContext.request.contextPath}/admin/item --%>
-            <a href="#" class="nav-link active" data-toggle="tab">
+          <li class="nav-item"><%-- ${pageContext.request.contextPath}/admin/item --%>
+            <a href="#" class="nav-link" data-toggle="tab">
               <i class="nav-icon fas fa-box-open"></i>
               <p>재고 관리<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#item_head" class="nav-link active" data-toggle="tab">
+                <a href="/admin/headItem" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>본사 재고</p>
                 </a>
@@ -213,128 +217,100 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        
                         <!--// volunteer-form \\-->
+                        
                         <br>
                         
                         <div class="charity-volunteer-form" >
-									<div class="tab-content">
-										<div class="tab-pane fade show active" id="item_head">
-											<form action="/admin/itemupdate" method="post">
-											<div class="widget_title"><h2>입고 관리</h2></div>
-												<table>
-													<tr>
-														<th>No.</th>
-														<th>물품명</th>
-														<th>현재 보유량</th>
-														<th>입고량</th>
-														<!-- <th>입고일</th> -->
-													</tr>
-	
-													<c:forEach items="${item}" var="headItem">
-													<tr>
-														<td><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
-														<td>${headItem.iname}</td> <!-- 물품명 출력  -->
-														<td>${headItem.iamount}</td> <!-- 현재 수량 출력 -->
-														<td> <!-- 입고량 -->
-															<select name="inputData">
-																<option value="0">0</option>
-																<option value="10">10</option>
-																<option value="20">20</option>
-																<option value="30">30</option>
-																<option value="40">40</option>
-																<option value="50">50</option>
-															</select>
-														</td>
-														<!-- <td><input type="text" class="datepicker" autocomplete="off" ></td> -->
-													</tr>
-													</c:forEach>
-												</table><br>
-												<button type="submit">업데이트</button>
-												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-												<br><br><br>
-												</form>
-												
-												<form action="${pageContext.request.contextPath}/admin/itemOutupdate" method="post">
-												<div class="widget_title"><h2>출고 관리</h2></div>
-												<c:forEach items="${vm}" var="vmvo">
-												</c:forEach>
-												<table>
-													<tr>
-														<th>No.</th>
-														<th>물품명</th>
-														<th>현재 보유량</th>
-														<th>출고량</th>
-														<th>출고일</th>
-														<th>출고지점</th>
-														<th>출고 자판기</th>
-													</tr>
-	
-													<c:forEach items="${item}" var="headItem">
-													<tr>
-														<td><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
-														<td><input type="hidden" value="${headItem.iname}" name="iname">${headItem.iname}</td> <!-- 물품명 출력  -->
-														<td>${headItem.iamount}</td><!-- 현재 수량 출력 -->
-														<td>
-														<!-- 출고량 -->
-															<select name="outputData"> 
-																<option value="0">0</option>
-																<option value="10">10</option>
-																<option value="20">20</option>
-																<option value="30">30</option>
-																<option value="40">40</option>
-																<option value="50">50</option>
-															</select>
-														</td>
-														<td><input type="text" class="datepicker" name="outDate"></td>
-														<td>
-														<!-- 출고지점 -->
-															<select name="branch"> 
-															<c:forEach items="${vm}" var="vmvo">
-																<option value="${vmvo.branch}">${vmvo.branch}</option>
-															</c:forEach> 
-															</select>
-														</td>
-														<td>
-														<!-- 출고 자판기 번호 -->
-															<select name="vm_num"> 
-															<c:forEach items="${vm}" var="vmvo">
-																<option value="${vmvo.vm_num}">${vmvo.vm_num}</option>
-															</c:forEach> 
-															</select>
-														</td>
-													</tr>
-													</c:forEach>
-												</table>
-												
-												<button type="submit">업데이트</button>
-												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-											</form>
+							<div class="widget_title"><h2>회원 관리</h2></div>
+								<div class="container">
+									<div class="row">
+										<div class="col">
+											<ul class="nav nav-tabs">
+												<li class="nav-item">
+													<a class="nav-link" href="/admin/member_view?member_id=${pageMaker.member_id}">기본정보</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" href="/admin/member/itemdona?member_id=${pageMaker.member_id}">물품기부내역</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link active" data-toggle="tab" href="#money">돈기부역내역</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" data-toggle="tab" href="#jkl">포인트내역</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" data-toggle="tab" href="#jkl">문의내역</a>
+												</li>
+											</ul>
+											
+											<div class="tab-content">
+												<div class="tab-pane fade show active" id="money">
+						                            <!--// volunteer-form \\-->
+						                            <form action="" method="post">
+							                          <table>
+							                          	<tr>
+							                              	<th>기부날짜</th>
+							                               	<th>금액</th>
+							                               	<th>결제방식</th>
+							                               	<th>처리상태</th>
+							                            </tr>
+							                            
+							                            <c:forEach items="${moneyDona}" var="moneydao" >
+							                            <tr>
+							                               	<td>${moneydao.dntdate}</td> 
+							                               	<td>${moneydao.dntprice}</td>
+							                              	<td>${moneydao.paymethod}</td>
+							                              	<td>${moneydao.dntstat}</td> 
+							                            </tr>
+							                           </c:forEach>
+							                           
+							                           </table>
+						                            </form>
+						                                   
+						                        <!--// volunteer-form \\-->
+						                        
+						                        <!-- Pagination -->
+											<div class="charity-pagination">
+												<ul class="page-numbers">
+													<li>
+													<c:if test="${pageMaker.prev}">
+														<a class="previous pages-numbers" href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(pageMaker.startPage - 1) }"><i class="fa fa-angle-left"></i>prev</a>
+													</c:if>
+													</li>
+				
+													<li>
+														<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+															<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+																<a href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(idx)}">${idx}</a>
+														</c:forEach>
+													</li>
+				
+													<li>
+														<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+															<a class="next page-numbers" href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(pageMaker.endPage +1) }">next<i class="fa fa-angle-right"></i></a>
+														</c:if>
+													</li>
+												</ul>
+											</div>
+											<!-- Pagination -->
+												</div>
+											</div>
 										</div>
 									</div>
-						
-
-                        </div>
-                        <!--// volunteer-form \\-->
-                        <div class="charity-team-contactus">
-                       
-                            <ul>
-                                <li>
-                                    <i class="fa fa-envelope"></i>
-                                    <h5>돌아가기</h5>
-                                <!--     <a href="mailto:name@email.com">info@example.com</a> -->
-                                </li>
-                                <li>
-                                    <i class="fa fa-phone"></i>
-                                    <h5>회원 삭제</h5>
-                                    <!-- <span>+(091)61 3146 8728</span> -->
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+								</div>
+							</div>
+							
+							
+						</div>
+					 </div>
+					 
+					 
+					<div class="charity-team-contactus">
+       					<button type="button" onClick="history.back()" class="charity-donation-parallex-btn center"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;돌아가기</i></button>
+					</div>
+				</div>
+			</div>
         <!-- Main Section -->
 
     </div>
@@ -369,16 +345,32 @@ https://stackoverflow.com/questions/36207203/uncaught-typeerror-datepicker-is-no
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>  
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
 <script>
-$(document).ready(function() { 
-	$('.datepicker').datepicker();
-  });
+
+$(document).ready(function() {
+	$("#bklistCheck").click(function(event){
+			alert("블랙리스트로 변경되었습니다");
+	});
 	
-	/* dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
-	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], // 월의 한글 형식.
-	monthNames:[ "1월", "2월", "3월", "4월", "5월", "6월","7월", "8월", "9월", "10월", "11월", "12월" ] // 상단에 월의 한글 형식
-	*/
+	$("#nonebklist").click(function(event){
+		alert("블랙리스트가 해제되었습니다");
+});
+
+   
+});
+
+/* function bkCheck() {  //체크했을때 밑에 바로 글씨 나오게 하는 함수
+  var checkBox = document.getElementById("bklistCheck");
+  var text = document.getElementById("checkOk");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+} */
 </script>
+
 
 </body>
 </html>

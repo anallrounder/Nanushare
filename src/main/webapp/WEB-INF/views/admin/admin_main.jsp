@@ -182,10 +182,31 @@
           </li>
           
           <li class="nav-item">
-            <a href="#boards" class="nav-link" data-toggle="tab">
+            <a href="#" class="nav-link" data-toggle="tab">
               <i class="nav-icon fas fa-th"></i>
-              <p>게시판 관리</p>
+              <p>게시판 관리<i class="right fas fa-angle-left"></i></p>
             </a>
+            
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/restful/notice" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>공지사항</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/restful/qna" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>문의게시판</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/board/shows/list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>인증게시판</p>
+                </a>
+              </li>
+             </ul>
           </li>
         </ul>
       </nav>
@@ -239,110 +260,9 @@
 												</table><br>
 												<button type="submit">업데이트</button>
 												<br><br><br>
-												</form>
-												
-												<form action="${pageContext.request.contextPath}/admin/itemOutupdate" method="post">
-												<div class="widget_title"><h2>출고 관리</h2></div>
-												<c:forEach items="${vm}" var="vmvo">
-												</c:forEach>
-												<table>
-													<tr>
-														<th>No.</th>
-														<th>물품명</th>
-														<th>현재 보유량</th>
-														<th>출고량</th>
-														<th>출고일</th>
-														<th>출고지점</th>
-														<th>출고 자판기</th>
-													</tr>
-	
-													<c:forEach items="${item}" var="headItem">
-													<tr>
-														<td><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
-														<td><input type="hidden" value="${headItem.iname}" name="iname">${headItem.iname}</td> <!-- 물품명 출력  -->
-														<td>${headItem.iamount}</td><!-- 현재 수량 출력 -->
-														<td>
-														<!-- 출고량 -->
-															<select name="outputData"> 
-																<option value="0">0</option>
-																<option value="10">10</option>
-																<option value="20">20</option>
-																<option value="30">30</option>
-																<option value="40">40</option>
-																<option value="50">50</option>
-															</select>
-														</td>
-														<td><input type="text" class="datepicker" name="outDate"></td>
-														<td>
-														<!-- 출고지점 -->
-															<select name="branch"> 
-															<c:forEach items="${vm}" var="vmvo">
-																<option value="${vmvo.branch}">${vmvo.branch}</option>
-															</c:forEach> 
-															</select>
-														</td>
-														<td>
-														<!-- 출고 자판기 번호 -->
-															<select name="vm_num"> 
-															<c:forEach items="${vm}" var="vmvo">
-																<option value="${vmvo.vm_num}">${vmvo.vm_num}</option>
-															</c:forEach> 
-															</select>
-														</td>
-													</tr>
-													</c:forEach>
-												</table>
-												
-												<button type="submit">업데이트</button>
-											</form>
-										</div>
-										
-										<div class="tab-pane fade" id="item_branch">
-											<form>
-											<div class="widget_title"><h2>지점 재고</h2></div>
-												<table class="branchI">
-													<div>
-														<br>
-													</div>
-													<tr>
-														<th>No.</th>
-														<th>지점명</th>
-														<th>마스크</th>
-														<th>기저귀</th>
-														<th>생리대</th>
-														<th>문구류</th>
-														<th>손세정제</th>
-													</tr>
-	
-													<c:forEach items="${vvam}" var="vmdao" varStatus="status">
-													<tr>
-														<td>${status.count}</td> <!-- index  -->
-														<td>${vmdao.branch}</td> <!-- 지점명 -->
-														<c:forEach items="${vmdao.vmamlist}" var="list">
-																<td>${list.vm_amount}</td>
-														</c:forEach>
-													</tr>
-													</c:forEach>
-												</table>
-											</form>
-										</div> --%>
-									</div>
-                        </div>
-                        <!--// volunteer-form \\-->
-                        <div class="charity-team-contactus">
-                       
-                            <ul>
-                                <li>
-                                    <i class="fa fa-envelope"></i>
-                                    <h5>돌아가기</h5>
-                                <!--     <a href="mailto:name@email.com">info@example.com</a> -->
-                                </li>
-                                <li>
-                                    <i class="fa fa-phone"></i>
-                                    <h5>회원 삭제</h5>
-                                    <!-- <span>+(091)61 3146 8728</span> -->
-                                </li>
-                            </ul>
+												</form> --%>
+									
+								</div>
                         </div>
                     </div>
                 </div>

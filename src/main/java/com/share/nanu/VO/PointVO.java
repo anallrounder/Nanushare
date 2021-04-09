@@ -15,13 +15,14 @@ public class PointVO {
 	private int totalpnt; // 총누적포인트
 	private int e_idx; // 이벤트인덱스
 	private int nowpnt; //현재포인트
+	private int ecat_num; // 이벤트 카테고리 분류번호
 	
 	public PointVO() {
 		super();
 	}
 	
 	public PointVO(int pnt_num, String member_id, Date pdate, int prtpnt, int dntpnt, int totalpnt, int e_idx,
-			int nowpnt) {
+			int nowpntm, int ecat_num) {
 		this.pnt_num = pnt_num;
 		this.member_id = member_id;
 		this.pdate = pdate;
@@ -30,6 +31,7 @@ public class PointVO {
 		this.totalpnt = totalpnt;
 		this.e_idx = e_idx;
 		this.nowpnt = nowpnt;
+		this.ecat_num = ecat_num;
 	}
 	
 	public int getPnt_num() {
@@ -94,5 +96,14 @@ public class PointVO {
 	public void setNowpnt(int nowpnt) {
 		this.nowpnt = nowpnt;
 	}
+
+	public int getEcat_num() {
+		return ecat_num;
+	}
+
+	public void setEcat_num(int ecat_num) {
+		this.ecat_num = ecat_num;
+	}
+	
 
 }

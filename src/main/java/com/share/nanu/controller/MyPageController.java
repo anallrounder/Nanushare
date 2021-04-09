@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.mypaging.Criteria;

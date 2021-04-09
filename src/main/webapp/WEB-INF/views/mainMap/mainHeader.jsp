@@ -202,6 +202,7 @@
                     </aside>  
 		</div> --%>
         <!-- Top Strip -->
+        </div>
     </header>
     <!-- Header -->
     
