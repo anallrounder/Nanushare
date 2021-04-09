@@ -39,16 +39,12 @@
            		//skin : ""
            	});
            
-           window.parent.CKEDITOR.tools.callFunction(" +
+           /* window.parent.CKEDITOR.tools.callFunction(" +
         		  callback + 
-        		  ",'" + fileUrl + "','이미지를 업로드 하였습니다.'")
-
+        		  ",'" + fileUrl + "','이미지를 업로드 하였습니다.'") */
+        
+          /*  window.parent.CKEDITOR.tools.callFunction(1,,"이미지업로드") */
            
-           
-           //window.parent.CKEDITOR.tools.callFunction("이미지업로드")
-           
-		    
-		    
 		     
 		});
 	 
