@@ -148,24 +148,33 @@
             </a>
           </li>
           
-          <li class="nav-item menu-open"><%-- ${pageContext.request.contextPath}/admin/item --%>
-            <a href="#" class="nav-link active" data-toggle="tab">
-              <i class="nav-icon fas fa-box-open"></i>
-              <p>재고 관리<i class="right fas fa-angle-left"></i></p>
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-toggle="tab">
+              <i class="nav-icon fas fa-th"></i>
+              <p>게시판 관리<i class="right fas fa-angle-left"></i></p>
             </a>
+            
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/headItem" class="nav-link">
+                <a href="/restful/notice" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>본사 재고</p>
+                  <p>공지사항</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#item_branch" class="nav-link active" data-toggle="tab">
+                <a href="/restful/qna" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>지점 재고</p>
+                  <p>문의게시판</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/board/shows/list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>인증게시판</p>
+                </a>
+              </li>
+             </ul>
+          </li>
              </ul>
           </li>
           

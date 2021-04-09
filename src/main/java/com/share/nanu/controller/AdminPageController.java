@@ -65,35 +65,6 @@ public class AdminPageController {
 		return mov;
 	}
 
-	// 회원관리(회원한명당 조회)
-	@GetMapping("/member_view")
-	public ModelAndView member_view(ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md) throws Exception {
-		
-		if (md != null) {
-			mov.addObject("username", md.getmember().getName());
-		}
-		
-		mov.setViewName("admin/admin_memberView");
-		mov.addObject("memberView", adminPgService.getMemberView(member.getMember_id()));
-		
-		log.info(member.getMember_id());
-		
-		return mov;
-	}
-	
-	// 회원관리(블랙리스트 변경)
-	@PostMapping("/member_bk")
-	public String member_bk(MemberVO member) throws Exception {
-		
-		log.info(member.getMember_id().toString());
-		
-		adminPgService.upBkCheck(member.getBklist(), member.getMember_id());
-		log.info("블랙리스트 업데이트");
-			
-		return "redirect:/admin/member";
-	}
-	
-	
 	// 재고관리-본사 재고 조회
 	@GetMapping("/headItem") 
 	public ModelAndView headItem (ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md) {

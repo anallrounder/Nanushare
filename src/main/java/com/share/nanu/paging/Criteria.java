@@ -1,12 +1,9 @@
 package com.share.nanu.paging;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@Setter
-@Getter
+
 public class Criteria {
 	
 	private int pageNum; // 페이지 번호
@@ -20,4 +17,23 @@ public class Criteria {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}
+
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	
+	
+	
 }

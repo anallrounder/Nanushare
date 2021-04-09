@@ -3,6 +3,8 @@ package com.share.nanu.service;
 import java.util.List;
 
 import com.share.nanu.VO.AdminItemOutVO;
+import com.share.nanu.VO.DonationVO;
+import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.VmVO;
@@ -29,6 +31,14 @@ public interface AdminPageService {
 	
 	//관리자페이지-본사재고관리(출고 업데이트)
 	void itemOut(AdminItemOutVO adoutvo);
+	
+	//회원관리- 물품기부내역
+	List<IteminvenVO> getMemberItem(String member_id, Criteria cri);
+	int getItemCount(String member_id, Criteria cri);
+	
+	//회원관리- 돈기부여내역
+	List<DonationVO> getMemberMoney(String member_id, Criteria cri);
+	int getMoneyCount(String member_id, Criteria cri);
 	
 
 	

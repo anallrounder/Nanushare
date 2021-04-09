@@ -219,11 +219,11 @@ li {
 
 													<span>나의 포인트</span>
 													<h4 class="mb-2 mt-3">
-													<form action="${pageContext.request.contextPath}/my/ask" method="get">
+													<%-- <form action="${pageContext.request.contextPath}/my/ask" method="get"> --%>
 														<c:forEach var="vo1" items="${memberInfo}">
 														
-															 <input type="hidden" value="${vo2.member_id} name="member_id" />
-															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.member_id} , ${vo2.nowpnt}</c:forEach>
+															<%--  <input type="hidden" value="${vo2.member_id} name="member_id" /> --%>
+															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}</c:forEach>
 														</c:forEach>
 													</form>
 													</h4>
@@ -344,7 +344,7 @@ li {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
+
 </body>
 </html>

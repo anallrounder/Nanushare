@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.mypaging.Criteria;
@@ -69,42 +68,48 @@ public class MyPageController {
 		return mav;
 	}
 
-	// 나의문의내역
+	// 1.나의문의내역
 	@GetMapping("/my/ask")
 	public ModelAndView myAsk(MemberVO mvo, ModelAndView mav, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
 		if (md != null) {
 			mav.addObject("username", md.getmember().getName());
 		}
 		
-		log.info(mvo.getMember_id().toString());
+		//log.info(mvo.getMember_id().toString());
 		mav.setViewName("/my/ask");
-		mav.addObject("list1", mgservice.myList1(cri, mvo.getMember_id()));// 나의문의내역
+		System.out.println("1.나의문의내역 +" + md.getUsername());
+		mav.addObject("list1", mgservice.myList1(cri,md.getUsername()));// 나의문의내역
 		
 
 		// 페이징
-		int total = mgservice.getTotalCount1(cri);
+		int total = mgservice.getTotalCount1(cri, md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
 	}
 
-	// 나의인증내역
+	// 2.나의인증내역
 	@GetMapping("/my/content")
-	public ModelAndView myCon(MemberVO mvo, ModelAndView mav, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
+	public ModelAndView myCon( MemberVO mvo, ModelAndView mav, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
 		if (md != null) {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.setViewName("/my/content");
 		
-		mav.addObject("memberid", md.getmember().getMember_id());
+		//mgservice.mycontent(md.getUsername());
+		//mav.addObject("memberid", md.getUsername(mvo));
 		
-		mav.addObject("list2", mgservice.myList2(cri));// 나의인증내역
+		System.out.println("2.인증내역 +" + md.getUsername());
+		mav.addObject("list2", mgservice.myList2(cri, md.getUsername()));// 나의인증내역
+		
+
 		// 페이징
-		int total = mgservice.getTotalCount2(cri);
+		int total = mgservice.getTotalCount2(cri,md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
+
 		return mav;
 	}
 
-	// 나의나눔내역
+	// 3.나의나눔내역
 	@GetMapping("/my/give")
 	public ModelAndView myDona(MemberVO mvo, ModelAndView mav, Criteria cri,
 			@AuthenticationPrincipal MemberDetails md) {
@@ -112,15 +117,19 @@ public class MyPageController {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.setViewName("/my/give");
-		mav.addObject("list3", mgservice.myList3(cri));// 나의나눔내역
+		
+		//mav.addObject("mycon", md.getmember().getMember_id());//id만 넘겨줌
+		//mav.addObject("mycon", md.getUsername());
+		
+		mav.addObject("list3", mgservice.myList3(cri,md.getUsername()));// 나의나눔내역
 		// 페이징
-		int total = mgservice.getTotalCount3(cri);
+		int total = mgservice.getTotalCount3(cri,md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
 
 		return mav;
 	}
 
-	// 나의댓글내역
+	// 4.나의댓글내역
 	@GetMapping("/my/reply")
 	public ModelAndView myReply(MemberVO mvo, ModelAndView mav, Criteria cri,
 			@AuthenticationPrincipal MemberDetails md) {
@@ -128,15 +137,15 @@ public class MyPageController {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.setViewName("/my/reply");
-		mav.addObject("list4", mgservice.myList4(cri));// 나의문의내역
+		mav.addObject("list4", mgservice.myList4(cri,md.getUsername()));// 나의문의내역
 		// 페이징
-		int total = mgservice.getTotalCount4(cri);
+		int total = mgservice.getTotalCount4(cri,md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
 	}
 	
 	
-	// 나의결제내역
+	// 5.나의결제내역
 		@GetMapping("/my/pay")
 		public ModelAndView myPay(MemberVO mvo, ModelAndView mav, Criteria cri,
 				@AuthenticationPrincipal MemberDetails md) {
@@ -144,9 +153,12 @@ public class MyPageController {
 				mav.addObject("username", md.getmember().getName());
 			}
 			mav.setViewName("/my/pay");
-			mav.addObject("list5", mgservice.myList5(cri));// 나의문의내역
+			mav.addObject("list5", mgservice.myList5(cri,md.getUsername()));// 나의문의내역
 			// 페이징
-			int total = mgservice.getTotalCount5(cri);
+			int total=mgservice.getTotalCount5(cri,md.getUsername());
+			
+			
+			
 			mav.addObject("pageMaker", new pageVO(cri, total));
 			return mav;
 		}
@@ -179,7 +191,7 @@ public class MyPageController {
 				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			} else {
 				System.out.println("실패");
-				System.out.println();
+				
 			}
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);

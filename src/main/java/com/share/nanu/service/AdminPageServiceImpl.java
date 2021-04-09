@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.share.nanu.VO.AdminItemOutVO;
+import com.share.nanu.VO.DonationVO;
+import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.VmVO;
@@ -83,6 +85,30 @@ public class AdminPageServiceImpl implements AdminPageService {
 			adminMapper.itemVmam(adoutvo.getVm_num()[i], adoutvo.getOutputData()[i], adoutvo.getIname()[i]); // vmam 자판기에 수량 업데이트
 			adminMapper.itemIoutPut(adoutvo.getVm_num()[i], adoutvo.getOutputData()[i], adoutvo.getOutDate()[i], adoutvo.getIcat_num()[i]); // 출고 테이블 로그 insert
 		}
+	}
+
+	@Override
+	public List<IteminvenVO> getMemberItem(String member_id, Criteria cri) {
+		
+		return adminMapper.getMemberItemDona(member_id, cri);
+	}
+
+	@Override
+	public int getItemCount(String member_id, Criteria cri) {
+		
+		return adminMapper.getItemCount(member_id, cri);
+	}
+
+	@Override
+	public List<DonationVO> getMemberMoney(String member_id, Criteria cri) {
+		
+		return adminMapper.getMemberMoneyDona(member_id, cri);
+	}
+
+	@Override
+	public int getMoneyCount(String member_id, Criteria cri) {
+		// TODO Auto-generated method stub
+		return adminMapper.getMoneyCount(member_id, cri);
 	}
 
 

@@ -112,7 +112,8 @@ li {
 										</h2></li>
 									<li class="email"><sec:authentication
 											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication property="principal.member.signuppath" />회원</li>
+									<li class="activity"><sec:authentication
+											property="principal.member.signuppath" />회원</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
@@ -138,7 +139,7 @@ li {
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 							<h2 class="title">
-								나의 문의 내역<span class="pro-label label label-warning">PRO</span>
+								나의 문의 내역<span class="pro-label label label-warning">ask</span>
 							</h2>
 
 
@@ -148,69 +149,70 @@ li {
 									<br>
 								</div>
 								<tr>
-
 									<!-- <th>아이디</th> -->
 									<th>나눔제목-링크아직X</th>
 									<th>조회수</th>
 									<th>날짜</th>
 
 								</tr>
+
+								<c:if test="${empty list1}">
+									<tr>
+										<td colspan="5" align="center">작성된 글이 없습니다</td>
+									</tr>
+								</c:if>
+
 								<!-- 로그인한 회원의 글 정보만 받아오기 -->
 								<!-- 나의문의내역 -->
-								<c:forEach items="${list1}" var="list1">
-									<sec:authentication property="principal" var="pinfo" />
+								<c:if test="${! empty list1}">
+									<c:forEach items="${list1}" var="list1">
+										<%-- <sec:authentication property="principal" var="pinfo" />
 									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list1.member_id}">
-											<tr>
-												<%-- <td>${list1.member_id}</td> --%>
-												<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
-												<td><a id="a-content"
-													href="${pageContext.request.contextPath}/my/ask?b_index=${list1.b_index}">${list1.btitle}</a></td>
-												<!-- 제목누르면 해당 글내용으로 이동링크 -->
-												<td>${list1.bhit}</td>
-												<td>${list1.bdate}</td>
+										<c:if test="${pinfo.username eq list1.member_id}"> --%>
+										<tr>
+											<%-- <td>${list1.member_id}</td> --%>
+											<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
+											<td><a id="a-content"
+												href="${pageContext.request.contextPath}/my/ask?b_index=${list1.b_index}">${list1.btitle}</a></td>
+											<!-- 제목누르면 해당 글내용으로 이동링크 -->
+											<td>${list1.bhit}</td>
+											<td>${list1.bdate}</td>
 
-											</tr>
-										</c:if>
-									</sec:authorize>
-								</c:forEach>
+										</tr>
+										<%-- </c:if>
+									</sec:authorize> --%>
+									</c:forEach>
+								</c:if>
 							</table>
 
+
+
 							<!-- 페이징 -->
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if test="${pageMaker.prev}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-												</c:if></li>
-
-											<li class="page-item"><c:forEach
-													begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-													var="idx">
-													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-													<a
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
-												</c:forEach></li>
 
 
-											<li class="page-item"><c:if
-													test="${pageMaker.next && pageMaker.endPage > 0}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-													</a>
-												</c:if></li>
-										</ul>
-									</div>
+							<div class="charity-pagination">
+								<ul class="page-numbers">
+									<c:if test="${pageMaker.prev}">
+										<li class="page-item"><a
+											href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
+										</li>
+									</c:if>
 
+									<c:forEach begin="${pageMaker.startPage}"
+										end="${pageMaker.endPage}" var="idx">
+										<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+										<li class="page-item"><a
+											href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
+										</li>
+									</c:forEach>
+
+									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+										<li class="page-item"><a
+											href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
+										</li>
+									</c:if>
 								</div>
-
 							</div>
-
-
-
-
 
 						</div>
 					</div>
@@ -270,6 +272,6 @@ li {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions.js"></script>
+	    <script src="/resources/charity/script/functions-main.js"></script>
 </body>
 </html>
