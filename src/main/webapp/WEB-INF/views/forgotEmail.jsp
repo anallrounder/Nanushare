@@ -152,7 +152,7 @@
 							
 								
 								errorPlacement : function(error, element) { 
-									if(element.is(":text") || element.is(":password")										  ){
+									if(element.is(":text") || element.is(":password")){
 										element.parent().after(error);
 									}else{
 										element.after(error);

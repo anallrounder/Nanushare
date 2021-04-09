@@ -3,10 +3,16 @@
 package com.share.nanu.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +21,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.JsonObject;
+import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.page.Criteria;
@@ -29,12 +36,16 @@ import com.share.nanu.service.NanuBoardShowYSService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+
+
+import oracle.net.aso.f;
 //https://kyuhyuk.kr/article/spring-boot/2020/07/21/Spring-Boot-JPA-MySQL-Board-Post-Update-Delete
 
 @Slf4j
 @AllArgsConstructor
 @Controller
-@RequestMapping("/board/shows/*")
+//@RequestMapping("/board/shows/*")
 public class NanuBoardShowYSController {
 
 	@Autowired
@@ -48,7 +59,7 @@ public class NanuBoardShowYSController {
 	 */
 
 	// 인증게시판 페이징 list
-	@GetMapping("/list")
+	@GetMapping("/board/shows/list")
 	public String boardShowPaging(Criteria cri, Model model, @AuthenticationPrincipal MemberDetails md)
 			throws Exception {
 		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);
@@ -68,7 +79,7 @@ public class NanuBoardShowYSController {
 	}
 
 	// 인증게시판 컨텐트뷰 - 체크
-	@GetMapping("/content_view")
+	@GetMapping("/board/shows/content_view")
 	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md)
 			throws Exception {
 		log.debug("인증게시판 컨트롤러 컨텐트뷰");
@@ -86,7 +97,7 @@ public class NanuBoardShowYSController {
 	}
 
 	// 수정창 보기 - 체크
-	@GetMapping("/modify_view")
+	@GetMapping("/my/board/shows/modify_view")
 	public String bsModiview(BoardVO boardVO, Model model) throws Exception {
 		log.debug("인증게시판 컨트롤러 컨텐트뷰");
 		model.addAttribute("modify_view", service.getBoard(boardVO.getB_index()));
@@ -94,7 +105,7 @@ public class NanuBoardShowYSController {
 	}
 
 	// 수정 내용 업데이트 -> 오류남. 수정해야함
-	@PostMapping("/modify")
+	@PostMapping("/my/board/shows/modify")
 	public String bsModify(BoardVO boardVO) throws Exception {
 		log.info("인증게시판 컨트롤러  -- modify() -- 호출");
 		service.modifyBoard(boardVO);
@@ -103,26 +114,87 @@ public class NanuBoardShowYSController {
 	}
 
 	// 게시글 삭제 - 체크
-	@GetMapping("/delete")
+	@GetMapping("/my/board/shows/delete")
 	public String bsDelete(BoardVO boardVO) throws Exception {
 		log.info("인증게시판 컨트롤러 -- delete() -- 호출");
 		service.deleteBoard(boardVO.getB_index());
 		return "redirect:plist";
 	}
 
+	
+	
+	
 	// 글작성 페이지
-	@GetMapping("/write_view")
+	@GetMapping("/my/board/shows/write_view")
 	public String vsWriteView(Model model) throws Exception {
 		log.debug("인증게시판 컨트롤러  -- write_view() -- 호출");
 		return "board_show/ysWriteView";
 	}
+	
+	@GetMapping("/my/board/shows/imageUpload")
+	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response, 
+			MultipartHttpServletRequest multiFile) throws  Exception{
+		log.info("로컬이미지 업로드");
+		
+		JsonObject json = new JsonObject();
+		PrintWriter printWriter = null;
+		OutputStream out = null;
+		
+		MultipartFile file = multiFile.getFile("upload");
+		
+		if(file != null) {
+			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
+				if(file.getContentType().toLowerCase().startsWith("resources/attachment/")) {
+					try {
+						String fileName = file.getName();
+						byte[] bytes = file.getBytes();
+						String uploadPath = request.getServletContext().getRealPath("/resources/attachment");
+						File uploadFile = new File(uploadPath);
+						if(!uploadFile.exists()) {
+							uploadFile.mkdirs();
+						}
+						
+						fileName = UUID.randomUUID().toString();
+						uploadPath = uploadPath + "/" + fileName;
+						out = new FileOutputStream(new File(uploadPath));
+						out.write(bytes);
+						
+						printWriter = response.getWriter();
+						response.setContentType("text/html");
+						String fileUrl = request.getContextPath() + "/resources/attachment/" + fileName;
+						
+						json.addProperty("uploaded",1);
+						json.addProperty("fileName",fileName);
+						json.addProperty("url",fileUrl);
+						
+						printWriter.print(json);
+						
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}finally {
+						if(out != null) {
+							out.close();
+						}
+						if(printWriter != null) {
+							printWriter.close();
+						}
+					}
+				}
+			}
+		}
+		
+		
+	}
+	
+	
 
 	// 글 작성 -> 로그인한 사용자의 아이디를 어떻게 불러올 것인가 고민해봐야한다.
 	// @AuthenticationPrincipal MemberDetails md 로 현재 로그인 되어 있는 유저의 정보를 받아올 수 있다.
 	// md.getusername() --> 로그인 되어 있는 유저의 member_id -->MemberDetails 참조
 	// 가져와서 board.setMember_id(md.getusername) boardVO 객체에 로그인 되어 있는 유저 member_id저장
 	// 서비스에 boardVO를 넘겨주고 DB에 저장
-	@PostMapping("/write")
+	@PostMapping("/my/board/shows/write")
 	public String bsWrite( MultipartHttpServletRequest multiple, 
 			BoardVO boardVO, AttachmentVO attachmentVO, Model model, @AuthenticationPrincipal MemberDetails md)
 			throws Exception {
