@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.DonationVO;
+import com.share.nanu.VO.EcatPointVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
@@ -44,6 +46,14 @@ public interface AdminMapper {
 	List<DonationVO> getMemberMoneyDona(String member_id, Criteria cri);
 
 	int getMoneyCount(String member_id, Criteria cri);
+
+	List<EcatPointVO> getPointLog(String member_id, Criteria cri);
+
+	int getPointCount(String member_id, Criteria cri);
+
+	List<BoardVO> getQnA(String member_id, Criteria cri);
+
+	int getQnACount(String member_id, Criteria cri);
 
 	
 

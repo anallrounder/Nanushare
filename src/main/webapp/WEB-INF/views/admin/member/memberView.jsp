@@ -237,10 +237,10 @@
 													<a class="nav-link" href="/admin/member/moneydona?member_id=${memberView.member_id}">돈기부역내역</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" data-toggle="tab" href="#jkl">포인트내역</a>
+													<a class="nav-link" href="/admin/member/point?member_id=${memberView.member_id}">포인트내역</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" data-toggle="tab" href="#jkl">문의내역</a>
+													<a class="nav-link" href="/admin/member/qna?member_id=${memberView.member_id}">문의내역</a>
 												</li>
 											</ul>
 											
@@ -308,7 +308,8 @@
 					 
 					 
 					<div class="charity-team-contactus">
-       					<button type="button" onClick="history.back()" class="charity-donation-parallex-btn center"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;돌아가기</i></button>
+       					<button type="button" onClick="history.back()" class="charity-donation-parallex-btn center"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;이전 페이지</i></button>
+       					<button type="button" onClick="location.href='/admin/member'" class="charity-donation-parallex-btn center">회원목록보기</button>
 					</div>
 				</div>
 			</div>

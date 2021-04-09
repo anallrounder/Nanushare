@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.share.nanu.VO.AdminItemOutVO;
+import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.DonationVO;
+import com.share.nanu.VO.EcatPointVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.IteminvenVO2;
 import com.share.nanu.VO.MemberVO;
@@ -107,12 +109,33 @@ public class AdminPageServiceImpl implements AdminPageService {
 
 	@Override
 	public int getMoneyCount(String member_id, Criteria cri) {
-		// TODO Auto-generated method stub
+		
 		return adminMapper.getMoneyCount(member_id, cri);
 	}
 
+	@Override
+	public List<EcatPointVO> getMemberPoint(String member_id, Criteria cri) {
+		
+		return adminMapper.getPointLog(member_id, cri);
+	}
 
+	@Override
+	public int getPointCount(String member_id, Criteria cri) {
+		
+		return adminMapper.getPointCount(member_id, cri);
+	}
 
+	@Override
+	public List<BoardVO> getMemberQnA(String member_id, Criteria cri) {
+		
+		return adminMapper.getQnA(member_id, cri);
+	}
+
+	@Override
+	public int getQnACount(String member_id, Criteria cri) {
+		// TODO Auto-generated method stub
+		return adminMapper.getQnACount(member_id, cri);
+	}
 
 	
 
