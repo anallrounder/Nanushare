@@ -190,35 +190,36 @@ li {
 
 
 							<!-- 페이징 -->
-						<!-- 	<div class="container" align="center"> -->
-								<!--  -->
+							<!-- 	<div class="container" align="center"> -->
+							<!--  -->
+							<c:if test="${! empty list2}">
 								<div class="charity-pagination">
-								<ul class="page-numbers">
-									<c:if test="${pageMaker.prev}">
-										<li class="page-item"><a
-											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
-										</li>
-									</c:if>
+									<ul class="page-numbers">
+										<c:if test="${pageMaker.prev}">
+											<li class="page-item"><a
+												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
+											</li>
+										</c:if>
 
-									<c:forEach begin="${pageMaker.startPage}"
-										end="${pageMaker.endPage}" var="idx">
-										<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-										<li class="page-item"><a
-											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
-										</li>
-									</c:forEach>
+										<c:forEach begin="${pageMaker.startPage}"
+											end="${pageMaker.endPage}" var="idx">
+											<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+											<li class="page-item"><a
+												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
+											</li>
+										</c:forEach>
 
-									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-										<li class="page-item"><a
-											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
-										</li>
-									</c:if>
+										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+											<li class="page-item"><a
+												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
+											</li>
+										</c:if>
 									</ul>
 								</div>
-							</div>
+							</c:if>
 						</div>
-					<!-- </div> -->
-					</section>
+					</div>
+					<!-- </div> --> </section>
 				</div>
 			</div>
 
@@ -274,6 +275,6 @@ li {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	    <script src="/resources/charity/script/functions-main.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
 </body>
 </html>

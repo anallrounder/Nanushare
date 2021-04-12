@@ -269,7 +269,7 @@ public class NanuBoardShowYSController {
 				service.fileUpload(attachmentVO);
 			}
 		}
-		return "redirect:my/board/shows/content_view";
+		return "redirect:/my/board/shows/content_view";
 	}
 
 }

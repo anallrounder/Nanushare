@@ -112,20 +112,22 @@ li {
 										</h2></li>
 									<li class="email"><sec:authentication
 											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication property="principal.member.signuppath" />회원</li>
+									<li class="activity"><sec:authentication
+											property="principal.member.signuppath" />회원</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>
 										Profile</a></li>
-								<li><a href="ask"><span
-										class="fa fa-question"> </span>나의문의내역</a></li>
+								<li><a href="ask"><span class="fa fa-question">
+									</span>나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
 									</span>나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-handshake">
 									</span>나의나눔내역</a></li>
-								<li class="active"><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
+								<li class="active"><a href="reply"><span
+										class="fa fa-reply"> </span>나의댓글내역</a></li>
 								<li><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
 							</ul>
 							</nav>
@@ -152,66 +154,66 @@ li {
 									<!-- <th>아이디</th> -->
 
 								</tr>
-								
+
 								<c:if test="${empty list4}">
 									<tr>
-										<td colspan="5" align="center">작성된 글이 없습니다</td>
+										<td colspan="5" align="center">작성된 댓글이 없습니다</td>
 									</tr>
 								</c:if>
-								
+
 								<!-- 나의댓글내역 -->
 								<c:if test="${! empty list4}">
-								<c:set var="list4" value="${list4}" />
-								<c:forEach items="${list4}" var="dao4" varStatus="status">
-									<c:forEach items="${dao4.reply}" var="dto4" varStatus="status">
-										<sec:authentication property="principal" var="pinfo" />
-										<sec:authorize access="isAuthenticated()">
-											<c:if test="${pinfo.username eq dto4.rid}">
-												<tr>
-													<td>${dao4.btitle}</td>
-													<td><a id="a-content"
-														href="${pageContext.request.contextPath}/my/reply?b_index=${dao4.b_index}">${dto4.rcontent}</a></td>
-													<!-- 제목누르면 해당 글내용으로 이동링크 -->
-													<td>${dto4.rdate}</td>
-													<%-- <td>${dto4.rid}</td> --%>
+									<c:set var="list4" value="${list4}" />
+									<c:forEach items="${list4}" var="dao4" varStatus="status">
+										<c:forEach items="${dao4.reply}" var="dto4" varStatus="status">
+											<sec:authentication property="principal" var="pinfo" />
+											<sec:authorize access="isAuthenticated()">
+												<c:if test="${pinfo.username eq dto4.rid}">
+													<tr>
+														<td>${dao4.btitle}</td>
+														<td><a id="a-content"
+															href="${pageContext.request.contextPath}/my/reply?b_index=${dao4.b_index}">${dto4.rcontent}</a></td>
+														<!-- 제목누르면 해당 글내용으로 이동링크 -->
+														<td>${dto4.rdate}</td>
+														<%-- <td>${dto4.rid}</td> --%>
 
-												</tr>
-											</c:if>
-										</sec:authorize>
+													</tr>
+												</c:if>
+											</sec:authorize>
+										</c:forEach>
 									</c:forEach>
-								</c:forEach>
 								</c:if>
 							</table>
 
 
+							<c:if test="${! empty list4}">
+								<div class="charity-pagination">
+									<ul class="page-numbers">
+										<li class="page-item"><c:if test="${pageMaker.prev}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+											</c:if></li>
 
-							<div class="charity-pagination">
-								<ul class="page-numbers">
-											<li class="page-item"><c:if test="${pageMaker.prev}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-												</c:if></li>
-
-											<li class="page-item"><c:forEach
-													begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-													var="idx">
-													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-													<a
-														href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(idx)}">${idx}</a>
-												</c:forEach></li>
+										<li class="page-item"><c:forEach
+												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+												var="idx">
+												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+												<a
+													href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(idx)}">${idx}</a>
+											</c:forEach></li>
 
 
-											<li class="page-item"><c:if
-													test="${pageMaker.next && pageMaker.endPage > 0}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-													</a>
-												</c:if></li>
-										</ul>
-								
+										<li class="page-item"><c:if
+												test="${pageMaker.next && pageMaker.endPage > 0}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+												</a>
+											</c:if></li>
+									</ul>
 
-							</div>
 
+								</div>
+							</c:if>
 
 
 

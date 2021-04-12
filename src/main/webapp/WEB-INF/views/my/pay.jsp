@@ -166,7 +166,7 @@ li {
 								</tr>
 								<c:if test="${empty list5}">
 									<tr>
-										<td colspan="5" align="center">작성된 글이 없습니다</td>
+										<td colspan="5" align="center">결제 내역이 없습니다</td>
 									</tr>
 								</c:if>
 
@@ -195,32 +195,33 @@ li {
 							</table>
 
 							<!-- 페이징 -->
-							<div class="charity-pagination">
-								<ul class="page-numbers">
-											<li class="page-item"><c:if test="${pageMaker.prev}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-												</c:if></li>
+							<c:if test="${! empty list5}">
+								<div class="charity-pagination">
+									<ul class="page-numbers">
+										<li class="page-item"><c:if test="${pageMaker.prev}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+											</c:if></li>
 
-											<li class="page-item"><c:forEach
-													begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-													var="idx">
-													<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-													<a
-														href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(idx)}">${idx}</a>
-												</c:forEach></li>
+										<li class="page-item"><c:forEach
+												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+												var="idx">
+												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+												<a
+													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(idx)}">${idx}</a>
+											</c:forEach></li>
 
-											<li class="page-item"><c:if
-													test="${pageMaker.next && pageMaker.endPage > 0}">
-													<a class="page-link"
-														href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-													</a>
-												</c:if></li>
-										</ul>
-									
-							</div>
+										<li class="page-item"><c:if
+												test="${pageMaker.next && pageMaker.endPage > 0}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+												</a>
+											</c:if></li>
+									</ul>
 
+								</div>
 
+							</c:if>
 
 
 

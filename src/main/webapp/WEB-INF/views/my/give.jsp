@@ -151,7 +151,7 @@ li {
 								</tr>
 								<c:if test="${empty list3}">
 									<tr>
-										<td colspan="5" align="center">작성된 글이 없습니다</td>
+										<td colspan="5" align="center">나눔 내역이 없습니다</td>
 									</tr>
 								</c:if>
 
@@ -180,57 +180,59 @@ li {
 								</c:if>
 							</table>
 
-							<div class="charity-pagination">
-								<ul class="page-numbers">
-									<li class="page-item"><c:if test="${pageMaker.prev}">
-											<a class="page-link"
-												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-										</c:if></li>
 
-									<li class="page-item"><c:forEach
-											begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-											var="idx">
-											<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-											<a
-												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(idx)}">${idx}</a>
-										</c:forEach></li>
+							<c:if test="${! empty list3}">
+								<div class="charity-pagination">
+									<ul class="page-numbers">
+										<li class="page-item"><c:if test="${pageMaker.prev}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+											</c:if></li>
+
+										<li class="page-item"><c:forEach
+												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+												var="idx">
+												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+												<a
+													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(idx)}">${idx}</a>
+											</c:forEach></li>
 
 
-									<li class="page-item"><c:if
-											test="${pageMaker.next && pageMaker.endPage > 0}">
-											<a class="page-link"
-												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-											</a>
-										</c:if></li>
+										<li class="page-item"><c:if
+												test="${pageMaker.next && pageMaker.endPage > 0}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+												</a>
+											</c:if></li>
 
-								</ul>
-							</div>
+									</ul>
+								</div>
+
+							</c:if>
+
+
+
+
 
 						</div>
-
-
-
-
-
 					</div>
+					</section>
 				</div>
-				</section>
 			</div>
+
+			<script>
+				$("#mytabs>ul>li>a").each(function(i) {
+					$(this).attr("href", "#mytab" + i)
+				})
+				$("#mytabs>div>div").each(function(i) {
+					$(this).attr("id", "mytab" + i)
+				})
+			</script>
+
+			<!-- Main Section -->
+
 		</div>
-
-		<script>
-			$("#mytabs>ul>li>a").each(function(i) {
-				$(this).attr("href", "#mytab" + i)
-			})
-			$("#mytabs>div>div").each(function(i) {
-				$(this).attr("id", "mytab" + i)
-			})
-		</script>
-
-		<!-- Main Section -->
-
-	</div>
-	<!-- Content -->
+		<!-- Content -->
 	</div>
 
 	<!-- Footer -->
