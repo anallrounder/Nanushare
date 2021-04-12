@@ -202,8 +202,8 @@
 												인생에 어디 아니다. 인간이 것은 싶이 고행을 대한 않는 별과 부패뿐이다. 천자만홍이 인생에 과실이 같이 꽃
 												것이다. 두손을 투명하되 낙원을 약동하다. 소금이라 미묘한 청춘의 꽃이 바이며, 쓸쓸하랴? 목숨이 거선의
 												관현악이며, 현저하게 피고 보라. --> </p>
-											<a href="/board/shows/content_view?b_index=${vo.b_index}" class="charity-simple-blog-btn">더보기</a>
-											
+											<a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}" class="charity-simple-blog-btn">더보기</a>
+											<%-- ${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index} --%>
 										</div>
 									</li>
 								</c:forEach>

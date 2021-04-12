@@ -127,6 +127,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	<!-- 댓글 리스트 -->
+ 	<select id="listComment" resultType="com.share.nanu.VO.BoardreplyVO">
+	   <![CDATA[
+		  select * from  BOARDREPLY  where b_index = #{b_index} order by r_num desc
+	   ]]>
+	</select>
+	
+	<!-- 댓글 입력 -->
+	<insert id="insertReply">
+		insert into BOARDREPLY (r_num, rcontent, rid, b_index)
+		values (BOARDREPLY_SEQ.nextval, #{rcontent}, #{rid}, #{b_index})
+	</insert>
+	
+	<select id="getComment" resultType="com.share.nanu.VO.BoardreplyVO">
+	   <![CDATA[
+		  select * from  BOARDREPLY  where b_index = #{b_index} and r_num= #{r_num}
+	   ]]>
+	</select>
+	
 </mapper>
 
 
