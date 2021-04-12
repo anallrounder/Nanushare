@@ -11,6 +11,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <!-- csrf_meta_tag_for_jsp
+    https://stackoverflow.com/questions/37383730/how-to-add-csrf-token-to-ajax-request -->
+	<meta name="_csrf" content="${_csrf.token}"/>
+	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+    
     <title>나누셰어 - 나눔인증</title>
 
     <!-- CSS -->
@@ -27,6 +32,41 @@
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 	
+	
+	<!-- 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드 -->
+	<script type="text/javascript">
+	/* This script and many more are available free online at
+	The JavaScript Source!! http://javascript.internet.com
+	Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
+		
+	function autoDate () {
+		var tDay = new Date();
+		var tMonth = tDay.getMonth()+1;
+		var tDate = tDay.getDate();
+		if ( tMonth < 10) tMonth = "0"+tMonth;
+		if ( tDate < 10) tDate = "0"+tDate;
+		document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
+	}
+	
+	// Multiple onload function created by: Simon Willison
+	// http://simonwillison.net/2004/May/26/addLoadEvent/
+	function addLoadEvent(func) {
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') {
+			window.onload = func;
+		} else {
+			window.onload = function() {
+				if (oldonload) {
+					oldonload();
+				}
+				func();
+			}
+		}
+	}
+	addLoadEvent(function() {
+		autoDate();
+	}); 
+	</script>
 </head>
 
 <body>
@@ -123,76 +163,51 @@
                         <div class="widget_title"><h2>Comments</h2></div>
                         <div class="comments-area">
                             
-                            <!--// coments \\-->
-                            <ul class="comment-list">
-                                <li>
-                                    <div class="thumb-list">
-                                        <figure><img alt="" src="${pageContext.request.contextPath}/resources/charity/extra-images/comment-img1.png"></figure>
-                                        <div class="text-holder">
-                                            <h6>Cynthia Sachmidt</h6>
-                                            <time class="post-date" datetime="2008-02-14 20:00">June 16, 2017 at 2:10 pm</time>
-                                          <!--   <a class="comment-reply-link" href="#"><i class="fa fa-share"></i> Reply</a> -->
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel consequat tellus augue tortor, vitae volutpat ante. Proin tellus augue, dignissim vel lorem ut, vulpu sit amet, co tate laoreet enim.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <!-- #comment-## -->
-                                <li>
-                                    <div class="thumb-list">
-                                        <figure><img alt="" src="${pageContext.request.contextPath}/resources/charity/extra-images/comment-img2.png"></figure>
-                                        <div class="text-holder">
-                                            <h6>George Baily</h6>
-                                            <time class="post-date" datetime="2008-02-14 20:00">June 16, 2017 at 2:10 pm</time>
-                                            <a class="comment-reply-link" href="#"><i class="fa fa-share"></i> Reply</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel consequat tellus augue tortor, vitae volutpat ante. Proin tellus augue, dignissim vel lorem ut, vulpu sit amet, co tate laoreet enim.</p>
-                                        </div>
-                                    </div>
-                                    
-                                   <%-- 대댓글 영역  
-                                   	<ul class="children">
-                                        <li>
-                                            <div class="thumb-list">
-                                                <figure><img alt="" src="${pageContext.request.contextPath}/resources/charity/extra-images/comment-img3.png"></figure>
-                                                <div class="text-holder">
-                                                    <h6>Sareena Marchant</h6>
-                                                    <time class="post-date" datetime="2008-02-14 20:00">June 16, 2017 at 2:10 pm</time>
-                                                    <a class="comment-reply-link" href="#"><i class="fa fa-share"></i> Reply</a>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel consequat tellus augue tortor, vitae volutpat ante. Proin tellus augue, dignissim vel lorem ut, vulpu sit amet, co tate laoreet enim.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- #comment-## -->
-                                    </ul>
-                                    <!-- .children --> --%>
-                                    
-                                </li>
-                                <!-- #comment-## -->
+                            <!--// comments \\-->
+                            <ul id="listComment"  class="comment-list">
+                             	<!-- prepend 자리 -->
+                             	<c:forEach var="vo" items="${listComment}">
+	                                
+	                                <li>
+	                                    <div class="thumb-list">
+	                                        <figure><img alt="" src="${pageContext.request.contextPath}/resources/charity/extra-images/comment-img1.png"></figure>
+	                                        <!-- 랜덤이미지? -->
+	                                        <div class="text-holder">
+	                                            <h6><c:out value="${vo.rid}"/></h6><!-- 작성자 -->
+	                                            <div><c:out value="${vo.rdate}"/></div><!-- 작성일 -->
+	                                            <p><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->
+	                                        </div>
+	                                    </div>
+	                                </li>
+	                                
+                                </c:forEach>
                             </ul>
-                            <!--// coments \\-->
+                            <!--// comments \\-->
                             
                         </div>
+                        
                         
                         <!--// 댓글 작성 영역 comment-respond \\-->
                         <div class="widget_title"><h2>Leave a Comment</h2></div>
                         <div class="comment-respond">
-                            <form>
+                            <form id="insertForm" action="${pageContext.request.contextPath}/board/shows/reply_insert" method="post">
                                 <p>
-                                    <label>Name:</label>
-                                    <input type="text" value="Enter name*" onblur="if(this.value == '') { this.value ='Enter name*'; }" onfocus="if(this.value =='Enter name*') { this.value = ''; }">
+                                    <label>작성자(아이디)</label>
+                                    <input type="text" id="rid" name="rid" value="<sec:authentication property="principal.member.member_id"/>"  readonly >
                                 </p>
                                 <p>
-                                    <label>Email:</label>
-                                    <input type="text" value="Enter email*" onblur="if(this.value == '') { this.value ='Enter email*'; }" onfocus="if(this.value =='Enter email*') { this.value = ''; }">
-                                </p>
+                                    <label>작성일</label>
+                                    <input type="text" id="rdate" disabled >
+                                    
                                 <p class="charity-respond-full-form">
-                                    <label>Comment:</label>
-                                    <textarea name="comment" placeholder="Type your comment*" class="commenttextarea"></textarea>
+                                    <label>댓글내용</label>
+                                    <textarea id="rcontent" name="rcontent" placeholder="댓글을 작성하세요." class="commenttextarea"></textarea>
                                 </p>
                                 <p class="form-submit">
-                                    <input name="submit" class="submit" value="Submit" type="submit">
                                     <input name="comment_post_ID" value="99" id="comment_post_ID" type="hidden">
+                                	<input name="submit" class="submit" value="댓글작성" type="submit">
                                 </p>
+                                
                             </form>
                         </div>
                         <!--// 댓글 작성 영역 comment-respond \\-->
@@ -228,11 +243,64 @@
                         <i class="fa fa-search"></i>
                     </form>
                 </div>
-                
             </div>
         </div>
     </div>
 
+
+    <script type="text/javascript">
+    // 댓글 작성 및 ajax로 댓글 불러오기
+    		
+    $(function(){
+    	 $("#insertForm").submit(function(event){
+    		event.preventDefault();
+    		
+    		var b_index = $("#b_index").val();
+    		var rid = $("#rid").val();
+    		var rcontent = $("#rcontent").val();
+    		console.log(b_index,  rcontent);
+    		
+    	 	var form = {
+    				b_index: b_index,
+    				rid : rid,
+    				rcontent : rcontent
+    		}  
+    	 	//var token = $("meta[name='_csrf']").attr("content");
+    	    //var header = $("meta[name='_csrf_header']").attr("content");
+    	    
+     		$.ajax({
+    			type:"POST",
+    			url:"${pageContext.request.contextPath}/board/shows/reply_insert",
+    			cache : false,
+    			dataType: 'text',
+    			contentType:'application/json; charset=UTF-8',
+    			data: JSON.stringify(form),
+                beforeSend : function(xhr)
+              	{   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                  xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+              	}, 
+    			success : function(result) {
+    			 	 if(result == "SUCCESS"){
+    					alert(result)
+    				
+    					$("#listComment").prepend("<div><b>"  + b_index + "</b></div>"
+    					+"<div>" + rid + "</div>"
+    					+"<div>" + rcontent + "</div>" + "<div><hr>"); // 작성 결과 입력
+    					$('#rid').val(''); //인풋박스 초기화
+    					$('#rcontent').val(''); //인풋박스 초기화
+    					
+    				};  
+    			}, //ajax 성공 시 end
+    			error : function(request, status, error) {
+    				alert("code:" + request.status + "\n" + "message:"
+    						+ request.responseText + "\n" + "error:" + error);
+    			} // ajax 에러 시 end
+    		}); //ajax end
+    		 
+    	});//#insertForm end
+    		
+    });
+    </script>	
 
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>
