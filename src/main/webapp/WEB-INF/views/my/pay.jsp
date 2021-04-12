@@ -55,7 +55,7 @@
 	function cancelPay() {
 		
 			$.ajax({
-		        url: "${pageContext.request.contextPath}/payments/cancel",
+		        url: "${pageContext.request.contextPath}/my/payments/cancel",
 		        type: "POST",
 		        contentType: "application/json",
 		        data: JSON.stringify({

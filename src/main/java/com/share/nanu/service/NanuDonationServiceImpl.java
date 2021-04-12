@@ -90,6 +90,7 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 		String afterPaidAt = sdf.format(date); // 스트링
 		//Date afterPaidAtSql = Date.valueOf(afterPaidAt); //sql 데이터 타입
 		return afterPaidAt;
+		//return afterPaidAtSql;
 	}
 
 	//donation 테이블에 ajax에서 받아온 데이터 insert

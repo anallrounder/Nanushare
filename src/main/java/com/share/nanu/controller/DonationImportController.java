@@ -1,7 +1,10 @@
 package com.share.nanu.controller;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.Format;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,8 +78,18 @@ public class DonationImportController {
 				  payMethod = "pay";
 			  }
 		  }
-			
+		  
+		 
+		  //Date dateChangePaidAt = new Date(Long.parseLong(changePaidAt));		  
+		  //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		  //Date dateChangePaidAt = (Date) sdf.parse(changePaidAt);
+		  //changePaidAt = sdf.format(changePaidAt);
+		  //Timestamp dateChangePaidAt = Timestamp.valueOf(changePaidAt);
+		  
 		  Date dateChangePaidAt = Date.valueOf(changePaidAt); //문자열로 반환된 날짜를 sql date 형식으로 지정
+		  
+		  System.out.println(changePaidAt);
+		  
 		  String amount = String.valueOf(resultMap.get(0).get("amount"));//int 타입을 String으로 캐스팅	
 		  
 		  
@@ -130,6 +143,13 @@ public class DonationImportController {
 		 
 		
 	}
+	
+	@PostMapping("/my/payments/cancel")
+	public void name() {
+		
+	}
+	
+	
 		
 	@GetMapping("/thank")
 	public ModelAndView thank(ModelAndView mav) { //감사페이지 이동
