@@ -14,7 +14,7 @@ public class EventController {
 	@RequestMapping("/event/check")
 	public ModelAndView attendance(ModelAndView mav) throws Exception {
 			
-		mav.setViewName("/eventView/attendcheck"); 
+		mav.setViewName("/eventView/attendcheck2"); 
 		return mav;
 	}
 	

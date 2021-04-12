@@ -178,8 +178,8 @@ li {
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
-								<li class="active"><a href="mypage"><span class="fa fa-user"></span>
-										Profile</a></li>
+								<li class="active"><a href="mypage"><span
+										class="fa fa-user"></span> Profile</a></li>
 								<li><a href="ask"><span class="fa fa-question">
 									</span>나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
@@ -187,15 +187,9 @@ li {
 								<li><a href="give"><span class="fa fa-handshake">
 									</span>나의나눔내역</a></li>
 								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
-								<li><a href="pay"><span
-										class="fa fa-credit-card"></span>나의결제내역</a></li>
-										
-										<%-- <c:set var="sign" value="${list1}"/>
-										<c:if test="${sign.signuppath != 'home'}">
-									 --%>
-										<li><a href="/my/drop"><span
-										class="fa fa-credit-card"></span>탈퇴하기</a></li>
-										<%-- </c:if> --%>
+								<li><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
+
+								
 							</ul>
 							</nav>
 						</div>
@@ -226,89 +220,88 @@ li {
 
 													<span>나의 포인트</span>
 													<h4 class="mb-2 mt-3">
-													<%-- <form action="${pageContext.request.contextPath}/my/ask" method="get"> --%>
+														<%-- <form action="${pageContext.request.contextPath}/my/ask" method="get"> --%>
 														<c:forEach var="vo1" items="${memberInfo}">
-														
+
 															<%--  <input type="hidden" value="${vo2.member_id} name="member_id" /> --%>
 															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}</c:forEach>
 														</c:forEach>
-													</form>
-													</h4>
-													<!-- <div
+							</form>
+							</h4>
+							<!-- <div
 												class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats"> -->
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="button mt-2 d-flex flex-row align-items-center">
-										<button class="charity-simple-blog-btn w-30 text-white stats"
-											type="button"
-											onClick="location.href='${pageContext.request.contextPath}/donation/money/point'">
-											기부하기</button>
-
-									</div>
-									<div
-										class="p-2 mt-2 bg d-flex justify-content-between rounded text-black stats"
-										style="border-style: dotted;">
-										<div class="d-flex flex-column">
-											<span class="articles">나의 나눔횟수</span> <span class="number1"><sec:authentication
-													property="principal.member.itemdntcnt" /></span>
-										</div>
-										<div class="d-flex flex-column">
-											<span class="followers">나의 기부횟수</span> <span class="number2"><sec:authentication
-													property="principal.member.dntcnt" /></span>
-										</div>
-										<!-- <div class="d-flex flex-column">
-											<span class="rating">Rating</span> <span class="number3">8.9</span>
-										</div> -->
-									</div>
-
-
-									<!-- 프로그래스바 -->
-									<div class="charity-cause-donate">
-
-
-										<div class="progressbar">
-											<img class="maxmax blinking" width="80" height="80">
-											<div class="progress-label"></div>
-										</div>
-
-										<div
-											data-width='<sec:authentication property="principal.member.dntcnt"/>'
-											max='100' class="charity-cause-progressbar"></div>
-									</div>
-						</div>
-
-						</fieldset>
-
-						<hr>
-
-						</form>
-
-						<div class="button mt-2 d-flex flex-row align-items-center">
-							<button class="charity-simple-blog-btn w-100 text-white stats"
-								type="submit"
-								onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-								프로필수정</button>
-							<button
-								class="charity-simple-blog-btn w-100 ml-2 text-white stats">기부영수증</button>
 						</div>
 					</div>
 				</div>
-				</section>
+			</div>
+			<div class="button mt-2 d-flex flex-row align-items-center">
+				<button class="charity-simple-blog-btn w-30 text-white stats"
+					type="button"
+					onClick="location.href='${pageContext.request.contextPath}/donation/money/point'">
+					기부하기</button>
+
+			</div>
+			<div
+				class="p-2 mt-2 bg d-flex justify-content-between rounded text-black stats"
+				style="border-style: dotted;">
+				<div class="d-flex flex-column">
+					<span class="articles">나의 나눔횟수</span> <span class="number1"><sec:authentication
+							property="principal.member.itemdntcnt" /></span>
+				</div>
+				<div class="d-flex flex-column">
+					<span class="followers">나의 기부횟수</span> <span class="number2"><sec:authentication
+							property="principal.member.dntcnt" /></span>
+				</div>
+				<!-- <div class="d-flex flex-column">
+											<span class="rating">Rating</span> <span class="number3">8.9</span>
+										</div> -->
+			</div>
+
+
+			<!-- 프로그래스바 -->
+			<div class="charity-cause-donate">
+
+
+				<div class="progressbar">
+					<img class="maxmax blinking" width="80" height="80">
+					<div class="progress-label"></div>
+				</div>
+
+				<div
+					data-width='<sec:authentication property="principal.member.dntcnt"/>'
+					max='100' class="charity-cause-progressbar"></div>
 			</div>
 		</div>
 
-		<script>
-			$("#mytabs>ul>li>a").each(function(i) {
-				$(this).attr("href", "#mytab" + i)
-			})
-			$("#mytabs>div>div").each(function(i) {
-				$(this).attr("id", "mytab" + i)
-			})
-		</script>
+		</fieldset>
 
-		<!-- Main Section -->
+		<hr>
+
+		</form>
+
+		<div class="button mt-2 d-flex flex-row align-items-center">
+			<button class="charity-simple-blog-btn w-100 text-white stats"
+				type="submit"
+				onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+				프로필수정</button>
+			<button class="charity-simple-blog-btn w-100 ml-2 text-white stats">기부영수증</button>
+		</div>
+	</div>
+	</div>
+	</section>
+	</div>
+	</div>
+
+	<script>
+		$("#mytabs>ul>li>a").each(function(i) {
+			$(this).attr("href", "#mytab" + i)
+		})
+		$("#mytabs>div>div").each(function(i) {
+			$(this).attr("id", "mytab" + i)
+		})
+	</script>
+
+	<!-- Main Section -->
 
 	</div>
 	<!-- Content -->
