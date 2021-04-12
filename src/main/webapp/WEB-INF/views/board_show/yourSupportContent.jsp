@@ -166,6 +166,15 @@
                             <!--// comments \\-->
                             <ul id="listComment"  class="comment-list">
                              	<!-- prepend 자리 -->
+                            	
+                            	<c:if test="${empty list4}">
+									<tr>
+										<td colspan="5" align="center">작성된 댓글이 없습니다</td>
+									</tr>
+								</c:if>
+                             
+                             	<c:if test="${! empty listComment}">
+                             	<c:set var="listComment" value="${listComment}" />
                              	<c:forEach var="vo" items="${listComment}">
 	                                
 	                                <li>
@@ -181,6 +190,7 @@
 	                                </li>
 	                                
                                 </c:forEach>
+                                </c:if>
                             </ul>
                             <!--// comments \\-->
                             
