@@ -145,9 +145,7 @@ li {
 
 
 							<table>
-								<div>
-									<br>
-								</div>
+							
 								<tr>
 
 									<th>인증게시판 제목</th>
