@@ -35,6 +35,49 @@
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
+<!-- <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+    </script> --><!-- jQuery CDN --->
+  <script type="text/javascript">
+  $(function() {
+	  
+	  var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+	    
+	  
+  
+  $('#refund').click(
+	function cancelPay() {
+		
+			$.ajax({
+		        url: "${pageContext.request.contextPath}/payments/cancel",
+		        type: "POST",
+		        contentType: "application/json",
+		        data: JSON.stringify({
+		          merchant_uid: "mid_" + new Date().getTime(), // 주문번호
+		          cancel_request_amount: 2000, // 환불금액
+		          reason: "테스트 결제 환불" // 환불사유
+		         
+		        }),
+		        dataType: "json"
+		      });
+			
+			
+			
+		}//canclePay end	  
+	  
+	  )//refund end 
+  });// function end
+  
+  
+  
+  </script>
+
 <title>Nanushare</title>
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
@@ -186,7 +229,7 @@ li {
 											<td><fmt:formatDate value="${list5.dntdate}" type="both"
 													dateStyle="full" timeStyle="full" /></td>
 											<td>${list5.paymethod}</td>
-											<td><button class="paycc" type="button">결제취소</button></td>
+											<td><button class="paycc" type="button" id="refund" name="refund" onclick="cancelPay()">결제취소</button></td>
 										</tr>
 										<%-- </c:if>
 									</sec:authorize> --%>
