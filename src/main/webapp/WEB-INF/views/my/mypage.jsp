@@ -190,11 +190,12 @@ li {
 								<li><a href="pay"><span
 										class="fa fa-credit-card"></span>나의결제내역</a></li>
 										
-										<c:set var="sign" value="${list1}"/>
+										<%-- <c:set var="sign" value="${list1}"/>
 										<c:if test="${sign.signuppath != 'home'}">
-									
+									 --%>
 										<li><a href="/my/drop"><span
-										class="fa fa-credit-card"></span>탈퇴하기</a></li></c:if>
+										class="fa fa-credit-card"></span>탈퇴하기</a></li>
+										<%-- </c:if> --%>
 							</ul>
 							</nav>
 						</div>
