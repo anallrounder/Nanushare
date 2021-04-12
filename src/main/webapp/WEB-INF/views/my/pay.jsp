@@ -155,13 +155,12 @@ li {
 									<br>
 								</div>
 								<tr>
-
 									<!-- <th>아이디</th> -->
-									<th>아이디</th>
-									<!-- <th>조회수</th> -->
 									<th>금액</th>
 									<th>결제날짜</th>
 									<th>결제방법</th>
+									<th>결제번호</th>
+									<th>처리상태</th>
 									<th>결제취소</th>
 								</tr>
 								<c:if test="${empty list5}">
@@ -175,21 +174,15 @@ li {
 								<!-- 나의문의내역 -->
 								<c:if test="${! empty list5}">
 									<c:forEach items="${list5}" var="list5" varStatus="status">
-										<%-- <sec:authentication property="principal" var="pinfo" />
-									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list5.member_id}"> --%>
 										<tr>
-											<td>${list5.member_id}</td>
-											<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td>
-												 --%>
 											<td><i class="fa fa-krw" aria-hidden="true"></i>${list5.dntprice}</td>
-											<td><fmt:formatDate value="${list5.dntdate}" type="both"
-													dateStyle="full" timeStyle="full" /></td>
+											<td><fmt:formatDate value="${list5.dntdate}" pattern="yyyy-MM-dd"/></td>
 											<td>${list5.paymethod}</td>
+											<td>${list5.dnt_paynum}</td>
+											<td>${list5.dntstat}</td>
 											<td><button class="paycc" type="button">결제취소</button></td>
 										</tr>
-										<%-- </c:if>
-									</sec:authorize> --%>
+
 									</c:forEach>
 								</c:if>
 							</table>
@@ -209,81 +202,82 @@ li {
 												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
 												<a
 													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(idx)}">${idx}</a>
-											</c:forEach></li>
+									</c:forEach>
+									</li>
 
-										<li class="page-item"><c:if
-												test="${pageMaker.next && pageMaker.endPage > 0}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-												</a>
-											</c:if></li>
+									<li class="page-item"><c:if
+											test="${pageMaker.next && pageMaker.endPage > 0}">
+											<a class="page-link"
+												href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+											</a>
+										</c:if></li>
 									</ul>
 
+									</div>
+
+								</c:if>
+
+
+
+								</div>
+								</div>
+								</section>
+								</div>
 								</div>
 
-							</c:if>
+								<script>
+									$("#mytabs>ul>li>a").each(function(i) {
+										$(this).attr("href", "#mytab" + i)
+									})
+									$("#mytabs>div>div").each(function(i) {
+										$(this).attr("id", "mytab" + i)
+									})
+								</script>
+
+								<!-- Main Section -->
+
+								</div>
+								<!-- Content -->
+								</div>
+
+								<!-- Footer -->
+								<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
+								<!-- Footer -->
+
+								<!-- Search Modal -->
+								<div class="modal fade searchmodal" id="searchModal"
+									tabindex="-1" role="dialog">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-body">
+												<a href="/resources/charity/#" class="charity-close-btn"
+													data-dismiss="modal" aria-label="Close"><span
+													aria-hidden="true">&times;</span></a>
+												<form>
+													<input type="text" value="Type Your Keyword"
+														onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
+														onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
+													<input type="submit" value=""> <i
+														class="fa fa-search"></i>
+												</form>
+											</div>
+
+										</div>
+									</div>
+								</div>
 
 
-
-						</div>
-					</div>
-					</section>
-				</div>
-			</div>
-
-			<script>
-				$("#mytabs>ul>li>a").each(function(i) {
-					$(this).attr("href", "#mytab" + i)
-				})
-				$("#mytabs>div>div").each(function(i) {
-					$(this).attr("id", "mytab" + i)
-				})
-			</script>
-
-			<!-- Main Section -->
-
-		</div>
-		<!-- Content -->
-	</div>
-
-	<!-- Footer -->
-	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
-	<!-- Footer -->
-
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-	<!-- jQuery -->
-	<script src="/resources/charity/script/jquery.js"></script>
-	<script src="/resources/charity/script/popper.min.js"></script>
-	<script src="/resources/charity/script/bootstrap.min.js"></script>
-	<script src="/resources/charity/script/slick.slider.min.js"></script>
-	<script src="/resources/charity/script/progressbar.js"></script>
-	<script src="/resources/charity/script/fancybox.min.js"></script>
-	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-	<script src="/resources/charity/script/jquery.jplayer.js"></script>
-	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions-main.js"></script>
-
+								<!-- jQuery -->
+								<script src="/resources/charity/script/jquery.js"></script>
+								<script src="/resources/charity/script/popper.min.js"></script>
+								<script src="/resources/charity/script/bootstrap.min.js"></script>
+								<script src="/resources/charity/script/slick.slider.min.js"></script>
+								<script src="/resources/charity/script/progressbar.js"></script>
+								<script src="/resources/charity/script/fancybox.min.js"></script>
+								<script src="/resources/charity/script/jquery.countdown.min.js"></script>
+								<script src="https://maps.googleapis.com/maps/api/js"></script>
+								<script src="/resources/charity/script/jquery.jplayer.js"></script>
+								<script src="/resources/charity/script/jplayer.playlist.js"></script>
+								<script src="/resources/charity/script/functions-main.js"></script>
 </body>
 </html>

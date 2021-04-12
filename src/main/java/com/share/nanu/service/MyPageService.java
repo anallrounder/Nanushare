@@ -12,8 +12,6 @@ import com.share.nanu.security.MemberDetails;
 public interface MyPageService {
 
 	// 1.마이페이지-나의문의
-	//public void mycontent(String username);
-	
 	public List<BoardVO> myList1(Criteria cri,String member_id);
 	//public List<BoardVO> myList1(Criteria cri,String member_id);
 	public int getTotalCount1(Criteria cri,String member_id);
@@ -44,8 +42,6 @@ public interface MyPageService {
 
 	// 회원탈퇴페이지
 	public void memberDelete(MemberVO mvo, MemberDetails md);
-	
-	
 	
 
 }
