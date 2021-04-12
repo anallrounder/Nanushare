@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
+import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.page.Criteria;
 
 @Mapper
@@ -39,5 +40,14 @@ public interface NanuBoardShowYSMapper {
 	
 	//이미지 업로드
 	public void uploadFile(AttachmentVO attachmentVO);
+
+	// 댓글 리스트
+	public List<BoardreplyVO> listComment(BoardreplyVO rvo);
+	
+	// 댓글 입력
+	public void insertReply(BoardreplyVO rvo);
+	
+	// 댓글 읽기
+	public BoardreplyVO getComment(BoardreplyVO rvo);
 
 }
