@@ -176,7 +176,7 @@ li {
 									<c:forEach items="${list5}" var="list5" varStatus="status">
 										<tr>
 											<td><i class="fa fa-krw" aria-hidden="true"></i>${list5.dntprice}</td>
-											<td><fmt:formatDate value="${list5.dntdate}" pattern="yyyy-MM-dd"/></td>
+											<td><fmt:formatDate value="${list5.dntdate}" pattern="yy-MM-dd hh:mm:ss"/></td>
 											<td>${list5.paymethod}</td>
 											<td>${list5.dnt_paynum}</td>
 											<td>${list5.dntstat}</td>
