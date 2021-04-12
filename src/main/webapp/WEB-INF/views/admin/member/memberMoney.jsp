@@ -237,10 +237,10 @@
 													<a class="nav-link active" data-toggle="tab" href="#money">돈기부역내역</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" data-toggle="tab" href="#jkl">포인트내역</a>
+													<a class="nav-link" href="/admin/member/point?member_id=${pageMaker.member_id}">포인트내역</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" data-toggle="tab" href="#jkl">문의내역</a>
+													<a class="nav-link" href="/admin/member/qna?member_id=${pageMaker.member_id}">문의내역</a>
 												</li>
 											</ul>
 											
@@ -275,20 +275,20 @@
 												<ul class="page-numbers">
 													<li>
 													<c:if test="${pageMaker.prev}">
-														<a class="previous pages-numbers" href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(pageMaker.startPage - 1) }"><i class="fa fa-angle-left"></i>prev</a>
+														<a class="previous pages-numbers" href="${pageContext.request.contextPath}/admin/member/moneydona${pageMaker.makeQuery(pageMaker.startPage - 1) }"><i class="fa fa-angle-left"></i>prev</a>
 													</c:if>
 													</li>
 				
 													<li>
 														<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 															<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																<a href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(idx)}">${idx}</a>
+																<a href="${pageContext.request.contextPath}/admin/member/moneydona${pageMaker.makeQuery(idx)}">${idx}</a>
 														</c:forEach>
 													</li>
 				
 													<li>
 														<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-															<a class="next page-numbers" href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(pageMaker.endPage +1) }">next<i class="fa fa-angle-right"></i></a>
+															<a class="next page-numbers" href="${pageContext.request.contextPath}/admin/member/moneydona${pageMaker.makeQuery(pageMaker.endPage +1) }">next<i class="fa fa-angle-right"></i></a>
 														</c:if>
 													</li>
 												</ul>

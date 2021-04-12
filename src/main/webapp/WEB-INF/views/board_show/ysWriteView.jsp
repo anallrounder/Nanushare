@@ -1,8 +1,6 @@
-<!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
 <!doctype html>
 <html lang="ko">
 
@@ -17,10 +15,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    
     <meta name="_csrf" content="${_csrf.token}">
-    <meta name="_csrf_header" content="${_csrf.headerName}">
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
     
     <script type="text/javascript">
+<<<<<<< HEAD
     
  
 	   $(function() {
@@ -47,6 +47,13 @@
            
 		     
 		});
+=======
+	    var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
+>>>>>>> master_si
 	 
     
     </script>
@@ -117,7 +124,20 @@
 	                           <br><br>
 	                           <h4>Content</h4>
 	                           <p><textarea id="editor4" name="bcontent" placeholder="내용을 작성하세요."></textarea></p>
-	                           
+	                             <script type="text/javascript">
+                        
+			                        var ckeditor_config = {
+			        						resize_enaleb : false, //에디터 크기조절 x
+			        						height:"450",
+			        						enterMode : CKEDITOR.ENTER_BR,
+			        						shiftEnterMode : CKEDITOR.ENTER_P,
+			        						filebrowserUploadUrl : '<c:url value="${pageContext.request.contextPath}/my/board/shows/imageUpload" />?${_csrf.parameterName}=${_csrf.token}'
+			        					};
+			                            CKEDITOR.replace('editor4', ckeditor_config);
+			                            
+			                            
+			                           
+		                        </script>
 	                           <br><br>
 							   <br><hr>
 
@@ -128,9 +148,10 @@
 							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 	                        </div>
 	                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	                        <input type="hidden" id="_csrf_header" name="_csrf_header" value="${_csrf.headerName}" />
                         </form>
-                        <!-- <script>CKEDITOR.replace('editor4');</script> -->
-                        
+                      
+                       
 
 
                         
@@ -182,7 +203,6 @@
     <script src="${pageContext.request.contextPath}/resources/charity/script/progressbar.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/fancybox.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.countdown.min.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js"></script> -->
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>

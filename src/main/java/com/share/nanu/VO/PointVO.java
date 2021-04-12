@@ -22,7 +22,7 @@ public class PointVO {
 	}
 	
 	public PointVO(int pnt_num, String member_id, Date pdate, int prtpnt, int dntpnt, int totalpnt, int e_idx,
-			int nowpntm, int ecat_num) {
+			int nowpnt, int ecat_num) {
 		this.pnt_num = pnt_num;
 		this.member_id = member_id;
 		this.pdate = pdate;

@@ -78,25 +78,66 @@ public class AdminMemberController {
 	}
 	
 	// 회원관리(돈기부여내역)
-		@GetMapping("/member/moneydona")
-		public ModelAndView memberMoneyDona(ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md, Criteria cri) throws Exception {
+	@GetMapping("/member/moneydona")
+	public ModelAndView memberMoneyDona(ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md, Criteria cri) throws Exception {
 					
-			if (md != null) {
-				mov.addObject("username", md.getmember().getName());
-			}
-			
-			log.info("돈기부여 내역 시작");
-			log.info(member.getMember_id());
-					
-			mov.setViewName("admin/member/memberMoney");
-			mov.addObject("moneyDona", adminPgService.getMemberMoney(member.getMember_id(), cri));
-				
-			// 페이징
-			int total = adminPgService.getMoneyCount(member.getMember_id(), cri);
-			mov.addObject("pageMaker", new PageVOtest(cri, total, member.getMember_id()));
-				
-			return mov;
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
 		}
+			
+		log.info("돈기부여 내역 시작");
+		log.info(member.getMember_id());
+					
+		mov.setViewName("admin/member/memberMoney");
+		mov.addObject("moneyDona", adminPgService.getMemberMoney(member.getMember_id(), cri));
+				
+		// 페이징
+		int total = adminPgService.getMoneyCount(member.getMember_id(), cri);
+		mov.addObject("pageMaker", new PageVOtest(cri, total, member.getMember_id()));
+				
+		return mov;
+	}
+	
+	// 회원관리(포인트내역)
+	@GetMapping("/member/point")
+	public ModelAndView memberPoint(ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md, Criteria cri) throws Exception {
+						
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
+		}
+				
+		log.info("포인트 내역 시작");
+		log.info(member.getMember_id());
+						
+		mov.setViewName("admin/member/memberPoint");
+		mov.addObject("point", adminPgService.getMemberPoint(member.getMember_id(), cri));
+					
+		// 페이징
+		int total = adminPgService.getPointCount(member.getMember_id(), cri);
+		mov.addObject("pageMaker", new PageVOtest(cri, total, member.getMember_id()));
+					
+		return mov;
+	}
+	// 회원관리(문의내역)
+	@GetMapping("/member/qna")
+	public ModelAndView memberQnA(ModelAndView mov, MemberVO member, @AuthenticationPrincipal MemberDetails md, Criteria cri) throws Exception {
+							
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
+		}
+					
+		log.info("문의 내역 시작");
+		log.info(member.getMember_id());
+							
+		mov.setViewName("admin/member/memberQnA");
+		mov.addObject("qna", adminPgService.getMemberQnA(member.getMember_id(), cri));
+						
+		// 페이징
+		int total = adminPgService.getQnACount(member.getMember_id(), cri);
+		mov.addObject("pageMaker", new PageVOtest(cri, total, member.getMember_id()));
+						
+		return mov;
+	}
 
 	
 	

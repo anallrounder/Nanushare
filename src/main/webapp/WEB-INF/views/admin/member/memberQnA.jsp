@@ -231,7 +231,7 @@
 													<a class="nav-link" href="/admin/member_view?member_id=${pageMaker.member_id}">기본정보</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link active" href="#item" data-toggle="tab">물품기부내역</a>
+													<a class="nav-link" href="/admin/member/itemdona?member_id=${pageMaker.member_id}">물품기부내역</a>
 												</li>
 												<li class="nav-item">
 													<a class="nav-link" href="/admin/member/moneydona?member_id=${pageMaker.member_id}">돈기부역내역</a>
@@ -240,32 +240,29 @@
 													<a class="nav-link" href="/admin/member/point?member_id=${pageMaker.member_id}">포인트내역</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" href="/admin/member/qna?member_id=${pageMaker.member_id}">문의내역</a>
+													<a class="nav-link active" data-toggle="tab" href="#qna">문의내역</a>
 												</li>
 											</ul>
 											
 											<div class="tab-content">
-												<div class="tab-pane fade show active" id="item">
+												<div class="tab-pane fade show active" id="qna">
 						                            <!--// volunteer-form \\-->
 						                            <form action="" method="post">
-						                           
 							                          <table>
 							                          	<tr>
-							                              	<th>물품명</th>
-							                               	<th>기부날짜</th>
-							                               	<th>수량</th>
+							                              	<th>글번호</th>
+							                               	<th>제목</th>
+							                               	<th>내용</th>
+							                               	<th>날짜</th>
 							                            </tr>
 							                            
-							                            <c:forEach items="${itemDona}" var="itemdao" >
-							                            <c:forEach items="${itemdao.dona}" var="listdao" varStatus="status">
+							                            <c:forEach items="${qna}" var="qdao">
 							                            <tr>
-							                            	
-							                               	<td>${itemdao.iname}</td> 
-							                               	<td>${listdao.idntdate}</td>
-							                              	<td>${listdao.donaamount}</td> 
-							                              	 
+							                               	<td><a href="${pageContext.request.contextPath}/restful/qna?b_index=${qdao.b_index}">${qdao.b_index}</a></td> 
+							                               	<td>${qdao.btitle}</td>
+							                              	<td>${qdao.bcontent}</td>
+							                              	<td>${qdao.bdate}</td>
 							                            </tr>
-							                            </c:forEach>
 							                           </c:forEach>
 							                           
 							                           </table>
@@ -278,20 +275,20 @@
 												<ul class="page-numbers">
 													<li>
 													<c:if test="${pageMaker.prev}">
-														<a class="previous pages-numbers" href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(pageMaker.startPage - 1) }"><i class="fa fa-angle-left"></i>prev</a>
+														<a class="previous pages-numbers" href="${pageContext.request.contextPath}/admin/member/qua${pageMaker.makeQuery(pageMaker.startPage - 1) }"><i class="fa fa-angle-left"></i>prev</a>
 													</c:if>
 													</li>
 				
 													<li>
 														<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 															<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																<a href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(idx)}">${idx}</a>
+																<a href="${pageContext.request.contextPath}/admin/member/qua${pageMaker.makeQuery(idx)}">${idx}</a>
 														</c:forEach>
 													</li>
 				
 													<li>
 														<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-															<a class="next page-numbers" href="${pageContext.request.contextPath}/admin/member/itemdona${pageMaker.makeQuery(pageMaker.endPage +1) }">next<i class="fa fa-angle-right"></i></a>
+															<a class="next page-numbers" href="${pageContext.request.contextPath}/admin/member/qua${pageMaker.makeQuery(pageMaker.endPage +1) }">next<i class="fa fa-angle-right"></i></a>
 														</c:if>
 													</li>
 												</ul>

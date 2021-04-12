@@ -126,6 +126,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	</select>
 	
+	<!-- 회원관리-돈기부여 -->
+	
 	<select id="getMemberMoneyDona" resultType="com.share.nanu.VO.DonationVO">
 	<![CDATA[ 
 		select * from (
@@ -140,6 +142,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select resultType="int" id="getMoneyCount">
 	<![CDATA[
 		select count(*) from donation where member_id= #{member_id}
+	]]>
+	</select>
+	
+	<!-- 회원관리-포인트내역 -->
+	<resultMap id="ecatvo" type="com.share.nanu.VO.PointVO">
+		<id property="pnt_num" column="pnt_num" />
+		<result property="pdate" column="pdate" />
+		<result property="prtpnt" column="prtpnt" />
+		<result property="dntpnt" column="dntpnt" />
+		<result property="totalpnt" column="totalpnt" />
+		<result property="e_idx" column="e_idx" />
+		<result property="nowpnt" column="nowpnt" />
+		<result property="ecat_num" column="ecat_num" />
+	</resultMap>
+	
+	<resultMap id="epointvo" type="com.share.nanu.VO.EcatPointVO">
+		<id property="ecat_num" column="ecat_num" />
+		<result property="ename" column="ename" />
+		<collection property="pointvo" javaType="java.util.List" resultMap="ecatvo" />
+	</resultMap>
+
+	<select resultMap="epointvo" id="getPointLog">
+	<![CDATA[
+	
+	select * from (  
+		select rownum as rn, a.* from ( 
+        	select p.pnt_num, p.member_id, p.pdate, p.prtpnt, p.dntpnt, p.totalpnt, p.e_idx, p.nowpnt, e.ecat_num, e.ename
+				from ecat e, point p where e.ecat_num = p.ecat_num and p.member_id = #{member_id} order by p.pnt_num asc
+     		)a where rownum <= #{cri.pageNum} * #{cri.amount}
+	) where rn >  (#{cri.pageNum}-1) * #{cri.amount}      
+	]]>
+	</select>
+	
+	<select resultType="int" id="getPointCount">
+	<![CDATA[
+		select count(*) from point where member_id= #{member_id}
+	]]>
+	</select>
+	
+	<select id="getQnA" resultType="com.share.nanu.VO.BoardVO">
+	<![CDATA[ 
+		select * from board where bcat_num = 1 and member_id = #{member_id}
+	]]>
+	</select>
+	
+	<select resultType="int" id="getQnACount">
+	<![CDATA[
+		select count(*) from board where bcat_num = 1 and member_id = #{member_id}
 	]]>
 	</select>
 	
