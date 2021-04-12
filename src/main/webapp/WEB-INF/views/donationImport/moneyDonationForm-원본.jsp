@@ -230,6 +230,24 @@ $(function() {
 
 </head>
 <body>
+  <!-- Header -->
+    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+    <!-- Header -->
+    <!-- Banner -->
+    <div class="charity-subheader">
+        <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>후원금기부</h1>
+                    <p>Point donation: Application Form</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner -->
+   
+   
 	<!-- 버튼을 눌렀을때 결제가 진행, 결제가완료 되면 db카운트 -->
 	<!-- 서버로 넘겨줄 정보 즉, nanushare db에 저장할 정보 -->
 	<!-- 아임포트 서버에도 내가 원하느정보를 던져주고, rest api를 통해서 아임포트 서버로부터 내가 원하는장보를 가져와서 db에 저장  -->
@@ -241,7 +259,7 @@ $(function() {
 	
 	<!-- 컨트롤러에서 회원정보 가져오기 member_id, 이름 -->
 	<!-- 카카오페이는 100원 미만 결제 불가  -->
-	<button type="button" id="donaCard" onclick="requestCard()" value="카드"  >카드</button>
+	<button type="button" id="donaCard" onclick="requestCard()" value="카드">카드</button>
 	<select name="donaCardSelect" id="donaCardSelect"> <!-- 결제금액 선택해서 아임포트에 전달 -->
 		<option value="">후원금선택</option>
 		<option value="100">100원</option>
@@ -251,7 +269,7 @@ $(function() {
 	<br/>
 	
 	
-	<button type="button" id="donaTrans" onclick="requestTrans()" value="카드"  >계좌</button>
+	<button type="button" id="donaTrans" onclick="requestTrans()" value="카드">계좌</button>
 	<select name="donaTransSelect" id="donaTransSelect">
 		<option value="">후원금선택</option>
 		<option value="100">100원</option>
