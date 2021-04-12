@@ -46,5 +46,8 @@ public interface NanuBoardShowYSService {
 	//댓글 불러오기
 	public BoardreplyVO getComment(BoardreplyVO rvo);
 	
+	// 댓글 삭제
+	public void remove(BoardreplyVO rvo);
+	
 
 }

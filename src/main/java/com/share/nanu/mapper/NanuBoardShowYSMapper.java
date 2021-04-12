@@ -49,5 +49,8 @@ public interface NanuBoardShowYSMapper {
 	
 	// 댓글 읽기
 	public BoardreplyVO getComment(BoardreplyVO rvo);
+	
+	// 댓글 삭제
+	public void removeReply(BoardreplyVO rvo);
 
 }
