@@ -50,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap id="MemberPointResult" type="com.share.nanu.VO.MemberPointVO">
  		<id column="member_id" property="member_id" />
  		<result column="name" property="name" />
+ 		<result column="signuppath" property="signuppath" />
  		<collection property="pointList" resultMap="Point" javaType="java.util.List" />
 	</resultMap>
 
@@ -57,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMP" resultMap="MemberPointResult">
 		<![CDATA[ 
 			select * from (
-					select m.member_id, m.name, p.pnt_num, p.totalpnt, p.nowpnt from member m, point p 
+					select m.member_id, m.signuppath, m.name, p.pnt_num, p.totalpnt, p.nowpnt from member m, point p 
 					where m.member_id = p.member_id order by p.pnt_num desc
 				) 
 			where rownum =1
