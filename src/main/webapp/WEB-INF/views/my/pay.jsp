@@ -148,7 +148,7 @@
 
 
 <body>
-<<<<<<< HEAD
+
    <!-- Header -->
    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
    <!-- Header -->
@@ -354,7 +354,7 @@
                         <script src="/resources/charity/script/jquery.jplayer.js"></script>
                         <script src="/resources/charity/script/jplayer.playlist.js"></script>
                         <script src="/resources/charity/script/functions-main.js"></script>
-=======
+
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
@@ -559,6 +559,6 @@
 								<script src="/resources/charity/script/jquery.jplayer.js"></script>
 								<script src="/resources/charity/script/jplayer.playlist.js"></script>
 								<script src="/resources/charity/script/functions-main.js"></script>
->>>>>>> master
+
 </body>
 </html>
