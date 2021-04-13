@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
@@ -49,13 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/my/**").access("hasRole('USER')")
 				.antMatchers("/sendQR/**").access("hasRole('USER')")
 				.antMatchers("/admin/**").access("hasRole('ADMIN')")
-				//.requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // cors설정
-																			// https://oddpoet.net/blog/2017/04/27/cors-with-spring-security/
+				//.requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // cors설정 https://oddpoet.net/blog/2017/04/27/cors-with-spring-security/
 				.antMatchers("/**").permitAll()
-				.anyRequest().permitAll()
+				.anyRequest().permitAll()				
 				/*
 				 * .and() .cors().configurationSource(corsConfiguration())
-				 */
+				 */			 
 			.and()
 				.formLogin()
 				.loginPage("/loginPage")// 인증이 필요하면 로그인으로 이동
@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username")
 				.passwordParameter("password")
 				.successHandler(successHandler())// a페이지-> b페이지(유저권한이필요) -> 로그인페이지-> b페이지로 이동
+				.failureHandler(failureHandler())
 				// .defaultSuccessUrl("/main",true)
 			.and()
 				.logout()
@@ -105,10 +106,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * configuration); return source; }
 	 */
 
+
 	@Bean
 	public AuthenticationSuccessHandler successHandler() {
 		return new SuccessHandler();
 
+	}
+	
+	@Bean
+	public AuthenticationFailureHandler failureHandler() {
+		return new LoginFailureHandler();
 	}
 
 	@Bean

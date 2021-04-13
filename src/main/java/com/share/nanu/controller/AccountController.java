@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,7 +54,7 @@ public class AccountController {
 		return mav;
 	}
 
-	@GetMapping("/loginPage") // 로그인 페이지
+	@RequestMapping("/loginPage") // 로그인 페이지
 	public ModelAndView home(ModelAndView mav, HttpServletRequest request) {
 		log.info("로그인 폼으로 이동");
 		//인증하기전 이전 주소를 기억 하는 로직

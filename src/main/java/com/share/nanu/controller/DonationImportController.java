@@ -1,11 +1,20 @@
 package com.share.nanu.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,12 +29,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.share.nanu.VO.DonationVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.NanuDonationService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
 import net.sf.json.JSONArray;
 
 @Slf4j
@@ -145,15 +157,6 @@ public class DonationImportController {
 	}
 	
 	
-	/*
-	 * @CrossOrigin(origins = "http://localhost:8282", maxAge = 3600)
-	 * 
-	 * @PostMapping("https://api.iamport.kr/users/getToken")
-	 *  public String cors() {
-	 *  log.info("api 호출 테스트"); 
-	 *  return "api 호출"; 
-	 * }
-	 */
 	
 	//@CrossOrigin(origins = "http://localhost:8282, withCredentials = 'true' ", maxAge = 3600)
 	@PostMapping("/my/payments/cancel")

@@ -67,7 +67,12 @@
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-
+<!-- <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script> --><!-- jQuery CDN --->
+  
+  
 	<script type="text/javascript"> 
 	
 	
@@ -82,7 +87,7 @@
 			console.log(paynum);
 			console.log(price);
 			
-			$.ajax({// 클라이언트가 가맹점 서버(Nanushare)로 환불 요청
+			jQuery.ajax({// 클라이언트가 가맹점 서버(Nanushare)로 환불 요청
 		        url: "${pageContext.request.contextPath}/my/payments/cancel",
 		        type: "POST",
 		        contentType: "application/json",		       
@@ -98,12 +103,12 @@
 					if(result == "SUCCESS"){
 						console.log("성공");
 						
-						
+						//https://api.iamport.kr/users/getToken
 						$.ajax({
 							url : "https://api.iamport.kr/users/getToken",
 							type: "POST",
 							contentType: "application/json",
-							dataType: 'jsonp',							
+							dataType: 'json',							
 							//jsonpCallback: "callback",
 							data: { //키들은 개발자 모드에서 확인할 수 있기때문에 서버단에서 처리해줘야한다. 수정해야할 부분
 							      imp_key: "4277055072256012", // REST API키

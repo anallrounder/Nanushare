@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.share.nanu.VO.AuthVO;
 import com.share.nanu.VO.MemberVO;
+import com.share.nanu.mapper.NanuMapper;
+import com.share.nanu.service.NanuService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +27,11 @@ public class MemberDetails implements UserDetails, OAuth2User {
 
 	private MemberVO mvo;
 	private Map<String, Object> attributes;
+	
+
+	
+	@Autowired
+	private NanuService nservice;
 
 	public MemberDetails(MemberVO mvo, Map<String, Object> attributes) { //oauth2 사용시 사용
 		log.info("OAuth2 사용");
@@ -73,8 +81,11 @@ public class MemberDetails implements UserDetails, OAuth2User {
 
 	@Override
 	public boolean isAccountNonLocked() { // 계정이 잠겨있나 ?
-
-		return true;
+		boolean lock = false;
+		if(mvo.getBklist() =="Y" || mvo.getBklist() ==null || mvo.getBklist()==" ") {
+			lock = true;
+		}
+		return lock;
 	}
 
 	@Override
@@ -86,8 +97,17 @@ public class MemberDetails implements UserDetails, OAuth2User {
 	@Override
 	public boolean isEnabled() {// 계정이 활성화 되었나?
 		// 휴면 계정 사용시 필요
-		// 현재 시간 - 로긴시간 -> 1년초과시 return false 설정
-		return true;
+		// ex) 현재 시간 - 로긴시간 -> 1년초과시 return false 설정
+		log.info("isEnabled");
+		boolean enable = true;		
+		
+		if(mvo.getEnable() != '1' || mvo.getEnable() == ' ') {
+			System.out.println(mvo.getMember_id()+"의 enable : "+ mvo.getEnable());
+			enable = false;
+		}
+		
+		
+		return enable;
 	}
 
 	// oauth2User

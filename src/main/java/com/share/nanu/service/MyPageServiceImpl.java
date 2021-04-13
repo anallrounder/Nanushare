@@ -177,6 +177,7 @@ public class MyPageServiceImpl implements MyPageService {
 		if(mvo.getMember_id().equals(md.getUsername()) && mvo.getName().equals(md.getmember().getName())
 		){			
 			//mgmapper.authdel(mvo);
+			//md.isAccountNonExpired(false);
 			mgmapper.memberDelete(mvo);	
 			
 		}
