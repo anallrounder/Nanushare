@@ -1,17 +1,17 @@
 package com.share.nanu.controller;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.Format;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,7 +47,7 @@ public class DonationImportController {
 	
 	@PostMapping("/commonDonation") //로그인한 회원정보를 가져오는 컨트롤러,공통 함수, 카드, 계좌이체에서 모두 사용
 	@ResponseBody
-	public Map<String, String> test(@AuthenticationPrincipal MemberDetails md) {
+	public Map<String, String> common(@AuthenticationPrincipal MemberDetails md) {
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("member_id", md.getUsername());
 		result.put("name", md.getmember().getName());
@@ -144,8 +144,38 @@ public class DonationImportController {
 		
 	}
 	
+	
+	/*
+	 * @CrossOrigin(origins = "http://localhost:8282", maxAge = 3600)
+	 * 
+	 * @PostMapping("https://api.iamport.kr/users/getToken")
+	 *  public String cors() {
+	 *  log.info("api 호출 테스트"); 
+	 *  return "api 호출"; 
+	 * }
+	 */
+	
+	//@CrossOrigin(origins = "http://localhost:8282, withCredentials = 'true' ", maxAge = 3600)
 	@PostMapping("/my/payments/cancel")
-	public void name() {
+	public ResponseEntity<String> refund(@RequestBody Map<String, String> refund) {
+		
+		log.info("클라이언트가 가맹점 서버로 결제취소 요청");
+		System.out.println(refund);
+		System.out.println(refund.get("merchant_uid"));
+		System.out.println(refund.get("cancel_request_amount"));
+		
+		
+		ResponseEntity<String> entity = null;
+		try {
+			ndservice.getDonation(refund.get("merchant_uid"));
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		
+		return entity;
 		
 	}
 	

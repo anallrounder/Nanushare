@@ -104,10 +104,11 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 		ndmapper.updateDntcnt(member_id);
 	}
 
-	
-	
-
-
+	//donation 테이블에서 주문번호가 존재하는지 조회
+	@Override
+	public void getDonation(String merchantUid) {
+		ndmapper.getDonation(merchantUid);
+	}
 	
 
 }

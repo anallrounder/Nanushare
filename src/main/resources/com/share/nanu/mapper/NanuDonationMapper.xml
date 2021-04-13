@@ -100,7 +100,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[ 
 			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = #{member_id}
 		]]>
-	</select> 
+	</select>
+	
+	<select id="getDonation"  resultType="com.share.nanu.VO.DonationVO">
+		<![CDATA[ 
+			select * from donation where dnt_paynum=#{merchantUid}
+		]]>
+	</select>  
 
 </mapper>
 

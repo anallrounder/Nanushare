@@ -30,6 +30,8 @@ public interface NanuDonationMapper {
 
 	public void updateDntcnt(String member_id);//후원금 기부 횟수 +1
 
+	public void getDonation(String merchantUid); //donation 테이블에서 주문번호가 존재하는지 조회
+
 	
 	
 }
