@@ -2,11 +2,14 @@
 // https://www.tutorialrepublic.com/twitter-bootstrap-button-generator.php
 package com.share.nanu.controller;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,11 +63,20 @@ public class NanuBoardShowReplyController {
 	// 댓글 입력 insert
 	// [Spring] ResponseEntity는 왜 쓰는 것이며 어떻게 쓰는걸까? https://a1010100z.tistory.com/106
 	@PostMapping("board/shows/reply_insert") 
-	public ResponseEntity<String> reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, BoardVO boardVO, Model model) {
-		System.out.println(rvo);
+	public ResponseEntity<String> reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) {
+		log.info("rvo = " + rvo);
 		
 		ResponseEntity<String> entity = null;
 		log.info("reply_insert");
+		
+		//Date dateChangePaidAt = Date.valueOf();
+				
+		System.out.println(rvo);
+		
+		if (md != null) {
+			model.addAttribute("member_id", md.getmember().getMember_id());
+		}
+		
 		try {
 			service.insertReply(rvo); //댓글 입력
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -72,6 +84,28 @@ public class NanuBoardShowReplyController {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+		return entity;
+	}
+	
+	// 댓글 삭제
+	@DeleteMapping("board/shows/delete") // 맵핑 자체가 델리트맵핑
+	public ResponseEntity<String> rest_deltete(BoardVO boardVO, BoardreplyVO rvo, Model model) {
+
+		ResponseEntity<String> entity = null; // 레스트풀을 위해 제공하는 대표적인 것 중 하나
+		log.info("rest_delete");
+
+		try {
+			service.remove(rvo);
+			
+			// 삭제가 성공하면 성공 상태 메세지 저장 // 마음대로 전달할 수 있다.
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			// message = "SUCCESS" 이렇게 해도 상관 없다.
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 댓글 삭제가 실패하면 실패 상태메세지 저장
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);// 400
+		}
+		// 삭제 처리 HTTP 상태 메시지 리턴
 		return entity;
 	}
 
