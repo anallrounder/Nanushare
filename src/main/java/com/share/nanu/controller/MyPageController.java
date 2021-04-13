@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,10 +51,11 @@ public class MyPageController {
 
 	// 마이페이지
 	@GetMapping("/my/mypage")
-	public ModelAndView myPage(MemberPointVO mpvo, Criteria cri, MemberVO mvo, ModelAndView mav,
+	public ModelAndView myPage(MemberPointVO mpvo, MemberVO mvo, ModelAndView mav,
 			@AuthenticationPrincipal MemberDetails md) {
 
 		System.out.println("마이페이지");
+//HttpSession session = request.getSession(true);
 
 		// 헤더에 로그인한 사람 정보 가져오기
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
@@ -60,7 +63,7 @@ public class MyPageController {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.addObject("memberInfo", ndservice.getMemberPoint(mpvo));
-		mav.addObject("list1", mgservice.myList1(cri, md.getUsername()));
+		//mav.addObject("sign", mgservice.mysign(md.getmember().getSignuppath()));//추가
 		mav.setViewName("/my/mypage");
 		return mav;
 	}
