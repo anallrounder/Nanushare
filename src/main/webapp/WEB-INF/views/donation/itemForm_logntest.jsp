@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
 
+
     <!--  date ui test 아마도 안쓸듯.  -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
