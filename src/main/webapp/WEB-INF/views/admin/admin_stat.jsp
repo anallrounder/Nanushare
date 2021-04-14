@@ -204,7 +204,8 @@
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="m_day">
 								<!-- 월 선택 -->
-						          <select class="form-control" id="choice-month" >
+								<h4>월을 선택하세요</h4>
+						          <select class="form-control" id="choice-month" style="width:200px">
 						          	<c:forEach var="i" begin="1" end="12">
 							        	<option value="${i}" <c:if test="${i eq month}">selected</c:if>>
 							        		${i}
@@ -285,7 +286,7 @@
 </div>
 <!-- Content End -->
 
-	   <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
+	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 
  <!-- jQuery -->
    <!--  <script src="/resources/charity/script/jquery.js"></script>

@@ -272,28 +272,32 @@
 									member_id :{
 										required : true, /* 필수인가? true는 yes를 의미 */
 										email : true, /* 이메일 형식인가? */
-										remote : "${pageContext.request.contextPath}/IdCheck"
+										remote : "${pageContext.request.contextPath}/IdCheck",
 										/* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
-										
+										spaceCheck : true
 									},
 									subemail : {
 										required : true,
 										email : true,
+										spaceCheck : true
 										
 									},
 									pw :{
 										required : true,
 										passwordCK : true,
 										minlength : 4, /* 최소글자 */
-										maxlength : 12 /* 최대12 글자 */
+										maxlength : 12, /* 최대12 글자 */
+										spaceCheck : true
 									},
 									pwConfirm : {
 										required : true,
-										equalTo : '#pw'									
+										equalTo : '#pw'	,
+										spaceCheck : true
 									},
 									name : {
 										required : true,
-										minlength : 2
+										minlength : 2,
+										spaceCheck : true
 									}									
 									/* phone : {
 										required : true,
@@ -313,25 +317,30 @@
 									member_id :{
 										required : '이메일을 입력해 주세요.',
 										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
-										remote :'이미 사용중인 이메일 입니다.'
+										remote :'이미 사용중인 이메일 입니다.',
+										spaceCheck: '공백없이 입력해주세요.'
 									},
 									subemail : {
 										required : '이메일을 입력해 주세요.',
-										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com'
+										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
+										spaceCheck: '공백없이 입력해주세요.'
 									},
 									pw :{
 										required : '비밀번호를 입력해 주세요.',
-										passwordCK : '비밀번호는 영문자, 숫자, 특수문자를 조합하여 입력해야 합니다. ex)?는 사용할 수 없습니다.',
+										passwordCK : '비밀번호는 영문자, 숫자, 특수문자를 조합하여 입력해야 합니다. ex)?와 공백은 사용할 수 없습니다.',
 										minlength : '비밀번호는 최소 4글자 이상 입력해 주세요.',
-										maxlength : '비밀번호는 최대 12글자 까지 입력이 가능합니다.'
+										maxlength : '비밀번호는 최대 12글자 까지 입력이 가능합니다.',
+										spaceCheck: '공백없이 입력해주세요.'
 									},
 									pwConfirm : {
 										required : '비밀번호를 입력해 주세요.',
-										equalTo : "비밀번호가 일치하지 않습니다."								
+										equalTo : "비밀번호가 일치하지 않습니다.",
+										spaceCheck: '공백없이 입력해주세요.'
 									},
 									name : {
 										required : '이름을 입력해 주세요.',
-										minlength : '2글자 이상 입력해 주세요.'
+										minlength : '2글자 이상 입력해 주세요.',
+										spaceCheck: '공백없이 입력해주세요.'
 									}									
 									/* phone : {
 										required : '핸드폰 번호를 입력해 주세요.',
@@ -372,6 +381,14 @@
 							$.validator.addMethod("passwordCK",  function( value, element ) { //어째서인지 ?는 특수문자 취급을 못 하고있다.
 								   return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
 								});
+							
+							/* 공백 체크 함수 추가함 */
+                            $.validator.addMethod("spaceCheck" /* validate명 */ , function(value, element) {
+                                //검사하는 name태그의 value 중 공백이 없으면 true, 있으면 false리턴
+                                //false 리턴 시 messages에 선언된 내용들 띄워줌
+                                return $(element).val().indexOf(" ") = -1 ? true : false;
+                            });
+                            //출처: https://devhong.tistory.com/3 [주니어를 탈출하고 싶은 개발자의 블로그]
 							
 							
 						</script>
