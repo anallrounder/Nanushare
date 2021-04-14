@@ -15,15 +15,15 @@
     <title>Charity About Us</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/fontawesome-all.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/slick-slider.css">
-    <link rel="stylesheet" href="css/fancybox.css">
-    <link href="css/jplayer.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/color.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
+    <link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
 
 	 <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-md-5">
                         <figure class="chrity-thumb-style">
-                            <img src="extra-images/aboutus-img.png" alt="">
+                            <img src="${pageContext.request.contextPath}/resources/charity/extra-images/aboutus-img.png" alt="">
                         </figure>
                     </div>
 
@@ -221,9 +221,9 @@
                         <div class="charity-partner-slider">
                             <div> <a href="404.html"><img src="extra-images/partner-logo-1.png" alt=""></a> </div>
                             <div> <a href="404.html"><img src="extra-images/partner-logo-2.png" alt=""></a> </div>
-                            <div> <a href="404.html"><img src="extra-images/partner-logo-3.png" alt=""></a> </div>
-                            <div> <a href="404.html"><img src="extra-images/partner-logo-4.png" alt=""></a> </div>
-                            <div> <a href="404.html"><img src="extra-images/partner-logo-3.png" alt=""></a> </div>
+                            <div> <a href="404.html"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/partner-logo-3.png" alt=""></a> </div>
+                            <div> <a href="404.html"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/partner-logo-4.png" alt=""></a> </div>
+                            <div> <a href="404.html"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/partner-logo-3.png" alt=""></a> </div>
                         </div>
                         <!--// Partner \\-->
                     </div>
@@ -241,7 +241,7 @@
 
 
     <!-- Search Modal -->
-    <div class="modal fade searchmodal" id="searchModal" tabindex="-1" role="dialog">
+<!--     <div class="modal fade searchmodal" id="searchModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -255,21 +255,22 @@
                 
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- jQuery -->
-    <script src="script/jquery.js"></script>
-    <script src="script/popper.min.js"></script>
-    <script src="script/bootstrap.min.js"></script>
-    <script src="script/slick.slider.min.js"></script>
-    <script src="script/progressbar.js"></script>
-    <script src="script/fancybox.min.js"></script>
-    <script src="script/jquery.countdown.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/slick.slider.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/progressbar.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/fancybox.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.countdown.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="script/jquery.jplayer.js"></script>
-    <script src="script/jplayer.playlist.js"></script>
-    <script src="script/functions.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
+</body>
 </body>
 
 </html>
