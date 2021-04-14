@@ -33,8 +33,9 @@
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
 <title>Nanushare</title>
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
-    <!-- 웹페이지 탭 로고이미지 삽입  -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<!-- 웹페이지 탭 로고이미지 삽입  -->
 
 
 
@@ -62,65 +63,74 @@
 
 <script type="text/javascript">
 	/* 403에러때문에 넣은 코드 */
-		$(document).ready(function() {
+	$(document)
+			.ready(
+					function() {
 
-			var token = $("meta[name='_csrf']").attr("content");
-			var header = $("meta[name='_csrf_header']").attr("content");
-			$(document).ajaxSend(function(e, xhr, options) {
-				xhr.setRequestHeader(header, token);
-			});
-		
-		$('#passwordcheck').submit(function(event) { //비밀번호 변경 처리
+						var token = $("meta[name='_csrf']").attr("content");
+						var header = $("meta[name='_csrf_header']").attr(
+								"content");
+						$(document).ajaxSend(function(e, xhr, options) {
+							xhr.setRequestHeader(header, token);
+						});
 
-			event.preventDefault();/* 이게있어서 폼태그에는 주소 필요x */
+						$('#passwordcheck')
+								.submit(
+										function(event) { //비밀번호 변경 처리
 
-			/* var member_id = $("#member_id").val(); */
-			var pwConfirm = $("#pwConfirm").val();
+											event.preventDefault();/* 이게있어서 폼태그에는 주소 필요x */
 
-			var check = {
+											/* var member_id = $("#member_id").val(); */
+											var pwConfirm = $("#pwConfirm").val();
 
-				/* member_id : member_id, */
-				pwConfirm : pwConfirm
-			/*주는값이 id --# */
-			};
-		
-		//패스워드 맞는지 확인 체크
-		$.ajax({
-					type : 'POST',
-					/* 내가 처리할 주소(=현재주소) */
-					url : "${pageContext.request.contextPath}/my/myprofile/check",
-					contentType : 'application/json; charset=utf-8',
-					data: pwConfirm, /* 여기가 컨트롤러로 넘어가는 data {안에넣어주면  = 형식으로 넘어감} */
-					async: "false",
-					datatype : 'text',
-					/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-					 /* beforeSend : function(xhr) { 
-						console.log("header 실행 " + header + token)
-						xhr.setRequestHeader(header, token);
-					}, */ 
- 
-					success : function(result) {
-						console.log(result);
+											var check = {
+												/* member_id : member_id, */
+												pwConfirm : pwConfirm
+											/*주는값이 id --# */
+											};
 
-						if (result == "SUCCESS") {
-							console.log("success");
-							$(location)
-									.attr('href',"${pageContext.request.contextPath}/my/myprofile/edit");
-							/* 성공했을때 넘어가는 페이지 */
+											//패스워드 맞는지 확인 체크
+											$.ajax({
+														type : 'POST',
+														/* 내가 처리할 주소(=현재주소) */
+														url : "${pageContext.request.contextPath}/my/myprofile/check",
+														contentType : 'application/json; charset=utf-8',
+														data : pwConfirm, /* 여기가 컨트롤러로 넘어가는 data {안에넣어주면  = 형식으로 넘어감} */
+														async : "false",
+														datatype : 'text',
+														/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+														/* beforeSend : function(xhr) { 
+														console.log("header 실행 " + header + token)
+														xhr.setRequestHeader(header, token);
+														}, */
 
-						}
-					},
+														success : function(result) {
+															console.log(result);
 
-					error : function(error) {
-						
-						alert("비밀번호가 일치하지 않습니다.");
+															if (result == "SUCCESS") {
+																console.log("success");
+																$(location).attr(
+																				'href',
+																				"${pageContext.request.contextPath}/my/myprofile/edit");
+																/* 성공했을때 넘어가는 페이지 */
 
-						console.log("에러 : " + error);
-					}
+															}else if(result == "FAIL"){
+												   	    		console.log(result);
+												   	    		alert("비밀번호를 다시 확인해주세요.");
+												   	    	}
+													    },
+														
 
-				}); //ajax end
-		}); //패스워드 체크 스크립트 end
-	});
+														error : function(error) {
+
+															//alert("비밀번호를 입력해주세요.");
+
+														//	console.log("에러 : " + error);
+														}
+
+													}); //ajax end
+										}); //패스워드 체크 스크립트 end
+					});
 </script>
 <style>
 label {
@@ -148,22 +158,6 @@ input {
 
 
 
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>비밀번호 확인 페이지</h1>
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Banner -->
-
-
-
 	<!-- Content -->
 	<div class="charity-main-content">
 
@@ -172,21 +166,29 @@ input {
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-<!-- "${pageContext.request.contextPath}/my/myprofile/edit" -->
-						<form id="passwordcheck" action="${pageContext.request.contextPath}/my/myprofile/edit" method="get">
+						<!-- "${pageContext.request.contextPath}/my/myprofile/edit" -->
+						<form id="passwordcheck"
+							action="${pageContext.request.contextPath}/my/myprofile/edit"
+							method="get">
 							<!-- 폼태그는 어차피 위에서 성공여부로 주소를 줬기때문에 안줘도 상관없다 -->
 
-							<div class="form-group has-feedback">
-								<label class="control-label" for="pw">패스워드</label> <input
-									class="form-control" type="password" id="pwConfirm"
-									name="pwConfirm" />
+							<div class="charity-volunteer-form">
+								<h6 style="color:brown;">회원님의 소중한 개인정보 보호를 위해 비밀번호를 한번 더 확인하고 있습니다.</h6>
+								<h6>공공장소에서 PC를 사용중일 경우, 비밀번호가 타인에게 노출되지 않도록 주의해 주시기 바랍니다.</h6>
+								<ul class="mt-4">
+									<label class="control-label" for="pw">패스워드 확인 : </label>
+									<input type="password" id="pwConfirm" name="pwConfirm" />
+								</ul>
+								<!-- name에 똑같이 줘야함 -->
+								<div class="form-group has-feedback-center">
+									<button class="charity-simple-blog-btn" type="submit" id="submit">확인</button>
+									<button class="charity-simple-blog-btn" onClick="history.go(-1)">취소</button>
+								</div>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
 							</div>
-							<!-- name에 똑같이 줘야함 -->
-							<div class="form-group has-feedback">
-								<button class="btn btn-success" type="submit" id="submit">확인</button>
-							</div>
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />
+
+
 						</form>
 
 

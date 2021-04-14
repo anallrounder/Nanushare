@@ -58,8 +58,6 @@
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
 
-
-
 <style>
 .maxmax {
 	position: relative;
@@ -67,6 +65,21 @@
 
 li {
 	list-style: none;
+}
+
+.threebox {
+	border: 1px solid lightgray;
+	box-sizing: border-box;
+	width: 270px;
+	height: 180px;
+	margin: 10px auto; padding : 10px auto;
+	border-radius: 20px 20px 20px 20px;
+	text-align: center;
+	padding: 10px auto;
+}
+
+.number2 {
+	text-align: center;
 }
 </style>
 
@@ -100,7 +113,6 @@ li {
 								$(".maxmax").attr("src",
 										"/resources/my/그림2.png").css("left",
 										"17%");
-
 							}
 							if (test > 40 && test <= 60) {
 
@@ -122,9 +134,7 @@ li {
 										"/resources/my/그림5.png").css("left",
 										"87%");
 							}
-
 						}
-
 					});
 </script>
 
@@ -135,20 +145,6 @@ li {
 	<!-- Header -->
 
 
-
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>mypage</h1>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Banner -->
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
@@ -160,6 +156,8 @@ li {
 				<div class="view-account">
 					<section class="module">
 					<div class="module-inner">
+
+						<!-- sidebar -->
 						<div class="side-bar">
 							<div class="user-info">
 								<img class="img-profile img-circle img-responsive center-block"
@@ -172,124 +170,101 @@ li {
 										</h2></li>
 									<li class="email"><sec:authentication
 											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication
-											property="principal.member.signuppath" />회원</li>
+									<li class="activity">
+										<button class="charity-simple-blog-btn w-100 text-white stats"
+											type="submit"
+											onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+											프로필수정</button>
+
+									</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
-								<li class="active"><a href="mypage"><span class="fa fa-user"></span>
-										Profile</a></li>
+								<li class="active"><a href="mypage"><span
+										class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
 								<li><a href="ask"><span class="fa fa-question">
-									</span>나의문의내역</a></li>
+									</span>&nbsp;&nbsp;나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
-									</span>나의인증내역</a></li>
+									</span>&nbsp;&nbsp;나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-handshake">
-									</span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
-								<li><a href="pay"><span
-										class="fa fa-credit-card"></span>나의결제내역</a></li>
+									</span>&nbsp;&nbsp;나의나눔내역</a></li>
+								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
+								<li><a href="pay"><span class="fa fa-credit-card">
+									</span>&nbsp;&nbsp;나의결제내역</a></li>
 							</ul>
 							</nav>
 						</div>
+						<!-- sidebar -->
+
 						<div class="content-panel">
-							<h2 class="title">
-								Profile<span class="pro-label label label-warning">PRO</span>
-							</h2>
-							<form class="form-horizontal">
-								<fieldset class="fieldset">
-									<h3 class="fieldset-title">Personal Info</h3>
-									<!-- <div class="form-group avatar">
-										<figure class="figure col-md-2 col-sm-3 col-xs-12"> <img
-											class="img-rounded img-responsive"
-											src="https://bootdey.com/img/Content/avatar/avatar1.png"
-											alt=""> </figure>
-										<div class="form-inline col-md-10 col-sm-9 col-xs-12">
-											<input type="file" class="file-uploader pull-left">
-											<button type="submit"
-												class="btn btn-sm btn-default-alt pull-left">Update
-												Image</button>
-										</div>
-									</div> -->
+							<h2 class="title">My Profile</h2>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div class="d-flex align-items-center">
 
-									<div class="container2 mt-5 d-flex justify-content-right">
-										<div class="card p-3">
-											<div class="d-flex align-items-center">
-												<div class="ml-2 auto">
+								<div class="charity-team charity-simple-team inner-wrap">
+									<div class="row">
 
-													<span>나의 포인트</span>
-													<h4 class="mb-2 mt-3">
-													<%-- <form action="${pageContext.request.contextPath}/my/ask" method="get"> --%>
-														<c:forEach var="vo1" items="${memberInfo}">
-														
-															<%--  <input type="hidden" value="${vo2.member_id} name="member_id" /> --%>
+										<li class="threebox" class="col-md-4"><div>&nbsp;</div>
+											<span>나의 포인트</span>
+											<h4 class="mb-4 mt-4 col-md-4">
+												<form action="${pageContext.request.contextPath}/my/ask"
+													method="get">
+													<span class="number2"><c:forEach var="vo1"
+															items="${memberInfo}">
+															<input type="hidden" value="${vo2.member_id} name=" member_id" />
 															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}</c:forEach>
-														</c:forEach>
-													</form>
-													</h4>
-													<!-- <div
-												class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats"> -->
-												</div>
-											</div>
-										</div>
+														</c:forEach>pt</span>
+											</h4>
+											<button class="charity-simple-blog-btn w-30 text-white stats"
+												type="button"
+												onClick="location.href='${pageContext.request.contextPath}/donation/money/point'">
+												기부하기</button></li>
+										<li class="threebox" class="col-md-4"><div>&nbsp;</div>
+											<span class="followers">나의 기부횟수</span>
+											<h4 class="mb-4 mt-4 col-md-4">
+												<span class="number2"><sec:authentication
+														property="principal.member.dntcnt" />회</span>
+											</h4></li>
+										<li class="threebox" class="col-md-4"><div>&nbsp;</div>
+											<span class="followers">나의 나눔횟수</span>
+											<h4 class="mb-4 mt-4 col-md-4">
+												<span class="number1"><sec:authentication
+														property="principal.member.itemdntcnt" />회</span>
+											</h4></li>
 									</div>
-									<div class="button mt-2 d-flex flex-row align-items-center">
-										<button class="charity-simple-blog-btn w-30 text-white stats"
-											type="button"
-											onClick="location.href='${pageContext.request.contextPath}/donation/money/point'">
-											기부하기</button>
-
-									</div>
-									<div
-										class="p-2 mt-2 bg d-flex justify-content-between rounded text-black stats"
-										style="border-style: dotted;">
-										<div class="d-flex flex-column">
-											<span class="articles">나의 나눔횟수</span> <span class="number1"><sec:authentication
-													property="principal.member.itemdntcnt" /></span>
-										</div>
-										<div class="d-flex flex-column">
-											<span class="followers">나의 기부횟수</span> <span class="number2"><sec:authentication
-													property="principal.member.dntcnt" /></span>
-										</div>
-										<!-- <div class="d-flex flex-column">
-											<span class="rating">Rating</span> <span class="number3">8.9</span>
-										</div> -->
-									</div>
-
-
-									<!-- 프로그래스바 -->
-									<div class="charity-cause-donate">
-
-
-										<div class="progressbar">
-											<img class="maxmax blinking" width="80" height="80">
-											<div class="progress-label"></div>
-										</div>
-
-										<div
-											data-width='<sec:authentication property="principal.member.dntcnt"/>'
-											max='100' class="charity-cause-progressbar"></div>
-									</div>
-						</div>
-
-						</fieldset>
-
-						<hr>
-
-						</form>
-
-						<div class="button mt-2 d-flex flex-row align-items-center">
-							<button class="charity-simple-blog-btn w-100 text-white stats"
-								type="submit"
-								onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-								프로필수정</button>
+								</div>
+							</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<!-- 프로그래스바 -->
+							<div class="charity-cause-donate">
+								<h4 align="center">나의 기부 %는?</h4>
+								<div class="progressbar">
+									<img class="maxmax blinking" width="80" height="80">
+									<div class="progress-label"></div>
+								</div>
+								<div
+									data-width='<sec:authentication property="principal.member.dntcnt"/>'
+									max='100' class="charity-cause-progressbar"></div>
+								<h6>*기부횟수 %따라 그림이 바뀌어요.</h6>
+							</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
 							<button
-								class="charity-simple-blog-btn w-100 ml-2 text-white stats">기부영수증</button>
+								class="charity-simple-blog-btn w-30 ml-2 text-white stats">기부금
+								영수증</button>
 						</div>
+						<hr>
 					</div>
 				</div>
 				</section>
 			</div>
+			<!-- container -->
 		</div>
 
 		<script>
@@ -345,6 +320,7 @@ li {
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
+
 
 </body>
 </html>

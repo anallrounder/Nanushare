@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
+import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.mapper.NanuBoardShowYSMapper;
 import com.share.nanu.page.Criteria;
 
@@ -95,6 +96,38 @@ public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 	@Override
 	public void fileUpload(AttachmentVO attachmentVO) {
 		mapper.uploadFile(attachmentVO);
+	}
+	
+	
+	/* 댓글 */
+	
+	// 댓글 리스트 불러오기
+	@Override
+	public List<BoardreplyVO> listComment(BoardreplyVO rvo) {
+		log.info("댓글 리스트 서비스 listComment()");
+		return mapper.listComment(rvo);
+	}
+	
+	// 댓글 입력
+	@Override
+	public void insertReply(BoardreplyVO rvo) {
+		log.info("댓글 등록 서비스 impl inserted-----------" );
+		mapper.insertReply(rvo);
+		
+	}
+	
+	// 댓글 불러오기
+	@Override
+	public BoardreplyVO getComment(BoardreplyVO rvo) {
+		log.info("새 댓글 불러오기");
+		return mapper.getComment(rvo);	
+	}
+	
+	// 댓글 삭제
+	@Override
+	public void remove(BoardreplyVO rvo) {
+		log.info("댓글 삭제");
+		mapper.removeReply(rvo);
 	}
 	
 	

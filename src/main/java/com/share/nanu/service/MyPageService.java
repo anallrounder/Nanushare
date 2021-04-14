@@ -6,14 +6,13 @@ import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
+import com.share.nanu.VO.PointVO;
 import com.share.nanu.mypaging.Criteria;
 import com.share.nanu.security.MemberDetails;
 
 public interface MyPageService {
 
 	// 1.마이페이지-나의문의
-	//public void mycontent(String username);
-	
 	public List<BoardVO> myList1(Criteria cri,String member_id);
 	//public List<BoardVO> myList1(Criteria cri,String member_id);
 	public int getTotalCount1(Criteria cri,String member_id);
@@ -45,7 +44,11 @@ public interface MyPageService {
 	// 회원탈퇴페이지
 	public void memberDelete(MemberVO mvo, MemberDetails md);
 	
+	//이벤트 - 1일1회 카운트
+	public int mycount(PointVO pointVO,String member_id);
 	
+	//이벤트
+	public void getMypoint(PointVO pointVO, String member_id);
 	
 
 }

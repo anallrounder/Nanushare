@@ -75,25 +75,11 @@ li {
 	<!-- Header -->
 
 
-
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>mypage</h1>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Banner -->
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
-		<!-- Main Section -->
-		<div class="charity-main-section">
+		<!-- Main Section-->
+		<!-- <div class="charity-main-section">  -->
 
 			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
 			<div class="container">
@@ -118,38 +104,37 @@ li {
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
-								<li><a href="mypage"><span class="fa fa-user"></span>
-										Profile</a></li>
+								<li><a href="mypage"><span
+										class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
 								<li><a href="ask"><span class="fa fa-question">
-									</span>나의문의내역</a></li>
-								<li class="active"><a href="content"><span
-										class="fa fa-file"> </span>나의인증내역</a></li>
+									</span>&nbsp;&nbsp;나의문의내역</a></li>
+								<li class="active"><a href="content"><span class="fa fa-file">
+									</span>&nbsp;&nbsp;나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-handshake">
-									</span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
-								<li><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
+									</span>&nbsp;&nbsp;나의나눔내역</a></li>
+								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
+								<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
+
+
 							</ul>
 							</nav>
 						</div>
-						<div class="content-panel">
-
-
-
+							<div class="content-panel">
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-							<h2 class="title">
-								나의 인증 내역<span class="pro-label label label-warning">PRO</span>
-							</h2>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div class="charity-fancy-title">
+							<h2>나의 인증 내역</h2></div>
+							<div>&nbsp;</div>
 							<table>
-
-
 								<div>
 									<br>
 								</div>
 								<tr>
-									<th>번호</th>
-									<th>아이디</th>
+									<th>글번호</th>
+									<!-- <th>아이디</th> -->
 									<th>인증제목</th>
 									<th>조회수</th>
 									<th>날짜</th>
@@ -171,9 +156,9 @@ li {
 										<%-- <c:if test="${sessionScope.member_id = principal.member_id}"> --%>
 										<tr>
 											<td>${list2.b_index}</td>
-											<td>${list2.member_id}</td>
+											<%-- <td>${list2.member_id}</td> --%>
 											<td><a id="a-content"
-												href="${pageContext.request.contextPath}/board/shows/content_view?b_index=${list2.b_index}">${list2.btitle}</a></td>
+												href="${pageContext.request.contextPath}/board/shows/content_view/${list2.b_index}">${list2.btitle}</a></td>
 											<!-- 제목누르면 해당 글내용으로 이동링크 -->
 											<td>${list2.bhit}</td>
 											<td>${list2.bdate}</td>
@@ -190,35 +175,36 @@ li {
 
 
 							<!-- 페이징 -->
-						<!-- 	<div class="container" align="center"> -->
-								<!--  -->
+							<!-- 	<div class="container" align="center"> -->
+							<!--  -->
+							<c:if test="${! empty list2}">
 								<div class="charity-pagination">
-								<ul class="page-numbers">
-									<c:if test="${pageMaker.prev}">
-										<li class="page-item"><a
-											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
-										</li>
-									</c:if>
+									<ul class="page-numbers">
+										<c:if test="${pageMaker.prev}">
+											<li class="page-item"><a
+												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
+											</li>
+										</c:if>
 
-									<c:forEach begin="${pageMaker.startPage}"
-										end="${pageMaker.endPage}" var="idx">
-										<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-										<li class="page-item"><a
-											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
-										</li>
-									</c:forEach>
+										<c:forEach begin="${pageMaker.startPage}"
+											end="${pageMaker.endPage}" var="idx">
+											<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+											<li class="page-item"><a
+												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
+											</li>
+										</c:forEach>
 
-									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-										<li class="page-item"><a
-											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
-										</li>
-									</c:if>
+										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+											<li class="page-item"><a
+												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
+											</li>
+										</c:if>
 									</ul>
 								</div>
-							</div>
+							</c:if>
 						</div>
-					<!-- </div> -->
-					</section>
+					</div>
+					<!-- </div> --> </section>
 				</div>
 			</div>
 
@@ -233,9 +219,9 @@ li {
 
 			<!-- Main Section -->
 
-		</div>
-		<!-- Content -->
-	</div>
+		 </div>
+		<!--Content -->
+	<!-- </div> -->
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
@@ -274,6 +260,6 @@ li {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	    <script src="/resources/charity/script/functions-main.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
 </body>
 </html>

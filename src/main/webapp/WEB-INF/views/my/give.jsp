@@ -69,20 +69,6 @@ li {
 	<!-- Header -->
 
 
-
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>mypage</h1>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Banner -->
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
@@ -112,32 +98,29 @@ li {
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
-								<li><a href="mypage"><span class="fa fa-user"></span>
-										Profile</a></li>
+								<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
 								<li><a href="ask"><span class="fa fa-question">
-									</span>나의문의내역</a></li>
+									</span>&nbsp;&nbsp;나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
-									</span>나의인증내역</a></li>
+									</span>&nbsp;&nbsp;나의인증내역</a></li>
 								<li class="active"><a href="give"><span
-										class="fa fa-handshake"> </span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
-								<li><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
+										class="fa fa-handshake"> </span>&nbsp;&nbsp;나의나눔내역</a></li>
+								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
+								<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
+
+
 							</ul>
 							</nav>
 						</div>
 						<div class="content-panel">
-
-
-
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-							<h2 class="title">
-								나의 기부 내역<span class="pro-label label label-warning">PRO</span>
-							</h2>
-
-
-
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div class="charity-fancy-title">
+							<h2>나의 나눔 내역</h2></div>
+							<div>&nbsp;</div>
 							<table>
 								<div>
 									<br>
@@ -151,7 +134,7 @@ li {
 								</tr>
 								<c:if test="${empty list3}">
 									<tr>
-										<td colspan="5" align="center">작성된 글이 없습니다</td>
+										<td colspan="5" align="center">나눔 내역이 없습니다</td>
 									</tr>
 								</c:if>
 
@@ -180,57 +163,59 @@ li {
 								</c:if>
 							</table>
 
-							<div class="charity-pagination">
-								<ul class="page-numbers">
-									<li class="page-item"><c:if test="${pageMaker.prev}">
-											<a class="page-link"
-												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-										</c:if></li>
 
-									<li class="page-item"><c:forEach
-											begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-											var="idx">
-											<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-											<a
-												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(idx)}">${idx}</a>
-										</c:forEach></li>
+							<c:if test="${! empty list3}">
+								<div class="charity-pagination">
+									<ul class="page-numbers">
+										<li class="page-item"><c:if test="${pageMaker.prev}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+											</c:if></li>
+
+										<li class="page-item"><c:forEach
+												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+												var="idx">
+												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+												<a
+													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(idx)}">${idx}</a>
+											</c:forEach></li>
 
 
-									<li class="page-item"><c:if
-											test="${pageMaker.next && pageMaker.endPage > 0}">
-											<a class="page-link"
-												href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-											</a>
-										</c:if></li>
+										<li class="page-item"><c:if
+												test="${pageMaker.next && pageMaker.endPage > 0}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+												</a>
+											</c:if></li>
 
-								</ul>
-							</div>
+									</ul>
+								</div>
+
+							</c:if>
+
+
+
+
 
 						</div>
-
-
-
-
-
 					</div>
+					</section>
 				</div>
-				</section>
 			</div>
+
+			<script>
+				$("#mytabs>ul>li>a").each(function(i) {
+					$(this).attr("href", "#mytab" + i)
+				})
+				$("#mytabs>div>div").each(function(i) {
+					$(this).attr("id", "mytab" + i)
+				})
+			</script>
+
+			<!-- Main Section -->
+
 		</div>
-
-		<script>
-			$("#mytabs>ul>li>a").each(function(i) {
-				$(this).attr("href", "#mytab" + i)
-			})
-			$("#mytabs>div>div").each(function(i) {
-				$(this).attr("id", "mytab" + i)
-			})
-		</script>
-
-		<!-- Main Section -->
-
-	</div>
-	<!-- Content -->
+		<!-- Content -->
 	</div>
 
 	<!-- Footer -->
