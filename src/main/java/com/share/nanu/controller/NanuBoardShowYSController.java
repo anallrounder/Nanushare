@@ -233,12 +233,8 @@ public class NanuBoardShowYSController {
 				UUID uuid = UUID.randomUUID();
 				// 본래 파일명
 				String originalfileName = mf.get(i).getOriginalFilename();// 원본이름
-<<<<<<< HEAD
 				String uuidName = originalfileName + "_" + uuid;
 				String extension = FilenameUtils.getExtension(originalfileName);// 확장자
-=======
-				String extension = FilenameUtils.getExtension(originalfileName);//확장자
->>>>>>> master
 				// 저장 될 파일명
 				// String savefileName=uuid+"."+ext;
 

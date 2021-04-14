@@ -20,26 +20,25 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class MemberDetails implements UserDetails, OAuth2User {
-	//시큐리티 세션에는 authentication만 들어갈 수 있다. authentication에는 userDetails와 oauth2가 들어갈 수 있다.
-	//일반 로그인을 하면 userDetails가 시큐리티 내부 authentication에 들어가고
-	//oauth2 로그인을 하면 oauth2가 authentication에 들어간다. 
-	//이를 하나로 묶어서 authentication에 넣어 처리
+	// 시큐리티 세션에는 authentication만 들어갈 수 있다. authentication에는 userDetails와 oauth2가 들어갈
+	// 수 있다.
+	// 일반 로그인을 하면 userDetails가 시큐리티 내부 authentication에 들어가고
+	// oauth2 로그인을 하면 oauth2가 authentication에 들어간다.
+	// 이를 하나로 묶어서 authentication에 넣어 처리
 
 	private MemberVO mvo;
 	private Map<String, Object> attributes;
-	
 
-	
 	@Autowired
 	private NanuService nservice;
 
-	public MemberDetails(MemberVO mvo, Map<String, Object> attributes) { //oauth2 사용시 사용
+	public MemberDetails(MemberVO mvo, Map<String, Object> attributes) { // oauth2 사용시 사용
 		log.info("OAuth2 사용");
 		this.mvo = mvo;
 		this.attributes = attributes;
 	}
 
-	public MemberDetails(MemberVO mvo) { //일반 시큐리티 사용시 사용
+	public MemberDetails(MemberVO mvo) { // 일반 시큐리티 사용시 사용
 		log.info("일반 시큐리티 사용");
 		this.mvo = mvo;
 	}
@@ -56,7 +55,7 @@ public class MemberDetails implements UserDetails, OAuth2User {
 
 		return authorities;
 	}
-	
+
 	public MemberVO getmember() {
 		return mvo;
 	}
@@ -81,10 +80,13 @@ public class MemberDetails implements UserDetails, OAuth2User {
 
 	@Override
 	public boolean isAccountNonLocked() { // 계정이 잠겨있나 ?
-		boolean lock = false;
-		if(mvo.getBklist() =="Y" || mvo.getBklist() ==null || mvo.getBklist()==" ") {
-			lock = true;
+		boolean lock = true;
+
+		if (mvo.getBklist().equals("Y")) {
+			System.out.println(mvo.getMember_id() + "의 블랙리스트 여부 : " + mvo.getBklist());
+			lock = false;
 		}
+
 		return lock;
 	}
 
@@ -99,20 +101,19 @@ public class MemberDetails implements UserDetails, OAuth2User {
 		// 휴면 계정 사용시 필요
 		// ex) 현재 시간 - 로긴시간 -> 1년초과시 return false 설정
 		log.info("isEnabled");
-		boolean enable = true;		
-		
-		if(mvo.getEnable() != '1' || mvo.getEnable() == ' ') {
-			System.out.println(mvo.getMember_id()+"의 enable : "+ mvo.getEnable());
+		boolean enable = true;
+
+		if (mvo.getEnable() != '1' || mvo.getEnable() == ' ') {
+			System.out.println(mvo.getMember_id() + "의 enable : " + mvo.getEnable());
 			enable = false;
 		}
-		
-		
+
 		return enable;
 	}
 
 	// oauth2User
 	@Override
-	public Map<String, Object> getAttributes() { //리소스 서버로부터 가져오는 회원정보
+	public Map<String, Object> getAttributes() { // 리소스 서버로부터 가져오는 회원정보
 
 		return attributes;
 	}

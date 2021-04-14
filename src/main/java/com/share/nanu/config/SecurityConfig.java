@@ -47,7 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http
 			.authorizeRequests()
-				.antMatchers("/my/**").access("hasRole('USER')")
+				.antMatchers("/my/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
+				//access("hasRole('USER')")
 				.antMatchers("/sendQR/**").access("hasRole('USER')")
 				.antMatchers("/admin/**").access("hasRole('ADMIN')")
 				//.requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // cors설정 https://oddpoet.net/blog/2017/04/27/cors-with-spring-security/
@@ -63,8 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username")
 				.passwordParameter("password")
 				.successHandler(successHandler())// a페이지-> b페이지(유저권한이필요) -> 로그인페이지-> b페이지로 이동
-				.failureHandler(failureHandler())
-				// .defaultSuccessUrl("/main",true)
+				.failureHandler(failureHandler())				
 			.and()
 				.logout()
 				.logoutUrl("/member/logout") // 로그아웃하면 메인페이지로 이동
@@ -74,13 +74,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.oauth2Login()
 				.loginPage("/loginPage")
-				// .loginPage("/login")
+				.loginPage("/login")
 				// 소셜로그인이 완료되면 후처리가 필요함 1.코드받기(인증) 2.엑세스토큰(권한) 3.사용자프로필 가져오기 4. 가져온 정보를 토대로
 				// 회원가입을 자동으로 진행
 				.userInfoEndpoint() // OAuth2 로그인 성공 이후 사용자 정보를 가져올 때의 설정
 				.userService(principalOauth2UserService)
 				// 로그인 성공 시 수행 할 UserService 구현체 지정, 엑세스토큰 + 사용자프로필정보 같이 받음
-				.and().defaultSuccessUrl("/main"); // 소셜 로그인이 성공하면 이동할 주소
+			.and()
+				.defaultSuccessUrl("/main"); // 소셜 로그인이 성공하면 이동할 주소
 
 		http
 			.rememberMe() // remember-Me 쿠키에는 사용자이름, expireTime,md5해시 포함
