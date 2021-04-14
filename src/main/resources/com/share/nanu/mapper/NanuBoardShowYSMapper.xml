@@ -113,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="uploadFile" resultType="com.share.nanu.VO.AttachmentVO">
 	 <![CDATA[
 	    
-	   	   insert into attachment VALUES (attachment_seq.nextval, #{originname}, #{path}, #{extension}, #{b_index})
+	   	   insert into attachment VALUES (attachment_seq.nextval, #{originname}, #{path}, #{extension}, #{b_index}, #{uuidName})
 		]]>
 	</select>
 	

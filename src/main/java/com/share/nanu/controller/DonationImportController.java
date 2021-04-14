@@ -1,5 +1,10 @@
 package com.share.nanu.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -7,8 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,12 +29,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.share.nanu.VO.DonationVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.NanuDonationService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
 import net.sf.json.JSONArray;
 
 @Slf4j
@@ -44,7 +59,7 @@ public class DonationImportController {
 	
 	@PostMapping("/commonDonation") //로그인한 회원정보를 가져오는 컨트롤러,공통 함수, 카드, 계좌이체에서 모두 사용
 	@ResponseBody
-	public Map<String, String> test(@AuthenticationPrincipal MemberDetails md) {
+	public Map<String, String> common(@AuthenticationPrincipal MemberDetails md) {
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("member_id", md.getUsername());
 		result.put("name", md.getmember().getName());
@@ -75,8 +90,18 @@ public class DonationImportController {
 				  payMethod = "pay";
 			  }
 		  }
-			
+		  
+		 
+		  //Date dateChangePaidAt = new Date(Long.parseLong(changePaidAt));		  
+		  //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		  //Date dateChangePaidAt = (Date) sdf.parse(changePaidAt);
+		  //changePaidAt = sdf.format(changePaidAt);
+		  //Timestamp dateChangePaidAt = Timestamp.valueOf(changePaidAt);
+		  
 		  Date dateChangePaidAt = Date.valueOf(changePaidAt); //문자열로 반환된 날짜를 sql date 형식으로 지정
+		  
+		  System.out.println(changePaidAt);
+		  
 		  String amount = String.valueOf(resultMap.get(0).get("amount"));//int 타입을 String으로 캐스팅	
 		  
 		  
@@ -130,6 +155,34 @@ public class DonationImportController {
 		 
 		
 	}
+	
+	
+	
+	//@CrossOrigin(origins = "http://localhost:8282, withCredentials = 'true' ", maxAge = 3600)
+	@PostMapping("/my/payments/cancel")
+	public ResponseEntity<String> refund(@RequestBody Map<String, String> refund) {
+		
+		log.info("클라이언트가 가맹점 서버로 결제취소 요청");
+		System.out.println(refund);
+		System.out.println(refund.get("merchant_uid"));
+		System.out.println(refund.get("cancel_request_amount"));
+		
+		
+		ResponseEntity<String> entity = null;
+		try {
+			ndservice.getDonation(refund.get("merchant_uid"));
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		
+		return entity;
+		
+	}
+	
+	
 		
 	@GetMapping("/thank")
 	public ModelAndView thank(ModelAndView mav) { //감사페이지 이동
