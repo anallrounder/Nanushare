@@ -157,18 +157,19 @@ input {
 	<!-- Header -->
 
 
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
+	<!-- Sub Header -->
+	<div class="charity-subheader" >
+		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent" ></span>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>프로필 수정하는 페이지</h1>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Banner -->
+	<!-- Sub Header -->
 
 	<!-- Content -->
 	<div class="charity-main-content">

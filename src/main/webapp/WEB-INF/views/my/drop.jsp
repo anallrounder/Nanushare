@@ -161,7 +161,19 @@ table {
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-
+<!-- Sub Header -->
+	<div class="charity-subheader" >
+		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent" ></span>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Sub Header -->
 	<!-- Content -->
 	<div class="charity-main-content">
 
