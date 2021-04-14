@@ -12,7 +12,7 @@ public interface NanuService {
 
 	public MemberVO findEmail(String mail); //이메일 찾기
 
-	public String getEnable(String username);// enable 정보 가져오기
+	
 
 	
 

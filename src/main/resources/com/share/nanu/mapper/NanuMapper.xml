@@ -71,11 +71,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id="getEnable"  resultType="com.share.nanu.VO.MemberVO">
-		<![CDATA[
-			select enable from member where member_id=#{member_id}
-		]]>
-	</select>
 	
 	
 

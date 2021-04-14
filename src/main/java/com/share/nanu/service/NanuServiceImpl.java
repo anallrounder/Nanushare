@@ -41,10 +41,6 @@ public class NanuServiceImpl implements NanuService {
 		return nmapper.findEmail(mail);
 	}
 
-	@Override
-	public String getEnable(String username) {
-		
-		return nmapper.getEnable(username);
-	}
+	
 
 }

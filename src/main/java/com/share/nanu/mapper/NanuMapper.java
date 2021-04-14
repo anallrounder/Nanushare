@@ -19,7 +19,7 @@ public interface NanuMapper {
 
 	public MemberVO findEmail(String mail);
 
-	public String getEnable(String username); //enable 정보 가져오기
+	
 
 	
 
