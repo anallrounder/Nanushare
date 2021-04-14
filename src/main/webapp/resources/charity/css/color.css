@@ -1,4 +1,4 @@
-/* 원래 있던 노란색 ffb607 -> 청록색 2a786b 으로 변경 03.18 혜선 */
+/* 원래 있던 노란색 ffb607 -> 청록색 2a786b 으로 변경 03.18 혜선 -> 회의 후 FFAE73 로 다시 변경 0413 */
 /* 찾기 쉽게 코드 정렬함 이용 사이트: https://prettydiff.com/ 03.26 혜선 */
 
 .charity-color,
@@ -17,14 +17,13 @@
 .charity-pagination > ul > li:hover > .next,
 .charity-pagination > ul > li > span.current,
 .charity-classic-team-text ul li:hover a {
-    color: #2a786b;
+    color: #FFAE73 ;
 }
 
 .charity-bgcolor,
 .charity-bgcolorhover:hover,
 .charity-navigation > ul > li > a:before,
 .charity-header-options > li > a:hover,
-.charity-banner-caption a:hover,
 .charity-banner .slick-arrow:hover,
 .charity-more-btn,
 .charity-service-link:before,
@@ -69,12 +68,12 @@ ul li:hover .charity-grid-prayer-btn,
 .charity-main-btn, /* 혜선생성 */
 
 .charity-partner-slider .slick-arrow:hover {
-    background-color: #2a786b;
+    background-color: #FFAE73;
 }
 
 .charity-sub-btn,  
 .charity-click-btn /* 혜선생성 */ {
-    background-color: #2a9f89;
+    background-color: #FFAE73;
 }
 
 .charity-border-color,
@@ -84,15 +83,15 @@ ul li:hover .charity-grid-prayer-btn,
 .charity-banner .slick-arrow,
 .charity-service-link,
 .charity-donation-parallex-btn {
-    border-color: #2a786b;
+    border-color: #FFAE73;
 }
 
 .charity-counter i:after,
 .charity-simple-blog figcaption time:before {
-    border-top-color: #2a786b;
+    border-top-color: #FFAE73;
 }
 
 .back-top:before,
 .back-top:after {
-    border-bottom-color: #2a786b;
+    border-bottom-color: #FFAE73;
 }

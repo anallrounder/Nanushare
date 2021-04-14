@@ -78,7 +78,7 @@ public class NanuDonationController {
 		log.debug("controller -- formAction -- 입력 값 DB로!!");
 		service.countItemDonation(mvo); //멤버 테이블에 물품기부 횟수 카운트 +1
 		service.saveForm(idvo);  //기부 테이블에 정보 입력
-		return "redirect:main"; // 감사 페이지로 연결 예정
+		return "donation/thanksPointDona"; // 감사 페이지로 연결 예정
 	}
 
 	// 돈기부여 메인 moneyMain.jsp
