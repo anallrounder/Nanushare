@@ -250,18 +250,18 @@
     <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
     <!-- Footer -->
 
-    <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/resources/script/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/slick.slider.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/progressbar.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/fancybox.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/jquery.countdown.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/jquery.jplayer.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/jplayer.playlist.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/functions.js"></script>
+   <!-- jQuery -->
+   <script src="/resources/charity/script/jquery.js"></script>
+   <script src="/resources/charity/script/popper.min.js"></script>
+   <script src="/resources/charity/script/bootstrap.min.js"></script>
+   <script src="/resources/charity/script/slick.slider.min.js"></script>
+   <script src="/resources/charity/script/progressbar.js"></script>
+   <script src="/resources/charity/script/fancybox.min.js"></script>
+   <script src="/resources/charity/script/jquery.countdown.min.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js"></script>
+   <script src="/resources/charity/script/jquery.jplayer.js"></script>
+   <script src="/resources/charity/script/jplayer.playlist.js"></script>
+   <script src="/resources/charity/script/functions-main.js"></script>
 </body>
 
 </html>
