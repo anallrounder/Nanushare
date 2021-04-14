@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.share.nanu.VO.DonationVO;
 import com.share.nanu.VO.VmVO;
+import com.share.nanu.VO.VmVmamVO;
 import com.share.nanu.VO.Vmam;
 
 @Mapper
@@ -15,7 +16,7 @@ public interface MainMapper {
 
 	public List<DonationVO> weekMoney();
 
-	public List<VmVO> getvm();
+	public List<VmVmamVO> getvm();
 
 	public List<VmVO> getvmcat();
 
@@ -26,5 +27,11 @@ public interface MainMapper {
 	public void outAmount(String vm_num, String iname);
 
 	public int vmcount(String vm_num, String iname);
+
+	public int getDay(String year, String month, String day);
+
+	public int getMonth(String year, String month);
+
+	public int getYear(String year);
 
 }

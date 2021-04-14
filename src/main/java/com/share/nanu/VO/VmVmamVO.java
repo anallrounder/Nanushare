@@ -13,6 +13,15 @@ public class VmVmamVO {
 	private String lng; // 경도
 	private String branch; // 지점명
 
+	public VmVmamVO(String vm_num, String lat, String lng, String branch, ArrayList<Vmam> vmamlist) {
+	
+		this.vm_num = vm_num;
+		this.lat = lat;
+		this.lng = lng;
+		this.branch = branch;
+		this.vmamlist = vmamlist;
+	}
+	
 	private ArrayList<Vmam> vmamlist; //vm index, 자판기번호, 수량, 물품명
 	
 	public VmVmamVO() {
@@ -59,13 +68,6 @@ public class VmVmamVO {
 		this.vmamlist = vmamlist;
 	}
 
-	public VmVmamVO(String vm_num, String lat, String lng, String branch, ArrayList<Vmam> vmamlist) {
-		super();
-		this.vm_num = vm_num;
-		this.lat = lat;
-		this.lng = lng;
-		this.branch = branch;
-		this.vmamlist = vmamlist;
-	}
+
 	
 }

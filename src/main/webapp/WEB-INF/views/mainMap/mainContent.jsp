@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
@@ -29,6 +28,7 @@
 <style>
 li {
 	list-style: none;
+	}
 </style>
 
 </head>
@@ -133,29 +133,22 @@ li {
                     <div class="col-md-12">
                         <div class="charity-counter" id="counter">
                             <ul class="row">
+                            
                                 <!-- style="transform: translateY(30px); -->
-                                <c:forEach var="result" items="${daymoney}">
-                                  <c:set var="total" value="${total + result.dntprice}" />
-                                </c:forEach>
-                                <li class="col-md-3">
+                                <li class="col-md-4">
                                     <i class="icon-donation2 charity-bgcolor"></i>
-                                    <span class="counter-value" data-count="${total}"></span>
-                                    <small>Donators</small>
+                                    <span class="counter-value" data-count="${dailySale}">0</span>
+                                    <small>오늘의 온도</small>
                                 </li>
-                                <li class="col-md-3">
-                                    <i class="icon-ribbon charity-bgcolor"></i>
-                                    <span class="counter-value" data-count="60574">0</span>
-                                    <small>Causes Solved</small>
+                                <li class="col-md-4">
+                                    <i class="fas fa-heart charity-bgcolor"></i>
+                                    <span class="counter-value" data-count="${monthSale}">0</span>
+                                    <small>이번 달 온도</small>
                                 </li>
-                                <li class="col-md-3">
-                                    <i class="icon-mortarboard charity-bgcolor"></i>
-                                    <span class="counter-value" data-count="30047">0</span>
-                                    <small>Volunteer</small>
-                                </li>
-                                <li class="col-md-3">
+                                <li class="col-md-4">
                                     <i class="icon-help charity-bgcolor"></i>
-                                    <span class="counter-value" data-count="7814">0</span>
-                                    <small>Child Saved</small>
+                                    <span class="counter-value" data-count="${yearSale}">0</span>
+                                    <small>올해 온도</small>
                                 </li>
                             </ul>
                         </div>
@@ -224,7 +217,7 @@ li {
                         <div class="widget widget_archive">
                             <div class="widget_title"><h2>Current ShareBox</h2></div>
                             <c:forEach items="${mapvm}" var="cat">
-                            <span style="font-size: 18px;" class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
+                            	<span style="font-size: 18px;" class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
                             	<i class="fa fa-map-marker-alt"></i>&nbsp; ${cat.branch}</span><br><br>
                            </c:forEach>
                            

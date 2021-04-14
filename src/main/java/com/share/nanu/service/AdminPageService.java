@@ -1,6 +1,7 @@
 package com.share.nanu.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.share.nanu.VO.AdminItemOutVO;
 import com.share.nanu.VO.BoardVO;
@@ -49,6 +50,11 @@ public interface AdminPageService {
 	//회원관리- 문의내역
 	List<BoardVO> getMemberQnA(String member_id, Criteria cri);
 	int getQnACount(String member_id, Criteria cri);
+	
+	//후원금관리 - 통계
+	Map<Integer, Integer> getMonthSales(String year);
+	Map<Integer, Integer> getDailySales(String year, String month);
+	int getYearSales(String year);
 	
 
 	

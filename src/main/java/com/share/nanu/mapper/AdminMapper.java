@@ -55,6 +55,12 @@ public interface AdminMapper {
 
 	int getQnACount(String member_id, Criteria cri);
 
+	Integer getMonthSale(String year, String month);
+
+	Integer getDailySale(String year, String month, String day);
+
+	int getYearSale(String year);
+
 	
 
 	

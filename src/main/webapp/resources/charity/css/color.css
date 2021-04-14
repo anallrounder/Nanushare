@@ -17,7 +17,7 @@
 .charity-pagination > ul > li:hover > .next,
 .charity-pagination > ul > li > span.current,
 .charity-classic-team-text ul li:hover a {
-    color: #2a786b;
+    color: #FFAE73;
 }
 
 .charity-bgcolor,
@@ -69,12 +69,12 @@ ul li:hover .charity-grid-prayer-btn,
 .charity-main-btn, /* 혜선생성 */
 
 .charity-partner-slider .slick-arrow:hover {
-    background-color: #2a786b;
+    background-color: #FFAE73;
 }
 
 .charity-sub-btn,  
 .charity-click-btn /* 혜선생성 */ {
-    background-color: #2a9f89;
+    background-color: #FFAE73;
 }
 
 .charity-border-color,
@@ -84,15 +84,15 @@ ul li:hover .charity-grid-prayer-btn,
 .charity-banner .slick-arrow,
 .charity-service-link,
 .charity-donation-parallex-btn {
-    border-color: #2a786b;
+    border-color: #FFAE73;
 }
 
 .charity-counter i:after,
 .charity-simple-blog figcaption time:before {
-    border-top-color: #2a786b;
+    border-top-color: #FFAE73;
 }
 
 .back-top:before,
 .back-top:after {
-    border-bottom-color: #2a786b;
+    border-bottom-color: #FFAE73;
 }

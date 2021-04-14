@@ -1,6 +1,9 @@
 package com.share.nanu.service;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -135,6 +138,38 @@ public class AdminPageServiceImpl implements AdminPageService {
 	public int getQnACount(String member_id, Criteria cri) {
 		// TODO Auto-generated method stub
 		return adminMapper.getQnACount(member_id, cri);
+	}
+
+	@Override
+	public Map<Integer, Integer> getMonthSales(String year) {
+		
+		Map<Integer, Integer> monthSale = new HashMap<>();
+		
+		for(int i= 1; i <13; i++) {
+			monthSale.put(i, adminMapper.getMonthSale(year, String.valueOf(i)));
+		}
+		
+		return monthSale; 
+	}
+
+	@Override
+	public Map<Integer, Integer> getDailySales(String year, String month) {
+		Calendar cal = Calendar.getInstance();
+        cal.set(Integer.parseInt(year), Integer.parseInt(month), 1);
+		
+		Map<Integer, Integer> dailySale = new HashMap<>();
+		
+		for(int i=1; i <= cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
+			dailySale.put(i, adminMapper.getDailySale(year, month, String.valueOf(i)));
+		}
+		
+		return dailySale;
+	}
+
+	@Override
+	public int getYearSales(String year) {
+		
+		return adminMapper.getYearSale(year);
 	}
 
 	
