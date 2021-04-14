@@ -1,5 +1,10 @@
 package com.share.nanu.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -7,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import com.share.nanu.security.MemberDetails;
+import com.share.nanu.service.AdminPageService;
 import com.share.nanu.service.MainService;
 
 import lombok.AllArgsConstructor;
@@ -31,20 +38,46 @@ public class NanuMainController {
 	public ModelAndView nanumain(ModelAndView mov ,@AuthenticationPrincipal MemberDetails md) throws Exception {
 		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
-		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-			
+		if(md != null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			 
 			log.info("로그인한 사람 이름 - "+ md.getmember().getName());
 			mov.addObject("username",md.getmember().getName());
 		}
-		mov.setViewName("mainMap/mainview"); 
-
 		
+
+		SimpleDateFormat yy = new SimpleDateFormat("yyyy");
+		SimpleDateFormat mm = new SimpleDateFormat("MM"); /* 소문자 mm로 쓰면 달로 표기되는게 아니라 시간으로 읽혀서 month처리 할때는 MM를 사용해야함 */
+		SimpleDateFormat dd = new SimpleDateFormat("dd");
+
+		Date time = new Date(); // 날짜 계산을 위해 Date형식으로 형변환
+
+		String year = yy.format(time);
+		String month = mm.format(time);
+		String day = dd.format(time);
+
+		log.info("오늘날짜: " + year + "년 " + month + "월 " + day + "일");
+
+		mov.addObject("year", year);
+		mov.addObject("month", month);
+		mov.addObject("day", day);
+
+		mov.addObject("dailySale", mainService.getDailySales(year, month, day)); // 일별
+		mov.addObject("monthSale", mainService.getMonthSales(year, month)); // 월별
+		mov.addObject("yearSale", mainService.getYearSales(year)); // 년별
+		
+		System.out.println("뭔데에에에에에" + mainService.getDailySales(year, month, day));
+
 		mov.setViewName("mainMap/mainContent"); 
-		/* mov.setViewName("test"); */
-		mov.addObject("daymoney", mainService.getMoney()); // 당일 후원 금액 로그기록(통계)
-		//mov.addObject("weekmoney", mainService.getWeekMoney()); 
 		mov.addObject("mapvm", mainService.getvm()); // vm, vmam VO
 		return mov;
+	}
+	
+	@RequestMapping("/vm/info")
+	@ResponseBody
+	public Map<String, Object> vmInfos() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", mainService.getvm());
+		return map; 
 	}
 	
 	//오프라인 기계 실시간 test

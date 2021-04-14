@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
 
  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -14,7 +13,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/resources/AdminLTE-master/dist/css/adminlte.min.css">
 
-<html>
+
 <head>
 <title>Admin Page</title>
 
@@ -110,36 +109,10 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link" data-toggle="tab">
+            <a href="/admin/stat" class="nav-link">
              <i class="nav-icon fas fa-donate"></i>
-              <p>후원금 관리<i class="right fas fa-angle-left"></i></p>
+              <p>후원금 관리</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/donation" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>일별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_week" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>주별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_month" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>월별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_year" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>년별</p>
-                </a>
-              </li>
-            </ul>
           </li>
           
           <li class="nav-item">

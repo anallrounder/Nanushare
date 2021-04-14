@@ -8,6 +8,7 @@ import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
+import com.share.nanu.VO.PointVO;
 import com.share.nanu.mypaging.Criteria;
 
 @Mapper
@@ -44,5 +45,12 @@ public interface MyPageMapper {
 	// 회원탈퇴
 	public void memberDelete(MemberVO mvo);
 	public void authdel(MemberVO mvo);
+	
+	//카운트
+	public int mycount(PointVO pointVO, String member_id);
+	//포인트 insert
+	public void getMypoint(PointVO pointVO, String member_id);
+	
+	
 
 }

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -118,36 +117,10 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link" data-toggle="tab">
+            <a href="/admin/stat" class="nav-link">
              <i class="nav-icon fas fa-donate"></i>
-              <p>후원금 관리<i class="right fas fa-angle-left"></i></p>
+              <p>후원금 관리</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/donation" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>일별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_week" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>주별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_month" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>월별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_year" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>년별</p>
-                </a>
-              </li>
-            </ul>
           </li>
           
           <li class="nav-item">
@@ -256,6 +229,13 @@
 							                               	<th>처리상태</th>
 							                            </tr>
 							                            
+							                            <c:if test="${empty moneyDona}">
+														<tr>
+															<td colspan="4" align="center">후원 기부 내역이 없습니다</td>
+														</tr>
+														</c:if>
+														
+							                            <c:if test="${! empty moneyDona}">
 							                            <c:forEach items="${moneyDona}" var="moneydao" >
 							                            <tr>
 							                               	<td>${moneydao.dntdate}</td> 
@@ -264,7 +244,7 @@
 							                              	<td>${moneydao.dntstat}</td> 
 							                            </tr>
 							                           </c:forEach>
-							                           
+							                           </c:if>
 							                           </table>
 						                            </form>
 						                                   
@@ -307,7 +287,7 @@
 					 
 					 
 					<div class="charity-team-contactus">
-       					<button type="button" onClick="history.back()" class="charity-donation-parallex-btn center"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;돌아가기</i></button>
+       					<button type="button" onClick="history.back()" class="charity-donation-parallex-btn center"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;이전 페이지</i></button>
 					</div>
 				</div>
 			</div>

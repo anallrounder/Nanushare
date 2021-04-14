@@ -35,7 +35,6 @@ public class NanuBoardShowReplyController {
 	private NanuBoardShowYSService service;
 
 	// 컨텐트뷰 + 댓글 보기
-	
 	@GetMapping("/board/shows/content_view/{b_index}") 
 	public ModelAndView content_view(BoardVO boardVO, BoardreplyVO rvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("controller -- content_view -- 호출");
@@ -109,4 +108,20 @@ public class NanuBoardShowReplyController {
 		return entity;
 	}
 
+	// 댓글 수정 창 보기
+	@PostMapping("/board/shows/update") /* /content_view/{bid}/reply/{rid} */
+	public ModelAndView updateReplyView(BoardVO boardVO, BoardreplyVO rvo, ModelAndView mav) throws Exception {
+		log.info("controller -- updateReplyView() -- 호출");
+		
+		//mav.setViewName("/content_view/{bid}/reply/{rid}");
+		mav.addObject("content_view", service.getBoard(boardVO.getB_index()));
+		mav.addObject("listComment", service.listComment(rvo));
+		mav.addObject("getComment", service.getComment(rvo));
+		
+		System.out.println("service.listComment(rvo) = " + service.listComment(rvo));
+		System.out.println("service.getComment(rvo) = "+ service.getComment(rvo));
+		
+		return mav;
+	}
+	
 }

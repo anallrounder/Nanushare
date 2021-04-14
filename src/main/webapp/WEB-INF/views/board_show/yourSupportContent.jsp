@@ -69,12 +69,6 @@
 		autoDate();
 	}); 
 	</script>
-<!-- 	<script type="text/javascript">
-		$(function(){
-			
-	
-		});
-	</script> -->
 	
 </head>
 
@@ -107,8 +101,8 @@
 					<div class="col-md-9">
 						<div class="charity-rich-editor">
                             
-							<h1>${content_view.btitle}</h1><hr>
-							<figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure>
+							<h1>${content_view.btitle}</h1><!-- <hr> -->
+							<%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
 							<div class="charity-blog-options">
                                 <ul style="float:right">
                                 	<li><i class="fa fa-folder-open"></i>  No. ${content_view.b_index}</li> 
@@ -144,6 +138,9 @@
                         <!-- 이전, 다음글 보기 -->
                         <div class="charity-prenxt-post">
                             <ul>
+                            
+                            	
+								
                             	<!-- 이전글 -->
                                 <li class="charity-prev-post">
                                     <figure>
@@ -151,7 +148,7 @@
                                     </figure>
                                     <div class="charity-prev-artical">
                                         <a href="404.html" class="charity-post-arrow"><i class="fa fa-angle-double-left"></i> Previous Article</a>
-                                        <h3><a href="404.html">Duis arcu lectus, interdum quisi sodales</a></h3>
+                                        <h3><a href="404.html" class="prev_btn">Duis arcu lectus, interdum quisi sodales</a></h3>
                                     </div>
                                 </li>
                                 <!-- 다음글 -->
@@ -185,7 +182,7 @@
                              	<c:set var="listComment" value="${listComment}" />
                              	<c:forEach var="vo" items="${listComment}">
 	                                
-	                                <li>
+	                                <li class="rlist">
 	                                    <div class="thumb-list">
 	                                       <figure><img id="introImg" class="usre_img" src="${pageContext.request.contextPath}/resources/users/user01_sm.png"></figure> 
 	                                       <!--  <figure><img id="introImg" border="0"></figure> -->
@@ -195,13 +192,11 @@
 	                                            <div><c:out value="${vo.rdate}"/></div><!-- 작성일 -->
 	                                            <p><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->
 	                                            <div class="charity-blog-social">
-		                                            <i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update"><b>수정하기</b></a> &nbsp;
+		                                            <i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update" onClick="updateView(${vo.b_index},${vo.rid},${vo.rdate}, ${vo.rcontent})"><b>수정하기</b></a> &nbsp;
 	                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete"><b>삭제하기</b></a>
                                     		    </div>
 	                                            <br>
-	                                            
 	                                        </div>
-	                                        
 	                                    </div>
 	                                </li>
 	                                
@@ -279,7 +274,35 @@
 	</script>
 
     <script type="text/javascript">
-    
+    	// 이전 페이지 주소
+    	/* $(".a-prev_btn").click(function(event) {
+    		event.preventDefault();
+    		alert("이전글 버튼 click");
+    	} */
+    	
+    	/* function prev_move(b_index) {
+			console.log(b_index)
+		};
+		function next_move(b_index) {
+			console.log(b_index)
+		};
+		if(b_index !== null){
+			var url = "${pageContext.request.contextPath}/board/shows/content_view/" + b_index -1;
+		}
+    	
+    	
+	   	$.ajax({
+	`			type: "POST",
+	   	        contentType: 'application/json; charset=utf-8',
+	   	  		url: url,
+	   	        data: JSON.stringify(form), 
+	   	        cache : false,
+	   	      
+	   	        success: function (data) { 
+	   	        	
+	   	        console.log("SUCCESS : ", data);
+	   	}); */
+	   	
    		// 랜덤 이미지 불러오기 (슬비씨 깃허브 참고: https://github.com/seulpi/TIL/blob/cfae84682eb65d8e85f76de11de663a17f14f22f/Quiz/spring_Answer11.md#5-view )
 		$(function(){
 	    	$('.usre_img').each(function (index, item) {	        	
@@ -299,6 +322,7 @@
     		var rid = $("#rid").val();
     		var rcontent = $("#rcontent").val();
     		
+    		// 오늘날짜 받기
             var tDay = new Date();
     		var tMonth = tDay.getMonth()+1;
     		var tDate = tDay.getDate();
@@ -312,6 +336,7 @@
     		console.log("rdate= " + rdate + "date= " + date ) ;
     		
     		console.log(b_index,  rid, rcontent, rdate);
+    		
     		
     	 	var form = {
     				b_index: b_index,
@@ -327,7 +352,6 @@
                 xhr.setRequestHeader(header, token);
             });
            
-    		
      		$.ajax({
     			type:"POST",
     			url:"${pageContext.request.contextPath}/board/shows/reply_insert",
@@ -346,10 +370,11 @@
     					htmls += '<figure><img id="introImg" class="usre_img" src="${pageContext.request.contextPath}/resources/users/user02_sm.png"></figure>'
     					htmls += '<div class="text-holder">'
     					htmls += '<h6>' + rid + '</h6>'
-    					htmls += '<div>' + date + '</div>' /*  rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
+    					htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
     					htmls += '<p>' + rcontent + '</p>'
-						htmls += '<button class="btn btn-primary-sm pull-right m-2" disabled ><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update">수정하기</a></button>'
-						htmls += '<button class="btn btn-primary-sm pull-right m-2" disabled ><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete">삭제하기</a></button>'   
+						htmls += '<div class="charity-blog-social">'
+						htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update"><b>수정하기</b></a>'+'&nbsp;'
+						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete"><b>삭제하기</b></a></div>'
     					htmls += '</div>'
     					htmls += '</div>'
     					htmls += '</li>'
@@ -402,6 +427,69 @@
     		}); //end of ajax
      	}); // 삭제 종료
     	
+     	// 댓글 수정 창 보기
+     	/* $(".a-updateView").click(function updateView (event) {
+    		event.preventDefault();
+    		alert("수정하기 click");
+    		
+    		function(b_index, rid, rcontent, rdate){
+    			console.log(b_index);
+        		console.log(rid);
+        		console.log(rcontent);
+        		console.log(rdate);
+        		
+        		var b_index = b_index;
+        		var rid = rid;
+        		var rcontent = rcontent;
+        		var rdate = rdate;
+
+    		};
+    	 	var form = {
+    				b_index: b_index,
+    				rid : rid,
+    				rcontent : rcontent,
+    				rdate : rdate
+    		}  */
+    	 	
+    	 	// csrf
+    	 /*   var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            }); */
+    		
+    	/*	$.ajax({
+    			type : "POST",
+    			url : $(this).attr("href"),
+    			cache : false,
+    			contentType : 'application/json; charset=UTF-8',
+    			dataType : "text", // -> 데이터 타입을 적으면 성공했음에도 불구하고 에러로 처리되어 리스트로 넘어가지 않는다. 
+    			data: JSON.stringify(form), 
+    			success: function (result) {       
+    	               if(result == "SUCCESS"){
+    					
+    						alert(result+ "수정창 보기");
+    	                  
+    						htmls = '';
+    						
+    						htmls += '<form id="insertForm" action="${pageContext.request.contextPath}/board/reply_insert" method="post">
+    						htmls += '<input type="text" id="b_inedex" name="b_inedex"  class="form-control"  value="' + b_inex + '"/>'
+    						htmls += '<input type="text" id="rid" name="rid" class="form-control" value="' + rid + '">'
+    						htmls += '<textarea id="rcontent" name="rcontent" class="form-control">'+ rcontent + '</textarea>'
+    						htmls += '<br>'
+    						htmls += '<button type="submit" class="btn btn-primary pull-right">댓글작성</button>'
+    						htmls += '</form>'
+    						
+    						$("#rlist").val(htmls); // 작성 결과 입력
+    											
+    	               }                       
+    	             },
+    	             error: function (e) {
+    	                 console.log(e);
+    	             }*/
+    			
+    		//}); // end of ajax
+    	//});   // end of submit event 
     	
     });
     </script>	

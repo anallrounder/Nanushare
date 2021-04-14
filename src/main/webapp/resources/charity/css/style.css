@@ -106,7 +106,7 @@ h1 {
 
 h2 {
 	/* font-size: 24px; */
-	font-size: 26px;
+	font-size: 28px;
 }
 
 h3 {
@@ -861,7 +861,7 @@ a.menu-link {
 	padding: 14px 25px 13px;
 	border-radius: 40px;
 	line-height: 1;
-	color: #272625;
+	color: #CD5C5C; 
 	font-weight: 600;
 	-webkit-transition: all 0.4s ease-in-out;
 	-moz-transition: all 0.4s ease-in-out;
@@ -1551,7 +1551,7 @@ ul li:hover .charity-simple-team-media {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #202020;
+	background-color: #78665A; /* 202020 */
 	opacity: 0.85;
 }
 
@@ -1721,7 +1721,7 @@ ul li:hover .charity-simple-team-media {
 
 .charity-simple-blog-btn:hover, ul li:hover .charity-simple-blog-btn {
 	color: #ffffff;
-	background-color: #222;
+	background-color: #78665A; /* 222 */
 }
 
 .charity-click-btn {
@@ -1743,7 +1743,7 @@ ul li:hover .charity-simple-team-media {
 .charity-click-btn:hover, ul li:hover .charity-click-btn {
 	text-align: center;
 	color: #ffffff;
-	background-color: #222;
+	background-color: #78665A; /* 222 */
 }
 
 .charity-simple-blog-options {
@@ -2019,7 +2019,7 @@ ul li:hover .charity-simple-team-media {
 
 .charity-subheader h1 {
 	color: #ffffff;
-	font-size: 40px;
+	font-size: 45px;
 	margin-bottom: 11px;
 	text-transform: uppercase;
 	font-weight: bold;
