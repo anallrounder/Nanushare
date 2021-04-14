@@ -108,8 +108,7 @@ table {
 
 																alert("탈퇴되었습니다. 그동안 이용해주셔서 감사합니다. ");
 																
-																 $(location)
-																		.attr(
+																 $(location).attr(
 																				'href',
 																				"${pageContext.request.contextPath}/deleteCooki");
 																/* $(location)
@@ -163,24 +162,6 @@ table {
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>탈퇴 페이지</h1>
-					https://yulfsong.tistory.com/75?category=797541 참고할것
-					<p>https://ming9mon.tistory.com/75</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Banner -->
-
-
-
 	<!-- Content -->
 	<div class="charity-main-content">
 
@@ -226,18 +207,18 @@ table {
 									<input type="checkbox" name="agree" id="chk1"> 안내 사항을
 									모두 확인하였으며, 이에 동의합니다.
 									<div class="buttonbutton">
-										<!-- </ul> -->
+										<div>&nbsp;</div>
 
 										<button type="submit" class="charity-simple-blog-btn">탈퇴하기</button>
-										<!-- onclick="modifyMember()" -->
+										
 									</div>
 									<input type="hidden" name="${_csrf.parameterName}"
 										value="${_csrf.token}" />
 								</form>
+								<div>&nbsp;</div>
 								<a href="${pageContext.request.contextPath}/my/mypage"
 									class="charity-simple-blog-btn">취소</a>
-								<!-- 탈퇴하면 탈퇴되었습니다 감사합니다 페이지 띄우고 3초뒤 리다이렉트로 홈으로 가는 페이지 구현 생각중 -->
-
+			
 								<!-- jquery validation cdn-->
 								<!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
 								<script type="text/javascript"
