@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 포인트 기부시 회원테이블에 물품신청 횟수 카운트 countPDnt -->
   	<update id="countPDnt" >
 		<![CDATA[ 
-			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = 'Ulric@naver.com'
+			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = #{member_id}
 		]]>
 	</update>
 	

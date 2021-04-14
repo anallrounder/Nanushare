@@ -52,7 +52,9 @@
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
 <!-- calendar를 위한 라이브러리들 지우면 안됨 -->
- <link href='/resources/calendar/main.css' rel='stylesheet' />  
+ <link href='/resources/calendar/main.css' rel='stylesheet' /> 
+ 
+ </head> 
 <script src='/resources/calendar/main.js'></script> 
 
 
@@ -100,7 +102,7 @@
 	   score.forEach(function(e, i){
 	  		ctx.beginPath(); 	
 	  		/* 원크기, false=시계방향 */
-	   	   	ctx.arc(0, 0, 370, 0, (360/score.length)*(Math.PI/180), false);
+	   	   	ctx.arc(0, 0, 360, 0, (360/score.length)*(Math.PI/180), false);
 	   	   	ctx.lineTo(0,0);
 	   	   	ctx.closePath();
 	   	   	ctx.fillStyle=e.color;
@@ -110,7 +112,7 @@
 	   	   	ctx.textAlign='left';
 	   	 	/* 글자크기 */
 	   	   	ctx.font='30px sanserif';
-	   	   	ctx.fillText(e.name, 210, 105);
+	   	   	ctx.fillText(e.name, 150, 105);
 	   	   	
 	   	   	ctx.rotate((360/score.length) * (Math.PI/180));
 		});
@@ -139,21 +141,21 @@
    	   	var prtpnt = 0;
    	   	
     	if(clicked <= 0){
-    		random += Math.random()*360 + 720;
+    		random += Math.random()*360;
     		$(this).css({'transition-timing-function': 'ease-in-out', 'transition': '6s', 'transform': 'rotate('+random+'deg)'});
  			console.log(random);
 	    } 
     	
     	//포인트 지정
-    	if(random >= 720 && random <= 792){
+    	if(random >= -10 && random <= 60){
     		prtpnt = 100;
-	   	}else if(random >= 792 && random <= 864){
+	   	}else if(random >= 60 && random <= 134){
 	   		prtpnt = 20;
-    	}else if(random >= 864 && random <= 936){
+    	}else if(random >= 134 && random <= 206){
     		prtpnt = 10;
-    	}else if(random >= 936 && random <= 1008){	
+    	}else if(random >= 206 && random <= 278){	
     		prtpnt = 1;
-	   	}else if(random >= 1008 && random <= 1080){
+	   	}else if(random >= 278 && random <= 350){
 	   		prtpnt = 0;
 	   	}
 
@@ -253,7 +255,7 @@ $(document).ready(function(){
 });
 </script>
 
-</head>
+
 <style>
 #판 {
 
