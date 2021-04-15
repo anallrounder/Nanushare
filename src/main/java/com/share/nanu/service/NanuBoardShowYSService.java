@@ -48,6 +48,11 @@ public interface NanuBoardShowYSService {
 	
 	// 댓글 삭제
 	public void remove(BoardreplyVO rvo);
+
+	
+	public List<AttachmentVO> getAttachment(AttachmentVO avo);
+
+	public int getAttachMentCoubt(AttachmentVO avo);
 	
 
 }

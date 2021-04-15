@@ -53,4 +53,8 @@ public interface NanuBoardShowYSMapper {
 	// 댓글 삭제
 	public void removeReply(BoardreplyVO rvo);
 
+	public List<AttachmentVO> getAttachMent(AttachmentVO avo);
+
+	public int getAttachMentCount(AttachmentVO avo);
+
 }

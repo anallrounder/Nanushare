@@ -13,7 +13,7 @@
 	</script> -->
 	
 	<head>
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- meta tags -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,15 +42,19 @@
 	}); */
 	
 		//$(document).reday(function() {
-	$(function() {
+	 $(function() {
 		//랜덤 이미지 불러오기 
 		$('.boardShow_img').each(function (index, item) {	        	
 	       	var imgUrl = '${pageContext.request.contextPath}/resources/board_thumbnail/bslist0'+Math.floor((Math.random()*6) + 1)+'.png';
-	       	console.log("imgurl" + imgUrl);
+	       	console.log("index : "+index);
+	       	console.log("item " + item);
+	       	console.log("imgurl : " + imgUrl);
 	       	console.log($(item).attr("src"));
 	       	
 	       	$(item).attr("src", imgUrl);
-		       	
+		});
+		
+		
 		/* 	var result = '<c:out value="${result}" />';
 		  	checkModal(result);
 		  	history.replaceState({},null,null);
@@ -188,13 +192,38 @@
 
 						<div class="charity-blog charity-simple-blog">
 							<ul class="row">
-
+								
 								<c:forEach var="vo" items="${list}">
+									
 									<li class="col-md-6">
 										<figure>
 											<a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}">
-												<img id="introImg" class="boardShow_img" src="${pageContext.request.contextPath}/resources/board_thumbnail/bslist07.png">
+											
+												<c:set var="doneLoop" value="false"/>
+												<c:set var="attachMentCount"  value="${attachMentCount}" />
+												<c:set var="i" value="1" />
+												
+												<c:forEach var="attachment" items="${attachment}">
+													
+													<c:set var="i" value="${i+1 }" />
+													
+													<%-- ${vo.b_index},${attachment.b_index} --%>
+													<c:if test="${doneLoop ne true}">
+														<c:choose>
+															<c:when test="${vo.b_index eq attachment.b_index }">
+																<img src="${attachment.path}">
+																<c:set var="doneLoop" value="true"/>
+															</c:when>
+															
+															<c:when test="${i+1 > attachMentCount }">															
+																<img id="introImg"  class="boardShow_img" src="${pageContext.request.contextPath}/resources/board_thumbnail/bslist07.png">
+																<c:set var="doneLoop" value="true"/>
+															</c:when>															
+														</c:choose>													
+													</c:if>																																																																																									
+												</c:forEach>											
 											</a>
+												
 											<figcaption>
 												<time datetime="2008-02-14 20:00" class="charity-bgcolor">나눔<span>인증</span></time>
 												<a href="/board/shows/content_view/${vo.b_index}" class="blog-link-hover"><i class="fa fa-link"></i></a>

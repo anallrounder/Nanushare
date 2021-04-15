@@ -44,7 +44,8 @@ public class AccountController {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+	
+	@Autowired
 	private NanuService nservice;
 
 	@GetMapping("/signUpForm") // 가입페이지 이동
@@ -55,7 +56,7 @@ public class AccountController {
 	}
 
 	@RequestMapping("/loginPage") // 로그인 페이지
-	public ModelAndView home(ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView home(ModelAndView mav) {
 		log.info("로그인 폼으로 이동");
 		//인증하기전 이전 주소를 기억 하는 로직
 		//String referrer = request.getHeader("Referer");//이전 페이지 주소

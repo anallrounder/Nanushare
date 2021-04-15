@@ -129,6 +129,18 @@ public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 		log.info("댓글 삭제");
 		mapper.removeReply(rvo);
 	}
+
+	@Override
+	public List<AttachmentVO> getAttachment(AttachmentVO avo) {
+		log.info("attachmentVO 가져오기");
+		return mapper.getAttachMent(avo);
+	}
+
+	@Override
+	public int getAttachMentCoubt(AttachmentVO avo) {
+		
+		return mapper.getAttachMentCount(avo);
+	}
 	
 	
 	
