@@ -23,46 +23,15 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+<!-- QNA게시판 리스트 -->
+<link rel="stylesheet" href="/resources/qna/css/common/common.css"/>
+
 <!-- 부트스트랩 아이콘 -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-<!-- SIDE BAR 1 CSS -->
-<!-- <link rel="stylesheet" href="/resources/sidebar/css/styles.css"> -->
-
-<style>
-    .faqHeader {
-        font-size: 27px;
-        margin: 20px;
-    }
-
-    .panel-heading [data-toggle="collapse"]:after {
-        font-family: 'Glyphicons Halflings';
-        content: "\e072"; /* "play" icon */
-        float: right;
-        color: #F58723;
-        font-size: 18px;
-        line-height: 22px;
-        /* rotate "play" icon from > (right arrow) to down arrow */
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-    }
-
-    .panel-heading [data-toggle="collapse"].collapsed:after {
-        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        transform: rotate(90deg);
-        color: #454444;
-    }
-</style>
 
 </head>
 
@@ -74,35 +43,56 @@
 ​h3 {
 	text-align: center;
 }
+
 </style>
+
+ 
 <body>
 	<!-- Header -->
 		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-	
-	<!-- Content -->
-	<div class="charity-main-content">
-
 		<!-- Main Section -->
-	<form id="updateForm" action="${pageContext.request.contextPath}/board/notice/${content_view.b_index}" method="post">
+	
+	</form>		
+		
+		<!-- 문의게시판 - START -->
+   <div id="wrapp">
+    <div id="containerr">
+        <div class="inner">        
+            <h2> 1:1 문의 </h2>            
+            <form id="boardForm" name="boardForm">
+                <table width="100%" class="table01">
+                    <colgroup>
+                        <col width="15%" />
+                        <col width="35%" />
+                        <col width="15%" />
+                        <col width="*" />
+                    </colgroup>
+                    <tbody id="tbody">
+                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/${content_view.b_index}" method="post">
 		<table class="table">
 			<input type="hidden" id="b_index" value="${content_view.b_index}">
 			<tr>
-				<td>번호</td>
+				<td>글번호</td>
 				<td>${content_view.b_index}</td>
 			</tr>
 			<tr>
-				<td>조회수</td>
-				<td>${content_view.bhit}</td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" id="member_id" value="${content_view.member_id}"></td>
+				<td>작성일</td>
+				<td>${content_view.bdate}</td>
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td><input type="text" id="btitle" value="${content_view.btitle}"></td>
+				<td>${content_view.btitle}</td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td><input type="text" id="member_id" value="${content_view.member_id}"></td>
+			</tr>
+			
+			<tr>
+				<td>조회수</td>
+				<td>${content_view.bhit}</td>
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -112,20 +102,19 @@
 				<td colspan="2">
 					<input type="submit" class="btn btn-primary" value="수정">&nbsp;&nbsp;
 					<button type="button" class="btn btn-primary" onclick="location.href='delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/notice'">목록</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna/reply/${content_view.b_index}'">답변</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna'">목록</button>
 				</td>
 			</tr>
 		</table>
-	</form>		
+                
+            </form>            
+        </div>
+    </div>
+    
+		<!-- 문의게시판 - END -->
 		
 		<!-- Main Section -->
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- Main Section -->
 
 	<!-- Search Modal -->
 	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
@@ -170,9 +159,7 @@
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
 	
-	 <!-- 자주묻는질문 -->
-    <script type="text/javascript" src="/resources/faq/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
+	
     
 </body>
 </html>

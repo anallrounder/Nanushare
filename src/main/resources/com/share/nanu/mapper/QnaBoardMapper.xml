@@ -4,12 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- select sum(dntprice) from donation where TO_CHAR(dntdate,'yyyy-mm-dd') > sysdate-1 order by dnt_paynum asc -->
 
-<mapper namespace="com.share.nanu.mapper.NoticeBoardMapper">
+<mapper namespace="com.share.nanu.mapper.QnaBoardMapper">
 	
 	<!-- 공지게시판 리스트 -->
 	<select id="getlist" resultType="com.share.nanu.VO.BoardVO">
 		<![CDATA[ 
-			select * from board where bcat_num = 3
+			select * from board where bcat_num = 1
 		]]>
 	</select>
 	
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from (
 				select  
     					rownum as rn, a.* from ( 
-        					select /*+ INDEX_DESC(board pk_board) */ * from board where bcat_num = 3 
+        					select /*+ INDEX_DESC(board pk_board) */ * from board where bcat_num = 1 
      			) a where 
 		]]>    
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
@@ -69,14 +69,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</foreach>
 		</trim>  
 		<![CDATA[	 
-			bcat_num = 3 and b_index > 0 
+			bcat_num = 1 and b_index > 0 
 		]]>
 	</select>
 	
 	<!-- 공지게시판 컨텐트뷰 -->
 	<select id="read" resultType="com.share.nanu.VO.BoardVO">
 		<![CDATA[
-	     	select * from board where bcat_num = 3 and b_index = #{b_index}
+	     	select * from board where bcat_num = 1 and b_index = #{b_index}
 		]]>
 	</select>
 	
@@ -123,7 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getBindex"  resultType="int">
 		<![CDATA[ 
 			select * from (
-        select b_index from board where member_id = #{member_id}  and bcat_num = 3 order by b_index desc
+        select b_index from board where member_id = #{member_id}  and bcat_num = 1 order by b_index desc
    	 		) 
 				where rownum =1
 		]]>

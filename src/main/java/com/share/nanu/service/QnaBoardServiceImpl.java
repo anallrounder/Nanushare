@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.share.nanu.mapper.NoticeBoardMapper;
+import com.share.nanu.mapper.QnaBoardMapper;
 import com.share.nanu.paging.Criteria;
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
@@ -18,10 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class NoticeBoardServiceImpl implements NoticeBoardService {
+public class QnaBoardServiceImpl implements QnaBoardService {
 	
 	@Autowired
-	private NoticeBoardMapper mapper;
+	private QnaBoardMapper mapper;
 	
 	// 인증게시판 리스트
 	@Override

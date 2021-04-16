@@ -85,6 +85,10 @@
 	<div class="charity-main-content">
 
 		<!-- Main Section -->
+	<div class="container">
+    <br />
+    <br />
+	
 	<form id="updateForm" action="${pageContext.request.contextPath}/board/notice/${content_view.b_index}" method="post">
 		<table class="table">
 			<input type="hidden" id="b_index" value="${content_view.b_index}">
@@ -117,6 +121,10 @@
 			</tr>
 		</table>
 	</form>		
+	
+	
+	
+   
 		
 		<!-- Main Section -->
 					</div>
