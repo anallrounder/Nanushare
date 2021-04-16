@@ -111,7 +111,7 @@
                                 <div class="skillst charity-item-text">
                                     <h5 style="color:orangered;">물품 신청을 하시기 전에 아래 정보를 꼭 확인해주세요!</h5>
                                 </div>
-                               <!--  <a href="/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a> -->
+                                <a href="/my/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a>s
                             </div>
                           	<!-- <p> <blockquote></blockquote></p> -->
                           	<!-- 상단 신청서 작성 버튼 -->
@@ -229,7 +229,7 @@
 	                            <h6>후원자 여러분~!</h6>
 								<p class="mb-5">일상의 기본인 생필품이 부족하여 어렵게 생활하고 있는 이웃을 위해 따뜻한 관심과 마음을 표현해주세요 :)</p>
 							</div>
-	                              <a href="/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a>
+	                              <a href="/my/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a>
                         </div>
                         <!-- 하단 물품 나눔 신청하기 버튼  end-->
                     </div> 
