@@ -153,6 +153,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   ]]>
 	</delete>
 	
+	<select id="getAttachMent" resultType="com.share.nanu.VO.AttachmentVO">
+		<![CDATA[ 
+			select * from attachment order by b_index desc
+		]]>
+	</select>
+	
+	<select id="getAttachMentCount" resultType="int">
+		<![CDATA[ 
+			select count(b_index) as count from attachment
+		]]>
+	</select>
+	
 </mapper>
 
 

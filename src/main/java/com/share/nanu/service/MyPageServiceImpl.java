@@ -1,5 +1,6 @@
 package com.share.nanu.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,6 +147,21 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void getMypoint(PointVO pointVO,String member_id) {
 		mgmapper.getMypoint(pointVO,member_id);
+		
+	}
+
+
+	//출첵 포인트 카운트
+	@Override
+	public int mycount2(PointVO pointVO, String member_id) {
+		
+		return mgmapper.mycount2(pointVO,member_id );
+	}
+
+	//출첵 포인트 넣기
+	@Override
+	public void getMypoint2(PointVO pointVO,String member_id) {
+		mgmapper.getMypoint2(pointVO,member_id);
 		
 	}
 

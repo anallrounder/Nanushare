@@ -2,6 +2,8 @@
 // https://www.tutorialrepublic.com/twitter-bootstrap-button-generator.php
 package com.share.nanu.controller;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -11,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,10 +57,33 @@ public class NanuBoardShowYSController {
 
 	// 인증게시판 페이징 list
 	@GetMapping("/board/shows/list")
-	public String boardShowPaging(Criteria cri, Model model, @AuthenticationPrincipal MemberDetails md)
+	public String boardShowPaging(Criteria cri, Model model,AttachmentVO avo ,@AuthenticationPrincipal MemberDetails md)
 			throws Exception {
-		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);
+		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);		
 		model.addAttribute("list", service.getlist(cri));
+				
+		log.info("getAttachMent b_index");
+		model.addAttribute("attachment", service.getAttachment(avo));
+		
+		
+		//절대경로 -> 상대경로 치환
+		String path = service.getAttachment(avo).get(0).getPath();//절대경로
+		log.info("절대경로 : " + path );
+		
+		String text = new File(path).toURI().getPath(); // 절대경로에 설정되어 있는 \\를 //로 변환
+		log.info("절대경로 -> 상대경로 치환중 : "+ text);
+		
+		int resources = text.indexOf("/resources");	
+		log.info("resources 까지 index : "+resources);	
+		
+		String relative = text.substring(resources);//상대결로로 바꿀 기준점
+		log.info("reesource 부터 출력(relative) : "+relative);		
+				
+		
+		
+		log.info("getAttachMent b_index Coubt");
+		model.addAttribute("attachMentCount", service.getAttachMentCount(avo));
+		
 
 		int total = service.getTotal(cri);
 		model.addAttribute("pageMaker", new pageVO(cri, total));
@@ -125,6 +151,7 @@ public class NanuBoardShowYSController {
 		return "board_show/ysWriteView";
 	}
 	
+	//ck 에디터
 	@GetMapping("/my/board/shows/imageUpload")
 	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response, 
 			MultipartHttpServletRequest multiFile) throws  Exception{
@@ -192,7 +219,13 @@ public class NanuBoardShowYSController {
 	public String bsWrite( MultipartHttpServletRequest multiple, 
 			BoardVO boardVO, AttachmentVO attachmentVO, Model model, @AuthenticationPrincipal MemberDetails md)
 			throws Exception {
+		
 		log.info("인증게시판 컨트롤러  -- write() -- 호출");
+		
+		final int THUMNAIL_WIDTH = 264;
+		final int THUMNAIL_HEIGHT = 336;
+		UUID uuid = UUID.randomUUID();
+				
 		String loginMember = md.getUsername();
 		boardVO.setMember_id(loginMember); //로그인한 사람
 		service.writeBoard(boardVO);
@@ -207,51 +240,76 @@ public class NanuBoardShowYSController {
 		// 화면\\폴더\\eclipse-workspace\\Nanu\\src\\main\\webapp\\resources\\attachment";
 
 		String path = multiple.getSession().getServletContext().getRealPath("/resources/attachment");
-		System.out.println("1. " + path);
+		log.info("attachment Path : " + path);
+		
+	
 
 		Date dt = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String datefolder = sdf.format(dt).toString();
-		System.out.println("2. "+datefolder);
+		log.info("오늘날짜로 생성한 폴더 이름 : " + datefolder);
+		
 		
 		path = path+"\\" + datefolder;
-		System.out.println("3. "+path);
-		//File dir = new File("C:/", datefolder);
-
+		log.info("오늘날짜로 생성한 폴더 경로 : " + path);
+	
 		File dir = new File(path);
-		System.out.println("4. "+dir);
+		log.info("오늘날짜로 폴더 생성 확인 : " + dir);
 		if (!dir.isDirectory()) {
 			dir.mkdir();
 		}
 
 		List<MultipartFile> mf = multiple.getFiles("file");
 		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
-
+			log.info("썸네일이 없습니다.");
 		} else {
 			for (int i = 0; i < mf.size(); i++) { // 파일명 중복 처리
 
-				UUID uuid = UUID.randomUUID();
+				
 				// 본래 파일명
 				String originalfileName = mf.get(i).getOriginalFilename();// 원본이름
-				String uuidName = originalfileName + "_" + uuid;
+				String uuidName = uuid +"_"+originalfileName;//랜덤문자열 파일이름 중복 방지
 				String extension = FilenameUtils.getExtension(originalfileName);// 확장자
 				// 저장 될 파일명
 				// String savefileName=uuid+"."+ext;
 
-				String savePath = path + "\\" + originalfileName; // 저장 될 파일 경로
-
+				String savePath = path + "\\" + uuidName; // 저장 될 파일 경로
+				
 				mf.get(i).transferTo(new File(savePath)); // 파일 저장
+				
+				//썸네일
+			
+				File originFile = new File(savePath);
+				
+				String thumNailName = "thumNail_"+uuid+"_"+originalfileName;
+				savePath = path + "\\" + thumNailName;
+				log.info("썸네일 경로 : " + savePath);
+				File thumNail = new File(path+"\\"+thumNailName);
+				
+				BufferedImage originalImage = ImageIO.read(originFile);
+				BufferedImage thumNailImage = new BufferedImage(THUMNAIL_WIDTH, THUMNAIL_HEIGHT, BufferedImage.TYPE_3BYTE_BGR);			
+				Graphics2D graphic = thumNailImage.createGraphics();
+				graphic.drawImage(originalImage, 0, 0, THUMNAIL_WIDTH, THUMNAIL_HEIGHT,null);
+				 
+				if(extension.equals("jpg")) {
+					ImageIO.write(thumNailImage, "jpg", thumNail);
+				}else {
+					ImageIO.write(thumNailImage, "png", thumNail); //png만 나옴
+				}
+				log.info("썸네일 생성");
+				
+				//로그 기록을 system.out.println에서 log.info로수정시 로딩속도 향상 그래도 아직 조금 느림
 				
 				
 				attachmentVO.setOriginname(originalfileName);
 				attachmentVO.setPath(savePath);
 				attachmentVO.setExtension(extension);
 				attachmentVO.setB_index(service.getBindex(boardVO));
-				attachmentVO.setUuidName(uuidName);
+				attachmentVO.setUuidName(thumNailName);
 				service.fileUpload(attachmentVO);
 			}
 		}
-		return "redirect:content_view";
+		return "board_show/yourSupportList";
 	}
 
 }

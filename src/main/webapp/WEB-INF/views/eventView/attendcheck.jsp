@@ -51,11 +51,23 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
-<!-- calendar를 위한 라이브러리들 지우면 안됨 -->
- <link href='/resources/calendar/main.css' rel='stylesheet' /> 
- 
- </head> 
-<script src='/resources/calendar/main.js'></script> 
+<!-- calendar -->
+<link href='/resources/calendar/main.css' rel='stylesheet' />
+<script src='/resources/calendar/main.js'></script>
+
+<!--<script
+	src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
+ <link
+	href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css'
+	rel='stylesheet' />
+<link
+	href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css'
+	rel='stylesheet' media='print' />
+<script
+	src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script> -->
+
+
+</head>
 
 
 <script type="text/javascript">
@@ -74,23 +86,23 @@
 	    var score = new Array(
 	    		{
 	     		   name: '1p',
-	     		   color: 'red'
+	     		   color: '#F5A9A9'
 	     	  	},
 	     	  	{
 	     	  		name: '10p',
-	     	  		color: '#ff7f00'
+	     	  		color: '#F7BE81'
 	     	  	},
 	     	  	{
 	 	    		name: '20p',
-	 	    		color: 'yellow'
+	 	    		color: '#F4FA58'
 	 	    	},
 	     		{
 	 	    		name: '100p',
-	 	    		color: 'lightgreen'
+	 	    		color: '#BEF781'
 	 	    	},
 	 	    	{
 	 	    		name: '♥',
-	 	    		color: 'skyblue'
+	 	    		color: '#A9E2F3'
 	 	    	}    	
 	    	);
 	    	    
@@ -111,40 +123,39 @@
 	   	   	ctx.fillStyle='black';
 	   	   	ctx.textAlign='left';
 	   	 	/* 글자크기 */
-	   	   	ctx.font='30px sanserif';
+	   	   	ctx.font='30px YiSunShinDotumM';
 	   	   	ctx.fillText(e.name, 150, 105);
 	   	   	
 	   	   	ctx.rotate((360/score.length) * (Math.PI/180));
 		});
-		//내부 원 설정
+		
    	   	ctx.beginPath();
    		 /* (x,y,반지름,시작점,끝점,방향) */
-   	   	ctx.arc(0, 0, 0, 0, 0*Math.PI, false);
-   	   	ctx.fillStyle = 'white';
+   	   	ctx.arc(0, 0, 100, 0, 2*Math.PI, false);
+   	   	ctx.fillStyle = 'lightgray';
    	   	ctx.fill();
    	   	
    	   	ctx.textAlign= 'center';
    	   	ctx.textBaseline = 'middle';
-   	   	ctx.font = '25px sanserif';
+   	   	ctx.font = '40px YiSunShinDotumM';
    	   	
    	   	ctx.strokeStyle = 'black';
-   	   	ctx.strokeText('출첵버튼', 0,0);
+   	   	ctx.strokeText('룰렛버튼', 0,0);
    	 
    	var member_id = $("#member_id").val();
-   	 
-
+   	
    	$('#canvas').click(function(){
    		
-   		
-   	  	var random = 0;
-   	   	var clicked = 0;
-   	   	var prtpnt = 0;
+   		var random = 0;
+	   	var clicked = 0;
+	   	var prtpnt = 0;
+   	  
    	   	
     	if(clicked <= 0){
     		random += Math.random()*360;
-    		$(this).css({'transition-timing-function': 'ease-in-out', 'transition': '6s', 'transform': 'rotate('+random+'deg)'});
+    		$(this).css({'transition-timing-function': 'ease-in-out', 'transition': '3s', 'transform': 'rotate('+3000+'deg)'});
  			console.log(random);
-	    } 
+	    } /* 'transform': 'rotate('+random+'deg) --원판속도 */
     	
     	//포인트 지정
     	if(random >= -10 && random <= 60){
@@ -159,14 +170,11 @@
 	   		prtpnt = 0;
 	   	}
 
-    	
-    	console.log(member_id);
     	console.log(prtpnt);
     	
     	var memberPoint = {   			
     			"member_id" : member_id,		 
-    			"prtpnt" : prtpnt
-    			/* "phone" : phone */
+    			"prtpnt" : prtpnt    			
     		};
     	
     	//참여 중복 확인 및 포인트 적립
@@ -179,13 +187,16 @@
    	        	member_id: member_id,
    	        	prtpnt: prtpnt
    	        }, */
+   	     async: "false",
    	     datatype : 'json',
    	    
 	   	    success: function (result) {
 	   	    	if(result == "SUCCESS"){
 		    		console.log(result); 
 		    		setTimeout(function(){
-		    			alert("오늘의 나누셰어 포인트는 "+prtpnt+" point");	    		
+		    			alert("오늘의 나누셰어 포인트는 "+prtpnt+" point");
+				/* 여기에 데이터를 전부 넣어주던지... */		
+		  	    
 		    		},5000);
 		        }else if(result == "FAIL"){
 	   	    		console.log(result);
@@ -196,70 +207,14 @@
 		    	console.log(e);
 		    }
     	});
-   	});
+   	});//canvas
+   	
    });
    </script>
-   
-   
-<script type="text/javascript">    
-document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-    </script>
-<script type="text/javascript">
-/* https://blog.naver.com/PostView.nhn?blogId=rima361&logNo=221315851905&parentCategoryNo=&categoryNo=32&viewDate=&isShowPopularPosts=true&from=search */
-$(document).ready(function(){
-	  $('#calendar').fullCalendar({
-	    header: {
-	      right: 'custom2 prevYear,prev,next,nextYear'
-	    },   
-        // 출석체크를 위한 버튼 생성
-	    customButtons: {
-	        custom2: {
-	          text: 'prtpnt',
-	          id: 'check',
-	         
-	          click: function() {	
-	        	  url: "/event/check/getpoint",
-	        	  type: "PUT",
-	        	  data : {member_id:member_id},
-	        	  dataType: "text",
-	        	  success: function (date) {
-	        	  $(".canvas").prop('disabled', true);
-	        	  $(".canvas").html('${prtpnt}');
-	        	  }
-	        }
-	    },
-       // 달력 정보 가져오기 
-	    eventSources: [
-	    	{
-				// ajax 통신으로 달력 정보 가져오기 
-                // GET "/users/attendances" -> {dateList:[ date: "2016-03-21", ... ]}
-	    		url: '/event/check',
-	    		type: 'GET',
-	    		dataType: "JSON",
-	    		success: function (data) { },
-	    		error: function() {
-	    			alert('there was an error while fetching events!');
-	    		},
-	    		color: 'purple',   
-	    		textColor: 'white' 
-	    	}
-	    ]
-	  }); 
-});
-</script>
-
 
 <style>
 #판 {
-
-	 width: 1000px;
+	width: 1000px;
 	height: 1000px;
 	/* width: 1200px;
 	height: 1150px; */
@@ -288,14 +243,12 @@ $(document).ready(function(){
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -312,8 +265,8 @@ $(document).ready(function(){
 
 						<div class="charity-event-rich-editor">
 							<h1 style="text-align: center;">
-								매일 나눔 룰렛 돌리고 포인트를 적립하세요!
-							</h1>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								매일 나눔 룰렛 돌리고 포인트를 적립하세요!</h1>
 						</div>
 
 
@@ -322,44 +275,12 @@ $(document).ready(function(){
 							<canvas id="canvas" width="1000px" height="1000px"></canvas>
 						</div>
 						<!-- <button type="button" class="btn btn-success">룰렛 돌리기</button> -->
-
-
-						
-
-
-						<!-- 달력 -->
-						 <div id='calendar' style="max-width:900px; margin:40px auto;">
-						 </div>
-
-
-
-
-						<div class="charity-post-tags">
-							<div class="charity-tags">
-								<span>Tags:</span> <a href="404.html">charity </a> <a
-									href="404.html">/ donation</a> <a href="404.html"> / needy</a>
-							</div>
-
-							<div class="charity-blog-social">
-								<span>Share:</span>
-								<ul>
-									<li><a href="https://www.facebook.com/"
-										class="fab fa-facebook"></a></li>
-									<li><a href="https://www.twitter.com/"
-										class="fab fa-twitter"></a></li>
-									<li><a href="https://www.linkedin.com/"
-										class="fab fa-linkedin"></a></li>
-									<li><a href="https://www.youtube.com/"
-										class="fab fa-youtube"></a></li>
-									<li><a href="https://www.vimeo.com/" class="fab fa-vimeo"></a>
-									</li>
-								</ul>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+			<button id='button' type="button" onClick="location.href='/event/check3'">출석하기</button>
+						
 		<!-- Main Section -->
 	</div>
 	<!-- Content -->
@@ -407,3 +328,142 @@ $(document).ready(function(){
 
 </body>
 </html>
+
+<!-- 		$(document).ready(function(){
+		    				  $('#calendar').fullCalendar({
+		    				    header: {
+		    				      right: 'custom2 prevYear,prev,next,nextYear'
+		    				    },   
+		    			        // 출석체크를 위한 버튼 생성 --필요없음. canvas의 id로 가져와봄
+		    				   /* customButtons: { */
+		    				    	 #canvas:{ 
+		    				        custom2: {
+		    				         /*  text: '출석체크하기', */
+		    				         /*  id: 'check', */
+		    				          click: function() {
+		    				
+		    				        	  url: "/event/check/mypoint",
+		    				        	  type: "PUT",
+		    				        	  data : {
+		    				        		  prtpnt, prtpnt},
+		    				        	  }
+		    				        	  dataType: "text",
+		    				        	  success: function (date) {
+		    				        		 //출석이라고 뿌려주기..
+			    				        	  }
+		    				        		  
+		    				        	 }
+		    				        }
+		    				        	/* $(".fc-custom2-button").prop('disabled', true);
+		    				        		  $(".fc-custom2-button").html('출석완료');*/
+		    				        }
+		    				    },
+		    			       // 달력 정보 가져오기 
+		    			     
+		    				    eventSources: [{
+		    				    		  $.ajax({
+		    							// ajax 통신으로 달력 정보 가져오기 
+		    			                // GET "/users/attendances" -> {dateList:[ date: "2016-03-21", ... ]}
+		    				    		url: '/event/check',
+		    				    		type: 'GET',
+		    				    		dataType: "JSON",
+		    				    		success: function (data) { 
+		    				    			//출석이라고 뿌려줘야함
+		    				    		},
+		    				    		error: function() {
+		    				    			alert('there was an error while fetching events!');
+		    				    		},
+		    				    		color: 'purple',   
+		    				    		textColor: 'white' 
+		    				    	});//ajax
+		    				    	
+		    				    	}]
+		    				    	
+		    				  }); 
+		    			 }); -->
+
+
+
+
+
+
+<!-- <script type="text/javascript">  
+document.addEventListener('DOMContentLoaded', function() {
+	  var calendarEl = document.getElementById('calendar');
+
+	  var calendar = new FullCalendar.Calendar(calendarEl, {
+		 initialView: 'dayGridMonth', //무조건 initialView로 써줘야함
+	    header: {
+		      right: 'custom2 prevYear,prev,next,nextYear'
+		    },
+	    footer: {
+	      left: 'custom2',
+	      center: '',
+	      right: 'prev,next'
+	    },
+	    customButtons: {
+	    
+	      custom2: {
+	        text: 'custom 2',
+	        click: function() {
+	          alert('clicked custom button 2!');
+	        },
+	         /*  eventSources: [
+
+			    				        // your event source
+			    				        {
+			    				          events: [ // put the array in the `events` property
+					    				            {
+				    				              title  : '출석',
+				    				              start  : '2021-04-14'
+				    				         }
+			    				          ],
+			    				          color: 'black',     // an option!
+			    				          textColor: 'yellow' // an option!
+			    				        }
+
+			    				        // any other event sources...
+
+			    				      ] */
+
+	        
+	      }
+	    } 
+	  });
+
+	  calendar.render();
+	});    
+		    				    /* eventSources: [{
+		    				    		  $.ajax({
+		    				    				url: '/event/check',
+		  		    				    		type: 'GET',
+		  		    				    		data : {
+		  		    				    			
+		  		    				    			 title : 'chulcheck',
+		    				    					  dateList : .getDate
+		  		    				    			
+		  		    				    		}
+		  		    				    		dataType: "JSON",
+		  		    				    		success: function (data) { 
+		    				    					 
+		    				    				  }
+		    							// ajax 통신으로 달력 정보 가져오기 
+		    			                // GET "/users/attendances" -> {dateList:[ date: "2016-03-21", ... ]}
+		    				    		
+		    				    			//출석이라고 뿌려줘야함
+		    				    		},
+		    				    		error: function() {
+		    				    			alert('there was an error while fetching events!');
+		    				    		},
+		    				    		color: 'purple',   
+		    				    		textColor: 'white' 
+		    				    	});//ajax
+		    				    	
+		    				    	}] */
+		    				    	
+		    				 // }); 
+		    			// });
+
+
+
+</script> -->

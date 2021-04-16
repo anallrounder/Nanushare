@@ -460,9 +460,19 @@
 											<td><i class="fa fa-krw" aria-hidden="true"></i>${list5.dntprice}</td>
 											<td><fmt:formatDate value="${list5.dntdate}" pattern="yy-MM-dd hh:mm:ss"/></td>
 											<td>${list5.paymethod}</td>
+<<<<<<< HEAD
+<<<<<<< HEAD
+											<td><button class="paycc" type="button" id="refund" name="refund" onclick="cancelPay()">결제취소</button></td>
+=======
 											<td>${list5.dnt_paynum}</td>
 											<td>${list5.dntstat}</td>
 											<td><button class="paycc" type="button">결제취소</button></td>
+>>>>>>> master
+=======
+											<td>${list5.dnt_paynum}</td>
+											<td>${list5.dntstat}</td>
+											<td><button class="paycc" type="button">결제취소</button></td>
+>>>>>>> dev_si_import_refund
 										</tr>
 
 									</c:forEach>

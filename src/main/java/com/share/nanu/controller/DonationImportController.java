@@ -82,6 +82,7 @@ public class DonationImportController {
 		  String paidAt = String.valueOf(resultMap.get(0).get("paid_at")); //paid_at은 int타입 아임포트 문서에 number라고 정의되어 있음
 		  String payMethod = String.valueOf(resultMap.get(0).get("pay_method"));
 		  String changePaidAt =  ndservice.changeUNIXTimeStamp(paidAt);
+		  
 		  System.out.println(changePaidAt);
 		  System.out.println(payMethod);
 		  
