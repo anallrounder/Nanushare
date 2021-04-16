@@ -68,6 +68,7 @@ public class MyPageController {
 			// log.info("로그인한 사람 이름 - "+ md.getmember().getName());
 			mav.addObject("username", md.getmember().getName());
 		}
+		mpvo.setMember_id(md.getUsername()); //로그인한 id 정보를 mpvo에 넣어줌
 		mav.addObject("memberInfo", ndservice.getMemberPoint(mpvo));
 		// mav.addObject("sign", mgservice.mysign(md.getmember().getSignuppath()));//추가
 		mav.setViewName("/my/mypage");
