@@ -1,5 +1,6 @@
 package com.share.nanu.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.share.nanu.VO.BoardVO;
@@ -47,8 +48,15 @@ public interface MyPageService {
 	//이벤트 - 1일1회 카운트
 	public int mycount(PointVO pointVO,String member_id);
 	
-	//이벤트
+	//룰렛
 	public void getMypoint(PointVO pointVO, String member_id);
+	
+	//이벤트 - 1일1회 카운트
+	public int mycount2(PointVO pointVO,String member_id);
+		
+	//룰렛
+	public void getMypoint2(PointVO pointVO, String member_id);
+		
 	
 
 }

@@ -57,14 +57,14 @@ $(function() {
 		var member_id = $("#member_id").val();
 		var subemail = $("#subemail").val();
 		var pw = $("#pw").val();
-		/* var phone = $("#phone").val(); */
+		
 
 		var memberJoin = {
 			"name" : name,
 			"member_id" : member_id,
 			 "subemail" : subemail,
 			"pw" : pw
-			/* "phone" : phone */
+			
 		};
 
 			$.ajax({

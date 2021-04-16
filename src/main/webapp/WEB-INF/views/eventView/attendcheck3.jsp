@@ -55,6 +55,8 @@
 <link href='/resources/calendar/main.css' rel='stylesheet' />
 <script src='/resources/calendar/main.js'></script>
 
+
+
 <!--<script
 	src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
  <link
@@ -70,173 +72,225 @@
 </head>
 
 
-<script type="text/javascript">
- /* https://m.blog.naver.com/sgj4958/221865512339 */ 
- /* prtpnt = 참여포인트 */
+
+ <!-- <script>
  
-   $(document).ready(function(){ 
-	   
-	   var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});
-	   
-	   
-	    var score = new Array(
-	    		{
-	     		   name: '1p',
-	     		   color: '#F5A9A9'
-	     	  	},
-	     	  	{
-	     	  		name: '10p',
-	     	  		color: '#F7BE81'
-	     	  	},
-	     	  	{
-	 	    		name: '20p',
-	 	    		color: '#F4FA58'
-	 	    	},
-	     		{
-	 	    		name: '100p',
-	 	    		color: '#BEF781'
-	 	    	},
-	 	    	{
-	 	    		name: '♥',
-	 	    		color: '#A9E2F3'
-	 	    	}    	
-	    	);
-	    	    
-	   var canvas = document.getElementById('canvas');
-	   var ctx = canvas.getContext('2d');
-	   /* 원점이동 */
-	   ctx.translate(500, 500);
-	   	
-	   score.forEach(function(e, i){
-	  		ctx.beginPath(); 	
-	  		/* 원크기, false=시계방향 */
-	   	   	ctx.arc(0, 0, 360, 0, (360/score.length)*(Math.PI/180), false);
-	   	   	ctx.lineTo(0,0);
-	   	   	ctx.closePath();
-	   	   	ctx.fillStyle=e.color;
-	   	   	ctx.fill();
-   	   	
-	   	   	ctx.fillStyle='black';
-	   	   	ctx.textAlign='left';
-	   	 	/* 글자크기 */
-	   	   	ctx.font='30px YiSunShinDotumM';
-	   	   	ctx.fillText(e.name, 150, 105);
-	   	   	
-	   	   	ctx.rotate((360/score.length) * (Math.PI/180));
-		});
+ function dateFormat(date){
+	 var yyyy = date.getFullYear();
+	 var MM = date.getMonth()+1;
+	 var dd = date.getDate();
+	 var pdate = yyyy + '-' +MM + '-' + dd;
+	 return pdate;	
+	 console.log(pdate);
+ }
+ function getEvent(proSeq){
+	 var events;
+	 
+	 $.ajax({
+	
+		 type : 'POST',
+		 data : {
+			 proSeq : proSeq
+		 },
+		 dataType : 'json',
+		 async : false,
+		 url : '/event/check/mypoint',
+		 success : function(result){
+			 events = result;
+		 },
+		 error : function(xhr, status, error){
+			 alert('ajax error' + error);
+		 }
+		 
+	 });
+	 
+	 return events;
+	 
+	 
+	 function updateFunc(info){
+		 start = dateFormat(pdate);
+		 end = dateFormat(pdate);
+		 var prtpnt = $("#prtpnt").val();
+		 
+		 $.ajax({
+				type : 'PUT',
+				 data: JSON.stringify(memberJoin),
+				 url : "${pageContext.request.contextPath}/my/myprofile/edit/check",
+				cache : false,
+				contentType: 'application/json',
+				async: "false", 
+				datatype : 'json',
+			success : function(result) {
+				  console.log(result);
+				  if (result == "y") {
+                      msg = '수정되었습니다.';
+				  }else{
+					  
+					  msg = '수정에 실패했습니다.';
+				  }
+		  
+			},
+			
+			error : functionxhr, status,error) {
+				msg = '수정에 실패했습니다.'
+			}
 		
-   	   	ctx.beginPath();
-   		 /* (x,y,반지름,시작점,끝점,방향) */
-   	   	ctx.arc(0, 0, 100, 0, 2*Math.PI, false);
-   	   	ctx.fillStyle = 'lightgray';
-   	   	ctx.fill();
-   	   	
-   	   	ctx.textAlign= 'center';
-   	   	ctx.textBaseline = 'middle';
-   	   	ctx.font = '40px YiSunShinDotumM';
-   	   	
-   	   	ctx.strokeStyle = 'black';
-   	   	ctx.strokeText('룰렛버튼', 0,0);
-   	 
-   	var member_id = $("#member_id").val();
-   	
-   	$('#canvas').click(function(){
-   		
-   		var random = 0;
-	   	var clicked = 0;
-	   	var prtpnt = 0;
-   	  
-   	   	
-    	if(clicked <= 0){
-    		random += Math.random()*360;
-    		$(this).css({'transition-timing-function': 'ease-in-out', 'transition': '3s', 'transform': 'rotate('+3000+'deg)'});
- 			console.log(random);
-	    } /* 'transform': 'rotate('+random+'deg) --원판속도 */
-    	
-    	//포인트 지정
-    	if(random >= -10 && random <= 60){
-    		prtpnt = 100;
-	   	}else if(random >= 60 && random <= 134){
-	   		prtpnt = 20;
-    	}else if(random >= 134 && random <= 206){
-    		prtpnt = 10;
-    	}else if(random >= 206 && random <= 278){	
-    		prtpnt = 1;
-	   	}else if(random >= 278 && random <= 350){
-	   		prtpnt = 0;
-	   	}
+	});
+	 return msg;
+	 
+	 }//
+	 
+	 
+	 
+ }
+ 
+ </script> -->
 
-    	console.log(prtpnt);
-    	
-    	var memberPoint = {   			
-    			"member_id" : member_id,		 
-    			"prtpnt" : prtpnt    			
-    		};
-    	
-    	//참여 중복 확인 및 포인트 적립
-    	$.ajax({
-   	        type :"PUT",
-   	        url :"/event/check/getpoint",
-   	    	 contentType: 'application/json',
-   	    	 data: JSON.stringify(memberPoint),
-   	        /* data : { //"JSON parse error: Unrecognized token" 에러나서 json.stringify씀
-   	        	member_id: member_id,
-   	        	prtpnt: prtpnt
-   	        }, */
-   	     async: "false",
-   	     datatype : 'json',
-   	    
-	   	    success: function (result) {
-	   	    	if(result == "SUCCESS"){
-		    		console.log(result); 
-		    		setTimeout(function(){
-		    			alert("오늘의 나누셰어 포인트는 "+prtpnt+" point");
-				/* 여기에 데이터를 전부 넣어주던지... */		
-		  	    
-		    		},5000);
-		        }else if(result == "FAIL"){
-	   	    		console.log(result);
-	   	    		alert("1일 1회 참여가 가능합니다.");
-	   	    	}
-		    },
-		    error: function (e) {
-		    	console.log(e);
-		    }
-    	});
-   	});//canvas
-   	
-   });
-   </script>
+<script type="text/javascript"> 
 
-<style>
-#판 {
-	width: 1000px;
-	height: 1000px;
-	/* width: 1200px;
-	height: 1150px; */
-	overflow: hidden;
-	position: relative;
-	top: 70px;
+function dateFormat(date){
+	 var yyyy = date.getFullYear();
+	 var MM = date.getMonth()+1;
+	 var dd = date.getDate();
+	 var pdate = yyyy + '-' +MM + '-' + dd;
+	 return pdate;	
+	 console.log(pdate);
 }
 
-#핀 {
-	width: 0;
-	height: 0;
-	top: 90px;
-	left: calc(50% - 16px);
-	position: absolute;
-	border-radius: 32px 32px 0 0;
-	border-top: 70px solid crimson;
-	border-left: 16px solid transparent;
-	border-right: 16px solid transparent;
-	border-bottom: 0;
-	z-index: 1;
-}
-</style>
+
+document.addEventListener('DOMContentLoaded', function() {
+	 
+	//var proSeq = $('#proSeq').val();
+	//var events = getEvent(proSeq);
+	
+	 var calendarEl = document.getElementById('calendar');
+	  var calendar = new FullCalendar.Calendar(calendarEl, {
+		
+	    headerToolbar: {
+	    left:'',
+	      center: 'title',
+	      right: '버튼'
+	    },   
+	      customButtons: {
+	        버튼: {
+	          text: '출석체크',
+	          click: function() {
+	            
+	        	  alert('오늘 출석 완료!');
+	            
+	            $(document).ready(function(){ 
+	         	   
+	         	   var token = $("meta[name='_csrf']").attr("content");
+	         		var header = $("meta[name='_csrf_header']").attr("content");
+	         		$(document).ajaxSend(function(e, xhr, options) {
+	         			xhr.setRequestHeader(header, token);
+	         		});
+	            
+	            
+	         // ajax 통신으로 출석 정보 저장하기 
+                // POST "/users/attendances" -> { status: "success", date:"2018-07-01"}
+                // 통신 성공시 버튼 바꾸고, property disabled 만들기 
+	            /* 추가부분 */
+	            
+	          
+	            
+	           	 function dateFormat(pdate){
+		           	 var yyyy = date.getFullYear();
+		           	 var MM = date.getMonth()+1;
+		           	 var dd = date.getDate();
+		           	var pdate = yyyy + '-' +MM + '-' + dd;	
+		           	
+		           	return pdate;
+		          }
+                
+	           //var m	 = calendar.moment(2021-04-13);
+	           var m = new Date;
+      	 		var pdate = pdate;
+      	 		var member_id = $("#member_id").val();
+                var prtpnt = 10; 
+                
+                var memberPoint = {
+            			"member_id" : member_id,		 
+            			"prtpnt" : prtpnt,
+            			"pdate" : pdate
+            			
+            		}; 
+                console.log(member_id);
+				  console.log(m);
+				  console.log(pdate);
+				  console.log(prtpnt);
+                
+	             $.ajax({
+					type : 'POST',
+					data: JSON.stringify(memberPoint),
+					url : "${pageContext.request.contextPath}/event/check3/getpoint",
+					cache : false,
+					contentType: 'application/json',
+					async: "false",
+					datatype : 'json',
+					success : function(pdate) {
+						$(".fc-버튼-button").prop('disabled', true);
+						$(".fc-버튼-button").html('출석완료');
+						eventSources: [{
+							events: function(info, successCallback, failureCallback) {
+								
+								
+								
+								$.ajax({
+									url: "${pageContext.request.contextPath}/event/check3/getpoint",
+									type: 'POST',
+									dataType: 'json',
+									data: {
+										start : moment(info.startStr).format('YYYY-MM-DD'),
+										end : moment(info.endStr).format('YYYY-MM-DD')
+									},
+									success: function(data) {
+										successCallback(data);
+									}
+								});
+							}
+						}]
+						
+						
+						  if (pdate == m) {
+							  console.log(member_id);
+							  console.log(date);
+							  console.log(pdate);
+	                          console.log("success");
+	                          //console.log(pdate);
+	                          alert("성공");
+	                          
+						} else if(result == "FAIL"){
+							 console.log(member_id);
+							  console.log(m);
+							  console.log(pdate);
+			   	    		console.log(result);
+			   	    		alert("1일 1회 참여가 가능합니다.");
+			   	    	} 
+				    },
+					error : function(e) {
+						console.log(member_id);
+						alert("필수 입력 사항을 입력해주세요.");
+	                     console.log(e);
+					}//success, error
+					
+					
+				
+					});  //ajax끝 /* 추가부분 */
+	            });//function end     
+
+	          }
+	        }//버튼
+	      }//custom버튼
+	    });
+	 
+
+	    calendar.render();
+	  });
+
+</script>
+
+
 
 <body>
 	<!-- Header -->
@@ -266,21 +320,24 @@
 						<div class="charity-event-rich-editor">
 							<h1 style="text-align: center;">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								매일 나눔 룰렛 돌리고 포인트를 적립하세요!</h1>
+								매일 출석체크하고 포인트를 적립하세요!</h1>
 						</div>
 
-
-						<div id="판">
-							<div id="핀"></div>
-							<canvas id="canvas" width="1000px" height="1000px"></canvas>
+<div>출석체크 달력</div>
+						
+<!-- 달력 -->
+						<div id='calendar' style="max-width: 1000px; margin: 40px auto;">
 						</div>
-						<!-- <button type="button" class="btn btn-success">룰렛 돌리기</button> -->
+<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+									
+
+
+
 					</div>
 				</div>
 			</div>
 		</div>
-			<button id='button' type="button" onClick="location.href='/event/check3'">출석하기</button>
-						
 		<!-- Main Section -->
 	</div>
 	<!-- Content -->
