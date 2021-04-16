@@ -91,8 +91,8 @@
                              <!-- 버튼 -->
                             <div class="charity-cause-donate">
                   			   <div class="skillst">
-                                <a href="/my/moneyDonationForm" class="charity-plan-btn m-3">후원금 기부하기<i class="fa fa-heart"></i></a> 
-                                <a href="/donation/money/point" class="charity-plan-btn m-3">포인트 기부하기<i class="fa fa-heart"></i></a>
+                                <a href="/my/donation/moneyDonationForm" class="charity-plan-btn m-3">후원금 기부하기<i class="fa fa-heart"></i></a> 
+                                <a href="/my/donation/money/point" class="charity-plan-btn m-3">포인트 기부하기<i class="fa fa-heart"></i></a>
                                </div>
                             </div> 
                             

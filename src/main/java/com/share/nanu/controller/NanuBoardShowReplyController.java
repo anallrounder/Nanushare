@@ -2,7 +2,8 @@
 // https://www.tutorialrepublic.com/twitter-bootstrap-button-generator.php
 package com.share.nanu.controller;
 
-import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,19 +49,21 @@ public class NanuBoardShowReplyController {
 		mav.addObject("listComment", service.listComment(rvo)); //게시판글의 댓글 리스트 불러오기
 		log.info("컨트롤러 댓글 리스트 테스트 service.listComment(rvo)= " + rvo); //확인
 		
+		//mav.addObject("getComment", service.getComment(rvo)); // 로그인한사람의 댓글 확인
+		
 		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		// model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); 
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
 			log.info("로그인한 사람 이름 - " + md.getmember().getName());
 			mav.addObject("username", md.getmember().getName());
+			mav.addObject("member_id", md.getUsername());
 		}
-		
 		return mav;
 	}
 	
-	
 	// 댓글 입력 insert
 	// [Spring] ResponseEntity는 왜 쓰는 것이며 어떻게 쓰는걸까? https://a1010100z.tistory.com/106
+/*
 	@PostMapping("board/shows/reply_insert") 
 	public ResponseEntity<String> reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) {
 		log.info("rvo = " + rvo);
@@ -76,6 +79,7 @@ public class NanuBoardShowReplyController {
 			model.addAttribute("member_id", md.getmember().getMember_id());
 		}
 		
+		
 		try {
 			service.insertReply(rvo); //댓글 입력
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -85,9 +89,31 @@ public class NanuBoardShowReplyController {
 		}
 		return entity;
 	}
+	*/
+	// 댓글 입력 insert
+		// [Spring] ResponseEntity는 왜 쓰는 것이며 어떻게 쓰는걸까? https://a1010100z.tistory.com/106
+		
+	@PostMapping("board/shows/reply_insert/{b_index}") 
+	public Map<String, String> reply_insert(@RequestBody BoardreplyVO rvo, BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		log.info("rvo = " + rvo);
+		log.info("reply_insert");
+		System.out.println(rvo);
+		
+		Map<String, String> needrid = new HashMap<String, String>();
+		service.insertReply(rvo); //댓글 입력
+		service.getRid(rvo.getB_index());
+		System.out.println(service.getRid(rvo.getB_index()));
+		
+		if (md != null) {
+			model.addAttribute("member_id", md.getmember().getMember_id());
+		}
+		
+		return needrid;
+	}
+
 	
 	// 댓글 삭제
-	@DeleteMapping("board/shows/delete") // 맵핑 자체가 델리트맵핑
+	@DeleteMapping("board/shows/delete/{b_index}/{r_num}") // 맵핑 자체가 델리트맵핑
 	public ResponseEntity<String> rest_deltete(BoardVO boardVO, BoardreplyVO rvo, Model model) {
 
 		ResponseEntity<String> entity = null; // 레스트풀을 위해 제공하는 대표적인 것 중 하나
@@ -109,19 +135,30 @@ public class NanuBoardShowReplyController {
 	}
 
 	// 댓글 수정 창 보기
-	@PostMapping("/board/shows/update") /* /content_view/{bid}/reply/{rid} */
-	public ModelAndView updateReplyView(BoardVO boardVO, BoardreplyVO rvo, ModelAndView mav) throws Exception {
+	/*
+	@GetMapping("/board/shows/update_view/updateView") // /content_view/{bid}/reply/{rid}
+	public ModelAndView updateReplyView(BoardVO boardVO, BoardreplyVO rvo, ModelAndView mav, @AuthenticationPrincipal MemberDetails md ) throws Exception {
 		log.info("controller -- updateReplyView() -- 호출");
 		
 		//mav.setViewName("/content_view/{bid}/reply/{rid}");
 		mav.addObject("content_view", service.getBoard(boardVO.getB_index()));
+		//rvo.setRid(md.getUsername()); // 로그인한 사람 id정보를 rvo 댓글작성자 id인 rid에 넣어줌
+		
 		mav.addObject("listComment", service.listComment(rvo));
 		mav.addObject("getComment", service.getComment(rvo));
 		
 		System.out.println("service.listComment(rvo) = " + service.listComment(rvo));
 		System.out.println("service.getComment(rvo) = "+ service.getComment(rvo));
 		
+		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
+		// model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); 
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+			mav.addObject("username", md.getmember().getName());
+			mav.addObject("member_id", md.getUsername());
+		}
 		return mav;
 	}
+	*/
 	
 }

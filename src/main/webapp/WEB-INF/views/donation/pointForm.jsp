@@ -156,6 +156,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
+                    
+                    	<!--// company-timeLine \\-->
                         <div class="charity-team-warp">
                            
                             <h3>포인트 나눔하기</h3>
@@ -175,39 +177,33 @@
                                         <a href="mailto:name@email.com">info@example.com</a>
                                     </li>
                                 </ul>
-                             
-                            </div>
+                            </div> <!-- charity-team-contact -->
                           
                         </div>
-                        <!--// company-timeline \\-->
+                        <!--// company-timeLine \\-->
                         
                         
                         <!--// volunteer-form \\-->
                         <div class="widget_title mt-4"><h2>포인트 나눔하기</h2></div>
                        
                         <div class="charity-volunteer-form"> <!-- .charity-volunteer-form > form > ul > li > #text-calendar -->
-						<form name="donatePoint" method="post" action="pointAction">
-							
+						<form name="donatePoint" method="post" action="${pageContext.request.contextPath}/my/donation/money/point/pointAction">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<ul class="mt-4">
 							<c:forEach var="vo1" items="${memberInfo}"> 
-							
-								<%-- 	<sec:authentication property="principal" var="pinfo" />
+							<%-- <sec:authentication property="principal" var="pinfo" />
 								<sec:authorize access="isAuthenticated()">
-								<c:if test="${pinfo.username eq vo1.member_id}"> --%>
+								<c:if test="${pinfo.username eq vo1.member_id}">  --%>
+                                   
                                    <li>
                                        <label>아이디(Email):</label>
-                                       <input type="text" value="<sec:authentication property="principal.member.member_id"/> "  readonly ></li>
-                                       <%-- <input type="hidden" name="member_id" value="${vo1.member_id}"> --%>
+                                       <%-- <input type="text" value="<sec:authentication property="principal.member.member_id"/> "  readonly >  --%>
+                                       <input type="text" name="member_id" value="${vo1.member_id}" readonly /> 
+                                   </li>
                                    <li>
                                        <label>이름:</label>
-                                       <input type="text" value="<sec:authentication property="principal.member.name"/>" onblur="if(this.value == '') { this.value ='Enter name*'; }" onfocus="if(this.value =='Enter name*') { this.value = ''; }" readonly>
-                                       </li>
-                                   
-                                   <%-- <li class="chrity-full-form">
-                                       <label>연락처:</label>
-                                       <input type="text" value="${vo1.phone}" onblur="if(this.value == '') { this.value ='Enter address line*'; }" onfocus="if(this.value =='Enter address line*') { this.value = ''; }" readonly>
-                                   </li> --%>
-                                  
+									   <input type="text" name="name" value="${vo1.name}" readonly />
+								</li>
                                    <li>
                                        <label>신청 날짜:</label>    
                                        <div class="chrity-full-form"> <!-- class="charity-select-date" -->
@@ -220,11 +216,12 @@
                                 
                                    <li>
                                        <label>보유 포인트:</label>
-                                       <input type="text" name="totalpnt" value="${vo2.nowpnt} point" readonly > 
+                                       <input type="text" name="totalpnt" value="${vo2.nowpnt}" readonly > 
+                                       <input type="hidden" name="totalpnt" value="${vo2.totalpnt}" readonly > 
                                    </li>
                                 </c:forEach> 
-								 <%-- </c:if>
-								</sec:authorize>	 --%>
+								<%-- </c:if>
+								</sec:authorize>  --%>
                               		<li>
                                    	<label>나눌 포인트:</label>
                                   		<input type="text" name="donaamount" id="selectDirect" disabled />

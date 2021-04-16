@@ -305,6 +305,7 @@
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
+	
 	<!-- Banner -->
 	<div class="charity-subheader">
 		<span class="black-transparent"></span>
@@ -318,6 +319,7 @@
 		</div>
 	</div>
 	<!-- Banner -->
+	
 	<!-- Content -->
 	<div class="charity-main-content">
 
@@ -326,103 +328,111 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
+					
+						<!--// company-timeLine \\-->
 						<div class="charity-team-warp">
 
 							<h3>후원 나눔하기</h3>
 							<span class="mb-3">Point donation _ Application Form</span>
-							<figure>
-								<img
-									src="${pageContext.request.contextPath}/resources/charity/donation-images/후원.png"
-									alt="">
-							</figure>
+							<figure><img src="${pageContext.request.contextPath}/resources/charity/donation-images/후원.png"	alt=""></figure>
 							<!-- 788x355 -->
 
-							<p>
-								후원 회원 여러분, 나누셰어 프로젝트의 나눔 활동에 동참해주셔서 감사합니다. <br>안내 사항을 다시 한
-								번 꼭 확인해 주시고 후원 부탁드립니다. <br> 감사합니다.
-							</p>
+							<p>후원 회원 여러분, 나누셰어 프로젝트의 나눔 활동에 동참해주셔서 감사합니다. <br>안내 사항을 다시 한 번 꼭 확인해 주시고 후원 부탁드립니다. <br> 
+							감사합니다.</p>
+							
 							<div class="charity-team-contact">
 								<ul class="chaity-contact-info">
 									<li>
-										<h6>후원 나눔 관련:</h6> <span>+123 45 678</span>
+										<h6>후원 나눔 관련:</h6>
+										<span>+123 45 678</span>
 									</li>
 									<li>
-										<h6>Email:</h6> <a href="mailto:name@email.com">info@example.com</a>
+										<h6>Email:</h6> 
+										<a href="mailto:name@email.com">info@example.com</a>
 									</li>
 								</ul>
-
-							</div>
+							</div> <!-- charity-team-contact -->
 
 						</div>
-						<!--// company-timeline \\-->
+						<!--// company-timeLine \\-->
 
 
 						<!--// volunteer-form \\-->
-						<div class="widget_title mt-4">
-							<h2>후원 나눔하기</h2>
-						</div>
+						
 						<!-- 버튼을 눌렀을때 결제가 진행, 결제가완료 되면 db카운트 -->
 						<!-- 서버로 넘겨줄 정보 즉, nanushare db에 저장할 정보 -->
 						<!-- 아임포트 서버에도 내가 원하느정보를 던져주고, rest api를 통해서 아임포트 서버로부터 내가 원하는장보를 가져와서 db에 저장  -->
-						<!-- 결제번호(dnt_paynum), 결제자 아이디(member_id), 결제금액(dntprice), 결제날짜(dntdate), 
-		결제처리 상태(카드는 즉시 완료 되지만, 무통장은 확인을 해야함 --사용안함, 카드와, 실시간계좌이체만 사용),pg사(pg), 
-		결제방법 분류 번호(pcat_num) 사용안함  -->
+						<!-- 결제번호(dnt_paynum), 결제자 아이디(member_id), 결제금액(dntprice), 결제날짜(dntdate), 결제처리 상태(카드는 즉시 완료 되지만, 무통장은 확인을 해야함 --사용안함, 카드와, 실시간계좌이체만 사용),pg사(pg), 결제방법 분류 번호(pcat_num) 사용안함  -->
 						<!-- 1. 카드, 2. 계좌 -->
 
 						<!-- 컨트롤러에서 회원정보 가져오기 member_id, 이름 -->
 						<!-- 카카오페이는 100원 미만 결제 불가  -->
-
-
+						<div class="widget_title mt-4">
+							<h2>카드결제</h2>
+						</div>
 						<div class="charity-volunteer-form">
+						 <form>
 							<ul class="mt-4">
-								<div class="charity-select-two">
 								
-								
-								<label>(select)</label>
-								<select name="donaCardSelect" id="donaCardSelect" >
-									<!-- 결제금액 선택해서 아임포트에 전달 -->
-									<option value="">직접입력</option>
-									<option value="1000">1,000원</option>
-									<option value="5000">5,000원</option>
-									<option value="10000">10,000원</option>
-								</select>
-								<li><label>결제금액:</label> <input type="text"
-									name="selectCardDirect" id="selectCardDirect" /></li>
-								<button class="charity-sub-btn" type="button" id="donaCard"
-									onclick="requestCard()" value="카드">카드 결제</button>
-								<br />
-
-
-								
-								<label>(select)</label>
-								<select name="donaTransSelect" id="donaTransSelect">
-									<option value="">직접입력</option>
-									<option value="1000">1,000원</option>
-									<option value="5000">5,000원</option>
-									<option value="10000">10,000원</option>
-								</select>
-								<li><label>결제금액:</label> <input type="text"
-									name="selectTransDirect" id="selectTransDirect" /></li>
-								<button class="charity-sub-btn" type="button" id="donaTrans"
-									value="계좌" onclick="requestTrans()">계좌 결제</button>
-
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
-								</div>
+								<li>
+									<label>결제금액:</label> 
+									<input type="text" name="selectCardDirect" id="selectCardDirect" />
+								</li>
+								<li> <!-- class="charity-select-form" -->
+									<label>(select)</label>
+									<div class="charity-select-two">
+										<select name="donaCardSelect" id="donaCardSelect" >
+											<!-- 결제금액 선택해서 아임포트에 전달 -->
+											<option value="">직접입력</option>
+											<option value="1000">1,000원</option>
+											<option value="5000">5,000원</option>
+											<option value="10000">10,000원</option>
+										</select>
+									</div>
+								</li>
 							</ul>
-						</div>
-
-						<div class="charity-team-contactus mt-3">
-
-							<button type="button" class="charity-sub-btn"
-								onclick="location.href='${pageContext.request.contextPath}/donation/money/main'">
-								<i class="fa fa-arrow-left"> 이전화면으로</i>
-							</button>
-						</div>
-
-
+							<div class="charity-team-contactus mt-3">
+								<button class="charity-sub-btn" type="button" id="donaCard" onclick="requestCard()" value="카드">카드 결제</button>
+								<br />
+							</div>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					</form>
+						
 					</div>
-
+					<div class="widget_title mt-4">
+						<h2>계좌이체</h2>
+					</div>
+					<div class="charity-volunteer-form">	
+						<form>
+							<ul class="mt-4">
+								<li>
+									<label>결제금액:</label>
+									<input type="text" name="selectTransDirect" id="selectTransDirect" />
+								</li>
+								<li> <!--  class="charity-select-form" 이 부분이 크기 좀 작게 만드는 거 -->
+									<label>(select)</label>
+									<div class="charity-select-two">
+										<select name="donaTransSelect" id="donaTransSelect">
+											<option value="">직접입력</option>
+											<option value="1000">1,000원</option>
+											<option value="5000">5,000원</option>
+											<option value="10000">10,000원</option>
+										</select>
+									</div>
+								</li>
+							</ul>
+							<div class="charity-team-contactus mt-3">
+								<button class="charity-sub-btn" type="button" id="donaTrans" value="계좌" onclick="requestTrans()">계좌 결제</button>
+							</div>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						</form>
+					</div>	
+						
+						
+					<div class="charity-team-contactus mt-3">
+						<button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/money/main'"><i class="fa fa-arrow-left"> 이전화면으로</i></button>
+					</div>
+						
 					<script>
 						function chk_Number(object) {
 							$(object).keyup(
@@ -475,7 +485,8 @@
 				<!-- 우측 배너  aside -->
 				<%@ include file="/WEB-INF/views/board_show/aside.jsp"%>
 				<!-- aside end -->
-			</div>
+				
+			</div> <!-- container end -->
 		</div>
 	</div>
 	<!-- Main Section -->
