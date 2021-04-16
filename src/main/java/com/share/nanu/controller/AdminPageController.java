@@ -157,7 +157,7 @@ public class AdminPageController {
 	@GetMapping("/temp")
 	@ResponseBody
 	public Map<Integer, Integer> temp(@RequestParam(value = "month") Integer month) {
-		log.info("month : ", month);
+		log.info("month : " + month); //, 로 해서안나옴
 		return adminPgService.getDailySales("2021", String.valueOf(month));
 	}
 

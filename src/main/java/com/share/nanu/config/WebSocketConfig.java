@@ -21,7 +21,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		// TODO Auto-generated method stub
 		
-		registry.addHandler(socketHandler, "/chating");
+		registry.addHandler(socketHandler, "/chatting/{username}");
 		
 	}
 	
