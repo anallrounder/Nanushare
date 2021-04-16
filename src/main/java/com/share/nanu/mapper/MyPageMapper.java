@@ -1,5 +1,6 @@
 package com.share.nanu.mapper;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -44,13 +45,18 @@ public interface MyPageMapper {
 	
 	// 회원탈퇴
 	public void memberDelete(MemberVO mvo);
-	public void authdel(MemberVO mvo);
+	//public void authdel(MemberVO mvo);
 	
 	//카운트
 	public int mycount(PointVO pointVO, String member_id);
+	
 	//포인트 insert
 	public void getMypoint(PointVO pointVO, String member_id);
 	
-	
-
+	//카운트
+		public int mycount2(PointVO pointVO, String member_id);
+		
+		//포인트 insert
+		public void getMypoint2(PointVO pointVO, String member_id);
+		
 }

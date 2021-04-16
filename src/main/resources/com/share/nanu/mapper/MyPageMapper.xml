@@ -4,12 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.share.nanu.mapper.MyPageMapper">
 	<!-- 1.나의문의내역 -->
-	 <!-- <select id="mygetlist1" resultType="com.share.nanu.VO.BoardVO">
-	<![CDATA[ 
-			select * from board where bcat_num=1
-		]]>
-	</select>  -->
-	
 	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist1">
 
 	<![CDATA[
@@ -29,11 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<!-- 2.나의인증내역 -->
-	<!-- <select id="mygetlist2" resultType="com.share.nanu.VO.BoardVO"> 
-	<![CDATA[ 
-		select * from board where bcat_num=2 and member_id=#{member_id} ]]> </select> 
- -->
-	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist2">
+<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist2">
 
 	<![CDATA[
 	select * from (
@@ -73,9 +63,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			resultMap="itemdonationVO" />
 	</resultMap>
 	<!-- resultType : 결과반환 Object, parameterType : 조회결과 Object -->
-	<!-- <select id="mygetlist3" resultMap="iteminvenVO">
-		<![CDATA[ select * from iteminven a, itemdonation b where a.icat_num = b.icat_num order by b.idntdate desc]]>
-	</select> -->
 
 
 	<select resultMap="iteminvenVO" id="mygetlist3">
@@ -113,10 +100,6 @@ from iteminven a, itemdonation b where a.icat_num = b.icat_num and b.member_id =
 		<collection property="reply" javaType="java.util.List"
 			resultMap="boardreplyVO" />
 	</resultMap>
-	<!-- <select id="mygetlist4" resultMap="boardVO">
-	<![CDATA[ 
-	select * from board a, boardreply b where a.b_index = b.b_index]]>
-	</select> -->
 
 
 	<select resultMap="boardVO" id="mygetlist4">
@@ -138,12 +121,6 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 
 
 	<!-- 5.나의결제내역 -->
-	<!-- <select id="mygetlist5"
-		resultType="com.share.nanu.VO.DonationVO">
-	<![CDATA[ 
-			select * from donation
-		]]>
-	</select> -->
 	<select resultType="com.share.nanu.VO.DonationVO"
 		id="mygetlist5">
 
@@ -191,6 +168,22 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 		<![CDATA[
 	       insert into point (pnt_num, member_id, pdate, prtpnt, dntpnt, totalpnt, e_idx, nowpnt, ecat_num) 
 	       values(POINT_SEQ.nextval, #{member_id}, sysdate, #{pointVO.prtpnt},0, #{pointVO.totalpnt}+#{pointVO.prtpnt}, null,#{pointVO.totalpnt}+#{pointVO.prtpnt}-#{pointVO.dntpnt}, 1)
+	   ]]>
+	</insert>
+	
+<!-- 출석체크 카운트세기 1일1회만 참여가능 -->
+<select id="mycount2" resultType="int">
+		<![CDATA[
+			select count(*) as count from point where member_id = #{member_id} and pdate>=TO_CHAR(SYSDATE, 'YYYY-MM-DD') and ecat_num=7
+	   ]]>
+	</select>
+
+
+<!-- 출첵으로 받은 포인트 insert --><!-- 총합포인트 쿼리 다시 짜야함  -->
+	<insert id="getMypoint2">
+		<![CDATA[
+	       insert into point (pnt_num, member_id, pdate, prtpnt, dntpnt, totalpnt, e_idx, nowpnt, ecat_num) 
+	       values(POINT_SEQ.nextval, #{member_id}, sysdate, #{pointVO.prtpnt},0, #{pointVO.totalpnt}+#{pointVO.prtpnt}, null,#{pointVO.totalpnt}+#{pointVO.prtpnt}-#{pointVO.dntpnt}, 7)
 	   ]]>
 	</insert>
 	

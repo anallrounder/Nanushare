@@ -1,6 +1,9 @@
 package com.share.nanu.controller;
 
 import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,7 +69,7 @@ public class MyPageController {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.addObject("memberInfo", ndservice.getMemberPoint(mpvo));
-		//mav.addObject("sign", mgservice.mysign(md.getmember().getSignuppath()));//추가
+		// mav.addObject("sign", mgservice.mysign(md.getmember().getSignuppath()));//추가
 		mav.setViewName("/my/mypage");
 		return mav;
 	}
@@ -191,7 +195,7 @@ public class MyPageController {
 			// bCryptPasswordEncoder.matches("pwConfirm", password);
 			if (pwConfirm != null && encoder.matches(pwConfirm, password) == true) { // 일치하면 true 리턴 불일치면 false
 				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			} else if(pwConfirm != null && encoder.matches(pwConfirm, password) == false) {
+			} else if (pwConfirm != null && encoder.matches(pwConfirm, password) == false) {
 				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
 				System.out.println("실패");
 
@@ -261,7 +265,6 @@ public class MyPageController {
 			mgservice.memberDelete(mvo, md);
 			log.info("탈퇴된 회원정보 : " + mvo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			
 
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -306,39 +309,81 @@ public class MyPageController {
 		response.sendRedirect(redirect_url); // restcontroller는 response를 사용하여야 한다.
 
 	}
-	
-		// 출석체크(event default) 
-		@GetMapping("/event/check")
-		public ModelAndView attendance(ModelAndView mav) throws Exception {
-			System.out.println("룰렛출첵페이지");
-			mav.setViewName("/eventView/attendcheck"); 
-			return mav;
-		}
-	
-		//이벤트 포인트 부여
-		@PutMapping("/event/check/getpoint")
-		public ResponseEntity<String> event(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
-				ModelAndView mav) {
-			if (md != null) {
-				mav.addObject("username", md.getmember().getName());
+
+	// 출석체크(event default)
+	@GetMapping("/event/check")
+	public ModelAndView attendance(ModelAndView mav) throws Exception {
+		System.out.println("룰렛출첵페이지");
+		mav.setViewName("/eventView/attendcheck");
+		return mav;
+	}
+
+	// 이벤트 포인트 부여
+	@PutMapping("/event/check/getpoint")
+	public ResponseEntity<String> event(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
+			ModelAndView mav) {
+
+		System.out.println("이벤트룰렛 도나요");
+		ResponseEntity<String> entity = null;
+		try {
+			int count = mgservice.mycount(pointVO, md.getUsername());
+			log.info("count" + count);
+
+			if (count >= 1) {
+				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
+			} else {
+				mgservice.getMypoint(pointVO, md.getUsername());
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			}
-			System.out.println("이벤트룰렛 도나요");
-			ResponseEntity<String> entity = null;		
-			try {
-				int count = mgservice.mycount(pointVO, md.getUsername());			
-				log.info("count" + count);	
-				
-				if(count >= 1) {
-					entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
-				}else{
-					mgservice.getMypoint(pointVO, md.getUsername());
-					entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-			}
-			return entity;
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+		return entity;
+	}
+
+//	@PostMapping("/event/check/mypoint")
+//	public ResponseEntity<List<Date>> mypoint(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
+//			Model model) {
+//
+//		// final List<Date> list = mgse
+//		List<Date> list = mgservice.getMypointList(pointVO, md.getUsername());
+//		model.addAttribute("cal", pointVO);
+//		return new ResponseEntity<List<Date>>(list, HttpStatus.OK);
+//	}
+
+	@GetMapping("/event/check3")
+	public ModelAndView attendance1(ModelAndView mov) {
+		System.out.println("그냥출첵페이지");
+		
+	
+		mov.setViewName("/eventView/attendcheck3");
+		return mov;
+	}
+
+	// 출첵 포인트 부여
+	@PostMapping("/event/check3/getpoint")
+	public ResponseEntity<String> event2(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
+			ModelAndView mav) {
+
+		System.out.println("이벤트출첵되나여");
+		ResponseEntity<String> entity = null;
+		try {
+			int count = mgservice.mycount2(pointVO, md.getUsername());
+			log.info("count" + count);
+			log.info("id  " +  md.getUsername());
+
+			if (count >= 1) {
+				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
+			} else {
+				mgservice.getMypoint2(pointVO, md.getUsername());
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 
 }
