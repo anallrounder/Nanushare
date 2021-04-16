@@ -76,6 +76,7 @@
                                     <li style="padding: 0px 40px 0px 30px"><a href="${pageContext.request.contextPath}/restful/notice" style="font-size: 20px;">더하기</a>
                                      	<ul class="children">
                                             <li><a href="${pageContext.request.contextPath}/board/notice">공지사항</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/board/faq">FAQ</a></li>
                                             <li><a href="${pageContext.request.contextPath}/board/qna">문의하기</a></li>
                                     	</ul>
                                     </li>	
