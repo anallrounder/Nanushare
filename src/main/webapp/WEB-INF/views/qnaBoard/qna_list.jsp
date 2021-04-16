@@ -29,10 +29,8 @@
  
  
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 </head>
 
@@ -103,20 +101,20 @@
 		<ul class="pagination justify-content-center">
 			<c:if test="${pageMaker.prev}">
 				<li class="page-item">
-					<a href="qna_list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
+					<a href="${pageContext.request.contextPath}/board/qna${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
 				</li>
 			</c:if>
 		
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 				<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
 				<li class="page-item">
-					<a href="qna_list${pageMaker.makeQuery(idx)}">${idx}</a>
+					<a href="${pageContext.request.contextPath}/board/qna${pageMaker.makeQuery(idx)}">${idx}</a>
 				</li>
 			</c:forEach>
 				
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 				<li class="page-item">
-				 	<a href="qna_list${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
+				 	<a href="${pageContext.request.contextPath}/board/qna${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
 				</li>
 			</c:if><br>
 		</ul>

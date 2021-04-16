@@ -56,78 +56,46 @@
 	<!-- Header -->
 
 		<!-- Main Section -->
-		
+	
+	</form>		
 		
 		<!-- 문의게시판 - START -->
    <div id="wrapp">
     <div id="containerr">
         <div class="inner">        
             <h2> 1:1 문의 </h2>            
-          
-                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/reply" method="post">
+           
+                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/modify" method="post">
 		<table class="table">
 			<tr>
 				<td>글번호</td>
-				<td>${content_view.b_index}</td>
+				<td><input type="hidden" name="b_index" value="${modify_view.b_index}">${modify_view.b_index}</td>
 			</tr>
 			<tr>
 				<td>작성일</td>
-				<td>${content_view.bdate}</td>
+				<td>${modify_view.bdate}</td>
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td>${content_view.btitle}</td>
+				<td><input type="text" id="btitle" name="btitle" size="50" value="${modify_view.btitle}"></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td>${content_view.member_id}</td>
+				<td>${modify_view.member_id}</td>
 			</tr>
 			
 			<tr>
 				<td>조회수</td>
-				<td>${content_view.bhit}</td>
+				<td>${modify_view.bhit}</td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td>${content_view.bcontent}</td>
+				<td><textarea cols="20" rows="10" id="bcontent" name="bcontent" >${modify_view.bcontent}</textarea></td>
 			</tr>
-			
-			<tr>
-				<td>관리자 답변</td>
-				<c:forEach items="${reply_view}" var="reply">
-				<td>${reply.rcontent}</td>
-				</c:forEach>
-				
-			</tr>
-			
-			<sec:authorize access="hasRole('ADMIN')"> 
-			<input type="hidden" name="b_index" value="${content_view.b_index}">
-			<tr>
-				<td>답변</td>
-				<td><textarea cols="20" rows="10" id="rcontent" name="rcontent"></textarea></td>
-			</tr>
-			</sec:authorize>
-			
 			<tr>
 				<td colspan="2">
-				
-				<sec:authentication property="principal" var="buttonhidden" />
-          		<sec:authorize access="isAuthenticated()">   
-   
-					<!-- 현재 접속된 닉네임과 댓글보드에 저장된 닉네임을 비교해서 일치 하면 보이게 함 -->
-					<c:if test="${buttonhidden.username eq content_view.member_id}">
-				
-					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna/modify/${content_view.b_index}'">수정</button>
-					<button type="button" class="btn btn-primary" onclick="location.href='/qna/delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
-					
-					</c:if>
-				</sec:authorize>
-				
-				<sec:authorize access="hasRole('ADMIN')"> 
-					<button type="submit" class="btn btn-primary">답변등록</button>
+					<button type="submit" class="btn btn-primary ">수정완료</button>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				</sec:authorize>
-				
 					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna'">목록</button>
 				</td>
 			</tr>
@@ -142,8 +110,7 @@
 		<!-- Main Section -->
 
 	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
+	<div class="modal fade searchmodal" id="searchModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">
