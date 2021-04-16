@@ -257,7 +257,7 @@ li {
             </div>
         </div>
         <!-- Main Section -->
-      
+      <%@ include file="/WEB-INF/views/chat/chatIcon.jsp" %>
     </div> 
     <!-- Content -->
 
