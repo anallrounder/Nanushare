@@ -57,8 +57,8 @@
                             <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
                             <li><a href="${pageContext.request.contextPath}/board/shows/list">나눔인증</a></li>
                             <li><a href="${pageContext.request.contextPath}/event/check">이벤트</a></li>
-                            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
-                            <li><a href="${pageContext.request.contextPath}/restful/qna">문의하기</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/notice">공지사항</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/qna">문의하기</a></li>
                         </ul>
                     </aside>
                     <aside class="col-md-4 widget widget_recent_news">
