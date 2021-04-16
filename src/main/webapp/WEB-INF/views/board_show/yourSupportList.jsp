@@ -204,15 +204,15 @@
 												<c:set var="i" value="1" />
 												
 												<c:forEach var="attachment" items="${attachment}">
-													
+													<%-- ${attachment.path } --%>
 													<c:set var="i" value="${i+1 }" />
 													
 													<%-- ${vo.b_index},${attachment.b_index} --%>
 													<c:if test="${doneLoop ne true}">
 														<c:choose>
 															<c:when test="${vo.b_index eq attachment.b_index }">
-																<img alt="" src="${attachment.path }">
-																<%-- <img src="${pageContext.request.contextPath}/resources/attachment//" + ${attachment.uuidname }> --%>
+																<%-- <img alt="" src="${attachment.path }"> --%>
+																<img src="${pageContext.request.contextPath}${attachment.path}">
 																<c:set var="doneLoop" value="true"/>
 															</c:when>
 															
