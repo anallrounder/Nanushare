@@ -61,25 +61,31 @@ public class NanuBoardShowYSController {
 			throws Exception {
 		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);		
 		model.addAttribute("list", service.getlist(cri));
-				
+			
+		
+		// 절대경로 -> 상대경로
+		List<AttachmentVO> attach = service.getAttachment(avo);
+		log.info("path : " + attach.get(0).getPath());
+		
+		for(int i = 0; i< attach.size();i++) {
+			String attachPath = attach.get(i).getPath(); //절대 경로 가지고 오기
+			log.info("attachMent table path : " + attachPath); //attachment table에 저장된 path
+			
+			String RelativePath = new File(attachPath).toURI().getPath(); // 절대경로에 \\ 설정 되어 있다. -> //로 수정
+			log.info("절대경로 -> 상대경로로 치환중 : " + RelativePath);
+			
+			int resources = RelativePath.indexOf("/resources"); // /resources까지 인덱스 번호
+			log.info("/resources 까지의 인덱스 번호 :  "+resources);
+			
+			String ChangeRelativePath = RelativePath.substring(resources);
+			log.info("완성된 상대 경로 : "+ChangeRelativePath);			
+			
+			attach.get(i).setPath(ChangeRelativePath);
+			log.info("저장되어진 경로 : "+attach.get(i).getPath());			
+		}
+		
 		log.info("getAttachMent b_index");
-		model.addAttribute("attachment", service.getAttachment(avo));
-		
-		
-		//절대경로 -> 상대경로 치환
-		String path = service.getAttachment(avo).get(0).getPath();//절대경로
-		log.info("절대경로 : " + path );
-		
-		String text = new File(path).toURI().getPath(); // 절대경로에 설정되어 있는 \\를 //로 변환
-		log.info("절대경로 -> 상대경로 치환중 : "+ text);
-		
-		int resources = text.indexOf("/resources");	
-		log.info("resources 까지 index : "+resources);	
-		
-		String relative = text.substring(resources);//상대결로로 바꿀 기준점
-		log.info("reesource 부터 출력(relative) : "+relative);		
-				
-		
+		model.addAttribute("attachment", attach);						
 		
 		log.info("getAttachMent b_index Coubt");
 		model.addAttribute("attachMentCount", service.getAttachMentCount(avo));
