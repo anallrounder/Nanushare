@@ -52,7 +52,7 @@ public interface NanuBoardShowYSService {
 	
 	public List<AttachmentVO> getAttachment(AttachmentVO avo);
 
-	public int getAttachMentCoubt(AttachmentVO avo);
+	public int getAttachMentCount(AttachmentVO avo);
 	
 
 }

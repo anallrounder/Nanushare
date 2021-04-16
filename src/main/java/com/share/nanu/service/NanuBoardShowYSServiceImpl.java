@@ -137,7 +137,7 @@ public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 	}
 
 	@Override
-	public int getAttachMentCoubt(AttachmentVO avo) {
+	public int getAttachMentCount(AttachmentVO avo) {
 		
 		return mapper.getAttachMentCount(avo);
 	}

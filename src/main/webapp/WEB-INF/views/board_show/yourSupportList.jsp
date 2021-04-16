@@ -211,7 +211,8 @@
 													<c:if test="${doneLoop ne true}">
 														<c:choose>
 															<c:when test="${vo.b_index eq attachment.b_index }">
-																<img src="${attachment.path}">
+																<img alt="" src="${attachment.path }">
+																<%-- <img src="${pageContext.request.contextPath}/resources/attachment//" + ${attachment.uuidname }> --%>
 																<c:set var="doneLoop" value="true"/>
 															</c:when>
 															

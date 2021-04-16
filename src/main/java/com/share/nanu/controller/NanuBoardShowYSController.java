@@ -65,8 +65,24 @@ public class NanuBoardShowYSController {
 		log.info("getAttachMent b_index");
 		model.addAttribute("attachment", service.getAttachment(avo));
 		
+		
+		//절대경로 -> 상대경로 치환
+		String path = service.getAttachment(avo).get(0).getPath();//절대경로
+		log.info("절대경로 : " + path );
+		
+		String text = new File(path).toURI().getPath(); // 절대경로에 설정되어 있는 \\를 //로 변환
+		log.info("절대경로 -> 상대경로 치환중 : "+ text);
+		
+		int resources = text.indexOf("/resources");	
+		log.info("resources 까지 index : "+resources);	
+		
+		String relative = text.substring(resources);//상대결로로 바꿀 기준점
+		log.info("reesource 부터 출력(relative) : "+relative);		
+				
+		
+		
 		log.info("getAttachMent b_index Coubt");
-		model.addAttribute("attachMentCount", service.getAttachMentCoubt(avo));
+		model.addAttribute("attachMentCount", service.getAttachMentCount(avo));
 		
 
 		int total = service.getTotal(cri);
@@ -271,9 +287,10 @@ public class NanuBoardShowYSController {
 				File thumNail = new File(path+"\\"+thumNailName);
 				
 				BufferedImage originalImage = ImageIO.read(originFile);
-				BufferedImage thumNailImage = new BufferedImage(THUMNAIL_WIDTH, THUMNAIL_HEIGHT, BufferedImage.TYPE_3BYTE_BGR);
+				BufferedImage thumNailImage = new BufferedImage(THUMNAIL_WIDTH, THUMNAIL_HEIGHT, BufferedImage.TYPE_3BYTE_BGR);			
 				Graphics2D graphic = thumNailImage.createGraphics();
 				graphic.drawImage(originalImage, 0, 0, THUMNAIL_WIDTH, THUMNAIL_HEIGHT,null);
+				 
 				if(extension.equals("jpg")) {
 					ImageIO.write(thumNailImage, "jpg", thumNail);
 				}else {
