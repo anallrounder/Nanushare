@@ -1,18 +1,65 @@
 package com.share.nanu.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
- 
-@Controller
+
+import com.share.nanu.security.MemberDetails;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RestController
 public class ChatController {
 	
-	@RequestMapping("/chat")
-	public ModelAndView chat(ModelAndView mov) {
+	private Set<String> roomList = new HashSet<String>();
+	
+	@GetMapping("/chat")
+	public ModelAndView chatUser(ModelAndView mov) {
 		
-		mov.setViewName("chat");
+		mov.setViewName("/chat/chatUser");
 		
 		return mov;
+	}
+	
+	@GetMapping("/chat/{username}")
+	public ModelAndView chat(ModelAndView mov, @PathVariable("username") String username) {
+		log.info("==========chat start! : " + username + "님 채팅방 입장 ==============");
+		
+		mov.addObject("username", username);
+		mov.setViewName("/chat/chatAdmin");
+		
+		return mov;
+	}
+	
+	@GetMapping("/room")
+	public ModelAndView room (ModelAndView mov) {
+		log.info("==========현재 채팅방의 수 : " + String.valueOf(roomList.size())+ "==============");
+		
+		mov.addObject("roomList", roomList);
+		mov.setViewName("/chat/room");
+		
+		return mov;
+	}
+	
+	@GetMapping("/room/list")
+	public Set<String> getRoomList () {
+
+		return roomList;
+	}
+	
+	@PostMapping("/room")
+	public Set<String> creatRomm(@AuthenticationPrincipal MemberDetails memberDetails) {
+		String username = memberDetails.getUsername();
+		roomList.add(username);
+		
+		return roomList;
 	}
 
 }
