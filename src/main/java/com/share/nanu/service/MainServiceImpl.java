@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.share.nanu.VO.DonationVO;
 import com.share.nanu.VO.VmVO;
+import com.share.nanu.VO.VmVmamVO;
 import com.share.nanu.VO.Vmam;
 import com.share.nanu.mapper.MainMapper;
 
@@ -20,19 +21,7 @@ public class MainServiceImpl implements MainService {
 	MainMapper mainmapper;
 
 	@Override
-	public List<DonationVO> getMoney() {
-		// TODO Auto-generated method stub
-		return mainmapper.dayMoney();
-	}
-
-	@Override
-	public List<DonationVO> getWeekMoney() {
-		// TODO Auto-generated method stub
-		return mainmapper.weekMoney();
-	}
-
-	@Override
-	public List<VmVO> getvm() {
+	public List<VmVmamVO> getvm() {
 		// TODO Auto-generated method stub
 		return mainmapper.getvm();
 	}
@@ -65,6 +54,24 @@ public class MainServiceImpl implements MainService {
 	public int vmCount(String vm_num, String iname) {
 		// TODO Auto-generated method stub
 		return mainmapper.vmcount(vm_num, iname);
+	}
+
+	@Override
+	public int getDailySales(String year, String month, String day) {
+		// TODO Auto-generated method stub
+		return mainmapper.getDay(year, month, day);
+	}
+
+	@Override
+	public int getMonthSales(String year, String month) {
+		// TODO Auto-generated method stub
+		return mainmapper.getMonth(year, month);
+	}
+
+	@Override
+	public int getYearSales(String year) {
+		// TODO Auto-generated method stub
+		return mainmapper.getYear(year);
 	}
 
 	

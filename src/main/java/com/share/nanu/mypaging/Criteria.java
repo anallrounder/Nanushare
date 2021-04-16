@@ -18,7 +18,7 @@ public class Criteria {
 	//private MemberDetails md;
 	
 	public Criteria() {
-		this(1, 5);	
+		this(1, 7);	
 	}
 
 	public Criteria(int pageNum, int amount) {

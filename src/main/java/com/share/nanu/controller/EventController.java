@@ -11,12 +11,12 @@ import lombok.AllArgsConstructor;
 public class EventController {
 	
 	// 출석체크(event default) 
-	@RequestMapping("/event/check")
-	public ModelAndView attendance(ModelAndView mav) throws Exception {
-			
-		mav.setViewName("/eventView/attendcheck2"); 
-		return mav;
-	}
+//	@RequestMapping("/event/check")
+//	public ModelAndView attendance(ModelAndView mav) throws Exception {
+//			
+//		mav.setViewName("/eventView/attendcheck"); 
+//		return mav;
+//	}
 	
 	// 테스트 디폴트 뷰(test default) 
 	@RequestMapping("/event/test")

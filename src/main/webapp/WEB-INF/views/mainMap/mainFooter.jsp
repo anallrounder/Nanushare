@@ -95,7 +95,7 @@
                 <!-- CopyRight -->
                 <div class="charity-copyright">
                     <a href="#" class="back-top charity-bgcolor"><i class="fa fa-angle-up"></i></a>
-                    <p><a href="#">이용약관</a> &nbsp; &nbsp;<a href="#">개인정보처리방침</a>&nbsp; &nbsp; <a href="#">이메일집단수집거부</a>&nbsp; &nbsp;<a href="#">오시는길</a>&nbsp; &nbsp;<a href="#">문의</a>&nbsp; &nbsp;<a href="#">사이트맵</a></p><p style="margin-left: 270px;">Â© 2021, All Right Reserved - by NanuShare</p><br>
+                    <p><a href="#">이용약관</a> &nbsp; &nbsp;<a href="#">개인정보처리방침</a>&nbsp; &nbsp; <a href="#">이메일집단수집거부</a>&nbsp; &nbsp;<a href="#">오시는길</a>&nbsp; &nbsp;<a href="#">문의</a>&nbsp; &nbsp;<a href="#">사이트맵</a></p><p style="margin-left: 160px;">Â© 2021, All Right Reserved - by NanuShare</p><br>
                     <p style="margin-left: 0px;"> <i class="fa fa-map-marker-alt"></i> &nbsp;(우)03164 서울특별시 종로구 종로2가 종로69</p> <p> &nbsp; &nbsp;<i class="fa fa-phone"  style="transform: rotate(90deg);"></i> &nbsp;대표전화 02-722-1481</p>
                     
                     <!-- <ul>
@@ -112,7 +112,7 @@
     <!-- Footer -->
 
     <!-- Search Modal -->
-    <div class="modal fade searchmodal" id="searchModal" tabindex="-1" role="dialog">
+<!--     <div class="modal fade searchmodal" id="searchModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -126,7 +126,7 @@
                 
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- jQuery -->
     <script src="/resources/charity/script/jquery.js"></script>

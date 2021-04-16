@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 포인트 기부시 회원테이블에 물품신청 횟수 카운트 countPDnt -->
   	<update id="countPDnt" >
 		<![CDATA[ 
-			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = 'Ulric@naver.com'
+			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = #{member_id}
 		]]>
 	</update>
 	
@@ -91,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="insertCardDona" resultType="com.share.nanu.VO.DonationVO">
 		<![CDATA[ 
 			insert into donation(dnt_paynum, member_id, dntprice, dntdate, dntstat, pg, paymethod)
-			values(#{dnt_paynum}, #{member_id},  #{dntprice},  #{dntdate}, #{dntstat}, #{pg}, #{paymethod})
+			values(#{dnt_paynum}, #{member_id},  #{dntprice},  #{dntdate}, to_char(#{dntstat},'yyyy-mm-dd hh24:mi:ss'), #{pg}, #{paymethod})
 		]]>
 	</select> 
 	
@@ -100,7 +100,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[ 
 			UPDATE member SET DNTCNT = DNTCNT + 1 where member_id = #{member_id}
 		]]>
-	</select> 
+	</select>
+	
+	<select id="getDonation"  resultType="com.share.nanu.VO.DonationVO">
+		<![CDATA[ 
+			select * from donation where dnt_paynum=#{merchantUid}
+		]]>
+	</select>  
 
 </mapper>
 

@@ -96,22 +96,22 @@
 							<p>나누셰어의 물품 나눔에 관심을 갖고 찾아와 주셔서 감사합니다.</p>
                             <p>나누셰어는 우리 사회에 따뜻한 온기를 불어 넣고 더불어 사는 사회를 실현하고자 합니다. <br>
                            	따뜻한 마음을 소외계층에게 전달하고 싶으나 방법을 몰라 망설이는 분들을 위해 나눔 박스를 마련했습니다. <br>
-                           	이를 통해 금전적 기부를 넘어 물품 나누기 프로젝트를 통해 지역 사회를 지원하려 합니다.<br>
-							또한 후원금을 통해 파트너, 등록 및 미등록 자선 단체, 비영리 단체 및 지역 사회 단체에 기부금을 제공합니다.</p>
+                           	이를 통해 금전적 기부를 넘어 물품 나누기 프로젝트를 통해 지역 사회를 지원하려 합니다.<!-- <br>
+							또한 후원금을 통해 파트너, 등록 및 미등록 자선 단체, 비영리 단체 및 지역 사회 단체에 기부금을 제공합니다. --></p>
 							
 							<p>후원 회원 관리를 위해 로그인 한 회원만 물품 기부 신청을 하실 수 있는 점 양해부탁드립니다. <br>
 							모두 어려운 코로나 상황 속에서도 지속적인 여러분의 참여에 감사드립니다. </p>
 							
-							<p>회원가입은 홈페이지 오른쪽 상단 '회원가입' 버튼을 통해서 하실 수 있으며, <br>
-							이미 가입하신 회원님은 물품 나눔을 위해  오른쪽 상단 '로그인' 버튼을 통해 로그인 후 이용해 주시면 감사하겠습니다.</p>
+							<!-- <p>회원가입은 홈페이지 오른쪽 상단 '회원가입' 버튼을 통해서 하실 수 있으며, <br>
+							이미 가입하신 회원님은 물품 나눔을 위해  오른쪽 상단 '로그인' 버튼을 통해 로그인 후 이용해 주시면 감사하겠습니다.</p> -->
 							<!-- 물품 나누기 소개글 -->
 							
 							<!-- 상단 신청서 작성 버튼 -->
                             <div class="charity-cause-donate">
                                 <div class="skillst charity-item-text">
-                                    <h6>물품 신청을 하시기 전에 아래 정보를 꼭 확인해주세요!</h6>
+                                    <h5 style="color:orangered;">물품 신청을 하시기 전에 아래 정보를 꼭 확인해주세요!</h5>
                                 </div>
-                                <a href="/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a>
+                               <!--  <a href="/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a> -->
                             </div>
                           	<!-- <p> <blockquote></blockquote></p> -->
                           	<!-- 상단 신청서 작성 버튼 -->
@@ -129,7 +129,7 @@
 								<ul>
 									<li>
 		                                <div class="charity-image">
-		                                   <i class="icon-heart"></i><!-- fas fa-head-side-mask --> <!-- icon-donation -->
+		                                   <i><img src="${pageContext.request.contextPath}/resources/donation/item/mask_sm.png" alt="" style="width:35px;"></i><!-- fas fa-head-side-mask --> <!-- icon-donation -->
 		                                   <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 		                                   <span></span>
 		                                </div>
@@ -141,7 +141,7 @@
 									</li>
 									<li>
 		                                <div class="charity-image">
-		                                   <i class="icon-heart"></i>
+		                                   <i><img src="${pageContext.request.contextPath}/resources/donation/item/diaper_sm.png" alt="" style="width:35px"></i>
 		                                   <span></span>
 		                                </div>
 		                                <div class="charity-item-text">
@@ -153,7 +153,8 @@
 									</li>
 									<li>
 		                                <div class="charity-image">
-		                                   <i class="icon-heart"></i><!-- icon-books-stack-of-three -->
+		                                  <!--  <i class="icon-heart"></i> --><!-- icon-books-stack-of-three -->
+		                                  <i><img src="${pageContext.request.contextPath}/resources/donation/item/sanitarypad_sm.png" alt="" style="width:35px;"></i>
 		                                   <span></span>
 		                                </div>
 		                                <div class="charity-item-text">
@@ -165,7 +166,7 @@
 									</li>
 									<li>
 		                                <div class="charity-image">
-		                                   <i class="icon-heart"></i>
+		                                   <i><img src="${pageContext.request.contextPath}/resources/donation/item/stationery_sm.png" alt="" style="width:35px"></i>
 		                                   <span></span>
 		                                </div>
 		                                <div class="charity-item-text">
@@ -178,7 +179,7 @@
 									</li>
 									<li>
 		                                <div class="charity-image">
-		                                   <i class="icon-heart"></i>
+		                                  <i><img src="${pageContext.request.contextPath}/resources/donation/item/handsanitizer_sm.png" alt="" style="width:37px"></i>
 		                                   <span></span>
 		                                </div>
 		                                <div class="charity-item-text">
@@ -249,18 +250,18 @@
     <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
     <!-- Footer -->
 
-    <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/resources/script/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/slick.slider.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/progressbar.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/fancybox.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/jquery.countdown.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/jquery.jplayer.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/jplayer.playlist.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/script/functions.js"></script>
+   <!-- jQuery -->
+   <script src="/resources/charity/script/jquery.js"></script>
+   <script src="/resources/charity/script/popper.min.js"></script>
+   <script src="/resources/charity/script/bootstrap.min.js"></script>
+   <script src="/resources/charity/script/slick.slider.min.js"></script>
+   <script src="/resources/charity/script/progressbar.js"></script>
+   <script src="/resources/charity/script/fancybox.min.js"></script>
+   <script src="/resources/charity/script/jquery.countdown.min.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js"></script>
+   <script src="/resources/charity/script/jquery.jplayer.js"></script>
+   <script src="/resources/charity/script/jplayer.playlist.js"></script>
+   <script src="/resources/charity/script/functions-main.js"></script>
 </body>
 
 </html>

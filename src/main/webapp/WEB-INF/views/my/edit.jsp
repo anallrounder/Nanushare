@@ -157,18 +157,19 @@ input {
 	<!-- Header -->
 
 
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
+	<!-- Sub Header -->
+	<div class="charity-subheader" >
+		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent" ></span>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>프로필 수정하는 페이지</h1>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Banner -->
+	<!-- Sub Header -->
 
 	<!-- Content -->
 	<div class="charity-main-content">
@@ -182,14 +183,13 @@ input {
 							<h2>프로필 수정</h2>
 						</div>
 						<div style="margin: 0 auto" align="center">
-							<form id="mjoin"
-								action="${pageContext.request.contextPath}/my/mypage"
+							<form id="mjoin" action="${pageContext.request.contextPath}/my/mypage"
 								method="get" novalidate>
 								<!-- onsubmit="return check()" -->
 
 								<ul class="charity-contact-form">
 									<li>
-										<!-- <ul class="row"> --> <label>아이디 </label> <input
+										<label>아이디 </label> <input
 										type="text" name="member_id" id="member_id"
 										value="<sec:authentication property="principal.member.member_id"/>"
 										readonly required />
@@ -203,10 +203,6 @@ input {
 										value="<sec:authentication property="principal.member.subemail" />"
 										required></li>
 
-									<%-- 	<li class="col-md-6">성별<input type="text"
-											placeholder="gender" name="gender" id="gender"
-											class="form-control" required>
-										</li> --%>
 									<li><label>변경할 비밀번호 입력</label><input type="password"
 										placeholder="Password" name="pw" id="pwd1"
 										class="form-control" required></li>
@@ -221,15 +217,16 @@ input {
 									<button type="submit" class="charity-simple-blog-btn">수정완료</button>
 									<!-- onclick="modifyMember()" -->
 								</div>
+								<div>&nbsp;</div>
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
 							</form>
-							<div>빈칸채우기</div>
 							<button type="button"
 								onclick="location.href='${pageContext.request.contextPath}/my/drop'"
 								class="charity-simple-blog-btn">회원 탈퇴</button>
 							<button type="button" onclick="location.href='/my/mypage'"
 								class="charity-simple-blog-btn">처음으로</button>
+								
 						</div>
 
 						<!-- jquery validation cdn-->

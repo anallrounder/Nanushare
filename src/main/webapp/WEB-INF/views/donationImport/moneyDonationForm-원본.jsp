@@ -54,14 +54,12 @@
 		});
 
 		/* 카드결제 */
-		$('#donaCard')
-				.click(
+		$('#donaCard').click(
 						function requestCard() {
 							var donaCardSelect = $("#donaCardSelect").val();
 							donaCardSelect = parseInt(donaCardSelect);
 
-							$
-									.ajax({//로그인한 회원의 정보를 가져온다.
+							$.ajax({//로그인한 회원의 정보를 가져온다.
 										type : 'post',
 										url : "${pageContext.request.contextPath}/my/commonDonation",
 										contentType : "application/json; charset=UTF-8",

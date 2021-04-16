@@ -67,22 +67,20 @@ li {
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-
-
-
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
+<!-- Sub Header -->
+	<div class="charity-subheader" >
+		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent" ></span>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>mypage</h1>
-
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Banner -->
+	<!-- Sub Header -->
+
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
@@ -112,32 +110,29 @@ li {
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
-								<li><a href="mypage"><span class="fa fa-user"></span>
-										Profile</a></li>
+								<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
 								<li><a href="ask"><span class="fa fa-question">
-									</span>나의문의내역</a></li>
+									</span>&nbsp;&nbsp;나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
-									</span>나의인증내역</a></li>
+									</span>&nbsp;&nbsp;나의인증내역</a></li>
 								<li class="active"><a href="give"><span
-										class="fa fa-handshake"> </span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
-								<li><a href="pay"><span class="fa fa-credit-card"></span>나의결제내역</a></li>
+										class="fa fa-handshake"> </span>&nbsp;&nbsp;나의나눔내역</a></li>
+								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
+								<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
+
+
 							</ul>
 							</nav>
 						</div>
 						<div class="content-panel">
-
-
-
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-							<h2 class="title">
-								나의 기부 내역<span class="pro-label label label-warning">PRO</span>
-							</h2>
-
-
-
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div>&nbsp;</div>
+							<div class="charity-fancy-title">
+							<h2>나의 나눔 내역</h2></div>
+							<div>&nbsp;</div>
 							<table>
 								<div>
 									<br>

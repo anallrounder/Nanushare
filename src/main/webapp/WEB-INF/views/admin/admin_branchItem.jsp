@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -109,36 +108,10 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/admin/donation" class="nav-link">
+            <a href="/admin/stat" class="nav-link">
              <i class="nav-icon fas fa-donate"></i>
-              <p>후원금 관리<i class="right fas fa-angle-left"></i></p>
+              <p>후원금 관리</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#m_day" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>일별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_week" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>주별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_month" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>월별</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#m_year" class="nav-link" data-toggle="tab">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>년별</p>
-                </a>
-              </li>
-            </ul>
           </li>
           
           <li class="nav-item">
@@ -146,6 +119,27 @@
               <i class="nav-icon fas fa-users"></i>
               <p>회원 관리</p>
             </a>
+          </li>
+          
+          <li class="nav-item menu-open"><%-- ${pageContext.request.contextPath}/admin/item --%>
+            <a href="#" class="nav-link active" data-toggle="tab">
+              <i class="nav-icon fas fa-box-open"></i>
+              <p>재고 관리<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/headItem" class="nav-link" data-toggle="tab">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>본사 재고</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#item_branch" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>지점 재고</p>
+                </a>
+              </li>
+             </ul>
           </li>
           
           <li class="nav-item">
@@ -176,13 +170,6 @@
              </ul>
           </li>
              </ul>
-          </li>
-          
-          <li class="nav-item">
-            <a href="#boards" class="nav-link" data-toggle="tab">
-              <i class="nav-icon fas fa-th"></i>
-              <p>게시판 관리</p>
-            </a>
           </li>
         </ul>
       </nav>

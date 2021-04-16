@@ -113,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="uploadFile" resultType="com.share.nanu.VO.AttachmentVO">
 	 <![CDATA[
 	    
-	   	   insert into attachment VALUES (attachment_seq.nextval, #{originname}, #{path}, #{extension}, #{b_index})
+	   	   insert into attachment VALUES (attachment_seq.nextval, #{originname}, #{path}, #{extension}, #{b_index}, #{uuidName})
 		]]>
 	</select>
 	
@@ -136,14 +136,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 댓글 입력 -->
 	<insert id="insertReply">
-		insert into BOARDREPLY (r_num, rcontent, rid, b_index)
-		values (BOARDREPLY_SEQ.nextval, #{rcontent}, #{rid}, #{b_index})
+		insert into BOARDREPLY (r_num, rcontent, rdate, rid, b_index)
+		values (BOARDREPLY_SEQ.nextval, #{rcontent}, #{rdate}, #{rid}, #{b_index})
 	</insert>
 	
 	<select id="getComment" resultType="com.share.nanu.VO.BoardreplyVO">
 	   <![CDATA[
-		  select * from  BOARDREPLY  where b_index = #{b_index} and r_num= #{r_num}
+		  select * from BOARDREPLY  where b_index = #{b_index} and r_num= #{r_num}
 	   ]]>
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="removeReply">
+		<![CDATA[
+		  delete from BOARDREPLY  where b_index = #{b_index} and r_num= #{r_num}
+	   ]]>
+	</delete>
+	
+	<select id="getAttachMent" resultType="com.share.nanu.VO.AttachmentVO">
+		<![CDATA[ 
+			select * from attachment order by b_index desc
+		]]>
+	</select>
+	
+	<select id="getAttachMentCount" resultType="int">
+		<![CDATA[ 
+			select count(b_index) as count from attachment
+		]]>
 	</select>
 	
 </mapper>

@@ -5,18 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- select sum(dntprice) from donation where TO_CHAR(dntdate,'yyyy-mm-dd') > sysdate-1 order by dnt_paynum asc -->
 <mapper namespace="com.share.nanu.mapper.MainMapper">
 	
-	<select id="dayMoney" resultType="com.share.nanu.VO.DonationVO">
-	<![CDATA[ 
-		select * from donation where TO_CHAR(dntdate,'yyyy-mm-dd') > sysdate-1 and dntstat='Y' order by dnt_paynum asc
-	]]>
-	</select>
-	
-	<select id="weekMoney" resultType="com.share.nanu.VO.DonationVO">
-	<![CDATA[ 
-		select sum(dntprice) from donation where dntdate >= '2021-03-16' and dntdate < to_char(sysdate,'YYYYMMDD') GROUP BY to_char(dntdate, 'YYYYMM')
-	]]>
-	</select>
-	
 	<resultMap type="com.share.nanu.VO.Vmam" id="vmamvo">
 		<id property="vmindex" column="vmindex" />
 		<result property="vm_num" column="vm_num" />
@@ -68,5 +56,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select vm_amount from vmam where vm_num = #{vm_num} and iname =#{iname}
 	]]>
 	</select>
+	
+	<!-- 당일 후원금 현황 -->
+	<select id="getDay" resultType="int"> 
+	<![CDATA[
+			select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month} and extract(day from dntdate) = #{day}
+		]]>
+	</select>
+	
+	<!-- 해당월 후원금 현황 -->
+	<select id="getMonth" resultType="int"> 
+	<![CDATA[ 
+		select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month}
+	]]>
+	</select>
+	
+	<!-- 해당년 후원금 현황 -->
+	<select id="getYear" resultType="int"> 
+	<![CDATA[
+		select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year}
+	]]>
+	</select>
+	
 
 </mapper>

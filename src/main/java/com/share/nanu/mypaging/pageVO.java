@@ -3,8 +3,6 @@ package com.share.nanu.mypaging;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.share.nanu.security.MemberDetails;
-
 import lombok.ToString;
 
 @ToString

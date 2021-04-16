@@ -13,7 +13,7 @@
 	</script> -->
 	
 	<head>
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- meta tags -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,9 +35,26 @@
 	 <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 	
-	
 	<script type="text/javascript">
-		$(document).reday(function() {
+	
+	/* $(function(){
+	   
+	}); */
+	
+		//$(document).reday(function() {
+	 $(function() {
+		//랜덤 이미지 불러오기 
+		$('.boardShow_img').each(function (index, item) {	        	
+	       	var imgUrl = '${pageContext.request.contextPath}/resources/board_thumbnail/bslist0'+Math.floor((Math.random()*6) + 1)+'.png';
+	       	console.log("index : "+index);
+	       	console.log("item " + item);
+	       	console.log("imgurl : " + imgUrl);
+	       	console.log($(item).attr("src"));
+	       	
+	       	$(item).attr("src", imgUrl);
+		});
+		
+		
 		/* 	var result = '<c:out value="${result}" />';
 		  	checkModal(result);
 		  	history.replaceState({},null,null);
@@ -69,6 +86,8 @@
 				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 				actionForm.submit();
 			});
+			
+			
 		});
 		
 		// 추가
@@ -82,7 +101,12 @@
 			actionForm.submit();
 			
 		}); */
+		
 	</script>
+<!-- 	<script type="text/javascript">
+	
+	
+</script> -->
 </head>
 
 <body>
@@ -91,9 +115,9 @@
 	<!-- Header -->
 
 	<!-- Sub Header -->
-	<div class="charity-subheader">
-		<!--   style="background-image: url(/resources/loginform/images/bg.jpg);" -->
-		<span class="light-black-transparent"></span>
+	<div class="charity-subheader" >
+		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="light-black-transparent" ></span>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -113,54 +137,51 @@
 			<div class="container">
 				<div class="row">
 				<div class="col-md-12">
-					<!-- Widget Search -->
+					<!-- Widget Search 참고 -->
 					<!-- 	<div class="widget_title"><h2>Search Here</h2></div> -->
 					<!-- <div style="float: right;" class="widget widget_search col-md-4">
 						<form>
 							<input type="text" placeholder="검색어를 입력하세요."> <input type="submit" value=""> <i class="fa fa-search"></i>
 						</form>
 					</div> -->
-					<!-- Widget Search -->
 					
+					<!-- Widget Search -->
+
 					<!-- search start  -->
-					<div class="row" style="clear:right;width:500px;margin:auto">
-						<div class="col-lg-12">
-						<div style="float: right;" class="widget widget_search">
-							<form id="searchForm" action="/board/shows/list" method="get" ><!-- class="navbar-form" -->
-								<div class="input-group">
-									<div class="form-group navbar-left">
-										<select name="type"  class="form-control">
-											<option value="">검색종류</option>
-											<option value="T" ${(pageMaker.cri.type == "T") ? "\"selected\"":"" }>제목</option>
-											<option value="C" ${(pageMaker.cri.type == "C") ? "\"selected\"":"" }>내용</option>
-											<option value="W" ${(pageMaker.cri.type == "W") ? "\"selected\"":"" }>작성자</option>
-											<option value="TC" ${(pageMaker.cri.type == "TC") ? "\"selected\"":"" }>제목과 내용</option>
-										</select>
-									</div>
-									<div class="form-group navbar-right">
-										<input type="text" name="keyword" class="form-control" placeholder="search here" value="${pageMaker.cri.keyword}"/>
-										<!-- <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button> -->
-										<button class="btn btn-default btn-sm">Search</button> 
-										<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-										<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-									</div> 
-									<!-- <button class="btn btn-primary btn-sm">Search</button> -->
-									<!-- <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button> -->
-										<!-- <i class="bi bi-search"></i> -->
-										 
-										<!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-											<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-										</svg>
- -->								
+					<div style="float: right;" class="widget widget_search ">
+						<form id="searchForm" action="/board/shows/list" method="get" ><!-- class="navbar-form serchForm" -->
+							<div class="input-group">
+								<%-- <div class="form-group col-md-2">
+									<select name="type"  class="charity-select-form">
+										<option value="">검색종류</option>
+										<option value="T" ${(pageMaker.cri.type == "T") ? "\"selected\"":"" }>제목</option>
+										<option value="C" ${(pageMaker.cri.type == "C") ? "\"selected\"":"" }>내용</option>
+										<option value="W" ${(pageMaker.cri.type == "W") ? "\"selected\"":"" }>작성자</option>
+										<option value="TC" ${(pageMaker.cri.type == "TC") ? "\"selected\"":"" }>제목과 내용</option>
+									</select>
+								</div> --%>
+								<div class="charity-select-two col-md-2">
+									<select name="type">
+										<option value="">검색종류</option>
+										<option value="T" ${(pageMaker.cri.type == "T") ? "\"selected\"":"" }>제목</option>
+										<option value="C" ${(pageMaker.cri.type == "C") ? "\"selected\"":"" }>내용</option>
+										<option value="W" ${(pageMaker.cri.type == "W") ? "\"selected\"":"" }>작성자</option>
+										<option value="TC" ${(pageMaker.cri.type == "TC") ? "\"selected\"":"" }>제목과 내용</option>
+									</select>
 								</div>
-							</form>
-						</div>
-						</div>
+								<div class="form-group col-md-3">
+									<input type="text" name="keyword" class="form-control" placeholder="검색" value="${pageMaker.cri.keyword}"/>
+									<input type="submit" value="" class="btn btn-default"/><i class="fa fa-search"></i>
+									<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+									<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+								</div> 
+							</div>
+						</form>
 					</div>
 					<!-- search end -->
 					
 					<div  style="float: right;" class="col-md-2">
-						<button  class="charity-click-btn" onclick="location.href='/my/board/shows/write_view'">나눔 인증글 작성</button>
+						<button  class="charity-click-btn mb-3" onclick="location.href='/my/board/shows/write_view'">나눔인증글작성</button><br>
 					</div>
 					<div class="col-md-6" style="float: right;"></div>
 				</div>
@@ -171,14 +192,42 @@
 
 						<div class="charity-blog charity-simple-blog">
 							<ul class="row">
-
+								
 								<c:forEach var="vo" items="${list}">
+									
 									<li class="col-md-6">
 										<figure>
-											<a href="#"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-simple-1.jpg" alt=""></a>
+											<a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}">
+											
+												<c:set var="doneLoop" value="false"/>
+												<c:set var="attachMentCount"  value="${attachMentCount}" />
+												<c:set var="i" value="1" />
+												
+												<c:forEach var="attachment" items="${attachment}">
+													
+													<c:set var="i" value="${i+1 }" />
+													
+													<%-- ${vo.b_index},${attachment.b_index} --%>
+													<c:if test="${doneLoop ne true}">
+														<c:choose>
+															<c:when test="${vo.b_index eq attachment.b_index }">
+																<img alt="" src="${attachment.path }">
+																<%-- <img src="${pageContext.request.contextPath}/resources/attachment//" + ${attachment.uuidname }> --%>
+																<c:set var="doneLoop" value="true"/>
+															</c:when>
+															
+															<c:when test="${i+1 > attachMentCount }">															
+																<img id="introImg"  class="boardShow_img" src="${pageContext.request.contextPath}/resources/board_thumbnail/bslist07.png">
+																<c:set var="doneLoop" value="true"/>
+															</c:when>															
+														</c:choose>													
+													</c:if>																																																																																									
+												</c:forEach>											
+											</a>
+												
 											<figcaption>
 												<time datetime="2008-02-14 20:00" class="charity-bgcolor">나눔<span>인증</span></time>
-												<a href="/board/shows/content_view?b_index=${vo.b_index}" class="blog-link-hover"><i class="fa fa-link"></i></a>
+												<a href="/board/shows/content_view/${vo.b_index}" class="blog-link-hover"><i class="fa fa-link"></i></a>
 											</figcaption>
 										</figure>
 
@@ -193,7 +242,7 @@
 											</ul>
 											
 											<h2><a href="/board/shows/content_view?b_index=${vo.b_index}">제목: ${vo.btitle}</a></h2>
-											<p class="contentclass mb-4">${vo.bcontent}<!-- 생의능히가치를 가지에 커다란 든
+											<p class="contentclas">${vo.bcontent}<!-- 생의능히가치를 가지에 커다란 든
 												돋고, 이상은 사막이다. 불어 소리다. 이것은 영원히 같은 바이며, 튼튼하며, 긴지라 피고, 돋고, 듣는다.
 												예수는 하는 같이 용기가 청춘을 꽃이 간에 때까지 못할 사막이다. 살았으며, 사랑의 곳으로 사는가 간에
 												기관과 낙원을 때문이다. 인생을 소금이라 얼마나 바이며, 힘있다. 구하지 아름답고 갑 피부가 끝에 같이,
@@ -231,20 +280,23 @@
 							</ul>
 						</div>
 						
-						<!-- p태그 생략 하는 자바스크립트 -->
-						<script type="text/javascript">
-						function truncateText(selector,	maxLength) {
-							var element = document.querySelector(selector), truncated = element.innerText;
-					
-							if (truncated.length > maxLength) {
-								truncated = truncated.substr(0,	maxLength) + '...';
-							}
-							return truncated;
-						} 
 						
-						//You can then call the function with something like what i have below. .contentclass
-						//document.querySelectorAll('p').innerText = truncateText('p', 50); 아래 처럼 써야 작동함
-					    $('.contentclass').text(truncateText('.contentclass', 75));
+						<script type="text/javascript">
+						    
+							 /* p태그 생략 하는 자바스크립트  */
+							function truncateText(selector,	maxLength) {
+								var element = document.querySelector(selector), truncated = element.innerText;
+						
+								if (truncated.length > maxLength) {
+									truncated = truncated.substr(0,	maxLength) + '...';
+								}
+								return truncated;
+							} 
+							
+							//You can then call the function with something like what i have below. .contentclass
+							//document.querySelectorAll('p').innerText = truncateText('p', 50); 아래 처럼 써야 작동함
+						    $('.contentclass').text(truncateText('.contentclass', 75));
+							
 						</script>
 						
 						
@@ -310,8 +362,9 @@
 	<script	src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
 	
 </body>
+
+
 <!-- 
-<script type="text/javascript">
 	function truncateText(selector, maxLength) {
 		var element = document.querySelector(selector), truncated = element.innerText;
 
@@ -321,7 +374,6 @@
 		return truncated;
 	}
 	//You can then call the function with something like what i have below.
-	document.querySelector('p').innerText = truncateText('p', 50);
-</script> -->
+	document.querySelector('p').innerText = truncateText('p', 50); -->
 
 </html>

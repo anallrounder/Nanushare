@@ -109,8 +109,7 @@
 							var selectCardDirect = $("#selectCardDirect").val();
 							selectCardDirect = parseInt(selectCardDirect);
 
-							$
-									.ajax({ //로그인한 회원의 정보를 가져온다.
+							$.ajax({ //로그인한 회원의 정보를 가져온다.
 										type : 'post',
 										url : "${pageContext.request.contextPath}/my/commonDonation",
 										contentType : "application/json; charset=UTF-8",
@@ -260,8 +259,7 @@
 																				cache : false,
 																				contentType : 'application/json; charset=utf-8',
 																				dataType : 'json',
-																				data : JSON
-																						.stringify(arr)
+																				data : JSON.stringify(arr)
 																			//https://docs.iamport.kr/tech/imp?lang=ko#param 데이터는 import 문서 참조
 																			/* data : { //필요정보 : 결제번호, 아이디, 결제금액,결제날짜,pg, 결제방법
 																			   merchant_uid : rsp.merchant_uid, //결제번호
@@ -281,8 +279,7 @@
 																			+ rsp.error_msg;
 																}
 																alert(msg);
-																$(location)
-																		.attr(
+																$(location).attr(
 																				'href',
 																				"${pageContext.request.contextPath}/my/moneyDonationForm");
 															});
@@ -331,7 +328,7 @@
 					<div class="col-md-9">
 						<div class="charity-team-warp">
 
-							<h3>포인트 나눔하기</h3>
+							<h3>후원 나눔하기</h3>
 							<span class="mb-3">Point donation _ Application Form</span>
 							<figure>
 								<img
@@ -342,12 +339,12 @@
 
 							<p>
 								후원 회원 여러분, 나누셰어 프로젝트의 나눔 활동에 동참해주셔서 감사합니다. <br>안내 사항을 다시 한
-								번 꼭 확인해 주시고 신청서 작성 부탁드립니다. <br> 감사합니다.
+								번 꼭 확인해 주시고 후원 부탁드립니다. <br> 감사합니다.
 							</p>
 							<div class="charity-team-contact">
 								<ul class="chaity-contact-info">
 									<li>
-										<h6>포인트 나눔 관련:</h6> <span>+123 45 678</span>
+										<h6>후원 나눔 관련:</h6> <span>+123 45 678</span>
 									</li>
 									<li>
 										<h6>Email:</h6> <a href="mailto:name@email.com">info@example.com</a>
@@ -362,7 +359,7 @@
 
 						<!--// volunteer-form \\-->
 						<div class="widget_title mt-4">
-							<h2>포인트 나눔하기</h2>
+							<h2>후원 나눔하기</h2>
 						</div>
 						<!-- 버튼을 눌렀을때 결제가 진행, 결제가완료 되면 db카운트 -->
 						<!-- 서버로 넘겨줄 정보 즉, nanushare db에 저장할 정보 -->
@@ -378,10 +375,9 @@
 
 						<div class="charity-volunteer-form">
 							<ul class="mt-4">
-								<!-- <div class="charity-select-two"> -->
-								선택버튼
-								<li><label>결제금액:</label> <input type="number"
-									name="selectCardDirect" id="selectCardDirect" /></li>
+								<div class="charity-select-two">
+								
+								
 								<label>(select)</label>
 								<select name="donaCardSelect" id="donaCardSelect" >
 									<!-- 결제금액 선택해서 아임포트에 전달 -->
@@ -390,13 +386,14 @@
 									<option value="5000">5,000원</option>
 									<option value="10000">10,000원</option>
 								</select>
+								<li><label>결제금액:</label> <input type="text"
+									name="selectCardDirect" id="selectCardDirect" /></li>
 								<button class="charity-sub-btn" type="button" id="donaCard"
 									onclick="requestCard()" value="카드">카드 결제</button>
 								<br />
 
 
-								<li><label>결제금액:</label> <input type="number"
-									name="selectTransDirect" id="selectTransDirect" /></li>
+								
 								<label>(select)</label>
 								<select name="donaTransSelect" id="donaTransSelect">
 									<option value="">직접입력</option>
@@ -404,11 +401,14 @@
 									<option value="5000">5,000원</option>
 									<option value="10000">10,000원</option>
 								</select>
+								<li><label>결제금액:</label> <input type="text"
+									name="selectTransDirect" id="selectTransDirect" /></li>
 								<button class="charity-sub-btn" type="button" id="donaTrans"
 									value="계좌" onclick="requestTrans()">계좌 결제</button>
 
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
+								</div>
 							</ul>
 						</div>
 
@@ -490,27 +490,18 @@
 
 
 	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/slick.slider.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/progressbar.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/fancybox.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/jquery.countdown.min.js"></script>
+	<script src="/resources/charity/script/jquery.js"></script>
+	<script src="/resources/charity/script/popper.min.js"></script>
+	<script src="/resources/charity/script/bootstrap.min.js"></script>
+	<script src="/resources/charity/script/slick.slider.min.js"></script>
+	<script src="/resources/charity/script/progressbar.js"></script>
+	<script src="/resources/charity/script/fancybox.min.js"></script>
+	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
+	<script src="/resources/charity/script/jquery.jplayer.js"></script>
+	<script src="/resources/charity/script/jplayer.playlist.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
+
 </body>
 
 </html>
