@@ -101,8 +101,8 @@ public class NanuBoardShowReplyController {
 		
 		Map<String, String> needrid = new HashMap<String, String>();
 		service.insertReply(rvo); //댓글 입력
-		service.getRid(rvo.getB_index());
-		System.out.println(service.getRid(rvo.getB_index()));
+		//service.getRid(rvo.getB_index());
+		//System.out.println(service.getRid(rvo.getB_index()));
 		
 		if (md != null) {
 			model.addAttribute("member_id", md.getmember().getMember_id());
