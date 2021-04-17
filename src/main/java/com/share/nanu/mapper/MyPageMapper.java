@@ -59,4 +59,6 @@ public interface MyPageMapper {
 		//포인트 insert
 		public void getMypoint2(PointVO pointVO, String member_id);
 		
+		public PointVO mypnt(PointVO pointVO);
+		
 }
