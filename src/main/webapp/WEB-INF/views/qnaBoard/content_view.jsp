@@ -10,6 +10,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+
 <title>myprofile_edit</title>
 
 <!-- CSS -->
@@ -53,26 +56,16 @@
 	<!-- Header -->
 
 		<!-- Main Section -->
-	
-	</form>		
+		
 		
 		<!-- 문의게시판 - START -->
    <div id="wrapp">
     <div id="containerr">
         <div class="inner">        
             <h2> 1:1 문의 </h2>            
-            <form id="boardForm" name="boardForm">
-                <table width="100%" class="table01">
-                    <colgroup>
-                        <col width="15%" />
-                        <col width="35%" />
-                        <col width="15%" />
-                        <col width="*" />
-                    </colgroup>
-                    <tbody id="tbody">
-                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/${content_view.b_index}" method="post">
+          
+                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/reply" method="post">
 		<table class="table">
-			<input type="hidden" id="b_index" value="${content_view.b_index}">
 			<tr>
 				<td>글번호</td>
 				<td>${content_view.b_index}</td>
@@ -87,7 +80,7 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" id="member_id" value="${content_view.member_id}"></td>
+				<td>${content_view.member_id}</td>
 			</tr>
 			
 			<tr>
@@ -96,13 +89,45 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="10" id="bcontent">${content_view.bcontent}</textarea></td>
+				<td>${content_view.bcontent}</td>
 			</tr>
+			
+			<tr>
+				<td>관리자 답변</td>
+				<c:forEach items="${reply_view}" var="reply">
+				<td>${reply.rcontent}</td>
+				</c:forEach>
+				
+			</tr>
+			
+			<sec:authorize access="hasRole('ADMIN')"> 
+			<input type="hidden" name="b_index" value="${content_view.b_index}">
+			<tr>
+				<td>답변</td>
+				<td><textarea cols="20" rows="10" id="rcontent" name="rcontent"></textarea></td>
+			</tr>
+			</sec:authorize>
+			
 			<tr>
 				<td colspan="2">
-					<input type="submit" class="btn btn-primary" value="수정">&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna/reply/${content_view.b_index}'">답변</button>
+				
+				<sec:authentication property="principal" var="buttonhidden" />
+          		<sec:authorize access="isAuthenticated()">   
+   
+					<!-- 현재 접속된 닉네임과 댓글보드에 저장된 닉네임을 비교해서 일치 하면 보이게 함 -->
+					<c:if test="${buttonhidden.username eq content_view.member_id}">
+				
+					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna/modify/${content_view.b_index}'">수정</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='/qna/delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
+					
+					</c:if>
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ADMIN')"> 
+					<button type="submit" class="btn btn-primary">답변등록</button>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</sec:authorize>
+				
 					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna'">목록</button>
 				</td>
 			</tr>

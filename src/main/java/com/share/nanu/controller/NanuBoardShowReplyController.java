@@ -2,9 +2,6 @@
 // https://www.tutorialrepublic.com/twitter-bootstrap-button-generator.php
 package com.share.nanu.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,8 +44,10 @@ public class NanuBoardShowReplyController {
 		mav.addObject("content_view", service.getBoard(boardVO.getB_index())); //게시판 글 불러오기
 		log.info("컨텐트 뷰 테스트 BordVO.getB_index()= " + boardVO.getB_index()); //확인
 		
+		
 		mav.addObject("listComment", service.listComment(rvo)); //게시판글의 댓글 리스트 불러오기
 		log.info("컨트롤러 댓글 리스트 테스트 service.listComment(rvo)= " + rvo); //확인
+
 		
 		//mav.addObject("getComment", service.getComment(rvo)); // 로그인한사람의 댓글 확인
 		
@@ -82,39 +82,107 @@ public class NanuBoardShowReplyController {
 		
 		try {
 			service.insertReply(rvo); //댓글 입력
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			service.getRecentComment(replyVO); //최신 저장된 댓글 가져오기
+			//entity = new ResponseEntity<String>("r_num" , service.getRecentComment(replyVO); //최신 저장된 댓글 가져오기);
+			//replyVO.setR_num(rvo.getR_num()); // 댓글 번호 받아서 넣어주기
+			//model.addAttribute("recentComment = ", replyVO); 
+			
+			System.out.println("rvo = " + rvo);
+			System.out.println("replyvo = " + service.getRecentComment(replyVO));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			//entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+		
+		
 		return entity;
 	}
 	*/
 	// 댓글 입력 insert
-		// [Spring] ResponseEntity는 왜 쓰는 것이며 어떻게 쓰는걸까? https://a1010100z.tistory.com/106
+	// [Spring] ResponseEntity는 왜 쓰는 것이며 어떻게 쓰는걸까? https://a1010100z.tistory.com/106
+	/*
+	@ResponseBody
+	@PostMapping("board/shows/reply_insert") 
+	public Map<String, Integer> reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		
-	@PostMapping("board/shows/reply_insert/{b_index}") 
-	public Map<String, String> reply_insert(@RequestBody BoardreplyVO rvo, BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("rvo = " + rvo);
 		log.info("reply_insert");
 		System.out.println(rvo);
 		
-		Map<String, String> needrid = new HashMap<String, String>();
+		Map<String, Integer> sendR_num = new HashMap<String, Integer>();
 		service.insertReply(rvo); //댓글 입력
-
+		//service.getRecentComment(replyVO); //최신 저장된 댓글 가져오기
 		//service.getRid(rvo.getB_index());
-		//System.out.println(service.getRid(rvo.getB_index()));
+		
+		//System.out.println("r_num = " + service.getRecentComment(replyVO).getR_num());
+		//System.out.println("r_num = " + rvo.getR_num());
+		
+		sendR_num.put("r_num", service.getRecentComment(replyVO).getR_num());
+		System.out.println("r_num = " + service.getRecentComment(replyVO).getR_num());
+		
+		
+		if (md != null) {
+			model.addAttribute("member_id", md.getmember().getMember_id());
+		}
+		return sendR_num;
+	}
+*/
+	/*
+	@ResponseBody
+	@PostMapping("board/shows/reply_insert") 
+	public BoardreplyVO reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		
+		System.out.println(rvo);
+		
+		service.insertReply(rvo); //댓글 입력
+		
+		//replyVO.setB_index(rvo.getR_num()); 
+		
+		BoardreplyVO send = service.getRecentComment(rvo.getR_num(), rvo.getB_index());
+		System.out.println(service.getRecentComment(rvo.getR_num(), rvo.getB_index()));
+		
+		//service.getRecentComment(replyVO); //최신 저장된 댓글 가져오기
+		//send.put("b_index" , rvo.getB_index());
+		//send.put("r_num" , service.getRecentComment(rvo).getB_index());
+		//System.out.println("r_num = " + service.getRecentComment(replyVO).getR_num());
+		//System.out.println("rvo = " + service.getRecentComment(rvo.getR_num()));
+		//System.out.println("b_index = " + rvo.getB_index());
 
 		if (md != null) {
 			model.addAttribute("member_id", md.getmember().getMember_id());
 		}
-		
-		return needrid;
+		return send;
 	}
+	*/
+	@ResponseBody
+	@PostMapping("board/shows/reply_insert") 
+	public int reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		 
+		service.insertReply(rvo); //댓글 입력
+		
+		//replyVO.setB_index(rvo.getR_num()); 
+		//BoardreplyVO send = service.getRecentComment(rvo.getR_num(), rvo.getB_index());
+		//System.out.println(service.getRecentComment(rvo.getR_num(), rvo.getB_index()));
+		
+		int send = service.getRecentComment(rvo).getR_num();
+		System.out.println(service.getRecentComment(rvo).getR_num());
+		
+		//service.getRecentComment(replyVO); //최신 저장된 댓글 가져오기
+		//send.put("b_index" , rvo.getB_index());
+		//send.put("r_num" , service.getRecentComment(rvo).getB_index());
+		//System.out.println("r_num = " + service.getRecentComment(replyVO).getR_num());
+		//System.out.println("rvo = " + service.getRecentComment(rvo.getR_num()));
+		//System.out.println("b_index = " + rvo.getB_index());
 
+		if (md != null) {
+			model.addAttribute("member_id", md.getmember().getMember_id());
+		}
+		return send;
+	}
 	
 	// 댓글 삭제
-	@DeleteMapping("board/shows/delete/{b_index}/{r_num}") // 맵핑 자체가 델리트맵핑
+	@DeleteMapping("board/shows/delete/{r_num}") // 맵핑 자체가 델리트맵핑 /{b_index}/{r_num}
 	public ResponseEntity<String> rest_deltete(BoardVO boardVO, BoardreplyVO rvo, Model model) {
 
 		ResponseEntity<String> entity = null; // 레스트풀을 위해 제공하는 대표적인 것 중 하나

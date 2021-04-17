@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +14,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 
 <title>myprofile_edit</title>
 
@@ -27,10 +35,8 @@
 <link rel="stylesheet" href="/resources/qna/css/common/common.css"/>
 
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 
 
@@ -56,72 +62,38 @@
 		<!-- Main Section -->
 		
 		<!-- 문의게시판 - START -->
-   <div id="wrapp">
     <div id="containerr">
-        <div class="inner">        
-            <h2> 1:1 문의 </h2>            
-            <form id="boardForm" name="boardForm">
-                <table width="100%" class="table01">
-                    <colgroup>
-                        <col width="10%" />
-                        <col width="25%" />
-                        <col width="10%" />
-                        <col width="15%" />
-                        <col width="20%" />
-                    </colgroup>
-                    <thead>        
-                        <tr>
-                            <th>글번호</th>
-                            <th>제목</th>
-                            <th>조회수</th>
-                            <th>작성자</th>
-                            <th>작성일</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody">
-       <c:forEach items="${list}" var="dto">
-        	<tr>
-            	<td>${dto.b_index}</td>
-				<td>
-					<c:forEach begin="1" end="${end.page}"></c:forEach>
-					<a href="${pageContext.request.contextPath}/board/qna/${dto.b_index}">${dto.btitle}</a></td>
-				<td>${dto.bhit}</td>	
-				<td>${dto.member_id}</td>
-				<td>${dto.bdate}</td>
-       	   </tr>
-       </c:forEach>  
-                    </tbody>    
-                </table>
-                
-           <div align="center">
-		<ul class="pagination justify-content-center">
-			<c:if test="${pageMaker.prev}">
-				<li class="page-item">
-					<a href="qna_list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
-				</li>
-			</c:if>
-		
-			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-				<li class="page-item">
-					<a href="qna_list${pageMaker.makeQuery(idx)}">${idx}</a>
-				</li>
-			</c:forEach>
-				
-			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li class="page-item">
-				 	<a href="qna_list${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
-				</li>
-			</c:if><br>
-		</ul>
-	</div>     
-            </form>            
-            <div class="btn_right mt15">
-                <button type="button" class="btn black mr5" onclick="javascript:goBoardWrite();">작성하기</button>
-            </div>
-        </div>
-    </div>
-    
+   	<form id="writeForm" action="${pageContext.request.contextPath}/board/qna/reply" method="post">
+   	
+		<table class="table">
+			
+			<tr>
+				<td>아이디</td>
+				<td><sec:authentication property="principal.member.member_id" /></td>
+			</tr>
+			
+			<tr>
+				<td>문의 내용</td>
+				<td>${reply_view.bContent}</td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td><input type="text" id="btitle" name="btitle" size="50"></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea cols="20" rows="10" id="bcontent" name="bcontent"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input class="btn btn-primary" type="submit" value="답변하기"> &nbsp;&nbsp;
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				 	<button type="button" class="btn btn-primary" onclick="location.href ='${pageContext.request.contextPath}/board/qna'">목록</button>
+				 </td>
+			</tr>
+		</table>
+	</form>
+</div>    
 		<!-- 문의게시판 - END -->
 		
 		<!-- Main Section -->

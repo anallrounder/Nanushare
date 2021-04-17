@@ -141,8 +141,11 @@ public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 		
 		return mapper.getAttachMentCount(avo);
 	}
-	
-	
-	
+
+	@Override
+	public BoardreplyVO getRecentComment(BoardreplyVO rvo) {
+		return mapper.getRecentComment(rvo);
+	}
+
 
 }

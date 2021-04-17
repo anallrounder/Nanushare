@@ -149,7 +149,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 댓글 삭제 -->
 	<delete id="removeReply">
 		<![CDATA[
-		  delete from BOARDREPLY  where b_index = #{b_index} and r_num= #{r_num}
+		  delete from BOARDREPLY where r_num= #{r_num}
 	   ]]>
 	</delete>
 	
@@ -162,6 +162,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAttachMentCount" resultType="int">
 		<![CDATA[ 
 			select count(b_index) as count from attachment
+		]]>
+	</select>
+	
+	
+	<select id="getRecentComment" resultType="com.share.nanu.VO.BoardreplyVO">
+		<![CDATA[ 
+			select * from(
+				select * from boardreply where b_index = #{b_index} order by r_num desc 
+			) where rownum = 1
 		]]>
 	</select>
 	

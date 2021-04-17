@@ -43,16 +43,27 @@ public interface NanuBoardShowYSService {
 	// 댓글 입력
 	public void insertReply(BoardreplyVO rvo);
 
-	//댓글 불러오기
+	// 로그인한 사람의 댓글 하나 불러오기
 	public BoardreplyVO getComment(BoardreplyVO rvo);
+	
+	//public BoardreplyVO getRecentComment(int r_num);
+	public BoardreplyVO getRecentComment(BoardreplyVO rvo);
+
 	
 	// 댓글 삭제
 	public void remove(BoardreplyVO rvo);
 
-	
+	// 첨부파일 리스트
 	public List<AttachmentVO> getAttachment(AttachmentVO avo);
 
 	public int getAttachMentCount(AttachmentVO avo);
+	
+	// 로그인한 사람의 가장 최신 댓글 불러오기
+	//public BoardreplyVO getRecentComment(int r_num, int b_index);
+
+	
+
+	
 	
 
 }
