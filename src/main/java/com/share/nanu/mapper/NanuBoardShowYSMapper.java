@@ -57,4 +57,7 @@ public interface NanuBoardShowYSMapper {
 
 	public int getAttachMentCount(AttachmentVO avo);
 
+	// 최신댓글 하나 불러오기
+	public BoardreplyVO getRecentComment(BoardreplyVO replyVO);
+
 }
