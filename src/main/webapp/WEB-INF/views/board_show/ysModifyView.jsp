@@ -154,7 +154,7 @@
 			        						shiftEnterMode : CKEDITOR.ENTER_P,
 			        						filebrowserUploadUrl : '<c:url value="${pageContext.request.contextPath}/my/board/shows/imageUpload" />?${_csrf.parameterName}=${_csrf.token}'
 		        					};
-		                            CKEDITOR.replace('editor4', ckeditor_config);
+		                            CKEDITOR.replace('bcontent', ckeditor_config);
 		                        </script>
 		                        
 							   <br><hr>
