@@ -24,6 +24,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -56,30 +58,37 @@ public class NanuBoardShowYSController {
 	 */
 
 	// 인증게시판 페이징 list
-	@GetMapping("/board/shows/list")
+	@RequestMapping("/board/shows/list")
 	public String boardShowPaging(Criteria cri, Model model,AttachmentVO avo ,@AuthenticationPrincipal MemberDetails md)
 			throws Exception {
 		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);		
 		model.addAttribute("list", service.getlist(cri));
-				
+			
+	
+		// 절대경로 -> 상대경로
+		List<AttachmentVO> attach = service.getAttachment(avo);
+		log.info("path : " + attach.get(0).getPath());
+		
+		// 썸네일을 불러올때마다 db 에있는 모든 경로를 매번 바꾸어 주어야 해서 매우 비효율적...
+		for(int i = 0; i< attach.size();i++) {
+			String attachPath = attach.get(i).getPath(); //절대 경로 가지고 오기
+			log.info("attachMent table path : " + attachPath); //attachment table에 저장된 path
+			
+			String RelativePath = new File(attachPath).toURI().getPath(); // 절대경로에 \\ 설정 되어 있다. -> //로 수정
+			log.info("절대경로 -> 상대경로로 치환중 : " + RelativePath);
+			
+			int resources = RelativePath.indexOf("/resources"); // /resources까지 인덱스 번호
+			log.info("/resources 까지의 인덱스 번호 :  "+resources);
+			
+			String ChangeRelativePath = RelativePath.substring(resources);
+			log.info("완성된 상대 경로 : "+ChangeRelativePath);			
+			
+			attach.get(i).setPath(ChangeRelativePath);
+			log.info("저장되어진 경로 : "+attach.get(i).getPath());			
+		}
+		
 		log.info("getAttachMent b_index");
-		model.addAttribute("attachment", service.getAttachment(avo));
-		
-		
-		//절대경로 -> 상대경로 치환
-		String path = service.getAttachment(avo).get(0).getPath();//절대경로
-		log.info("절대경로 : " + path );
-		
-		String text = new File(path).toURI().getPath(); // 절대경로에 설정되어 있는 \\를 //로 변환
-		log.info("절대경로 -> 상대경로 치환중 : "+ text);
-		
-		int resources = text.indexOf("/resources");	
-		log.info("resources 까지 index : "+resources);	
-		
-		String relative = text.substring(resources);//상대결로로 바꿀 기준점
-		log.info("reesource 부터 출력(relative) : "+relative);		
-				
-		
+		model.addAttribute("attachment", attach);						
 		
 		log.info("getAttachMent b_index Coubt");
 		model.addAttribute("attachMentCount", service.getAttachMentCount(avo));
@@ -152,60 +161,79 @@ public class NanuBoardShowYSController {
 	}
 	
 	//ck 에디터
-	@GetMapping("/my/board/shows/imageUpload")
-	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response, 
-			MultipartHttpServletRequest multiFile) throws  Exception{
+	@PostMapping("/my/board/shows/imageUpload")
+	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response,
+
+			@RequestParam MultipartFile upload) throws Exception {
+
 		log.info("로컬이미지 업로드");
-		
-		JsonObject json = new JsonObject();
-		PrintWriter printWriter = null;
 		OutputStream out = null;
-		
-		MultipartFile file = multiFile.getFile("upload");
-		
-		if(file != null) {
-			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
-				if(file.getContentType().toLowerCase().startsWith("resources/attachment/")) {
-					try {
-						String fileName = file.getName();
-						byte[] bytes = file.getBytes();
-						String uploadPath = request.getServletContext().getRealPath("/resources/attachment");
-						File uploadFile = new File(uploadPath);
-						if(!uploadFile.exists()) {
-							uploadFile.mkdirs();
-						}
-						
-						fileName = UUID.randomUUID().toString();
-						uploadPath = uploadPath + "/" + fileName;
-						out = new FileOutputStream(new File(uploadPath));
-						out.write(bytes);
-						
-						printWriter = response.getWriter();
-						response.setContentType("text/html");
-						String fileUrl = request.getContextPath() + "/resources/attachment/" + fileName;
-						
-						json.addProperty("uploaded",1);
-						json.addProperty("fileName",fileName);
-						json.addProperty("url",fileUrl);
-						
-						printWriter.print(json);
-						
-					} catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					}finally {
-						if(out != null) {
-							out.close();
-						}
-						if(printWriter != null) {
-							printWriter.close();
-						}
-					}
+		PrintWriter writer = null;
+		JsonObject json = new JsonObject();
+
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/attachment");
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String datefolder = sdf.format(dt).toString();
+		System.out.println("오늘 날짜 : " + datefolder);
+
+		uploadPath = uploadPath + "\\" + datefolder; // 업로드 경로
+		System.out.println("ck에디터 이미지 업로드 패스 : " + uploadPath);
+
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+
+		String uid = UUID.randomUUID().toString();
+
+		try {
+			String fileName = upload.getOriginalFilename();
+			fileName = uid +"_"+fileName;
+			System.out.println("파일 이름 " + fileName);
+			byte[] bytes = upload.getBytes();
+
+			// String ckEditorUpLoadPath = uploadPath +"\\" + uid + "_" + fileName ;
+
+			File dir = new File(uploadPath);			
+			if (!dir.isDirectory()) {
+				dir.mkdir();
+
+			}			
+
+			writer = response.getWriter();
+			String fileUrl ="/resources/attachment" +"/"+ datefolder + "/" +fileName; 
+			// 업로드시 이미지 정보에 표시 되어 지는 url, 파일이 저장되어 있는 위치, 이름이 같아야 한다!!!!, resources 에서부터 설정하지 않으면 views아래에서 찾는다.
+			
+			upload.transferTo(new File(uploadPath+"\\"+fileName));
+
+			json.addProperty("uploaded", 1);
+			json.addProperty("fileName", fileName);
+			json.addProperty("url", fileUrl);
+
+			writer.println(json);
+
+			// writer.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1,
+			// \"url\":\"" + fileUrl + "\"}");
+
+			writer.flush();
+		} catch (Exception e) { // TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
 				}
+				if (writer != null) {
+					writer.close();
+				}
+			} catch (Exception e) { // TODO:handleexception
+				e.printStackTrace();
+
 			}
+
 		}
-		
-		
+
+		return;
+
 	}
 	
 	
@@ -309,7 +337,7 @@ public class NanuBoardShowYSController {
 				service.fileUpload(attachmentVO);
 			}
 		}
-		return "board_show/yourSupportList";
+		return "/board_show/yourSupportList";
 	}
 
 }
