@@ -2,7 +2,6 @@ package com.share.nanu.controller;
 
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -33,7 +32,6 @@ import com.share.nanu.service.NanuDonationService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
 import net.sf.json.JSONArray;
 
 @Slf4j
@@ -174,6 +172,7 @@ public class DonationImportController {
 			String cancelRequestAmount = request.getParameter("cancel_request_amount"); //결제 취소 금액
 			String reason = impData.get("reason"); //결제 취소 이유
 			
+			//결제 취소할때 결제 금액은 필요없음, 결제 번호와 결제 취소 이유만 필요
 			log.info("결제 번호 : " + merchantUid );
 			log.info("결제 취소 금액 : " + cancelRequestAmount );
 			log.info("결제 취소 이유 : " + reason );

@@ -25,6 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -160,60 +161,79 @@ public class NanuBoardShowYSController {
 	}
 	
 	//ck 에디터
-	@GetMapping("/my/board/shows/imageUpload")
-	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response, 
-			MultipartHttpServletRequest multiFile) throws  Exception{
+	@PostMapping("/my/board/shows/imageUpload")
+	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response,
+
+			@RequestParam MultipartFile upload) throws Exception {
+
 		log.info("로컬이미지 업로드");
-		
-		JsonObject json = new JsonObject();
-		PrintWriter printWriter = null;
 		OutputStream out = null;
-		
-		MultipartFile file = multiFile.getFile("upload");
-		
-		if(file != null) {
-			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
-				if(file.getContentType().toLowerCase().startsWith("resources/attachment/")) {
-					try {
-						String fileName = file.getName();
-						byte[] bytes = file.getBytes();
-						String uploadPath = request.getServletContext().getRealPath("/resources/attachment");
-						File uploadFile = new File(uploadPath);
-						if(!uploadFile.exists()) {
-							uploadFile.mkdirs();
-						}
-						
-						fileName = UUID.randomUUID().toString();
-						uploadPath = uploadPath + "/" + fileName;
-						out = new FileOutputStream(new File(uploadPath));
-						out.write(bytes);
-						
-						printWriter = response.getWriter();
-						response.setContentType("text/html");
-						String fileUrl = request.getContextPath() + "/resources/attachment/" + fileName;
-						
-						json.addProperty("uploaded",1);
-						json.addProperty("fileName",fileName);
-						json.addProperty("url",fileUrl);
-						
-						printWriter.print(json);
-						
-					} catch (Exception e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					}finally {
-						if(out != null) {
-							out.close();
-						}
-						if(printWriter != null) {
-							printWriter.close();
-						}
-					}
+		PrintWriter writer = null;
+		JsonObject json = new JsonObject();
+
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/attachment");
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String datefolder = sdf.format(dt).toString();
+		System.out.println("오늘 날짜 : " + datefolder);
+
+		uploadPath = uploadPath + "\\" + datefolder; // 업로드 경로
+		System.out.println("ck에디터 이미지 업로드 패스 : " + uploadPath);
+
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+
+		String uid = UUID.randomUUID().toString();
+
+		try {
+			String fileName = upload.getOriginalFilename();
+			fileName = uid +"_"+fileName;
+			System.out.println("파일 이름 " + fileName);
+			byte[] bytes = upload.getBytes();
+
+			// String ckEditorUpLoadPath = uploadPath +"\\" + uid + "_" + fileName ;
+
+			File dir = new File(uploadPath);			
+			if (!dir.isDirectory()) {
+				dir.mkdir();
+
+			}			
+
+			writer = response.getWriter();
+			String fileUrl ="/resources/attachment" +"/"+ datefolder + "/" +fileName; 
+			// 업로드시 이미지 정보에 표시 되어 지는 url, 파일이 저장되어 있는 위치, 이름이 같아야 한다!!!!, resources 에서부터 설정하지 않으면 views아래에서 찾는다.
+			
+			upload.transferTo(new File(uploadPath+"\\"+fileName));
+
+			json.addProperty("uploaded", 1);
+			json.addProperty("fileName", fileName);
+			json.addProperty("url", fileUrl);
+
+			writer.println(json);
+
+			// writer.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1,
+			// \"url\":\"" + fileUrl + "\"}");
+
+			writer.flush();
+		} catch (Exception e) { // TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
 				}
+				if (writer != null) {
+					writer.close();
+				}
+			} catch (Exception e) { // TODO:handleexception
+				e.printStackTrace();
+
 			}
+
 		}
-		
-		
+
+		return;
+
 	}
 	
 	
