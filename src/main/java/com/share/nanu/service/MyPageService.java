@@ -56,6 +56,9 @@ public interface MyPageService {
 		
 	//룰렛
 	public void getMypoint2(PointVO pointVO, String member_id);
+	
+
+	public PointVO mypnt(PointVO pointVO);
 		
 	
 

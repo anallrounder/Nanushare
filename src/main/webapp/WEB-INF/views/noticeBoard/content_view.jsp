@@ -5,12 +5,16 @@
 <html>
 <head>
 
-<!-- meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>myprofile_edit</title>
+  <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <meta name="_csrf" content="${_csrf.token}">
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
+ 
+<title>myprofile_content</title>
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -33,35 +37,35 @@
 <!-- <link rel="stylesheet" href="/resources/sidebar/css/styles.css"> -->
 
 <style>
-    .faqHeader {
-        font-size: 27px;
-        margin: 20px;
-    }
+.faqHeader {
+	font-size: 27px;
+	margin: 20px;
+}
 
-    .panel-heading [data-toggle="collapse"]:after {
-        font-family: 'Glyphicons Halflings';
-        content: "\e072"; /* "play" icon */
-        float: right;
-        color: #F58723;
-        font-size: 18px;
-        line-height: 22px;
-        /* rotate "play" icon from > (right arrow) to down arrow */
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-    }
+.panel-heading [data-toggle="collapse"]:after {
+	font-family: 'Glyphicons Halflings';
+	content: "\e072"; /* "play" icon */
+	float: right;
+	color: #F58723;
+	font-size: 18px;
+	line-height: 22px;
+	/* rotate "play" icon from > (right arrow) to down arrow */
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
 
-    .panel-heading [data-toggle="collapse"].collapsed:after {
-        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        transform: rotate(90deg);
-        color: #454444;
-    }
+.panel-heading [data-toggle="collapse"].collapsed:after {
+	/* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+	color: #454444;
+}
 </style>
 
 </head>
@@ -77,79 +81,59 @@
 </style>
 <body>
 	<!-- Header -->
-		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-	
+
 	<!-- Content -->
 	<div class="charity-main-content">
 
 		<!-- Main Section -->
-	<form id="updateForm" action="${pageContext.request.contextPath}/board/notice/${content_view.b_index}" method="post">
-		<table class="table">
-			<input type="hidden" id="b_index" value="${content_view.b_index}">
-			<tr>
-				<td>번호</td>
-				<td>${content_view.b_index}</td>
-			</tr>
-			<tr>
-				<td>조회수</td>
-				<td>${content_view.bhit}</td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" id="member_id" value="${content_view.member_id}"></td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td><input type="text" id="btitle" value="${content_view.btitle}"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea rows="10" id="bcontent">${content_view.bcontent}</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="submit" class="btn btn-primary" value="수정">&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/notice'">목록</button>
-				</td>
-			</tr>
-		</table>
-	</form>		
-		
+		<form id="updateForm"
+			action="${pageContext.request.contextPath}/board/notice/${content_view.b_index}/modify_view"
+			method="get">
+			<table class="table">
+				<input type="hidden" id="b_index" value="${content_view.b_index}">
+				<input type="hidden" id="b_index" value="${content_view.bhit}">
+				<input type="hidden" id="b_index" value="${content_view.member_id}">
+				<input type="hidden" id="b_index" value="${content_view.btitle}">
+				<input type="hidden" id="b_index" value="${content_view.bcontent}">
+				
+				<tr>
+					<td>번호</td>
+					<td>${content_view.b_index}</td>
+				</tr>
+				<tr>
+					<td>조회수</td>
+					<td>${content_view.bhit}</td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td>${content_view.member_id}</td>
+				</tr>
+				<tr>
+					<td>제목</td>
+					<td>${content_view.btitle}</td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					<td>${content_view.bcontent}</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" class="btn btn-primary" 
+						value="수정">&nbsp;&nbsp;
+						<button type="button" class="btn btn-primary"
+							onclick="location.href='delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
+						<button type="button" class="btn btn-primary"
+							onclick="location.href='${pageContext.request.contextPath}/board/notice'">목록</button>
+					</td>
+				</tr>
+			</table>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	                        <input type="hidden" id="_csrf_header" name="_csrf_header" value="${_csrf.headerName}" />
+                        </form>
+
 		<!-- Main Section -->
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- Main Section -->
-
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <input type="button"
-							value="취소" onClick="history.go(-2)"
-							class="charity-simple-blog-btn"> <a
-							href="${pageContext.request.contextPath}/my/mypage"
-							class="charity-simple-blog-btn">저장</a> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
 	</div>
 
 	<!-- Footer -->
@@ -169,10 +153,12 @@
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
-	
-	 <!-- 자주묻는질문 -->
-    <script type="text/javascript" src="/resources/faq/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
-    
+
+	<!-- 자주묻는질문 -->
+	<script type="text/javascript"
+		src="/resources/faq/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 </html>

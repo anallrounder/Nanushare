@@ -109,6 +109,7 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 	public void getDonation(String merchantUid) {
 		ndmapper.getDonation(merchantUid);
 	}
+
 	
 
 }

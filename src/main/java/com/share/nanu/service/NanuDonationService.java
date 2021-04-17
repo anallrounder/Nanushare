@@ -38,9 +38,6 @@ public interface NanuDonationService {
 	public void getDonation(String merchantUid);
 	
 	
-	
-	
-	
 
 	
 }
