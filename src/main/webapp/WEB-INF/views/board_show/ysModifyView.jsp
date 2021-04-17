@@ -1,13 +1,10 @@
-<!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <!doctype html>
 <html lang="ko">
-
+<!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- meta tags -->
     <meta charset="utf-8">
@@ -57,9 +54,9 @@
 			});
 			
 			var form = {
-				b_index : b_index,
-				btitle : btitle,
-				bcontent : bcontent,
+				b_index : board_id,
+				btitle : title,
+				bcontent : text
 			}
 			
 			$.ajax({
@@ -67,19 +64,19 @@
 				url : $(this).attr("action"),
 				cache : false,
 				dataType: 'text',
-				contentType : 'application/json; charset=UTF-8',
+				contentType: 'application/json; charset=utf-8',
 				data : JSON.stringify(form),
 				success : function(result){
 					console.log("result : " + result );
 						if(result == "SUCCESS") {
 							//$(location).attr('href', '${pageContext.request.contextPath}/board/sows/content_view/'+ form.b_index +');
-							window.location.href='${pageContext.request.contextPath}/board/sows/content_view/'+ form.b_index +';
+							window.location.href='${pageContext.request.contextPath}/board/shows/content_view/'+ board_id;
 							
 							swal({
 								title : "글 수정 완료" , 
 								icon : "success" , 
 								button : true 
-							})
+							});
 						}
 				},
 				error : function(e){
@@ -88,7 +85,7 @@
 						title : "오류가 발생했습니다." , 
 						icon : "error" , 
 						button : false 
-					})
+					});
 					console.log(e);
 				}
 			}); // ajax end
@@ -127,7 +124,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-                       <form action="/board/shows/modify/${modify_view.b_index}" id="modify" method="post" >
+                       <form action="/board/shows/modify" id="modify" method="post" >
                        <input type="hidden" id="b_index" name="b_index" value="${modify_view.b_index}" >
 	                       <div class="charity-contact-form">
 	                           <h4><span>Title</span><input type="text" id="btitle" name="btitle" value="${modify_view.btitle}"></h4><hr><br>
