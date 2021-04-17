@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -56,17 +57,18 @@ public class NanuBoardShowYSController {
 	 */
 
 	// 인증게시판 페이징 list
-	@GetMapping("/board/shows/list")
+	@RequestMapping("/board/shows/list")
 	public String boardShowPaging(Criteria cri, Model model,AttachmentVO avo ,@AuthenticationPrincipal MemberDetails md)
 			throws Exception {
 		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);		
 		model.addAttribute("list", service.getlist(cri));
 			
-		
+	
 		// 절대경로 -> 상대경로
 		List<AttachmentVO> attach = service.getAttachment(avo);
 		log.info("path : " + attach.get(0).getPath());
 		
+		// 썸네일을 불러올때마다 db 에있는 모든 경로를 매번 바꾸어 주어야 해서 매우 비효율적...
 		for(int i = 0; i< attach.size();i++) {
 			String attachPath = attach.get(i).getPath(); //절대 경로 가지고 오기
 			log.info("attachMent table path : " + attachPath); //attachment table에 저장된 path
@@ -315,7 +317,7 @@ public class NanuBoardShowYSController {
 				service.fileUpload(attachmentVO);
 			}
 		}
-		return "board_show/yourSupportList";
+		return "/board_show/yourSupportList";
 	}
 
 }

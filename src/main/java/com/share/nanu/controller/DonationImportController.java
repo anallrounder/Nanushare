@@ -1,10 +1,8 @@
 package com.share.nanu.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -15,12 +13,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.fasterxml.jackson.databind.JsonNode;
 import com.share.nanu.VO.DonationVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.NanuDonationService;
@@ -37,14 +34,23 @@ import com.share.nanu.service.NanuDonationService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
 import net.sf.json.JSONArray;
 
 @Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("/my/**")
-public class DonationImportController {
+public class DonationImportController {	
+	
+	//아임포트 아이디
+	private final static String IMP_ID = "4277055072256012"; 
+	//아임포트 시크릿 
+	private final static String IMP_SECRET = "33wvwXxYcfLhMimvBD5fDeteJBRCiPjlSQQpOoo1D9iqsEW3i1iVfL9Zn1BFRV1JMS9AgxBUHUk9ygdQ";
+	//아임포트 토큰 요청 url
+	private final static String IMP_TOKEN = "https://api.iamport.kr/users/getToken";
+	//아임포트 결제 취소 요청 url
+	private final static String IMP_CANCELURL = "https://api.iamport.kr/payments/cancel";
+		
 	
 	
 	@Autowired
@@ -118,8 +124,6 @@ public class DonationImportController {
 		  if((String)(resultMap.get(0).get("status")) == "paid") { //결제 상태가 paid(결제완료)면 카운트
 			  ndservice.updateDntcnt(donavo.getMember_id());
 		  }
-		  
-		  
 		
 	}
 	
@@ -155,43 +159,53 @@ public class DonationImportController {
 		  }
 		 
 		
-	}
-	
+	}	
 	
 	
 	//@CrossOrigin(origins = "http://localhost:8282, withCredentials = 'true' ", maxAge = 3600)
 	@PostMapping("/my/payments/cancel")
-	public ResponseEntity<String> refund(@RequestBody Map<String, String> refund) {
+	public ResponseEntity<String> refund(@RequestBody Map<String, String> impData, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		
 		log.info("클라이언트가 가맹점 서버로 결제취소 요청");
-		System.out.println(refund);
-		System.out.println(refund.get("merchant_uid"));
-		System.out.println(refund.get("cancel_request_amount"));
-		
 		
 		ResponseEntity<String> entity = null;
 		try {
-			ndservice.getDonation(refund.get("merchant_uid"));
+			String merchantUid = impData.get("merchant_uid");// 주문번호
+			String cancelRequestAmount = request.getParameter("cancel_request_amount"); //결제 취소 금액
+			String reason = impData.get("reason"); //결제 취소 이유
+			
+			log.info("결제 번호 : " + merchantUid );
+			log.info("결제 취소 금액 : " + cancelRequestAmount );
+			log.info("결제 취소 이유 : " + reason );
+			
+			
+			JsonNode getToken = ndservice.getImportToken(IMP_ID,IMP_SECRET,IMP_TOKEN);
+			log.info("토큰 가져오기 : "+ getToken);
+			
+			String accessToken = getToken.get("response").get("access_token").asText();
+			log.info("엑세스 토큰 : " +accessToken);
+			
+			JsonNode result = ndservice.cancelPayment(merchantUid,cancelRequestAmount,reason,IMP_CANCELURL,accessToken);
+			log.info("취소 처리 결과 : "+ result);
+			ndservice.updateState(merchantUid);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
 		}
 		
-		return entity;
 		
+		return entity;
 	}
 	
-	
-		
+					
 	@GetMapping("/thank")
 	public ModelAndView thank(ModelAndView mav) { //감사페이지 이동
 		log.info("감사페이지로 이동");
 		mav.setViewName("donationImport/thank");
 		return mav;
 	}
-	
-	
-
+		
 }
