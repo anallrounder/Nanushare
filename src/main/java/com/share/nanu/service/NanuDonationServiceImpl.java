@@ -125,6 +125,7 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 	public void getDonation(String merchantUid) {
 		ndmapper.getDonation(merchantUid);
 	}
+
 	
 	//아임포트 엑세스 토큰 
 	@Override

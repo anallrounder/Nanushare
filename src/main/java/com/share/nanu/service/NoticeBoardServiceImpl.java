@@ -58,77 +58,48 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		mapper.hitUpdate(boardVO);
 	}
 	
-	// 게시글 수정사항 업데이트
-	@Override
-	public void modifyBoard(BoardVO boardVO) {
-		log.info("글 수정 modifyBoard()");
-		mapper.modify(boardVO);
-	}
-	
-	// 인증게시판 글 삭제
-	@Override
-	public void deleteBoard(int b_index) {
-		log.info("글 삭제 deleteBoard()");
-		mapper.delete(b_index);
-	}
-	
-	// 글 입력
+	// 글 작성
 	@Override
 	public void writeBoard(BoardVO boardVO) {
 		log.info("글 입력 writeBoard()");
 		mapper.insert(boardVO);
 	}
-	// 이미지
-	/*
-	 * @Override public void fileUpload(int attach_num, String originname, String
-	 * path) { HashMap<String, Object> vo = new HashMap<>(); vo.put("attach_num",
-	 * attach_num); vo.put("originname", originname); vo.put("path", path);
-	 * mapper.uploadFile(vo); }
-	 */
 	
+	
+
+	
+	// 인증게시판 글 삭제
+		@Override
+		public void deleteBoard(int b_index) {
+			log.info("글 삭제 deleteBoard()");
+			mapper.delete(b_index);
+		}
+
+	//글수정
+		@Override
+		public void writeInsert(BoardVO boardVO) {
+			// TODO Auto-generated method stub
+			//return mapper.modify(b_index);
+			mapper.modify(boardVO);
+		}
+		
+		
 	//게시판 글번호
 	@Override
 	public int getBindex(BoardVO boardVO) {
 		
 		return mapper.getBindex(boardVO);
 	}
+
 	
 	//이미지 첨부
 	@Override
 	public void fileUpload(AttachmentVO attachmentVO) {
-		mapper.uploadFile(attachmentVO);
+		//mapper.uploadFile(attachmentVO);
 	}
-	
-	
-	/* 댓글 */
-	
-	// 댓글 리스트 불러오기
-	@Override
-	public List<BoardreplyVO> listComment(BoardreplyVO rvo) {
-		log.info("댓글 리스트 서비스 listComment()");
-		return mapper.listComment(rvo);
-	}
-	
-	// 댓글 입력
-	@Override
-	public void insertReply(BoardreplyVO rvo) {
-		log.info("댓글 등록 서비스 impl inserted-----------" );
-		mapper.insertReply(rvo);
-		
-	}
-	
-	// 댓글 불러오기
-	@Override
-	public BoardreplyVO getComment(BoardreplyVO rvo) {
-		log.info("새 댓글 불러오기");
-		return mapper.getComment(rvo);	
-	}
-	
-	// 댓글 삭제
-	@Override
-	public void remove(BoardreplyVO rvo) {
-		log.info("댓글 삭제");
-		mapper.removeReply(rvo);
-	}
+
+
+
+
 	
 }
