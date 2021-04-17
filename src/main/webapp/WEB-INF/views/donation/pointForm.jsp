@@ -31,55 +31,57 @@
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 	
 	<!-- point input box 입력시 공백일 경우와 1000포인트 미만일 경우 검증 -->
-	<!-- <script>
-		/* alert띄우는 방법 */
-		/* function dd(bool){
-			if(boll.value.length==0){
-				alert("기부할 포인트를 입력해주세요.")
-				return false;
-			}
-			return true;
-		} */
-		
-		/* 인풋박스 오른쪽에 빨간글씨로 검증 내용 띄우는 방법 */
-	/* 	function dd(bool){
-			var hlep = document.getElementById("one_help");
-			if(bool.value.length==0){
-				help.innerHTML = "기부할 포인트를 입력해주세요.";
-				return false;
-			}
-			else{
-				help.innerHTML="";
-			}
-			return true;
+    <!-- <script>
+	/* alert띄우는 방법 */
+	 function dd(bool){
+		if(boll.value.length==0){
+			alert("기부할 포인트를 입력해주세요.")
+			return false;
+		}
+		return true;
+	} 
+	
+	/* 인풋박스 오른쪽에 빨간글씨로 검증 내용 띄우는 방법 */
+	function dd(bool){
+		var check = document.getElementById("selectDirect");
+		if(bool.value.length==0){
+			check.innerHTML = "기부할 포인트를 입력해주세요.";
+			return false;
 		}
 		
-		/* 4자리 이상 숫자인지 확인 */
-	/* 	function(data){
-			var hlep = document.getElementById("one_help");
-			if(data.value.lenth!=4){
-				help.innerHTML = "1000point부터 기부할 수 있습니다.";
-				return false;
-			}
-		
-			return true; */
-		} */
-	</script> -->
+		return true;
+	}
 	
+	/* 4자리 이상 숫자인지 확인 */
+		function(data){
+		var check = document.getElementById("selectDirect");
+		if(data.value.lenth! = 4){
+			check.innerHTML = "1000point부터 기부할 수 있습니다.";
+			return false;
+		}
+		return true; 
+	} 
+	</script>  -->
+		<!-- validation 경고문구 스타일 -->
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
 	<!-- 셀렉트 박스에서 직접입력 및 인풋박스에 셀렉트한 값이 입력되어 넘어가도록 하는 자바스크립트 코드 -->
 	<script type="text/javascript"> 
 		function changeSelection(){
 			if(document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value == '0'){
-				 document.donatePoint.donaamount.disabled = true;
-				 document.donatePoint.donaamount.value = "";
+				 document.donatePoint.dntpnt.disabled = true;
+				 document.donatePoint.dntpnt.value = "";
 			}
 			if(document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value == '9'){
-				 document.donatePoint.donaamount.disabled = false;
-				 document.donatePoint.donaamount.value = "";
-				 document.donatePoint.donaamount.focus();
+				 document.donatePoint.dntpnt.disabled = false;
+				 document.donatePoint.dntpnt.value = "";
+				 document.donatePoint.dntpnt.focus();
 			} else{
-				 document.donatePoint.donaamount.disabled = true;
-				 document.donatePoint.donaamount.value = document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value;
+				 document.donatePoint.dntpnt.disabled = true;
+				 document.donatePoint.dntpnt.value = document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value;
 			}
 		} 
 		
@@ -187,7 +189,7 @@
                         <div class="widget_title mt-4"><h2>포인트 나눔하기</h2></div>
                        
                         <div class="charity-volunteer-form"> <!-- .charity-volunteer-form > form > ul > li > #text-calendar -->
-						<form name="donatePoint" method="post" action="${pageContext.request.contextPath}/my/donation/money/point/pointAction">
+						<form id="donatePoint" name="donatePoint" method="post" action="${pageContext.request.contextPath}/my/donation/money/point/pointAction">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<ul class="mt-4">
 							<c:forEach var="vo1" items="${memberInfo}"> 
@@ -216,7 +218,7 @@
                                 
                                    <li>
                                        <label>보유 포인트:</label>
-                                       <input type="text" name="totalpnt" value="${vo2.nowpnt}" readonly > 
+                                       <input type="text" name="nowpnt" value="${vo2.nowpnt}" readonly > 
                                        <input type="hidden" name="totalpnt" value="${vo2.totalpnt}" readonly > 
                                    </li>
                                 </c:forEach> 
@@ -224,7 +226,7 @@
 								</sec:authorize>  --%>
                               		<li>
                                    	<label>나눌 포인트:</label>
-                                  		<input type="text" name="donaamount" id="selectDirect" disabled />
+                                  		<input type="text" name="dntpnt" id="selectDirect" disabled />
                                    </li>
                                    <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 										자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
@@ -252,7 +254,7 @@
                                </ul>
                                
                                 <div class="charity-team-contactus mt-3">
-                               		 *포인트는 1000p 이상부터 100p단위로 나눔할 수 있습니다.
+                               		 *포인트는 1000p 이상부터 나눔할 수 있습니다.
 	                                <button type="submit" class="charity-sub-btn" id="btnSend" ><i class="fa fa-save"> 포인트 나눔하기</i></button>
 									<button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/money/main'"><i class="fa fa-arrow-left"> 이전화면으로</i></button>
                            		</div>
@@ -279,6 +281,70 @@
 	                            </div>
 	                        </div>
 	                    </div>
+	                    
+					<!-- jQuery validation CDN form validation : form 태그 아래에 위치해야 작동한다. (왜 인지는 잘 모름) -->
+					<!-- jQuery 플러그인 이기때문에 jQuery가 있어야 한다. -->
+					<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+					<!-- jQuery validation method CDN -->
+					<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+					<!-- jQuery validation CDN form validation end-->
+                         
+                    <!-- form validation - 성일씨 회원가입 validation 코드 참고로 작성함 -->
+                    <script>
+                        $("#donatePoint").validate({
+                            rules: {
+                                /* 각 태그의 규칙을 설정 */
+                                /* 함수 정의 https://offbyone.tistory.com/50 참고주소 */
+                                /* 공식 문서 https://jqueryvalidation.org/ */
+                                /* html의 input태그의 name=""에 설정한 값과 같아야한다.  */
+                                amount: { 					// 수량 select
+                                    required: true			/* 필수인가? true는 yes를 의미 */
+                                },
+                                dntpnt: { 				// 수량input
+                                    required: true,			/* 필수인가? true는 yes를 의미 */
+                                    digits: true,			/* (양수)숫자만 입력가능 -number와 다른점은 소수와 음수일 경우 false 작동함 */
+                                    spaceCheck: true,		/* 내가 추가한 validate 메소드 */
+                                    minlength: 1,			/* 최소글자 수 */
+                                    min: 1					/* 최소 값 */
+                                    //minlength: 4,			/* 최소글자 수*/
+                                    //min: 1000				/* 최소 값 */
+                                }
+                            },
+                            messages: {
+                                /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
+                                amount: { 		// 기부 포인트 select
+                                    required: '기부할 포인트를 선택해 주세요.'
+                                },
+                                dntpnt: { 		// 기부 포인트  input
+                                    required: '기부할 포인트를 입력해 주세요.',
+                                    digits: '숫자만 입력 가능합니다.',
+                                    spaceCheck: '공백없이 입력해주세요.',
+                                    minlength: '1000포인트 부터 기부가 가능합니다.',
+                                    min: '1000포인트 부터 기부가 가능합니다.'
+                                }
+                            },
+                            errorElement: 'span',			/* 디폴트는 lable 태그 lable->span 으로 수정 */
+                            errorClass: 'error',			/* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
+
+                            errorPlacement: function(error, element) {
+                                if (element.is(":text") ) {
+                                    element.parent().after(error);
+                                } else {
+                                    element.after(error);
+                                }
+                            }
+                        });
+
+                        /* 공백 체크 함수 추가함 */
+                        $.validator.addMethod("spaceCheck" /* validate명 */ , function(value, element) {
+                            //검사하는 name태그의 value 중 공백이 없으면 true, 있으면 false리턴
+                            //false 리턴 시 messages에 선언된 내용들 띄워줌
+                            return $(element).val().indexOf(" ") = -1 ? true : false;
+                        });
+                        //출처: https://devhong.tistory.com/3 [주니어를 탈출하고 싶은 개발자의 블로그]
+                    </script> 
+					<!-- form validation end -->
+	                    
 	                    
 	                    <!--// 연락처 이메일 \\-->
                         <div class="charity-team-contactus">
