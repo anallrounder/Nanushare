@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -249,6 +250,26 @@ public class NanuBoardShowReplyController {
 		// 삭제 처리 HTTP 상태 메시지 리턴
 		return entity;
 	}
+	
+	
+	//댓글 수정
+	@PutMapping("board/shows/replyModify")
+	public ResponseEntity<String> relpyModify(ModelAndView mav, @RequestBody BoardreplyVO brvo) {
+		log.info("댓글 수정");
+		log.info("brvo : " + brvo);
+		ResponseEntity<String> entity = null;
+		try {
+			service.modifyReply(brvo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	
 
 	// 댓글 수정 창 보기
 	/*

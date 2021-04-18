@@ -70,5 +70,8 @@ public interface NanuBoardShowYSMapper {
 
 	//attachment에서 인증게시판 글번호에 해당하는 데이터 삭제
 	public void deleteAttachment(int b_index);
+	
+	//댓글 수정
+	public void modifyReply(BoardreplyVO brvo);
 
 }

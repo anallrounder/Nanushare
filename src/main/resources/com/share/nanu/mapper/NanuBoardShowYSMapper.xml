@@ -198,6 +198,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
+	<!-- 댓글 수정 updateReply -->
+    <update id="modifyReply">
+      <![CDATA[
+          update boardreply set rcontent = #{rcontent} where r_num = #{r_num}
+      ]]>
+   </update> 
+	
 </mapper>
 
 

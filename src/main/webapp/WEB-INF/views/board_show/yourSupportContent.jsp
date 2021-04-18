@@ -5,7 +5,7 @@
 <html lang="ko">
 
 <head>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,42 +35,103 @@
     <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
+	
 	<script type="text/javascript">
 		
 	/* 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드  */
 	/* This script and many more are available free online at
 	The JavaScript Source!! http://javascript.internet.com
 	Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
-
-	function autoDate () {
 		
-		var tDay = new Date();
-		var tMonth = tDay.getMonth()+1;
-		var tDate = tDay.getDate();
-		if ( tMonth < 10) tMonth = "0"+tMonth;
-		if ( tDate < 10) tDate = "0"+tDate;
-		document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
-		//document.getElementById("rdate").value = tDay.getFullYear()+"/"+tMonth+"/"+tDate;
-	}
-	
-	// Multiple onload function created by: Simon Willison
-	// http://simonwillison.net/2004/May/26/addLoadEvent/
-	function addLoadEvent(func) {
-		var oldonload = window.onload;
-		if (typeof window.onload != 'function') {
-			window.onload = func;
-		} else {
-			window.onload = function() {
-				if (oldonload) {
-					oldonload();
+		 	function answerEdit(bIndex,rid,rcontent,rNum) {
+				console.log(bIndex);
+				console.log(rid);
+				console.log(rcontent);
+				console.log(rNum);
+				
+				// csrf
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+				$(document).ajaxSend(function(e, xhr, options) {
+					xhr.setRequestHeader(header, token);
+				});
+				
+		 			
+		 			$('#modify').html( //1번
+		 					"<textarea id='edit_acontent'  style='width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
+		 					/* +"<style>#edit_acontent {width:640px; height:80px; resize:none;} </style>" */
+		 				);
+		 				
+		 				$('#abt').html( //2번
+		 					"<a href='javascript:void(0);'  onclick='answerEditSave("+bIndex+","+rNum+")' id='btnEdit'>완료</a> "
+		 					+"<a href='javascript:void(0);' onclick='location.href='qnaDetail.do?idx="+rNum+"' id='btnCancel'>취소</a>"
+		 				);
+		 			};
+
+		 			function answerEditSave(bIndex, rNum){ //3번
+		 				var rcontent = $("#edit_acontent").val();
+		 				//location.href='answerEdit.do?idx='+rid+"&acontent="+rcontent; //(4번)
+		 				var bindex = bIndex;
+		 				var form = {
+		 						rcontent : rcontent,
+		 						r_num : rNum
+		 				}
+		 				
+		 				$.ajax({
+		 					 type: 'put',
+		                     url: '${pageContext.request.contextPath}/board/shows/replyModify',
+		                     cache : false,
+		     				 dataType: 'text',
+		     				 data : JSON.stringify(form),
+		     				 contentType: 'application/json; charset=utf-8',
+		     				 success : function(result){
+		     					 if(result == "SUCCESS"){
+		     					
+		     						$(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/" +bindex);
+			     					
+		     					 }
+		     					
+		     				 },
+		     				 error : function (e) {
+								console.log(e);
+							 }
+		 					
+		 				});
+		 			};
+		 		
+		 	
+		 	
+		 	
+		 function autoDate () {
+				
+				var tDay = new Date();
+				var tMonth = tDay.getMonth()+1;
+				var tDate = tDay.getDate();
+				if ( tMonth < 10) tMonth = "0"+tMonth;
+				if ( tDate < 10) tDate = "0"+tDate;
+				document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
+				//document.getElementById("rdate").value = tDay.getFullYear()+"/"+tMonth+"/"+tDate;
+			};
+			
+			// Multiple onload function created by: Simon Willison
+			// http://simonwillison.net/2004/May/26/addLoadEvent/
+			function addLoadEvent(func) {
+				var oldonload = window.onload;
+				if (typeof window.onload != 'function') {
+					window.onload = func;
+				} else {
+					window.onload = function() {
+						if (oldonload) {
+							oldonload();
+						}
+						func();
+					}
 				}
-				func();
-			}
-		}
-	}
-	addLoadEvent(function() {
-		autoDate();
-	}); 
+			};
+			addLoadEvent(function() {
+				autoDate();
+			}); 
+	
 	</script>
 	
 </head>
@@ -196,17 +257,22 @@
 	                                        <div class="text-holder">
 	                                            <h6><c:out value="${vo.rid}"/></h6><!-- 작성자 -->
 	                                            <div><c:out value="${vo.rdate}"/></div><!-- 작성일 -->
-	                                            <p><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->
+	                                            <p id="modify" ><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->	                                            
+	                                            
 	                                            
 	                                            <sec:authentication property="principal" var="pinfo" />
 												<sec:authorize access="isAuthenticated()">
 												<c:if test="${pinfo.username eq vo.rid}"> 
-		                                            <div class="charity-blog-social">
-			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}" ><b>수정하기</b></a> &nbsp;
+		                                            <div class="charity-blog-social" id="abt" >
+		                                            	
+		                                            <!-- href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}"  -->
+			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')"> <b>수정하기</b></a> 
 		                                    		   <%--  onClick="updateView('${vo.b_index}','${vo.rid}','${vo.rdate}','${vo.rcontent}')" --%>
 		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" ><b>삭제하기</b></a>
 		                                    		    <%--  onClick="del('${vo.b_index}','${vo.r_num}')" --%>
+		                                    		    
 	                                    		    </div>
+	                                    		    
                                     		    </c:if>
                                     		    </sec:authorize>
 	                                            <br> 
@@ -221,7 +287,7 @@
                             <!--// comments \\-->
                             
                         </div>
-                        
+                       
                         <!--// 댓글 작성 영역 comment-respond \\-->
                         <div class="widget_title"><h2>댓글을 남겨주세요.</h2></div><!-- Leave a Comment -->
                         <div class="comment-respond">

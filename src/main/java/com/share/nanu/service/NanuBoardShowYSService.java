@@ -70,6 +70,12 @@ public interface NanuBoardShowYSService {
 	//attachment에서 인증게시판 글번호에 해당하는 데이터 삭제
 	public void deleteAttachment(int b_index);
 	
+	//댓글 수정
+	public void modifyReply(BoardreplyVO brvo);
+	
+	
+
+	
 	// 로그인한 사람의 가장 최신 댓글 불러오기
 	//public BoardreplyVO getRecentComment(int r_num, int b_index);
 

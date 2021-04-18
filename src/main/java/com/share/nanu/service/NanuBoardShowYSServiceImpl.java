@@ -166,6 +166,11 @@ public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 	public void deleteAttachment(int b_index) {
 		mapper.deleteAttachment(b_index);
 	}
+	
+	@Override //댓글 수정
+	public void modifyReply(BoardreplyVO brvo) {
+		mapper.modifyReply(brvo);
+	}
 
 
 }
