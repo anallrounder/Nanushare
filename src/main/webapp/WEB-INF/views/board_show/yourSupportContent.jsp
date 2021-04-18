@@ -133,7 +133,7 @@
 										<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq content_view.member_id}"> 
                                         	<li><a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
-                                        	<li><a id="del_btn" href="delete?b_index=${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
+                                        	<li><a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
                                         </c:if>
                                         </sec:authorize>
                                         <!-- onClick="bcontent_del();" -->
