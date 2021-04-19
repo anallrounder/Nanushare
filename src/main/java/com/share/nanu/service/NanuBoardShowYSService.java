@@ -47,7 +47,6 @@ public interface NanuBoardShowYSService {
 	// 로그인한 사람의 댓글 하나 불러오기
 	public BoardreplyVO getComment(BoardreplyVO rvo);
 	
-	//public BoardreplyVO getRecentComment(int r_num);
 	public BoardreplyVO getRecentComment(BoardreplyVO rvo);
 
 	// 댓글 삭제

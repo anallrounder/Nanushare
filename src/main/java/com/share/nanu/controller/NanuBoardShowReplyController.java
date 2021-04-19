@@ -51,7 +51,10 @@ public class NanuBoardShowReplyController {
 
 		mav.addObject("listComment", service.listComment(rvo)); // 게시판글의 댓글 리스트 불러오기
 		log.info("컨트롤러 댓글 리스트 테스트 service.listComment(rvo)= " + rvo); // 확인
-
+		
+		mav.addObject("replyCount", service.replyCount(rvo)); //댓글 수 카운트
+		log.info("컨트롤러 댓글 수 확인 service.replyCount(rvo) = " + service.replyCount(rvo)); //확인
+		
 		// mav.addObject("getComment", service.getComment(rvo)); // 로그인한사람의 댓글 확인
 
 		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
