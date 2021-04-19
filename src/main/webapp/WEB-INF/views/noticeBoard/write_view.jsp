@@ -5,11 +5,15 @@
 <html>
 <head>
 
-<!-- meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <meta name="_csrf" content="${_csrf.token}">
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
+    
 <title>myprofile_edit</title>
 
 <!-- CSS -->
@@ -46,45 +50,47 @@
 </style>
 <body>
 	<!-- Header -->
-		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-	
+
 	<!-- Content -->
 	<div class="charity-main-content">
 
 		<!-- Main Section -->
-	<div class="container">
-   <form id="writeForm" action="${pageContext.request.contextPath}/board/notice/write" method="post">
-		<table class="table">
-			<tr>
-				<td>이름</td>
-				<td><input type="text" id="member_id" name="member_id" size="50"></td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td><input type="text" id="btitle" name="btitle" size="50"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea cols="20" rows="10" id="bcontent" name="bcontent"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input class="btn btn-primary" type="submit" value="입력"> &nbsp;&nbsp;
-				 	<button type="button" class="btn btn-primary" onclick="location.href = '${pageContext.request.contextPath}/board/notice'">목록</button>
-				 </td>
-			</tr>
-		</table>
-	</form>
-		
-		<!-- Main Section -->
-					</div>
-				</div>
+		<div class="container">
+			<form action="${pageContext.request.contextPath}/board/notice/write" method="post">
+				<table class="table">
+					 <tr>
+						<td>이름</td>
+						<td><sec:authentication property="principal.member.name" /></td>
+					</tr>
+					<tr>
+						<td>제목</td>
+						<td><input type="text" id="btitle" name="btitle" size="50"></td>
+					</tr>
+				
+					<tr>
+						<td>내용</td>
+						<td><textarea cols="20" rows="10" id="bcontent"
+								name="bcontent"></textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input class="btn btn-primary" type="submit"
+							value="입력"> &nbsp;&nbsp;
+							<button type="button" class="btn btn-primary"
+								onclick="location.href = '${pageContext.request.contextPath}/board/notice'">목록</button>
+						</td>
+					</tr>
+				</table>
+				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	                        <input type="hidden" id="_csrf_header" name="_csrf_header" value="${_csrf.headerName}" />
+                        </form>
 
-			</div>
+			<!-- Main Section -->
 		</div>
 	</div>
+
 	<!-- Main Section -->
 
 	<!-- Search Modal -->
@@ -129,10 +135,12 @@
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
-	
-	 <!-- 자주묻는질문 -->
-    <script type="text/javascript" src="/resources/faq/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
-    
+
+	<!-- 자주묻는질문 -->
+	<script type="text/javascript"
+		src="/resources/faq/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 </html>

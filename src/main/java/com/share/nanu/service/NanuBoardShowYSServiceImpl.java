@@ -141,8 +141,36 @@ public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
 		
 		return mapper.getAttachMentCount(avo);
 	}
+
+	@Override
+	public BoardreplyVO getRecentComment(BoardreplyVO rvo) {
+		return mapper.getRecentComment(rvo);
+	}
+
+	@Override
+	public String getAttachmentBindex(int b_index) { //attachment 에서 삭제할 이미지 경로 가져오기
+		return mapper.getAttachmentBindex(b_index);
+	}
+
+	@Override //인증게시판 글 삭제시 댓글 전부 삭제
+	public void deleteReply(int b_index) {
+		mapper.deleteReply(b_index);
+	}
+
+	@Override //인증글 삭제
+	public void deleteCertificationBoard(int b_index) {
+		mapper.deleteCertificationBoard(b_index);
+	}
+
+	@Override //attachment에서 인증게시판 글번호에 해당하는 데이터 삭제
+	public void deleteAttachment(int b_index) {
+		mapper.deleteAttachment(b_index);
+	}
 	
-	
-	
+	@Override //댓글 수정
+	public void modifyReply(BoardreplyVO brvo) {
+		mapper.modifyReply(brvo);
+	}
+
 
 }

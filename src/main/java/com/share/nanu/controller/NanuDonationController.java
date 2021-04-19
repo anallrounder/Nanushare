@@ -113,10 +113,13 @@ public class NanuDonationController {
 	
 	// 포인트 전송 -> 데이터베이스 저장
 	@PostMapping("/my/donation/money/point/pointAction")
-	public String pointAction(MemberPointVO mpvo, MemberVO mvo, PointVO pvo, Model model) throws Exception {
+	public String pointAction(MemberPointVO mpvo, MemberVO mvo, PointVO pvo, Model model, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.debug("controller -- pointAction -- 입력 값 DB로!!");
 		service.countPointDonation(mvo); //멤버 테이블에 물품기부 횟수 카운트 +1
 		service.donatePoint(pvo);  // 포인트 테이블에 기부정보 입력
+		
+		//service.getMypoint(pvo, md.getUsername());
+		
 		//model.addAttribute("memberInfo", service.getMemberPoint(mpvo));->이 정보는 ajax 불러와야할것같다.. 이건 일단 검색좀 더 해보자.
 		return "donation/thanks"; // 감사 페이지로 연결 예정
 	}

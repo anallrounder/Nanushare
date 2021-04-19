@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="insertCardDona" resultType="com.share.nanu.VO.DonationVO">
 		<![CDATA[ 
 			insert into donation(dnt_paynum, member_id, dntprice, dntdate, dntstat, pg, paymethod)
-			values(#{dnt_paynum}, #{member_id},  #{dntprice},  #{dntdate}, to_char(#{dntstat},'yyyy-mm-dd hh24:mi:ss'), #{pg}, #{paymethod})
+			values(#{dnt_paynum}, #{member_id},  #{dntprice},  #{dntdate}, #{dntstat}, #{pg}, #{paymethod})
 		]]>
 	</select> 
 	
@@ -108,6 +108,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from donation where dnt_paynum=#{merchantUid}
 		]]>
 	</select>  
+	
+	<update id="updateState" >
+		<![CDATA[ 
+			UPDATE donation SET dntstat = 'cancelled' where dnt_paynum = #{merchantUid}
+		]]>
+	</update>  
 
 	
 </mapper>

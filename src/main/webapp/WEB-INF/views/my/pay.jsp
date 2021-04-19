@@ -75,7 +75,7 @@
   
 	<script type="text/javascript"> 
 	
-	
+		//결제취소 
 		function cancle(paynum,price) {
 			
 			var token = $("meta[name='_csrf']").attr("content");
@@ -92,50 +92,26 @@
 		        type: "POST",
 		        contentType: "application/json",		       
 		        data: JSON.stringify({
+		        	
 		          merchant_uid: paynum, // 주문번호
 		          cancel_request_amount: price, // 환불금액
 		          reason: "후원금 결제 취소" // 환불사유
 		         
 		        }),
 		        dataType: "text", //데이터 타입을 제이슨 으로 지정시 statusText: "parsererror" 발생
-		        success : function(result) {
+		        success : function(result) {		        	
 		        	console.log(result);
-					if(result == "SUCCESS"){
-						console.log("성공");
-						
-						//https://api.iamport.kr/users/getToken
-						$.ajax({
-							url : "https://api.iamport.kr/users/getToken",
-							type: "POST",
-							contentType: "application/json",
-							dataType: 'json',							
-							//jsonpCallback: "callback",
-							data: { //키들은 개발자 모드에서 확인할 수 있기때문에 서버단에서 처리해줘야한다. 수정해야할 부분
-							      imp_key: "4277055072256012", // REST API키
-							      imp_secret: "33wvwXxYcfLhMimvBD5fDeteJBRCiPjlSQQpOoo1D9iqsEW3i1iVfL9Zn1BFRV1JMS9AgxBUHUk9ygdQ" // REST API Secret
-							    },
-							success : function(data) {
-								console.log(data);
-								console.log("토큰");
-								
-								
-							},
-							error : function(e){
-								console.log(e);
-								console.log("토큰 실패");
-								
-							}
-							
-						});//2. ajax end
-						
-						
-					} //if end
-				},//1. success end
+					if(result =="SUCCESS"){
+						alert("결제가 취소 되었습니다.");
+						$(location).attr('href', "${pageContext.request.contextPath}/my/pay");
+					}
+					
+				},// success end
 				error : function(e) {
 					console.log(e);
 					console.log("실패");
 				}
-		      }); //1. ajax end			
+		      }); // ajax end			
 		}//cancle function end
 	 
 	</script>
@@ -148,9 +124,6 @@
 
 
 </head>
-
-
-
 
 <body>
 

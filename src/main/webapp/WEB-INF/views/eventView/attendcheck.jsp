@@ -145,11 +145,21 @@
    	var member_id = $("#member_id").val();
    	
    	$('#canvas').click(function(){
+  /*  		function update(a,c){
+   			var totalpnt = a;
+   		var nowpnt = c;
+   		console.log(a); 
+console.log(c);
+   		} */
+   		var totalpnt = $('#totalpnt').val();
+   		var nowpnt = $('#nowpnt').val();
    		
    		var random = 0;
 	   	var clicked = 0;
 	   	var prtpnt = 0;
    	  
+   	   	console.log("totalpnt = " + totalpnt);
+   	   	console.log("nowpnt = "+nowpnt);
    	   	
     	if(clicked <= 0){
     		random += Math.random()*360;
@@ -174,7 +184,10 @@
     	
     	var memberPoint = {   			
     			"member_id" : member_id,		 
-    			"prtpnt" : prtpnt    			
+    			"prtpnt" : prtpnt,
+    			"totalpnt" : totalpnt,
+    			"nowpnt" : nowpnt
+    			
     		};
     	
     	//참여 중복 확인 및 포인트 적립
@@ -268,11 +281,16 @@
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								매일 나눔 룰렛 돌리고 포인트를 적립하세요!</h1>
 						</div>
-
+						
+						<!-- 전에있던 totalpnt를 넘겨주기 위해 -->
+				<input type="hidden" id="totalpnt" name="totalpnt" value="${pointvo.totalpnt}">
+				<input type="hidden" id="nowpnt" name="nowpnt" value="${pointvo.nowpnt}">
+				
 
 						<div id="판">
 							<div id="핀"></div>
-							<canvas id="canvas" width="1000px" height="1000px"></canvas>
+							<canvas id="canvas" width="1000px" height="1000px" ></canvas>
+							
 						</div>
 						<!-- <button type="button" class="btn btn-success">룰렛 돌리기</button> -->
 					</div>
@@ -280,7 +298,7 @@
 			</div>
 		</div>
 			<button id='button' type="button" onClick="location.href='/event/check3'">출석하기</button>
-						
+				
 		<!-- Main Section -->
 	</div>
 	<!-- Content -->
@@ -290,27 +308,7 @@
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
+	
 
 	<!-- jQuery -->
 	<script src="/resources/charity/script/jquery.js"></script>
@@ -328,142 +326,3 @@
 
 </body>
 </html>
-
-<!-- 		$(document).ready(function(){
-		    				  $('#calendar').fullCalendar({
-		    				    header: {
-		    				      right: 'custom2 prevYear,prev,next,nextYear'
-		    				    },   
-		    			        // 출석체크를 위한 버튼 생성 --필요없음. canvas의 id로 가져와봄
-		    				   /* customButtons: { */
-		    				    	 #canvas:{ 
-		    				        custom2: {
-		    				         /*  text: '출석체크하기', */
-		    				         /*  id: 'check', */
-		    				          click: function() {
-		    				
-		    				        	  url: "/event/check/mypoint",
-		    				        	  type: "PUT",
-		    				        	  data : {
-		    				        		  prtpnt, prtpnt},
-		    				        	  }
-		    				        	  dataType: "text",
-		    				        	  success: function (date) {
-		    				        		 //출석이라고 뿌려주기..
-			    				        	  }
-		    				        		  
-		    				        	 }
-		    				        }
-		    				        	/* $(".fc-custom2-button").prop('disabled', true);
-		    				        		  $(".fc-custom2-button").html('출석완료');*/
-		    				        }
-		    				    },
-		    			       // 달력 정보 가져오기 
-		    			     
-		    				    eventSources: [{
-		    				    		  $.ajax({
-		    							// ajax 통신으로 달력 정보 가져오기 
-		    			                // GET "/users/attendances" -> {dateList:[ date: "2016-03-21", ... ]}
-		    				    		url: '/event/check',
-		    				    		type: 'GET',
-		    				    		dataType: "JSON",
-		    				    		success: function (data) { 
-		    				    			//출석이라고 뿌려줘야함
-		    				    		},
-		    				    		error: function() {
-		    				    			alert('there was an error while fetching events!');
-		    				    		},
-		    				    		color: 'purple',   
-		    				    		textColor: 'white' 
-		    				    	});//ajax
-		    				    	
-		    				    	}]
-		    				    	
-		    				  }); 
-		    			 }); -->
-
-
-
-
-
-
-<!-- <script type="text/javascript">  
-document.addEventListener('DOMContentLoaded', function() {
-	  var calendarEl = document.getElementById('calendar');
-
-	  var calendar = new FullCalendar.Calendar(calendarEl, {
-		 initialView: 'dayGridMonth', //무조건 initialView로 써줘야함
-	    header: {
-		      right: 'custom2 prevYear,prev,next,nextYear'
-		    },
-	    footer: {
-	      left: 'custom2',
-	      center: '',
-	      right: 'prev,next'
-	    },
-	    customButtons: {
-	    
-	      custom2: {
-	        text: 'custom 2',
-	        click: function() {
-	          alert('clicked custom button 2!');
-	        },
-	         /*  eventSources: [
-
-			    				        // your event source
-			    				        {
-			    				          events: [ // put the array in the `events` property
-					    				            {
-				    				              title  : '출석',
-				    				              start  : '2021-04-14'
-				    				         }
-			    				          ],
-			    				          color: 'black',     // an option!
-			    				          textColor: 'yellow' // an option!
-			    				        }
-
-			    				        // any other event sources...
-
-			    				      ] */
-
-	        
-	      }
-	    } 
-	  });
-
-	  calendar.render();
-	});    
-		    				    /* eventSources: [{
-		    				    		  $.ajax({
-		    				    				url: '/event/check',
-		  		    				    		type: 'GET',
-		  		    				    		data : {
-		  		    				    			
-		  		    				    			 title : 'chulcheck',
-		    				    					  dateList : .getDate
-		  		    				    			
-		  		    				    		}
-		  		    				    		dataType: "JSON",
-		  		    				    		success: function (data) { 
-		    				    					 
-		    				    				  }
-		    							// ajax 통신으로 달력 정보 가져오기 
-		    			                // GET "/users/attendances" -> {dateList:[ date: "2016-03-21", ... ]}
-		    				    		
-		    				    			//출석이라고 뿌려줘야함
-		    				    		},
-		    				    		error: function() {
-		    				    			alert('there was an error while fetching events!');
-		    				    		},
-		    				    		color: 'purple',   
-		    				    		textColor: 'white' 
-		    				    	});//ajax
-		    				    	
-		    				    	}] */
-		    				    	
-		    				 // }); 
-		    			// });
-
-
-
-</script> -->
