@@ -165,36 +165,46 @@
 					<div class="col-md-9">
 						<div class="charity-rich-editor">
                             
+                            <!-- 글 제목 -->
 							<h1>${content_view.btitle}</h1><!-- <hr> -->
+							
+							<!-- 대표 이미지(썸네일 등록한거는) 컨텐트 뷰 에서는 사용 안하기로 -->
 							<%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
+							
+							<!-- 넘버링, 계산들 -->
 							<div class="charity-blog-options">
                                 <ul style="float:right">
-                                	<li><i class="fa fa-folder-open"></i>  No. ${content_view.b_index}</li> 
-                                    <li style="text-indent: 0.3em"><i class="fa fa-calendar"></i><time datetime="2008-02-14 20:00">  ${content_view.bdate}</time></li>
-                                    <li style="text-indent: 0.3em"><i class="fa fa-comments"></i><a href="404.html">  23 comments</a></li>
-                                    <li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 ${content_view.bhit}</li>
+                                	<li><i class="fa fa-user"></i>  ${content_view.member_id} &nbsp;  </li> <!-- 작성자 -->
+                                	<li><i class="fa fa-folder-open"></i>  No. ${content_view.b_index} </li> <!-- 게시판 글번호 -->
+                                    <li style="text-indent: 0.3em"><i class="fa fa-calendar"></i>  ${content_view.bdate}</li> <!-- 작성일 -->
+                                    <li style="text-indent: 0.3em"><i class="fa fa-comments"></i> 댓글수 ${replyCount} </li> <!-- 댓글수 -->
+                                    													<!-- 댓글 수 카운트는 아직 새로고침 해야 반영된다. -->
+                                    <li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 ${content_view.bhit}</li> <!-- 글 조회수 -->
                                 </ul>
                             </div>
+                            
+                            <!-- 글 내용 -->
                             <p>${content_view.bcontent}</p><br>
                            
 							<hr>
                             
+                            <!-- 버튼 -->
                             <div class="charity-post-tags">
-                                <div class="charity-tags">
+                                <!-- <div class="charity-tags">
                                     <span>Tags:</span>
                                     <a href="#">charity </a>
                                     <a href="#">/ donation</a>
                                     <a href="#"> / needy</a>
-                                </div>
+                                </div> -->
                                 <div class="charity-blog-social">
                                  	<span></span>
                                     <ul>
-                                    	<li><a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt"> 목록</a></li>
+                                    	<li><a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt"> 게시글 목록보기</a></li>
                                     	<sec:authentication property="principal" var="pinfo" />
 										<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq content_view.member_id}"> 
                                         	<li><a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
-                                        	<li><a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
+                                        	<li><a id="del_btn" href="delete?b_index=${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
                                         </c:if>
                                         </sec:authorize>
                                         <!-- onClick="bcontent_del();" -->
@@ -203,6 +213,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 버튼 -->
                         
                         
                         <!-- 이전, 다음글 보기 -->

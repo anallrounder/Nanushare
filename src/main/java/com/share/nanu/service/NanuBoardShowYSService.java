@@ -39,6 +39,7 @@ public interface NanuBoardShowYSService {
 	
 	// 댓글 리스트 불러오기
 	public List<BoardreplyVO> listComment(BoardreplyVO rvo);
+	public int replyCount(BoardreplyVO rvo); // 댓글 수 count
 	
 	// 댓글 입력
 	public void insertReply(BoardreplyVO rvo);
@@ -49,13 +50,13 @@ public interface NanuBoardShowYSService {
 	//public BoardreplyVO getRecentComment(int r_num);
 	public BoardreplyVO getRecentComment(BoardreplyVO rvo);
 
-	
 	// 댓글 삭제
 	public void remove(BoardreplyVO rvo);
 
 	// 첨부파일 리스트
 	public List<AttachmentVO> getAttachment(AttachmentVO avo);
-
+	
+	// 첨부파일 갯수 카운트
 	public int getAttachMentCount(AttachmentVO avo);
 
 	//attachment 에서 삭제할 이미지 경로 가져오기
@@ -76,8 +77,7 @@ public interface NanuBoardShowYSService {
 	
 
 	
-	// 로그인한 사람의 가장 최신 댓글 불러오기
-	//public BoardreplyVO getRecentComment(int r_num, int b_index);
+	
 
 	
 
