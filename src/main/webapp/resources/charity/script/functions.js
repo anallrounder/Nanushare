@@ -171,6 +171,14 @@ jQuery(function ($) {
             each_li.append("<span class='has-subnav'><i class='fa fa-angle-down'></i></span>");
         }
     });
+    
+    
+      $(".float-right a").each(function () {
+        var each_a = $(this);
+        if (each_a.find('charity-strip-btn').length > 0) {
+            each_a.append("<span class='has-subnav'><i class='fa fa-angle-down'></i></span>");
+        }
+    });
     var $menuTrigger = $('.has-subnav');
 
     $menulink.on("click", function (e) {

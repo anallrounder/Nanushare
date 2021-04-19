@@ -64,10 +64,17 @@
             <div class="float-right">
 				<!-- all 버튼 header -->
 				<sec:authorize access="isAnonymous()"> 
-					<a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" style="padding: 13px 0px 0px 24px; ">로그인</a>
-					<a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor" style="padding: 13px 10px 0px 17px; ">회원가입</a>
-				</sec:authorize>																																
-				
+					<div class="all-header">
+					<a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" >로그인</a>
+					
+					<form id="signUp">
+						<a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor">회원가입</a>
+					</form>
+					
+					</div>
+					
+				</sec:authorize>	
+																																			
 				<!-- 로그인됐을때 버튼 header -->
 				<div class="user-header">
 				<sec:authorize access="hasRole('USER')">
@@ -75,11 +82,11 @@
 	                   <span>${username}님</span>
 	                </c:forEach> 
 					
-					<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor" style="padding: 12px 0px 0px 10px;">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor">마이페이지</a>
 
 					<form action="/member/logout" method="post" id="mlogout">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-						<a href="#" class="charity-strip-btn charity-bgcolor" onclick="document.getElementById('mlogout').submit();" style="padding: 13px 0px 0px 15px;">로그아웃</a>
+						<a href="#" class="charity-strip-btn charity-bgcolor" onclick="document.getElementById('mlogout').submit();">로그아웃</a>
 					</form>
 				</sec:authorize>
 				</div>
@@ -91,10 +98,10 @@
                     	<span>${username}님</span>
                     </c:forEach>
                    
-					<a href="${pageContext.request.contextPath}/admin/stat" class="charity-strip-btn charity-bgcolor" style="padding: 12px 0px 0px 3px;">관리자페이지</a>
+					<a href="${pageContext.request.contextPath}/admin/stat" class="charity-strip-btn charity-bgcolor">관리자페이지</a>
 					<form action="/member/logout" method="post" id="mlogout">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-						<a href="#" class="charity-strip-btn charity-bgcolor" onclick="document.getElementById('mlogout').submit();" style="padding: 13px 0px 0px 15px;">로그아웃</a>
+						<a href="#" class="charity-strip-btn charity-bgcolor" onclick="document.getElementById('mlogout').submit();">로그아웃</a>
 					</form>
 					
 				</sec:authorize>
