@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,11 +73,21 @@ public class NanuMainController {
 		return mov;
 	}
 	
+	//지도윈포윈도우 처음으로 call하는 함수
 	@RequestMapping("/vm/info")
 	@ResponseBody
 	public Map<String, Object> vmInfos() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", mainService.getvm());
+		return map; 
+	}
+	
+	//실시간으로 DB 현황 call하는 함수
+	@RequestMapping("/vm/item/info")
+	@ResponseBody
+	public Map<String, Object> vmItemInfos(@RequestParam("vmNum") String vmNum) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("iteminfo", mainService.getVmItem(vmNum));
 		return map; 
 	}
 	

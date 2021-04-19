@@ -149,7 +149,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 댓글 삭제 -->
 	<delete id="removeReply">
 		<![CDATA[
-		  delete from BOARDREPLY  where b_index = #{b_index} and r_num= #{r_num}
+		  delete from BOARDREPLY where r_num= #{r_num}
 	   ]]>
 	</delete>
 	
@@ -164,6 +164,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select count(b_index) as count from attachment
 		]]>
 	</select>
+	
+	
+	<select id="getRecentComment" resultType="com.share.nanu.VO.BoardreplyVO">
+		<![CDATA[ 
+			select * from(
+				select * from boardreply where b_index = #{b_index} order by r_num desc 
+			) where rownum = 1
+		]]>
+	</select>
+	
+	<select id="getAttachmentBindex" resultType="String">
+		<![CDATA[ 
+			select path from attachment where b_index =#{b_index}
+		]]>
+	</select>
+	
+	<select id="deleteReply" resultType="com.share.nanu.VO.BoardreplyVO">
+		<![CDATA[ 
+			DELETE FROM boardreply WHERE b_index = #{b_index}
+		]]>
+	</select>
+	
+	<select id="deleteCertificationBoard" resultType="com.share.nanu.VO.BoardVO">
+		<![CDATA[ 
+			DELETE FROM board WHERE b_index = #{b_index}
+		]]>
+	</select>
+	
+	<select id="deleteAttachment" resultType="com.share.nanu.VO.AttachmentVO">
+		<![CDATA[ 
+			DELETE FROM attachment WHERE b_index = #{b_index}
+		]]>
+	</select>
+	
+	<!-- 댓글 수정 updateReply -->
+    <update id="modifyReply">
+      <![CDATA[
+          update boardreply set rcontent = #{rcontent} where r_num = #{r_num}
+      ]]>
+   </update> 
 	
 </mapper>
 

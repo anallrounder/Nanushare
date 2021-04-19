@@ -87,12 +87,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</update>
 	
-	<!-- 게시글 수정 modify-->
- 	<update id="modify">
+	<!-- 글 작성 write insert -->
+	<insert id="writeAdd">
+  		<![CDATA[
+			insert into board (b_index, member_id, btitle, bcontent, bhit, bdate, bcat_num) values (board_seq.nextval, #{member_id}, #{btitle}, #{bcontent}, 0, sysdate, 1)
+ 		]]>
+	</insert>
+	
+	
+	<!-- 문의글 수정 -->
+	<update id="modifyBoard">
 		<![CDATA[
-	    	update board set btitle = #{btitle}, bcontent = #{bcontent} where b_index = #{b_index}
+	      update board set btitle = #{btitle}, bcontent = #{bcontent} where b_index = #{b_index}
 		]]>
-	</update> 
+	</update>
+
 	
 	<!-- 글 삭제 -->
 	<delete id="delete">
@@ -101,59 +110,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   ]]>
 	</delete>
 	
-	
-	<!-- 글 작성 write insert -->
-	<!--  'Ulric@naver.com'로 테스트, 실제로는 로그인 사용자 정보 받아와서 넣어야함. 아직 미구현상태라 이렇게 테스트함 -->
-	<insert id="insert">
-  		<![CDATA[
-			insert into board (b_index, member_id, btitle, bcontent, bhit, bdate, bcat_num) 
-			values (board_seq.nextval, #{member_id}, #{btitle}, #{bcontent}, 0, sysdate, 3)
- 		]]>
-	</insert>
-	
-	<!-- 이미지 업로드 -->
-	<!-- <select id="uploadFile" resultType="com.share.nanu.VO.AttachmentVO">
-	 <![CDATA[
-	    
-	   	   insert into attachment VALUES (attachment_seq.nextval, #{originname}, #{path}, #{extension}, #{b_index})
-		]]>
-	</select> -->
-	
-	<!-- 게시판 글번호 -->
-	<select id="getBindex"  resultType="int">
-		<![CDATA[ 
-			select * from (
-        select b_index from board where member_id = #{member_id}  and bcat_num = 1 order by b_index desc
-   	 		) 
-				where rownum =1
-		]]>
-	</select>
-	
-	<!-- 댓글 리스트 -->
- 	<select id="listComment" resultType="com.share.nanu.VO.BoardreplyVO">
+	<!-- (글 삭제시)댓글 삭제 -->
+	<delete id="replyDelete">
 	   <![CDATA[
-		  select * from  BOARDREPLY  where b_index = #{b_index} order by r_num desc
-	   ]]>
-	</select>
-	
-	<!-- 댓글 입력 -->
-	<insert id="insertReply">
-		insert into BOARDREPLY (r_num, rcontent, rdate, rid, b_index)
-		values (BOARDREPLY_SEQ.nextval, #{rcontent}, #{rdate}, #{rid}, #{b_index})
-	</insert>
-	
-	<select id="getComment" resultType="com.share.nanu.VO.BoardreplyVO">
-	   <![CDATA[
-		  select * from BOARDREPLY  where b_index = #{b_index} and r_num= #{r_num}
-	   ]]>
-	</select>
-	
-	<!-- 댓글 삭제 -->
-	<delete id="removeReply">
-		<![CDATA[
-		  delete from BOARDREPLY  where b_index = #{b_index} and r_num= #{r_num}
+	     	delete from boardreply where b_index = #{b_index}
 	   ]]>
 	</delete>
 	
+	<!-- 댓글 입력 -->
+	<insert id="reply">
+		insert into BOARDREPLY (r_num, rcontent, rdate, rid, b_index)
+		values (BOARDREPLY_SEQ.nextval, #{rcontent}, sysdate, #{rid}, #{b_index})
+	</insert>
+	
+	<!-- 댓글 보기 -->
+	<select id="replyView" resultType="com.share.nanu.VO.BoardreplyVO">
+	   <![CDATA[
+		  select * from  BOARDREPLY where b_index = #{b_index} order by r_num desc
+	   ]]>
+	</select>
 	
 </mapper>

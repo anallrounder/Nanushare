@@ -48,28 +48,23 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @AllArgsConstructor
 @Controller
-/* @RequestMapping("/board/*") */
 public class NoticeBoardController {
 
 	@Autowired
-	private NoticeBoardService nbService;
+	private NoticeBoardService ntService;
 
 	// 공지사항 리스트
 	@GetMapping("/board/notice")
 	public String noticeBoardPaging(Criteria cri, Model model, @AuthenticationPrincipal MemberDetails md)
 			throws Exception {
-		log.debug("noticelist" + cri);
-		model.addAttribute("list", nbService.getlist(cri));
-
-		int total = nbService.getTotal(cri);
-		model.addAttribute("pageMaker", new PageVO(cri, total));
-
-		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
-		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-			log.info("로그인한 사람 이름 - " + md.getmember().getName());
 			model.addAttribute("username", md.getmember().getName());
 		}
+
+		model.addAttribute("list", ntService.getlist(cri));
+
+		int total = ntService.getTotal(cri);
+		model.addAttribute("pageMaker", new PageVO(cri, total));
 
 		return "noticeBoard/notice_list";
 	}
@@ -78,50 +73,76 @@ public class NoticeBoardController {
 	@GetMapping("/board/notice/{b_index}")
 	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md)
 			throws Exception {
-		log.debug("공지 게시판 컨텐트뷰");
-		nbService.uphit(boardVO);
-		model.addAttribute("content_view", nbService.getBoard(boardVO.getB_index()));
 
-		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
-		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
-		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+		if (md != null) { 
 			model.addAttribute("username", md.getmember().getName());
 		}
+
+		ntService.uphit(boardVO);
+		model.addAttribute("content_view", ntService.getBoard(boardVO.getB_index()));
 
 		return "noticeBoard/content_view";
 	}
 
-	// 수정
-	@GetMapping("/board/notice/{b_index}/modify")
-	public String bsModiview(BoardVO boardVO, Model model) throws Exception {
-		log.debug("공지 게시판 수정");
-		model.addAttribute("modify_view", nbService.getBoard(boardVO.getB_index()));
+	//수정뷰	
+	@GetMapping("/board/notice/modify/{b_index}")
+	public 	String bsModi(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md){
+		if (md != null) { 
+			model.addAttribute("username", md.getmember().getName());
+		}
+		
+		model.addAttribute("modify_view", ntService.getBoard(boardVO.getB_index()));
+
+		boardVO.setMember_id(md.getUsername());
+		
 		return "noticeBoard/modify_view";
 	}
+	
+	//수정
+	@PostMapping("/board/notice/modify")
+	public String bsModiview(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) {
+		System.out.println("공지 게시판 수정");
+		if (md != null) { 
+			model.addAttribute("username", md.getmember().getName());
+		}
+		 ntService.writeInsert(boardVO);
+		//model.addAttribute("modify_view", ntService.writeInsert(boardVO.getB_index()));
+		//model.addAttribute("modify_view", ntService.writeInsert(boardVO.getB_index()));
 
-	// 수정 내용 업데이트 -> 오류남. 수정해야함
-	/*
-	 * @PostMapping("/board/notice/modify") public String bsModify(BoardVO boardVO)
-	 * throws Exception { log.info("인증게시판 컨트롤러  -- modify() -- 호출");
-	 * nbService.modifyBoard(boardVO); return "redirect:content_view";
-	 * ?b_index=${modify_view.b_index} // return "redirect:plist"; }
-	 */
+		//boardVO.setMember_id(md.getUsername());// 로그인한 사람 정보 가져오기
+
+		return "redirect:/board/notice";
+	}
+	
 
 	// 글 삭제
-		@GetMapping("/board/notice/delete")
-		public String noticeDelete(BoardVO boardVO) throws Exception {
-			log.info("공지 게시판 delete");
-			nbService.deleteBoard(boardVO.getB_index());
-			return "redirect:";
-		}
-
-		
-	// 글작성
-	@GetMapping("/board/notice/write")
-	public String noticeWrite(Model model) throws Exception {
-		log.debug("공지게시판 write_view");
-		return "noticeBoard/write_view";
+	@GetMapping("/board/notice/delete")
+	public String noticeDelete(BoardVO boardVO) throws Exception {
+		log.info("공지 게시판 delete");
+		ntService.deleteBoard(boardVO.getB_index());
+		return "redirect:";
 	}
 
+	
+	// 글작성뷰
+	@GetMapping("/board/notice/write_view")
+	public String noticeWrite_view(Model model, @AuthenticationPrincipal MemberDetails md) {
+		log.info("공지게시판 write_view");
+		return "noticeBoard/write_view";
+	}
+	
+	// 글작성
+	@PostMapping("/board/notice/write")
+	public String noticeWrite(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md) {
+
+		if (md != null) { 
+			model.addAttribute("username", md.getmember().getName());
+		}
+		
+		boardVO.setMember_id(md.getUsername());
+		ntService.writeBoard(boardVO);
+		log.info("공지게시판 write_view");
+		
+		return "redirect:";
+	}
 }

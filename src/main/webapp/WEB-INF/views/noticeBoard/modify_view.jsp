@@ -10,6 +10,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+<meta name="_csrf" content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header"
+	content="${_csrf.headerName}">
+
 <title>myprofile_edit</title>
 
 <!-- CSS -->
@@ -29,40 +34,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-<!-- SIDE BAR 1 CSS -->
-<!-- <link rel="stylesheet" href="/resources/sidebar/css/styles.css"> -->
-
-<style>
-    .faqHeader {
-        font-size: 27px;
-        margin: 20px;
-    }
-
-    .panel-heading [data-toggle="collapse"]:after {
-        font-family: 'Glyphicons Halflings';
-        content: "\e072"; /* "play" icon */
-        float: right;
-        color: #F58723;
-        font-size: 18px;
-        line-height: 22px;
-        /* rotate "play" icon from > (right arrow) to down arrow */
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-    }
-
-    .panel-heading [data-toggle="collapse"].collapsed:after {
-        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        transform: rotate(90deg);
-        color: #454444;
-    }
-</style>
 
 </head>
 
@@ -77,88 +48,66 @@
 </style>
 <body>
 	<!-- Header -->
-		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-	
+
 	<!-- Content -->
 	<div class="charity-main-content">
 
 		<!-- Main Section -->
-	<div class="container">
-    <br />
-    <br />
-	
-	<form id="updateForm" action="${pageContext.request.contextPath}/board/notice/${content_view.b_index}" method="post">
-		<table class="table">
-			<input type="hidden" id="b_index" value="${content_view.b_index}">
-			<tr>
-				<td>번호</td>
-				<td>${content_view.b_index}</td>
-			</tr>
-			<tr>
-				<td>조회수</td>
-				<td>${content_view.bhit}</td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" id="member_id" value="${content_view.member_id}"></td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td><input type="text" id="btitle" value="${content_view.btitle}"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea rows="10" id="bcontent">${content_view.bcontent}</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="submit" class="btn btn-primary" value="수정">&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/notice'">목록</button>
-				</td>
-			</tr>
-		</table>
-	</form>		
-	
-	
-	
-   
-		
-		<!-- Main Section -->
-					</div>
-				</div>
+		<div class="container">
+			<br /> <br />
 
-			</div>
+			<form id="updateForm"
+				action="${pageContext.request.contextPath}/board/notice/modify"
+				method="post">
+				<table class="table">
+
+
+					<tr>
+						<td>번호</td>
+						<td><input type="hidden" id="b_index" name="b_index"
+							value="${modify_view.b_index}">${modify_view.b_index}</td>
+					</tr>
+					<tr>
+						<td>조회수</td>
+						<td>${modify_view.bhit}</td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td><input type="hidden" id="member_id" name="member_id"
+							value="${modify_view.member_id}">${modify_view.member_id}</td>
+					</tr>
+					<tr>
+						<td>제목</td>
+						<td> <input type="text" id="btitle" name="btitle"
+							value="${modify_view.btitle}"><textarea></textarea></td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td><textarea  rows="100" cols="100"  id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+						 <input type="submit" class="btn btn-primary" value="수정완료">
+						<!-- <button type="submit" class="btn btn-primary">
+								수정</button> -->&nbsp;&nbsp; <input type="hidden"
+							name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+							<input type="hidden" id="_csrf_header" name="_csrf_header"
+							value="${_csrf.headerName}" />
+							<button type="button" class="btn btn-primary"
+								onclick="location.href='${pageContext.request.contextPath}/board/notice'">목록</button>
+						</td>
+					</tr>
+				</table>
+
+			</form>
+
 		</div>
 	</div>
-	<!-- Main Section -->
 
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <input type="button"
-							value="취소" onClick="history.go(-2)"
-							class="charity-simple-blog-btn"> <a
-							href="${pageContext.request.contextPath}/my/mypage"
-							class="charity-simple-blog-btn">저장</a> <i class="fa fa-search"></i>
-					</form>
-				</div>
 
-			</div>
-		</div>
-	</div>
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
@@ -177,10 +126,12 @@
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
-	
-	 <!-- 자주묻는질문 -->
-    <script type="text/javascript" src="/resources/faq/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
-    
+
+	<!-- 자주묻는질문 -->
+	<script type="text/javascript"
+		src="/resources/faq/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 </html>

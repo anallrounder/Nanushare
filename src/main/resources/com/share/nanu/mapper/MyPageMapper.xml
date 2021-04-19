@@ -158,16 +158,19 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 <!-- 출석체크 카운트세기 1일1회만 참여가능 -->
 <select id="mycount" resultType="int">
 		<![CDATA[
-			select count(*) as count from point where member_id = #{member_id} and pdate>=TO_CHAR(SYSDATE, 'YYYYMMDD') and ecat_num=1
+			
+	   select count(*) as count from point where member_id = #{member_id} and pdate>=TO_CHAR(SYSDATE, 'YYYYMMDD') and ecat_num=1
+	    
 	   ]]>
 	</select>
-
+<!-- select count(*) as count from point where member_id = #{member_id} and pdate>=TO_CHAR(SYSDATE, 'YYYYMMDD') and ecat_num=1
+	    -->
 
 <!-- 출첵으로 받은 포인트 insert --><!-- 총합포인트 쿼리 다시 짜야함  -->
 	<insert id="getMypoint">
 		<![CDATA[
 	       insert into point (pnt_num, member_id, pdate, prtpnt, dntpnt, totalpnt, e_idx, nowpnt, ecat_num) 
-	       values(POINT_SEQ.nextval, #{member_id}, sysdate, #{pointVO.prtpnt},0, #{pointVO.totalpnt}+#{pointVO.prtpnt}, null,#{pointVO.totalpnt}+#{pointVO.prtpnt}-#{pointVO.dntpnt}, 1)
+	       values(POINT_SEQ.nextval, #{member_id}, sysdate, #{pointVO.prtpnt},0, #{pointVO.totalpnt}+#{pointVO.prtpnt}, null,#{pointVO.nowpnt}+#{pointVO.prtpnt}, 1)
 	   ]]>
 	</insert>
 	
@@ -186,5 +189,12 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 	       values(POINT_SEQ.nextval, #{member_id}, sysdate, #{pointVO.prtpnt},0, #{pointVO.totalpnt}+#{pointVO.prtpnt}, null,#{pointVO.totalpnt}+#{pointVO.prtpnt}-#{pointVO.dntpnt}, 7)
 	   ]]>
 	</insert>
+	
+	
+	<select id="mypnt" resultType="com.share.nanu.VO.PointVO">
+		<![CDATA[
+			select * from (select * from point where member_id = #{member_id} and ecat_num=1 order by pnt_num desc) where rownum = 1
+	   ]]>
+	</select>
 	
 </mapper>

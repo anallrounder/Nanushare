@@ -166,4 +166,11 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 
+	@Override
+	public PointVO mypnt(PointVO pointVO) {
+		
+		return mgmapper.mypnt(pointVO);
+	}
+
+
 }

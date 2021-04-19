@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +14,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 
 <title>myprofile_edit</title>
 
@@ -27,25 +35,70 @@
 <link rel="stylesheet" href="/resources/qna/css/common/common.css"/>
 
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+<!-- Ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
+
+
+<!-- 작성 폼 스크립트 -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$("#writeForm").submit(function(event){         
+           event.preventDefault();
+          
+           var btitle = $("#btitle").val();
+           var bcontent = $("#bcontent").val();
+           
+           var form = {
+        		 btitle: btitle,
+        		 bcontent: bcontent
+           };
+           
+           $.ajax({
+             type : "POST",
+             url : $(this).attr("action"),
+             cache : false,
+             contentType:'application/json; charset=utf-8',
+             data: JSON.stringify(form), 
+             //데이터를 전송하기 전에 헤더에 csrf값을 설정 (같이 넘겨줘야 post 403 error가 없다)
+             beforeSend : function(csrf) {   
+            	csrf.setRequestHeader(header, token)
+             },
+             success: function (result) {       
+               if(result == "SUCCESS") {
+                  $(location).attr('href', '${pageContext.request.contextPath}/board/qna')                            
+               }                       
+             },
+             error: function (e) {
+                location.reload(); // 실패시 새로고침하기
+             }
+         })            
+       });       
+   	});
+</script>
+	
+<style>
+	.charity-simple-blog-btn {
+		border: 0;
+	}
+	
+	​h3 {
+		text-align: center;
+	}
+	
+</style>
+	
 
 </head>
 
-<style>
-.charity-simple-blog-btn {
-	border: 0;
-}
-
-​h3 {
-	text-align: center;
-}
-
-</style>
 
  
 <body>
@@ -57,11 +110,12 @@
 		
 		<!-- 문의게시판 - START -->
     <div id="containerr">
-   <form id="writeForm" action="${pageContext.request.contextPath}/board/qna/write" method="post">
+   	<form id="writeForm" action="${pageContext.request.contextPath}/board/qna/write">
+   	
 		<table class="table">
 			<tr>
-				<td>이름</td>
-				<td><input type="text" id="member_id" name="member_id" size="50"></td>
+				<td>아이디</td>
+				<td><sec:authentication property="principal.member.member_id" /></td>
 			</tr>
 			<tr>
 				<td>제목</td>
@@ -74,7 +128,8 @@
 			<tr>
 				<td colspan="2">
 					<input class="btn btn-primary" type="submit" value="입력"> &nbsp;&nbsp;
-				 	<button type="button" class="btn btn-primary" onclick="location.href = '${pageContext.request.contextPath}/board/qna'">목록</button>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				 	<button type="button" class="btn btn-primary" onclick="location.href ='${pageContext.request.contextPath}/board/qna'">목록</button>
 				 </td>
 			</tr>
 		</table>

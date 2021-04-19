@@ -72,7 +72,8 @@ li {
 	box-sizing: border-box;
 	width: 270px;
 	height: 180px;
-	margin: 10px auto; padding : 10px auto;
+	margin: 10px auto;
+	padding: 10px auto;
 	border-radius: 20px 20px 20px 20px;
 	text-align: center;
 	padding: 10px auto;
@@ -144,15 +145,13 @@ li {
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<!-- Sub Header -->
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -180,15 +179,38 @@ li {
 									<li class="name"><h2>
 											<sec:authentication property="principal.member.name" />
 										</h2></li>
-									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></a></li>
+									<li class="email"><sec:authentication property="principal.member.member_id" /></a></li>
 									<li class="activity">
-										<button class="charity-simple-blog-btn w-100 text-white stats"
-											type="submit"
-											onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-											프로필수정</button>
+									
+									<sec:authentication
+											property="principal.member" var="buttonhidden" /> <sec:authorize
+											access="isAuthenticated()">
+											
+											<c:if test="${buttonhidden.signuppath == 'home'}">
 
-									</li>
+												<button class="charity-simple-blog-btn w-100 text-white stats"
+													type="submit"
+													onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+													프로필수정</button>
+											
+											</c:if>
+										</sec:authorize>
+										
+										<sec:authentication
+											property="principal.member" var="buttonhidden" /> <sec:authorize
+											access="isAuthenticated()">
+											
+											<c:if test="${buttonhidden.signuppath != 'home'}">
+
+												<button class="charity-simple-blog-btn w-100 text-white stats"
+													type="submit"
+													onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
+													회원탈퇴</button>
+											
+											</c:if>
+										</sec:authorize>
+										
+										</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
@@ -219,8 +241,8 @@ li {
 								<div class="charity-team charity-simple-team inner-wrap">
 									<div class="row">
 
-										<li class="threebox" class="col-md-4"><div>&nbsp;</div>
-											<span>나의 포인트</span>
+										<li class="threebox" class="col-md-4"><div>&nbsp;</div> <span>나의
+												포인트</span>
 											<h4 class="mb-4 mt-4 col-md-4">
 												<form action="${pageContext.request.contextPath}/my/ask"
 													method="get">
@@ -232,16 +254,16 @@ li {
 											</h4>
 											<button class="charity-simple-blog-btn w-30 text-white stats"
 												type="button"
-												onClick="location.href='${pageContext.request.contextPath}/donation/money/point'">
+												onClick="location.href='${pageContext.request.contextPath}/my/donation/money/point'">
 												기부하기</button></li>
-										<li class="threebox" class="col-md-4"><div>&nbsp;</div>
-											<span class="followers">나의 기부횟수</span>
+										<li class="threebox" class="col-md-4"><div>&nbsp;</div> <span
+											class="followers">나의 기부횟수</span>
 											<h4 class="mb-4 mt-4 col-md-4">
 												<span class="number2"><sec:authentication
 														property="principal.member.dntcnt" />회</span>
 											</h4></li>
-										<li class="threebox" class="col-md-4"><div>&nbsp;</div>
-											<span class="followers">나의 나눔횟수</span>
+										<li class="threebox" class="col-md-4"><div>&nbsp;</div> <span
+											class="followers">나의 나눔횟수</span>
 											<h4 class="mb-4 mt-4 col-md-4">
 												<span class="number1"><sec:authentication
 														property="principal.member.itemdntcnt" />회</span>
@@ -268,7 +290,7 @@ li {
 							<div>&nbsp;</div>
 							<div>&nbsp;</div>
 							<button
-								class="charity-simple-blog-btn w-30 ml-2 text-white stats">기부금
+								class="charity-simple-blog-btn w-30 ml-2 text-white stats" type="button" onClick="location.href='${pageContext.request.contextPath}/board/notice/188'">기부금
 								영수증</button>
 						</div>
 						<hr>

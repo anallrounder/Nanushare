@@ -78,5 +78,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	</select>
 	
+	<select id="getVmItem" resultType="com.share.nanu.VO.Vmam">
+	<![CDATA[ 
+		select * from vmam where vm_num = #{vm_num}
+	]]>
+	</select>
+	
 
 </mapper>

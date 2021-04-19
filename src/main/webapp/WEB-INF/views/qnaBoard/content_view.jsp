@@ -10,6 +10,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+
 <title>myprofile_edit</title>
 
 <!-- CSS -->
@@ -27,13 +30,48 @@
 <link rel="stylesheet" href="/resources/qna/css/common/common.css"/>
 
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
+<!-- Ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-</head>
+<!-- 게시글 삭제 -->
+<script type="text/javascript">
+	$(document).ready(function (){
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$('#delete').click(function(event){
+			event.preventDefault();
+			
+			var b_index = $("#b_index").val();
+			var url = "${pageContext.request.contextPath}/board/qna/modify/" + b_index
+	
+			$.ajax({
+				type : 'DELETE',
+				url : url,
+				cache : false,
+				beforeSend : function(csrf) {   
+		            	csrf.setRequestHeader(header, token)
+		        },
+				success: function(result){
+					console.log(result);
+					if(result == "SUCCESS"){
+						alert('삭제 완료'); 
+						$(location).attr('href', '${pageContext.request.contextPath}/board/qna') 
+					}
+				},
+				error:function(e){
+					console.log(e);
+		               alert('삭제 실패');
+		               location.reload(); // 실패시 새로고침하기
+				}
+			})
+		});	
+	});	
+</script>
 
 <style>
 .charity-simple-blog-btn {
@@ -45,6 +83,9 @@
 }
 
 </style>
+</head>
+
+
 
  
 <body>
@@ -53,29 +94,19 @@
 	<!-- Header -->
 
 		<!-- Main Section -->
-	
-	</form>		
+		
 		
 		<!-- 문의게시판 - START -->
    <div id="wrapp">
     <div id="containerr">
         <div class="inner">        
             <h2> 1:1 문의 </h2>            
-            <form id="boardForm" name="boardForm">
-                <table width="100%" class="table01">
-                    <colgroup>
-                        <col width="15%" />
-                        <col width="35%" />
-                        <col width="15%" />
-                        <col width="*" />
-                    </colgroup>
-                    <tbody id="tbody">
-                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/${content_view.b_index}" method="post">
+          
+                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/reply" method="post">
 		<table class="table">
-			<input type="hidden" id="b_index" value="${content_view.b_index}">
 			<tr>
 				<td>글번호</td>
-				<td>${content_view.b_index}</td>
+				<td><input type="hidden" id="b_index" name="b_index" value="${content_view.b_index}">${content_view.b_index}</td>
 			</tr>
 			<tr>
 				<td>작성일</td>
@@ -87,7 +118,7 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" id="member_id" value="${content_view.member_id}"></td>
+				<td>${content_view.member_id}</td>
 			</tr>
 			
 			<tr>
@@ -96,13 +127,45 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea rows="10" id="bcontent">${content_view.bcontent}</textarea></td>
+				<td>${content_view.bcontent}</td>
 			</tr>
+			
+			<tr>
+				<td>관리자 답변</td>
+				<c:forEach items="${reply_view}" var="reply">
+				<td>${reply.rcontent}</td>
+				</c:forEach>
+				
+			</tr>
+			
+			<sec:authorize access="hasRole('ADMIN')"> 
+			<input type="hidden" name="b_index" value="${content_view.b_index}">
+			<tr>
+				<td>답변</td>
+				<td><textarea cols="20" rows="10" id="rcontent" name="rcontent"></textarea></td>
+			</tr>
+			</sec:authorize>
+			
 			<tr>
 				<td colspan="2">
-					<input type="submit" class="btn btn-primary" value="수정">&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
-					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna/reply/${content_view.b_index}'">답변</button>
+				
+				<sec:authentication property="principal" var="buttonhidden" />
+          		<sec:authorize access="isAuthenticated()">   
+   
+					<!-- 현재 접속된 닉네임과 댓글보드에 저장된 닉네임을 비교해서 일치 하면 보이게 함 -->
+					<c:if test="${buttonhidden.username eq content_view.member_id}">
+				
+					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna/modify/${content_view.b_index}'">수정</button>
+					<button type="button" id= "delete" class="btn btn-primary">삭제</button>&nbsp;&nbsp;
+					
+					</c:if>
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ADMIN')"> 
+					<button type="submit" class="btn btn-primary">답변등록</button>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</sec:authorize>
+				
 					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna'">목록</button>
 				</td>
 			</tr>

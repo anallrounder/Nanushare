@@ -1,137 +1,164 @@
 package com.share.nanu.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.share.nanu.service.NoticeBoardService;
 import com.share.nanu.service.QnaBoardService;
 import com.share.nanu.controller.QnaBoardController;
-import com.share.nanu.page.pageVO;
 import com.share.nanu.paging.Criteria;
 import com.share.nanu.paging.PageVO;
 import com.share.nanu.security.MemberDetails;
-import com.google.gson.JsonObject;
-import com.nimbusds.oauth2.sdk.util.StringUtils;
-import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
+import com.share.nanu.VO.BoardreplyVO;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @AllArgsConstructor
-@Controller
-/* @RequestMapping("/board/*") */
+@RestController
+@RequestMapping("/board/*")
 public class QnaBoardController {
 
 	@Autowired
 	private QnaBoardService qService;
 
 	// FAQ 게시판 리스트
-		@GetMapping("/board/faq")
-		public String list(Model model) {
-			log.debug("Frequently Asked Questions");
-			log.info("FAQlist..");
-			model.addAttribute("FAQlist", qService.getlist());
-			return "faq/faq_list";
+	@GetMapping("/faq")
+	public String list(Model model) {
+		model.addAttribute("FAQlist", qService.getlist());
+		
+		return "faq/faq_list";
+	}
+
+	// QNA 게시판 리스트 조회
+	@GetMapping("/qna")
+	public ModelAndView noticeBoardPaging(Criteria cri, ModelAndView mov, @AuthenticationPrincipal MemberDetails md)
+			throws Exception {
+
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
 		}
 
-	// QNA 게시판 리스트
-		@GetMapping("/board/qna")
-		public String noticeBoardPaging(Criteria cri, Model model, @AuthenticationPrincipal MemberDetails md)
-				throws Exception {
-			log.debug("qnalist" + cri);
-			model.addAttribute("list", qService.getlist(cri));
+		mov.addObject("list", qService.getlist(cri));
 
-			int total = qService.getTotal(cri);
-			model.addAttribute("pageMaker", new PageVO(cri, total));
+		int total = qService.getTotal(cri);
+		mov.addObject("pageMaker", new PageVO(cri, total));
+		
+		mov.setViewName("qnaBoard/qna_list");
 
-			// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
-			/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
-			if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-				log.info("로그인한 사람 이름 - " + md.getmember().getName());
-				model.addAttribute("username", md.getmember().getName());
-			}
+		return mov;
+	}
 
-			return "qnaBoard/qna_list";
+	// 문의글 작성 페이지
+	@GetMapping("/qna/write")
+	public ModelAndView qnaWriteView(ModelAndView mov, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		
+		mov.setViewName("qnaBoard/write_view");
+		
+		return mov;
+
+	}
+	
+	// 문의글 추가
+	@PostMapping("/qna/write")
+	public ResponseEntity<String> qnaWrite(@RequestBody BoardVO boardVO, @AuthenticationPrincipal MemberDetails md) {
+		
+		ResponseEntity<String> entity = null;
+
+		try {
+			boardVO.setMember_id(md.getUsername());
+			qService.writeInsert(boardVO);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 
-		// 컨텐트뷰
-		@GetMapping("/board/qna/{b_index}")
-		public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md)
-				throws Exception {
-			log.debug("공지 게시판 컨텐트뷰");
-			qService.uphit(boardVO);
-			model.addAttribute("content_view", qService.getBoard(boardVO.getB_index()));
+		return entity;
+	}
 
-			// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
-			/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
-			if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-				log.info("로그인한 사람 이름 - " + md.getmember().getName());
-				model.addAttribute("username", md.getmember().getName());
-			}
-
-			return "qnaBoard/content_view";
+	// 컨텐트뷰
+	@GetMapping("/qna/{b_index}")
+	public ModelAndView qnaContentView(BoardVO boardVO, BoardreplyVO replyVO, ModelAndView mov, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		
+		if (md != null) { 
+			mov.addObject("username", md.getmember().getName());
 		}
 
-		// 수정
-		@GetMapping("/board/qna/{b_index}/modify")
-		public String bsModiview(BoardVO boardVO, Model model) throws Exception {
-			log.debug("공지 게시판 수정");
-			model.addAttribute("modify_view", qService.getBoard(boardVO.getB_index()));
-			return "qnaBoard/modify_view";
+		qService.uphit(boardVO);
+		mov.addObject("content_view", qService.getBoard(boardVO.getB_index()));
+		mov.addObject("reply_view", qService.getReplyBoard(replyVO.getB_index()));
+		mov.setViewName("qnaBoard/content_view");
+
+		return mov;
+	}
+
+	// 수정페이지
+	@GetMapping("/qna/modify/{b_index}")
+	public ModelAndView qnaModifyView(BoardVO boardVO, ModelAndView mov) throws Exception {
+		
+		mov.addObject("modify_view", qService.getBoard(boardVO.getB_index()));
+		mov.setViewName("qnaBoard/modify_view");
+		
+		return mov;
+	}
+	
+	// 문의글 수정
+	@PostMapping("/qna/modify")
+	public ResponseEntity<String> qnaModify(@RequestBody BoardVO boardVO, @AuthenticationPrincipal MemberDetails md) {
+		
+		ResponseEntity<String> entity = null;
+
+		try {
+			qService.modifyBoard(boardVO);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 
-		// 수정 내용 업데이트 -> 오류남. 수정해야함
-		/*
-		 * @PostMapping("/board/notice/modify") public String bsModify(BoardVO boardVO)
-		 * throws Exception { log.info("인증게시판 컨트롤러  -- modify() -- 호출");
-		 * nbService.modifyBoard(boardVO); return "redirect:content_view";
-		 * ?b_index=${modify_view.b_index} // return "redirect:plist"; }
-		 */
+		return entity;
+	}
+	
+	//글 삭제
+	@DeleteMapping("/qna/modify/{b_index}")
+	public ResponseEntity<String> qnaDelete(BoardVO boardVO, BoardreplyVO replyVO) {
+		ResponseEntity<String> entity = null;
+		log.info("noticeDelete...");
 
-		// 글 삭제
-			@GetMapping("/board/qna/delete")
-			public String noticeDelete(BoardVO boardVO) throws Exception {
-				log.info("공지 게시판 delete");
-				qService.deleteBoard(boardVO.getB_index());
-				return "redirect:";
-			}
-
-			
-		// 글작성
-		@GetMapping("/board/qna/write")
-		public String noticeWrite(Model model) throws Exception {
-			log.debug("공지게시판 write_view");
-			return "qnaBoard/write_view";
-			
+		try {
+			qService.deleteReply(replyVO.getB_index());
+			qService.deleteBoard(boardVO.getB_index());
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+
+		return entity;
+	}
+
+	// 답변 작성
+	@PostMapping("/qna/reply")
+	public ModelAndView qnaReply(BoardreplyVO bReplyVO, ModelAndView mov, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		
+		bReplyVO.setRid(md.getUsername());
+		qService.replyInsert(bReplyVO);
+		mov.setViewName("qnaBoard/qna_list");
+		
+		return mov;
+	}
+
 }

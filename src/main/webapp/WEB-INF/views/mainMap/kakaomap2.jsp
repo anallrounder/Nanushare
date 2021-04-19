@@ -37,21 +37,18 @@
 		
 		// 옆에 지점명 누르면 지도위 마커 인포 띄우기
 		$('.branches').click(function() {
-			var info = loadInfoWindows(map, positions, markers, infoWindows);
-			console.log('info', info);
 			var lng = $(this).data('lng');
 			var lat = $(this).data('lat');
 			
 			for (var i = 0; i < markers.length; i++) {
 				var marker = markers[i];
-				
 				if (lat.toString() === marker.latData && lng.toString() === marker.lngData) {
 					
 					for (var i = 0; i < infoWindows.length; i++) {
 						infoWindows[i].close();
 			        }
-					console.log('click');
 					var infowindow = infoWindows[marker.index];
+					updateInfowindow(marker.vmNum, marker.branch, infowindow);
 					infowindow.open(map, marker);
 				}
 				
@@ -100,14 +97,14 @@
 							content: html, 
 							lat: lat,
 							lng: lng, 
-							vmNum: vmNum
+							vmNum: vmNum,
+							branch: branch
 					};
 					positions[i] = result;
 				}
 				//console.log(positions);
 			}
 		});
-		
 		
 		
 		for (var i = 0; i < positions.length; i++) {
@@ -119,6 +116,8 @@
 			
 			marker.latData = positions[i].lat;
 			marker.lngData = positions[i].lng;
+			marker.vmNum = positions[i].vmNum;
+			marker.branch = positions[i].branch;
 			marker.index = i;
 			markers.push(marker);
 
@@ -128,7 +127,6 @@
 				removable : true
 			});
 			
-			//console.log('infowindow', infowindow);
 			
 			infoWindows.push(infowindow);
 			
@@ -144,11 +142,42 @@
 	// 클릭이벤트마다 열고 닫기
 	function makeOverListener(map, marker, infowindow) {
 		return function() {
+			updateInfowindow(marker.vmNum, marker.branch, infowindow);
 	        for (var i = 0; i < infoWindows.length; i++) {
 	            infoWindows[i].close();
 	        }
 	        infowindow.open(map, marker);
 	    };
+	}
+	
+	// 실시간으로 사용하기 위한 함수 (클릭했을때 ajax로 DB 실시간 업데이트 되는 로직 콜)
+	function updateInfowindow(vmNum, branch, infowindow) {
+		
+		$.ajax({
+			url: "/vm/item/info",
+			async: false,
+			data: {
+				vmNum : vmNum
+			},
+			success: function(data) {
+				
+				var content = '';
+				content += '<div>';
+				content += '<p class="infowindow-title">' + branch + '</p>';
+				content += '<div class="infowindow-item">';
+				
+				var itemList = data.iteminfo;
+				for (var j = 0; j < itemList.length; j++) {
+					var item = itemList[j];
+					content += '<p>' + item.iname + ' : ' + item.vm_amount + '</p>';
+				}
+				
+				content += '</div>';
+				
+				// 윈포윈도우 content 재설정(업데이트)
+				infowindow.setContent(content);
+			}
+		});
 	}
 	
 	
