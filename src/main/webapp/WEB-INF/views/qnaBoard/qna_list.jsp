@@ -80,7 +80,6 @@
 										<th>제목</th>
 										<th>날짜</th>
 										<th>조회수</th>
-										<th>option</th>
 									</tr>
 								</thead>
 		
@@ -89,26 +88,9 @@
 						        	<tr>
 						            	<td>${dto.b_index}</td>
 										<td>${dto.member_id}</td>
-										<td>${dto.btitle}</td>
+										<td><a href="${pageContext.request.contextPath}/board/qna/${dto.b_index}">${dto.btitle}</a></td>
 										<td>${dto.bdate}</td>
 										<td>${dto.bhit}</td>	
-										<td>
-				                          <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/board/qna/${dto.b_index}">
-				                              <i class="fas fa-folder">
-				                              </i>
-				                              View
-				                          </a>
-				                          <a class="btn btn-info btn-sm" href="#">
-				                              <i class="fas fa-pencil-alt">
-				                              </i>
-				                              Edit
-				                          </a>
-				                          <a class="btn btn-danger btn-sm" href="#">
-				                              <i class="fas fa-trash">
-				                              </i>
-				                              Delete
-				                          </a>
-				                      </td>
 						       	   </tr>
 								</c:forEach>  
 				              </tbody>
