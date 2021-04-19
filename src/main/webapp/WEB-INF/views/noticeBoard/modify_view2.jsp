@@ -81,12 +81,12 @@
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td> <input type="text" id="btitle" name="btitle"
-							value="${modify_view.btitle}"><textarea></textarea></td>
+						<td><input type="text" id="btitle" name="btitle"
+							value="${modify_view.btitle}"></td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td><textarea  rows="100" cols="100"  id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></td>
+						<td><textarea rows="10" id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></td>
 					</tr>
 					<tr>
 						<td colspan="2">

@@ -313,8 +313,12 @@ public class MyPageController {
 
 	// 출석체크(event default)
 	@GetMapping("/event/check")
-	public ModelAndView attendance(ModelAndView mav) throws Exception {
+	public ModelAndView attendance(ModelAndView mav, @AuthenticationPrincipal MemberDetails md,PointVO pointVO ) throws Exception {
 		System.out.println("룰렛출첵페이지");
+		pointVO.setMember_id(md.getUsername());//로그인한회원정보 불러오려고
+		mav.addObject("pointvo", mgservice.mypnt(pointVO));
+	System.out.println(mgservice.mypnt(pointVO));
+		
 		mav.setViewName("/eventView/attendcheck");
 		return mav;
 	}
