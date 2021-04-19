@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -161,6 +162,7 @@ public class NanuBoardShowYSController {
 			@RequestParam MultipartFile upload) throws Exception {
 
 		log.info("로컬이미지 업로드");
+		//log.info("bvo : " + bvo);
 		OutputStream out = null;
 		PrintWriter writer = null;
 		JsonObject json = new JsonObject();
@@ -180,9 +182,9 @@ public class NanuBoardShowYSController {
 		String uid = UUID.randomUUID().toString();
 
 		try {
-			String fileName = upload.getOriginalFilename();
-			fileName = uid + "_" + fileName;
-			System.out.println("파일 이름 " + fileName);
+			String fileName = upload.getOriginalFilename(); //원본이름
+			fileName = uid + "_" + fileName; //중복방지 랜덤 문자열
+			log.info("파일 이름 : " + fileName);			
 			byte[] bytes = upload.getBytes();
 
 			// String ckEditorUpLoadPath = uploadPath +"\\" + uid + "_" + fileName ;
@@ -194,7 +196,7 @@ public class NanuBoardShowYSController {
 			}
 
 			writer = response.getWriter();
-			String fileUrl = "/resources/attachment" + "/" + datefolder + "/" + fileName;
+			String fileUrl = "/resources/attachment" + "/" + datefolder + "/" + fileName; //path
 			// 업로드시 이미지 정보에 표시 되어 지는 url, 파일이 저장되어 있는 위치, 이름이 같아야 한다!!!!, resources 에서부터
 			// 설정하지 않으면 views아래에서 찾는다.
 

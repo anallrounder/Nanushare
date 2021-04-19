@@ -33,13 +33,15 @@ public class NanuBoardShowModifyController {
 	@Autowired
 	private NanuBoardShowYSService service;
 	
-	@PutMapping("/board/shows/modify/{b_index}")
+	@PutMapping("/board/shows/modify")
 	public ResponseEntity<String> bsModify(@RequestBody BoardVO boardVO) throws Exception {
 		log.info("인증게시판 컨트롤러  -- modify() -- 호출");
-		
+		log.info("boardVO"+boardVO);
+		 
 		ResponseEntity<String> entity = null;
 		
 		try {
+			
 			service.modifyBoard(boardVO); //수정 업데이트
 			
 	        entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);

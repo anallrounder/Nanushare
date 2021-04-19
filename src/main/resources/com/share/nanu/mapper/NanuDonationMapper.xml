@@ -107,7 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[ 
 			select * from donation where dnt_paynum=#{merchantUid}
 		]]>
-	</select> 
+	</select>  
 	
 	<update id="updateState" >
 		<![CDATA[ 
