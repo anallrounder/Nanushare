@@ -74,6 +74,12 @@ public class MainServiceImpl implements MainService {
 		return mainmapper.getYear(year);
 	}
 
+	@Override
+	public List<Vmam> getVmItem(String vmNum) {
+		// TODO Auto-generated method stub
+		return mainmapper.getVmItem(vmNum);
+	}
+
 	
 
 

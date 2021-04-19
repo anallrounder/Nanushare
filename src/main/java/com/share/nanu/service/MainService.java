@@ -26,4 +26,7 @@ public interface MainService {
 	public int getMonthSales(String year, String month);
 	public int getYearSales(String year);
 
+	
+	public List<Vmam> getVmItem(String vmNum);
+
 }

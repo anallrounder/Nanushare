@@ -38,20 +38,67 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
+<!-- Ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
+
+
+<!-- 작성 폼 스크립트 -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$("#writeForm").submit(function(event){         
+           event.preventDefault();
+          
+           var btitle = $("#btitle").val();
+           var bcontent = $("#bcontent").val();
+           
+           var form = {
+        		 btitle: btitle,
+        		 bcontent: bcontent
+           };
+           
+           $.ajax({
+             type : "POST",
+             url : $(this).attr("action"),
+             cache : false,
+             contentType:'application/json; charset=utf-8',
+             data: JSON.stringify(form), 
+             //데이터를 전송하기 전에 헤더에 csrf값을 설정 (같이 넘겨줘야 post 403 error가 없다)
+             beforeSend : function(csrf) {   
+            	csrf.setRequestHeader(header, token)
+             },
+             success: function (result) {       
+               if(result == "SUCCESS") {
+                  $(location).attr('href', '${pageContext.request.contextPath}/board/qna')                            
+               }                       
+             },
+             error: function (e) {
+                location.reload(); // 실패시 새로고침하기
+             }
+         })            
+       });       
+   	});
+</script>
+	
+<style>
+	.charity-simple-blog-btn {
+		border: 0;
+	}
+	
+	​h3 {
+		text-align: center;
+	}
+	
+</style>
+	
 
 </head>
 
-<style>
-.charity-simple-blog-btn {
-	border: 0;
-}
-
-​h3 {
-	text-align: center;
-}
-
-</style>
 
  
 <body>
@@ -63,7 +110,7 @@
 		
 		<!-- 문의게시판 - START -->
     <div id="containerr">
-   	<form id="writeForm" action="${pageContext.request.contextPath}/board/qna/write/add" method="post">
+   	<form id="writeForm" action="${pageContext.request.contextPath}/board/qna/write">
    	
 		<table class="table">
 			<tr>

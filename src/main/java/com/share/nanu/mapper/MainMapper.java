@@ -34,4 +34,6 @@ public interface MainMapper {
 
 	public int getYear(String year);
 
+	public List<Vmam> getVmItem(String vmNum);
+
 }

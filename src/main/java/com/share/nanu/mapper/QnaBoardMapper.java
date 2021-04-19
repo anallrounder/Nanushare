@@ -36,7 +36,11 @@ public interface QnaBoardMapper {
 	
 	//댓글 보기
 	public List<BoardreplyVO> replyView(int b_index);
+	
+	//댓글삭제
+	public void replyDelete(int b_index);
 
+	
 
 
 }
