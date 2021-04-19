@@ -32,12 +32,17 @@ public interface QnaBoardService {
 	
 	// 글 삭제
 	public void deleteBoard(int b_index);
+	
+	//댓글삭제
+	public void deleteReply(int b_index);
 
 	//댓글 추가
 	public void replyInsert(BoardreplyVO bReplyVO);
 	
 	//댓글 내용
 	public List<BoardreplyVO> getReplyBoard(int b_index);
+
+	
 
 	
 

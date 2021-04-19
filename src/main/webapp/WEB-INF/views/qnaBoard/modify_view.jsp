@@ -30,13 +30,56 @@
 <link rel="stylesheet" href="/resources/qna/css/common/common.css"/>
 
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
+<!-- Ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-</head>
+<!-- 작성 폼 스크립트 -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$("#updateForm").submit(function(event){         
+           event.preventDefault();
+          
+           var b_index = $("#b_index").val();
+           var btitle = $("#btitle").val();
+           var bcontent = $("#bcontent").val();
+           
+           
+           var form = {
+        		 b_index: b_index,
+        		 btitle: btitle,
+        		 bcontent: bcontent
+           };
+           
+           $.ajax({
+             type : "POST",
+             url : $(this).attr("action"),
+             cache : false,
+             contentType:'application/json; charset=utf-8',
+             data: JSON.stringify(form), 
+             //데이터를 전송하기 전에 헤더에 csrf값을 설정 (같이 넘겨줘야 post 403 error가 없다)
+             beforeSend : function(csrf) {   
+            	csrf.setRequestHeader(header, token)
+             },
+             success: function (result) {       
+               if(result == "SUCCESS") {
+                  $(location).attr('href', '${pageContext.request.contextPath}/board/qna')                            
+               }                       
+             },
+             error: function (e) {
+                location.reload(); // 실패시 새로고침하기
+             }
+         })            
+       });       
+   	});
+</script>
+	
 
 <style>
 .charity-simple-blog-btn {
@@ -49,6 +92,7 @@
 
 </style>
 
+</head>
  
 <body>
 	<!-- Header -->
@@ -65,11 +109,11 @@
         <div class="inner">        
             <h2> 1:1 문의 </h2>            
            
-                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/modify" method="post">
+                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/modify">
 		<table class="table">
 			<tr>
 				<td>글번호</td>
-				<td><input type="hidden" name="b_index" value="${modify_view.b_index}">${modify_view.b_index}</td>
+				<td><input type="hidden" id="b_index" name="b_index" value="${modify_view.b_index}">${modify_view.b_index}</td>
 			</tr>
 			<tr>
 				<td>작성일</td>

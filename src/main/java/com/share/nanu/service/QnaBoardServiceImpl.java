@@ -73,7 +73,7 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	}
 	
 	
-	// 인증게시판 글 삭제
+	//글 삭제
 	@Override
 	public void deleteBoard(int b_index) {
 		log.info("글 삭제 deleteBoard()");
@@ -91,6 +91,12 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	public List<BoardreplyVO> getReplyBoard(int b_index) {
 		
 		return mapper.replyView(b_index);
+	}
+
+	@Override
+	public void deleteReply(int b_index) {
+		
+		 mapper.replyDelete(b_index);
 	}
 
 	

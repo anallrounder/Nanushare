@@ -30,13 +30,48 @@
 <link rel="stylesheet" href="/resources/qna/css/common/common.css"/>
 
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
+<!-- Ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-</head>
+<!-- 게시글 삭제 -->
+<script type="text/javascript">
+	$(document).ready(function (){
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$('#delete').click(function(event){
+			event.preventDefault();
+			
+			var b_index = $("#b_index").val();
+			var url = "${pageContext.request.contextPath}/board/qna/modify/" + b_index
+	
+			$.ajax({
+				type : 'DELETE',
+				url : url,
+				cache : false,
+				beforeSend : function(csrf) {   
+		            	csrf.setRequestHeader(header, token)
+		        },
+				success: function(result){
+					console.log(result);
+					if(result == "SUCCESS"){
+						alert('삭제 완료'); 
+						$(location).attr('href', '${pageContext.request.contextPath}/board/qna') 
+					}
+				},
+				error:function(e){
+					console.log(e);
+		               alert('삭제 실패');
+		               location.reload(); // 실패시 새로고침하기
+				}
+			})
+		});	
+	});	
+</script>
 
 <style>
 .charity-simple-blog-btn {
@@ -48,6 +83,9 @@
 }
 
 </style>
+</head>
+
+
 
  
 <body>
@@ -68,7 +106,7 @@
 		<table class="table">
 			<tr>
 				<td>글번호</td>
-				<td>${content_view.b_index}</td>
+				<td><input type="hidden" id="b_index" name="b_index" value="${content_view.b_index}">${content_view.b_index}</td>
 			</tr>
 			<tr>
 				<td>작성일</td>
@@ -118,7 +156,7 @@
 					<c:if test="${buttonhidden.username eq content_view.member_id}">
 				
 					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna/modify/${content_view.b_index}'">수정</button>
-					<button type="button" class="btn btn-primary" onclick="location.href='/qna/delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
+					<button type="button" id= "delete" class="btn btn-primary">삭제</button>&nbsp;&nbsp;
 					
 					</c:if>
 				</sec:authorize>

@@ -110,6 +110,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   ]]>
 	</delete>
 	
+	<!-- (글 삭제시)댓글 삭제 -->
+	<delete id="replyDelete">
+	   <![CDATA[
+	     	delete from boardreply where b_index = #{b_index}
+	   ]]>
+	</delete>
+	
 	<!-- 댓글 입력 -->
 	<insert id="reply">
 		insert into BOARDREPLY (r_num, rcontent, rdate, rid, b_index)
