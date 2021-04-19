@@ -99,36 +99,35 @@
 		 				});
 		 			};
 		 			
-		 			$('#del_btn').click(function(event){
-		 				event.preventDefault();
-		 				
-		 				//var b_index = $("#b_index").val();
-		 				//var url = "${pageContext.request.contextPath}/board/qna/delete/" + b_index
-		 		
-		 				$.ajax({
-		 					type : 'DELETE',
-		 					url :  $(this).attr("href"),
-		 					cache : false,
-		 					beforeSend : function(csrf) {   
-		 			            	csrf.setRequestHeader(header, token)
-		 			        },
-		 					success: function(result){
-		 						console.log(result);
-		 						if(result == "SUCCESS"){
-		 							alert('삭제 완료'); 
-		 							$(location).attr('href', '${pageContext.request.contextPath}/board/qna') 
-		 						}
-		 					},
-		 					error:function(e){
-		 						console.log(e);
-		 			               alert('삭제 실패');
-		 			               location.reload(); // 실패시 새로고침하기
-		 					}
-		 				});
-		 			});
-		 		
-		 	
-		 	
+		 				function qBoardDelete(b_index) {
+		 					console.log(b_index);
+		 					
+		 					// csrf
+		 					var token = $("meta[name='_csrf']").attr("content");
+		 					var header = $("meta[name='_csrf_header']").attr("content");
+		 					$(document).ajaxSend(function(e, xhr, options) {
+		 						xhr.setRequestHeader(header, token);
+		 					});
+		 					
+		 					$.ajax({
+			 					type : 'DELETE',
+			 					url : '${pageContext.request.contextPath}/board/qna/delete/'+b_index,
+			 					cache : false,			 				
+			 					success: function(result){
+			 						console.log(result);
+			 						if(result == "SUCCESS"){
+			 							alert('삭제 완료'); 
+			 							$(location).attr('href', '${pageContext.request.contextPath}/board/qna') 
+			 						}
+			 					},
+			 					error:function(e){
+			 						console.log(e);
+			 			               alert('삭제 실패');
+			 			               location.reload(); // 실패시 새로고침하기
+			 					}
+			 				});
+						}
+		 			
 		 	
 		 function autoDate () {
 				
@@ -232,7 +231,7 @@
 										<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq content_view.member_id}"> 
                                         	<li><a href="${pageContext.request.contextPath}/board/qna/modify/${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
-                                        	<li><a id="del_btn" href="${pageContext.request.contextPath}/board/qna/delete/${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
+                                        	<li><a id="del_btn"  href="javascript:void(0)" onclick="qBoardDelete('${content_view.b_index}')"  class="fa fa-eraser"> 삭제</a></li>
                                         </c:if>
                                         </sec:authorize>
                                         <!-- onClick="bcontent_del();" -->

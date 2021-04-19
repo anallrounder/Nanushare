@@ -103,10 +103,16 @@
 		}); */
 		
 	</script>
-<!-- 	<script type="text/javascript">
+<style>
+#forimg {
+	background-image: url('/resources/banner_imgs/show_banner.png');
+	width:100%;
 	
-	
-</script> -->
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
 </head>
 
 <body>
@@ -115,8 +121,8 @@
 	<!-- Header -->
 
 	<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+<!-- 	<div class="charity-subheader" >
+		   style="background-image: url(/resources/loginform/images/bg.jpg);" 
 		<span class="light-black-transparent" ></span>
 		<div class="container">
 			<div class="row">
@@ -126,12 +132,29 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
+	<!-- Banner -->
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                   <!--  <h1>1:1 문의</h1> -->
+                   <!--  <p>show your support</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner -->
 	<!-- Sub Header -->
 
 	<!-- Content -->
+	<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 나눔 인증 </h2>
+	</div> 
+	
 	<div class="charity-main-content">
-
+		
 		<!-- Main Section -->
 		<div class="charity-main-section">
 			<div class="container">
@@ -360,11 +383,11 @@
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script	src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
 	<script	src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
-	<script	src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/functions-main.js"></script>
 	
 </body>
 
-
+<!-- <a href='https://www.freepik.com/vectors/people'>People vector created by pch.vector - www.freepik.com</a> -->
 <!-- 
 	function truncateText(selector, maxLength) {
 		var element = document.querySelector(selector), truncated = element.innerText;

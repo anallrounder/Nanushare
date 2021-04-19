@@ -724,7 +724,7 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/functions-main.js.js"></script>
 </body>
 
 </html>
