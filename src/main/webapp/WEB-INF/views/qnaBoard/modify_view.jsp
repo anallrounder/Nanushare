@@ -1,175 +1,211 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!doctype html>
+<html lang="ko">
+<!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- csrf_meta_tag_for_jsp
+    https://stackoverflow.com/questions/37383730/how-to-add-csrf-token-to-ajax-request -->
+	<meta name="_csrf" content="${_csrf.token}"/>
+	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+	
+	 <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <title>나누셰어 - 문의하기수정</title>
 
-<meta name="_csrf" content="${_csrf.token}">
-<meta name="_csrf_header" content="${_csrf.headerName}">
-
-<title>myprofile_edit</title>
-
-<!-- CSS -->
-<link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
-<link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
-<link rel="stylesheet" href="/resources/charity/css/flaticon.css">
-<link rel="stylesheet" href="/resources/charity/css/slick-slider.css">
-<link rel="stylesheet" href="/resources/charity/css/fancybox.css">
-<link href="/resources/charity/css/jplayer.css" rel="stylesheet">
-<link rel="stylesheet" href="/resources/charity/css/style.css">
-<link rel="stylesheet" href="/resources/charity/css/color.css">
-<link rel="stylesheet" href="/resources/charity/css/responsive.css">
-
-<!-- QNA게시판 리스트 -->
-<link rel="stylesheet" href="/resources/qna/css/common/common.css"/>
-
-<!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-
-<!-- Ajax -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- 작성 폼 스크립트 -->
-<script type="text/javascript">
+    <!-- CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
+    <link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+	
+	<!-- 웹페이지 탭 로고이미지 삽입  -->
+	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+	
+	<!-- ckeditor -->
+	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+	
+	<script type="text/javascript">
+	
 	$(document).ready(function(){
-		
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		
-		$("#updateForm").submit(function(event){         
-           event.preventDefault();
-          
-           var b_index = $("#b_index").val();
-           var btitle = $("#btitle").val();
-           var bcontent = $("#bcontent").val();
-           
-           
-           var form = {
-        		 b_index: b_index,
-        		 btitle: btitle,
-        		 bcontent: bcontent
-           };
-           
-           $.ajax({
-             type : "POST",
-             url : $(this).attr("action"),
-             cache : false,
-             contentType:'application/json; charset=utf-8',
-             data: JSON.stringify(form), 
-             //데이터를 전송하기 전에 헤더에 csrf값을 설정 (같이 넘겨줘야 post 403 error가 없다)
-             beforeSend : function(csrf) {   
-            	csrf.setRequestHeader(header, token)
-             },
-             success: function (result) {       
-               if(result == "SUCCESS") {
-                  $(location).attr('href', '${pageContext.request.contextPath}/board/qna')                            
-               }                       
-             },
-             error: function (e) {
-                location.reload(); // 실패시 새로고침하기
-             }
-         })            
-       });       
-   	});
-</script>
-	
-
-<style>
-.charity-simple-blog-btn {
-	border: 0;
-}
-
-​h3 {
-	text-align: center;
-}
-
-</style>
-
-</head>
- 
-<body>
-	<!-- Header -->
-		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
-	<!-- Header -->
-
-		<!-- Main Section -->
-	
-	</form>		
-		
-		<!-- 문의게시판 - START -->
-   <div id="wrapp">
-    <div id="containerr">
-        <div class="inner">        
-            <h2> 1:1 문의 </h2>            
-           
-                    <form id="updateForm" action="${pageContext.request.contextPath}/board/qna/modify">
-		<table class="table">
-			<tr>
-				<td>글번호</td>
-				<td><input type="hidden" id="b_index" name="b_index" value="${modify_view.b_index}">${modify_view.b_index}</td>
-			</tr>
-			<tr>
-				<td>작성일</td>
-				<td>${modify_view.bdate}</td>
-			</tr>
-			<tr>
-				<td>제목</td>
-				<td><input type="text" id="btitle" name="btitle" size="50" value="${modify_view.btitle}"></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td>${modify_view.member_id}</td>
-			</tr>
+		$("#modify").submit(function(event){			
+			event.preventDefault();
 			
-			<tr>
-				<td>조회수</td>
-				<td>${modify_view.bhit}</td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea cols="20" rows="10" id="bcontent" name="bcontent" >${modify_view.bcontent}</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<button type="submit" class="btn btn-primary ">수정완료</button>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					<button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/board/qna'">목록</button>
-				</td>
-			</tr>
-		</table>
-                
-            </form>            
+			var board_id = $("#b_index").val(); 					
+			var title = $("#btitle").val(); 
+			var text = $("#bcontent").val(); 
+			
+			// csrf
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+			
+			var form = {
+				b_index : board_id,
+				btitle : title,
+				bcontent : text
+			}
+			
+			$.ajax({
+				type : "PUT",
+				url : $(this).attr("action"),
+				cache : false,
+				dataType: 'text',
+				contentType: 'application/json; charset=utf-8',
+				data : JSON.stringify(form),
+				success : function(result){
+					console.log("result : " + result );
+						if(result == "SUCCESS") {
+							//$(location).attr('href', '${pageContext.request.contextPath}/board/sows/content_view/'+ form.b_index +');
+							window.location.href='${pageContext.request.contextPath}/board/qna/'+ board_id;
+							
+							swal({
+								title : "글 수정 완료" , 
+								icon : "success" , 
+								button : true 
+							});
+						}
+				},
+				error : function(e){
+					//alert("오류가 발생했습니다.");
+					swal({
+						title : "오류가 발생했습니다." , 
+						icon : "error" , 
+						button : false 
+					});
+					console.log(e);
+				}
+			}); // ajax end
+		}); // event end
+	}); // ready end
+</script>
+		
+	
+	
+</head>
+
+<body>
+    <!-- Header -->
+    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+    <!-- Header -->
+    
+    <!-- Banner -->
+    <div class="charity-subheader">
+        <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>문의 하기</h1>
+                    <p>show your support</p>
+                </div>
+            </div>
         </div>
     </div>
-    
-		<!-- 문의게시판 - END -->
+    <!-- Banner -->
+
+    <!-- Content -->
+    <div class="charity-main-content">
+
+        <!-- Main Section -->
+		<div class="charity-main-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9">
+                       <form action="${pageContext.request.contextPath}/board/qna/modify" id="modify" method="post" >
+                       <input type="hidden" id="b_index" name="b_index" value="${modify_view.b_index}" >
+	                       <div class="charity-contact-form">
+	                           <h4><span>Title</span><input type="text" id="btitle" name="btitle" value="${modify_view.btitle}"></h4><hr><br>
+	                           
+	                           <div class="charity-blog-options">
+	                                <ul style="float:right">
+	                                	<li><i class="fa fa-folder-open"></i>  No. ${modify_view.b_index}</li> 
+	                                    <li style="text-indent: 0.3em"><i class="fa fa-calendar"></i><time datetime="2008-02-14 20:00">  ${modify_view.bdate}</time></li>
+	                                    <li style="text-indent: 0.3em"><i class="fa fa-comments"></i><a href="404.html">  23 comments</a></li>
+	                                    <li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 ${modify_view.bhit}</li>
+	                                </ul>
+	                           </div>
+	                           <h4>Content</h4>
+	                           
+	                           <p><textarea id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></p><br><br>
+							  
+							   <!-- 에디터 -->
+							   <script type="text/javascript">
+		                        	var ckeditor_config = {
+			        						resize_enaleb : false, //에디터 크기조절 x
+			        						height:"450",
+			        						enterMode : CKEDITOR.ENTER_BR,
+			        						shiftEnterMode : CKEDITOR.ENTER_P,
+			        						filebrowserUploadUrl : '<c:url value="${pageContext.request.contextPath}/my/board/shows/imageUpload" />?${_csrf.parameterName}=${_csrf.token}'
+		        					};
+		                            CKEDITOR.replace('bcontent', ckeditor_config);
+		                        </script>
+		                        
+							   <br><hr>
+								<!-- 글삭제는 첨부파일,댓글 다 지워야 가능하다. 수정해야함 -->
+	                           <button type="button" class="charity-sub-btn"><i class="fa fa-eraser" onclick="location.href='delete?b_index=${modify_view.b_index}'"> 글삭제</i></button>
+							   <button type="submit" id="modify" class="charity-sub-btn"><i class="fa fa-save"> 수정완료</i></button>
+							   <button type="button" class="charity-sub-btn"><i class="fa fa-arrow-left"  onclick="location.href='${pageContext.request.contextPath}/board/qna/${modify_view.b_index}'"> 수정취소</i></button>
+							  <!--  <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시수정하기</i></button> -->
+							   <!-- charity-main-btn -->
+							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
+	                          
+	                        </div>
+	                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        </form>
+                        
+                    	<!--   a href="plist" -->
+                        <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="${pageContext.request.contextPath}/board/qna" class="fa fa-list-alt" > 문의하기 게시판 돌아가기 </a></div>
+                        <br><br>
+                       
+                        <!-- 댓글 보일지 말지 고민중  -->
+                        <!-- 댓글 보일지 말지 고민중  -->
+                        
+                    </div>
+
+                    <!-- 우측 배너  aside -->
+					<%@ include file="/WEB-INF/views/board_show/aside.jsp"%>
+					<!-- aside end -->
+					
+                </div>
+            </div>
+        </div>
+        <!-- Main Section -->
 		
-		<!-- Main Section -->
+    </div>
+    <!-- Content -->
 
-	<!-- Footer -->
-	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
-	<!-- Footer -->
+    <!-- Footer -->
+    <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
+    <!-- Footer -->
 
 
-	<!-- jQuery -->
-	<script src="/resources/charity/script/jquery.js"></script>
-	<script src="/resources/charity/script/popper.min.js"></script>
-	<script src="/resources/charity/script/bootstrap.min.js"></script>
-	<script src="/resources/charity/script/slick.slider.min.js"></script>
-	<script src="/resources/charity/script/progressbar.js"></script>
-	<script src="/resources/charity/script/fancybox.min.js"></script>
-	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-	<script src="/resources/charity/script/jquery.jplayer.js"></script>
-	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions-main.js"></script>
-	
+    <!-- jQuery -->
+    <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/slick.slider.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/progressbar.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/fancybox.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.countdown.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
 </body>
+
 </html>

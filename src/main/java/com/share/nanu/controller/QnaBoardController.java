@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -107,8 +108,7 @@ public class QnaBoardController {
 		
 		qService.uphit(boardVO);
 		mov.addObject("content_view", qService.getBoard(boardVO.getB_index()));
-		mov.addObject("reply_view", qService.getReplyBoard(replyVO.getB_index()));
-		//mov.addObject("manager", qService.getManager(md.getUsername()));
+		mov.addObject("reply_view", qService.getReplyBoard(replyVO.getB_index()));		
 		mov.setViewName("qnaBoard/content_view");
 
 		return mov;
@@ -125,9 +125,10 @@ public class QnaBoardController {
 	}
 	
 	// 문의글 수정
-	@PostMapping("/qna/modify")
+	@PutMapping("/qna/modify")
 	public ResponseEntity<String> qnaModify(@RequestBody BoardVO boardVO, @AuthenticationPrincipal MemberDetails md) {
-		
+		log.info("문의글 수정");
+		log.info("boardVO : " + boardVO);
 		ResponseEntity<String> entity = null;
 
 		try {
