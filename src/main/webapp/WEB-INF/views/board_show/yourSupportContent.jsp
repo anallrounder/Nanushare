@@ -57,7 +57,7 @@
 				});
 				
 		 			
-		 			$('#modify').html( //1번
+		 			$('#modify'+rNum).html( //1번
 		 					"<textarea id='edit_acontent'  style='width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
 		 					/* +"<style>#edit_acontent {width:640px; height:80px; resize:none;} </style>" */
 		 				);
@@ -257,7 +257,7 @@
 	                                        <div class="text-holder">
 	                                            <h6><c:out value="${vo.rid}"/></h6><!-- 작성자 -->
 	                                            <div><c:out value="${vo.rdate}"/></div><!-- 작성일 -->
-	                                            <p id="modify" ><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->	                                            
+	                                            <p id="modify${vo.r_num}"><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->	                                            
 	                                            
 	                                            
 	                                            <sec:authentication property="principal" var="pinfo" />
