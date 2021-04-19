@@ -5,7 +5,7 @@
 <html lang="ko">
 
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,7 @@
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
-    <title>나누셰어 - 문의하기 상세보기</title>
+    <title>나누셰어 - 나눔인증</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
@@ -35,131 +35,42 @@
     <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
-	
 	<script type="text/javascript">
 		
 	/* 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드  */
 	/* This script and many more are available free online at
 	The JavaScript Source!! http://javascript.internet.com
 	Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
-		
-		 	function answerEdit(bIndex,rid,rcontent,rNum) {
-				console.log(bIndex);
-				console.log(rid);
-				console.log(rcontent);
-				console.log(rNum);
-				
-				// csrf
-				var token = $("meta[name='_csrf']").attr("content");
-				var header = $("meta[name='_csrf_header']").attr("content");
-				$(document).ajaxSend(function(e, xhr, options) {
-					xhr.setRequestHeader(header, token);
-				});
-				
-		 			
-		 			$('#modify'+rNum).html( //1번
-		 					"<textarea id='edit_acontent'  style='width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
-		 					/* +"<style>#edit_acontent {width:640px; height:80px; resize:none;} </style>" */
-		 				);
-		 				
-		 				$('#abt').html( //2번
-		 					"<a href='javascript:void(0);'  onclick='answerEditSave("+bIndex+","+rNum+")' id='btnEdit'>완료</a> "
-		 					+"<a href='javascript:void(0);' onclick='location.href='qnaDetail.do?idx="+rNum+"' id='btnCancel'>취소</a>"
-		 				);
-		 			};
 
-		 			function answerEditSave(bIndex, rNum){ //3번
-		 				var rcontent = $("#edit_acontent").val();
-		 				//location.href='answerEdit.do?idx='+rid+"&acontent="+rcontent; //(4번)
-		 				var bindex = bIndex;
-		 				var form = {
-		 						rcontent : rcontent,
-		 						r_num : rNum
-		 				}
-		 				
-		 				$.ajax({
-		 					 type: 'put',
-		                     url: '${pageContext.request.contextPath}/board/shows/replyModify',
-		                     cache : false,
-		     				 dataType: 'text',
-		     				 data : JSON.stringify(form),
-		     				 contentType: 'application/json; charset=utf-8',
-		     				 success : function(result){
-		     					 if(result == "SUCCESS"){
-		     					
-		     						$(location).attr('href', "${pageContext.request.contextPath}/board/qna/" +bindex);
-			     					
-		     					 }
-		     					
-		     				 },
-		     				 error : function (e) {
-								console.log(e);
-							 }
-		 					
-		 				});
-		 			};
-		 			
-		 			$('#del_btn').click(function(event){
-		 				event.preventDefault();
-		 				
-		 				//var b_index = $("#b_index").val();
-		 				//var url = "${pageContext.request.contextPath}/board/qna/delete/" + b_index
-		 		
-		 				$.ajax({
-		 					type : 'DELETE',
-		 					url :  $(this).attr("href"),
-		 					cache : false,
-		 					beforeSend : function(csrf) {   
-		 			            	csrf.setRequestHeader(header, token)
-		 			        },
-		 					success: function(result){
-		 						console.log(result);
-		 						if(result == "SUCCESS"){
-		 							alert('삭제 완료'); 
-		 							$(location).attr('href', '${pageContext.request.contextPath}/board/qna') 
-		 						}
-		 					},
-		 					error:function(e){
-		 						console.log(e);
-		 			               alert('삭제 실패');
-		 			               location.reload(); // 실패시 새로고침하기
-		 					}
-		 				});
-		 			});
-		 		
-		 	
-		 	
-		 	
-		 function autoDate () {
-				
-				var tDay = new Date();
-				var tMonth = tDay.getMonth()+1;
-				var tDate = tDay.getDate();
-				if ( tMonth < 10) tMonth = "0"+tMonth;
-				if ( tDate < 10) tDate = "0"+tDate;
-				document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
-				//document.getElementById("rdate").value = tDay.getFullYear()+"/"+tMonth+"/"+tDate;
-			};
-			
-			// Multiple onload function created by: Simon Willison
-			// http://simonwillison.net/2004/May/26/addLoadEvent/
-			function addLoadEvent(func) {
-				var oldonload = window.onload;
-				if (typeof window.onload != 'function') {
-					window.onload = func;
-				} else {
-					window.onload = function() {
-						if (oldonload) {
-							oldonload();
-						}
-						func();
-					}
-				}
-			};
-			addLoadEvent(function() {
-				autoDate();
-			}); 
+	function autoDate () {
+		
+		var tDay = new Date();
+		var tMonth = tDay.getMonth()+1;
+		var tDate = tDay.getDate();
+		if ( tMonth < 10) tMonth = "0"+tMonth;
+		if ( tDate < 10) tDate = "0"+tDate;
+		document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
+		//document.getElementById("rdate").value = tDay.getFullYear()+"/"+tMonth+"/"+tDate;
+	}
 	
+	// Multiple onload function created by: Simon Willison
+	// http://simonwillison.net/2004/May/26/addLoadEvent/
+	function addLoadEvent(func) {
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') {
+			window.onload = func;
+		} else {
+			window.onload = function() {
+				if (oldonload) {
+					oldonload();
+				}
+				func();
+			}
+		}
+	}
+	addLoadEvent(function() {
+		autoDate();
+	}); 
 	</script>
 	
 </head>
@@ -175,7 +86,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12"> 
-                    <h1>문의하기 상세보기</h1>
+                    <h1>인증게시판</h1>
                     <p>show your support</p>
                 </div>
             </div>
@@ -193,46 +104,36 @@
 					<div class="col-md-9">
 						<div class="charity-rich-editor">
                             
-                            <!-- 글 제목 -->
 							<h1>${content_view.btitle}</h1><!-- <hr> -->
-							
-							<!-- 대표 이미지(썸네일 등록한거는) 컨텐트 뷰 에서는 사용 안하기로 -->
 							<%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
-							
-							<!-- 넘버링, 계산들 -->
 							<div class="charity-blog-options">
                                 <ul style="float:right">
-                                	<li><i class="fa fa-user"></i>  ${content_view.member_id} &nbsp;  </li> <!-- 작성자 -->
-                                	<li><i class="fa fa-folder-open"></i>  No. ${content_view.b_index} </li> <!-- 게시판 글번호 -->
-                                    <li style="text-indent: 0.3em"><i class="fa fa-calendar"></i>  ${content_view.bdate}</li> <!-- 작성일 -->
-                                    <li style="text-indent: 0.3em"><i class="fa fa-comments"></i> 댓글수 ${replyCount} </li> <!-- 댓글수 -->
-                                    													<!-- 댓글 수 카운트는 아직 새로고침 해야 반영된다. -->
-                                    <li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 ${content_view.bhit}</li> <!-- 글 조회수 -->
+                                	<li><i class="fa fa-folder-open"></i>  No. ${content_view.b_index}</li> 
+                                    <li style="text-indent: 0.3em"><i class="fa fa-calendar"></i><time datetime="2008-02-14 20:00">  ${content_view.bdate}</time></li>
+                                    <li style="text-indent: 0.3em"><i class="fa fa-comments"></i><a href="404.html">  23 comments</a></li>
+                                    <li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 ${content_view.bhit}</li>
                                 </ul>
                             </div>
-                            
-                            <!-- 글 내용 -->
                             <p>${content_view.bcontent}</p><br>
                            
 							<hr>
                             
-                            <!-- 버튼 -->
                             <div class="charity-post-tags">
-                                <!-- <div class="charity-tags">
+                                <div class="charity-tags">
                                     <span>Tags:</span>
                                     <a href="#">charity </a>
                                     <a href="#">/ donation</a>
                                     <a href="#"> / needy</a>
-                                </div> -->
+                                </div>
                                 <div class="charity-blog-social">
                                  	<span></span>
                                     <ul>
-                                    	<li><a href="${pageContext.request.contextPath}/board/qna" class="fa fa-list-alt"> 게시글 목록보기</a></li>
+                                    	<li><a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt"> 목록</a></li>
                                     	<sec:authentication property="principal" var="pinfo" />
 										<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq content_view.member_id}"> 
-                                        	<li><a href="${pageContext.request.contextPath}/board/qna/modify/${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
-                                        	<li><a id="del_btn" href="${pageContext.request.contextPath}/board/qna/delete/${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
+                                        	<li><a href="modify_view?b_index=${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
+                                        	<li><a id="del_btn" href="delete?b_index=${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
                                         </c:if>
                                         </sec:authorize>
                                         <!-- onClick="bcontent_del();" -->
@@ -241,8 +142,33 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- 버튼 -->
                         
+                        
+                        <!-- 이전, 다음글 보기 -->
+                      <%--   <div class="charity-prenxt-post">
+                            <ul>
+                                <li class="charity-prev-post">
+                                    <figure>
+                                        <a href="404.html"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/post-img1.png" alt=""></a>
+                                    </figure>
+                                    <div class="charity-prev-artical">
+                                        <a href="404.html" class="charity-post-arrow"><i class="fa fa-angle-double-left"></i> Previous Article</a>
+                                        <h3><a href="404.html" class="prev_btn">Duis arcu lectus, interdum quisi sodales</a></h3>
+                                    </div>
+                                </li>
+                                <!-- 다음글 -->
+                                <li class="charity-next-post">
+                                    <figure>
+                                        <a href="404.html"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/post-img2.png" alt=""></a>
+                                    </figure>
+                                    <div class="charity-next-artical">
+                                        <a href="404.html" class="charity-post-arrow">Next Article <i class="fa fa-angle-double-right"></i></a>
+                                        <h3><a href="404.html">Duis arcu lectus, interdum quisi sodales</a></h3>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> --%>
+                        <!-- 이전, 다음글 보기 -->
                        
                         <!-- 댓글 -->
                         <div class="widget_title"><h2>댓글</h2></div><!-- Comments -->
@@ -253,13 +179,13 @@
                             
                              	<!-- prepend 자리 -->
                             	
-                            	<c:if test="${empty reply_view}">
+                            	<c:if test="${empty listComment}">
 									<p id="nothing" align="center">작성된 댓글이 없습니다</p>
 								</c:if>
                              
-                             	<c:if test="${! empty reply_view}">
+                             	<c:if test="${! empty listComment}">
                              	<%-- <c:set var="listComment" value="${listComment}" /> --%> <!-- 이건 왜 쓰는건지 잘 모르겠당 -->
-                             	<c:forEach var="vo" items="${reply_view}">
+                             	<c:forEach var="vo" items="${listComment}">
 	                                
 	                                <li class="rlist">
 	                                    <div class="thumb-list">
@@ -270,22 +196,16 @@
 	                                        <div class="text-holder">
 	                                            <h6><c:out value="${vo.rid}"/></h6><!-- 작성자 -->
 	                                            <div><c:out value="${vo.rdate}"/></div><!-- 작성일 -->
-	                                            <p id="modify${vo.r_num}"><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->	                                            
-	                                            
+	                                            <p><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->
 	                                            
 	                                            <sec:authentication property="principal" var="pinfo" />
 												<sec:authorize access="isAuthenticated()">
 												<c:if test="${pinfo.username eq vo.rid}"> 
-		                                            <div class="charity-blog-social" id="abt" >
-		                                            	
-		                                            <!-- href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}"  -->
-			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')"> <b>수정하기</b></a> 
+		                                            <div class="charity-blog-social">
+			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update_view/${vo.b_index}/${vo.r_num}" ><b>수정하기</b></a> &nbsp;
 		                                    		   <%--  onClick="updateView('${vo.b_index}','${vo.rid}','${vo.rdate}','${vo.rcontent}')" --%>
-		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" ><b>삭제하기</b></a>
-		                                    		    <%--  onClick="del('${vo.b_index}','${vo.r_num}')" --%>
-		                                    		    
-	                                    		    </div>
-	                                    		    
+		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.b_index}/${vo.r_num}" ><b>삭제하기</b></a><%--  onClick="del('${vo.b_index}','${vo.r_num}')" --%>
+	                                    		    </div><%-- /${vo.r_num} --%>
                                     		    </c:if>
                                     		    </sec:authorize>
 	                                            <br> 
@@ -300,16 +220,9 @@
                             <!--// comments \\-->
                             
                         </div>
-                       
+                        
                         <!--// 댓글 작성 영역 comment-respond \\-->
-                        <!-- 댓글 작성 버튼은 관리자와 현재 게시글의 작성자만 대글작성 버튼을 누를 수 있다. -->                       
-                        <!-- Leave a Comment -->
-                        <sec:authentication property="principal" var="principalMember_id" />
-                        
-                        <!-- 관리자 체크 -->
-                        <c:if test="${principalMember_id.username eq content_view.member_id || principalMember_id.getmember().getAuthname() eq '관리자' }">
-                        
-                        <div class="widget_title"><h2>댓글을 남겨주세요.</h2></div>
+                        <div class="widget_title"><h2>댓글을 남겨주세요.</h2></div><!-- Leave a Comment -->
                         <div class="comment-respond">
                             <form id="insertForm" action="${pageContext.request.contextPath}/board/shows/reply_insert" method="post">
                                 <input type="hidden" id="b_index" name="b_index" value="${content_view.b_index}"/>
@@ -318,7 +231,9 @@
 									<c:if test="${! empty  pinfo.username}"> 
 	                                <p>
 	                                    <label>작성자(아이디)</label>
-	                                    <input type="text" id="rid" name="rid" value="<c:out value='${pinfo.username}'/>" readonly> <!-- 문제는 이렇게 바꾸니까 값이 안넘어간다 ㅠㅠ -->	                                  
+	                                    <input type="text" id="rid" name="rid" value="<c:out value='${pinfo.username}'/>" readonly> <!-- 문제는 이렇게 바꾸니까 값이 안넘어간다 ㅠㅠ -->
+	                                  <%--   <input type="text" id="rid" name="rid" value="<sec:authentication property="principal.member.member_id"/>"  readonly >  
+	                                   			이거쓰면 로그인 안한 사람이 댓글 없는 컨텐트뷰에 들어올 때 에러남 --%>
 	                                </p>
 	                                </c:if>
                                	 	</sec:authorize> 
@@ -330,15 +245,16 @@
                                     <label>댓글내용</label>
                                     <textarea id="rcontent" name="rcontent" placeholder="댓글을 작성하세요." class="commenttextarea"></textarea>
                                 </p>
-                                <p class="form-submit">                                  
+                                <p class="form-submit">
+                                    <!-- <input name="comment_post_ID" value="99" id="comment_post_ID" type="hidden"> -->
                                 	<input id="resubmit" name="submit" class="submit" value="댓글작성" type="submit">
-                                	<!-- 관리자와 글 작성자만 댓글을 달 수 있다. -->
+                                	
+                                <!-- 여기서는 수정, 삭제를 할 필요가 없었잖아? <button type="button" class="btn btn-primary-sm m-2" onClick="rmodify()">삭제</button>
+									<button type="button" class="btn btn-primary-sm m-2" onClick="rmodify()">수정</button> -->
                                 </p>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             </form>
                         </div>
-                        </c:if>
-                         <!-- Leave a Comment -->
                         <!--// 댓글 작성 영역 comment-respond \\-->
                         
                     </div>
@@ -363,7 +279,6 @@
 	<script>
 	// 댓글 작성 누를 때 로그인 체크: 로그인이 되어있지 않으면 alert창이 뜨고 확인버튼을 누르면 loginPage로 이동한다.
 	$(document).ready(function() {
-		
 		var rid = $("#rid").val();
 		function checkLogin() {
 			if (rid == undefined) {
@@ -380,9 +295,8 @@
 					location.href = '/loginPage'
 				});
 				//alert("로그인 후 글을 작성해주세요.");
-			};
-		};
-		
+			}
+		}
 		//댓글 작성 로그인 체크
 		$('#resubmit').click(function() {
 			checkLogin();
@@ -392,7 +306,43 @@
 	</script>
 
     <script type="text/javascript">
+    	// 이전 페이지 주소
+    	/* $(".a-prev_btn").click(function(event) {
+    		event.preventDefault();
+    		alert("이전글 버튼 click");
+    	} */
     	
+    	/* function prev_move(b_index) {
+			console.log(b_index)
+		};
+		function next_move(b_index) {
+			console.log(b_index)
+		};
+		if(b_index !== null){
+			var url = "${pageContext.request.contextPath}/board/shows/content_view/" + b_index -1;
+		}
+    	
+    	
+	   	$.ajax({
+	`			type: "POST",
+	   	        contentType: 'application/json; charset=utf-8',
+	   	  		url: url,
+	   	        data: JSON.stringify(form), 
+	   	        cache : false,
+	   	      
+	   	        success: function (data) { 
+	   	        	
+	   	        console.log("SUCCESS : ", data);
+	   	}); */
+	   	
+	   	 
+	   /* 	var member_id = ${content_view.member_id};
+	   	var username = ;
+	   	
+	   	if(member_id ! == username || username == null){
+	   		$('#bcontent_del').hide();
+	   	}
+	   	 */
 	   	 
    		// 랜덤 이미지 불러오기 (슬비씨 깃허브 참고: https://github.com/seulpi/TIL/blob/cfae84682eb65d8e85f76de11de663a17f14f22f/Quiz/spring_Answer11.md#5-view )
 		$(function(){
@@ -452,10 +402,11 @@
     			dataType: 'text',
     			contentType:'application/json; charset=UTF-8',
     			data: JSON.stringify(form),
-    			success : function(r_num) {
-    					//alert(r_num)
-    					//alert(result.replyVO.r_num)
-    					//alert(result.rvo.b_index)
+    			success : function(result) {
+    					alert(result)
+    					
+    					alert(result.r_num)
+    					alert(result.b_index)
     					
 	    				swal({
 						  title : "댓글 입력 완료" , 
@@ -473,8 +424,8 @@
     					htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
     					htmls += '<p>' + rcontent + '</p>'
 						htmls += '<div class="charity-blog-social">'
-						htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update_view/' + r_num + '" ><b>수정하기</b></a>'+'&nbsp;'
-						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + r_num + '" ><b>삭제하기</b></a></div>'
+						//htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update_view/' + form.b_index + '/' +  form.r_num  + '" ><b>수정하기</b></a>'+'&nbsp;'
+						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + form.b_index + '/'+ result + '" ><b>삭제하기</b></a></div>'
     					htmls += '</div>'
     					htmls += '</div>'
     					htmls += '</li>'
@@ -506,7 +457,26 @@
     			    			cache : false,
     			    			success : function(result) {
     			    				console.log("result: " + result); 
-    			    				
+    			    				/* if (result == "SUCCESS") {
+    			    					$(tr).remove();
+    			    					//alert("삭제되었습니다.");
+    			    					swal({
+    									  title : "진짜로 댓글을 삭제하시겠습니까?" , 
+    									  text : "삭제하면이 댓글을 복구 할 수 없습니다!" , 
+    									  icon : "warning" , 
+    									  button : true , 
+    									  dangerMode : true , 
+    									})
+    									.then((willDelete) => { 
+    									  if (willDelete) {  
+    									    swal("댓글이 삭제되었습니다!" , { 
+    									      icon : "success" , 
+    									    });
+    									  } 
+    									});
+    			    					if($('.rlist') !== null){
+    			    						$('#nothing').show();
+    			    					}  */
     			    					if (result == "SUCCESS") {
     			    					$(tr).remove();
     			    					//alert("삭제되었습니다.");
@@ -578,7 +548,69 @@
     		
      	}); // 삭제 종료
     	
-     	
+     	// 댓글 수정 창 보기
+     	/*  $(".a-updateView").click(function(event) {
+    		event.preventDefault();
+    		alert("수정하기 click");
+    		
+    		function(b_index, rid, rcontent, rdate){
+    			console.log(b_index);
+        		console.log(rid);
+        		console.log(rcontent);
+        		console.log(rdate);
+        		
+        		var b_index = b_index;
+        		var rid = rid;
+        		var rcontent = rcontent;
+        		var rdate = rdate;
+
+    		};
+    	 	var form = {
+    				b_index: b_index,
+    				rid : rid,
+    				rcontent : rcontent,
+    				rdate : rdate
+    		}  
+    	 	
+    	 	// csrf
+    	    var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            }); 
+    		
+    		$.ajax({
+    			type : "GET",
+    			url : $(this).attr("href"),
+    			cache : false,
+    			contentType : 'application/json; charset=UTF-8',
+    			dataType : "text", // -> 데이터 타입을 적으면 성공했음에도 불구하고 에러로 처리되어 리스트로 넘어가지 않는다. 
+    			data: JSON.stringify(form), 
+    			success: function (result) {       
+    	               if(result == "SUCCESS"){
+    					
+    						alert(result+ "수정창 보기");
+    	                  
+    						htmls = '';
+    						
+    						htmls += '<form id="insertForm" action="${pageContext.request.contextPath}/board/reply_insert" method="post">
+    						htmls += '<input type="text" id="b_inedex" name="b_inedex"  class="form-control"  value="' + b_inex + '"/>'
+    						htmls += '<input type="text" id="rid" name="rid" class="form-control" value="' + rid + '">'
+    						htmls += '<textarea id="rcontent" name="rcontent" class="form-control">'+ rcontent + '</textarea>'
+    						htmls += '<br>'
+    						htmls += '<button type="submit" class="btn btn-primary pull-right">댓글작성</button>'
+    						htmls += '</form>'
+    						
+    						$("#rlist").val(htmls); // 작성 결과 입력
+    											
+    	               }                       
+    	             },
+    	             error: function (e) {
+    	                 console.log(e);
+    	             }
+    			
+    		}); // end of ajax
+    	});   */  // end of 수정 event 
     	
     });
     </script>	

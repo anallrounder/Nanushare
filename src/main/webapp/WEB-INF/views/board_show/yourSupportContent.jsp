@@ -164,7 +164,7 @@
 				<div class="row">
 					<div class="col-md-9">
 						<div class="charity-rich-editor">
-                            
+                          
                             <!-- 글 제목 -->
 							<h1>${content_view.btitle}</h1><!-- <hr> -->
 							
@@ -189,13 +189,12 @@
 							<hr>
                             
                             <!-- 버튼 -->
-                            <div class="charity-post-tags">
-                                <!-- <div class="charity-tags">
-                                    <span>Tags:</span>
-                                    <a href="#">charity </a>
-                                    <a href="#">/ donation</a>
-                                    <a href="#"> / needy</a>
-                                </div> -->
+                            <div class="charity-post-tags" >
+                              	<div class="charity-tags">
+	                            	<span style="color:orange;">관리자: </span>
+	                            	<a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 수정 </a>
+	                            	<a id="del_btn" href="delete?b_index=${content_view.b_index}" class="fa fa-eraser" style="color:orange;"> 삭제</a>
+	                           	</div>
                                 <div class="charity-blog-social">
                                  	<span></span>
                                     <ul>
@@ -204,18 +203,38 @@
 										<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq content_view.member_id}"> 
                                         	<li><a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
-                                        	<li><a id="del_btn" href="delete?b_index=${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
+                                        	<li><a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
                                         </c:if>
                                         </sec:authorize>
                                         <!-- onClick="bcontent_del();" -->
                                     </ul>
-                                
                                 </div>
                             </div>
                         </div>
                         <!-- 버튼 -->
                         
+                          <!-- 관리자 버튼 -->
+                      <%--   <div class="charity-post-tags">
                         
+	                        <div class="charity-tags">
+                               <span>관리자 기능</span>
+                               <!-- <a href="#">charity </a>
+                               <a href="#">/ donation</a>
+                               <a href="#"> / needy</a> -->
+                           </div> 
+	                        
+	                        <div class="charity-blog-social">
+						        <ul>             
+		                        <sec:authorize access="hasRole('ADMIN')">
+		                      		<li><a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
+		                        	<li><a id="del_btn" href="delete?b_index=${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
+		                        </sec:authorize>
+		                        </ul>  
+	                        </div>
+                        </div> --%>
+                        <!-- 관리자 버튼 -->
+                        
+                       
                         <!-- 이전, 다음글 보기 -->
                       <%--   <div class="charity-prenxt-post">
                             <ul>
@@ -296,6 +315,8 @@
                                 </c:if>
                             </ul>
                             <!--// comments \\-->
+                            
+                            
                             
                         </div>
                        

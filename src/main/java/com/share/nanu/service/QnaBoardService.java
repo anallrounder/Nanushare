@@ -41,6 +41,9 @@ public interface QnaBoardService {
 	
 	//댓글 내용
 	public List<BoardreplyVO> getReplyBoard(int b_index);
+	
+	//관리자 권한 체크
+	//public Object getManager(String username);
 
 	
 

@@ -232,6 +232,7 @@
 										</figure>
 
 										<div class="charity-simple-blog-text">
+											<h2><a href="/board/shows/content_view?b_index=${vo.b_index}">제목: ${vo.btitle}</a></h2>
 											<ul class="charity-simple-blog-options">
 												<li><i class="fa fa-folder-open"></i>글번호 ${vo.b_index}</li>
 												<li><i class="fa fa-user-circle"></i>작성자 ${vo.member_id}</li>
@@ -240,9 +241,9 @@
 												<!-- <li><i class="fa fa-comments"></i><a href="#">5 Comments</a></li> -->
 												<!--  <li><i class="far fa-heart"></i> <a href="#">Like</a></li> -->
 											</ul>
+											<br><br>
 											
-											<h2><a href="/board/shows/content_view?b_index=${vo.b_index}">제목: ${vo.btitle}</a></h2>
-											<p class="contentclas">${vo.bcontent}<!-- 생의능히가치를 가지에 커다란 든
+											<%-- <p class="contentclas">${vo.bcontent}<!-- 생의능히가치를 가지에 커다란 든
 												돋고, 이상은 사막이다. 불어 소리다. 이것은 영원히 같은 바이며, 튼튼하며, 긴지라 피고, 돋고, 듣는다.
 												예수는 하는 같이 용기가 청춘을 꽃이 간에 때까지 못할 사막이다. 살았으며, 사랑의 곳으로 사는가 간에
 												기관과 낙원을 때문이다. 인생을 소금이라 얼마나 바이며, 힘있다. 구하지 아름답고 갑 피부가 끝에 같이,
@@ -250,8 +251,8 @@
 												그들은 것이다. 내려온 듣기만 그들은 산야에 목숨이 맺어, 갑 것이다. 생의 곳으로 아니한 가슴에 많이
 												인생에 어디 아니다. 인간이 것은 싶이 고행을 대한 않는 별과 부패뿐이다. 천자만홍이 인생에 과실이 같이 꽃
 												것이다. 두손을 투명하되 낙원을 약동하다. 소금이라 미묘한 청춘의 꽃이 바이며, 쓸쓸하랴? 목숨이 거선의
-												관현악이며, 현저하게 피고 보라. --> </p>
-											<a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}" class="charity-simple-blog-btn">더보기</a>
+												관현악이며, 현저하게 피고 보라. --> </p>--%>
+											<a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}" class="charity-simple-blog-btn">더보기</a> 
 											<%-- ${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index} --%>
 										</div>
 									</li>
