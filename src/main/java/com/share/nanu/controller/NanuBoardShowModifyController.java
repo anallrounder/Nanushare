@@ -41,7 +41,6 @@ public class NanuBoardShowModifyController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			
 			service.modifyBoard(boardVO); //수정 업데이트
 			
 	        entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
