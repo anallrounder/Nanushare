@@ -73,15 +73,13 @@ li {
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<!-- Sub Header -->
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -102,51 +100,47 @@ li {
 							<div class="user-info">
 								<img class="img-profile img-circle img-responsive center-block"
 									src="/resources/my/프로필사진.PNG" alt="">
-								<!-- 
-									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
 								<ul class="meta list list-unstyled">
 									<li class="name"><h2>
 											<sec:authentication property="principal.member.name" />
 										</h2></li>
 									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></a></li>
+											property="principal.member.member_id" /></li>
 									<li class="activity"><sec:authentication
 											property="principal.member.signuppath" />회원</li>
 								</ul>
 							</div>
 							<nav class="side-menu">
 							<ul class="nav">
-								<li><a href="mypage"><span
-										class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
-								<li class="active"><a href="ask"><span class="fa fa-question">
-									</span>&nbsp;&nbsp;나의문의내역</a></li>
+								<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
+								<li class="active"><a href="ask"><span
+										class="fa fa-question"> </span>&nbsp;&nbsp;나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
 									</span>&nbsp;&nbsp;나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-handshake">
 									</span>&nbsp;&nbsp;나의나눔내역</a></li>
 								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
 								<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
-
-
 							</ul>
 							</nav>
 						</div>
-							<div class="content-panel">
+						<div class="content-panel">
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 							<div>&nbsp;</div>
 							<div>&nbsp;</div>
 							<div>&nbsp;</div>
 							<div class="charity-fancy-title">
-							<h2>나의 문의 내역</h2></div>
+								<h2>나의 문의 내역</h2>
+							</div>
 							<div>&nbsp;</div>
 							<table>
 								<div>
 									<br>
 								</div>
 								<tr>
-									<!-- <th>아이디</th> -->
-									<th>문의제목-링크아직X</th>
+									<th>글번호</th>
+									<th>문의제목</th>
 									<th>조회수</th>
 									<th>날짜</th>
 
@@ -162,26 +156,17 @@ li {
 								<!-- 나의문의내역 -->
 								<c:if test="${! empty list1}">
 									<c:forEach items="${list1}" var="list1">
-										<%-- <sec:authentication property="principal" var="pinfo" />
-									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list1.member_id}"> --%>
 										<tr>
-											<%-- <td>${list1.member_id}</td> --%>
-											<%-- <td><c:if test="${sessionScope.member_id = principal.member_id}"></c:if></td> --%>
+											<td>${list1.b_index}</td>
 											<td><a id="a-content"
-												href="${pageContext.request.contextPath}/my/ask?b_index=${list1.b_index}">${list1.btitle}</a></td>
+												href="${pageContext.request.contextPath}/board/qna/${list1.b_index}">${list1.btitle}</a></td>
 											<!-- 제목누르면 해당 글내용으로 이동링크 -->
 											<td>${list1.bhit}</td>
 											<td>${list1.bdate}</td>
-
 										</tr>
-										<%-- </c:if>
-									</sec:authorize> --%>
 									</c:forEach>
 								</c:if>
 							</table>
-
-
 
 							<!-- 페이징 -->
 
@@ -201,7 +186,6 @@ li {
 												href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
 											</li>
 										</c:forEach>
-
 										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 											<li class="page-item"><a
 												href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>

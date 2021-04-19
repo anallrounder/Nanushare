@@ -128,87 +128,87 @@ public class NanuDonationServiceImpl implements NanuDonationService {
 
 	
 	//아임포트 엑세스 토큰 
-	@Override
-	public JsonNode getImportToken(String impId, String impSecret, String impToken) {
-		log.info("엑세스토큰 요청 서비스");
-		log.info("아임포트 아이디 : "+impId);
-		log.info("아임포트 시크릿 : " + impSecret);
-		log.info("아임포트 엑세스토큰 요청 url : "+ impToken);
-		
-		//httpclient 로 request 보내기
-		//다른 서버로 request를 보내 response 받기
-		//즉, 아임포트로 엑세스토큰 request를 보내서 response로 엑세스토큰 받기
-		
-		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-		postParams.add(new BasicNameValuePair("imp_key", impId)); //주의! 반드시 아임포트에서 지정한 변수명으로 지정해야한다! imp_key 로 선언하지 않을시 에러
-		postParams.add(new BasicNameValuePair("imp_secret", impSecret));
-		log.info("postParams : "+ postParams);
-		
-		final HttpClient client = HttpClientBuilder.create().build();
-		
-		final HttpPost post = new HttpPost(impToken);
-		post.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-		JsonNode returnNode = null;
-		
-		try {
-			post.setEntity(new UrlEncodedFormEntity(postParams));
-			final HttpResponse response = client.execute(post);
-			ObjectMapper mapper = new ObjectMapper();
-			returnNode = mapper.readTree(response.getEntity().getContent());
-			log.info("returnNode : " + returnNode);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		
-		return returnNode;
-		
-	}
-	
-	//아임포트 취소 요청
-	@Override
-	public JsonNode cancelPayment(String merchantUid, String cancelRequestAmount, String reason, 
-			String impCancelurl, String accessToken) {
-		log.info("결제 취소 서비스");
-		log.info("결제 번호 : " + merchantUid );
-		log.info("결제 취소 금액 : " + cancelRequestAmount );
-		log.info("결제 취소 이유 : " + reason );
-		
-		
-		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-		postParams.add(new BasicNameValuePair("merchant_uid", merchantUid));
-		//postParams.add(new BasicNameValuePair("cancel_request_amount", cancelRequestAmount));
-		postParams.add(new BasicNameValuePair("reason", reason));
-		
-		final HttpClient client = HttpClientBuilder.create().build();
-		
-		final HttpPost post = new HttpPost(impCancelurl);
-		post.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-		post.addHeader("Authorization", accessToken);
-		
-		JsonNode returnNode = null;
-		
-		try {
-			post.setEntity(new UrlEncodedFormEntity(postParams));
-			final HttpResponse response = client.execute(post);
-			ObjectMapper mapper = new ObjectMapper();
-			returnNode = mapper.readTree(response.getEntity().getContent());
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		
-		return returnNode;
-	}
-
-	//아임포트 취소후 처리상태 업데이트
-	@Override
-	public void updateState(String merchantUid) {
-		ndmapper.updateState(merchantUid);
-	}
-	
+//	@Override
+//	public JsonNode getImportToken(String impId, String impSecret, String impToken) {
+//		log.info("엑세스토큰 요청 서비스");
+//		log.info("아임포트 아이디 : "+impId);
+//		log.info("아임포트 시크릿 : " + impSecret);
+//		log.info("아임포트 엑세스토큰 요청 url : "+ impToken);
+//		
+//		//httpclient 로 request 보내기
+//		//다른 서버로 request를 보내 response 받기
+//		//즉, 아임포트로 엑세스토큰 request를 보내서 response로 엑세스토큰 받기
+//		
+//		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+//		postParams.add(new BasicNameValuePair("imp_key", impId)); //주의! 반드시 아임포트에서 지정한 변수명으로 지정해야한다! imp_key 로 선언하지 않을시 에러
+//		postParams.add(new BasicNameValuePair("imp_secret", impSecret));
+//		log.info("postParams : "+ postParams);
+//		
+//		final HttpClient client = HttpClientBuilder.create().build();
+//		
+//		final HttpPost post = new HttpPost(impToken);
+//		post.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+//		JsonNode returnNode = null;
+//		
+//		try {
+//			post.setEntity(new UrlEncodedFormEntity(postParams));
+//			final HttpResponse response = client.execute(post);
+//			ObjectMapper mapper = new ObjectMapper();
+//			returnNode = mapper.readTree(response.getEntity().getContent());
+//			log.info("returnNode : " + returnNode);
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return returnNode;
+//		
+//	}
+//	
+//	//아임포트 취소 요청
+//	@Override
+//	public JsonNode cancelPayment(String merchantUid, String cancelRequestAmount, String reason, 
+//			String impCancelurl, String accessToken) {
+//		log.info("결제 취소 서비스");
+//		log.info("결제 번호 : " + merchantUid );
+//		log.info("결제 취소 금액 : " + cancelRequestAmount );
+//		log.info("결제 취소 이유 : " + reason );
+//		
+//		
+//		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+//		postParams.add(new BasicNameValuePair("merchant_uid", merchantUid));
+//		//postParams.add(new BasicNameValuePair("cancel_request_amount", cancelRequestAmount));
+//		postParams.add(new BasicNameValuePair("reason", reason));
+//		
+//		final HttpClient client = HttpClientBuilder.create().build();
+//		
+//		final HttpPost post = new HttpPost(impCancelurl);
+//		post.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+//		post.addHeader("Authorization", accessToken);
+//		
+//		JsonNode returnNode = null;
+//		
+//		try {
+//			post.setEntity(new UrlEncodedFormEntity(postParams));
+//			final HttpResponse response = client.execute(post);
+//			ObjectMapper mapper = new ObjectMapper();
+//			returnNode = mapper.readTree(response.getEntity().getContent());
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return returnNode;
+//	}
+//
+//	//아임포트 취소후 처리상태 업데이트
+//	@Override
+//	public void updateState(String merchantUid) {
+//		ndmapper.updateState(merchantUid);
+//	}
+//	
 
 }

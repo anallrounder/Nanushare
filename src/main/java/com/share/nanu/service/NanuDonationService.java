@@ -48,19 +48,19 @@ public interface NanuDonationService {
 	public void getDonation(String merchantUid);
 	
 	//아임포트 엑세스 토큰 가져오기
-	public JsonNode getImportToken(String impId, String impSecret, String impToken);
+	//public JsonNode getImportToken(String impId, String impSecret, String impToken);
 	
-<<<<<<< HEAD
-
-=======
-	//아임포트 취소
-	public JsonNode cancelPayment(String merchantUid, String cancelRequestAmount, String reason, String impCancelurl, String accessToken);
+//<<<<<<< HEAD
+//
+//=======
+//	//아임포트 취소
+//	public JsonNode cancelPayment(String merchantUid, String cancelRequestAmount, String reason, String impCancelurl, String accessToken);
+//	
+//	//아임포트 취소후 결제 상태 업데이트
+//	public void updateState(String merchantUid);
+//	
 	
-	//아임포트 취소후 결제 상태 업데이트
-	public void updateState(String merchantUid);
-	
-	
->>>>>>> master_lhj
+//>>>>>>> master_lhj
 	
 
 }

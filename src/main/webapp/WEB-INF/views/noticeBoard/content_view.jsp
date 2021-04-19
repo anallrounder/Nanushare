@@ -5,15 +5,16 @@
 <html>
 <head>
 
-  <!-- meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
-    <meta name="_csrf" content="${_csrf.token}">
-    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
- 
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="_csrf" content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header"
+	content="${_csrf.headerName}">
+
 <title>myprofile_content</title>
 
 <!-- CSS -->
@@ -89,52 +90,88 @@
 	<div class="charity-main-content">
 
 		<!-- Main Section -->
-		<form id="updateForm"
-			action="${pageContext.request.contextPath}/board/notice/${content_view.b_index}/modify_view"
-			method="get">
-			<table class="table">
-				<input type="hidden" id="b_index" value="${content_view.b_index}">
-				<input type="hidden" id="b_index" value="${content_view.bhit}">
-				<input type="hidden" id="b_index" value="${content_view.member_id}">
-				<input type="hidden" id="b_index" value="${content_view.btitle}">
-				<input type="hidden" id="b_index" value="${content_view.bcontent}">
-				
-				<tr>
-					<td>번호</td>
-					<td>${content_view.b_index}</td>
-				</tr>
-				<tr>
-					<td>조회수</td>
-					<td>${content_view.bhit}</td>
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td>${content_view.member_id}</td>
-				</tr>
-				<tr>
-					<td>제목</td>
-					<td>${content_view.btitle}</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>${content_view.bcontent}</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" class="btn btn-primary" 
-						value="수정">&nbsp;&nbsp;
-						<button type="button" class="btn btn-primary"
-							onclick="location.href='delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;
-						<button type="button" class="btn btn-primary"
-							onclick="location.href='${pageContext.request.contextPath}/board/notice'">목록</button>
-					</td>
-				</tr>
-			</table>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	                        <input type="hidden" id="_csrf_header" name="_csrf_header" value="${_csrf.headerName}" />
-                        </form>
+		<div class="charity-main-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="widget_title">
+							<h2>공지사항</h2>
+						</div>
+						<div class="charity-rich-editor charity-cause-detail">
+							<div class="charity-volunteer-form">
 
+								<form>
+									<ul class="charity-cause-options">
+										<li><i class="fa fa-map-marker-alt"></i>
+											<h6>
+												글번호 <input type="hidden" id="b_index"
+													value="${content_view.b_index}">
+												${content_view.b_index}
+											</h6></li>
+									</ul>
+									<div>&nbsp;</div>
+									<div>&nbsp;</div>
+									<h3>
+										<input type="hidden" id="b_index"
+											value="${content_view.btitle}">
+										${content_view.btitle}
+									</h3>
+									<ul class="charity-cause-options">
+										<li><i class="fa fa-map-marker-alt"></i>
+											<h6>
+												작성자 : <input type="hidden" id="b_index"
+													value="${content_view.member_id}">관리자
+											</h6></li>
+										<li><i class="fa fa-clock"></i>
+											<h6>작성날짜 : ${content_view.bdate}</h6></li>
+										<li><i class="fa fa-heart"></i>
+											<h6>
+												조회수 : <input type="hidden" id="b_index"
+													value="${content_view.bhit}"> ${content_view.bhit}
+											</h6></li>
+
+									</ul>
+									<div>&nbsp;</div>
+									<div>&nbsp;</div>
+									<div>&nbsp;</div>			
+									<div>&nbsp;</div>
+									<p style="height: auto;">
+										<input type="hidden" id="b_index"
+											value="${content_view.bcontent}">
+										${content_view.bcontent}
+									</p>
+								</form>
+							</div>
+
+							<sec:authorize access="hasRole('ADMIN')">
+								<!-- 관리자버튼권한 -->
+								<button type="button" class="btn btn-primary"
+									onclick="location.href='${pageContext.request.contextPath}/board/notice/modify/${content_view.b_index}'">수정</button>
+								<!-- <input type="submit" class="btn btn-primary" value="수정">&nbsp;&nbsp;
+							 -->
+								<button type="button" class="btn btn-primary"
+									onclick="location.href='delete?b_index=${content_view.b_index}'">삭제</button>&nbsp;&nbsp;					
+						</sec:authorize>
+							<button type="button" class="btn btn-primary"
+								onclick="location.href='${pageContext.request.contextPath}/board/notice'">목록</button>
+
+
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" /> <input type="hidden"
+								id="_csrf_header" name="_csrf_header"
+								value="${_csrf.headerName}" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- Main Section -->
+
 	</div>
+	<!-- Content -->
+
+
+
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>

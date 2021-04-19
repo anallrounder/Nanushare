@@ -159,7 +159,7 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 <select id="mycount" resultType="int">
 		<![CDATA[
 			
-	   select count(*) as count from point where member_id = #{member_id} and pdate=TO_CHAR(SYSDATE, 'YYYYMMDD') and ecat_num=1
+	   select count(*) as count from point where member_id = #{member_id} and pdate>=TO_CHAR(SYSDATE, 'YYYYMMDD') and ecat_num=1
 	    
 	   ]]>
 	</select>

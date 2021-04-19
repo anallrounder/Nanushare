@@ -78,9 +78,8 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	//글수정
 		@Override
 		public void writeInsert(BoardVO boardVO) {
-			// TODO Auto-generated method stub
-			//return mapper.modify(b_index);
-			mapper.modify(boardVO);
+			log.info("service 글수정" + boardVO);
+			 mapper.modify(boardVO);
 		}
 		
 		

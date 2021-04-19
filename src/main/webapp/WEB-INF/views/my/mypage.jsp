@@ -179,8 +179,7 @@ li {
 									<li class="name"><h2>
 											<sec:authentication property="principal.member.name" />
 										</h2></li>
-									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></a></li>
+									<li class="email"><sec:authentication property="principal.member.member_id" /></a></li>
 									<li class="activity">
 									
 									<sec:authentication
@@ -193,6 +192,20 @@ li {
 													type="submit"
 													onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
 													프로필수정</button>
+											
+											</c:if>
+										</sec:authorize>
+										
+										<sec:authentication
+											property="principal.member" var="buttonhidden" /> <sec:authorize
+											access="isAuthenticated()">
+											
+											<c:if test="${buttonhidden.signuppath != 'home'}">
+
+												<button class="charity-simple-blog-btn w-100 text-white stats"
+													type="submit"
+													onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
+													회원탈퇴</button>
 											
 											</c:if>
 										</sec:authorize>
@@ -241,7 +254,7 @@ li {
 											</h4>
 											<button class="charity-simple-blog-btn w-30 text-white stats"
 												type="button"
-												onClick="location.href='${pageContext.request.contextPath}/donation/money/point'">
+												onClick="location.href='${pageContext.request.contextPath}/my/donation/money/point'">
 												기부하기</button></li>
 										<li class="threebox" class="col-md-4"><div>&nbsp;</div> <span
 											class="followers">나의 기부횟수</span>
@@ -277,7 +290,7 @@ li {
 							<div>&nbsp;</div>
 							<div>&nbsp;</div>
 							<button
-								class="charity-simple-blog-btn w-30 ml-2 text-white stats">기부금
+								class="charity-simple-blog-btn w-30 ml-2 text-white stats" type="button" onClick="location.href='${pageContext.request.contextPath}/board/notice/188'">기부금
 								영수증</button>
 						</div>
 						<hr>

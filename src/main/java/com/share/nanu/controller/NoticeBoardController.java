@@ -85,19 +85,17 @@ public class NoticeBoardController {
 	}
 
 	//수정뷰	
-	@GetMapping("/board/notice/{b_index}/modify_view")
-	public ModelAndView bsModi(BoardVO boardVO,  ModelAndView mav,Model model, @AuthenticationPrincipal MemberDetails md)
-			throws Exception {
-
+	@GetMapping("/board/notice/modify/{b_index}")
+	public 	String bsModi(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md){
 		if (md != null) { 
 			model.addAttribute("username", md.getmember().getName());
 		}
-		mav.setViewName("/noticeBoard/modify_view");
-		mav.addObject("content_view", ntService.getBoard(boardVO.getB_index()));
+		
+		model.addAttribute("modify_view", ntService.getBoard(boardVO.getB_index()));
 
 		boardVO.setMember_id(md.getUsername());
 		
-		return mav;
+		return "noticeBoard/modify_view";
 	}
 	
 	//수정
@@ -111,9 +109,9 @@ public class NoticeBoardController {
 		//model.addAttribute("modify_view", ntService.writeInsert(boardVO.getB_index()));
 		//model.addAttribute("modify_view", ntService.writeInsert(boardVO.getB_index()));
 
-		boardVO.setMember_id(md.getUsername());// 로그인한 사람 정보 가져오기
+		//boardVO.setMember_id(md.getUsername());// 로그인한 사람 정보 가져오기
 
-		return "noticeBoard/notice_list";
+		return "redirect:/board/notice";
 	}
 	
 
@@ -147,6 +145,4 @@ public class NoticeBoardController {
 		
 		return "redirect:";
 	}
-
-
 }

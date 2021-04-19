@@ -28,10 +28,6 @@ public interface NoticeBoardService {
 		//글수정
 		public void writeInsert(BoardVO boardVO);
 		
-		
-		
-		
-		
 		//이미지 첨부
 		public void fileUpload(AttachmentVO attachmentVO);
 		
