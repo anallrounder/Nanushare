@@ -38,7 +38,7 @@ li {
 
     <!-- Banner -->
     <section style="background-color: #222222">
-     <div class="container-fluid px-0 ">
+     <div class="container-fluid">
             <!-- <div class="container-fluid px-0"> 은 왼쪽여백 아예 없게 하는것-->
             <div class="row">
                 <div class="col-12">
