@@ -52,9 +52,11 @@ public interface NanuBoardShowYSMapper {
 	
 	// 댓글 삭제
 	public void removeReply(BoardreplyVO rvo);
-
+	
+	// 이미지 첨부파일 리스트
 	public List<AttachmentVO> getAttachMent(AttachmentVO avo);
 
+	// 이미지 수 카운트
 	public int getAttachMentCount(AttachmentVO avo);
 
 	// 최신댓글 하나 불러오기
@@ -63,7 +65,8 @@ public interface NanuBoardShowYSMapper {
 	//attachment 에서 삭제할 이미지 경로 가져오기
 	public String getAttachmentBindex(int b_index);
 
-	public void deleteReply(int b_index); //인증게시판 글 삭제시 댓글 전부 삭제
+	//인증게시판 글 삭제시 댓글 전부 삭제
+	public void deleteReply(int b_index); 
 	
 	//인증 게시판 글 삭제
 	public void deleteCertificationBoard(int b_index);
@@ -73,5 +76,7 @@ public interface NanuBoardShowYSMapper {
 	
 	//댓글 수정
 	public void modifyReply(BoardreplyVO brvo);
-
+	
+	//댓글수 카운트
+	public int replyCount(BoardreplyVO rvo);
 }

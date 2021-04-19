@@ -204,6 +204,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           update boardreply set rcontent = #{rcontent} where r_num = #{r_num}
       ]]>
    </update> 
+   
+   	<!-- 댓글 총 개수  -->
+	<select id="replyCount" resultType="int">
+		<![CDATA[
+			select count(*) from boardreply where b_index = #{b_index}
+		]]>
+	</select>
 	
 </mapper>
 
