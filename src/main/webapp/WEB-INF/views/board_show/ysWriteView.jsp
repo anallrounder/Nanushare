@@ -44,8 +44,69 @@
 
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+	<script>
+	$(document).ready(function(){
+		$("#write").submit(function(event){			
+			event.preventDefault();
+			console.log("write click");
+			
+			var board_id = $("#b_index").val(); 					
+			var title = $("#btitle").val(); 
+			var text = $("#bcontent").val(); 
+			
+			// csrf
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+			
+			var form = {
+				b_index : board_id,
+				btitle : title,
+				bcontent : text
+			}
+			
+			$.ajax({
+				type : "PUT",
+				url : $(this).attr("action"),
+				cache : false,
+				dataType: 'text',
+				contentType: 'application/json; charset=utf-8',
+				data : JSON.stringify(form),
+				success : function(result){
+					console.log("result : " + result );
+						if(result == "SUCCESS") {
+							//$(location).attr('href', '${pageContext.request.contextPath}/board/sows/content_view/'+ form.b_index +');
+							window.location.href='${pageContext.request.contextPath}/board/shows/content_view/'+ board_id;
+							
+							swal({
+								title : "글 수정 완료" , 
+								icon : "success" , 
+								button : true 
+							});
+						}
+				},
+				error : function(e){
+					//alert("오류가 발생했습니다.");
+					swal({
+						title : "오류가 발생했습니다." , 
+						icon : "error" , 
+						button : false 
+					});
+					console.log(e);
+				}
+			}); // ajax end
+		}); // event end
+	}); // ready end
+</script>
+	
+	
 	
 </head>
+
+
+
 
 <body>
 
