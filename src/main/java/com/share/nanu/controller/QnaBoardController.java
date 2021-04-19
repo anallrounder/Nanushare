@@ -36,7 +36,13 @@ public class QnaBoardController {
 
 	// FAQ 게시판 리스트
 	@GetMapping("/faq")
-	public ModelAndView faqList(ModelAndView mov) {
+	public ModelAndView faqList(ModelAndView mov, @AuthenticationPrincipal MemberDetails md) {
+		
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
+		}
+
+		
 		mov.addObject("FAQlist", qService.getlist());
 		mov.setViewName("faq/faq_list");
 		
