@@ -33,6 +33,8 @@ public interface NanuDonationMapper {
 	public void getDonation(String merchantUid); //donation 테이블에서 주문번호가 존재하는지 조회
 
 	//public void getMypoint(PointVO pvo, String member_id);
+	
+	public void updateState(String merchantUid);//아임포트 취소후 처리상태 업데이트
 
 	
 	
