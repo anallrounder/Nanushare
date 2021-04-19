@@ -139,30 +139,6 @@
 		
 		<!-- Main Section -->
 
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <input type="button"
-							value="취소" onClick="history.go(-2)"
-							class="charity-simple-blog-btn"> <a
-							href="${pageContext.request.contextPath}/my/mypage"
-							class="charity-simple-blog-btn">저장</a> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>

@@ -36,10 +36,17 @@ public class QnaBoardController {
 
 	// FAQ 게시판 리스트
 	@GetMapping("/faq")
-	public String list(Model model) {
-		model.addAttribute("FAQlist", qService.getlist());
+	public ModelAndView faqList(ModelAndView mov, @AuthenticationPrincipal MemberDetails md) {
 		
-		return "faq/faq_list";
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
+		}
+
+		
+		mov.addObject("FAQlist", qService.getlist());
+		mov.setViewName("faq/faq_list");
+		
+		return mov;
 	}
 
 	// QNA 게시판 리스트 조회
