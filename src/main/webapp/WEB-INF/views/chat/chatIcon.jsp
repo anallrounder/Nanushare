@@ -39,7 +39,7 @@
 <body>
 
 	<div id="chat-icon" onclick="openChat()">
-		<img src="/resources/nanulogo_ico_convert.ico" style="height:60px;">
+		<img src="/resources/nanulogoRe.ico" style="height:60px;">
 	</div>
 	
 </body>

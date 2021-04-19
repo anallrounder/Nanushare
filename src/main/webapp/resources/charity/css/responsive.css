@@ -1,5 +1,32 @@
+/* Media 990sPx Start */
+@media screen and (max-width: 1920px) {
+	#charity-header {position:relative; z-index:2; float: left;}
+	.charity-top-strip > .charity-logo > img{margin: -35px 0px 15px 40px; width:90px; height:80px;}
+	#menu {float: right; margin: 0px 500px 0px 0px; text-align: center; } 
+	#menu > ul > li > a {float: right; font-size: 20px; padding: 35px 50px 0px 0px;} 
+	.float-right > .admin-header > span, .float-right > .user-header > span {white-space: nowrap; margin: -40px 270px 0px 0px; color: #ffffff; font-size: 16px; float: right;}
+	.float-right > .admin-header > a, .float-right > .user-header > a {width:95px; height:40px; white-space: nowrap; margin: -50px 20px 20px 0px;}
+	.float-right > .admin-header > form > .charity-strip-btn, .float-right > .user-header > form > .charity-strip-btn  {width:90px; height:40px; white-space: nowrap; margin: -50px 20px 20px 0px;}
+	.float-right > form > .charity-strip-btn {width:95px; height:40px; white-space: nowrap; margin: -50px 0px 20px 0px; }
+	.charity-strip-btn { width:95px; height:40px; white-space: nowrap; margin: -50px 20px 40px 0px;}
+	.children > li > a {text-align: left;}
+
+}
+
+
+
 /*	Media 768Px Start */
 @media (min-width: 768px) and (max-width: 990px) {
+	.charity-top-strip > .charity-logo > img{margin: -20px 0px 15px 40px; width:90px; height:80px;}
+	.float-right > .admin-header > span, .float-right > .user-header > span {white-space: nowrap; margin: -100px 270px 0px 500px; color: #ffffff; font-size: 16px; float: right;}
+	.float-right > .admin-header > a, .float-right > .user-header > a {width:95px; height:40px; white-space: nowrap; margin: -110px 20px 20px 0px;}
+	.float-right > .admin-header > form > .charity-strip-btn, .float-right > .user-header > form > .charity-strip-btn  {width:90px; height:40px; white-space: nowrap; margin: -110px 140px 20px 0px;}
+	.float-right > form > .charity-strip-btn {width:95px; height:40px; white-space: nowrap; margin: -50px 0px 20px 0px;}
+	.charity-strip-btn { width:95px; height:40px; white-space: nowrap; margin: -50px 20px 40px 0px;}
+	.children > li > a {text-align: left;}
+	
+	#mlogout > a {padding: 13px 0px 0px 5px;}
+	
 	.float-right { position: relative; }
 	a.menu-link { color: #666; }
 	.menu-link span { border-bottom: solid 3px #666; border-top: double 10px #666; float: right; height: 17px; margin: 0 5px 0px 0; width: 30px; }
