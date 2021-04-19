@@ -70,16 +70,16 @@
 	<script type="text/javascript"> 
 		function changeSelection(){
 			if(document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value == '0'){
-				 document.donatePoint.donaamount.disabled = true;
-				 document.donatePoint.donaamount.value = "";
+				 document.donatePoint.dntpnt.disabled = true;
+				 document.donatePoint.dntpnt.value = "";
 			}
 			if(document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value == '9'){
-				 document.donatePoint.donaamount.disabled = false;
-				 document.donatePoint.donaamount.value = "";
-				 document.donatePoint.donaamount.focus();
+				 document.donatePoint.dntpnt.disabled = false;
+				 document.donatePoint.dntpnt.value = "";
+				 document.donatePoint.dntpnt.focus();
 			} else{
-				 document.donatePoint.donaamount.disabled = true;
-				 document.donatePoint.donaamount.value = document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value;
+				 document.donatePoint.dntpnt.disabled = true;
+				 document.donatePoint.dntpnt.value = document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value;
 			}
 		} 
 		
@@ -216,7 +216,7 @@
                                 
                                    <li>
                                        <label>보유 포인트:</label>
-                                       <input type="text" name="totalpnt" value="${vo2.nowpnt}" readonly > 
+                                       <input type="text" name="nowpnt" value="${vo2.nowpnt}" readonly > 
                                        <input type="hidden" name="totalpnt" value="${vo2.totalpnt}" readonly > 
                                    </li>
                                 </c:forEach> 
@@ -224,7 +224,7 @@
 								</sec:authorize>  --%>
                               		<li>
                                    	<label>나눌 포인트:</label>
-                                  		<input type="text" name="donaamount" id="selectDirect" disabled />
+                                  		<input type="text" name="dntpnt" id="selectDirect" disabled />
                                    </li>
                                    <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 										자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
