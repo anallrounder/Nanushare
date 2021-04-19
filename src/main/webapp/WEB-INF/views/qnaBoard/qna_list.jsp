@@ -49,7 +49,7 @@
 }
 
 #forimg {
-	background-image: url('/resources/charity/qna/qna_banner.jpg');
+	background-image: url('/resources/banner_imgs/qna_banner.jpg');
 	width:100%;
 	
 }
