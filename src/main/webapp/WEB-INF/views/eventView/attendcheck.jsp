@@ -55,16 +55,6 @@
 <link href='/resources/calendar/main.css' rel='stylesheet' />
 <script src='/resources/calendar/main.js'></script>
 
-<!--<script
-	src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
- <link
-	href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css'
-	rel='stylesheet' />
-<link
-	href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css'
-	rel='stylesheet' media='print' />
-<script
-	src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script> -->
 
 
 </head>
@@ -163,20 +153,20 @@ console.log(c);
    	   	
     	if(clicked <= 0){
     		random += Math.random()*360;
-    		$(this).css({'transition-timing-function': 'ease-in-out', 'transition': '3s', 'transform': 'rotate('+3000+'deg)'});
+    		$(this).css({'transition-timing-function': 'ease-in-out', 'transition': '7s', 'transform': 'rotate('+random+'deg)'});
  			console.log(random);
 	    } /* 'transform': 'rotate('+random+'deg) --원판속도 */
     	
     	//포인트 지정
-    	if(random >= -10 && random <= 60){
+    	if(random >= -10 && random <= 50){
     		prtpnt = 100;
-	   	}else if(random >= 60 && random <= 134){
+	   	}else if(random >= 50 && random <= 124){
 	   		prtpnt = 20;
-    	}else if(random >= 134 && random <= 206){
+    	}else if(random >= 124 && random <= 196){
     		prtpnt = 10;
-    	}else if(random >= 206 && random <= 278){	
+    	}else if(random >= 196 && random <= 268){	
     		prtpnt = 1;
-	   	}else if(random >= 278 && random <= 350){
+	   	}else if(random >= 268 && random <= 340){
 	   		prtpnt = 0;
 	   	}
 
@@ -193,7 +183,7 @@ console.log(c);
     	//참여 중복 확인 및 포인트 적립
     	$.ajax({
    	        type :"PUT",
-   	        url :"/event/check/getpoint",
+   	        url :"/my/event/check/getpoint",
    	    	 contentType: 'application/json',
    	    	 data: JSON.stringify(memberPoint),
    	        /* data : { //"JSON parse error: Unrecognized token" 에러나서 json.stringify씀

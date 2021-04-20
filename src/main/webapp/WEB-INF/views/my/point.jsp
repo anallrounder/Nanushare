@@ -42,6 +42,12 @@
 
 
 
+<!-- 탭처리 -->
+<link rel="stylesheet"
+	href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
+<script src='//unpkg.com/jquery@3/dist/jquery.min.js'></script>
+<script src='//unpkg.com/popper.js@1/dist/umd/popper.min.js'></script>
+<script src='//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js'></script>
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -61,7 +67,7 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
-
+	
 
 </head>
 <style>
@@ -85,7 +91,6 @@ li {
 		</div>
 	</div>
 	<!-- Sub Header -->
-
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
@@ -101,12 +106,14 @@ li {
 							<div class="user-info">
 								<img class="img-profile img-circle img-responsive center-block"
 									src="/resources/my/프로필사진.PNG" alt="">
+								<!-- 
+									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
 								<ul class="meta list list-unstyled">
 									<li class="name"><h2>
 											<sec:authentication property="principal.member.name" />
 										</h2></li>
 									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></li>
+											property="principal.member.member_id" /></a></li>
 									<li class="activity"><sec:authentication
 											property="principal.member" var="buttonhidden" /> <sec:authorize
 											access="isAuthenticated()">
@@ -139,15 +146,17 @@ li {
 							<nav class="side-menu">
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
-								<li class="active"><a href="ask"><span
-										class="fa fa-question"> </span>&nbsp;&nbsp;나의문의내역</a></li>
+								<li><a href="ask"><span class="fa fa-question">
+									</span>&nbsp;&nbsp;나의문의내역</a></li>
 								<li><a href="content"><span class="fa fa-file">
 									</span>&nbsp;&nbsp;나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-handshake">
 									</span>&nbsp;&nbsp;나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
+								<li><a href="reply"><span
+										class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
 								<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
-								<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
+								<li class="active"><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
+
 
 							</ul>
 							</nav>
@@ -159,7 +168,7 @@ li {
 							<div>&nbsp;</div>
 							<div>&nbsp;</div>
 							<div class="charity-fancy-title">
-								<h2>나의 문의 내역</h2>
+								<h2>나의 포인트 내역</h2>
 							</div>
 							<div>&nbsp;</div>
 							<table>
@@ -167,61 +176,71 @@ li {
 									<br>
 								</div>
 								<tr>
-									<th>글번호</th>
-									<th>문의제목</th>
-									<th>조회수</th>
 									<th>날짜</th>
+									<th>얻은 포인트</th>
+									<th>기부 포인트</th>
+									<th>현재 포인트</th>
+									<!-- <th>이벤트</th> -->
+									
 
 								</tr>
 
-								<c:if test="${empty list1}">
+								<c:if test="${empty list6}">
 									<tr>
-										<td colspan="5" align="center">작성된 글이 없습니다</td>
+										<td colspan="5" align="center">작성된 댓글이 없습니다</td>
 									</tr>
 								</c:if>
 
-								<!-- 로그인한 회원의 글 정보만 받아오기 -->
-								<!-- 나의문의내역 -->
-								<c:if test="${! empty list1}">
-									<c:forEach items="${list1}" var="list1">
+								<!-- 나의댓글내역 -->
+								<c:if test="${! empty list6}">
+									<c:forEach items="${list6}" var="list6" varStatus="status">
 										<tr>
-											<td>${list1.b_index}</td>
-											<td><a id="a-content"
-												href="${pageContext.request.contextPath}/board/qna/${list1.b_index}">${list1.btitle}</a></td>
-											<!-- 제목누르면 해당 글내용으로 이동링크 -->
-											<td>${list1.bhit}</td>
-											<td>${list1.bdate}</td>
-										</tr>
+											<td>${list6.pdate}</td>
+											<td style="color:blue;"><c:if test="${list6.prtpnt != 0}">${list6.prtpnt}</c:if>
+											<c:if test="${list6.prtpnt == 0}">&nbsp;</c:if></td>
+											<td style="color:red;"><c:if test="${list6.dntpnt != 0}">${list6.dntpnt}</c:if>
+											<c:if test="${list6.dntpnt == 0}">&nbsp;</c:if>
+											</td>
+											<td>${list6.nowpnt}</td>
+											<%-- <td>${list6.ecat_num}</td> --%>
+											</tr>
+
 									</c:forEach>
 								</c:if>
 							</table>
 
 							<!-- 페이징 -->
-
-							<c:if test="${! empty list1}">
+							<c:if test="${! empty list6}">
 								<div class="charity-pagination">
 									<ul class="page-numbers">
-										<c:if test="${pageMaker.prev}">
-											<li class="page-item"><a
-												href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
-											</li>
-										</c:if>
+										<li class="page-item"><c:if test="${pageMaker.prev}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+											</c:if></li>
 
-										<c:forEach begin="${pageMaker.startPage}"
-											end="${pageMaker.endPage}" var="idx">
-											<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-											<li class="page-item"><a
-												href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(idx)}">${idx}</a>
-											</li>
-										</c:forEach>
-										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-											<li class="page-item"><a
-												href="${pageContext.request.contextPath}/my/ask${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
-											</li>
-										</c:if>
+										<li class="page-item"><c:forEach
+												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+												var="idx">
+												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+												<a
+													href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(idx)}">${idx}</a>
+											</c:forEach></li>
+
+										<li class="page-item"><c:if
+												test="${pageMaker.next && pageMaker.endPage > 0}">
+												<a class="page-link"
+													href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+												</a>
+											</c:if></li>
 									</ul>
+
 								</div>
+
 							</c:if>
+
+
+
+
 						</div>
 					</div>
 					</section>
@@ -281,5 +300,6 @@ li {
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
+
 </body>
 </html>

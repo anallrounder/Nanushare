@@ -60,6 +60,13 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+<link rel="stylesheet" href="/resources/charity/css/style_mypage_hj.css">
+
+
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
 
 
 </head>
@@ -73,15 +80,13 @@ li {
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<!-- Sub Header -->
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -110,7 +115,32 @@ li {
 									<li class="email"><sec:authentication
 											property="principal.member.member_id" /></a></li>
 									<li class="activity"><sec:authentication
-											property="principal.member.signuppath" />회원</li>
+											property="principal.member" var="buttonhidden" /> <sec:authorize
+											access="isAuthenticated()">
+
+											<c:if test="${buttonhidden.signuppath == 'home'}">
+
+												<button
+													class="charity-simple-blog-btn w-100 text-white stats"
+													type="submit"
+													onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+													프로필수정</button>
+
+											</c:if>
+										</sec:authorize> <sec:authentication property="principal.member"
+											var="buttonhidden" /> <sec:authorize
+											access="isAuthenticated()">
+
+											<c:if test="${buttonhidden.signuppath != 'home'}">
+
+												<button
+													class="charity-simple-blog-btn w-100 text-white stats"
+													type="submit"
+													onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
+													회원탈퇴</button>
+
+											</c:if>
+										</sec:authorize></li>
 								</ul>
 							</div>
 							<nav class="side-menu">
@@ -125,19 +155,21 @@ li {
 								<li class="active"><a href="reply"><span
 										class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
 								<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
+								<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
 
 
 							</ul>
 							</nav>
 						</div>
-							<div class="content-panel">
+						<div class="content-panel">
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 							<div>&nbsp;</div>
 							<div>&nbsp;</div>
 							<div>&nbsp;</div>
 							<div class="charity-fancy-title">
-							<h2>나의 댓글 내역</h2></div>
+								<h2>나의 댓글 내역</h2>
+							</div>
 							<div>&nbsp;</div>
 							<table>
 								<div>

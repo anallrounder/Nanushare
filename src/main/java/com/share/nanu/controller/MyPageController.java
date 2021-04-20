@@ -55,14 +55,14 @@ public class MyPageController {
 			@AuthenticationPrincipal MemberDetails md) {
 
 		System.out.println("마이페이지");
-//HttpSession session = request.getSession(true);
+		// HttpSession session = request.getSession(true);
 
 		// 헤더에 로그인한 사람 정보 가져오기
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
 			// log.info("로그인한 사람 이름 - "+ md.getmember().getName());
 			mav.addObject("username", md.getmember().getName());
 		}
-		mpvo.setMember_id(md.getUsername()); //로그인한 id 정보를 mpvo에 넣어줌
+		mpvo.setMember_id(md.getUsername()); // 로그인한 id 정보를 mpvo에 넣어줌
 		mav.addObject("memberInfo", ndservice.getMemberPoint(mpvo));
 		// mav.addObject("sign", mgservice.mysign(md.getmember().getSignuppath()));//추가
 		mav.setViewName("/my/mypage");
@@ -153,6 +153,22 @@ public class MyPageController {
 		mav.addObject("list5", mgservice.myList5(cri, md.getUsername()));// 나의문의내역
 		// 페이징
 		int total = mgservice.getTotalCount5(cri, md.getUsername());
+
+		mav.addObject("pageMaker", new pageVO(cri, total));
+		return mav;
+	}
+
+	// 6.나의포인트내역
+	@GetMapping("/my/point")
+	public ModelAndView myPoint(PointVO pointVO, ModelAndView mav, Criteria cri,
+			@AuthenticationPrincipal MemberDetails md) {
+		if (md != null) {
+			mav.addObject("username", md.getmember().getName());
+		}
+		mav.setViewName("/my/point");
+		mav.addObject("list6", mgservice.myList6(cri, md.getUsername()));// 나의문의내역
+		// 페이징
+		int total = mgservice.getTotalCount6(cri, md.getUsername());
 
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
@@ -306,19 +322,20 @@ public class MyPageController {
 	}
 
 	// 출석체크(event default)
-	@GetMapping("/event/check")
-	public ModelAndView attendance(ModelAndView mav, @AuthenticationPrincipal MemberDetails md,PointVO pointVO ) throws Exception {
+	@GetMapping("/my/event/check")
+	public ModelAndView attendance(ModelAndView mav, @AuthenticationPrincipal MemberDetails md, PointVO pointVO)
+			throws Exception {
 		System.out.println("룰렛출첵페이지");
-		pointVO.setMember_id(md.getUsername());//로그인한회원정보 불러오려고
+		pointVO.setMember_id(md.getUsername());// 로그인한회원정보 불러오려고
 		mav.addObject("pointvo", mgservice.mypnt(pointVO));
-	System.out.println(mgservice.mypnt(pointVO));
-		
+		System.out.println(mgservice.mypnt(pointVO));
+
 		mav.setViewName("/eventView/attendcheck");
 		return mav;
 	}
 
 	// 이벤트 포인트 부여
-	@PutMapping("/event/check/getpoint")
+	@PutMapping("/my/event/check/getpoint")
 	public ResponseEntity<String> event(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
 			ModelAndView mav) {
 
@@ -341,21 +358,20 @@ public class MyPageController {
 		return entity;
 	}
 
-//	@PostMapping("/event/check/mypoint")
-//	public ResponseEntity<List<Date>> mypoint(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
-//			Model model) {
-//
-//		// final List<Date> list = mgse
-//		List<Date> list = mgservice.getMypointList(pointVO, md.getUsername());
-//		model.addAttribute("cal", pointVO);
-//		return new ResponseEntity<List<Date>>(list, HttpStatus.OK);
-//	}
+//		@PostMapping("/event/check/mypoint")
+//		public ResponseEntity<List<Date>> mypoint(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
+//				Model model) {
+	//
+//			// final List<Date> list = mgse
+//			List<Date> list = mgservice.getMypointList(pointVO, md.getUsername());
+//			model.addAttribute("cal", pointVO);
+//			return new ResponseEntity<List<Date>>(list, HttpStatus.OK);
+//		}
 
 	@GetMapping("/event/check3")
 	public ModelAndView attendance1(ModelAndView mov) {
 		System.out.println("그냥출첵페이지");
-		
-	
+
 		mov.setViewName("/eventView/attendcheck3");
 		return mov;
 	}
@@ -370,7 +386,7 @@ public class MyPageController {
 		try {
 			int count = mgservice.mycount2(pointVO, md.getUsername());
 			log.info("count" + count);
-			log.info("id  " +  md.getUsername());
+			log.info("id  " + md.getUsername());
 
 			if (count >= 1) {
 				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
