@@ -38,70 +38,73 @@
 }
 </style>
 
-<script type="text/javascript">
-$(function() {
+<!-- <script type="text/javascript">
+	$(function() {
 
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function(e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
 
-	/* 비밀번호 */
+		/* 비밀번호 */
 
-	/* ajax를 통한 회원정보 수정처리 */
-	 $('#mjoin').submit(function(event) { 
-                event.preventDefault();
-                
-		var name = $("#name").val();
-		var member_id = $("#member_id").val();
-		var subemail = $("#subemail").val();
-		var pw = $("#pw").val();
-		
+		/* ajax를 통한 회원정보 수정처리 */
+		$('#mjoin')
+				.submit(
+						function(event) {
+							event.preventDefault();
 
-		var memberJoin = {
-			"name" : name,
-			"member_id" : member_id,
-			 "subemail" : subemail,
-			"pw" : pw
-			
-		};
+							var name = $("#name").val();
+							var member_id = $("#member_id").val();
+							var subemail = $("#subemail").val();
+							var pw = $("#pw").val();
 
-			$.ajax({
-				type : 'PUT',
-				 data: JSON.stringify(memberJoin),
-				 url : "${pageContext.request.contextPath}/my/myprofile/edit/check",
-				cache : false,
-				contentType: 'application/json',
-			/* 	 data:{
-					 name: name,
-	                 pw: pw,
-	                 member_id : member_id,
-	                 subemail : email                   
-				 } */
-					async: "false", 
-					datatype : 'json',
-				success : function(result) {
-					  console.log(result);
-					  if (result == "SUCCESS") {
-                          console.log("success");
-                          alert("회원 정보가 수정되었습니다. 다시 로그인해주세요.");
-                          $(location)
-							.attr('href',"${pageContext.request.contextPath}/my/mypage");
-                          /* 성공했을때 넘어가는 페이지 */
-					}
-				},
-				
-				error : function(e) {
-					alert("필수 입력 사항을 입력해주세요.");
-                     console.log(e);
-				}
-			
-		});//ajax end
- 	});// mjoin end
-});//function end
-	
-</script>
+							var memberJoin = {
+								"name" : name,
+								"member_id" : member_id,
+								"subemail" : subemail,
+								"pw" : pw
+
+							};
+
+							$.ajax({
+										type : 'PUT',
+										data : JSON.stringify(memberJoin),
+										url : "${pageContext.request.contextPath}/my/myprofile/edit/check",
+										cache : false,
+										contentType : 'application/json',
+										/* 	 data:{
+												 name: name,
+										         pw: pw,
+										         member_id : member_id,
+										         subemail : email                   
+											 } */
+										async : "false",
+										datatype : 'json',
+										success : function(validateForm) {
+											console.log(result);
+											if (result == true) {
+												console.log("success");
+												alert("회원 정보가 수정되었습니다. 다시 로그인해주세요.");
+												$(location).attr('href',
+																"${pageContext.request.contextPath}/my/mypage");
+												/* 성공했을때 넘어가는 페이지 */
+											}else{
+												alert("정보를 알맞게 다시 입력해주세요");
+												
+											}
+										},
+
+										error : function(e) {
+											alert("필수 입력 사항을 입력해주세요.");
+											console.log(e);
+										}
+
+									});//ajax end
+						});// mjoin end
+	});//function end
+</script> -->
 
 
 <style>
@@ -158,14 +161,12 @@ input {
 
 
 	<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -183,17 +184,14 @@ input {
 							<h2>프로필 수정</h2>
 						</div>
 						<div style="margin: 0 auto" align="center">
-							<form id="mjoin" action="${pageContext.request.contextPath}/my/mypage"
-								method="get" novalidate>
+							<form id="mjoin" name="mjoin" action="${pageContext.request.contextPath}/my/mypage" method="get" novalidate>
 								<!-- onsubmit="return check()" -->
 
 								<ul class="charity-contact-form">
-									<li>
-										<label>아이디 </label> <input
-										type="text" name="member_id" id="member_id"
+									<li><label>아이디 </label> <input type="text"
+										name="member_id" id="member_id"
 										value="<sec:authentication property="principal.member.member_id"/>"
-										readonly required />
-									</li>
+										readonly required /></li>
 									<li><label>이름</label> <input type="text" name="name"
 										id="name"
 										value="<sec:authentication property="principal.member.name" />"
@@ -202,7 +200,6 @@ input {
 										name="subemail" id="subemail"
 										value="<sec:authentication property="principal.member.subemail" />"
 										required></li>
-
 									<li><label>변경할 비밀번호 입력</label><input type="password"
 										placeholder="Password" name="pw" id="pwd1"
 										class="form-control" required></li>
@@ -212,21 +209,18 @@ input {
 								</ul>
 
 								<div class="buttonbutton">
-									<!-- </ul> -->
-
 									<button type="submit" class="charity-simple-blog-btn">수정완료</button>
-									<!-- onclick="modifyMember()" -->
+									<button type="button" onclick="location.href='${pageContext.request.contextPath}/my/drop'"
+										class="charity-simple-blog-btn">회원 탈퇴</button>
+									<button type="button" onclick="location.href='/my/mypage'"
+										class="charity-simple-blog-btn">처음으로</button>
 								</div>
 								<div>&nbsp;</div>
 								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
 							</form>
-							<button type="button"
-								onclick="location.href='${pageContext.request.contextPath}/my/drop'"
-								class="charity-simple-blog-btn">회원 탈퇴</button>
-							<button type="button" onclick="location.href='/my/mypage'"
-								class="charity-simple-blog-btn">처음으로</button>
-								
+
+
 						</div>
 
 						<!-- jquery validation cdn-->
@@ -237,23 +231,22 @@ input {
 						<!-- jquery validation method cdn -->
 						<script type="text/javascript"
 							src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js">
-    </script>
+							
+						</script>
 
 
 						<script>
-							$("#mjoin")
-									.validate(
-											{
+							$("#mjoin").validate({
 
 												rules : { /* 각 태그의 규칙을 설정 */
 													/*함수 정의 https://offbyone.tistory.com/50 참고주소 */
 													/* 비밀번호 특수문자 https://yoo-hyeok.tistory.com/82  */
 													/* 공식 문서 https://jqueryvalidation.org/ */
 													/* html의 input태그의 name=""에 설정한 값과 같아야한다.  */
-														subemail : {
+													subemail : {
 														required : true,
 														email : true,
-														
+
 													},
 													pw : {
 														required : true,
@@ -271,7 +264,7 @@ input {
 														minlength : 2
 													}
 												},// rules end
-													
+
 												messages : { /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
 
 													subemail : {
@@ -293,21 +286,91 @@ input {
 														minlength : '2글자 이상 입력해 주세요.'
 													}
 												},// message end
-													
+
 												errorElement : 'span',
-													errorClass : 'error',
-													errorPlacement : function(error, element) { 
-														if(element.is(":text") || element.is(":password")){										  
-															element.parent().after(error);
-														}
-														else{
-															element.after(error);
-														}
+												errorClass : 'error',
+												errorPlacement : function(error, element) {
+													if (element.is(":text")
+															|| element
+																	.is(":password")) {
+														element.parent().after(
+																error);
+													} else {
+														element.after(error);
 													}
-												
+												},
+												messages:{
+													
+													submitHandler:function(){
+														
+														var token = $("meta[name='_csrf']").attr("content");
+														var header = $("meta[name='_csrf_header']").attr("content");
+														$(document).ajaxSend(function(e, xhr, options) {
+															xhr.setRequestHeader(header, token);
+														});
+
+														/* 비밀번호 */
+
+														/* ajax를 통한 회원정보 수정처리 */
+														$('#mjoin').submit(
+																		function(event) {
+																			event.preventDefault();
+
+																			var name = $("#name").val();
+																			var member_id = $("#member_id").val();
+																			var subemail = $("#subemail").val();
+																			var pw = $("#pw").val();
+
+																			var memberJoin = {
+																				"name" : name,
+																				"member_id" : member_id,
+																				"subemail" : subemail,
+																				"pw" : pw
+
+																			};
+
+																			$.ajax({
+																						type : 'PUT',
+																						data : JSON.stringify(memberJoin),
+																						url : "${pageContext.request.contextPath}/my/myprofile/edit/check",
+																						cache : false,
+																						contentType : 'application/json',
+																						/* 	 data:{
+																								 name: name,
+																						         pw: pw,
+																						         member_id : member_id,
+																						         subemail : email                   
+																							 } */
+																						async : "false",
+																						datatype : 'json',
+																						success : function(validateForm) {
+																							console.log(result);
+																							if (result == true) {
+																								console.log("success");
+																								alert("회원 정보가 수정되었습니다. 다시 로그인해주세요.");
+																								$(location).attr('href',
+																												"${pageContext.request.contextPath}/my/mypage");
+																								/* 성공했을때 넘어가는 페이지 */
+																							}else{
+																								alert("정보를 알맞게 다시 입력해주세요");
+																								
+																							}
+																						},
+
+																						error : function(e) {
+																							alert("필수 입력 사항을 입력해주세요.");
+																							console.log(e);
+																						}
+
+																					});//ajax end
+																		});// mjoin end
+														
+														
+													}
+												}
+
 											}); //validate end
-							$.validator
-									.addMethod(
+							$.validator.addMethod(
 											"passwordCK",
 											function(value, element) {
 												return this.optional(element)
@@ -324,57 +387,24 @@ input {
 </body>
 </html>
 <!-- Main Section -->
-
-
-
 <!-- Content -->
-
-
-<!-- Search Modal -->
-<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-	role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body">
-				<a href="/resources/charity/#" class="charity-close-btn"
-					data-dismiss="modal" aria-label="Close"><span
-					aria-hidden="true">&times;</span></a>
-				<form>
-					<input type="text" value="Type Your Keyword"
-						onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-						onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-					<input type="submit" value=""> <input type="button"
-						value="취소" onClick="history.go(-2)"
-						class="charity-simple-blog-btn"> <a
-						href="${pageContext.request.contextPath}/my/mypage"
-						class="charity-simple-blog-btn">저장</a> <i class="fa fa-search"></i>
-				</form>
-			</div>
-
-		</div>
-	</div>
-</div>
-
 
 <!-- Footer -->
 <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 <!-- Footer -->
 
-
-
-
 <!-- jQuery -->
-	<script src="/resources/charity/script/jquery.js"></script>
-	<script src="/resources/charity/script/popper.min.js"></script>
-	<script src="/resources/charity/script/bootstrap.min.js"></script>
-	<script src="/resources/charity/script/slick.slider.min.js"></script>
-	<script src="/resources/charity/script/progressbar.js"></script>
-	<script src="/resources/charity/script/fancybox.min.js"></script>
-	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-	<script src="/resources/charity/script/jquery.jplayer.js"></script>
-	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	    <script src="/resources/charity/script/functions-main.js"></script>
+<script src="/resources/charity/script/jquery.js"></script>
+<script src="/resources/charity/script/popper.min.js"></script>
+<script src="/resources/charity/script/bootstrap.min.js"></script>
+<script src="/resources/charity/script/slick.slider.min.js"></script>
+<script src="/resources/charity/script/progressbar.js"></script>
+<script src="/resources/charity/script/fancybox.min.js"></script>
+<script src="/resources/charity/script/jquery.countdown.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="/resources/charity/script/jquery.jplayer.js"></script>
+<script src="/resources/charity/script/jplayer.playlist.js"></script>
+<script src="/resources/charity/script/functions-main.js"></script>
 </body>
 
 </html>

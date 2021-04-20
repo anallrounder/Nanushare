@@ -1,27 +1,20 @@
 package com.share.nanu.controller;
 
 import java.io.IOException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,9 +38,6 @@ public class MyPageController {
 
 	@Autowired
 	private MyPageService mgservice;
-
-	@Autowired
-	private MemberService mservice;
 
 	@Autowired
 	private NanuDonationService ndservice;
@@ -163,6 +153,21 @@ public class MyPageController {
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
 	}
+	
+	// 6.나의포인트내역
+		@GetMapping("/my/point")
+		public ModelAndView myPoint(PointVO pointVO, ModelAndView mav, Criteria cri, @AuthenticationPrincipal MemberDetails md) {
+			if (md != null) {
+				mav.addObject("username", md.getmember().getName());
+			}
+			mav.setViewName("/my/point");
+			mav.addObject("list6", mgservice.myList6(cri, md.getUsername()));// 나의문의내역
+			// 페이징
+			int total = mgservice.getTotalCount6(cri, md.getUsername());
+
+			mav.addObject("pageMaker", new pageVO(cri, total));
+			return mav;
+		}
 
 	// 프로필 관리로 가는 페이지(수정 전 비밀번호 확인 단계)
 	@GetMapping("/my/myprofile")
@@ -312,19 +317,19 @@ public class MyPageController {
 	}
 
 	// 출석체크(event default)
-	@GetMapping("/event/check")
+	@GetMapping("/my/event/check")
 	public ModelAndView attendance(ModelAndView mav, @AuthenticationPrincipal MemberDetails md,PointVO pointVO ) throws Exception {
 		System.out.println("룰렛출첵페이지");
 		pointVO.setMember_id(md.getUsername());//로그인한회원정보 불러오려고
 		mav.addObject("pointvo", mgservice.mypnt(pointVO));
-	System.out.println(mgservice.mypnt(pointVO));
+		System.out.println(mgservice.mypnt(pointVO));
 		
 		mav.setViewName("/eventView/attendcheck");
 		return mav;
 	}
 
 	// 이벤트 포인트 부여
-	@PutMapping("/event/check/getpoint")
+	@PutMapping("/my/event/check/getpoint")
 	public ResponseEntity<String> event(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
 			ModelAndView mav) {
 

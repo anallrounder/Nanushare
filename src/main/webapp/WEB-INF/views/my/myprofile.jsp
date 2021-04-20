@@ -81,7 +81,8 @@
 											event.preventDefault();/* 이게있어서 폼태그에는 주소 필요x */
 
 											/* var member_id = $("#member_id").val(); */
-											var pwConfirm = $("#pwConfirm").val();
+											var pwConfirm = $("#pwConfirm")
+													.val();
 
 											var check = {
 												/* member_id : member_id, */
@@ -90,7 +91,8 @@
 											};
 
 											//패스워드 맞는지 확인 체크
-											$.ajax({
+											$
+													.ajax({
 														type : 'POST',
 														/* 내가 처리할 주소(=현재주소) */
 														url : "${pageContext.request.contextPath}/my/myprofile/check",
@@ -104,28 +106,31 @@
 														xhr.setRequestHeader(header, token);
 														}, */
 
-														success : function(result) {
+														success : function(
+																result) {
 															console.log(result);
 
 															if (result == "SUCCESS") {
-																console.log("success");
-																$(location).attr(
+																console
+																		.log("success");
+																$(location)
+																		.attr(
 																				'href',
 																				"${pageContext.request.contextPath}/my/myprofile/edit");
 																/* 성공했을때 넘어가는 페이지 */
 
-															}else if(result == "FAIL"){
-												   	    		console.log(result);
-												   	    		alert("비밀번호를 다시 확인해주세요.");
-												   	    	}
-													    },
-														
+															} else if (result == "FAIL") {
+																console
+																		.log(result);
+																alert("비밀번호를 다시 확인해주세요.");
+															}
+														},
 
 														error : function(error) {
 
 															//alert("비밀번호를 입력해주세요.");
 
-														//	console.log("에러 : " + error);
+															//	console.log("에러 : " + error);
 														}
 
 													}); //ajax end
@@ -156,15 +161,13 @@ input {
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<!-- Sub Header -->
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -177,33 +180,33 @@ input {
 		<div class="charity-main-section">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-9">
-						<!-- "${pageContext.request.contextPath}/my/myprofile/edit" -->
-						<form id="passwordcheck"
-							action="${pageContext.request.contextPath}/my/myprofile/edit"
-							method="get">
+					<div class="col-md-12">
+						<form id="passwordcheck" action="${pageContext.request.contextPath}/my/myprofile/edit" method="get">
 							<!-- 폼태그는 어차피 위에서 성공여부로 주소를 줬기때문에 안줘도 상관없다 -->
-
-							<div class="charity-volunteer-form">
-								<h6 style="color:brown;">회원님의 소중한 개인정보 보호를 위해 비밀번호를 한번 더 확인하고 있습니다.</h6>
-								<h6>공공장소에서 PC를 사용중일 경우, 비밀번호가 타인에게 노출되지 않도록 주의해 주시기 바랍니다.</h6>
-								<ul class="mt-4">
-									<label class="control-label" for="pw">패스워드 확인 : </label>
-									<input type="password" id="pwConfirm" name="pwConfirm" />
-								</ul>
-								<!-- name에 똑같이 줘야함 -->
-								<div class="form-group has-feedback-center">
-									<button class="charity-simple-blog-btn" type="submit" id="submit">확인</button>
-									<button class="charity-simple-blog-btn" onClick="history.go(-1)">취소</button>
+							<div style="margin: 0 auto" align="center">
+								<div class="charity-volunteer-form">
+									<h6 style="color: brown;">회원님의 소중한 개인정보 보호를 위해 비밀번호를 한번 더
+										확인하고 있습니다.</h6>
+									<h6>공공장소에서 PC를 사용중일 경우, 비밀번호가 타인에게 노출되지 않도록 주의해 주시기 바랍니다.</h6>
+									<div>&nbsp;</div><div>&nbsp;</div>
+									<ul class="mt-4">
+										<label class="control-label" for="pw">패스워드 확인 : </label>
+										<input type="password" id="pwConfirm" name="pwConfirm" />
+									</ul>
+									
+									<div>&nbsp;</div><div>&nbsp;</div>
+									<!-- name에 똑같이 줘야함 -->
+									<div class="charity-contact-form">
+										<button class="charity-simple-blog-btn" type="submit"
+											id="submit">확인</button>
+										<button class="charity-simple-blog-btn"
+											onClick="history.go(-1)">취소</button>
+									</div>
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 								</div>
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
 							</div>
-
-
 						</form>
-
-
 					</div>
 
 				</div>
