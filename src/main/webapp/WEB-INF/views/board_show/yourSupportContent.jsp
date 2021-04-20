@@ -463,12 +463,35 @@
 					    </div> 
 					    <!-- Widget Event -->
 					    
+					    		
+				<%-- <c:forEach var="attachment" items="${attachment}">
+					${attachment.path }
+					<c:set var="i" value="${i+1 }" />
+					
+					${vo.b_index},${attachment.b_index}
+					<c:if test="${doneLoop ne true}">
+						<c:choose>
+							<c:when test="${vo.b_index eq attachment.b_index }">
+								<img alt="" src="${attachment.path }">
+								<img src="${pageContext.request.contextPath}${attachment.path}">
+								<c:set var="doneLoop" value="true"/>
+							</c:when>
+							
+							<c:when test="${i+1 > attachMentCount }">															
+								<img id="introImg"  class="boardShow_img" src="${pageContext.request.contextPath}/resources/board_thumbnail/bslist07.png">
+								<c:set var="doneLoop" value="true"/>
+							</c:when>															
+						</c:choose>													
+					</c:if>																																																																																									
+				</c:forEach>			 --%>
+					    
+					    
 					    <!-- Widget Gallery -->
 					    <div class="widget widget_gallery">
 					        <div class="widget_title"> <h2>인증게시판</h2> </div>
 					        <c:if test="${! empty list}">
 				            <c:set var="listComment" value="${list}" />
-				            <c:forEach var="vo" items="${list}">
+				            <c:forEach var="vo" items="${list}" begin="1" end="12">
 					        
 						        <ul>
 						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}"><img src="${pageContext.request.contextPath}/resources/users/user01_sm.png" alt=""> <i class="fa fa-plus"></i> </a></li>
