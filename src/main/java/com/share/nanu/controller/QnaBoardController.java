@@ -106,6 +106,7 @@ public class QnaBoardController {
 			mov.addObject("username", md.getmember().getName());
 		}
 		
+		
 		qService.uphit(boardVO);
 		mov.addObject("content_view", qService.getBoard(boardVO.getB_index()));
 		mov.addObject("reply_view", qService.getReplyBoard(replyVO.getB_index()));		

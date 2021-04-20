@@ -20,7 +20,7 @@ import com.share.nanu.VO.ItemdonationVO;
 import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.PointVO;
-import com.share.nanu.mapper.NanuDonationMapper;
+import com.share.nanu.mapper.DonationMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +40,10 @@ import org.apache.http.message.BasicNameValuePair;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class NanuDonationServiceImpl implements NanuDonationService {
+public class DonationServiceImpl implements DonationService {
 
 	@Autowired
-	private NanuDonationMapper ndmapper;
+	private DonationMapper ndmapper;
 
 	// 물품신청서 회원 정보 불러오기
 	@Override

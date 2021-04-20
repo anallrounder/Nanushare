@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.BoardreplyVO;
-import com.share.nanu.mapper.NanuBoardShowYSMapper;
+import com.share.nanu.mapper.BoardShowsMapper;
 import com.share.nanu.page.Criteria;
 
 import lombok.AllArgsConstructor;
@@ -17,10 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class NanuBoardShowYSServiceImpl implements NanuBoardShowYSService {
+public class BoardShowsServiceImpl implements BoardShowsService {
 	
 	@Autowired
-	private NanuBoardShowYSMapper mapper;
+	private BoardShowsMapper mapper;
 	
 	// 인증게시판 리스트
 	@Override
