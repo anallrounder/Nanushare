@@ -33,7 +33,7 @@ import com.share.nanu.mypaging.pageVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.MemberService;
 import com.share.nanu.service.MyPageService;
-import com.share.nanu.service.NanuDonationService;
+import com.share.nanu.service.DonationService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +50,7 @@ public class MyPageController {
 	private MemberService mservice;
 
 	@Autowired
-	private NanuDonationService ndservice;
+	private DonationService ndservice;
 
 	@Autowired
 	BCryptPasswordEncoder encoder;
