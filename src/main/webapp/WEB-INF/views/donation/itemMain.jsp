@@ -38,7 +38,20 @@
 	
 	<!-- FONT AWSOME -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<style>
+#forimg {
+	/* background-color: #db7a7c; */
+	background-color: #dfebe9;
+	background-image: url('/resources/banner_imgs/show_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+	/* background-size: 1500px; 
+	width:100%;  */
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
 </head>
 
 <body>
@@ -47,13 +60,13 @@
 	<!-- Header -->
 	
 	<!-- Banner -->
-	<div class="charity-subheader">
+	<div id="forimg" class="charity-subheader">
 	    <span class="black-transparent"></span>
 	    <div class="container">
 	        <div class="row">
 	            <div class="col-md-12">
-	                <h1>물품 나누기</h1>
-	                <p>Product Donation Guidelines and Application</p>
+	                <!-- <h1>물품 나누기</h1>
+	                <p>Product Donation Guidelines and Application</p> -->
 	            </div>
 	        </div>
 	    </div>
@@ -61,6 +74,10 @@
 	<!-- Banner -->
 
 	<!-- Content -->
+	<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 물품 나누기 </h2>
+	</div> 
+	
 	<div class="charity-main-content">
 
         <!-- Main Section -->

@@ -63,11 +63,24 @@
 	} 
 	</script>  -->
 		<!-- validation 경고문구 스타일 -->
-    <style type="text/css">
-        .error {
-            color: red;
-        }
-    </style>
+<style type="text/css">
+.error {
+    color: red;
+}
+
+#forimg {
+	background-color: #eaf0fe;
+	background-image: url('/resources/banner_imgs/donation_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	background-height:100%;
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
+
+    <!-- Banner -->
 	<!-- 셀렉트 박스에서 직접입력 및 인풋박스에 셀렉트한 값이 입력되어 넘어가도록 하는 자바스크립트 코드 -->
 	<script type="text/javascript"> 
 		function changeSelection(){
@@ -135,22 +148,25 @@
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
-   
+
     <!-- Banner -->
-    <div class="charity-subheader">
-        <span class="black-transparent"></span>
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h1>포인트 나눔</h1>
-                    <p>Point donation: Application Form</p>
+                <div class="col-md-12"> 
+              <!--       <h1>포인트 나눔</h1>
+                    <p>Point donation: Application Form</p> -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- Banner -->
 
     <!-- Content -->
+    <div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 포인트 나눔하기 </h2>
+	</div> 
+
     <div class="charity-main-content">
 
         <!-- Main Section -->
@@ -163,7 +179,7 @@
                         <div class="charity-team-warp">
                            
                             <h3>포인트 나눔하기</h3>
-                            <span class="mb-3">Point donation _ Application Form</span>
+                            <span class="mb-3">Point donation_ Application Form</span>
                             <figure><img src="${pageContext.request.contextPath}/resources/charity/donation-images/heart.jpg" alt=""></figure><!-- 788x355 -->
                              
                             <p>후원 회원 여러분, 나누셰어 프로젝트의 나눔 활동에 동참해주셔서 감사합니다. <br>안내 사항을 다시 한 번 꼭 확인해 주시고 신청서 작성 부탁드립니다. <br>
@@ -186,7 +202,7 @@
                         
                         
                         <!--// volunteer-form \\-->
-                        <div class="widget_title mt-4"><h2>포인트 나눔하기</h2></div>
+                        <div class="widget_title mt-4"><h2>포인트 나눔 신청서</h2></div>
                        
                         <div class="charity-volunteer-form"> <!-- .charity-volunteer-form > form > ul > li > #text-calendar -->
 						<form id="donatePoint" name="donatePoint" method="post" action="${pageContext.request.contextPath}/my/donation/money/point/pointAction">

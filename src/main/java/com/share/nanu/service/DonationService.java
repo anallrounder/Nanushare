@@ -16,7 +16,7 @@ import com.share.nanu.VO.PointVO;
 
 import net.minidev.json.JSONObject;
 
-public interface NanuDonationService {
+public interface DonationService {
 
 	/* 물품 기부 */
 	public List<MemberVO> getMember(); // 물품신청서 회원 정보 불러오기//로그인한 사용자용 - 로그인 사용자 용 test중

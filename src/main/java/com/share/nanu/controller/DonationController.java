@@ -15,7 +15,7 @@ import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.PointVO;
 import com.share.nanu.security.MemberDetails;
-import com.share.nanu.service.NanuDonationService;
+import com.share.nanu.service.DonationService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Controller
 //@RequestMapping("/donation/*")
-public class NanuDonationController {
+public class DonationController {
 
 	@Autowired
-	private NanuDonationService service;
+	private DonationService service;
 	
 	// 물품기부 메인
 	@GetMapping("/donation/item/main")
