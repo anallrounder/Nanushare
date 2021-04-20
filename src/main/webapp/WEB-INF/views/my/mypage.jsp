@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <!-- 이건무조건 여기있어야함 -->
@@ -51,13 +51,19 @@
 <link rel="stylesheet" href="/resources/charity/css/style.css">
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
-<link rel="stylesheet" type="text/css"
-	href="/resources/charity/css/imgblink_hj.css">
+<link rel="stylesheet" type="text/css" href="/resources/charity/css/imgblink_hj.css">
+
+<link rel="stylesheet" href="/resources/charity/css/style_mypage_hj.css">
 
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
-
+<!--  -->
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+	
 <style>
 .maxmax {
 	position: relative;
@@ -67,20 +73,22 @@ li {
 	list-style: none;
 }
 
-.threebox {
-	border: 1px solid lightgray;
-	box-sizing: border-box;
-	width: 270px;
-	height: 180px;
-	margin: 10px auto;
-	padding: 10px auto;
-	border-radius: 20px 20px 20px 20px;
-	text-align: center;
-	padding: 10px auto;
-}
-
 .number2 {
 	text-align: center;
+	color: white;
+	font-weight: bold;
+}
+
+.threebox {
+	color: white;
+	width: 190px;
+	height: 190px;
+	border-radius: 95px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 14px;
+	vertical-align: middle;
+	line-height: 150px;
 }
 </style>
 
@@ -89,7 +97,7 @@ li {
 <script type="text/JavaScript"
 	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-	jQuery(document)
+	$(document)
 			.ready(
 					function() {
 						var barbar = jQuery('.progressbar');
@@ -166,135 +174,165 @@ li {
 			<div class="container">
 				<div class="view-account">
 					<section class="module">
-					<div class="module-inner">
+						<div class="module-inner">
 
-						<!-- sidebar -->
-						<div class="side-bar">
-							<div class="user-info">
-								<img class="img-profile img-circle img-responsive center-block"
-									src="/resources/my/프로필사진.PNG" alt="">
-								<!-- 
+							<!-- sidebar -->
+							<div class="side-bar">
+								<div class="user-info">
+									<img class="img-profile img-circle img-responsive center-block"
+										src="/resources/my/프로필사진.PNG" alt="">
+									<!-- 
 									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
-								<ul class="meta list list-unstyled">
-									<li class="name"><h2>
-											<sec:authentication property="principal.member.name" />
-										</h2></li>
-									<li class="email"><sec:authentication property="principal.member.member_id" /></a></li>
-									<li class="activity">
-									
-									<sec:authentication
-											property="principal.member" var="buttonhidden" /> <sec:authorize
-											access="isAuthenticated()">
-											
-											<c:if test="${buttonhidden.signuppath == 'home'}">
+									<ul class="meta list list-unstyled">
+										<li class="name"><h2>
+												<sec:authentication property="principal.member.name" />
+											</h2></li>
+										<li class="email"><sec:authentication
+												property="principal.member.member_id" /></a></li>
+										<li class="activity"><sec:authentication
+												property="principal.member" var="buttonhidden" /> <sec:authorize
+												access="isAuthenticated()">
 
-												<button class="charity-simple-blog-btn w-100 text-white stats"
-													type="submit"
-													onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-													프로필수정</button>
-											
-											</c:if>
-										</sec:authorize>
-										
-										<sec:authentication
-											property="principal.member" var="buttonhidden" /> <sec:authorize
-											access="isAuthenticated()">
-											
-											<c:if test="${buttonhidden.signuppath != 'home'}">
+												<c:if test="${buttonhidden.signuppath == 'home'}">
 
-												<button class="charity-simple-blog-btn w-100 text-white stats"
-													type="submit"
-													onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
-													회원탈퇴</button>
-											
-											</c:if>
-										</sec:authorize>
-										
-										</li>
-								</ul>
+													<button
+														class="charity-simple-blog-btn w-100 text-white stats"
+														type="submit"
+														onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+														프로필수정</button>
+
+												</c:if>
+											</sec:authorize> <sec:authentication property="principal.member"
+												var="buttonhidden" /> <sec:authorize
+												access="isAuthenticated()">
+
+												<c:if test="${buttonhidden.signuppath != 'home'}">
+
+													<button
+														class="charity-simple-blog-btn w-100 text-white stats"
+														type="submit"
+														onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
+														회원탈퇴</button>
+
+												</c:if>
+											</sec:authorize></li>
+									</ul>
+								</div>
+								<nav class="side-menu">
+									<ul class="nav">
+										<li class="active"><a href="mypage"><span
+												class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
+										<li><a href="ask"><span class="fa fa-question">
+											</span>&nbsp;&nbsp;나의문의내역</a></li>
+										<li><a href="content"><span class="fa fa-file">
+											</span>&nbsp;&nbsp;나의인증내역</a></li>
+										<li><a href="give"><span class="fa fa-handshake">
+											</span>&nbsp;&nbsp;나의나눔내역</a></li>
+										<li><a href="reply"><span class="fa fa-reply">
+											</span>&nbsp;&nbsp;나의댓글내역</a></li>
+										<li><a href="pay"><span class="fa fa-credit-card">
+											</span>&nbsp;&nbsp;나의결제내역</a></li>
+										<li><a href="point"><span
+												class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
+
+									</ul>
+								</nav>
 							</div>
-							<nav class="side-menu">
-							<ul class="nav">
-								<li class="active"><a href="mypage"><span
-										class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
-								<li><a href="ask"><span class="fa fa-question">
-									</span>&nbsp;&nbsp;나의문의내역</a></li>
-								<li><a href="content"><span class="fa fa-file">
-									</span>&nbsp;&nbsp;나의인증내역</a></li>
-								<li><a href="give"><span class="fa fa-handshake">
-									</span>&nbsp;&nbsp;나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
-								<li><a href="pay"><span class="fa fa-credit-card">
-									</span>&nbsp;&nbsp;나의결제내역</a></li>
-							</ul>
-							</nav>
-						</div>
-						<!-- sidebar -->
+							<!-- sidebar -->
 
-						<div class="content-panel">
-							<h2 class="title">My Profile</h2>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div class="d-flex align-items-center">
+							<div class="content-panel">
+								<h2 class="title">My Profile</h2>
+								<div>&nbsp;</div>
+								<div>&nbsp;</div>
+								<div>&nbsp;</div>
+								<div class="d-flex align-items-center">
 
-								<div class="charity-team charity-simple-team inner-wrap">
-									<div class="row">
+									<div class="charity-team charity-simple-team inner-wrap">
+										<div class="row">
 
-										<li class="threebox" class="col-md-4"><div>&nbsp;</div> <span>나의
-												포인트</span>
-											<h4 class="mb-4 mt-4 col-md-4">
-												<form action="${pageContext.request.contextPath}/my/ask"
-													method="get">
+
+											<%-- <div id="circle1">
+												<li>나의포인트</li>
+												<li><c:forEach var="vo1" items="${memberInfo}">
+														<input type="hidden" value="${vo2.member_id} name=" member_id" />
+														<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}</c:forEach>
+													</c:forEach></li>
+											</div>
+ --%>
+
+											<div class="threebox" class="col-md-4"
+												style="background-color: FFDB8E;">
+												<!-- <h6>&nbsp;</h6> -->
+												<i class="far fa-parking-circle"
+													style="color: white; font-size: 30px;"></i>
+												<h4 style="color: white;">N.point</h4>
+												<h1>
+													<%-- <form action="${pageContext.request.contextPath}/my/ask"
+														method="get"> ??--%>
 													<span class="number2"><c:forEach var="vo1"
 															items="${memberInfo}">
 															<input type="hidden" value="${vo2.member_id} name=" member_id" />
-															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}</c:forEach>
-														</c:forEach>pt</span>
-											</h4>
-											<button class="charity-simple-blog-btn w-30 text-white stats"
-												type="button"
-												onClick="location.href='${pageContext.request.contextPath}/my/donation/money/point'">
-												기부하기</button></li>
-										<li class="threebox" class="col-md-4"><div>&nbsp;</div> <span
-											class="followers">나의 기부횟수</span>
-											<h4 class="mb-4 mt-4 col-md-4">
-												<span class="number2"><sec:authentication
-														property="principal.member.dntcnt" />회</span>
-											</h4></li>
-										<li class="threebox" class="col-md-4"><div>&nbsp;</div> <span
-											class="followers">나의 나눔횟수</span>
-											<h4 class="mb-4 mt-4 col-md-4">
-												<span class="number1"><sec:authentication
-														property="principal.member.itemdntcnt" />회</span>
-											</h4></li>
+															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}pt</c:forEach>
+														</c:forEach></span>
+												</h1>
+												<button
+													class="charity-simple-blog-btn w-30 text-white stats"
+													type="button"
+													onClick="location.href='${pageContext.request.contextPath}/my/donation/money/point'">
+													기부하기</button>
+											</div>
+											<div class="threebox" class="col-md-4"
+												style="background-color: FFAE73;">
+												<h6>&nbsp;</h6>
+												<i class="fal fa-hand-holding-usd"
+													style="color: white; font-size: 30px;"></i>
+												<h4 style="color: white;">나의 기부횟수</h4>
+												<h1>
+													<span class="number2"><sec:authentication
+															property="principal.member.dntcnt" />회</span>
+												</h1>
+											</div>
+											<div class="threebox" class="col-md-4"
+												style="background-color: FFC7A8;">
+												<h6>&nbsp;</h6>
+												<i class="fal fa-gift-card"
+													style="color: white; font-size: 30px;"></i>
+
+												<h4 style="color: white;">나의 나눔횟수</h4>
+												<h1>
+													<span class="number2"><sec:authentication
+															property="principal.member.itemdntcnt" />회</span>
+												</h1>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<!-- 프로그래스바 -->
-							<div class="charity-cause-donate">
-								<h4 align="center">나의 기부 %는?</h4>
-								<div class="progressbar">
-									<img class="maxmax blinking" width="80" height="80">
-									<div class="progress-label"></div>
+								<div>&nbsp;</div>
+								<div>&nbsp;</div>
+								<div>&nbsp;</div>
+								<div>&nbsp;</div>
+								<!-- 프로그래스바 -->
+								<div class="charity-cause-donate">
+									<h4 align="center">나의 기부 %는?</h4>
+									<div class="progressbar">
+										<img class="maxmax blinking" width="80" height="80">
+										<div class="progress-label"></div>
+									</div>
+									<div
+										data-width='<sec:authentication property="principal.member.dntcnt"/>'
+										max='100' class="charity-cause-progressbar"></div>
+									<h6>*기부횟수 %따라 그림이 바뀌어요.</h6>
 								</div>
-								<div
-									data-width='<sec:authentication property="principal.member.dntcnt"/>'
-									max='100' class="charity-cause-progressbar"></div>
-								<h6>*기부횟수 %따라 그림이 바뀌어요.</h6>
+								<div>&nbsp;</div>
+								<div>&nbsp;</div>
+								<button
+									class="charity-simple-blog-btn w-30 ml-2 text-white stats"
+									type="button"
+									onClick="location.href='${pageContext.request.contextPath}/board/notice/188'">기부금
+									영수증</button>
 							</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<button
-								class="charity-simple-blog-btn w-30 ml-2 text-white stats" type="button" onClick="location.href='${pageContext.request.contextPath}/board/notice/188'">기부금
-								영수증</button>
+							<hr>
 						</div>
-						<hr>
-					</div>
 				</div>
 				</section>
 			</div>
@@ -314,7 +352,7 @@ li {
 
 	</div>
 	<!-- Content -->
-	</div>
+
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>

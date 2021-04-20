@@ -139,7 +139,7 @@
 														href="${pageContext.request.contextPath}/board/notice/modify/${content_view.b_index}"
 														class="fa fa-edit"> 수정</a></li>
 													<li><a id="del_btn"
-														href="${pageContext.request.contextPath}/board/notice/delete"
+														href="${pageContext.request.contextPath}/delete?b_index=${content_view.b_index}"
 														class="fa fa-eraser"> 삭제</a></li>
 											
 											</sec:authorize>

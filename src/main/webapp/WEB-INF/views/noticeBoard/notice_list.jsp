@@ -71,7 +71,6 @@
 }
 </style>
 
-
 </head>
 
 <style>
@@ -82,11 +81,39 @@
 ​h3 {
 	text-align: center;
 }
+
+#forimg {
+	background-color: #eaf3fa;
+	background-image: url('/resources/charity/qna/notice_banner2.jpg');
+	background-size: 500px;
+	background-repeat: no-repeat;
+	background-position: center;	
+}
+
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
 </style>
+
 <body>
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
+	<!-- Banner -->
+	<div id="forimg" class="charity-subheader">
+		<!-- <img src='/resources/my/notice_banner.jpg'> -->
+		<!--  <span class="black-transparent"></span> -->
+		<!-- <div class="container">
+			<div class="row">
+				<div class="col-md-12"></div>
+			</div>
+		</div> -->
+	</div>
+	<!-- Banner -->
 
 	<!-- Main Section -->
 	<!-- Content -->
@@ -97,93 +124,99 @@
 	<div class="charity-fancy-title">
 		<h2>공지사항</h2>
 	</div>
-	<div class="charity-main-content">
-		<!-- Main Section -->
-		<div class="charity-main-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<!-- Event -->
-						<div class="charity-event charity-event-list">
-							<ul class="row">
+
+
+
+
+
+
+
+
+	<div id="container">
+		<div class="row">
+			<!-- <div class="container">
+                  </div> -->
+
+			<div class="container" style="height: 90%">
+
+				<div class="col-12">
+					<!--  <div class="card"> -->
+					<!-- <div class="card-body"> -->
+
+
+					<form id="boardForm" class="charity-volunteer-form"
+						name="boardForm" style="margin-bottom: 0px; padding-bottom: 10px;">
+						<table class="table taWWble-striped projects">
+							<!-- <table class="table table-light table-hover " > -->
+							<colgroup>
+								<col width="10%" />
+								<col width="45%" />
+								<col width="15%" />
+								<col width="20%" />
+								<col width="10%" />
+							</colgroup>
+
+							<thead>
+								<!-- table-dark -->
+								<tr bgcolor="a5a5a5">
+									<!-- ffd7b9 -->
+									<th style="border-left: none;">글번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>날짜</th>
+									<th style="border-right: none;">조회수</th>
+
+
+								</tr>
+							</thead>
+
+							<tbody>
 								<c:forEach items="${list}" var="dto">
-									<li class="col-md-12">
-										<div class="charity-event-list-text">
-											<time datetime="${dto.bdate}"> <span
-												class="charity-bgcolor">${dto.b_index}</span>${dto.bdate}</time>
-											<h2>
-												<c:forEach begin="1" end="${end.page}"></c:forEach>
-												<a href="${pageContext.request.contextPath}/board/notice/${dto.b_index}">${dto.btitle}</a>
-											</h2>
-											<p>조회수 : ${dto.bhit}</p>
-											<!-- <a href="#" class="charity-event-list-btn">Read More</a> -->
-										</div>
-									</li>
+									<tr>
+										<td style="border-left: none;">${dto.b_index}</td>
+										<td><a
+											href="${pageContext.request.contextPath}/board/notice/${dto.b_index}">${dto.btitle}</a></td>
+										<td>관리자</td>
+										<td>${dto.bdate}</td>
+										<td style="border-right: none;">${dto.bhit}</td>
+									</tr>
 								</c:forEach>
-							</ul>
-							<!-- </div> -->
-							<!-- Event -->
+							</tbody>
+						</table>
 
-							<!-- Pagination -->
-							<div align="center">
-								<ul class="pagination justify-content-center">
-									<c:if test="${pageMaker.prev}">
-										<li class="page-item"><a
-											href="notice${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
-										</li>
-									</c:if>
+					</form>
 
-									<c:forEach begin="${pageMaker.startPage}"
-										end="${pageMaker.endPage}" var="idx">
+					<!-- Pagination -->
+					<!-- <div > -->
+					<div style="margin: 10px;">
+						<div class="charity-pagination">
+							<ul class="page-numbers">
+								<li><c:if test="${pageMaker.prev}">
+										<a class="previous page-numbers"
+											href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(pageMaker.startPage - 1) }"><i
+											class="fa fa-angle-left"></i>prev</a>
+									</c:if></li>
+
+								<li><c:forEach begin="${pageMaker.startPage }"
+										end="${pageMaker.endPage }" var="idx">
 										<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-										<li class="page-item"><a
-											href="notice${pageMaker.makeQuery(idx)}">${idx}</a></li>
-									</c:forEach>
+										<a
+											href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(idx)}">${idx}</a>
+									</c:forEach></li>
 
-									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-										<li class="page-item"><a
-											href="notice${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a></li>
-									</c:if>
-									<br>
-								</ul>
-							</div>
-							<!-- Pagination -->
+								<li><c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+										<a class="next page-numbers"
+											href="${pageContext.request.contextPath}/board/notice${pageMaker.makeQuery(pageMaker.endPage +1) }">next<i
+											class="fa fa-angle-right"></i></a>
+									</c:if></li>
+							</ul>
 						</div>
-
 					</div>
 				</div>
 			</div>
-			<!-- Main Section -->
 		</div>
 	</div>
-	<!-- Content -->
 
-
-
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <input type="button"
-							value="취소" onClick="history.go(-2)"
-							class="charity-simple-blog-btn"> <a
-							href="${pageContext.request.contextPath}/my/mypage"
-							class="charity-simple-blog-btn">저장</a> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>

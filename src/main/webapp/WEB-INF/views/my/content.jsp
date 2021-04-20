@@ -60,6 +60,13 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+<link rel="stylesheet" href="/resources/charity/css/style_mypage_hj.css">
+
+
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
 
 
 </head>
@@ -73,15 +80,13 @@ li {
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<!-- Sub Header -->
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -93,153 +98,178 @@ li {
 		<!-- Main Section-->
 		<!-- <div class="charity-main-section">  -->
 
-			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
-			<div class="container">
-				<div class="view-account">
-					<section class="module">
-					<div class="module-inner">
-						<div class="side-bar">
-							<div class="user-info">
-								<img class="img-profile img-circle img-responsive center-block"
-									src="/resources/my/프로필사진.PNG" alt="">
-								<!-- 
+		<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
+		<div class="container">
+			<div class="view-account">
+				<section class="module">
+				<div class="module-inner">
+					<div class="side-bar">
+						<div class="user-info">
+							<img class="img-profile img-circle img-responsive center-block"
+								src="/resources/my/프로필사진.PNG" alt="">
+							<!-- 
 									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
-								<ul class="meta list list-unstyled">
-									<li class="name"><h2>
-											<sec:authentication property="principal.member.name" />
-										</h2></li>
-									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication
-											property="principal.member.signuppath" />회원</li>
-								</ul>
-							</div>
-							<nav class="side-menu">
-							<ul class="nav">
-								<li><a href="mypage"><span
-										class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
-								<li><a href="ask"><span class="fa fa-question">
-									</span>&nbsp;&nbsp;나의문의내역</a></li>
-								<li class="active"><a href="content"><span class="fa fa-file">
-									</span>&nbsp;&nbsp;나의인증내역</a></li>
-								<li><a href="give"><span class="fa fa-handshake">
-									</span>&nbsp;&nbsp;나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
-								<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
+							<ul class="meta list list-unstyled">
+								<li class="name"><h2>
+										<sec:authentication property="principal.member.name" />
+									</h2></li>
+								<li class="email"><sec:authentication
+										property="principal.member.member_id" /></a></li>
+								<li class="activity"><sec:authentication
+										property="principal.member" var="buttonhidden" /> <sec:authorize
+										access="isAuthenticated()">
 
+										<c:if test="${buttonhidden.signuppath == 'home'}">
 
+											<button
+												class="charity-simple-blog-btn w-100 text-white stats"
+												type="submit"
+												onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+												프로필수정</button>
+
+										</c:if>
+									</sec:authorize> <sec:authentication property="principal.member"
+										var="buttonhidden" /> <sec:authorize
+										access="isAuthenticated()">
+
+										<c:if test="${buttonhidden.signuppath != 'home'}">
+
+											<button
+												class="charity-simple-blog-btn w-100 text-white stats"
+												type="submit"
+												onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
+												회원탈퇴</button>
+
+										</c:if>
+									</sec:authorize></li>
 							</ul>
-							</nav>
 						</div>
-							<div class="content-panel">
-							<script
-								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div class="charity-fancy-title">
-							<h2>나의 인증 내역</h2></div>
-							<div>&nbsp;</div>
-							<table>
-								<div>
-									<br>
-								</div>
+						<nav class="side-menu">
+						<ul class="nav">
+							<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
+							<li><a href="ask"><span class="fa fa-question"> </span>&nbsp;&nbsp;나의문의내역</a></li>
+							<li class="active"><a href="content"><span
+									class="fa fa-file"> </span>&nbsp;&nbsp;나의인증내역</a></li>
+							<li><a href="give"><span class="fa fa-handshake">
+								</span>&nbsp;&nbsp;나의나눔내역</a></li>
+							<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
+							<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
+							<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
+
+
+						</ul>
+						</nav>
+					</div>
+					<div class="content-panel">
+						<script
+							src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+						<div>&nbsp;</div>
+						<div>&nbsp;</div>
+						<div>&nbsp;</div>
+						<div class="charity-fancy-title">
+							<h2>나의 인증 내역</h2>
+						</div>
+						<div>&nbsp;</div>
+						<table>
+							<div>
+								<br>
+							</div>
+							<tr>
+								<th>글번호</th>
+								<!-- <th>아이디</th> -->
+								<th>인증제목</th>
+								<th>조회수</th>
+								<th>날짜</th>
+								<!-- 	<th>분류번호</th> -->
+							</tr>
+
+							<c:if test="${empty list2}">
 								<tr>
-									<th>글번호</th>
-									<!-- <th>아이디</th> -->
-									<th>인증제목</th>
-									<th>조회수</th>
-									<th>날짜</th>
-									<!-- 	<th>분류번호</th> -->
+									<td colspan="5" align="center">작성된 글이 없습니다</td>
 								</tr>
+							</c:if>
 
-								<c:if test="${empty list2}">
-									<tr>
-										<td colspan="5" align="center">작성된 글이 없습니다</td>
-									</tr>
-								</c:if>
-
-								<!-- 나의인증내역 -->
-								<c:if test="${! empty list2}">
-									<c:forEach items="${list2}" var="list2">
-										<%-- <sec:authentication property="principal" var="pinfo" />
+							<!-- 나의인증내역 -->
+							<c:if test="${! empty list2}">
+								<c:forEach items="${list2}" var="list2">
+									<%-- <sec:authentication property="principal" var="pinfo" />
 									<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq list2.member_id}"> --%>
-										<%-- <c:if test="${sessionScope.member_id = principal.member_id}"> --%>
-										<tr>
-											<td>${list2.b_index}</td>
-											<%-- <td>${list2.member_id}</td> --%>
-											<td><a id="a-content"
-												href="${pageContext.request.contextPath}/board/shows/content_view/${list2.b_index}">${list2.btitle}</a></td>
-											<!-- 제목누르면 해당 글내용으로 이동링크 -->
-											<td>${list2.bhit}</td>
-											<td>${list2.bdate}</td>
-											<%-- <td>${list2.bcat_num}</td> --%>
-										</tr>
-										<%--	</c:if>
+									<%-- <c:if test="${sessionScope.member_id = principal.member_id}"> --%>
+									<tr>
+										<td>${list2.b_index}</td>
+										<%-- <td>${list2.member_id}</td> --%>
+										<td><a id="a-content"
+											href="${pageContext.request.contextPath}/board/shows/content_view/${list2.b_index}">${list2.btitle}</a></td>
+										<!-- 제목누르면 해당 글내용으로 이동링크 -->
+										<td>${list2.bhit}</td>
+										<td>${list2.bdate}</td>
+										<%-- <td>${list2.bcat_num}</td> --%>
+									</tr>
+									<%--	</c:if>
 										 </c:if> 
 									</sec:authorize>--%>
-									</c:forEach>
-								</c:if>
-
-							</table>
-
-
-
-							<!-- 페이징 -->
-							<!-- 	<div class="container" align="center"> -->
-							<!--  -->
-							<c:if test="${! empty list2}">
-								<div class="charity-pagination">
-									<ul class="page-numbers">
-										<c:if test="${pageMaker.prev}">
-											<li class="page-item"><a
-												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
-											</li>
-										</c:if>
-
-										<c:forEach begin="${pageMaker.startPage}"
-											end="${pageMaker.endPage}" var="idx">
-											<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-											<li class="page-item"><a
-												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
-											</li>
-										</c:forEach>
-
-										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-											<li class="page-item"><a
-												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
-											</li>
-										</c:if>
-									</ul>
-								</div>
+								</c:forEach>
 							</c:if>
-						</div>
+
+						</table>
+
+
+
+						<!-- 페이징 -->
+						<!-- 	<div class="container" align="center"> -->
+						<!--  -->
+						<c:if test="${! empty list2}">
+							<div class="charity-pagination">
+								<ul class="page-numbers">
+									<c:if test="${pageMaker.prev}">
+										<li class="page-item"><a
+											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
+										</li>
+									</c:if>
+
+									<c:forEach begin="${pageMaker.startPage}"
+										end="${pageMaker.endPage}" var="idx">
+										<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+										<li class="page-item"><a
+											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
+										</li>
+									</c:forEach>
+
+									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+										<li class="page-item"><a
+											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
+										</li>
+									</c:if>
+								</ul>
+							</div>
+						</c:if>
 					</div>
-					<!-- </div> --> </section>
 				</div>
+				<!-- </div> --> </section>
 			</div>
+		</div>
 
-			<script>
-				$("#mytabs>ul>li>a").each(function(i) {
-					$(this).attr("href", "#mytab" + i)
-				})
-				$("#mytabs>div>div").each(function(i) {
-					$(this).attr("id", "mytab" + i)
-				})
-			</script>
+		<script>
+			$("#mytabs>ul>li>a").each(function(i) {
+				$(this).attr("href", "#mytab" + i)
+			})
+			$("#mytabs>div>div").each(function(i) {
+				$(this).attr("id", "mytab" + i)
+			})
+		</script>
 
-			<!-- Main Section -->
+		<!-- Main Section -->
 
-		 </div>
-		<!--Content -->
+	</div>
+	<!--Content -->
 	<!-- </div> -->
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
-	
+
 
 
 	<!-- jQuery -->

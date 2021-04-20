@@ -1,46 +1,16 @@
 package com.share.nanu.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.share.nanu.service.NoticeBoardService;
-
 import com.share.nanu.controller.NoticeBoardController;
-import com.share.nanu.page.pageVO;
 import com.share.nanu.paging.Criteria;
 import com.share.nanu.paging.PageVO;
 import com.share.nanu.security.MemberDetails;
-import com.google.gson.JsonObject;
-import com.nimbusds.oauth2.sdk.util.StringUtils;
-import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
