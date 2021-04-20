@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>myprofile_edit</title>
+<title> 나누셰어 - 공지사항 </title>
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -23,18 +23,25 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
+
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/resources/AdminLTE-master/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/resources/AdminLTE-master/dist/css/adminlte.min.css">
 
 <!-- 자주묻는질문 -->
 <script>
 	document.getElementsByTagName("html")[0].className += " js";
 </script>
 <link rel="stylesheet" href="/resources/faq/assets/css/style.css">
-<link rel="stylesheet" href="/resources/faq/assets/css/style.scss">
+
+</head>
 
 <style>
 .charity-simple-blog-btn {
@@ -45,17 +52,21 @@
 	text-align: center;
 }
 </style>
-
-</head>
-
 <body>
 	<!-- Header -->
-	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-
-	<!-- Main Section -->
 	
-	<!-- Bootstrap FAQ - START -->
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	
+	<div class="charity-fancy-title">
+		<h2> 자주 묻는 질문 (FAQ)</h2>
+	</div>
+	<!-- Main Section -->
+	<!-- Content -->
 	
 	<section
 		class="cd-faq js-cd-faq container max-width-md margin-top-lg margin-bottom-lg"">
@@ -63,7 +74,7 @@
 	<ul class="cd-faq__categories">
 		<li><a
 			class="cd-faq__category cd-faq__category-selected truncate"
-			href="#basics"> 자주 묻는 질문 </a></li>
+			href="#basics"> 유용한 도움말 </a></li>
 		<li><a class="cd-faq__category truncate" href="#mobile">물품 관련</a></li>
 		<li><a class="cd-faq__category truncate" href="#account">기부
 				관련</a></li>
@@ -77,22 +88,22 @@
 		<ul id="basics" class="cd-faq__group">
 			<li class="cd-faq__title"><h2> 자주 묻는 질문 </h2></li>
 			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span>나누셰어는
-						어떤 기업인가요?</span></a>
+						어떤 단체인가요?</span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
 						<p>나누셰어는</p>
 					</div>
 				</div></li>
-			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span>질문이 있습니다</span></a>
+			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span> 정기적인 후원도 가능한가요? </span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>d</p>
+						<p> 현재 준비중입니다. </p>
 					</div>
 				</div></li>
-			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span>있습니다 질문</span></a>
+			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span> 대량의 물품을 기부하고 싶습니다. </span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>dd.</p>
+						<p> 1:1문의란에 상세 내용 남겨 주시면 연락드리겠습니다. </p>
 					</div>
 				</div></li>
 		</ul>
@@ -109,7 +120,7 @@
 						기부한 물품의 배송현황이 궁금합니다. </span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>택배사에 운송장번호로 문의하세요</p>
+						<p>지정 택배사에서 운송장번호로 조회 가능합니다.</p>
 					</div>
 				</div></li>
 			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span>
@@ -126,21 +137,21 @@
 						기부한 내역은 어디서 확인하나요? </span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>마이페이지에서 확인하실 수 있습니다.</p>
+						<p>로그인 후 마이페이지에서 확인하실 수 있습니다.</p>
 					</div>
 				</div></li>
 			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span>
 						기부금에 대한 영수증 발급 문의 </span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>사무실로 연락 주세요</p>
+						<p>사무실로 연락 바랍니다.</p>
 					</div>
 				</div></li>
 			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span>
 						기부금이 사용된 내역은 어디서 확인하나요? </span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>홈페이지에서 확인 하세요</p>
+						<p>홈페이지에 업데이트 될 예정입니다.</p>
 					</div>
 				</div></li>
 		</ul>
@@ -198,19 +209,19 @@
 						업무 협약은 어디로 문의하나요?</span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>.</p>
+						<p> 1:1문의란에 해당 내용 남겨주시면 연락 드리겠습니다.</p>
 					</div>
 				</div></li>
-			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span>?</span></a>
+			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span> 채용 일정이 궁금합니다. </span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>t.</p>
+						<p> 현재 논의중입니다.</p>
 					</div>
 				</div></li>
-			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span>?</span></a>
+			<li class="cd-faq__item"><a class="cd-faq__trigger" href="#0"><span> 매거진 발행은 언제쯤 되나요? </span></a>
 				<div class="cd-faq__content">
 					<div class="text-component">
-						<p>.</p>
+						<p> 현재 준비중입니다. </p>
 					</div>
 				</div></li>
 			<a href="#0" class="cd-faq__close-panel text-replace">Close</a>
@@ -248,160 +259,29 @@
 	</script>
 	<!-- Bootstrap FAQ - END -->
 
-	<aside class="col-md-3">
-		<div style="height:30px"></div>
-	    <!-- Widget Search -->
-	    <!-- <div class="widget widget_search">
-	        <div class="widget_title"><h2>검색</h2></div>
-	        <form>
-	            <input type="text" placeholder="Search Here">
-	            <input type="submit" value="">
-	            <i class="fa fa-search"></i>
-	        </form>
-	    </div> -->
-	    <!-- Widget Search -->
-	    
-	    <!-- Widget Archive 퀵링크 연결 -->
-	    <div class="widget widget_archive">
-	        <div class="widget_title"><h2>바로가기</h2></div>
-	        <ul>
-		        <li><a href="${pageContext.request.contextPath}/main">나눔함 안내</a></li>
-	            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
-	            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
-	            <li><a href="${pageContext.request.contextPath}/board/shows/list">나눔 인증</a></li>
-	            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
-	        </ul>
-	    </div>
-	    <!-- Widget Archive 퀵링크 연결 -->
-	    
-	    <!-- Widget Event -->
-	   	<div class="widget widget_events">
-	        <div class="widget_title"><h2>최근 공지사항</h2></div>
-	        <ul>
-	            <li>
-	                <time datetime="2008-02-14 20:00">22 Aug</time>
-	                <div class="charity-events">
-	                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-	                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-	                </div>
-	            </li>
-	            <li>
-	                <time datetime="2008-02-14 20:00">13 Sep</time>
-	                <div class="charity-events">
-	                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-	                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-	                </div>
-	            </li>
-	            <li>
-	                <time datetime="2008-02-14 20:00">07 Dec</time>
-	                <div class="charity-events">
-	                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-	                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-	                </div>
-	            </li>
-	         </ul>
-	    </div> 
-	    <!-- Widget Event -->
-	    
-	    <!-- Widget Gallery -->
-	    <div class="widget widget_gallery">
-	        <div class="widget_title"> <h2>인증게시판</h2> </div>
-	        <c:if test="${! empty list}">
-            <c:set var="listComment" value="${list}" />
-            <c:forEach var="vo" items="${list}">
-	        
-		        <ul>
-		            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}"><img src="${pageContext.request.contextPath}/resources/users/user01_sm.png" alt=""> <i class="fa fa-plus"></i> </a></li>
-		       <%--      <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-2.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-2.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-		            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-3.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-3.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-		            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-4.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-4.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-		            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-5.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-5.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-		            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-		            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-7.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-7.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-		            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-8.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-8.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-		            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li> --%>
-		        </ul>
-		        
-	        </c:forEach>
-            </c:if>
-	    </div>
-	    <!-- Widget Gallery -->
-		
-		<!-- Widget Event 새로운 지점 정보 넣을지 고민중 -->
-<!-- 		<div class="widget widget_events">
-		    <div class="widget_title"><h2>Upcoming ShareBox</h2></div>
-		    <ul>
-		    	<li>
-		            <time datetime="2008-02-14 20:00">22 Jun</time>
-		            <div class="charity-events">
-			            <h6>강남역점</h6>
-			            <p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 서초구 서초동 1318-10</p>
-		    		</div>
-				</li>
-				<li>
-		    		<time datetime="2008-02-14 20:00">13 July</time>
-		    		<div class="charity-events">
-		    			<h6>용산역점</h6>
-		     			<p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 용산구 한강대로 23길 55</p>
-		   			</div>
-				</li>
-				<li>
-					<time datetime="2008-02-14 20:00">20 July</time>
-					<div class="charity-events">
-						<h6>시청역점</h6>
-						<p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 중구 태평로 1가 54-3</p>
-					</div>
-				</li>
-			</ul>
-		</div> -->
-		<!-- Widget Event -->
-		
-	</aside>
-	
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <input type="button"
-							value="취소" onClick="history.go(-2)"
-							class="charity-simple-blog-btn"> <a
-							href="${pageContext.request.contextPath}/my/mypage"
-							class="charity-simple-blog-btn">저장</a> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
 
-	<!-- jQuery -->
-	<script src="/resources/charity/script/jquery.js"></script>
-	<script src="/resources/charity/script/popper.min.js"></script>
-	<script src="/resources/charity/script/bootstrap.min.js"></script>
-	<script src="/resources/charity/script/slick.slider.min.js"></script>
-	<script src="/resources/charity/script/progressbar.js"></script>
-	<script src="/resources/charity/script/fancybox.min.js"></script>
-	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-	<script src="/resources/charity/script/jquery.jplayer.js"></script>
-	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions-main.js"></script>
+<!-- jQuery -->
+<script src="/resources/charity/script/jquery.js"></script>
+<script src="/resources/charity/script/popper.min.js"></script>
+<script src="/resources/charity/script/bootstrap.min.js"></script>
+<script src="/resources/charity/script/slick.slider.min.js"></script>
+<script src="/resources/charity/script/progressbar.js"></script>
+<script src="/resources/charity/script/fancybox.min.js"></script>
+<script src="/resources/charity/script/jquery.countdown.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="/resources/charity/script/jquery.jplayer.js"></script>
+<script src="/resources/charity/script/jplayer.playlist.js"></script>
+<script src="/resources/charity/script/functions-main.js"></script>
+	
 
-
-
+<!-- AdminLTE App -->
+<script src="/resources/AdminLTE-master/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/resources/AdminLTE-master/dist/js/demo.js"></script>
+    
 </body>
 </html>
