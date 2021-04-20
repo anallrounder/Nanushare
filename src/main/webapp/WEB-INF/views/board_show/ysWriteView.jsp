@@ -44,16 +44,6 @@
 	$(document).ready(function(){
 		$("#write").submit(function(event){			
 			event.preventDefault();
-			console.log("write click");
-			
-			//var thumNail = $("#thumNail").val(); 					
-			var btitle = $("#btitle").val(); 
-			var bcontent = $("#bcontent").val($('#bcontent').text());
-			var getMemberId = $("#getMemberId").val();
-			
-			console.log(btitle);
-			console.log(bcontent);
-			console.log(getMemberId);
 			
 			// csrf
 			var token = $("meta[name='_csrf']").attr("content");
@@ -61,6 +51,27 @@
 			$(document).ajaxSend(function(e, xhr, options) {
 				xhr.setRequestHeader(header, token);
 			});
+			
+							
+			var btitle = $("#btitle").val(); 
+			var bcontent = CKEDITOR.instances.bcontent.getData();
+			var getMemberId = $("#getMemberId").val();
+			//var thumNail = $("#thumNail").val();
+			
+			
+			var formData = new FormData();
+			formData.append("btitle", btitle);
+			formData.append("bcontent", bcontent);
+			formData.append("getMemberId", getMemberId);
+			//formData.append("thumNail", thumNail);
+			
+			console.log(formData.get('btitle'));
+			console.log(formData.get('bcontent'));
+			console.log(formData.get('getMemberId'));
+			//console.log(formData.get('thumNail'));
+			
+			var form = new FormData(document.getElementById('write'));
+			console.log(form);
 			
 			var form = {
 				getMemberId : getMemberId,				
@@ -75,8 +86,8 @@
 				processData : false,				
 				url : $(this).attr("action"),
 				cache : false,
-				dataType: 'text',
-				data : JSON.stringify(form),
+				dataType: 'json',
+				data : JSON.stringify(form) , /* JSON.stringify(form) */
 				success : function(result){
 					console.log("result : " + result );
 						if(result == "SUCCESS") {
