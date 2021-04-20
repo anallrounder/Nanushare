@@ -305,7 +305,7 @@
                         <!-- 댓글 작성 버튼은 관리자와 현재 게시글의 작성자만 대글작성 버튼을 누를 수 있다. -->                       
                         <!-- Leave a Comment -->
                         <sec:authentication property="principal" var="principalMember_id" />
-                        <c:set var="stop" value="true" />
+                        <c:set var="stop" value="true" /> <!-- 로그인한 유저가 있는지 체크하가위해 사용 java에서 break와 비슷 -->
                         
                      	<c:if test="${ empty principalMember_id}">
                      		<c:set var="stop" value="false" /> <!-- 로그인한 유저가 없다면 아래 댓글 작성을 보여주지 않는다. -->
