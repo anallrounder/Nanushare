@@ -5,8 +5,8 @@
 	.charity-top-strip > .charity-logo > img{margin: -35px 0px 15px 40px; width:80px; height:70px;}
 	#menu {float: right; margin: 0px 500px 0px 0px; text-align: center; } 
 	#menu > ul > li > a {float: right; font-size: 20px; padding: 35px 50px 0px 0px;} 
-	.float-right > .all-header > a {width:95px; height:40px; white-space: nowrap; margin: -50px 60px 20px -20px; padding: 13px 0px 0px 24px;}
-	.float-right > .all-header > form > .charity-strip-btn {width:95px; height:40px; white-space: nowrap; margin: -60px 190px 0px 0px; padding: 13px 10px 0px 17px;}
+	.float-right > .all-header > a {width:95px; height:40px; white-space: nowrap; margin: -50px 80px 20px -20px; padding: 13px 0px 0px 24px;}
+	.float-right > .all-header > form > .charity-strip-btn {width:95px; height:40px; white-space: nowrap; margin: -60px 200px 0px 0px; padding: 13px 10px 0px 17px;}
 	.float-right > .admin-header > span, .float-right > .user-header > span {white-space: nowrap; margin: -40px 270px 0px 0px; color: #ffffff; font-size: 16px; float: right;}
 	.float-right > .admin-header > a{width:90px; height:40px; white-space: nowrap; margin: -50px 20px 20px 0px; padding: 12px 0px 0px 0px;}
 	.float-right > .admin-header > form > .charity-strip-btn  {width:90px; height:40px; white-space: nowrap; margin: -50px 20px 20px 0px;  padding: 13px 0px 0px 15px;}
@@ -18,7 +18,7 @@
 	
 	
 	/* Footer */
-	.charity-newslatter form { width: 100%; margin-top: 18px}
+ 	.charity-newslatter form { width: 100%; margin-top: 18px} 
 	
 }
 
@@ -127,7 +127,7 @@
 
 	/* Footer */
 	.charity-footer-one .col-md-6 { width: 100%; float: left; flex: 0 0 100%; max-width: 100%; }
-	.charity-newslatter form { width: 100%; margin-top: 15px; }
+	.charity-newslatter form { width: 100%;  margin: 15px 0px 0px 0px;  }
 	.charity-footer-widget .widget { display: inline-block; margin-right: -4px; vertical-align: top; float: none; flex: 0 0 50%; max-width: 50%; }
 }
 
@@ -236,7 +236,7 @@
 
 	/* Footer */
 	.charity-footer-one .col-md-6 { width: 100%; float: left; flex: 0 0 100%; max-width: 100%; }
-	.charity-newslatter form { width: 100%; margin-top: 15px; }
+	.charity-newslatter form { width: 100%; margin: 15px 0px 0px 0px; }
 	.charity-footer-widget .widget { display: inline-block; margin-right: -4px; vertical-align: top; float: none; flex: 0 0 50%; max-width: 50%; }
 	
 	.charity-copyright p {float: left; margin: 30px 0px 0px -335px; font-size: 10px;}

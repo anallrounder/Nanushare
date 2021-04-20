@@ -159,13 +159,13 @@
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/restful/notice" class="nav-link">
+                <a href="/board/notice" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>공지사항</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/restful/qna" class="nav-link">
+                <a href="/board/qna" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>문의게시판</p>
                 </a>
