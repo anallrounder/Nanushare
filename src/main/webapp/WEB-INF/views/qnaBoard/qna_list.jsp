@@ -50,6 +50,8 @@
 
 #forimg {
 	background-image: url('/resources/banner_imgs/qna_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;"
 	width:100%;
 	
 }
@@ -123,8 +125,9 @@
 			                        <col width="10%" />
 			                    </colgroup>
 								
-								<thead ><!-- table-dark -->
-									<tr ffd7b9 bgcolor="#d1c997"><!-- ffd7b9 bgcolor="#d1c997" style="opacity:70%"--> 
+								<thead><!-- table-dark -->
+									<tr bgcolor="#ccccc">
+									<!-- <tr ffd7b9 bgcolor="#d1c997"> --><!-- ffd7b9 bgcolor="#d1c997" style="opacity:70%"--> 
 										<th style="border-left: none;" >글번호</th>
 										<th>제목</th >
 										<th>작성자</th>

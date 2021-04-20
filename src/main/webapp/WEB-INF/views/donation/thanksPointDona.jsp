@@ -27,7 +27,20 @@
 
 	 <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
-	
+
+<style type="text/css">
+#forimg {
+	background-color: #eaf0fe;
+	background-image: url('/resources/banner_imgs/donation_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	background-height:100%;
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
+
 </head>
 
 <body>
@@ -38,7 +51,7 @@
     <!-- Header -->
 
     <!-- Banner -->
-    <div class="charity-subheader">
+    <div id="forimg" class="charity-subheader">
         <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
@@ -51,6 +64,10 @@
     <!-- Banner -->
 
     <!-- Content -->
+  <!--   <div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 포인트 나눔하기 </h2>
+	</div> -->
+    
     <div class="charity-main-content">
 
         <!-- Main Section -->

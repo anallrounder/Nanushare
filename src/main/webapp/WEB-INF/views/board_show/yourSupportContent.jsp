@@ -5,6 +5,7 @@
 <html lang="ko">
 
 <head>
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- meta tags -->
     <meta charset="utf-8">
@@ -35,105 +36,154 @@
     <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
+	<!-- 새로고침 시 스크롤이 상단으로 manual = 복원안함 auto  = 복원 https://okky.kr/article/684414?note=1915071 -->
+<!-- 	<script>history.scrollRestoration = "auto"</script> -->
 	
 	<script type="text/javascript">
+	
+	// 댓글 수정 취소 
+	function cancleEdit(rNum) {
+		console.log("cancleEdit" + rNum)
+		
+		document.location.reload(true);
+		
+		/* 수정 취소해서 원래 상태로 돌리는게 아래처럼 하면 일단 작동은 함. 
+		문제는 저렇게 하면 append된 버튼을 다시 누르려면 저 아래서 바로 함수를 다시 호출해야하는데 그렇게 해보니까 
+		뭔가 다른게 잘 작동을 안하는거같아서 일단은 그냥 원래 위치기억하고 새로고침 시켰다. */
+		
+	/* 	// 이 부분 참고: https://www.codingfactory.net/10679
+		$('#edit_acontent'+rNum).contents().unwrap().wrap( "<p id='modify"+ rNum +"'></p>" );	// 1번 
+		
+		$('#abt'+rNum).empty(); //2번 */
+		
+	 	/* htmls='';
+		htmls += '<a class="a-updateView" onclick="answerEdit('+rid+','+rcontent+','+rNum+')">수정하기</a>' 
+		htmls +=  
+		
+		$('#abt'+rNum).append(
+			'<b><i class="fa fa-edit"></i><a class="a-updateView" onclick="answerEdit('+rid+','+rcontent+','+rNum+')">수정하기</a></b>' +
+			'<b><i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/'+rNum+'" >삭제하기</a><b>' 
+		); */
+		console.log("되는건가");
+	} 
+	
+	// 댓글 수정 창으로
+	function answerEdit(bIndex,rid,rcontent,rNum) {
+		console.log(bIndex);
+		console.log(rid);
+		console.log(rcontent);
+		console.log(rNum);
+		
+		// csrf
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		
+		$('#modify'+rNum).html( //1번
+				"<textarea id='edit_acontent"+rNum+"' style='width:100%;height:500%;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
+				/* +"<style>#edit_acontent {width:640px; height:80px; resize:none;} </style>" */
+		);
+			
+		$('#abt'+rNum).html( //2번
+			"<b><a href='javascript:void(0);' onclick='answerEditSave("+bIndex+","+rNum+")' id='btnEdit' class='fa fa-edit' style='color:#937768'> 수정완료</a></b> &nbsp;" 
+			+ "<a href='javascript:void(0);'onclick='cancleEdit("+rNum+")' id='btnCancel' class='fa fa-eraser' style='color:#937768'><b>수정취소</b></a>"
+			/* $(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/" +bindex); */
+		);
+		
+	};
+	
+	
+	// 댓글 수정 send
+	function answerEditSave(bIndex, rNum){ //3번
+		var rcontent = $("#edit_acontent"+rNum).val();
+		//location.href='answerEdit.do?idx='+rid+"&acontent="+rcontent; //(4번)
+		var bindex = bIndex;
+		var form = {
+				rcontent : rcontent,
+				r_num : rNum
+		}
+		
+		$.ajax({
+			type: 'put',
+			url: '${pageContext.request.contextPath}/board/shows/replyModify',
+			cache : false,
+  			dataType: 'text',
+  			data : JSON.stringify(form),
+  			contentType: 'application/json; charset=utf-8',
+  			success : function(result){
+  				if(result == "SUCCESS"){
+  					swal({
+  						title :"댓글 수정 완료" , 
+						icon : "success" , 
+  						button :"확인",
+  						//timer: 5000,
+  					})
+  					.then(function(){
+ 						//$(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/" +bindex+aaa); // 주소 이동
+ 							
+ 						// 페이지 새로고침지 원래 위치로 돌아오기 https://devonaws.com/front-end/javascript/javascript-%ED%98%84%EC%9E%AC-%EC%8A%A4%ED%81%AC%EB%A1%A4-%EC%9C%84%EC%B9%98%EC%97%90%EC%84%9C-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8/
+  						document.location.reload(true);
+  					});
+  				}
+  			},
+  			error : function (e) {
+				console.log(e);
+			}
+		});
+	};
 		
 	/* 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드  */
 	/* This script and many more are available free online at
 	The JavaScript Source!! http://javascript.internet.com
 	Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
-		
-		 	function answerEdit(bIndex,rid,rcontent,rNum) {
-				console.log(bIndex);
-				console.log(rid);
-				console.log(rcontent);
-				console.log(rNum);
-				
-				// csrf
-				var token = $("meta[name='_csrf']").attr("content");
-				var header = $("meta[name='_csrf_header']").attr("content");
-				$(document).ajaxSend(function(e, xhr, options) {
-					xhr.setRequestHeader(header, token);
-				});
-				
-		 			
-		 			$('#modify'+rNum).html( //1번
-		 					"<textarea id='edit_acontent'  style='width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
-		 					/* +"<style>#edit_acontent {width:640px; height:80px; resize:none;} </style>" */
-		 				);
-		 				
-		 				$('#abt').html( //2번
-		 					"<a href='javascript:void(0);'  onclick='answerEditSave("+bIndex+","+rNum+")' id='btnEdit'>완료</a> "
-		 					+"<a href='javascript:void(0);' onclick='location.href='qnaDetail.do?idx="+rNum+"' id='btnCancel'>취소</a>"
-		 				);
-		 			};
-
-		 			function answerEditSave(bIndex, rNum){ //3번
-		 				var rcontent = $("#edit_acontent").val();
-		 				//location.href='answerEdit.do?idx='+rid+"&acontent="+rcontent; //(4번)
-		 				var bindex = bIndex;
-		 				var form = {
-		 						rcontent : rcontent,
-		 						r_num : rNum
-		 				}
-		 				
-		 				$.ajax({
-		 					 type: 'put',
-		                     url: '${pageContext.request.contextPath}/board/shows/replyModify',
-		                     cache : false,
-		     				 dataType: 'text',
-		     				 data : JSON.stringify(form),
-		     				 contentType: 'application/json; charset=utf-8',
-		     				 success : function(result){
-		     					 if(result == "SUCCESS"){
-		     					
-		     						$(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/" +bindex);
-			     					
-		     					 }
-		     					
-		     				 },
-		     				 error : function (e) {
-								console.log(e);
-							 }
-		 					
-		 				});
-		 			};
-		 		
-		 	
-		 	
-		 	
-		 function autoDate () {
-				
-				var tDay = new Date();
-				var tMonth = tDay.getMonth()+1;
-				var tDate = tDay.getDate();
-				if ( tMonth < 10) tMonth = "0"+tMonth;
-				if ( tDate < 10) tDate = "0"+tDate;
-				document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
-				//document.getElementById("rdate").value = tDay.getFullYear()+"/"+tMonth+"/"+tDate;
-			};
+	 	
+	function autoDate () {
 			
-			// Multiple onload function created by: Simon Willison
-			// http://simonwillison.net/2004/May/26/addLoadEvent/
-			function addLoadEvent(func) {
-				var oldonload = window.onload;
-				if (typeof window.onload != 'function') {
-					window.onload = func;
-				} else {
-					window.onload = function() {
-						if (oldonload) {
-							oldonload();
-						}
-						func();
-					}
+		var tDay = new Date();
+		var tMonth = tDay.getMonth()+1;
+		var tDate = tDay.getDate();
+		if ( tMonth < 10) tMonth = "0"+tMonth;
+		if ( tDate < 10) tDate = "0"+tDate;
+		document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
+		//document.getElementById("rdate").value = tDay.getFullYear()+"/"+tMonth+"/"+tDate;
+	};
+		
+	// Multiple onload function created by: Simon Willison
+	// http://simonwillison.net/2004/May/26/addLoadEvent/
+	function addLoadEvent(func) {
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') {
+			window.onload = func;
+		} else {
+			window.onload = function() {
+				if (oldonload) {
+					oldonload();
 				}
-			};
-			addLoadEvent(function() {
-				autoDate();
-			}); 
-	
-	</script>
-	
+				func();
+			}
+		}
+	};
+	addLoadEvent(function() {
+		autoDate();
+	}); 
+
+</script>
+
+<style>
+#forimg {
+	background-color: #e4edfe;
+	background-image: url('/resources/banner_imgs/people_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
+
 </head>
 
 <body>
@@ -142,13 +192,13 @@
 	<!-- Header -->
 
     <!-- Banner -->
-    <div class="charity-subheader">
-        <span class="black-transparent"></span>
+       <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12"> 
-                    <h1>인증게시판</h1>
-                    <p>show your support</p>
+                      <!-- <h1>인증게시판</h1>
+                    <p>show your support</p> -->
                 </div>
             </div>
         </div>
@@ -156,6 +206,10 @@
     <!-- Banner -->
 
     <!-- Content -->
+    <div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 나눔 인증 </h2>
+	</div> 
+    
     <div class="charity-main-content">
 
 		<!-- Main Section -->
@@ -191,9 +245,12 @@
                             <!-- 버튼 -->
                             <div class="charity-post-tags" >
                               	<div class="charity-tags">
+                              		<sec:authorize access="hasRole('ADMIN')">
 	                            	<span style="color:orange;">관리자: </span>
-	                            	<a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 수정 </a>
-	                            	<a id="del_btn" href="delete?b_index=${content_view.b_index}" class="fa fa-eraser" style="color:orange;"> 삭제</a>
+	                            	<%-- <a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 수정 </a> --%>
+	                            	<a href="/my/board/shows/modify_view/${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 수정 </a>
+	                            	<a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser" style="color:orange;"> 삭제</a>
+	                            	</sec:authorize>
 	                           	</div>
                                 <div class="charity-blog-social">
                                  	<span></span>
@@ -202,7 +259,7 @@
                                     	<sec:authentication property="principal" var="pinfo" />
 										<sec:authorize access="isAuthenticated()">
 										<c:if test="${pinfo.username eq content_view.member_id}"> 
-                                        	<li><a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
+                                        	<li><a href="/my/board/shows/modify_view/${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
                                         	<li><a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
                                         </c:if>
                                         </sec:authorize>
@@ -289,14 +346,14 @@
 	                                            <div><c:out value="${vo.rdate}"/></div><!-- 작성일 -->
 	                                            <p id="modify${vo.r_num}"><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->	                                            
 	                                            
-	                                            
+	                                            <br>
 	                                            <sec:authentication property="principal" var="pinfo" />
 												<sec:authorize access="isAuthenticated()">
 												<c:if test="${pinfo.username eq vo.rid}"> 
-		                                            <div class="charity-blog-social" id="abt" >
+		                                            <div class="charity-blog-social" id="abt${vo.r_num}" >
 		                                            	
 		                                            <!-- href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}"  -->
-			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')"> <b>수정하기</b></a> 
+			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')"> <b>수정하기</b></a> &nbsp;  
 		                                    		   <%--  onClick="updateView('${vo.b_index}','${vo.rid}','${vo.rdate}','${vo.rcontent}')" --%>
 		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" ><b>삭제하기</b></a>
 		                                    		    <%--  onClick="del('${vo.b_index}','${vo.r_num}')" --%>
@@ -360,7 +417,100 @@
  					<!-- aside 제외한 왼쪽 컨텐츠 div 끝 -->
 
 					<!-- 우측 배너  aside -->
-					<%@ include file="/WEB-INF/views/board_show/aside.jsp"%>
+						<%-- <%@ include file="/WEB-INF/views/board_show/aside.jsp"%>  --%>
+						<aside class="col-md-3">
+						<div style="height:30px"></div>
+					    
+					    <!-- Widget Archive 퀵링크 연결 -->
+					    <div class="widget widget_archive">
+					        <div class="widget_title"><h2>바로가기</h2></div>
+					        <ul>
+						        <li><a href="${pageContext.request.contextPath}/main">나눔함 안내</a></li>
+					            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
+					            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
+					            <li><a href="${pageContext.request.contextPath}/board/shows/list">나눔 인증</a></li>
+					            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
+					        </ul>
+					    </div>
+					    <!-- Widget Archive 퀵링크 연결 -->
+					    
+					    <!-- Widget Event -->
+					   	<div class="widget widget_events">
+					        <div class="widget_title"><h2>최근 공지사항</h2></div>
+					        <ul>
+					            <li>
+					                <time datetime="2008-02-14 20:00">22 Aug</time>
+					                <div class="charity-events">
+					                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
+					                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
+					                </div>
+					            </li>
+					            <li>
+					                <time datetime="2008-02-14 20:00">13 Sep</time>
+					                <div class="charity-events">
+					                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
+					                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
+					                </div>
+					            </li>
+					            <li>
+					                <time datetime="2008-02-14 20:00">07 Dec</time>
+					                <div class="charity-events">
+					                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
+					                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
+					                </div>
+					            </li>
+					         </ul>
+					    </div> 
+					    <!-- Widget Event -->
+					    
+					    		
+				<%-- <c:forEach var="attachment" items="${attachment}">
+					${attachment.path }
+					<c:set var="i" value="${i+1 }" />
+					
+					${vo.b_index},${attachment.b_index}
+					<c:if test="${doneLoop ne true}">
+						<c:choose>
+							<c:when test="${vo.b_index eq attachment.b_index }">
+								<img alt="" src="${attachment.path }">
+								<img src="${pageContext.request.contextPath}${attachment.path}">
+								<c:set var="doneLoop" value="true"/>
+							</c:when>
+							
+							<c:when test="${i+1 > attachMentCount }">															
+								<img id="introImg"  class="boardShow_img" src="${pageContext.request.contextPath}/resources/board_thumbnail/bslist07.png">
+								<c:set var="doneLoop" value="true"/>
+							</c:when>															
+						</c:choose>													
+					</c:if>																																																																																									
+				</c:forEach>			 --%>
+					    
+					    
+					    <!-- Widget Gallery -->
+					    <div class="widget widget_gallery">
+					        <div class="widget_title"> <h2>인증게시판</h2> </div>
+					        <c:if test="${! empty list}">
+				            <c:set var="listComment" value="${list}" />
+				            <c:forEach var="vo" items="${list}" begin="1" end="12">
+					        
+						        <ul>
+						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}"><img src="${pageContext.request.contextPath}/resources/users/user01_sm.png" alt=""> <i class="fa fa-plus"></i> </a></li>
+						       <%--      <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-2.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-2.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-3.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-3.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-4.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-4.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-5.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-5.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-7.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-7.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-8.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-8.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
+						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li> --%>
+						        </ul>
+						        
+					        </c:forEach>
+				            </c:if>
+					    </div>
+					    <!-- Widget Gallery -->
+						
+					</aside>
 					<!-- aside end -->
 					
                 </div>
@@ -405,43 +555,6 @@
 	</script>
 
     <script type="text/javascript">
-    	// 이전 페이지 주소
-    	/* $(".a-prev_btn").click(function(event) {
-    		event.preventDefault();
-    		alert("이전글 버튼 click");
-    	} */
-    	
-    	/* function prev_move(b_index) {
-			console.log(b_index)
-		};
-		function next_move(b_index) {
-			console.log(b_index)
-		};
-		if(b_index !== null){
-			var url = "${pageContext.request.contextPath}/board/shows/content_view/" + b_index -1;
-		}
-    	
-    	
-	   	$.ajax({
-	`			type: "POST",
-	   	        contentType: 'application/json; charset=utf-8',
-	   	  		url: url,
-	   	        data: JSON.stringify(form), 
-	   	        cache : false,
-	   	      
-	   	        success: function (data) { 
-	   	        	
-	   	        console.log("SUCCESS : ", data);
-	   	}); */
-	   	
-	   	 
-	   /* 	var member_id = ${content_view.member_id};
-	   	var username = ;
-	   	
-	   	if(member_id ! == username || username == null){
-	   		$('#bcontent_del').hide();
-	   	}
-	   	 */
 	   	 
    		// 랜덤 이미지 불러오기 (슬비씨 깃허브 참고: https://github.com/seulpi/TIL/blob/cfae84682eb65d8e85f76de11de663a17f14f22f/Quiz/spring_Answer11.md#5-view )
 		$(function(){
@@ -502,7 +615,7 @@
     			contentType:'application/json; charset=UTF-8',
     			data: JSON.stringify(form),
     			success : function(r_num) {
-    					//alert(r_num)
+    					//alert("r_num = " + r_num)
     					//alert(result.replyVO.r_num)
     					//alert(result.rvo.b_index)
     					
@@ -511,7 +624,7 @@
 						  icon : "success" , 
 						  button : true 
 						})
-					
+    					
     					htmls = '';
     					
     					htmls += '<li>'
@@ -522,19 +635,45 @@
     					htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
     					htmls += '<p>' + rcontent + '</p>'
 						htmls += '<div class="charity-blog-social">'
-						htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update_view/' + r_num + '" ><b>수정하기</b></a>'+'&nbsp;'
+						htmls += '<i class="fa fa-edit"></i><b><a href="javascript:void(0);" onclick="answerEdit('+rid+','+rcontent+','+r_num+')">수정하기</a></b>'
 						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + r_num + '" ><b>삭제하기</b></a></div>'
     					htmls += '</div>'
     					htmls += '</div>'
     					htmls += '</li>'
-    					
+    						
     					$("#listComment").prepend(htmls); // 작성 결과 입력
     					
     					$('#rcontent').val(''); //인풋박스 초기화
     					$('#nothing').hide();
     					
-    					$(".a-del").click(function(event) { //id는 한번만 calss는 여러번 선택 가능.
-    			    		//하나의 id는 한 문서에서 한 번만 사용이 가능(가장 마지막 혹은 처음게 선택). 
+    					// 댓글 수정 창으로
+    					function answerEdit(b_index,rid,rcontent,r_num) {
+    						console.log(b_index);
+    						console.log(rid);
+    						console.log(rcontent);
+    						console.log(r_num);
+    						
+    						// csrf
+    						var token = $("meta[name='_csrf']").attr("content");
+    						var header = $("meta[name='_csrf_header']").attr("content");
+    						$(document).ajaxSend(function(e, xhr, options) {
+    							xhr.setRequestHeader(header, token);
+    						});
+    						
+    						$('#modify'+r_num).html( //1번
+    							"<textarea id='edit_acontent"+r_num+"' style='width:100%;height:500%;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
+    						);
+    							
+    						$('#abt'+r_num).html( //2번
+    							"<b><a href='javascript:void(0);' onclick='answerEditSave("+b_index+","+r_num+")' id='btnEdit' class='fa fa-edit' style='color:#937768'> 수정완료</a></b> &nbsp;" 
+    							+ "<a href='javascript:void(0);'onclick='cancleEdit("+r_num+")' id='btnCancel' class='fa fa-eraser' style='color:#937768'><b>수정취소</b></a>"
+    						);
+    						
+    					};
+    					
+    					
+    					$(".a-del").click(function(event) { //id는 한번만 calss는 여러번 선택 가능
+    			    		//하나의 id는 한 문서에서 한 번만 사용이 가능(가장 마지막 혹은 처음게 선택)
     			    		event.preventDefault(); 
     			    	
     			    		//alert("replyDel click");
@@ -547,34 +686,15 @@
     			                xhr.setRequestHeader(header, token);
     			            });
     			            
-    			    		var tr = $(this).parent().parent().parent().parent();//자바스크립트 클로저
+    			    		var tr = $(this).parent().parent().parent().parent();
     			    		
     			    		$.ajax({
     			    			type : 'DELETE', //method
-    			    			url : $(this).attr("href"), //주소를 받아오는 것이 두 번째 포인트.
+    			    			url : $(this).attr("href"),
     			    			cache : false,
     			    			success : function(result) {
     			    				console.log("result: " + result); 
-    			    				/* if (result == "SUCCESS") {
-    			    					$(tr).remove();
-    			    					//alert("삭제되었습니다.");
-    			    					swal({
-    									  title : "진짜로 댓글을 삭제하시겠습니까?" , 
-    									  text : "삭제하면이 댓글을 복구 할 수 없습니다!" , 
-    									  icon : "warning" , 
-    									  button : true , 
-    									  dangerMode : true , 
-    									})
-    									.then((willDelete) => { 
-    									  if (willDelete) {  
-    									    swal("댓글이 삭제되었습니다!" , { 
-    									      icon : "success" , 
-    									    });
-    									  } 
-    									});
-    			    					if($('.rlist') !== null){
-    			    						$('#nothing').show();
-    			    					}  */
+    			    			
     			    					if (result == "SUCCESS") {
     			    					$(tr).remove();
     			    					//alert("삭제되었습니다.");
@@ -591,7 +711,49 @@
     			    		}); //end of ajax
     			    		
     			     	}); // 삭제 종료
-    			    	
+    			     	
+    				 	// 댓글 수정 취소 
+    					function cancleEdit(r_num) {
+    						console.log("cancleEdit" + r_num)
+    						document.location.reload(true);
+    						console.log("되는건가");
+    					}  
+    					
+	   					// 댓글 수정 send
+	   					function answerEditSave(b_index, r_num){ //3번
+	   						var rcontent = $("#edit_acontent"+r_num).val();
+	   						var b_index = b_index;
+	   						var form = {
+	   								rcontent : rcontent,
+	   								r_num : r_num
+	   						}
+	   						
+	   						$.ajax({
+	   							type: 'put',
+	   							url: '${pageContext.request.contextPath}/board/shows/replyModify',
+	   							cache : false,
+	   				  			dataType: 'text',
+	   				  			data : JSON.stringify(form),
+	   				  			contentType: 'application/json; charset=utf-8',
+	   				  			success : function(result){
+	   				  				if(result == "SUCCESS"){
+	   				  					swal({
+	   				  						title :"댓글 수정 완료" , 
+	   										icon : "success" , 
+	   				  						button :"확인",
+	   				  						//timer: 5000,
+	   				  					})
+	   				  					.then(function(){
+	   				  						document.location.reload(true);
+	   				  					});
+	   				  				}
+	   				  			},
+	   				  			error : function (e) {
+	   								console.log(e);
+	   							}
+	   						});
+	   					}; 
+    			     	
     				},
     				error : function(request, status, error) {
     					//alert("code:" + request.status + "\n" + "message:"
@@ -599,7 +761,6 @@
     				} // ajax 에러 시 end
     				
     		}); //ajax end
-    		 
     		
     		
     	});//#insertForm end
@@ -646,73 +807,10 @@
     		
      	}); // 삭제 종료
     	
-     	// 댓글 수정 창 보기
-     	/*  $(".a-updateView").click(function(event) {
-    		event.preventDefault();
-    		alert("수정하기 click");
-    		
-    		function(b_index, rid, rcontent, rdate){
-    			console.log(b_index);
-        		console.log(rid);
-        		console.log(rcontent);
-        		console.log(rdate);
-        		
-        		var b_index = b_index;
-        		var rid = rid;
-        		var rcontent = rcontent;
-        		var rdate = rdate;
-
-    		};
-    	 	var form = {
-    				b_index: b_index,
-    				rid : rid,
-    				rcontent : rcontent,
-    				rdate : rdate
-    		}  
-    	 	
-    	 	// csrf
-    	    var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
-            $(document).ajaxSend(function(e, xhr, options) {
-                xhr.setRequestHeader(header, token);
-            }); 
-    		
-    		$.ajax({
-    			type : "GET",
-    			url : $(this).attr("href"),
-    			cache : false,
-    			contentType : 'application/json; charset=UTF-8',
-    			dataType : "text", // -> 데이터 타입을 적으면 성공했음에도 불구하고 에러로 처리되어 리스트로 넘어가지 않는다. 
-    			data: JSON.stringify(form), 
-    			success: function (result) {       
-    	               if(result == "SUCCESS"){
-    					
-    						alert(result+ "수정창 보기");
-    	                  
-    						htmls = '';
-    						
-    						htmls += '<form id="insertForm" action="${pageContext.request.contextPath}/board/reply_insert" method="post">
-    						htmls += '<input type="text" id="b_inedex" name="b_inedex"  class="form-control"  value="' + b_inex + '"/>'
-    						htmls += '<input type="text" id="rid" name="rid" class="form-control" value="' + rid + '">'
-    						htmls += '<textarea id="rcontent" name="rcontent" class="form-control">'+ rcontent + '</textarea>'
-    						htmls += '<br>'
-    						htmls += '<button type="submit" class="btn btn-primary pull-right">댓글작성</button>'
-    						htmls += '</form>'
-    						
-    						$("#rlist").val(htmls); // 작성 결과 입력
-    											
-    	               }                       
-    	             },
-    	             error: function (e) {
-    	                 console.log(e);
-    	             }
-    			
-    		}); // end of ajax
-    	});   */  // end of 수정 event 
-    	
+     
     });
     </script>	
-
+	<!-- <a href='https://www.freepik.com/vectors/people'>People vector created by rawpixel.com - www.freepik.com</a> -->
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/popper.min.js"></script>

@@ -81,7 +81,7 @@
 							window.location.href='${pageContext.request.contextPath}/board/shows/content_view/'+ board_id;
 							
 							swal({
-								title : "글 수정 완료" , 
+								title : "글 작성 완료" , 
 								icon : "success" , 
 								button : true 
 							});
@@ -100,9 +100,7 @@
 		}); // event end
 	}); // ready end
 </script>
-	
-	
-	
+
 </head>
 
 
