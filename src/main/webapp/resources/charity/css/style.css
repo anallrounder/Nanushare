@@ -751,7 +751,7 @@ a.menu-link {
 	border: 2px solid;
 	font-size: 24px;
 	text-align: center;
-	padding-top: 11px;
+	padding-top: 4px;
 	margin-top: -60px;
 	z-index: 999;
 	cursor: pointer;
@@ -5013,15 +5013,10 @@ blockquote {
 }
 
 .charity-copyright p {
-	float: left;
+	float: right;
 	color: #ababab;
-	margin-bottom: 10px;
-}
-
-.charity-copyright p {
-	float: left;
-	color: #ababab;
-	margin-bottom: 10px;
+	margin-left: 0px; 
+	font-size: 14px;
 }
 
 .charity-copyright p a {
@@ -5029,13 +5024,13 @@ blockquote {
 }
 
 .charity-copyright span {
-	float: left;
+	float: right;
 	color: #ababab;
-	margin-bottom: 10px;
+	font-size: 14px;
 }
 
 .charity-copyright ul {
-	float: right;
+	float: left;
 }
 
 .charity-copyright ul li {
@@ -5046,11 +5041,15 @@ blockquote {
 
 .charity-copyright ul li a {
 	color: #ababab;
+	padding-left: 5px;
+	margin: 0px 0px 12px -20px; 
+	font-size: 14px;
 }
+
 
 .back-top {
 	position: absolute;
-	left: 50%;
+	left: 47%;
 	top: -10px;
 	width: 40px;
 	height: 40px;

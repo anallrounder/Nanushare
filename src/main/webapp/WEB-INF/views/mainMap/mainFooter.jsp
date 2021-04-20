@@ -25,12 +25,12 @@
             <div class="container">
                 <div class="row">
                     <aside class="col-md-6">
-                        <h2>고액 기부 & 정기 기부 문의</h2><!-- <h3 style="margin-left: 325px; margin-top: -30px;">"Donate Contact"</h3> -->
-                        <p>고액으로 기부하시거나 정기 기부를 문의하실 분은<br> 나누셰어 공식 번호로 연락 또는 메일을 남겨주세요:D</p>
+                        <h2>고액 기부 & 정기 기부 문의</h2>
+                        <h6>고액으로 기부하시거나 정기 기부를 문의하실 분은<br> 나누셰어 공식 번호로 연락 또는 메일을 남겨주세요:D</h6>
                     </aside>
                     <aside class="col-md-6">
                         <form>
-                            <input type="text" placeholder="e-mail을 남겨주시면 기부 관련 메일을 보내드립니다" style="width: 400px; margin-left: -30px;">
+                            <input type="text" placeholder="기부 관련 메일을 보내드립니다">
                             <label>
                                 <input type="submit" value="e-mail 전송">
                                 <i class="far fa-paper-plane"></i>
@@ -94,13 +94,18 @@
                 <!-- CopyRight -->
                 <div class="charity-copyright">
                     <a href="#" class="back-top charity-bgcolor"><i class="fa fa-angle-up"></i></a>
-                    <p><a href="#">이용약관</a> &nbsp; &nbsp;<a href="#">개인정보처리방침</a>&nbsp; &nbsp; <a href="#">이메일집단수집거부</a>&nbsp; &nbsp;<a href="#">오시는길</a>&nbsp; &nbsp;<a href="#">문의</a>&nbsp; &nbsp;<a href="#">사이트맵</a></p><p style="margin-left: 160px;">Â© 2021, All Right Reserved - by NanuShare</p><br>
-                    <p style="margin-left: 0px;"> <i class="fa fa-map-marker-alt"></i> &nbsp;(우)03164 서울특별시 종로구 종로2가 종로69</p> <p> &nbsp; &nbsp;<i class="fa fa-phone"  style="transform: rotate(90deg);"></i> &nbsp;대표전화 02-722-1481</p>
-                    
-                    <!-- <ul>
-                    	<li><a href="#">이용약관</a></li>s
-                     
-                    </ul> -->
+                    	<ul>
+                    		<li><a href="#">이용약관</a></li>
+                    		<li><a href="#">개인정보처리방침</a></li>
+                    		<li><a href="#">이메일집단수집거부</a></li>
+                    		<li><a href="#">오시는길</a></li>
+                    		<li><a href="#">문의</a></li>
+                    		<li><a href="#">사이트맵</a></li>
+                    	
+                    	
+                    	</ul>
+                    <p><i class="fa fa-map-marker-alt"></i> &nbsp;(우)03164 서울특별시 종로구 종로2가 종로69 <i class="fas fa-phone-volume"></i> &nbsp;대표전화 02-722-1481</p> 
+                    <span>Â© 2021, All Right Reserved - by NanuShare</span>
                 </div>
                 <!-- CopyRight -->
             </div>
