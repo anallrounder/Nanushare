@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- blog detail 사용 css style도 여기서 찾을 것  .charity-form-btn 생성함 color에도 추가함-->
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!doctype html>
 <html lang="ko">
 
@@ -9,6 +11,9 @@
 	
 	<!-- ckeditor -->
 	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+	
+	<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <!-- meta tags -->
     <meta charset="utf-8">
@@ -19,15 +24,6 @@
     <meta name="_csrf" content="${_csrf.token}">
     <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
     
-    <script type="text/javascript">
-	    var token = $("meta[name='_csrf']").attr("content");
-	    var header = $("meta[name='_csrf_header']").attr("content");
-	    $(document).ajaxSend(function(e, xhr, options) {
-	        xhr.setRequestHeader(header, token);
-	    });
-	 
-    
-    </script>
 
     <title>나누셰어 - 나눔인증</title>
 
@@ -50,9 +46,14 @@
 			event.preventDefault();
 			console.log("write click");
 			
-			var board_id = $("#b_index").val(); 					
-			var title = $("#btitle").val(); 
-			var text = $("#bcontent").val(); 
+			//var thumNail = $("#thumNail").val(); 					
+			var btitle = $("#btitle").val(); 
+			var bcontent = $("#bcontent").val($('#bcontent').text());
+			var getMemberId = $("#getMemberId").val();
+			
+			console.log(btitle);
+			console.log(bcontent);
+			console.log(getMemberId);
 			
 			// csrf
 			var token = $("meta[name='_csrf']").attr("content");
@@ -62,23 +63,25 @@
 			});
 			
 			var form = {
-				b_index : board_id,
-				btitle : title,
-				bcontent : text
+				getMemberId : getMemberId,				
+				btitle : btitle,
+				bcontent : bcontent
 			}
 			
 			$.ajax({
-				type : "PUT",
+				type : 'post',				
+				enctype: 'multipart/form-data',	
+				contentType: false, /* application/json; charset=utf-8 */
+				processData : false,				
 				url : $(this).attr("action"),
 				cache : false,
 				dataType: 'text',
-				contentType: 'application/json; charset=utf-8',
 				data : JSON.stringify(form),
 				success : function(result){
 					console.log("result : " + result );
 						if(result == "SUCCESS") {
-							//$(location).attr('href', '${pageContext.request.contextPath}/board/sows/content_view/'+ form.b_index +');
-							window.location.href='${pageContext.request.contextPath}/board/shows/content_view/'+ board_id;
+							
+							window.location.href='${pageContext.request.contextPath}/board/shows/content_view/'+ result;
 							
 							swal({
 								title : "글 작성 완료" , 
@@ -137,23 +140,25 @@
                 <div class="row">
               		 <div class="col-md-9">
                
-                       <form action="${pageContext.request.contextPath}/my/board/shows/write" method="post" enctype="multipart/form-data" >
+                       <form id="write" action="${pageContext.request.contextPath}/my/board/shows/write" method="post" enctype="multipart/form-data" >
+                     	   <sec:authentication property="principal" var="getMemberId"/>
                      	   
 	                       <div class="charity-contact-form">
+	                       		<input id="getMemberId" type="hidden" value="${getMemberId.getUsername() }">
 	                           <h4><span>Title</span></h4>
-	                           <input type="text" name="btitle" placeholder="제목을 작성하세요." >
+	                           <input type="text" id="btitle" name="btitle" placeholder="제목을 작성하세요." >
 	                           <br>
 	                           <br>
 	                           <h4>Images</h4>
 	                           <%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
 	                           <p>썸네일 이미지 첨부하기 :
 	                           	<br/>
-							   		<input type="file" name="file" multiple="multiple"/>
+							   		<input id="thumNail" type="file" name="file" multiple="multiple"/>
 	                            </p>
 	                            <!-- <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 이미지 저장</i></button> -->
 	                           <br><br>
 	                           <h4>Content</h4>
-	                           <p><textarea id="editor4" name="bcontent" placeholder="내용을 작성하세요."></textarea></p>
+	                           <p><textarea id="bcontent" placeholder="내용을 작성하세요."></textarea></p>
 	                             <script type="text/javascript">
                         
 			                        var ckeditor_config = {
@@ -163,10 +168,8 @@
 			        						shiftEnterMode : CKEDITOR.ENTER_P,
 			        						filebrowserUploadUrl : '<c:url value="${pageContext.request.contextPath}/my/board/shows/imageUpload" />?${_csrf.parameterName}=${_csrf.token}'
 			        					};
-			                            CKEDITOR.replace('editor4', ckeditor_config);
+			                            CKEDITOR.replace('bcontent', ckeditor_config);
 			                            
-			                            
-			                           
 		                        </script>
 	                           <br><br>
 							   <br><hr>

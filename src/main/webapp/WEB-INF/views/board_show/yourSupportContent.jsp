@@ -43,7 +43,7 @@
 	
 	// 댓글 수정 취소 
 	function cancleEdit(rNum) {
-		console.log("cancleEdit" + rNum)
+		console.log("cancleEdit" + rNum);
 		
 		document.location.reload(true);
 		
@@ -65,7 +65,7 @@
 			'<b><i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/'+rNum+'" >삭제하기</a><b>' 
 		); */
 		console.log("되는건가");
-	} 
+	};  
 	
 	// 댓글 수정 창으로
 	function answerEdit(bIndex,rid,rcontent,rNum) {
@@ -104,7 +104,7 @@
 		var form = {
 				rcontent : rcontent,
 				r_num : rNum
-		}
+		};
 		
 		$.ajax({
 			type: 'put',
@@ -128,11 +128,11 @@
   						document.location.reload(true);
   					});
   				}
-  			},
+  			}, //success end
   			error : function (e) {
 				console.log(e);
 			}
-		});
+		}); //ajax end
 	};
 		
 	/* 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드  */
@@ -161,10 +161,10 @@
 			window.onload = function() {
 				if (oldonload) {
 					oldonload();
-				}
+				};
 				func();
-			}
-		}
+			};
+		};
 	};
 	addLoadEvent(function() {
 		autoDate();
@@ -569,8 +569,8 @@
 					location.href = '/loginPage'
 				});
 				//alert("로그인 후 글을 작성해주세요.");
-			}
-		}
+			};
+		};
 		//댓글 작성 로그인 체크
 		$('#resubmit').click(function() {
 			checkLogin();
@@ -623,7 +623,7 @@
     				rid : rid,
     				rcontent : rcontent,
     				rdate : rdate
-    		}  
+    		};  
     	 	
     	 	// csrf
     	    var token = $("meta[name='_csrf']").attr("content");
@@ -672,29 +672,7 @@
     					$('#nothing').hide();
     					
     					// 댓글 수정 창으로
-    					function answerEdit(b_index,rid,rcontent,r_num) {
-    						console.log(b_index);
-    						console.log(rid);
-    						console.log(rcontent);
-    						console.log(r_num);
-    						
-    						// csrf
-    						var token = $("meta[name='_csrf']").attr("content");
-    						var header = $("meta[name='_csrf_header']").attr("content");
-    						$(document).ajaxSend(function(e, xhr, options) {
-    							xhr.setRequestHeader(header, token);
-    						});
-    						
-    						$('#modify'+r_num).html( //1번
-    							"<textarea id='edit_acontent"+r_num+"' style='width:100%;height:500%;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
-    						);
-    							
-    						$('#abt'+r_num).html( //2번
-    							"<b><a href='javascript:void(0);' onclick='answerEditSave("+b_index+","+r_num+")' id='btnEdit' class='fa fa-edit' style='color:#937768'> 수정완료</a></b> &nbsp;" 
-    							+ "<a href='javascript:void(0);'onclick='cancleEdit("+r_num+")' id='btnCancel' class='fa fa-eraser' style='color:#937768'><b>수정취소</b></a>"
-    						);
-    						
-    					};
+    					
     					
     					
     					$(".a-del").click(function(event) { //id는 한번만 calss는 여러번 선택 가능
@@ -737,47 +715,8 @@
     			    		
     			     	}); // 삭제 종료
     			     	
-    				 	// 댓글 수정 취소 
-    					function cancleEdit(r_num) {
-    						console.log("cancleEdit" + r_num)
-    						document.location.reload(true);
-    						console.log("되는건가");
-    					}  
-    					
-	   					// 댓글 수정 send
-	   					function answerEditSave(b_index, r_num){ //3번
-	   						var rcontent = $("#edit_acontent"+r_num).val();
-	   						var b_index = b_index;
-	   						var form = {
-	   								rcontent : rcontent,
-	   								r_num : r_num
-	   						}
-	   						
-	   						$.ajax({
-	   							type: 'put',
-	   							url: '${pageContext.request.contextPath}/board/shows/replyModify',
-	   							cache : false,
-	   				  			dataType: 'text',
-	   				  			data : JSON.stringify(form),
-	   				  			contentType: 'application/json; charset=utf-8',
-	   				  			success : function(result){
-	   				  				if(result == "SUCCESS"){
-	   				  					swal({
-	   				  						title :"댓글 수정 완료" , 
-	   										icon : "success" , 
-	   				  						button :"확인",
-	   				  						//timer: 5000,
-	   				  					})
-	   				  					.then(function(){
-	   				  						document.location.reload(true);
-	   				  					});
-	   				  				}
-	   				  			},
-	   				  			error : function (e) {
-	   								console.log(e);
-	   							}
-	   						});
-	   					}; 
+    				 	
+	   					
     			     	
     				},
     				error : function(request, status, error) {

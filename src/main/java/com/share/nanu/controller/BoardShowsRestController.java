@@ -377,9 +377,10 @@ public class BoardShowsRestController {
 	// md.getusername() --> 로그인 되어 있는 유저의 member_id -->MemberDetails 참조
 	// 가져와서 board.setMember_id(md.getusername) boardVO 객체에 로그인 되어 있는 유저 member_id저장
 	// 서비스에 boardVO를 넘겨주고 DB에 저장
+	@ResponseBody
 	@PostMapping("/my/board/shows/write")
-	public ModelAndView bsWrite(MultipartHttpServletRequest multiple, BoardVO boardVO, AttachmentVO attachmentVO, Model model,
-			@AuthenticationPrincipal MemberDetails md, ModelAndView mav) throws Exception {
+	public int bsWrite(MultipartHttpServletRequest multiple, @RequestBody BoardVO boardVO, 
+			AttachmentVO attachmentVO) throws Exception {
 
 		log.info("인증게시판 컨트롤러  -- write() -- 호출");
 
@@ -387,8 +388,7 @@ public class BoardShowsRestController {
 		final int THUMNAIL_HEIGHT = 300; // 336 
 		UUID uuid = UUID.randomUUID();
 
-		String loginMember = md.getUsername();
-		boardVO.setMember_id(loginMember); // 로그인한 사람
+		
 		service.writeBoard(boardVO);
 		// 멤버아이디를 이렇게 가져오는게 맞을까? 아니다. 받아올수가 없네. 로그인한 사용자 정보를 받아와야함. 일단 테스트는 쿼리문에서 써야겠다.
 		// model.addAttribute("getMember_id",
@@ -396,10 +396,7 @@ public class BoardShowsRestController {
 
 		log.info("fileUpload");
 		// 이미지 저장 절대경로
-		// "C:\\Users\\Hyeseon\\eclipse-workspace\\Nanushare\\src\\main\\webapp\\resources\\attachment";
-		// String path = "C:\\Users\\Slim 5\\바탕
-		// 화면\\폴더\\eclipse-workspace\\Nanu\\src\\main\\webapp\\resources\\attachment";
-
+	
 		String path = multiple.getSession().getServletContext().getRealPath("/resources/attachment");
 		log.info("attachment Path : " + path);
 
@@ -466,8 +463,9 @@ public class BoardShowsRestController {
 				service.fileUpload(attachmentVO);
 			}
 		}
-		mav.setViewName("/board_show/yourSupportList");
-		return mav;
+		int bIndex = service.getBindex(boardVO);
+		log.info("bindex : " + bIndex);
+		return bIndex;
 	}
 
 
