@@ -2,8 +2,21 @@
 // https://www.tutorialrepublic.com/twitter-bootstrap-button-generator.php
 package com.share.nanu.controller;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +27,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.BoardreplyVO;
+import com.share.nanu.page.Criteria;
+import com.share.nanu.page.pageVO;
 import com.share.nanu.security.MemberDetails;
-import com.share.nanu.service.NanuBoardShowYSService;
+import com.share.nanu.service.BoardShowsService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,18 +52,73 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @RestController
 //@RequestMapping("/board/shows/*")
-public class NanuBoardShowReplyController {
+public class BoardShowsRestController {
 
 	@Autowired
-	private NanuBoardShowYSService service;
+	private BoardShowsService service;
 
-	// 컨텐트뷰 + 댓글 보기
+	/* 게시글 */
+	// 인증게시판 페이징 list
+	@RequestMapping("/board/shows/list")
+	public ModelAndView boardShowPaging(Criteria cri, ModelAndView mav, AttachmentVO avo,
+			@AuthenticationPrincipal MemberDetails md) throws Exception {
+		log.info("인증게시판 컨트롤러 페이징 리스트" + cri);
+		
+		mav.addObject("list", service.getlist(cri));
+		
+		// 절대경로 -> 상대경로
+		List<AttachmentVO> attach = service.getAttachment(avo);
+		log.info("path : " + attach.get(0).getPath());
+
+		// 썸네일을 불러올때마다 db 에있는 모든 경로를 매번 바꾸어 주어야 해서 매우 비효율적...
+		for (int i = 0; i < attach.size(); i++) {
+			String attachPath = attach.get(i).getPath(); // 절대 경로 가지고 오기
+			log.info("attachMent table path : " + attachPath); // attachment table에 저장된 path
+
+			String RelativePath = new File(attachPath).toURI().getPath(); // 절대경로에 \\ 설정 되어 있다. -> //로 수정
+			log.info("절대경로 -> 상대경로로 치환중 : " + RelativePath);
+
+			int resources = RelativePath.indexOf("/resources"); // /resources까지 인덱스 번호
+			log.info("/resources 까지의 인덱스 번호 :  " + resources);
+
+			String ChangeRelativePath = RelativePath.substring(resources);
+			log.info("완성된 상대 경로 : " + ChangeRelativePath);
+
+			attach.get(i).setPath(ChangeRelativePath);
+			log.info("저장되어진 경로 : " + attach.get(i).getPath());
+		}
+
+		log.info("getAttachMent b_index");
+		mav.addObject("attachment", attach);
+
+		log.info("getAttachMent b_index Coubt");
+		mav.addObject("attachMentCount", service.getAttachMentCount(avo));
+
+		int total = service.getTotal(cri);
+		mav.addObject("pageMaker", new pageVO(cri, total));
+
+		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
+		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+			mav.addObject("username", md.getmember().getName());
+		}
+		
+		mav.setViewName("board_show/yourSupportList");
+		
+		return mav;
+	}
+	
+	
+	// 인증게시판 게시글 컨텐트뷰 + 댓글 보기
 	@GetMapping("/board/shows/content_view/{b_index}")
 	public ModelAndView content_view(BoardVO boardVO, BoardreplyVO rvo, ModelAndView mav,
 			@AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("controller -- content_view -- 호출");
 		service.uphit(boardVO);
-
+		
+		mav.addObject("list", service.getlist());
+		
 		mav.setViewName("board_show/yourSupportContent"); // 이동할 웹페이지 주소
 
 		mav.addObject("content_view", service.getBoard(boardVO.getB_index())); // 게시판 글 불러오기
@@ -66,7 +141,57 @@ public class NanuBoardShowReplyController {
 		}
 		return mav;
 	}
+	
+	// 글작성 페이지
+	@GetMapping("/my/board/shows/write_view")
+	public ModelAndView vsWriteView(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		log.info("인증게시판 컨트롤러  -- write_view() -- 호출");
+		
+		mav.setViewName("board_show/ysWriteView");
+		
+		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
+		// model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate()));
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+			mav.addObject("username", md.getmember().getName());
+			mav.addObject("member_id", md.getUsername());
+		}
+		return mav;
+	}
+	
+	
+	// 수정창 보기 - 체크
+	@GetMapping("/my/board/shows/modify_view/{b_index}")
+	public ModelAndView bsModiview(BoardVO boardVO, ModelAndView mav) throws Exception {
+		log.info("인증게시판 컨트롤러 컨텐트뷰");
+		mav.addObject("modify_view", service.getBoard(boardVO.getB_index()));
+		mav.setViewName("board_show/ysModifyView");
+		return mav;
+	}
+	
+	// 인증게시판 게시글 수정
+	@PutMapping("/board/shows/modify")
+	public ResponseEntity<String> bsModify(@RequestBody BoardVO boardVO) throws Exception {
+		log.info("인증게시판 컨트롤러  -- modify() -- 호출");
+		log.info("boardVO"+boardVO);
+		 
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service.modifyBoard(boardVO); //수정 업데이트
+			
+	        entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+	        
+	      }catch(Exception e){
+	         e.printStackTrace();
+	         entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      }
+		
+		return entity;  
+	}
+	
 
+	// 인증게시판 게시글 삭제
 	// ck에디터로 저장되어지는 이미지는 디비에 저장히자 않아서..... 이미지의 경로를 모른다....
 	@GetMapping("/my/board/shows/delete/{b_index}")
 	public ModelAndView bsDelete(ModelAndView mav, BoardVO bvo, AttachmentVO attvo, BoardreplyVO brvo)
@@ -79,7 +204,7 @@ public class NanuBoardShowReplyController {
 
 		// ck 에디터로 올리는 이미지 삭제는 잠시 보류.. 게시판 글번호를 가져올 수 없어서 찾을 수 없다.
 		log.info("인증게시판 글 삭제");
-
+	
 		//1. 썸네일 로컬에서 삭제
 		String path = service.getAttachmentBindex(bvo.getB_index()); // attachment 에서 삭제할 썸네일 이미지 경로 가져오기		
 		if (path != null) {
@@ -96,7 +221,6 @@ public class NanuBoardShowReplyController {
 			service.deleteAttachment(bvo.getB_index());
 			log.info("썸네일 저장 테이블에서 삭제");
 			
-			
 		}
 		
 		//2. 댓글 테이블에서 해당 게시판 글번호로 댓글 전부 삭제
@@ -109,99 +233,17 @@ public class NanuBoardShowReplyController {
 		log.info("인증게시판 글 삭제");
 		
 		
-		mav.setViewName("board_show/yourSupportList");
+		mav.setViewName("redirec:board_show/yourSupportList");
 		return mav;
 
 	}
 
+	
+	
+	/* 댓글 */
+
 	// 댓글 입력 insert
 	// [Spring] ResponseEntity는 왜 쓰는 것이며 어떻게 쓰는걸까? https://a1010100z.tistory.com/106
-	/*
-	 * @PostMapping("board/shows/reply_insert") public ResponseEntity<String>
-	 * reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, BoardVO
-	 * boardVO, Model model, @AuthenticationPrincipal MemberDetails md) {
-	 * log.info("rvo = " + rvo);
-	 * 
-	 * ResponseEntity<String> entity = null; log.info("reply_insert");
-	 * 
-	 * //Date dateChangePaidAt = Date.valueOf();
-	 * 
-	 * System.out.println(rvo);
-	 * 
-	 * if (md != null) { model.addAttribute("member_id",
-	 * md.getmember().getMember_id()); }
-	 * 
-	 * 
-	 * try { service.insertReply(rvo); //댓글 입력 service.getRecentComment(replyVO);
-	 * //최신 저장된 댓글 가져오기 //entity = new ResponseEntity<String>("r_num" ,
-	 * service.getRecentComment(replyVO); //최신 저장된 댓글 가져오기);
-	 * //replyVO.setR_num(rvo.getR_num()); // 댓글 번호 받아서 넣어주기
-	 * //model.addAttribute("recentComment = ", replyVO);
-	 * 
-	 * System.out.println("rvo = " + rvo); System.out.println("replyvo = " +
-	 * service.getRecentComment(replyVO));
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); //entity = new
-	 * ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); }
-	 * 
-	 * 
-	 * return entity; }
-	 */
-	// 댓글 입력 insert
-	// [Spring] ResponseEntity는 왜 쓰는 것이며 어떻게 쓰는걸까? https://a1010100z.tistory.com/106
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("board/shows/reply_insert") public Map<String, Integer>
-	 * reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, Model
-	 * model, @AuthenticationPrincipal MemberDetails md) throws Exception {
-	 * 
-	 * log.info("rvo = " + rvo); log.info("reply_insert"); System.out.println(rvo);
-	 * 
-	 * Map<String, Integer> sendR_num = new HashMap<String, Integer>();
-	 * service.insertReply(rvo); //댓글 입력 //service.getRecentComment(replyVO); //최신
-	 * 저장된 댓글 가져오기 //service.getRid(rvo.getB_index());
-	 * 
-	 * //System.out.println("r_num = " +
-	 * service.getRecentComment(replyVO).getR_num());
-	 * //System.out.println("r_num = " + rvo.getR_num());
-	 * 
-	 * sendR_num.put("r_num", service.getRecentComment(replyVO).getR_num());
-	 * System.out.println("r_num = " +
-	 * service.getRecentComment(replyVO).getR_num());
-	 * 
-	 * 
-	 * if (md != null) { model.addAttribute("member_id",
-	 * md.getmember().getMember_id()); } return sendR_num; }
-	 */
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("board/shows/reply_insert") public BoardreplyVO
-	 * reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, Model
-	 * model, @AuthenticationPrincipal MemberDetails md) throws Exception {
-	 * 
-	 * System.out.println(rvo);
-	 * 
-	 * service.insertReply(rvo); //댓글 입력
-	 * 
-	 * //replyVO.setB_index(rvo.getR_num());
-	 * 
-	 * BoardreplyVO send = service.getRecentComment(rvo.getR_num(),
-	 * rvo.getB_index());
-	 * System.out.println(service.getRecentComment(rvo.getR_num(),
-	 * rvo.getB_index()));
-	 * 
-	 * //service.getRecentComment(replyVO); //최신 저장된 댓글 가져오기 //send.put("b_index" ,
-	 * rvo.getB_index()); //send.put("r_num" ,
-	 * service.getRecentComment(rvo).getB_index()); //System.out.println("r_num = "
-	 * + service.getRecentComment(replyVO).getR_num());
-	 * //System.out.println("rvo = " + service.getRecentComment(rvo.getR_num()));
-	 * //System.out.println("b_index = " + rvo.getB_index());
-	 * 
-	 * if (md != null) { model.addAttribute("member_id",
-	 * md.getmember().getMember_id()); } return send; }
-	 */
 	@ResponseBody
 	@PostMapping("board/shows/reply_insert")
 	public int reply_insert(@RequestBody BoardreplyVO rvo, BoardreplyVO replyVO, Model model,
@@ -209,22 +251,8 @@ public class NanuBoardShowReplyController {
 
 		service.insertReply(rvo); // 댓글 입력
 
-		// replyVO.setB_index(rvo.getR_num());
-		// BoardreplyVO send = service.getRecentComment(rvo.getR_num(),
-		// rvo.getB_index());
-		// System.out.println(service.getRecentComment(rvo.getR_num(),
-		// rvo.getB_index()));
-
 		int send = service.getRecentComment(rvo).getR_num();
 		System.out.println(service.getRecentComment(rvo).getR_num());
-
-		// service.getRecentComment(replyVO); //최신 저장된 댓글 가져오기
-		// send.put("b_index" , rvo.getB_index());
-		// send.put("r_num" , service.getRecentComment(rvo).getB_index());
-		// System.out.println("r_num = " +
-		// service.getRecentComment(replyVO).getR_num());
-		// System.out.println("rvo = " + service.getRecentComment(rvo.getR_num()));
-		// System.out.println("b_index = " + rvo.getB_index());
 
 		if (md != null) {
 			model.addAttribute("member_id", md.getmember().getMember_id());
@@ -254,7 +282,6 @@ public class NanuBoardShowReplyController {
 		return entity;
 	}
 	
-	
 	//댓글 수정
 	@PutMapping("board/shows/replyModify")
 	public ResponseEntity<String> relpyModify(ModelAndView mav, @RequestBody BoardreplyVO brvo) {
@@ -272,32 +299,78 @@ public class NanuBoardShowReplyController {
 		return entity;
 	}
 	
-	
+	// ck 에디터
+	@PostMapping("/my/board/shows/imageUpload")
+	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam MultipartFile upload) throws Exception {
 
-	// 댓글 수정 창 보기
-	/*
-	 * @GetMapping("/board/shows/update_view/updateView") //
-	 * /content_view/{bid}/reply/{rid} public ModelAndView updateReplyView(BoardVO
-	 * boardVO, BoardreplyVO rvo, ModelAndView mav, @AuthenticationPrincipal
-	 * MemberDetails md ) throws Exception {
-	 * log.info("controller -- updateReplyView() -- 호출");
-	 * 
-	 * //mav.setViewName("/content_view/{bid}/reply/{rid}");
-	 * mav.addObject("content_view", service.getBoard(boardVO.getB_index()));
-	 * //rvo.setRid(md.getUsername()); // 로그인한 사람 id정보를 rvo 댓글작성자 id인 rid에 넣어줌
-	 * 
-	 * mav.addObject("listComment", service.listComment(rvo));
-	 * mav.addObject("getComment", service.getComment(rvo));
-	 * 
-	 * System.out.println("service.listComment(rvo) = " + service.listComment(rvo));
-	 * System.out.println("service.getComment(rvo) = "+ service.getComment(rvo));
-	 * 
-	 * // @AuthenticationPrincipal MemberDetails md 유저정보 가져오기 //
-	 * model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); if
-	 * (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-	 * log.info("로그인한 사람 이름 - " + md.getmember().getName());
-	 * mav.addObject("username", md.getmember().getName());
-	 * mav.addObject("member_id", md.getUsername()); } return mav; }
-	 */
+		log.info("로컬이미지 업로드");
+		//log.info("bvo : " + bvo);
+		OutputStream out = null;
+		PrintWriter writer = null;
+		JsonObject json = new JsonObject();
+
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/attachment");
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String datefolder = sdf.format(dt).toString();
+		System.out.println("오늘 날짜 : " + datefolder);
+
+		uploadPath = uploadPath + "\\" + datefolder; // 업로드 경로
+		System.out.println("ck에디터 이미지 업로드 패스 : " + uploadPath);
+
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+
+		String uid = UUID.randomUUID().toString();
+
+		try {
+			String fileName = upload.getOriginalFilename(); //원본이름
+			fileName = uid + "_" + fileName; //중복방지 랜덤 문자열
+			log.info("파일 이름 : " + fileName);			
+			byte[] bytes = upload.getBytes();
+
+			// String ckEditorUpLoadPath = uploadPath +"\\" + uid + "_" + fileName ;
+
+			File dir = new File(uploadPath);
+			if (!dir.isDirectory()) {
+				dir.mkdir();
+			}
+
+			writer = response.getWriter();
+			String fileUrl = "/resources/attachment" + "/" + datefolder + "/" + fileName; //path
+			// 업로드시 이미지 정보에 표시 되어 지는 url, 파일이 저장되어 있는 위치, 이름이 같아야 한다!!!!, resources 에서부터
+			// 설정하지 않으면 views아래에서 찾는다.
+
+			upload.transferTo(new File(uploadPath + "\\" + fileName));
+
+			json.addProperty("uploaded", 1);
+			json.addProperty("fileName", fileName);
+			json.addProperty("url", fileUrl);
+
+			writer.println(json);
+
+			// writer.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1,
+			// \"url\":\"" + fileUrl + "\"}");
+
+			writer.flush();
+			
+		} catch (Exception e) { // TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+				if (writer != null) {
+					writer.close();
+				}
+			} catch (Exception e) { // TODO:handleexception
+				e.printStackTrace();
+			}
+		}
+		return;
+	}
+
 
 }

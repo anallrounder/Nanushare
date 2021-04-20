@@ -7,7 +7,7 @@ import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.page.Criteria;
 
-public interface NanuBoardShowYSService {
+public interface BoardShowsService {
 	
 	// 기본 리스트
 	public List<BoardVO> getlist(); // 인증게시판 리스트 불러오기

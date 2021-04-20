@@ -5,39 +5,26 @@ package com.share.nanu.controller;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.google.gson.JsonObject;
-import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
-import com.share.nanu.page.Criteria;
-import com.share.nanu.page.pageVO;
 import com.share.nanu.security.MemberDetails;
-import com.share.nanu.service.NanuBoardShowYSService;
+import com.share.nanu.service.BoardShowsService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,76 +33,31 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Controller
 //@RequestMapping("/board/shows/*")
-public class NanuBoardShowYSController {
+public class BoardShowsController {
 
 	@Autowired
-	private NanuBoardShowYSService service;
+	private BoardShowsService service;
 
 	// 인증게시판 리스트 test
 	/*
-	 * @GetMapping("/testlist") public String boardShowYS(Model model) {
-	 * log.info("인증게시판 리스트 컨트롤러"); model.addAttribute("testlist",
-	 * service.getlist()); return "board_show/yourSupportList"; }
+	 @GetMapping("/testlist") 
+	 public String boardShowYS(Model model) {
+	 	log.info("인증게시판 리스트 컨트롤러"); 
+	 	model.addAttribute("testlist", service.getlist()); 
+	 	return "board_show/yourSupportList"; 
+	 }
 	 */
-
-	// 인증게시판 페이징 list
-	@RequestMapping("/board/shows/list")
-	public String boardShowPaging(Criteria cri, Model model, AttachmentVO avo,
-			@AuthenticationPrincipal MemberDetails md) throws Exception {
-		log.debug("인증게시판 컨트롤러 페이징 리스트" + cri);
-		model.addAttribute("list", service.getlist(cri));
-
-		// 절대경로 -> 상대경로
-		List<AttachmentVO> attach = service.getAttachment(avo);
-		log.info("path : " + attach.get(0).getPath());
-
-		// 썸네일을 불러올때마다 db 에있는 모든 경로를 매번 바꾸어 주어야 해서 매우 비효율적...
-		for (int i = 0; i < attach.size(); i++) {
-			String attachPath = attach.get(i).getPath(); // 절대 경로 가지고 오기
-			log.info("attachMent table path : " + attachPath); // attachment table에 저장된 path
-
-			String RelativePath = new File(attachPath).toURI().getPath(); // 절대경로에 \\ 설정 되어 있다. -> //로 수정
-			log.info("절대경로 -> 상대경로로 치환중 : " + RelativePath);
-
-			int resources = RelativePath.indexOf("/resources"); // /resources까지 인덱스 번호
-			log.info("/resources 까지의 인덱스 번호 :  " + resources);
-
-			String ChangeRelativePath = RelativePath.substring(resources);
-			log.info("완성된 상대 경로 : " + ChangeRelativePath);
-
-			attach.get(i).setPath(ChangeRelativePath);
-			log.info("저장되어진 경로 : " + attach.get(i).getPath());
-		}
-
-		log.info("getAttachMent b_index");
-		model.addAttribute("attachment", attach);
-
-		log.info("getAttachMent b_index Coubt");
-		model.addAttribute("attachMentCount", service.getAttachMentCount(avo));
-
-		int total = service.getTotal(cri);
-		model.addAttribute("pageMaker", new pageVO(cri, total));
-
-		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
-		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
-		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-			log.info("로그인한 사람 이름 - " + md.getmember().getName());
-			model.addAttribute("username", md.getmember().getName());
-		}
-
-		return "board_show/yourSupportList";
-	}
-
+	/*
 	// 인증게시판 컨텐트뷰 - 체크
 	@GetMapping("/board/shows/content_view")
 	public String boardShowContent(BoardVO boardVO, Model model, @AuthenticationPrincipal MemberDetails md)
 			throws Exception {
-		log.debug("인증게시판 컨트롤러 컨텐트뷰");
+		log.info("인증게시판 컨트롤러 컨텐트뷰");
 		service.uphit(boardVO);
 		model.addAttribute("content_view", service.getBoard(boardVO.getB_index()));
 
 		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
-		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
+		// model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); 
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
 			log.info("로그인한 사람 이름 - " + md.getmember().getName());
 			model.addAttribute("username", md.getmember().getName());
@@ -127,7 +69,7 @@ public class NanuBoardShowYSController {
 	// 수정창 보기 - 체크
 	@GetMapping("/my/board/shows/modify_view")
 	public String bsModiview(BoardVO boardVO, Model model) throws Exception {
-		log.debug("인증게시판 컨트롤러 컨텐트뷰");
+		log.info("인증게시판 컨트롤러 컨텐트뷰");
 		model.addAttribute("modify_view", service.getBoard(boardVO.getB_index()));
 		return "board_show/ysModifyView";
 	}
@@ -141,24 +83,26 @@ public class NanuBoardShowYSController {
 	 */
 
 	// 게시글 삭제 - 체크
+	/*
 	@GetMapping("/my/board/shows/delete")
 	public String bsDelete(BoardVO boardVO) throws Exception {
 		log.info("인증게시판 컨트롤러 -- delete() -- 호출");
 		service.deleteBoard(boardVO.getB_index());
-		return "redirect:plist";
+		return "redirect:list";
 	}
-
+	*/
+	/*
 	// 글작성 페이지
 	@GetMapping("/my/board/shows/write_view")
 	public String vsWriteView(Model model) throws Exception {
-		log.debug("인증게시판 컨트롤러  -- write_view() -- 호출");
+		log.info("인증게시판 컨트롤러  -- write_view() -- 호출");
 		return "board_show/ysWriteView";
 	}
-
+	*/
+	/*
 	// ck 에디터
 	@PostMapping("/my/board/shows/imageUpload")
 	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response,
-
 			@RequestParam MultipartFile upload) throws Exception {
 
 		log.info("로컬이미지 업로드");
@@ -228,10 +172,10 @@ public class NanuBoardShowYSController {
 			}
 
 		}
-
 		return;
 
 	}
+	*/
 
 	// 글 작성 -> 로그인한 사용자의 아이디를 어떻게 불러올 것인가 고민해봐야한다.
 	// @AuthenticationPrincipal MemberDetails md 로 현재 로그인 되어 있는 유저의 정보를 받아올 수 있다.
@@ -245,7 +189,7 @@ public class NanuBoardShowYSController {
 		log.info("인증게시판 컨트롤러  -- write() -- 호출");
 
 		final int THUMNAIL_WIDTH = 264;
-		final int THUMNAIL_HEIGHT = 336;
+		final int THUMNAIL_HEIGHT = 300; // 336 
 		UUID uuid = UUID.randomUUID();
 
 		String loginMember = md.getUsername();
@@ -329,5 +273,6 @@ public class NanuBoardShowYSController {
 		}
 		return "/board_show/yourSupportList";
 	}
+
 
 }
