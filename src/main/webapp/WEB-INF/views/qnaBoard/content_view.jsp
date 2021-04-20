@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!doctype html>
 <html lang="ko">
 
@@ -304,39 +305,44 @@
                         <!-- 댓글 작성 버튼은 관리자와 현재 게시글의 작성자만 대글작성 버튼을 누를 수 있다. -->                       
                         <!-- Leave a Comment -->
                         <sec:authentication property="principal" var="principalMember_id" />
+                        <c:set var="stop" value="true" />
                         
+                     	<c:if test="${ empty principalMember_id}">
+                     		<c:set var="stop" value="false" /> <!-- 로그인한 유저가 없다면 아래 댓글 작성을 보여주지 않는다. -->
+                     		
                         <!-- 관리자 체크 -->
-                        <c:if test="${principalMember_id.username eq content_view.member_id || principalMember_id.getmember().getAuthname() eq '관리자' }">
+                        <c:if test="${ !empty principalMember_id && principalMember_id.username eq content_view.member_id || principalMember_id.getmember().getAuthname() eq '관리자'  }">
                         
-                        <div class="widget_title"><h2>댓글을 남겨주세요.</h2></div>
-                        <div class="comment-respond">
-                            <form id="insertForm" action="${pageContext.request.contextPath}/board/shows/reply_insert" method="post">
-                                <input type="hidden" id="b_index" name="b_index" value="${content_view.b_index}"/>
-									<sec:authentication property="principal" var="pinfo" />
-									<sec:authorize access="isAuthenticated()">
-									<c:if test="${! empty  pinfo.username}"> 
+	                        <div class="widget_title"><h2>댓글을 남겨주세요.</h2></div>
+	                        <div class="comment-respond">
+	                            <form id="insertForm" action="${pageContext.request.contextPath}/board/shows/reply_insert" method="post">
+	                                <input type="hidden" id="b_index" name="b_index" value="${content_view.b_index}"/>
+										<sec:authentication property="principal" var="pinfo" />
+										<sec:authorize access="isAuthenticated()">
+										<c:if test="${! empty  pinfo.username}"> 
+		                                <p>
+		                                    <label>작성자(아이디)</label>
+		                                    <input type="text" id="rid" name="rid" value="<c:out value='${pinfo.username}'/>" readonly> <!-- 문제는 이렇게 바꾸니까 값이 안넘어간다 ㅠㅠ -->	                                  
+		                                </p>
+		                                </c:if>
+	                               	 	</sec:authorize> 
 	                                <p>
-	                                    <label>작성자(아이디)</label>
-	                                    <input type="text" id="rid" name="rid" value="<c:out value='${pinfo.username}'/>" readonly> <!-- 문제는 이렇게 바꾸니까 값이 안넘어간다 ㅠㅠ -->	                                  
+	                                    <label>작성일</label>
+	                                    <input type="text" id="rdate" disabled >
+	                                </p>   
+	                                <p class="charity-respond-full-form">
+	                                    <label>댓글내용</label>
+	                                    <textarea id="rcontent" name="rcontent" placeholder="댓글을 작성하세요." class="commenttextarea"></textarea>
 	                                </p>
-	                                </c:if>
-                               	 	</sec:authorize> 
-                                <p>
-                                    <label>작성일</label>
-                                    <input type="text" id="rdate" disabled >
-                                </p>   
-                                <p class="charity-respond-full-form">
-                                    <label>댓글내용</label>
-                                    <textarea id="rcontent" name="rcontent" placeholder="댓글을 작성하세요." class="commenttextarea"></textarea>
-                                </p>
-                                <p class="form-submit">                                  
-                                	<input id="resubmit" name="submit" class="submit" value="댓글작성" type="submit">
-                                	<!-- 관리자와 글 작성자만 댓글을 달 수 있다. -->
-                                </p>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                            </form>
-                        </div>
+	                                <p class="form-submit">                                  
+	                                	<input id="resubmit" name="submit" class="submit" value="댓글작성" type="submit">
+	                                	<!-- 관리자와 글 작성자만 댓글을 달 수 있다. -->
+	                                </p>
+	                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	                            </form>
+	                        </div>
                         </c:if>
+                       </c:if>
                          <!-- Leave a Comment -->
                         <!--// 댓글 작성 영역 comment-respond \\-->
                         
