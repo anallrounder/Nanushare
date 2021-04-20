@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -58,7 +59,17 @@ table {
 }
 </style>
 
+<script>
+	/* 이용약관 버튼 */
+	function Checkform() {
+		if (secession.agree.checked != true) {
 
+			alert("개인정보 수집에 동의해 주세요.");
+			frm.confirm.focus();
+			return false;
+		}
+	}
+</script>
 
 <script type="text/javascript">
 	/* 403에러때문에 넣은 코드 */
@@ -95,26 +106,27 @@ table {
 														url : "${pageContext.request.contextPath}/my/drop/check",
 														contentType : "application/json", /* charset=utf-8' */
 														cache : false,
-														data : JSON.stringify(check),
+														data : JSON
+																.stringify(check),
 														async : "false",
 														datatype : 'text',
-														success : function(
-																result) {
-															console.log(result);
+														success : function(Checkform) {
+															console.log(Checkform);
 
-															if (result == "SUCCESS") {
-																console
-																		.log("success");
+															if (Checkform == true) {
+																console.log("success");
 
 																alert("탈퇴되었습니다. 그동안 이용해주셔서 감사합니다. ");
-																
-																 $(location).attr(
-																				'href',
+
+																$(location).attr('href',
 																				"${pageContext.request.contextPath}/deleteCooki");
 																/* $(location)
 																.attr(
 																		'href',
 																		"${pageContext.request.contextPath}/member/logout"); */
+
+															}else{
+																alert("정보를 알맞게 다시 입력해주세요");
 																
 															}
 														},
@@ -131,25 +143,7 @@ table {
 										}); //패스워드 체크 스크립트 end
 					});
 </script>
-<script>
-	/* 이용약관 버튼 */
-	function agree() {
-		var chkbox = document.getElementsByName('agree');
-		var chk = false;
-		for (var i = 0; i < chkbox.length; i++) {
-			if (chkbox[i].checked) {
-				chk = true;
-			} else {
-				chk = false;
-			}
-		}
-		if (chk) {
-			window.location.href = "${pageContext.request.contextPath}/main";
-		} else {
-			alert("모든 약관에 동의해 주세요.")
-		}
-	}
-</script>
+
 </head>
 
 <body>
@@ -161,15 +155,13 @@ table {
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<!-- Sub Header -->
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -190,7 +182,7 @@ table {
 
 								<h3>탈퇴 안내</h3>
 								<h6>회원탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요.</h6>
-
+								<div>&nbsp;</div>
 								<i class="fa fa-check" aria-hidden="true"></i> 탈퇴 후 회원정보 및 개인형
 								서비스 이용기록은 모두 삭제됩니다. <br> <br> <i class="fa fa-check"
 									aria-hidden="true"></i> 회원정보는 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다. <br>
@@ -206,31 +198,33 @@ table {
 								없어, 게시글을 임의로 삭제해드릴 수 없습니다. <br> <br> <br>
 
 
-								<!-- <div style="margin: 0 auto" align="center"> -->
-								<form id="secession" method="get" novalidate>
+								<form id="secession" name="secession" method="get"
+									onSubmit="return Checkform()" novalidate>
 									<ul class="charity-contact-form">
-
-										<li>
-											 <label>이름</label> <input type="text" name="name" id="name"  required /></li>
-										<li><label>이메일</label><input type="text" name="member_id" id="member_id" required></li>
-										<li><label>비밀번호</label><input type="password" placeholder="Confirm Password" name="pw" id="pw"
+										<li><label>이름</label> <input type="text" name="name"
+											id="name" required /></li>
+										<li><label>이메일</label><input type="text" name="member_id"
+											id="member_id" required></li>
+										<li><label>비밀번호</label><input type="password"
+											placeholder="Confirm Password" name="pw" id="pw"
 											class="form-control" required></li>
 									</ul>
-									<input type="checkbox" name="agree" id="chk1"> 안내 사항을
+									<input type="checkbox" name="agree" id="agree"> 안내 사항을
 									모두 확인하였으며, 이에 동의합니다.
 									<div class="buttonbutton">
 										<div>&nbsp;</div>
 
 										<button type="submit" class="charity-simple-blog-btn">탈퇴하기</button>
-										
+										&nbsp;&nbsp;<a
+											href="${pageContext.request.contextPath}/my/mypage"
+											class="charity-simple-blog-btn">취소</a>
 									</div>
 									<input type="hidden" name="${_csrf.parameterName}"
 										value="${_csrf.token}" />
 								</form>
 								<div>&nbsp;</div>
-								<a href="${pageContext.request.contextPath}/my/mypage"
-									class="charity-simple-blog-btn">취소</a>
-			
+
+
 								<!-- jquery validation cdn-->
 								<!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
 								<script type="text/javascript"
@@ -256,12 +250,9 @@ table {
 															},
 															pw : {
 																required : true,
-															/* passwordCK: true, */
-
 															},
 															name : {
 																required : true,
-
 															}
 														}, // rules end */
 
@@ -284,11 +275,15 @@ table {
 																error, element) {
 															if (element
 																	.is(":text")
-																	|| element.is(":password")) {
-																element.parent().after(
+																	|| element
+																			.is(":password")) {
+																element
+																		.parent()
+																		.after(
 																				error);
 															} else {
-																element.after(error);
+																element
+																		.after(error);
 															}
 														}
 
@@ -301,9 +296,6 @@ table {
 												.test(value);
 													}); */
 								</script>
-
-								</ul>
-
 							</div>
 						</div>
 					</div>
@@ -319,41 +311,14 @@ table {
 				$(this).attr("id", "mytab" + i)
 			})
 		</script>
-
-
-
-
-
 		<!-- Main Section -->
 
 	</div>
 	<!-- Content -->
-	</div>
+
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
-
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
 
 	<!-- jQuery -->
 	<script src="/resources/charity/script/jquery.js"></script>
@@ -366,7 +331,7 @@ table {
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	    <script src="/resources/charity/script/functions-main.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
 </body>
 
 </html>
