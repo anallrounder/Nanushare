@@ -95,12 +95,23 @@
     </script>
     
 	<!-- validation 경고문구 스타일 -->
-    <style type="text/css">
-        .error {
-            color: red;
-        }
-    </style>
-    
+<style type="text/css">
+.error {
+    color: red;
+}
+#forimg {
+	/* background-color: #db7a7c; */
+	background-color: #dfebe9;
+	background-image: url('/resources/banner_imgs/show_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+	/* background-size: 1500px; 
+	width:100%;  */
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
 </head>
 
 <body>
@@ -109,13 +120,13 @@
     <!-- Header -->
 
     <!-- Banner -->
-    <div class="charity-subheader">
+    <div id="forimg" class="charity-subheader">
         <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>물품나눔 신청서 작성</h1>
-                    <p>Product donation: Application Form</p>
+                   <!--  <h1>물품나눔 신청서 작성</h1>
+                    <p>Product donation: Application Form</p> -->
                 </div>
             </div>
         </div>
@@ -131,6 +142,10 @@
 	%> --%>
 	
     <!-- Content -->
+	<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 물품 나누기 </h2>
+	</div> 
+	
     <div class="charity-main-content">
 
         <!-- Main Section -->
@@ -144,8 +159,8 @@
                         <!--// 신청서 안내사항 \\ -->
                         <div class="charity-team-warp">
 
-                            <h3>물품 나누기 신청</h3>
-                            <span class="mb-3">Product donation _ Application Form</span>
+                            <h3>물품 나누기 신청서 작성</h3>
+                            <span class="mb-3">Product donation_ Application Form</span>
                             <figure><img src="${pageContext.request.contextPath}/resources/charity/donation-images/heart.jpg" alt=""></figure><!-- 788x355 -->
 
                             <p>후원 회원 여러분, 나누셰어 프로젝트의 물품 나누기에 동참해주셔서 감사합니다.<br>
@@ -261,7 +276,7 @@
 	                                	date는 초기화 되지 않도록 만들고 싶어서 일부만 초기화를 제외하는 방법 찾는중
 	                                	$(input박스가 있는 곳을 감싸고 있는 객체의 ID).find('input[type=text]').each(function(){ $(this).val(''); });
 									   참고: https://alwayslifegoseon.tistory.com/119 -->
-                                    <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시선택하기</i></button>
+                                   <!--  <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시선택하기</i></button> -->
                                     <button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/item/main'"><i class="fa fa-arrow-left"> 이전화면으로</i></button><!-- 확인필요 -->
                                 </div>
                             </form>

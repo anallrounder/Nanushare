@@ -297,6 +297,19 @@
 	}); //function end
 </script>
 
+<style type="text/css">
+
+#forimg {
+	background-color: #eaf0fe;
+	background-image: url('/resources/banner_imgs/donation_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	background-height:100%;
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
 
 
 
@@ -307,20 +320,23 @@
 	<!-- Header -->
 	
 	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>후원금기부</h1>
-					<p>Point donation: Application Form</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Banner -->
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+             	<!-- 	 <h1>후원금기부</h1>
+					<p>Point donation: Application Form</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 후원금 나눔하기 </h2>
+	</div> 
 	
-	<!-- Content -->
 	<div class="charity-main-content">
 
 		<!-- Main Section -->
@@ -332,8 +348,8 @@
 						<!--// company-timeLine \\-->
 						<div class="charity-team-warp">
 
-							<h3>후원 나눔하기</h3>
-							<span class="mb-3">Point donation _ Application Form</span>
+							<h3>후원금 나눔하기</h3>
+							<span class="mb-3">Point donation_ Application Form</span>
 							<figure><img src="${pageContext.request.contextPath}/resources/charity/donation-images/후원.png"	alt=""></figure>
 							<!-- 788x355 -->
 
@@ -343,7 +359,7 @@
 							<div class="charity-team-contact">
 								<ul class="chaity-contact-info">
 									<li>
-										<h6>후원 나눔 관련:</h6>
+										<h6>후원금 나눔 관련:</h6>
 										<span>+123 45 678</span>
 									</li>
 									<li>
@@ -454,8 +470,7 @@
 								<ul class="charity-item-text">
 									<!-- charity-list-style-one -->
 									<li class="mt-3">다음 내용은 2021년 3월 17일 기준으로 작성되었습니다.</li>
-									<li class="mt-3">나누셰어 회원이 되시면 돈기부여페이지에서 후원나눔을 하실 수 있습니다.</li>
-
+									<li class="mt-3">나누셰어 회원이 되시면 돈기부여 페이지에서 후원나눔을 하실 수 있습니다.</li>
 									<li class="mt-3">기부하신 내역과 결제 취소는 마이페이지에서 확인하실 수 있습니다.</li>
 								</ul>
 							</div>

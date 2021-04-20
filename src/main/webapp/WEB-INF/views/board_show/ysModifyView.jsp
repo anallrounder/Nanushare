@@ -92,24 +92,33 @@
 		}); // event end
 	}); // ready end
 </script>
-		
-	
-	
+<style>
+#forimg {
+	background-color: #eaf0fe;
+	background-image: url('/resources/banner_imgs/donation_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	background-height:100%;
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
 </head>
 
 <body>
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
-    
+
     <!-- Banner -->
-    <div class="charity-subheader">
-        <span class="black-transparent"></span>
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h1>나눔 인증</h1>
-                    <p>show your support</p>
+                <div class="col-md-12"> 
+          <!--         <h1>나눔 인증</h1>
+                    <p>show your support</p> -->
                 </div>
             </div>
         </div>
@@ -117,6 +126,9 @@
     <!-- Banner -->
 
     <!-- Content -->
+    <div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 나눔 인증 </h2>
+	</div> 
     <div class="charity-main-content">
 
         <!-- Main Section -->
@@ -172,12 +184,11 @@
                         <br><br>
                        
                         <!-- 댓글 보일지 말지 고민중  -->
-                        <!-- 댓글 보일지 말지 고민중  -->
                         
                     </div>
 
                     <!-- 우측 배너  aside -->
-					<%@ include file="/WEB-INF/views/board_show/aside.jsp"%>
+					<%-- <%@ include file="/WEB-INF/views/board_show/aside.jsp"%> --%>
 					<!-- aside end -->
 					
                 </div>
@@ -192,23 +203,6 @@
     <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
     <!-- Footer -->
 
-    <!-- Search Modal -->
-   <!--  <div class="modal fade searchmodal" id="searchModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <a href="#" class="charity-close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-                    <form>
-                        <input type="text" value="Type Your Keyword" onblur="if(this.value == '') { this.value ='Type Your Keyword'; }" onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-                        <input type="submit" value="">
-                        <i class="fa fa-search"></i>
-                    </form>
-                </div>
-                
-            </div>
-        </div>
-    </div>
- -->
 
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>

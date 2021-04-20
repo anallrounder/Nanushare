@@ -10,7 +10,7 @@ import com.share.nanu.VO.BoardreplyVO;
 import com.share.nanu.page.Criteria;
 
 @Mapper
-public interface NanuBoardShowYSMapper {
+public interface BoardShowsMapper {
 	
 	// 일반 리스트
 	public List<BoardVO> getlist(); // 인증게시판 리스트

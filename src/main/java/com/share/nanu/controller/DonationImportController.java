@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.share.nanu.VO.DonationVO;
 import com.share.nanu.security.MemberDetails;
-import com.share.nanu.service.NanuDonationService;
+import com.share.nanu.service.DonationService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +52,7 @@ public class DonationImportController {
 	
 	
 	@Autowired
-	private NanuDonationService ndservice;
+	private DonationService ndservice;
 	
 	@GetMapping("/moneyDonationForm") //후원금 기부페이지 이동
 	public ModelAndView moneyForm(ModelAndView mav) {		

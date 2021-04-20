@@ -11,7 +11,7 @@ import com.share.nanu.VO.PointVO;
 
 
 @Mapper
-public interface NanuDonationMapper {
+public interface DonationMapper {
 	
 	/* 물품 기부 */
 	public List<MemberVO> readMember();// 물품신청서 회원 정보 불러오기 - 로그인 사용자 용 test중

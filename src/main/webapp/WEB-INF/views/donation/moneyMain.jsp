@@ -27,7 +27,19 @@
     
     <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
-	
+
+<style>
+#forimg {
+	background-color: #eaf0fe;
+	background-image: url('/resources/banner_imgs/donation_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	background-height:100%;
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
 </head>
 
 <body>
@@ -36,13 +48,13 @@
     <!-- Header -->
 
     <!-- Banner -->
-    <div class="charity-subheader">
-        <span class="black-transparent"></span>
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h1>돈기부여하기</h1>
-                    <p>작은 나눔은 큰 힘이 됩니다.</p>
+                <div class="col-md-12"> 
+                  <!--   <h1>돈기부여하기</h1>
+                    <p>작은 나눔은 큰 힘이 됩니다.</p> -->
                 </div>
             </div>
         </div>
@@ -50,6 +62,9 @@
     <!-- Banner -->
 
     <!-- Content -->
+      <div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 돈기부여하기 </h2>
+	</div> 
     <div class="charity-main-content">
 
         <!-- Main Section -->
@@ -59,8 +74,7 @@
                     <div class="col-md-9">
                         <div class="charity-rich-editor charity-cause-detail">
                             <figure class="charity-cause-thumb"><img src="/resources/extra-images/cause-detail-img.png" alt=""></figure>
-                            <h3>돈기부여</h3>
-                           
+                            <h4>작은 나눔은 큰 힘이 됩니다! </h4>
                             <hr>
                             
                             <figure>
@@ -91,8 +105,8 @@
                              <!-- 버튼 -->
                             <div class="charity-cause-donate">
                   			   <div class="skillst">
-                                <a href="/my/donation/moneyDonationForm" class="charity-plan-btn m-3">후원금 기부하기<i class="fa fa-heart"></i></a> 
-                                <a href="/my/donation/money/point" class="charity-plan-btn m-3">포인트 기부하기<i class="fa fa-heart"></i></a>
+                                <a href="/my/donation/moneyDonationForm" class="charity-plan-btn m-3">후원금 나눔하기<i class="fa fa-heart"></i></a> 
+                                <a href="/my/donation/money/point" class="charity-plan-btn m-3">포인트 나눔하기<i class="fa fa-heart"></i></a>
                                </div>
                             </div> 
                             
@@ -102,38 +116,6 @@
                             <p>누구나 한 걸음부터 시작합니다. 후원자분들의 작은 정성이 모여 수많은 구호 활동을 펼쳤습니다. <br> 나누셰어와 함께하는 나눔의 첫걸음, 모이면 기적이 만들어집니다.</p>
                         </div> <!-- charity-rich-edito -->
                         
-                        
-                         
-                        <!-- <div class="widget_title"><h2>Admin Post</h2></div>
-                        <div class="charity-admin-post">
-                            <figure>
-                                <a href="404.html"><img src="/resources/extra-images/admin-post-img.png" alt=""></a>
-                                <figcaption>
-                                    <h6><a href="404.html">Mickey Ror</a></h6>
-                                    <span>Founder</span>
-                                </figcaption>
-                            </figure>
-                            <div class="charity-admin-post-text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultricies dolor libero, eu fermentum ante tristique fermentum. Vestibulum maximus ornare facilisis. Etiam id vulp utate dolor. Class aptent taciti sociosqu ad litor.</p>
-                                <ul class="charity-admin-social">
-                                    <li>
-                                        <a href="https://www.facebook.com/" class="fab fa-facebook"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.twitter.com/" class="fab fa-twitter"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.youtube.com/" class="fab fa-youtube"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.vimeo.com/" class="fab fa-vine"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
                        
                         <div class="widget_title"><h2>돈기부여 안내</h2></div>
                         <div class="charity-campaign-content">
@@ -153,18 +135,8 @@
                             </div> <!-- row -->
                         </div> <!-- charity-campaign-content -->
                         
-                        <!-- <div class="widget_title"><h2>Cause Progress</h2></div>
-                        <div class="charity-progress-wrap">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>Nullam sollicitudin orci id velit dapibus preti um. Cras elementum arcu ac neque iaculisid consequat nunc condimentum.</p>
-                                    <p>Etiam pharetra diam et sapien ullamcorperw eget porta tortor pulvinar. Nam lobortis, velit in commodo mattis.</p>
-                                </div> col-md-5
-                            </div> row
-                        </div> --><!--  charity-progress-wrap  -->
                         
-                        
-                        <div class="charity-rich-editor">
+                       <!--  <div class="charity-rich-editor">
                             <div class="charity-post-tags">
                               
                                 <div class="charity-tags">
@@ -172,7 +144,7 @@
                                     <a href="404.html">charity </a>
                                     <a href="404.html">/ donation</a>
                                     <a href="404.html"> / needy</a>
-                                </div> <!-- charity-tags -->
+                                </div> charity-tags
                                
                                 <div class="charity-blog-social">
                                     <span>Share:</span>
@@ -193,10 +165,10 @@
                                             <a href="https://www.vimeo.com/" class="fab fa-vimeo"></a>
                                         </li>
                                     </ul>
-                                </div> <!-- charity-blog-social -->
+                                </div> charity-blog-social
                                 
-                            </div> <!-- charity-post-tags -->
-                        </div> <!--charity-rich-editor -->
+                            </div> charity-post-tags
+                        </div> --> <!--charity-rich-editor -->
                         
                         
                     </div><!-- col-md-9 -->

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper 
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.share.nanu.mapper.NanuDonationMapper">
+<mapper namespace="com.share.nanu.mapper.DonationMapper">
 
 	<!-- 물품신청서 회원정보 불러오기 _ 아래는 현재 테스트용 쿼리문임 현재 로그인한 회원정보 불러오기로 추후 변경해야함 -->
 	<select id="readMember" resultType="com.share.nanu.VO.MemberVO">

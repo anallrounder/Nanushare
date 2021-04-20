@@ -1,27 +1,21 @@
 package com.share.nanu.controller;
 
 import java.io.IOException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,9 +25,9 @@ import com.share.nanu.VO.PointVO;
 import com.share.nanu.mypaging.Criteria;
 import com.share.nanu.mypaging.pageVO;
 import com.share.nanu.security.MemberDetails;
+import com.share.nanu.service.DonationService;
 import com.share.nanu.service.MemberService;
 import com.share.nanu.service.MyPageService;
-import com.share.nanu.service.NanuDonationService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +44,7 @@ public class MyPageController {
 	private MemberService mservice;
 
 	@Autowired
-	private NanuDonationService ndservice;
+	private DonationService ndservice;
 
 	@Autowired
 	BCryptPasswordEncoder encoder;
