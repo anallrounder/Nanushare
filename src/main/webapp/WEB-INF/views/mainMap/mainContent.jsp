@@ -42,7 +42,7 @@ li {
             <!-- <div class="container-fluid px-0"> 은 왼쪽여백 아예 없게 하는것-->
             <div class="row">
                 <div class="col-12">
-                   <div class="charity-banner" style="overflow: hidden; zoom: 1; position: relative; z-index: 1">
+                   <div class="charity-banner">
  
                             <div class="charity-banner-layer">
                                 <span class="charity-banner-transparent"></span> 
@@ -170,49 +170,10 @@ li {
                             <c:import url="kakaomap2.jsp"/> </div>
                         </div>
 
-                        <div class="charity-post-tags">
-                            <div class="charity-tags">
-                                <span>Tags:</span>
-                                <a href="404.html">charity </a>
-                                <a href="404.html">/ donation</a>
-                                <a href="404.html"> / needy</a>
-                            </div>
-                            <div class="charity-blog-social">
-                                <span>Share:</span>
-                                <ul>
-                                    <li>
-                                        <a href="https://www.facebook.com/" class="fab fa-facebook"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.twitter.com/" class="fab fa-twitter"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.youtube.com/" class="fab fa-youtube"></a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.vimeo.com/" class="fab fa-vimeo"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
+                       
                     </div>
                     <aside class="col-md-3">
                         
-                        <!-- Widget Search -->
-                        <div class="widget widget_search">
-                            <div class="widget_title"><h2>Search Here</h2></div>
-                            <form>
-                                <input type="text" placeholder="Search Here">
-                                <input type="submit" value="">
-                                <i class="fa fa-search"></i>
-                            </form>
-                        </div>
-                        <!-- Widget Search -->
-                     
                         <!-- Widget Archive -->
                         <div class="widget widget_archive">
                             <div class="widget_title"><h2>Current ShareBox</h2></div>

@@ -43,14 +43,14 @@
 							</ul>
 						</li>
 						<li><a href="${pageContext.request.contextPath}/board/shows/list">나눔 인증</a></li>
-						<li><a href="${pageContext.request.contextPath}/event/check">이벤트</a>
+						<li><a href="${pageContext.request.contextPath}/my/event/check">이벤트</a>
 							<ul class="children">
-								<li><a href="${pageContext.request.contextPath}/event/check">출석체크</a></li>
+								<li><a href="${pageContext.request.contextPath}/my/event/check">출석체크</a></li>
 								<li><a href="${pageContext.request.contextPath}/event/test">테스트</a></li>
 								<li><a href="${pageContext.request.contextPath}/event/game">게임</a></li>
 							</ul>
 						</li>
-						<li><a href="${pageContext.request.contextPath}/restful/notice">더하기</a>
+						<li><a href="${pageContext.request.contextPath}/board/notice">더하기</a>
 							<ul class="children">
 								<li><a href="${pageContext.request.contextPath}/board/notice">공지사항</a></li>
 								<li><a href="${pageContext.request.contextPath}/board/faq">FAQ</a></li>
