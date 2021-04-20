@@ -128,13 +128,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/headItem" class="nav-link" data-toggle="tab">
+                <a href="/admin/headItem" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>본사 재고</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#item_branch" class="nav-link active">
+                <a href="#item_branch" class="nav-link active" data-toggle="tab">
                   <i class="far fa-circle nav-icon"></i>
                   <p>지점 재고</p>
                 </a>
@@ -150,13 +150,13 @@
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/restful/notice" class="nav-link">
+                <a href="/board/notice" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>공지사항</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/restful/qna" class="nav-link">
+                <a href="/board/qna" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>문의게시판</p>
                 </a>
@@ -220,21 +220,6 @@
 									</div>
                         </div>
                         <!--// volunteer-form \\-->
-                        <div class="charity-team-contactus">
-                       
-                            <ul>
-                                <li>
-                                    <i class="fa fa-envelope"></i>
-                                    <h5>돌아가기</h5>
-                                <!--     <a href="mailto:name@email.com">info@example.com</a> -->
-                                </li>
-                                <li>
-                                    <i class="fa fa-phone"></i>
-                                    <h5>회원 삭제</h5>
-                                    <!-- <span>+(091)61 3146 8728</span> -->
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
