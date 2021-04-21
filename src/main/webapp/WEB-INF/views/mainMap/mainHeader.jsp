@@ -34,7 +34,7 @@
 								<li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
 							</ul>
 						</li>
-						<li><a class="mainMap-top" href="#" style="display: scroll;">나눔함 안내</a></li>
+						<li><a href="${pageContext.request.contextPath}/main">나눔함 안내</a></li>
 						<li>
 							<a href="${pageContext.request.contextPath}/donation/item/main">나누기</a>
 							<ul class="children">

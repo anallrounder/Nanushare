@@ -196,21 +196,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 월별 통계 -->
 	<select id="getMonthSale" resultType="int"> 
 	<![CDATA[ 
-		select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month}
+		select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month} and dntstat='paid'
 	]]>
 	</select>
 	
 	<!-- 일별 통계 -->
 	<select id="getDailySale" resultType="int">
 		<![CDATA[
-			select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month} and extract(day from dntdate) = #{day}
+			select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month} and extract(day from dntdate) = #{day} and dntstat='paid'
 		]]>
 	</select>
 	
 	<!-- 년별 통계 -->
 	<select id="getYearSale" resultType="int">
 		<![CDATA[
-			select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year}
+			select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and dntstat='paid'
 		]]>
 	</select>
 	

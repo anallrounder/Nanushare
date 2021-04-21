@@ -208,7 +208,7 @@ body {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-						<div class="charity-fancy-title " style=" margin:20px 0px 20px 0px;">
+						<div class="charity-fancy-title " style=" margin:60px 0px 60px 0px;">
 							<h2> 회원 관리 </h2>
 						</div> 
 								<div class="container">
@@ -304,7 +304,6 @@ body {
 								</div>
 						</div>
 					 </div>
-					 
 					 
 					<div class="charity-team-contactus">
        					<button type="button" onClick="history.back()" class="charity-donation-parallex-btn center"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;이전 페이지</i></button>

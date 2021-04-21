@@ -60,21 +60,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 당일 후원금 현황 -->
 	<select id="getDay" resultType="int"> 
 	<![CDATA[
-			select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month} and extract(day from dntdate) = #{day}
+			select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month} and extract(day from dntdate) = #{day} and dntstat='paid'
 		]]>
 	</select>
 	
 	<!-- 해당월 후원금 현황 -->
 	<select id="getMonth" resultType="int"> 
 	<![CDATA[ 
-		select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month}
+		select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and extract(month from dntdate) = #{month} and dntstat='paid'
 	]]>
 	</select>
 	
 	<!-- 해당년 후원금 현황 -->
 	<select id="getYear" resultType="int"> 
 	<![CDATA[
-		select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year}
+		select nvl(sum(dntprice), 0) from donation where extract(year from dntdate) = #{year} and dntstat='paid'
 	]]>
 	</select>
 	

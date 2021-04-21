@@ -26,16 +26,124 @@
     <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
 <style>
+
+
+
 li {
 	list-style: none;
-	}
+	
+}
+
+.widget_events li {
+width: 270px;
+}
+	
+.charity-events p {
+
+	font-size: 11px; 
+	color: #696969;
+}
+	
 </style>
 
 </head>
 
 <body>
-    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+   
+    <!-- Header -->
+    <header id="charity-header" class="charity-header-one">
+        <!-- Top Strip -->
+        <div class="charity-top-strip">
+			
+			<a href="${pageContext.request.contextPath}/main" class="charity-logo"><img src="/resources/nanulogoRe.ico" alt=""></a>
+			
+			<div>
+				<a href="#menu" class="menu-link active"><span></span></a>
+				<nav id="menu" class="menu charity-navigation">
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/menu/about">나누셰어란?</a>
+							<ul class="children">
+								<li><a href="${pageContext.request.contextPath}/menu/about">나누셰어 소개</a></li>
+								<li><a href="${pageContext.request.contextPath}/menu/way">찾아오셰어</a></li>
+							</ul>
+						</li>
+						<li><a class="mainMap-top" href="#" style="display: scroll;">나눔함 안내</a></li>
+						<li>
+							<a href="${pageContext.request.contextPath}/donation/item/main">나누기</a>
+							<ul class="children">
+								<li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
+								<li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
+							</ul>
+						</li>
+						<li><a href="${pageContext.request.contextPath}/board/shows/list">나눔 인증</a></li>
+						<li><a href="${pageContext.request.contextPath}/my/event/check">이벤트</a>
+							<ul class="children">
+								<li><a href="${pageContext.request.contextPath}/my/event/check">출석체크</a></li>
+								<li><a href="${pageContext.request.contextPath}/event/test">테스트</a></li>
+								<li><a href="${pageContext.request.contextPath}/event/game">게임</a></li>
+							</ul>
+						</li>
+						<li><a href="${pageContext.request.contextPath}/board/notice">더하기</a>
+							<ul class="children">
+								<li><a href="${pageContext.request.contextPath}/board/notice">공지사항</a></li>
+								<li><a href="${pageContext.request.contextPath}/board/faq">FAQ</a></li>
+								<li><a href="${pageContext.request.contextPath}/board/qna">문의하기</a></li>
+							</ul>
+						</li>	
+					</ul>
+				</nav>
+			</div>
+            
+            <div class="float-right">
+				<!-- all 버튼 header -->
+				<sec:authorize access="isAnonymous()"> 
+					<div class="all-header">
+					<a href="${pageContext.request.contextPath}/loginPage" class="charity-strip-btn charity-bgcolor" >로그인</a>
+					
+					<form id="signUp">
+						<a href="${pageContext.request.contextPath}/signUpForm" class="charity-strip-btn charity-bgcolor">회원가입</a>
+					</form>
+					
+					</div>
+					
+				</sec:authorize>	
+																																			
+				<!-- 로그인됐을때 버튼 header -->
+				<div class="user-header">
+				<sec:authorize access="hasRole('USER')">
+					<c:forEach items="${username}" var="username">
+	                   <span>${username}님</span>
+	                </c:forEach> 
+					
+					<a href="${pageContext.request.contextPath}/my/mypage" class="charity-strip-btn charity-bgcolor">마이페이지</a>
 
+					<form action="/member/logout" method="post" id="mlogout">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+						<a href="#" class="charity-strip-btn charity-bgcolor" onclick="document.getElementById('mlogout').submit();">로그아웃</a>
+					</form>
+				</sec:authorize>
+				</div>
+							
+				<!-- 관리자 버튼 header -->	
+				<div class="admin-header">		
+				<sec:authorize access="hasRole('ADMIN')"> 
+					<c:forEach items="${username}" var="username">
+                    	<span>${username}님</span>
+                    </c:forEach>
+                   
+					<a href="${pageContext.request.contextPath}/admin/stat" class="charity-strip-btn charity-bgcolor">관리자페이지</a>
+					<form action="/member/logout" method="post" id="mlogout">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<a href="#" class="charity-strip-btn charity-bgcolor" onclick="document.getElementById('mlogout').submit();">로그아웃</a>
+					</form>
+					
+				</sec:authorize>
+				</div>
+			</div>
+		</div>
+         
+        <!-- Top Strip -->
+    </header>
     <!-- Banner -->
     <section style="background-color: #222222">
      <div class="container-fluid">
@@ -58,7 +166,7 @@ li {
                                         </p>
                                         <div class="clearfix"></div>
                                         <!--  <a href="#">Learn More</a> -->
-                                        <a href="#">Donate Now</a>
+                                        <a href="/donation/item/main">Donate Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +186,7 @@ li {
                                         </p>
                                         <div class="clearfix"></div>
                                         <!--  <a href="#">Learn More</a> -->
-                                        <a href="#">Donate Now</a>
+                                        <a href="/donation/money/main">Donate Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +205,7 @@ li {
                                             새삼 알았습니다
                                         </p>
                                         <div class="clearfix"></div>
-                                        <a href="#">Learn More</a> <a href="#">Donate Now</a>
+                                        <a href="/board/shows/list">Learn More</a> <a href="/donation/item/main">Donate Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +220,7 @@ li {
                                         <div class="clearfix"></div>
                                         <p>다른 후원사이트에 비해서 나누셰어는 정말 믿을 수 있는 것 같아요</p>
                                         <div class="clearfix"></div>
-                                        <a href="#">Learn More</a> <a href="#">Donate Now</a>
+                                        <a href="/board/shows/list">Learn More</a> <a href="/donation/money/main">Donate Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -178,8 +286,8 @@ li {
                         <div class="widget widget_archive">
                             <div class="widget_title"><h2>Current ShareBox</h2></div>
                             <c:forEach items="${mapvm}" var="cat">
-                            	<span style="font-size: 18px;" class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
-                            	<i class="fa fa-map-marker-alt"></i>&nbsp; ${cat.branch}</span><br><br>
+                            	<span class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
+                            	<h4><i class="fa fa-map-marker-alt"></i>&nbsp;${cat.branch}</h4></span>
                            </c:forEach>
                            
                         </div>
@@ -193,21 +301,21 @@ li {
                                     <time datetime="2008-02-14 20:00">22 Jun</time>
                                     <div class="charity-events">
                                        <h6>강남역점</h6>
-                                       <p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 서초구 서초동 1318-10</p>
+                                       <p><i class="fa fa-map-marker-alt"></i> 서울 서초구 서초동 1318-10</p>
                                     </div>
                                 </li>
                                 <li>
                                     <time datetime="2008-02-14 20:00">13 July</time>
                                     <div class="charity-events">
                                        <h6>용산역점</h6>
-                                       <p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 용산구 한강대로 23길 55</p>
+                                       <p><i class="fa fa-map-marker-alt"></i> 서울 용산구 한강대로 23길 55</p>
                                     </div>
                                 </li>
                                 <li>
                                     <time datetime="2008-02-14 20:00">20 July</time>
                                     <div class="charity-events">
                                        <h6>시청역점</h6>
-                                      <p style="font-size: 11px; color: #696969;"><i class="fa fa-map-marker-alt"></i> 서울 중구 태평로 1가 54-3</p>
+                                      <p><i class="fa fa-map-marker-alt"></i> 서울 중구 태평로 1가 54-3</p>
                                     </div>
                                 </li>
                              </ul>

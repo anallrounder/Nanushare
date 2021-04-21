@@ -206,7 +206,7 @@ body {
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="m_day">
 							
-								<div class="charity-fancy-title " style=" margin:20px 0px 20px 0px;">
+								<div class="charity-fancy-title " style=" margin:60px 0px 60px 0px;">
 									<h2> 후원금 통계 </h2>
 								</div>
 								<!-- 월 선택 -->

@@ -2,7 +2,7 @@
 @media screen and (max-width: 1920px) {
 	/* Header */
 	#charity-header {position:relative; z-index:2; float: left;}
-	.charity-top-strip > .charity-logo > img{margin: -35px 0px 15px 40px; width:80px; height:70px;}
+	.charity-top-strip > .charity-logo > img{margin: -25px 0px 15px 40px; width:70px; height:60px;}
 	#menu {float: right; margin: 0px 500px 0px 0px; text-align: center; } 
 	#menu > ul > li > a {float: right; font-size: 20px; padding: 35px 50px 0px 0px;} 
 	.float-right > .all-header > a {width:95px; height:40px; white-space: nowrap; margin: -50px 80px 20px -20px; padding: 13px 0px 0px 24px;}
@@ -40,7 +40,7 @@
 
 /*	Media 768Px Start */
 @media (max-width: 945px) {
-	.charity-top-strip > .charity-logo > img {margin: -20px 0px -25px 40px; width:80px; height:70px;}
+	.charity-top-strip > .charity-logo > img {margin: -20px 0px -25px 40px; width:60px; height:50px;}
 	.float-right > .all-header > a {width:95px; height:40px; white-space: nowrap; margin: 25px -280px 0px -20px; padding: 13px 0px 0px 4px;}
 	.float-right > .all-header > form > .charity-strip-btn {width:95px; height:40px; white-space: nowrap; margin: 25px -160px 0px 0px; padding: 13px 10px 0px 10px;}
 	.float-right > .admin-header > span, .float-right > .user-header > span {white-space: nowrap; margin: 27px 20px 20px 0px; color: #ffffff; font-size: 16px; float: right;}
@@ -133,7 +133,7 @@
 
 /* Media 420Px Start */
 @media (max-width: 767px) {
-	.charity-top-strip > .charity-logo > img {margin: -20px 0px -25px 40px; width:80px; height:70px;}
+	.charity-top-strip > .charity-logo > img {margin: -20px 0px -25px 40px; width:60px; height:50px;}
 	.float-right > .all-header > a {width:70px; height:40px; white-space: nowrap; margin: 25px -60px 0px -20px; padding: 13px 0px 0px 0px;}
 	.float-right > .all-header > form > .charity-strip-btn {width:70px; height:40px; white-space: nowrap; margin: 25px 40px 0px 0px; padding: 13px 10px 0px 6px;}
 	.float-right > .admin-header > span, .float-right > .user-header > span {white-space: nowrap; margin: -70px 500px 0px 180px; color: #ffffff; font-size: 16px; float: right;}
