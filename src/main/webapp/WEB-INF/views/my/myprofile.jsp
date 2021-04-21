@@ -56,6 +56,8 @@
 <link rel="stylesheet" href="/resources/charity/css/style.css">
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
+<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 </head>
 

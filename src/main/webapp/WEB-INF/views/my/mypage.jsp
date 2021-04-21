@@ -290,7 +290,7 @@ li {
 													class="charity-donation-parallex-btn w-30 text-black stats"
 													type="button"
 													onClick="location.href='${pageContext.request.contextPath}/my/donation/money/point'">
-													포인트 기부하기</button>
+													포인트 기부</button>
 											</div>
 											<div class="twobox" class="col-md-4">
 
@@ -298,7 +298,7 @@ li {
 													class="charity-donation-parallex-btn w-30 text-black stats"
 													type="button"
 													onClick="location.href='${pageContext.request.contextPath}/my/donation/moneyDonationForm'">
-													후원 기부하기</button>
+													후원 기부</button>
 											</div>
 											<div class="twobox" class="col-md-4">
 
@@ -306,7 +306,7 @@ li {
 													class="charity-donation-parallex-btn w-30 text-black stats"
 													type="button"
 													onClick="location.href='${pageContext.request.contextPath}/donation/item/main'">
-													물품 기부하기</button>
+													물품 기부</button>
 											</div>
 										</div>
 									</div>

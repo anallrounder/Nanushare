@@ -34,8 +34,9 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-<!-- SIDE BAR 1 CSS -->
-<!-- <link rel="stylesheet" href="/resources/sidebar/css/styles.css"> -->
+<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 
 <style>
 .faqHeader {
@@ -79,11 +80,39 @@
 ​h3 {
 	text-align: center;
 }
+
+#forimg {
+	background-color: #eaf3fa;
+	background-image: url('/resources/charity/qna/notice_banner2.jpg');
+	background-size: 500px;
+	background-repeat: no-repeat;
+	background-position: center;	
+}
+
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
 </style>
 <body>
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
+<!-- Banner -->
+	    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Banner -->
 
 
 	<!-- Content -->
@@ -114,7 +143,6 @@
 										<li style="text-indent: 0.3em"><i class="fa fa-calendar"></i>
 										<time datetime="2008-02-14 20:00">
 											${content_view.bdate}</time></li>
-										<!-- <li style="text-indent: 0.3em"><i class="fa fa-comments"></i><a href="404.html">  23 comments</a></li> -->
 										<li style="text-indent: 0.3em"><i
 											class="fa fa-mouse-pointer"></i> 조회수 <input type="hidden"
 											id="b_index" value="${content_view.bhit}">
@@ -132,7 +160,7 @@
 										<span></span>
 										<ul>
 											<li><a
-												href="${pageContext.request.contextPath}/board/shows/list"
+												href="${pageContext.request.contextPath}/board/notice"
 												class="fa fa-list-alt"> 목록</a></li>
 											<sec:authorize access="hasRole('ADMIN')">
 													<li><a

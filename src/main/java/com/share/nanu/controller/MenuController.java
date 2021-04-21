@@ -1,11 +1,12 @@
 package com.share.nanu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.share.nanu.service.NanuService;
+import com.share.nanu.security.MemberDetails;
 
 import lombok.AllArgsConstructor;
 
@@ -13,22 +14,23 @@ import lombok.AllArgsConstructor;
 @Controller
 public class MenuController {
 
-	@Autowired
-	private NanuService nservice;
-
 	@GetMapping("/menu/about")
-	public ModelAndView about(ModelAndView mav) {
-
+	public ModelAndView about(ModelAndView mav,@AuthenticationPrincipal MemberDetails md) {
+		if (md != null) {
+			mav.addObject("username", md.getmember().getName());
+		}
 		mav.setViewName("/menu/menu_about");
-		// mav.addObject("list", nservice.memberList(mvo));
+		
 		return mav;
 	}
 
 	@GetMapping("/menu/way")
-	public ModelAndView way(ModelAndView mav) {
-
+	public ModelAndView way(ModelAndView mav,@AuthenticationPrincipal MemberDetails md) {
+		if (md != null) {
+			mav.addObject("username", md.getmember().getName());
+		}
 		mav.setViewName("/menu/menu_way");
-		// mav.addObject("list", nservice.memberList(mvo));
+		
 		return mav;
 	}
 }

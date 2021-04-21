@@ -1085,7 +1085,7 @@ li:hover .charity-service-link:before {
 	color: #272625;
 	font-weight: bold;
 	padding-right: 10px;
-	font-size: 12px;
+	font-size: 20px;
 }
 
 .charity-cause-raised {
@@ -1582,8 +1582,8 @@ ul li:hover .charity-simple-team-media {
 	border-bottom: 10px solid transparent;
 }
 
-.charity-donation-parallex-btn {
-	display: inline-block;
+.charity-donation-parallex-btn { /* radius값 추가 */
+	display: inline-block; border-radius: 4px;
 	padding: 12px 32px;
 	border: 1px solid;
 	line-height: 1.3;

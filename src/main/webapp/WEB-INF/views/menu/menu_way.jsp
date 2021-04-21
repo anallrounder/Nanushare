@@ -29,11 +29,24 @@
 <!-- font-awesome 부트스트랩 이모티콘 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 </head>
 
 <style>
 .charity-simple-blog-btn {
 	border: 0;
+}
+#forimg {
+	/* background-color: #e4edfe; */
+	background-image: url('/resources/banner_imgs/map_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;"
+}
+.black-transparent {
+	opacity:50%;
 }
 </style>
 <body>
@@ -41,7 +54,7 @@
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	<!-- Sub Header -->
-	<div class="charity-subheader">
+	<div id="forimg" class="charity-subheader">
 		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
 		<span class="black-transparent"></span>
 		<div class="container">
