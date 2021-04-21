@@ -209,7 +209,7 @@ body {
                     <div class="col-md-12">
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="item_head">
-								<div class="charity-fancy-title " style="margin: 20px 0px 20px 0px;">
+								<div class="charity-fancy-title " style="margin: 60px 0px 60px 0px;">
 									<h2> 입고 관리 </h2>
 								</div> 
 							

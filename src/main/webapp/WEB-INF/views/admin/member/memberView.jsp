@@ -220,7 +220,7 @@ body {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-							<div class="charity-fancy-title " style=" margin:20px 0px 20px 0px;">
+							<div class="charity-fancy-title " style=" margin:60px 0px 60px 0px;">
 								<h2> 회원 관리 </h2>
 							</div> 
 							

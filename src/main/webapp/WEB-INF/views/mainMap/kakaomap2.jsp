@@ -80,12 +80,12 @@
 					var itemList = vm.vmamlist;
 					
 					html += '<div>';
-					html += '<p class="infowindow-title">' + branch + '</p>';
+					html += '<h4 class="infowindow-title"><i class="fas fa-heart"></i>' + branch + '</h4>';
 					html += '<div class="infowindow-item">';
 					
 					for (var j = 0; j < itemList.length; j++) {
 						var item = itemList[j];
-						html += '<p>' + item.iname + ' : ' + item.vm_amount + '</p>';
+						html += '<h6> -' + item.iname + ' : <span style="color:red"> ' + item.vm_amount + '</span></h6>';
 						if (item.iname === '마스크') {
 							console.log('개수', item.vm_amount);
 						}
@@ -163,13 +163,13 @@
 				
 				var content = '';
 				content += '<div>';
-				content += '<p class="infowindow-title">' + branch + '</p>';
+				content += '<h4 class="infowindow-title"><i class="fas fa-heart"></i>' + branch + '</h4>';
 				content += '<div class="infowindow-item">';
 				
 				var itemList = data.iteminfo;
 				for (var j = 0; j < itemList.length; j++) {
 					var item = itemList[j];
-					content += '<p>' + item.iname + ' : ' + item.vm_amount + '</p>';
+					content += '<h6> -' + item.iname + ' : <span style="color:red">' + item.vm_amount + '</span></h6>';
 				}
 				
 				content += '</div>';
@@ -179,8 +179,6 @@
 			}
 		});
 	}
-	
-	
 	
 	</script>
 
