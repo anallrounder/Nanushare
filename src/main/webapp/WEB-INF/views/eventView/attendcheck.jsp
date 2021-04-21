@@ -51,10 +51,9 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
-<!-- calendar -->
-<link href='/resources/calendar/main.css' rel='stylesheet' />
-<script src='/resources/calendar/main.js'></script>
 
+<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 
 </head>

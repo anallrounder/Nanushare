@@ -37,6 +37,9 @@
 
 <!-- ckeditor -->
 	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+
+<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	
 	
 </head>
@@ -49,11 +52,39 @@
 ​h3 {
 	text-align: center;
 }
+
+#forimg {
+	background-color: #eaf3fa;
+	background-image: url('/resources/charity/qna/notice_banner2.jpg');
+	background-size: 500px;
+	background-repeat: no-repeat;
+	background-position: center;	
+}
+
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
 </style>
 <body>
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
+<!-- Banner -->
+	    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Banner -->
 
   <!-- Content -->
     <div class="charity-main-content">
