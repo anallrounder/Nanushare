@@ -72,7 +72,11 @@ public class QnaBoardController {
 	// 문의글 작성 페이지
 	@GetMapping("/qna/write")
 	public ModelAndView qnaWriteView(ModelAndView mov, @AuthenticationPrincipal MemberDetails md) throws Exception {
-		log.info("문의하기 페이지로 이동");
+		
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
+		}
+		
 		mov.setViewName("qnaBoard/write_view");
 		
 		return mov;
@@ -82,8 +86,7 @@ public class QnaBoardController {
 	// 문의글 추가
 	@PostMapping("/qna/qnaWrite")
 	public ResponseEntity<String> qnaWrite(@RequestBody BoardVO boardVO, @AuthenticationPrincipal MemberDetails md) {
-		log.info("문의하기 글 작성하기");
-		log.info("boardVO" + boardVO);
+		
 		ResponseEntity<String> entity = null;
 
 		try {
@@ -117,7 +120,12 @@ public class QnaBoardController {
 
 	// 수정페이지
 	@GetMapping("/qna/modify/{b_index}")
-	public ModelAndView qnaModifyView(BoardVO boardVO, ModelAndView mov) throws Exception {
+	public ModelAndView qnaModifyView(BoardVO boardVO, ModelAndView mov, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
+		}
+
 		
 		mov.addObject("modify_view", qService.getBoard(boardVO.getB_index()));
 		mov.setViewName("qnaBoard/modify_view");
@@ -147,7 +155,6 @@ public class QnaBoardController {
 	@DeleteMapping("/qna/delete/{b_index}")
 	public ResponseEntity<String> qnaDelete(BoardVO boardVO, BoardreplyVO replyVO) {
 		ResponseEntity<String> entity = null;
-		log.info("noticeDelete...");
 
 		try {
 			qService.deleteReply(replyVO.getB_index());
@@ -164,6 +171,10 @@ public class QnaBoardController {
 	// 답변 작성
 	@PostMapping("/qna/reply")
 	public ModelAndView qnaReply(BoardreplyVO bReplyVO, ModelAndView mov, @AuthenticationPrincipal MemberDetails md) throws Exception {
+		
+		if (md != null) { 
+			mov.addObject("username", md.getmember().getName());
+		}
 		
 		bReplyVO.setRid(md.getUsername());
 		qService.replyInsert(bReplyVO);
