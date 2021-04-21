@@ -160,19 +160,23 @@ li {
 						}
 					});
 </script>
-<script type="text/javascript">
-	$(function() {
-		$('.usre_img').each(
-						function(index, item) {
-							var imgUrl = '${pageContext.request.contextPath}/resources/users/user0'
-									+ Math.floor((Math.random() * 5) + 1)
-									+ '_sm.png';
-							console.log(imgUrl);
-							console.log($(item).attr("src"));
-							$(item).attr("src", imgUrl);
-						});
-	});
-</script>
+<!-- <style>
+#forimg {
+	background-color: white;
+	background-image: url('/resources/charity/qna/mypage2.png');
+	background-size: 1600px;
+	background-repeat: repeat;
+	background-position: center;	
+}
+
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style> -->
 
 </head>
 <body>
@@ -180,17 +184,18 @@ li {
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-	<!-- Sub Header -->
-	<div class="charity-subheader">
-		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12"></div>
-			</div>
-		</div>
-	</div>
-	<!-- Sub Header -->
+	<%-- <!-- Banner -->
+	    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Banner -->
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
@@ -205,7 +210,7 @@ li {
 						<div class="module-inner">
 
 							<!-- sidebar -->
-							<div class="side-bar">
+							<div class="side-bar"> --%>
 								<!-- profile -->
 								<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
 								<!-- profile -->

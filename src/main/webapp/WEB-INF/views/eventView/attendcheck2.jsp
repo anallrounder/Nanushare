@@ -5,392 +5,285 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-
- <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="/resources/AdminLTE-master/plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/resources/AdminLTE-master/dist/css/adminlte.min.css">
-
+<!doctype html>
 <html>
+
 <head>
+    <!-- 이건무조건 여기있어야함 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- jquery validation cdn 이거 두개 안되면 폼태그 끝나는 시점 바로 밑에 넣기-->
+<!-- jquery 플러그인 이기때문에 jquery가 있어야 한다. -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-	<meta name="_csrf" content="${_csrf.token}">
-	<meta name="_csrf_header" content="${_csrf.headerName}">
-	
-<title>출석체크</title>
-
- <!-- meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Charity Team Detail</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
-    <link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
-    <link rel="stylesheet" href="/resources/charity/css/flaticon.css">
-    <link rel="stylesheet" href="/resources/charity/css/slick-slider.css">
-    <link rel="stylesheet" href="/resources/charity/css/fancybox.css">
-    <link href="/resources/charity/css/jplayer.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/charity/css/style.css">
-    <link rel="stylesheet" href="/resources/charity/css/color.css">
-    <link rel="stylesheet" href="/resources/charity/css/responsive.css">
-
-	<!-- Google Font: Source Sans Pro -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-	<!-- Font Awesome Icons -->
-	<link rel="stylesheet" href="/resources/AdminLTE-master/plugins/fontawesome-free/css/all.min.css">
-	<!-- IonIcons -->
-	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<!-- Theme style -->
-	<link rel="stylesheet" href="/resources/AdminLTE-master/dist/css/adminlte.min.css">
-	  
-  	<!--탭처리2  -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	<!-- Admin style -->
-  	<link rel="stylesheet" href="/resources/admin/admin_style.css">
+<!-- jquery validation method cdn -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 
 
-</head>
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%-- <meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />  에러 주범??  --%>
+
+<!-- 헤더 안에 추가  -->
+<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
+<!-- js에서 csrf 토큰, 헤더등록 -->
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+
+<title>Nanushare</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<!-- 웹페이지 탭 로고이미지 삽입  -->
+
+<!-- CSS -->
+<link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
+<link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
+<link rel="stylesheet" href="/resources/charity/css/flaticon.css">
+<link rel="stylesheet" href="/resources/charity/css/slick-slider.css">
+<link rel="stylesheet" href="/resources/charity/css/fancybox.css">
+<link href="/resources/charity/css/jplayer.css" rel="stylesheet">
+<link rel="stylesheet" href="/resources/charity/css/style.css">
+<link rel="stylesheet" href="/resources/charity/css/color.css">
+<link rel="stylesheet" href="/resources/charity/css/responsive.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/charity/css/imgblink_hj.css">
+
+<link rel="stylesheet" href="/resources/charity/css/style_mypage_hj.css">
+
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type='text/javascript' src='https://www.jestina.co.kr/content/js/swiper.3.4.1/swiper.jquery.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="https://www.jestina.co.kr/content/css/reset2.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jestina.co.kr/content/ux/content/css/common.css">
+    <link rel="stylesheet" type="text/css" href="https://www.jestina.co.kr/content/css/swiper.min.css">
+    <!--이벤트/기획 공통-->
+    <script type="text/javascript" src="https://webimg.jestina.co.kr/UpData/jestina/event/@assets/sub.common.version.02.js"></script>
+    <link rel="stylesheet" href="https://webimg.jestina.co.kr/UpData/jestina/event/@assets/sub.common.version.01.css">
+
+
 <script type="text/javascript">
- /* https://m.blog.naver.com/sgj4958/221865512339 */ 
- /* prtpnt = 참여포인트 */
+
+$(document).ready(function () {
+    var prize = 'product03';
+    // roulette_product_end = 이벤트 종료 : 룰렛엔 없어용
+
+    // product01 = 조엘 컬러바
+    // product02 = 크리스피기프티콘
+    // product03 = 스타벅스 기프티콘
+    // product04 = 더블 5,000원 쿠폰번호 1397
+    // product05 = 더블 3,000원 쿠폰번호 1396
+    // product06 = 더블 1,000원 쿠폰번호 1395
+
+    // product07 = 이미참여하셨습니다
+
+    $('#start-rotate').click(function () {
+        if (prize == 'product01') {
+            var degrees = 65;
+            rotate(degrees);
+            $('#resultImg').attr('src',
+                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_01.png'
+            );
+            window.setTimeout(resultLayer, 5400);
+        } else if (prize == 'product02') {
+            var degrees = 120;
+            rotate(degrees);
+            $('#resultImg').attr('src',
+                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_02.png'
+            );
+            window.setTimeout(resultLayer, 5400);
+        } else if (prize == 'product03') {
+            var degrees = 0;
+            rotate(degrees);
+            $('#resultImg').attr('src',
+                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_03.png'
+            );
+            window.setTimeout(resultLayer, 5400);
+        } else if (prize == 'product04') {
+            var degrees = 220;
+            rotate(degrees);
+            $('#resultImg').attr('src',
+                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_04.png'
+            );
+            window.setTimeout(resultLayer, 5400);
+        } else if (prize == 'product05') {
+            var degrees = 290;
+            rotate(degrees);
+            $('#resultImg').attr('src',
+                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_05.png'
+            );
+            window.setTimeout(resultLayer, 5400);
+        } else if (prize == 'product06') {
+            var degrees = 160;
+            rotate(degrees);
+            $('#resultImg').attr('src',
+                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_06.png'
+            );
+            window.setTimeout(resultLayer, 5400);
+        }
+    });
+
+    function rotate(degrees) {
+        $("#roulette-gift").rotate({
+            angle: 0,
+            animateTo: 360 * 5 + degrees,
+            easing: $.easing.easeInOutElastic,
+            duration: 5000
+        });
+    };
+
+    function resultLayer() {
+        $('.resultLayer').css('display', 'block');
+    };
+
+    $('#closeLayer').click(function () {
+        $('.resultLayer').css('display', 'none');
+
+        $("#roulette-gift").rotate({
+            angle: 0,
+            duration: 0
+        });
+    });
+});
+
+</script>
+ <style type="text/css">
  
-   $(document).ready(function(){ 
-	   
-	   var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});
-	   
-	   
-	    var score = new Array(
-	    		{
-	     		   name: '1p',
-	     		   color: 'red'
-	     	  	},
-	     	  	{
-	     	  		name: '10p',
-	     	  		color: '#ff7f00'
-	     	  	},
-	     	  	{
-	 	    		name: '20p',
-	 	    		color: 'yellow'
-	 	    	},
-	     		{
-	 	    		name: '100p',
-	 	    		color: 'lightgreen'
-	 	    	},
-	 	    	{
-	 	    		name: '♥',
-	 	    		color: 'skyblue'
-	 	    	}    	
-	    	);
-	    	    
-	   var canvas = document.getElementById('canvas');
-	   var ctx = canvas.getContext('2d');
-	   /* 원점이동 */
-	   ctx.translate(500, 500);
-	   	
-	   score.forEach(function(e, i){
-	  		ctx.beginPath(); 	
-	  		/* 원크기, false=시계방향 */
-	   	   	ctx.arc(0, 0, 360, 0, (360/score.length)*(Math.PI/180), false);
-	   	   	ctx.lineTo(0,0);
-	   	   	ctx.closePath();
-	   	   	ctx.fillStyle=e.color;
-	   	   	ctx.fill();
-   	   	
-	   	   	ctx.fillStyle='black';
-	   	   	ctx.textAlign='left';
-	   	 	/* 글자크기 */
-	   	   	ctx.font='30px sanserif';
-	   	   	ctx.fillText(e.name, 150, 105);
-	   	   	
-	   	   	ctx.rotate((360/score.length) * (Math.PI/180));
-		});
-		//내부 원 설정
-   	   	ctx.beginPath();
-   		 /* (x,y,반지름,시작점,끝점,방향) */
-   	   	ctx.arc(0, 0, 0, 0, 0*Math.PI, false);
-   	   	ctx.fillStyle = 'white';
-   	   	ctx.fill();
-   	   	
-   	   	ctx.textAlign= 'center';
-   	   	ctx.textBaseline = 'middle';
-   	   	ctx.font = '25px sanserif';
-   	   	
-   	   	ctx.strokeStyle = 'black';
-   	   	ctx.strokeText('출첵버튼', 0,0);
-   	 
-   	var member_id = $("#member_id").val();
-   	 
-		var random = 0;
-	   	var clicked = 0;
-	   	var prtpnt = 0;
-   	$('#canvas').click(function(){
-   		
-   		/* var random = 0;
-	   	var clicked = 0;
-	   	var prtpnt = 0; */
-   	  
-   	   	
-    	if(clicked <= 0){
-    		random += Math.random()*360;
-    		$(this).css({'transition-timing-function': 'ease-in-out', 'transition': '6s', 'transform': 'rotate('+random+'deg)'});
- 			console.log(random);
-	    } 
-    	
-    	//포인트 지정
-    	if(random >= -10 && random <= 60){
-    		prtpnt = 100;
-	   	}else if(random >= 60 && random <= 134){
-	   		prtpnt = 20;
-    	}else if(random >= 134 && random <= 206){
-    		prtpnt = 10;
-    	}else if(random >= 206 && random <= 278){	
-    		prtpnt = 1;
-	   	}else if(random >= 278 && random <= 350){
-	   		prtpnt = 0;
-	   	}
-
-    	
-    	console.log(member_id);
-    	console.log(prtpnt);
-    	
-    	var memberPoint = {   			
-    			"member_id" : member_id,		 
-    			"prtpnt" : prtpnt
-    			/* "phone" : phone */
-    		};
-    	
-    	//참여 중복 확인 및 포인트 적립
-    	$.ajax({
-   	        type :"PUT",
-   	        url :"/event/check/getpoint",
-   	    	 contentType: 'application/json',
-   	    	 data: JSON.stringify(memberPoint),
-   	        /* data : { //"JSON parse error: Unrecognized token" 에러나서 json.stringify씀
-   	        	member_id: member_id,
-   	        	prtpnt: prtpnt
-   	        }, */
-   	     datatype : 'json',
-   	    
-	   	    success: function (result) {
-	   	    	if(result == "SUCCESS"){
-		    		console.log(result); 
-		    		setTimeout(function(){
-		    			alert("오늘의 나누셰어 포인트는 "+prtpnt+" point");
-/* 여기에 데이터를 전부 넣어주던지... */			
-		    		},5000);
-		        }else if(result == "FAIL"){
-	   	    		console.log(result);
-	   	    		alert("1일 1회 참여가 가능합니다.");
-	   	    	}
-		    },
-		    error: function (e) {
-		    	console.log(e);
-		    }
-    	});
-   	});//canvas
-   	
-   	console.log("확인"+prtpnt);
-   });
-   </script>
-   
-
-
-<style>
-#판 {
-
-	 width: 1000px;
-	height: 1000px;
-	/* width: 1200px;
-	height: 1150px; */
-	overflow: hidden;
-	position: relative;
-	top: 70px;
-}
-
-#핀 {
-	width: 0;
-	height: 0;
-	top: 90px;
-	left: calc(50% - 16px);
+ /*룰렛*/
+.roulette-wrapper {
 	position: absolute;
-	border-radius: 32px 32px 0 0;
-	border-top: 70px solid crimson;
-	border-left: 16px solid transparent;
-	border-right: 16px solid transparent;
-	border-bottom: 0;
-	z-index: 1;
+	left: 0;
+	right: 0;
+	top: 38%;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 669px;
 }
+
+.resultLayer {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 10;
+	box-sizing: border-box;
+	max-width: 456px;
+	left: 0;
+	right: 0;
+	top: 10rem;
+	margin: 0 auto;
+}
+
+.resultLayer #closeLayer {
+	position: absolute;
+	top: -2rem;
+	right: -2rem;
+	margin: 0 auto;
+	width: 18.5%;
+	box-sizing: border-box;
+}
+
+.roulette-wrapper #roulette-bg {
+	position: relative;
+	z-index: 2;
+}
+
+.roulette-wrapper #roulette-gift {
+	position: absolute;
+	z-index: 2;
+	top: 40px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	max-width: 600px;
+	width: 100%;
+}
+
+.roulette-wrapper #roulette-niddle {
+	position: absolute;
+	z-index: 3;
+	width: 6.2%;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+
+.roulette-wrapper #roulette-startBtn {
+	position: absolute;
+	z-index: 3;
+	width: 36.7%;
+	top: 31.5%;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	left: -9px;
+}
+
 </style>
 
+</head>
 
 <body>
-	<!-- Header -->
-	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
-	<!-- Header -->
-	<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Sub Header -->
-
-	<!-- Content -->
-	<div class="charity-main-content">
-
-		<!-- Main Section -->
-		<div class="charity-main-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-9 bottom-spacer">
-
-						<div class="charity-event-rich-editor">
-							<h1 style="text-align: center;">
-								매일 나눔 룰렛 돌리고 포인트를 적립하세요!
-							</h1>
-						</div>
+<div class="jestina-sub-project__wrap">
 
 
-						<div id="판">
-							<div id="핀"></div>
-							<canvas id="canvas" width="1000px" height="1000px"></canvas>
-						</div>
-				
-							<div class="datepicker"></div>
-
-
-
-						<div class="charity-post-tags">
-							<div class="charity-tags">
-								<span>Tags:</span> <a href="404.html">charity </a> <a
-									href="404.html">/ donation</a> <a href="404.html"> / needy</a>
-							</div>
-
-							<div class="charity-blog-social">
-								<span>Share:</span>
-								<ul>
-									<li><a href="https://www.facebook.com/"
-										class="fab fa-facebook"></a></li>
-									<li><a href="https://www.twitter.com/"
-										class="fab fa-twitter"></a></li>
-									<li><a href="https://www.linkedin.com/"
-										class="fab fa-linkedin"></a></li>
-									<li><a href="https://www.youtube.com/"
-										class="fab fa-youtube"></a></li>
-									<li><a href="https://www.vimeo.com/" class="fab fa-vimeo"></a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Main Section -->
-	</div>
-	<!-- Content -->
-
-
-	
-	   <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
-
- <!-- jQuery -->
-   <!--  <script src="/resources/charity/script/jquery.js"></script>
-    <script src="/resources/charity/script/popper.min.js"></script> -->
-    <script src="/resources/charity/script/bootstrap.min.js"></script>
-    <script src="/resources/charity/script/slick.slider.min.js"></script>
-    <script src="/resources/charity/script/progressbar-main.js"></script> <!-- progressbar 복붙해서 사용  -->
-    <script src="/resources/charity/script/fancybox.min.js"></script>
-    <script src="/resources/charity/script/jquery.countdown.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="/resources/charity/script/jquery.jplayer.js"></script>
-    <script src="/resources/charity/script/jplayer.playlist.js"></script>
-    <script src="/resources/charity/script/functions-main.js"></script> <!-- fuctions 복붙해서 사용 -->
+    <section class="jestina-sub-project-02" id="02">
+        <div class="jestina-sub-project__inner">
     
- 
-<!-- Bootstrap -->
-<script src="/resources/AdminLTE-master/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <div class="roulette-wrapper">
 
-<!-- AdminLTE App -->
-<script src="/resources/AdminLTE-master/dist/js/adminlte.min.js"></script>
+                <div class="resultLayer">
+                    <!--이벤트 종료되었을 경우-->
+                    <img id="resultImg" src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_end.png" alt="이벤트종료">
 
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-<!-- 위에 script를 추가하면 덮여져서인지 datepicker가 팝업이 아예 안됨 
-https://stackoverflow.com/questions/36207203/uncaught-typeerror-datepicker-is-not-a-functionanonymous-function-->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>  
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                    <!--이미 응모했을 경우-->
+                    <!--<img id="resultImg" src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_07.png" alt="이미참여하셨습니다/">-->
 
-<script>
+                    <button id="closeLayer">
+                        <img src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/popup_close__btn.png" alt="닫기">
+                    </button>
 
-$(document).ready(function() { 
-	$('.datepicker').datepicker({
+                </div>
 
-		/*beforeShowDay: function (date){
+                <img id="roulette-bg"
+                     src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_bg.png">
+                <img id="roulette-gift"
+                     src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product.png">
 
-			  var year = date.getFullYear();
-			var month = makePadNumber(date.getMonth() + 1);
-			var day = makePadNumber(date.getDate());
-			var dateString = month + "/" + day + "/" + year;
+                <img id="roulette-niddle"
+                     src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_niddle.png">
 
-			if(appDate.indexOf(dateString) >= 0) {
-				return [true, "app"];  //- 포인트
-			}
-			if(webDate.indexOf(dateString) >= 0) {
-				return [true, "web"]; //- 포인트
-			}					
+                <button id="start-rotate">
+                    <img id="roulette-startBtn"
+                         src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_btn.png">
+                </button>
+            </div>
 
-			return [true, ""]; */
-		} 
-		
-		
-	});//.datepicker("setDate" , getToday());
-	
-	
-  });
-  
-  
-/* $(document).ready(function() { 
-$("#datepicker").datepicker({
+           
 
-	beforeShowDay: function (date){
+            <script type='text/javascript' src='http://php-jestina2.azurewebsites.net/scripts/jQueryRotate.js'></script>
 
-		var year = date.getFullYear();
-		var month = makePadNumber(date.getMonth() + 1);
-		var day = makePadNumber(date.getDate());
-		var dateString = month + "/" + day + "/" + year;
 
-		if(appDate.indexOf(dateString) >= 0) {
-			return [true, "app"];  //- 포인트
-		}
-		if(webDate.indexOf(dateString) >= 0) {
-			return [true, "web"]; //- 포인트
-		}					
+        </div>
+        
+    </section>
 
-		return [true, ""];
-	}
-
-}).datepicker("setDate" , getToday());
-}); */
-</script>
-
+</div>
 </body>
 </html>
-

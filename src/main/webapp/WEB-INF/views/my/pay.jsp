@@ -123,6 +123,7 @@
 	}//cancle function end
 </script>
 
+
 <style>
 li {
 	list-style: none;
@@ -141,7 +142,7 @@ li {
 
 
 	<!-- Sub Header -->
-	<div class="charity-subheader">
+	<%-- <div class="charity-subheader">
 		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
 		<span class="black-transparent"></span>
 		<div class="container">
@@ -162,7 +163,7 @@ li {
 				<div class="view-account">
 					<section class="module">
 					<div class="module-inner">
-						<div class="side-bar">
+						<div class="side-bar"> --%>
 							<!-- profile -->
 							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
 							<!-- profile -->
@@ -224,16 +225,33 @@ li {
 										<c:if test="${! empty list5}">
 											<c:forEach items="${list5}" var="list5" varStatus="status">
 												<tr>
-													<td><fmt:formatDate value="${list5.dntdate}"
-															pattern="yy-MM-dd hh:mm:ss" /></td>
+													<td>${list5.dntdate}</td>
 													<td>${list5.dnt_paynum}</td>
-													<td><i class="fa fa-krw" aria-hidden="true"></i>
-														${list5.dntprice}</td>
-													<td>${list5.paymethod}</td>
-													<td>${list5.dntstat}</td>
-													<td><button class="cancelPay" class="paycc"
+													<td>￦${list5.dntprice}</td>
+													<td><c:if test="${list5.paymethod == 'card'}">카드
+														</c:if>
+														<c:if test="${list5.paymethod == 'trans'}">계좌이체
+														</c:if>
+														<c:if test="${list5.paymethod == 'vbank'}">가상계좌
+														</c:if>
+														<c:if test="${list5.paymethod == 'phone'}">휴대폰결제
+														</c:if>
+														<c:if test="${list5.paymethod == 'point'}">페이코
+														</c:if>
+														<c:if test="${list5.paymethod == 'pay'}">카카오페이
+														</c:if></td>
+													<td><c:if test="${list5.dntstat == 'cancelled'}"><span style="color: #FF3636;">취소완료</span>
+														</c:if>
+														<c:if test="${list5.dntstat == 'paid'}"><span style="color: #5586EB;">정상</span>
+														</c:if></td>
+													<td><c:if test="${list5.dntstat == 'cancelled'}"><button class="charity-simple-blog-btn" class="paycc"
 															type="button"
-															onclick="cancle('${list5.dnt_paynum}','${list5.dntprice}')">결제취소</button></td>
+															onclick="alert('이미 취소된 결제 건입니다.')">취소완료</button></c:if>
+														
+														<c:if test="${list5.dntstat == 'paid'}"><button class="charity-simple-blog-btn" class="paycc"
+															type="button"
+															onclick="cancle('${list5.dnt_paynum}','${list5.dntprice}')">결제취소</button></c:if>
+															</td>
 												</tr>
 											</c:forEach>
 										</c:if>
@@ -293,239 +311,6 @@ li {
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
-
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-	<!-- jQuery -->
-	<script src="/resources/charity/script/jquery.js"></script>
-	<script src="/resources/charity/script/popper.min.js"></script>
-	<script src="/resources/charity/script/bootstrap.min.js"></script>
-	<script src="/resources/charity/script/slick.slider.min.js"></script>
-	<script src="/resources/charity/script/progressbar.js"></script>
-	<script src="/resources/charity/script/fancybox.min.js"></script>
-	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-	<script src="/resources/charity/script/jquery.jplayer.js"></script>
-	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions-main.js"></script>
-
-	<!-- Header -->
-	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
-	<!-- Header -->
-
-
-
-	<!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>mypage</h1>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Banner -->
-	<!-- Content -->
-	<!-- Content와 MainSection은 무조건 있어야함 -->
-	<div class="charity-main-content">
-		<!-- Main Section -->
-		<div class="charity-main-section">
-
-			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
-			<div class="container">
-				<div class="view-account">
-					<section class="module">
-					<div class="module-inner">
-						<div class="side-bar">
-							<div class="user-info">
-								<img class="img-profile img-circle img-responsive center-block"
-									src="/resources/my/프로필사진.PNG" alt="">
-								<!-- 
-									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
-								<ul class="meta list list-unstyled">
-									<li class="name"><h2>
-											<sec:authentication property="principal.member.name" />
-										</h2></li>
-									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication
-											property="principal.member.signuppath" />회원</li>
-								</ul>
-							</div>
-							<nav class="side-menu">
-							<ul class="nav">
-								<li><a href="mypage"><span class="fa fa-user"></span>
-										Profile</a></li>
-								<li><a href="ask"><span class="fa fa-question">
-									</span>나의문의내역</a></li>
-								<li><a href="content"><span class="fa fa-file">
-									</span>나의인증내역</a></li>
-								<li><a href="give"><span class="fa fa-handshake">
-									</span>나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>나의댓글내역</a></li>
-								<li class="active"><a href="pay"><span
-										class="fa fa-credit-card"></span>나의결제내역</a></li>
-							</ul>
-							</nav>
-						</div>
-						<div class="content-panel">
-
-
-
-							<script
-								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-							<h2 class="title">
-								나의 결제 내역<span class="pro-label label label-warning">PRO</span>
-							</h2>
-
-
-							<table>
-
-								<div>
-									<br>
-								</div>
-								<tr>
-									<!-- <th>아이디</th> -->
-									<th>금액</th>
-									<th>결제날짜</th>
-									<th>결제방법</th>
-									<th>결제번호</th>
-									<th>처리상태</th>
-									<th>결제취소</th>
-								</tr>
-								<c:if test="${empty list5}">
-									<tr>
-										<td colspan="5" align="center">결제 내역이 없습니다</td>
-									</tr>
-								</c:if>
-
-
-								<!-- 로그인한 회원의 글 정보만 받아오기 -->
-								<!-- 나의문의내역 -->
-								<c:if test="${! empty list5}">
-									<c:forEach items="${list5}" var="list5" varStatus="status">
-										<tr>
-											<td><i class="fa fa-krw" aria-hidden="true"></i>${list5.dntprice}</td>
-											<td><fmt:formatDate value="${list5.dntdate}"
-													pattern="yy-MM-dd hh:mm:ss" /></td>
-											<td>${list5.paymethod}</td> <<<<<<< HEAD <<<<<<< HEAD
-											<td><button class="paycc" type="button" id="refund"
-													name="refund" onclick="cancelPay()">결제취소</button></td> =======
-											<td>${list5.dnt_paynum}</td>
-											<td>${list5.dntstat}</td>
-											<td><button class="paycc" type="button">결제취소</button></td>
-											>>>>>>> master =======
-											<td>${list5.dnt_paynum}</td>
-											<td>${list5.dntstat}</td>
-											<td><button class="paycc" type="button">결제취소</button></td>
-											>>>>>>> dev_si_import_refund
-										</tr>
-
-									</c:forEach>
-								</c:if>
-							</table>
-
-							<!-- 페이징 -->
-							<c:if test="${! empty list5}">
-								<div class="charity-pagination">
-									<ul class="page-numbers">
-										<li class="page-item"><c:if test="${pageMaker.prev}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-											</c:if></li>
-
-										<li class="page-item"><c:forEach
-												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-												var="idx">
-												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-												<a
-													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(idx)}">${idx}</a>
-											</c:forEach></li>
-
-										<li class="page-item"><c:if
-												test="${pageMaker.next && pageMaker.endPage > 0}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-												</a>
-											</c:if></li>
-									</ul>
-
-								</div>
-
-							</c:if>
-
-
-
-						</div>
-					</div>
-					</section>
-				</div>
-			</div>
-
-			<script>
-				$("#mytabs>ul>li>a").each(function(i) {
-					$(this).attr("href", "#mytab" + i)
-				})
-				$("#mytabs>div>div").each(function(i) {
-					$(this).attr("id", "mytab" + i)
-				})
-			</script>
-
-			<!-- Main Section -->
-
-		</div>
-		<!-- Content -->
-	</div>
-
-	<!-- Footer -->
-	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
-	<!-- Footer -->
-
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
 
 	<!-- jQuery -->
 	<script src="/resources/charity/script/jquery.js"></script>
