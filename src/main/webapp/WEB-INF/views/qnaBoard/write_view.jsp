@@ -7,74 +7,87 @@
 <html lang="ko">
 
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- ckeditor -->
+<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+   
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="_csrf" content="${_csrf.token}">
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
+
+<!-- 작성 폼 스크립트 -->
+<script type="text/javascript">
+$(document).ready(function(){
 	
-	<!-- ckeditor -->
-	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
-    
-    <!-- meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
-    <meta name="_csrf" content="${_csrf.token}">
-    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
-    
-    <!-- 작성 폼 스크립트 -->
-	<script type="text/javascript">
-		$(document).ready(function(){
-			
-			var token = $("meta[name='_csrf']").attr("content");
-			var header = $("meta[name='_csrf_header']").attr("content");
-			
-			$("#writeForm").submit(function(event){         
-	           event.preventDefault();
-	          
-	           var btitle = $("#btitle").val();
-	           var bcontent = $("#bcontent").val();
-	           
-	           var form = {
-	        		 btitle: btitle,
-	        		 bcontent: bcontent
-	           };
-	           
-	           $.ajax({
-	             type : "POST",
-	             url : $(this).attr("action"),
-	             cache : false,
-	             contentType:'application/json; charset=utf-8',
-	             data: JSON.stringify(form), 
-	             //데이터를 전송하기 전에 헤더에 csrf값을 설정 (같이 넘겨줘야 post 403 error가 없다)
-	             beforeSend : function(csrf) {   
-	            	csrf.setRequestHeader(header, token)
-	             },
-	             success: function (result) {       
-	               if(result == "SUCCESS") {
-	            	   alert("성공")
-	                  $(location).attr('href', '${pageContext.request.contextPath}/board/qna')                            
-	               }                       
-	             },
-	             error: function (e) {
-	            	 console.log(e);
-	                location.reload(); // 실패시 새로고침하기
-	             }
-	         })            
-	       });       
-	   	});
-		
-	</script>
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 	
-	<style>
-		.charity-simple-blog-btn {
-			border: 0;
-		}
-		
-		​h3 {
-			text-align: center;
-		}
-		
-	</style>
+	$("#writeForm").submit(function(event){         
+          event.preventDefault();
+         
+          var btitle = $("#btitle").val();
+          var bcontent = $("#bcontent").val();
+          
+          var form = {
+       		 btitle: btitle,
+       		 bcontent: bcontent
+          };
+          
+          $.ajax({
+            type : "POST",
+            url : $(this).attr("action"),
+            cache : false,
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(form), 
+            //데이터를 전송하기 전에 헤더에 csrf값을 설정 (같이 넘겨줘야 post 403 error가 없다)
+            beforeSend : function(csrf) {   
+           	csrf.setRequestHeader(header, token)
+            },
+            success: function (result) {       
+              if(result == "SUCCESS") {
+           	   alert("성공")
+                 $(location).attr('href', '${pageContext.request.contextPath}/board/qna')                            
+              }                       
+            },
+            error: function (e) {
+           	 console.log(e);
+               location.reload(); // 실패시 새로고침하기
+            }
+        })            
+      });       
+  	});
+	
+</script>
+	
+<style>
+.charity-simple-blog-btn {
+	border: 0;
+}
+
+​h3 {
+	text-align: center;
+}
+
+#forimg {
+	background-image: url('/resources/banner_imgs/qna_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
+	
+}
+.black-transparent {
+	opacity:50%;
+}
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style>	
 
     <title>나누셰어 - 문의하기</title>
 
@@ -104,7 +117,7 @@
     <!-- Header -->
     
     <!-- Banner -->
-    <div class="charity-subheader">
+     <div id="forimg" class="charity-subheader">
         <span class="black-transparent"></span>
         <div class="container">
             <div class="row">

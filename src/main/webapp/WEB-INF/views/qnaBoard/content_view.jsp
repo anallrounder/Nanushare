@@ -164,7 +164,21 @@
 			}); 
 	
 	</script>
+<style>
+#forimg {
+	background-image: url('/resources/banner_imgs/qna_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
 	
+}
+.black-transparent {
+	opacity:50%;
+}
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style>		
 </head>
 
 <body>
@@ -173,7 +187,7 @@
 	<!-- Header -->
 
     <!-- Banner -->
-    <div class="charity-subheader">
+     <div id="forimg" class="charity-subheader">
         <span class="black-transparent"></span>
         <div class="container">
             <div class="row">

@@ -119,7 +119,7 @@
 						<!-- 문의하기 버튼 -->
 					
 						
-		        		<form id="boardForm" class="charity-volunteer-form" name="boardForm" style="margin-bottom:0px; padding-bottom:10px;">
+		        		<form id="boardForm" class="charity-volunteer-form" name="boardForm" style="margin-bottom:0px; padding-bottom:10px; background-color:white;">
 							<table class="table taWWble-striped projects" >
 							<!-- <table class="table table-light table-hover " > -->
 								<colgroup>
