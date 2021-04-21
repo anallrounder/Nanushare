@@ -145,7 +145,7 @@ $(document).ready(function(){
 					<form id="writeForm" action="${pageContext.request.contextPath}/board/qna/qnaWrite" >
 							<div class="charity-contact-form">
 	                       		<h4><span>ID</span></h4>
-	                       		<h5><sec:authentication property="principal.member.member_id" /></h5> <br/>
+	                       		<h6><sec:authentication property="principal.member.member_id" /></h6> <br/>
 	                           	<h4><span>Title</span></h4>
 								<input type="text" id="btitle" name="btitle" placeholder="제목을 작성하세요." >
 								
@@ -166,8 +166,7 @@ $(document).ready(function(){
 			                        CKEDITOR.replace('bcontent', ckeditor_config);
 								</script>
 		                        
-	                           <br><br>
-							   <br><hr>
+	                     
 
 							   <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 작성완료</i></button>
 							   <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시쓰기</i></button>
