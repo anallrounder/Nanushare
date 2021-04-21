@@ -9,35 +9,35 @@
 
 <head>
 
-    <!-- meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>물품 나누기</title>
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
-    <link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-	
-	<!-- 웹페이지 탭 로고이미지 삽입  -->
-	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
-	
-	<!-- new korean font from google -->
-	<!-- NotoSansKR, Gothic A1 -->
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-	
-	<!-- FONT AWSOME -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>물품 나누기</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
+<link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+
+<!-- 웹페이지 탭 로고이미지 삽입  -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+
+<!-- new korean font from google -->
+<!-- NotoSansKR, Gothic A1 -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- FONT AWSOME -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 #forimg {
 	/* background-color: #db7a7c; */
@@ -45,12 +45,11 @@
 	background-image: url('/resources/banner_imgs/show_banner.png');
 	background-repeat:no-repeat;
 	background-position: center;
-	/* background-size: 1500px; 
-	width:100%;  */
 }
 .black-transparent {
 	opacity:50%;
 }
+
 </style>
 </head>
 
@@ -92,10 +91,10 @@
 						<div class="charity-rich-editor charity-cause-detail">
                             
                             <figure class="charity-cause-thumb"><img src="/resources/extra-images/cause-detail-img.png" alt=""></figure>
-                            <h3>물품 나누기 소개 및 신청 방법 안내</h3>
+                            <h3 style="font-size:26px;">물품 나누기 소개 및 신청 방법 안내</h3>
                            
                            <!-- 수정필요한 부분 -->
-                            <ul class="charity-cause-options">
+                          <!--   <ul class="charity-cause-options">
                                 <li>
                                     <i class="fa fa-clock"></i>
                                     <h6>이번 달:</h6>
@@ -106,12 +105,12 @@
                                     <h6>나눔 횟수:</h6>
                                     <span>23</span>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <!-- 수정필요한 부분 -->
                            
                           	<!-- 물품 나누기 소개글 -->
 							<p>나누셰어의 물품 나눔에 관심을 갖고 찾아와 주셔서 감사합니다.</p>
-                            <p>나누셰어는 우리 사회에 따뜻한 온기를 불어 넣고 더불어 사는 사회를 실현하고자 합니다. <br>
+							<p>나누셰어는 우리 사회에 따뜻한 온기를 불어 넣고 더불어 사는 사회를 실현하고자 합니다. <br>
                            	따뜻한 마음을 소외계층에게 전달하고 싶으나 방법을 몰라 망설이는 분들을 위해 나눔 박스를 마련했습니다. <br>
                            	이를 통해 금전적 기부를 넘어 물품 나누기 프로젝트를 통해 지역 사회를 지원하려 합니다.<!-- <br>
 							또한 후원금을 통해 파트너, 등록 및 미등록 자선 단체, 비영리 단체 및 지역 사회 단체에 기부금을 제공합니다. --></p>
@@ -126,9 +125,11 @@
 							<!-- 상단 신청서 작성 버튼 -->
                             <div class="charity-cause-donate">
                                 <div class="skillst charity-item-text">
-                                    <h5 style="color:orangered;">물품 신청을 하시기 전에 아래 정보를 꼭 확인해주세요!</h5>
+                               <!--  <div class="widget_title"> -->
+                                    <h2 style="color:orangered; font-size:20px;">물품 신청을 하시기 전에 아래 정보를 꼭 확인해주세요!</h2>
+                                <!-- </div> -->
                                 </div>
-                                <a href="/my/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a>s
+                                <a href="/my/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a>
                             </div>
                           	<!-- <p> <blockquote></blockquote></p> -->
                           	<!-- 상단 신청서 작성 버튼 -->
@@ -140,9 +141,9 @@
 						<!-- 물품 나눔 항목 소개 start -->
 						<!-- responsive.css -> .charity-team-timeline { width: 100%; } 반응형 지워야할지 수정해야할지... -->
 						<!--// company-timeline \\--><!-- charity-team-timeline-text -->
-						<div class="charity-team-timeline">
-							<div class="widget_title"><h2>이 품목들에 대해 나눔이 필요해요!</h2></div>
-							<h6><b>신청 가능 물품 종류: </b> <span> 마스크 | 기저귀 | 생리대 | 문구류 | 손세정제 </span></h6><br>
+						<div class="charity-team-timeline" 	>
+							<div class="widget_title" ><h2 style="font-size:22px;">이 품목들에 대해 나눔이 필요해요!</h2></div>
+							<h6 style="font-size:20px;"><b>신청 가능 물품 종류: </b>  마스크 | 기저귀 | 생리대 | 문구류 | 손세정제 </h6><br>
 								<ul>
 									<li>
 		                                <div class="charity-image">
@@ -153,7 +154,8 @@
 		                                <div class="charity-item-text">
 		                                   <h6>마스크: 함께 나눠 써요. </h6>
 		                                   <p>감기인 듯 스쳐 지나갈 술 알았던 코로나바이러스는 우리의 일상을 참 많이도 바꿔 버렸습니다.
-											사회적 거리두기와 마스크 착용이 의무화되면서 일상적이던 이웃과의 만남과 소통은 자연스레 멀어지고 있습니다.</p>
+											사회적 거리두기와 마스크 착용이 의무화되면서 일상적이던 이웃과의 만남과 소통은 자연스레 멀어지고 있습니다.
+											현재의 코로나 시기를 모두 함께 잘 극복할 수 있도록 도와 주세요.</p>
 		                                </div>
 									</li>
 									<li>
@@ -176,9 +178,10 @@
 		                                </div>
 		                                <div class="charity-item-text">
 		                                   <h6>생리대: 생리가 찾아올 때마다 홀로 고민하는 아이들이 있습니다.</h6>
-		                                   <p>더 이상 생리대 때문에 걱정하는 여학생들이 없었으면 좋겠습니다. 
-		                                	 누군가에게는 어느 마트에서나 손쉽게 구매할 수 있는 아이템이지만 조금이라도 더 싸게 파는 곳을 찾아 헤매는 여정을 거쳐야 합니다. 
-		                                	 매달 생리를 맞이하는 여성 청소년이 고민 없이 행복하게 청소년기를 보낼 수 있도록, 몸의 변화에 대해 긍정적으로 느끼고, 이로써 그들의 자존감을 지킬 수 있도록 여러분의 작은 관심으로 이를 실현할 수 있습니다.</p>
+		                                   <p><!-- 더 이상 생리대 때문에 걱정하는 여학생들이 없었으면 좋겠습니다.  -->
+		                                	 누군가에게는 손쉽게 구매할 수 있는 아이템이지만 조금이라도 더 싸게 파는 곳을 찾아 헤매는 청소년들이 있습니다. 
+		                                	 매달 생리를 맞이하는 여성 청소년이 고민 없이 행복하게 청소년기를 보낼 수 있도록 여러분의 작은 관심으로 이를 실현할 수 있습니다.</p>
+		                                	<!--  , 몸의 변화에 대해 긍정적으로 느끼고, 이로써 그들의 자존감을 지킬 수 있도록  -->
 		                                </div>
 									</li>
 									<li>
@@ -188,8 +191,8 @@
 		                                </div>
 		                                <div class="charity-item-text">
 		                                   <h6>문구류: 아이들에게 희망을 선물해 주세요.</h6>
-		                                   <p>온라인 수업으로 집에서 홀로 생활하는 아이들! 저소득 가정의 아이들은 보호자 없이  하루를 보냅니다. 
-		                                   그리고 고립되어 어떻게 시간을 보내야 할지 몰라 우울감과 무력감을 갖는 아이들이 있습니다.
+		                                   <p>온라인 수업으로 집에서 홀로 생활하는 아이들! <br>저소득 가정의 아이들은 보호자 없이 하루를 보냅니다. 
+		                                   <!-- 그리고 고립되어 어떻게 시간을 보내야 할지 몰라 우울감과 무력감을 갖는 아이들이 있습니다. -->
 		                                   <!-- 고립된 생활로 우울감과 무력감으로 생활하는 저소득가정이 건강하고 행복한 세상에서 가장 아름다운 “오늘”을 만들 수 있도록 응원해 주세요. -->
 		                                   가정 내에서 시공간의 제약을 받지 않고 학습에 참여할 수 있도록, 또한 아이들이 행복한 오늘을 만들어 나갈 수 있도록 응원해주세요.</p>
 		                                </div>
@@ -200,8 +203,9 @@
 		                                   <span></span>
 		                                </div>
 		                                <div class="charity-item-text">
-		                                   <h6>손 세정제: </h6>
-		                                   <p>코로나19 감염 확산에 따른 국가적 재난 극복에 동참하고, 지역 주민들의 어려움을 함께 나누기 위해 </p>
+		                                   <h6>손 세정제: 함께 극복해요. </h6>
+		                                   <p>코로나19 감염 확산에 따른 국가적 재난 극복에 동참하고, 지역 주민들과 어려운 시기를 함께 극복 위해 
+		                                    손 세정제를 나눔품목으로 정하였습니다. 주변의 이웃들을 위해 손 세정제를 지원해주세요. </p>
 		                                </div>
 									</li>
 								</ul>
@@ -210,7 +214,7 @@
 	                        <!-- 물품 나눔 항목 소개 end  -->
                 
 	                       	<!--  지침: 확인 사항 리스트 start -->
-	                        <div class="widget_title mt-5"><h2>물품 신청 전 반드시 확인해 주세요!</h2></div>
+	                        <div class="widget_title mt-5"><h2 style="font-size:22px;">물품 신청 전 반드시 확인해 주세요!</h2></div>
 	                        <div class="charity-campaign-content">
 	                            <div class="row">
 	                                <div class="col-md-12">
@@ -227,7 +231,7 @@
 	                        <!--  지침: 확인 사항 리스트 end -->
 	                        
 	                        <!-- 신청 절차 안내  start  -->   
-	                        <div class="widget_title"><h2>물품 나눔 신청 후 절차</h2></div>
+	                        <div class="widget_title"><h2 style="font-size:22px;">물품 나눔 신청 후 절차</h2></div>
 	                        <div class="charity-progress-wrap">
 	                            <div class="row">
 	                                <div class="charity-item-text col-md-12 mb-2">
@@ -243,7 +247,7 @@
 	                       <!-- 하단 물품 나눔 신청하기 버튼 start-->
 	                       <div class="charity-progress-wrap">
 	                            <div class="charity-item-text">
-	                            <h6>후원자 여러분~!</h6>
+	                            <h6 style="font-size:20px;">후원자 여러분~!</h6>
 								<p class="mb-5">일상의 기본인 생필품이 부족하여 어렵게 생활하고 있는 이웃을 위해 따뜻한 관심과 마음을 표현해주세요 :)</p>
 							</div>
 	                              <a href="/my/donation/item/form" class="charity-plan-btn">신청서 작성하기<i class="fa fa-heart"></i></a>

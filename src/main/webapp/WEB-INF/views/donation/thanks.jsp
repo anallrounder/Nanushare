@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -7,26 +6,31 @@
 
 <head>
 
-    <!-- meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Charity About Us</title>
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
-    <link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+<title>Charity About Us</title>
 
-	 <!-- 웹페이지 탭 로고이미지 삽입  -->
-	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+<!-- CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
+<link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+
+<!-- 웹페이지 탭 로고이미지 삽입  -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+
+<!-- new korean font from google -->
+<!-- NotoSansKR, Gothic A1 -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
 <style type="text/css">
 #forimg {
@@ -42,12 +46,11 @@
 	opacity:50%;
 }
 </style>
+	
 </head>
 
 <body>
-    
-
-    <!-- Header -->
+	<!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
 
@@ -82,10 +85,10 @@
                             <div>&nbsp;</div>
                             <h3><span style="color:#FFAE73;"><sec:authentication property="principal.member.name" /></span>님의 소중한 후원금(후원물품), 투명하고 정직하게 사용하겠습니다.</h3>
                             <ul class="charity-list-style-one">
-                            <div>&nbsp;</div>
-                            <div>&nbsp;</div>
-                            <div>&nbsp;</div>
-                            <h5>*나눔 내역은 마이페이지에서 확인하실 수 있습니다.*</h5>
+	                            <div>&nbsp;</div>
+	                            <div>&nbsp;</div>
+	                            <div>&nbsp;</div>
+                            	<h5>*나눔 내역은 마이페이지에서 확인하실 수 있습니다.*</h5>
                            </ul>
                             <!-- <h6>Donation So Far: <span>$ 6000</span></h6> -->
                                                         	<br>
@@ -94,9 +97,7 @@
                         </div>
                     </div>
                     <div class="col-md-5">
-                        
-                            <img src="${pageContext.request.contextPath}/resources/donation/money_teamwork.jpg" alt="">
-                       
+                        <img src="${pageContext.request.contextPath}/resources/donation/money_teamwork.jpg" alt="">
                     </div>
 
                 </div>
@@ -104,17 +105,12 @@
         </div>
         <!-- Main Section -->
 
-       
-      
-
     </div>
     <!-- Content -->
 
  	 <!-- Footer -->
     <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
     <!-- Footer -->
-
-
 
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>

@@ -16,7 +16,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	
+	<!-- new korean font from google -->
+	<!-- NotoSansKR, Gothic A1 -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <title>물품나눔 신청서</title>
 
     <!-- CSS -->
@@ -185,7 +189,7 @@
 
                         <!--// 신청서 양식 \\-->
                         <div class="widget_title mt-4">
-                            <h2>물품 나눔 신청서</h2>
+                            <h2 style="font-size:22px;">물품 나눔 신청서</h2>
                         </div>
 
                         <div class="charity-volunteer-form">
@@ -357,7 +361,7 @@
                         </div>
                         
                         <!--// 연락처 이메일 \\-->
-                        <div class="charity-team-contactus">
+                        <!-- <div class="charity-team-contactus">
                             <ul>
                                 <li>
                                     <i class="fa fa-phone"></i>
@@ -370,7 +374,7 @@
                                     <a href="mailto:name@email.com">info@example.com</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                         <!--\\ 연락처 이메일 //-->
                         
                     </div>
