@@ -158,7 +158,7 @@ li {
 		<div class="charity-main-section">
 
 			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
-			<div class="container">
+			<div class="container col-md-10">
 				<div class="view-account">
 					<section class="module">
 					<div class="module-inner">
@@ -188,14 +188,14 @@ li {
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 							<div>&nbsp;</div>
-
+							<div>&nbsp;</div>
 							<div class="charity-fancy-title">
 								<h2>나의 결제 내역</h2>
 							</div>
 
 							<form id="boardForm" class="charity-volunteer-form"
 								name="boardForm"
-								style="margin-bottom: 0px; padding-bottom: 10px;">
+								style="margin-bottom: 0px; padding-bottom: 10px; background-color: white;">
 
 								<table class="table taWWble-striped projects">
 
@@ -204,7 +204,7 @@ li {
 											<th>결제날짜</th>
 											<th>결제번호</th>
 											<th>금액</th>
-											<th>결제방법</th>											
+											<th>결제방법</th>
 											<th>처리상태</th>
 											<th>결제취소</th>
 										</tr>
@@ -225,11 +225,11 @@ li {
 											<c:forEach items="${list5}" var="list5" varStatus="status">
 												<tr>
 													<td><fmt:formatDate value="${list5.dntdate}"
-															pattern="yy-MM-dd hh:mm:ss" /></td>												
+															pattern="yy-MM-dd hh:mm:ss" /></td>
 													<td>${list5.dnt_paynum}</td>
 													<td><i class="fa fa-krw" aria-hidden="true"></i>
 														${list5.dntprice}</td>
-														<td>${list5.paymethod}</td>
+													<td>${list5.paymethod}</td>
 													<td>${list5.dntstat}</td>
 													<td><button class="cancelPay" class="paycc"
 															type="button"

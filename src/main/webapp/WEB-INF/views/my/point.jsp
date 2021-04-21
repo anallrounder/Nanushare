@@ -98,7 +98,7 @@ li {
 		<div class="charity-main-section">
 
 			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
-			<div class="container">
+			<div class="container col-md-10">
 				<div class="view-account">
 					<section class="module">
 					<div class="module-inner">
@@ -127,22 +127,22 @@ li {
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 							<div>&nbsp;</div>
-
+							<div>&nbsp;</div>
 							<div class="charity-fancy-title">
 								<h2>나의 포인트 내역</h2>
 							</div>
 
 							<form id="boardForm" class="charity-volunteer-form"
 								name="boardForm"
-								style="margin-bottom: 0px; padding-bottom: 10px;">
+								style="margin-bottom: 0px; padding-bottom: 10px; background-color: white;">
 
 								<table class="table taWWble-striped projects">
 
 									<thead>
 										<tr bgcolor="a5a5a5">
 											<th>날짜</th>
-											<th>적립 포인트</th>
-											<th>기부 포인트</th>
+											<th>적립/기부 내역</th>
+											<th>적립/기부 포인트</th>
 											<th>현재 포인트</th>
 											<!-- <th>이벤트</th> -->
 
@@ -161,18 +161,18 @@ li {
 											<c:forEach items="${list6}" var="list6" varStatus="status">
 												<tr>
 													<td>${list6.pdate}</td>
-													<td style="color: #2E2EFE;"><c:if
-															test="${list6.prtpnt != 0}">${list6.prtpnt}</c:if> <c:if
-															test="${list6.prtpnt == 0}">
+													<td><c:if test="${list6.ecat_num == 1}">룰렛</c:if> <c:if
+															test="${list6.ecat_num == 0}">포인트기부</c:if> <c:if
+															test="${list6.ecat_num == 7}">출석체크</c:if></td>
+													<td><c:if test="${list6.prtpnt != 0}">
+															<span style="color: #5586EB;">(+)${list6.prtpnt} P</span>
+														</c:if> <%-- <c:if test="${list6.prtpnt == 0}">
 															<i class="far fa-smile"
-																style="color: lightgrey; line-height: 40px; vertical-align: middle;"></i>
+																style="color: lightgrey; line-height: 40px; vertical-align: middle;"></i></c:if> --%>
+														<c:if test="${list6.dntpnt != 0}">
+															<span style="color: #FF3636;">(-)${list6.dntpnt} P</span>
 														</c:if></td>
-													<td style="color: #FE2E2E;"><c:if
-															test="${list6.dntpnt != 0}">${list6.dntpnt}</c:if> <c:if
-															test="${list6.dntpnt == 0}">
-															<i class="far fa-smile"
-																style="color: lightgrey; line-height: 40px; vertical-align: middle;"></i>
-														</c:if></td>
+
 													<td>${list6.nowpnt}</td>
 													<%-- <td>${list6.ecat_num}</td> --%>
 												</tr>

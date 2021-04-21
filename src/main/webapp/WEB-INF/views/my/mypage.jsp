@@ -112,8 +112,7 @@ li {
 <script type="text/JavaScript"
 	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
+	$(document).ready(
 					function() {
 						var barbar = jQuery('.progressbar');
 						var barProgress = <sec:authentication property="principal.member.dntcnt"/>;
@@ -162,14 +161,17 @@ li {
 					});
 </script>
 <script type="text/javascript">
-	 $(function(){
-	    	$('.usre_img').each(function (index, item) {	        	
-	        	var imgUrl = '${pageContext.request.contextPath}/resources/users/user0' + Math.floor((Math.random() * 5) + 1) + '_sm.png';
-	        	console.log(imgUrl);
-	        	console.log($(item).attr("src"));
-	        	$(item).attr("src", imgUrl);
-			});
-		});
+	$(function() {
+		$('.usre_img').each(
+						function(index, item) {
+							var imgUrl = '${pageContext.request.contextPath}/resources/users/user0'
+									+ Math.floor((Math.random() * 5) + 1)
+									+ '_sm.png';
+							console.log(imgUrl);
+							console.log($(item).attr("src"));
+							$(item).attr("src", imgUrl);
+						});
+	});
 </script>
 
 </head>
@@ -196,7 +198,8 @@ li {
 		<div class="charity-main-section">
 
 			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
-			<div class="container">
+			<!--  col-md-10 으로 넓이 넓힘 -->
+			<div class="container col-md-10">
 				<div class="view-account">
 					<section class="module">
 						<div class="module-inner">
@@ -204,24 +207,24 @@ li {
 							<!-- sidebar -->
 							<div class="side-bar">
 								<!-- profile -->
-							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
-							<!-- profile -->
+								<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+								<!-- profile -->
 								<nav class="side-menu">
 									<ul class="nav">
 										<li class="active"><a href="mypage"><span
 												class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
 										<li><a href="ask"><span class="fa fa-question">
-											</span>&nbsp;&nbsp;나의문의내역</a></li>
+											</span>&nbsp;&nbsp;나의 문의 내역</a></li>
 										<li><a href="content"><span class="fa fa-file">
-											</span>&nbsp;&nbsp;나의인증내역</a></li>
+											</span>&nbsp;&nbsp;나의 인증 내역</a></li>
 										<li><a href="give"><span class="fa fa-handshake">
-											</span>&nbsp;&nbsp;나의나눔내역</a></li>
+											</span>&nbsp;&nbsp;나의 나눔 내역</a></li>
 										<li><a href="reply"><span class="fa fa-reply">
-											</span>&nbsp;&nbsp;나의댓글내역</a></li>
+											</span>&nbsp;&nbsp;나의 댓글 내역</a></li>
 										<li><a href="pay"><span class="fa fa-credit-card">
-											</span>&nbsp;&nbsp;나의결제내역</a></li>
+											</span>&nbsp;&nbsp;나의 결제 내역</a></li>
 										<li><a href="point"><span
-												class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
+												class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의 포인트 내역</a></li>
 
 									</ul>
 								</nav>
@@ -244,7 +247,7 @@ li {
 												<i class="far fa-parking-circle"
 													style="color: 424242; font-size: 23px;"></i>
 												<h6 style="color: 424242;">N.point</h6>
-												<h1>
+												<h2>
 													<%-- <form action="${pageContext.request.contextPath}/my/ask"
 														method="get"> ??--%>
 													<span class="number2"><c:forEach var="vo1"
@@ -252,7 +255,7 @@ li {
 															<input type="hidden" value="${vo2.member_id} name=" member_id" />
 															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}pt</c:forEach>
 														</c:forEach></span>
-												</h1>
+												</h2>
 
 											</div>
 											<div class="threebox" class="col-md-4"
@@ -261,10 +264,10 @@ li {
 												<i class="fal fa-hand-holding-usd"
 													style="color: 424242; font-size: 23px;"></i>
 												<h6 style="color: 424242;">나의 기부횟수</h6>
-												<h1>
+												<h2>
 													<span class="number2"><sec:authentication
 															property="principal.member.dntcnt" />회</span>
-												</h1>
+												</h2>
 											</div>
 											<div class="threebox" class="col-md-4"
 												style="background-color: #FFC7A8;">
@@ -272,10 +275,10 @@ li {
 												<i class="fal fa-gift-card"
 													style="color: 424242; font-size: 23px;"></i>
 												<h6 style="color: 424242;">나의 나눔횟수</h6>
-												<h1>
+												<h2>
 													<span class="number2"><sec:authentication
 															property="principal.member.itemdntcnt" />회</span>
-												</h1>
+												</h2>
 											</div>
 										</div>
 
@@ -311,6 +314,10 @@ li {
 										</div>
 									</div>
 								</div>
+
+								<div class="mb-3">&nbsp;</div>
+
+								<div class="mb-3">&nbsp;</div>
 								<!-- 프로그래스바 -->
 								<div class="charity-cause-donate">
 									<h2 align="center"
@@ -323,7 +330,9 @@ li {
 									<div
 										data-width='<sec:authentication property="principal.member.dntcnt"/>'
 										max='100' class="charity-cause-progressbar"></div>
-									<h6>*기부횟수 %따라 그림이 바뀌어요.</h6>
+									<h6>
+										<b>*기부횟수 %따라 그림이 바뀌어요.</b>
+									</h6>
 								</div>
 								<div>&nbsp;</div>
 								<div>&nbsp;</div>
