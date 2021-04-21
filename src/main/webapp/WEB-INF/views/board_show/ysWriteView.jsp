@@ -56,22 +56,12 @@
 			var btitle = $("#btitle").val(); 
 			var bcontent = CKEDITOR.instances.bcontent.getData();
 			var getMemberId = $("#getMemberId").val();
-			//var thumNail = $("#thumNail").val();
 			
-			
-			var formData = new FormData();
+			/* var formData = new FormData();
 			formData.append("btitle", btitle);
 			formData.append("bcontent", bcontent);
-			formData.append("getMemberId", getMemberId);
-			//formData.append("thumNail", thumNail);
-			
-			console.log(formData.get('btitle'));
-			console.log(formData.get('bcontent'));
-			console.log(formData.get('getMemberId'));
-			//console.log(formData.get('thumNail'));
-			
-			var form = new FormData(document.getElementById('write'));
-			console.log(form);
+			formData.append("getMemberId", getMemberId); */
+		
 			
 			var form = {
 				getMemberId : getMemberId,				
