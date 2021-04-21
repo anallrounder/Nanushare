@@ -98,46 +98,9 @@ li {
 					<section class="module">
 					<div class="module-inner">
 						<div class="side-bar">
-							<div class="user-info">
-								<img class="img-profile img-circle img-responsive center-block"
-									src="/resources/my/프로필사진.PNG" alt="">
-								<!-- 
-									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
-								<ul class="meta list list-unstyled">
-									<li class="name"><h2>
-											<sec:authentication property="principal.member.name" />
-										</h2></li>
-									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication
-											property="principal.member" var="buttonhidden" /> <sec:authorize
-											access="isAuthenticated()">
-
-											<c:if test="${buttonhidden.signuppath == 'home'}">
-
-												<button
-													class="charity-simple-blog-btn w-100 text-white stats"
-													type="submit"
-													onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-													프로필수정</button>
-
-											</c:if>
-										</sec:authorize> <sec:authentication property="principal.member"
-											var="buttonhidden" /> <sec:authorize
-											access="isAuthenticated()">
-
-											<c:if test="${buttonhidden.signuppath != 'home'}">
-
-												<button
-													class="charity-simple-blog-btn w-100 text-white stats"
-													type="submit"
-													onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
-													회원탈퇴</button>
-
-											</c:if>
-										</sec:authorize></li>
-								</ul>
-							</div>
+							<!-- profile -->
+							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+							<!-- profile -->
 							<nav class="side-menu">
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
@@ -159,53 +122,59 @@ li {
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
+
 							<div class="charity-fancy-title">
 								<h2>나의 나눔 내역</h2>
 							</div>
-							<div>&nbsp;</div>
-							<table>
-								<div>
-									<br>
-								</div>
-								<tr>
-									<th>물품이름</th>
-									<th>날짜</th>
-									<th>수량</th>
-									<!-- <th>아이디</th> -->
 
-								</tr>
-								<c:if test="${empty list3}">
-									<tr>
-										<td colspan="5" align="center">나눔 내역이 없습니다</td>
-									</tr>
-								</c:if>
+							<form id="boardForm" class="charity-volunteer-form"
+								name="boardForm"
+								style="margin-bottom: 0px; padding-bottom: 10px;">
 
-								<!-- 나의나눔내역 -->
-								<c:if test="${! empty list3}">
-									<c:set var="list3" value="${list3}" />
-									<c:forEach items="${list3}" var="dao3" varStatus="status">
-										<c:forEach items="${dao3.dona}" var="dto3" varStatus="status">
-											<sec:authentication property="principal" var="pinfo" />
-											<sec:authorize access="isAuthenticated()">
-												<c:if test="${pinfo.username eq dto3.member_id}">
-													<tr>
+								<table class="table taWWble-striped projects">
 
-														<td>${dao3.iname}</td>
-														<td>${dto3.idntdate}</td>
+									<thead>
+										<tr bgcolor="a5a5a5">
+											<th>물품이름</th>
+											<th>날짜</th>
+											<th>수량</th>
+											<!-- <th>아이디</th> -->
 
-														<!-- 제목누르면 해당 글내용으로 이동링크 -->
-														<td>${dto3.donaamount}</td>
-														<%-- <td>${dto3.member_id}</td> --%>
+										</tr>
+										<c:if test="${empty list3}">
+											<tr>
+												<td colspan="5" align="center">나눔 내역이 없습니다</td>
+											</tr>
+										</c:if>
+									</thead>
+									<tbody>
+										<!-- 나의나눔내역 -->
+										<c:if test="${! empty list3}">
+											<c:set var="list3" value="${list3}" />
+											<c:forEach items="${list3}" var="dao3" varStatus="status">
+												<c:forEach items="${dao3.dona}" var="dto3"
+													varStatus="status">
+													<sec:authentication property="principal" var="pinfo" />
+													<sec:authorize access="isAuthenticated()">
+														<c:if test="${pinfo.username eq dto3.member_id}">
+															<tr>
 
-													</tr>
-												</c:if>
-											</sec:authorize>
-										</c:forEach>
-									</c:forEach>
-								</c:if>
-							</table>
+																<td>${dao3.iname}</td>
+																<td>${dto3.idntdate}</td>
+
+																<!-- 제목누르면 해당 글내용으로 이동링크 -->
+																<td>${dto3.donaamount}</td>
+																<%-- <td>${dto3.member_id}</td> --%>
+
+															</tr>
+														</c:if>
+													</sec:authorize>
+												</c:forEach>
+											</c:forEach>
+										</c:if>
+									</tbody>
+								</table>
+							</form>
 
 
 							<c:if test="${! empty list3}">
@@ -236,11 +205,6 @@ li {
 								</div>
 
 							</c:if>
-
-
-
-
-
 						</div>
 					</div>
 					</section>
