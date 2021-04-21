@@ -29,15 +29,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-<!-- 공지사항 게시판 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- header -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 <style>
 .faqHeader {
@@ -124,13 +117,6 @@
 	<div class="charity-fancy-title">
 		<h2>공지사항</h2>
 	</div>
-
-
-
-
-
-
-
 
 	<div id="container">
 		<div class="row">
@@ -236,10 +222,6 @@
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
 
-	<!-- 자주묻는질문 -->
-	<script type="text/javascript"
-		src="/resources/faq/js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript"
-		src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
+	
 </body>
 </html>
