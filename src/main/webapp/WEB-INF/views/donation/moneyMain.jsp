@@ -7,26 +7,31 @@
 <html lang="en">
 
 <head>
-    <!-- meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Charity Cause Detail</title>
+ <!-- meta tags -->
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ <!-- new korean font from google -->
+ <!-- NotoSansKR, Gothic A1 -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
-    <link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
-    <link rel="stylesheet" href="/resources/charity/css/flaticon.css">
-    <link rel="stylesheet" href="/resources/charity/css/slick-slider.css">
-    <link rel="stylesheet" href="/resources/charity/css/fancybox.css">
-    <link href="/resources/charity/css/jplayer.css" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/charity/css/style.css">
-    <link rel="stylesheet" href="/resources/charity/css/color.css">
-    <link rel="stylesheet" href="/resources/charity/css/responsive.css">
-    
-    <!-- 웹페이지 탭 로고이미지 삽입  -->
-	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+   <title>Charity Cause Detail</title>
+
+   <!-- CSS -->
+ <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
+ <link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
+ <link rel="stylesheet" href="/resources/charity/css/flaticon.css">
+ <link rel="stylesheet" href="/resources/charity/css/slick-slider.css">
+ <link rel="stylesheet" href="/resources/charity/css/fancybox.css">
+ <link href="/resources/charity/css/jplayer.css" rel="stylesheet">
+ <link rel="stylesheet" href="/resources/charity/css/style.css">
+ <link rel="stylesheet" href="/resources/charity/css/color.css">
+ <link rel="stylesheet" href="/resources/charity/css/responsive.css">
+ 
+ <!-- 웹페이지 탭 로고이미지 삽입  -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 
 <style>
 #forimg {
@@ -74,7 +79,7 @@
                     <div class="col-md-9">
                         <div class="charity-rich-editor charity-cause-detail">
                             <figure class="charity-cause-thumb"><img src="/resources/extra-images/cause-detail-img.png" alt=""></figure>
-                            <h4>작은 나눔은 큰 힘이 됩니다! </h4>
+                            <h4 style="font-size:24px;"><b>작은 나눔은 큰 힘이 됩니다! </b></h4>
                             <hr>
                             
                             <figure>
@@ -99,8 +104,8 @@
                                 </li>
                                 <li></li>
                             </ul> -->
-                            <h5>회원 여러분들의 후원은 지속 가능한 나눔 활동을 가능케 하여 도움이 필요한 이웃들의 삶에 의미있는 변화를 가져옵니다. <br>지금, 그 변화의 시작에 함께하세요.</h5>
-                            
+                            <h5 style="font-size:18px;"><b>회원 여러분들의 후원은 지속 가능한 나눔 활동을 가능케 하여 도움이 필요한 이웃들의 삶에 의미있는 변화를 가져옵니다. 지금, 그 변화의 시작에 함께하세요.</b></h5>
+                            <br>
                             
                              <!-- 버튼 -->
                             <div class="charity-cause-donate">
@@ -117,7 +122,7 @@
                         </div> <!-- charity-rich-edito -->
                         
                        
-                        <div class="widget_title"><h2>돈기부여 안내</h2></div>
+                        <div class="widget_title"><h2 style="font-size:22px;">돈기부여 안내</h2></div>
                         <div class="charity-campaign-content">
                             <div class="row">
                                 <div class="col-md-12">
