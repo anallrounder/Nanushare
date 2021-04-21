@@ -51,10 +51,9 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
-<!-- calendar -->
-<link href='/resources/calendar/main.css' rel='stylesheet' />
-<script src='/resources/calendar/main.js'></script>
 
+<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 
 </head>
@@ -239,6 +238,16 @@ console.log(c);
 	border-bottom: 0;
 	z-index: 1;
 }
+
+#forimg {
+	/* background-color: #e4edfe; */
+	background-image: url('/resources/banner_imgs/check_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;"
+}
+.black-transparent {
+	opacity:50%;
+}
 </style>
 
 <body>
@@ -246,7 +255,7 @@ console.log(c);
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	<!-- Sub Header -->
-	<div class="charity-subheader">
+	<div id="forimg" class="charity-subheader">
 		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
 		<span class="black-transparent"></span>
 		<div class="container">
@@ -261,16 +270,20 @@ console.log(c);
 	<div class="charity-main-content">
 
 		<!-- Main Section -->
+		<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+			<h2> 매일 나눔 룰렛 돌리고 <br> 포인트를 적립하세요!! </h2>
+		</div> 
+		
 		<div class="charity-main-section">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9 bottom-spacer">
 
-						<div class="charity-event-rich-editor">
+						<!-- <div class="charity-event-rich-editor">
 							<h1 style="text-align: center;">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								매일 나눔 룰렛 돌리고 포인트를 적립하세요!</h1>
-						</div>
+						</div> -->
 						
 						<!-- 전에있던 totalpnt를 넘겨주기 위해 -->
 				<input type="hidden" id="totalpnt" name="totalpnt" value="${pointvo.totalpnt}">

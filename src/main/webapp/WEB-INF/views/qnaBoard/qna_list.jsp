@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -36,6 +38,10 @@
 <!-- Theme style -->
 <!-- <link rel="stylesheet" href="/resources/AdminLTE-master/dist/css/adminlte.min.css"> -->
 
+<!-- header  -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+
 <style>
 /* body {
 	background-color: f9f9fb;
@@ -51,7 +57,7 @@
 #forimg {
 	background-image: url('/resources/banner_imgs/qna_banner.jpg');
 	background-repeat:no-repeat;
-	background-position: center;"
+	background-position: center;
 	width:100%;
 	
 }
@@ -70,7 +76,6 @@
 <body style="background-color: f9f9fb">
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
-	<!-- Header -->
 	
 	<!-- Main Section -->
 	
@@ -114,7 +119,7 @@
 						<!-- 문의하기 버튼 -->
 					
 						
-		        		<form id="boardForm" class="charity-volunteer-form" name="boardForm" style="margin-bottom:0px; padding-bottom:10px;">
+		        		<form id="boardForm" class="charity-volunteer-form" name="boardForm" style="margin-bottom:0px; padding-bottom:10px; background-color:white;">
 							<table class="table taWWble-striped projects" >
 							<!-- <table class="table table-light table-hover " > -->
 								<colgroup>
@@ -210,11 +215,6 @@
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
 		
-	
-	<!-- AdminLTE App -->
-	<script src="/resources/AdminLTE-master/dist/js/adminlte.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="/resources/AdminLTE-master/dist/js/demo.js"></script>
 	    
 </body>
 

@@ -39,6 +39,9 @@
 	<!-- 새로고침 시 스크롤이 상단으로 manual = 복원안함 auto  = 복원 https://okky.kr/article/684414?note=1915071 -->
 <!-- 	<script>history.scrollRestoration = "auto"</script> -->
 	
+	<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
 	<script type="text/javascript">
 	
 	// 댓글 수정 취소 
@@ -353,9 +356,9 @@
 		                                            <div class="charity-blog-social" id="abt${vo.r_num}" >
 		                                            	
 		                                            <!-- href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}"  -->
-			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')"> <b>수정하기</b></a> &nbsp;  
+			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')" style="color:black" > <b>수정하기</b></a> &nbsp;  
 		                                    		   <%--  onClick="updateView('${vo.b_index}','${vo.rid}','${vo.rdate}','${vo.rcontent}')" --%>
-		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" ><b>삭제하기</b></a>
+		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" style="color:black"  ><b>삭제하기</b></a>
 		                                    		    <%--  onClick="del('${vo.b_index}','${vo.r_num}')" --%>
 		                                    		    
 	                                    		    </div>

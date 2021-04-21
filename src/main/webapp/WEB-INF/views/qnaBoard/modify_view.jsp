@@ -35,6 +35,9 @@
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 	
+	<!-- header  -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
 	<!-- ckeditor -->
 	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	
@@ -94,8 +97,21 @@
 		}); // event end
 	}); // ready end
 </script>
-		
+<style>
+#forimg {
+	background-image: url('/resources/banner_imgs/qna_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
 	
+}
+.black-transparent {
+	opacity:50%;
+}
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style>	
 	
 </head>
 
@@ -105,13 +121,13 @@
     <!-- Header -->
     
     <!-- Banner -->
-    <div class="charity-subheader">
+     <div id="forimg" class="charity-subheader">
         <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>문의 하기</h1>
-                    <p>show your support</p>
+                   <!--  <h1>문의 하기</h1>
+                    <p>show your support</p> -->
                 </div>
             </div>
         </div>
@@ -119,6 +135,9 @@
     <!-- Banner -->
 
     <!-- Content -->
+	<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 1:1 문의 </h2>
+	</div> 
     <div class="charity-main-content">
 
         <!-- Main Section -->

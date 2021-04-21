@@ -108,7 +108,7 @@ from iteminven a, itemdonation b where a.icat_num = b.icat_num and b.member_id =
 	select * from (  
 select rownum as rn, a.* from ( 
         select a.rcontent, a.rdate, a.rid, b.b_index, b.btitle, b.bcat_num
-from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order by a.rdate
+from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order by a.rdate desc
      )a where rownum <= #{cri.pageNum} * #{cri.amount}
 ) where rn >  (#{cri.pageNum}-1) * #{cri.amount} 
 ]]>

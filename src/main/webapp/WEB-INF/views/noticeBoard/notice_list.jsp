@@ -29,47 +29,9 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-<!-- 공지사항 게시판 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-<style>
-.faqHeader {
-	font-size: 27px;
-	margin: 20px;
-}
-
-.panel-heading [data-toggle="collapse"]:after {
-	font-family: 'Glyphicons Halflings';
-	content: "\e072"; /* "play" icon */
-	float: right;
-	color: #F58723;
-	font-size: 18px;
-	line-height: 22px;
-	/* rotate "play" icon from > (right arrow) to down arrow */
-	-webkit-transform: rotate(-90deg);
-	-moz-transform: rotate(-90deg);
-	-ms-transform: rotate(-90deg);
-	-o-transform: rotate(-90deg);
-	transform: rotate(-90deg);
-}
-
-.panel-heading [data-toggle="collapse"].collapsed:after {
-	/* rotate "play" icon from > (right arrow) to ^ (up arrow) */
-	-webkit-transform: rotate(90deg);
-	-moz-transform: rotate(90deg);
-	-ms-transform: rotate(90deg);
-	-o-transform: rotate(90deg);
-	transform: rotate(90deg);
-	color: #454444;
-}
-</style>
 
 </head>
 
@@ -99,51 +61,36 @@
 }
 </style>
 
-<body>
+<body style="background-color: f9f9fb">
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	<!-- Banner -->
-	<div id="forimg" class="charity-subheader">
-		<!-- <img src='/resources/my/notice_banner.jpg'> -->
-		<!--  <span class="black-transparent"></span> -->
-		<!-- <div class="container">
-			<div class="row">
-				<div class="col-md-12"></div>
-			</div>
-		</div> -->
-	</div>
+	    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                  
+                </div>
+            </div>
+        </div>
+    </div>
 	<!-- Banner -->
 
 	<!-- Main Section -->
 	<!-- Content -->
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<div class="charity-fancy-title">
+	<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
 		<h2>공지사항</h2>
 	</div>
 
-
-
-
-
-
-
-
 	<div id="container">
 		<div class="row">
-			<!-- <div class="container">
-                  </div> -->
-
+			
 			<div class="container" style="height: 90%">
 
 				<div class="col-12">
-					<!--  <div class="card"> -->
-					<!-- <div class="card-body"> -->
-
-
+					
 					<form id="boardForm" class="charity-volunteer-form"
 						name="boardForm" style="margin-bottom: 0px; padding-bottom: 10px;">
 						<table class="table taWWble-striped projects">
@@ -157,9 +104,9 @@
 							</colgroup>
 
 							<thead>
-								<!-- table-dark -->
+								
 								<tr bgcolor="a5a5a5">
-									<!-- ffd7b9 -->
+									
 									<th style="border-left: none;">글번호</th>
 									<th>제목</th>
 									<th>작성자</th>
@@ -236,10 +183,6 @@
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
 
-	<!-- 자주묻는질문 -->
-	<script type="text/javascript"
-		src="/resources/faq/js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript"
-		src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
+	
 </body>
 </html>

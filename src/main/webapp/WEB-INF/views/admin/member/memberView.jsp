@@ -16,9 +16,6 @@
 <html>
 <head>
 
-<!-- 헤더 안에 추가  -->
-<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
-<!-- js에서 csrf 토큰, 헤더등록 -->
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
@@ -57,6 +54,42 @@
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
 
+<style>
+body {
+	background-color: f9f9fb;
+} 
+.charity-simple-blog-btn {
+	border: 0;
+}
+
+​h3 {
+	text-align: center;
+}
+
+#forimg {
+	background-image: url('/resources/banner_imgs/admin_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
+	
+}
+.black-transparent {
+	opacity:50%;
+}
+
+.twobox {
+	text-color: 424242;
+	width: 200px;
+	height: 100px;
+	border-radius: 95px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 14px;
+	vertical-align: middle;
+	line-height: 150px;
+}
+
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -64,19 +97,16 @@
    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp" %>
     
     <!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>관리자 페이지</h1>
-	                <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</p>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-	<!-- Banner -->
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner -->
 	
     <!-- Content -->
     <div class="charity-main-content">
@@ -190,16 +220,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <!--// volunteer-form \\-->
-                        
-                        <br>
-                        
-                        <div class="charity-volunteer-form" >
-							<div class="widget_title"><h2>회원 관리</h2></div>
+							<div class="charity-fancy-title " style=" margin:20px 0px 20px 0px;">
+								<h2> 회원 관리 </h2>
+							</div> 
+							
 								<div class="container">
 									<div class="row">
 										<div class="col">
-											<ul class="nav nav-tabs">
+											<ul class="nav nav-tabs nav-justified">
 												<li class="nav-item">
 													<a class="nav-link active" data-toggle="tab" href="#info">기본정보</a>
 												</li>
@@ -220,35 +248,35 @@
 											<div class="tab-content">
 												<div class="tab-pane fade show active" id="info">
 						                            <!--// volunteer-form \\-->
-						                            <form action="${pageContext.request.contextPath}/admin/member_bk" method="post">
-							                          <table>
+						                            <form class="charity-volunteer-form" action="${pageContext.request.contextPath}/admin/member_bk" method="post">
+							                          <table class="table taWWble-striped projects">
 							                          	<tr>
-							                               <th>아이디</th>
+							                               <th bgcolor="a5a5a5">아이디</th>
 							                               <td><input type="hidden" value="${memberView.member_id}" name="member_id">${memberView.member_id}</td>
 							                            </tr>
 							                            
 							                            <tr>
-							                               <th>이름</th>
+							                               <th bgcolor="a5a5a5">이름</th>
 							                               <td>${memberView.name}</td>
 							                            </tr>
 							                            
 							                            <tr>
-							                               <th>가입경로</th>
+							                               <th bgcolor="a5a5a5">가입경로</th>
 							                               <td>${memberView.signuppath}</td>
 							                            </tr>
 							                            
 							                            <tr>
-							                               <th>후원금기부횟수</th>
+							                               <th bgcolor="a5a5a5">후원금기부횟수</th>
 							                               <td>${memberView.dntcnt}</td>
 							                            </tr>
 							                            
 							                            <tr>
-							                               <th>물품기부횟수</th>
+							                               <th bgcolor="a5a5a5">물품기부횟수</th>
 							                               <td>${memberView.itemdntcnt}</td>
 							                            </tr>
 							                            
 							                            <tr>
-							                               <th>블랙리스트 여부</th>
+							                               <th bgcolor="a5a5a5">블랙리스트 여부</th>
 															
      														<!-- <input type="radio" name="testInput" value="test2"/> -->
 							                               <td>
@@ -265,8 +293,10 @@
 							                            </tr>
 							                           </table>
 							                           
-							                           <button type="submit">회원 정보 수정</button>
-							                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+														<div class="d-flex justify-content-center">
+															<button type="submit" class="charity-simple-blog-btn" >회원 정보 수정</button>
+							                           		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						                            	</div>
 						                            </form>
 						                                   
 						                        <!--// volunteer-form \\-->
@@ -275,14 +305,18 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							
 						</div>
 					 </div>
 					 
-					 
-					<div class="charity-team-contactus">
-       					<button type="button" onClick="history.back()" class="charity-donation-parallex-btn center"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;이전 페이지</i></button>
-       					<button type="button" onClick="location.href='/admin/member'" class="charity-donation-parallex-btn center">회원목록보기</button>
+					<div class="row">
+						<div class="twobox" class="col-md-4">
+							<button type="button" onClick="history.back()" class="charity-donation-parallex-btn w-30 text-black stats"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;이전 페이지</i></button>
+						</div>
+						
+						<div class="twobox" class="col-md-4">
+							<button type="button" onClick="location.href='/admin/member'" class="charity-donation-parallex-btn w-30 text-black stats"><i class="fas fa-list"></i> &nbsp;&nbsp;회원목록보기</button>
+						</div>
 					</div>
 				</div>
 			</div>

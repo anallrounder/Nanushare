@@ -195,6 +195,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12"> 
+                <p style="text-align:right; margin:0; padding:0;" ><a style="font-size:1px;" href='https://www.freepik.com/vectors/blue'>Blue vector created by vectorjuice - www.freepik.com</a></p>
                    <!--  <h1>1:1 문의</h1> -->
                    <!--  <p>show your support</p> -->
                 </div>

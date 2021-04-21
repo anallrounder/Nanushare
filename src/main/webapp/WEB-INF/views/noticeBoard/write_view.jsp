@@ -34,10 +34,36 @@
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 
+	<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	
 
 </head>
+<style>
+.charity-simple-blog-btn {
+	border: 0;
+}
 
+​h3 {
+	text-align: center;
+}
+
+#forimg {
+	background-color: #eaf3fa;
+	background-image: url('/resources/charity/qna/notice_banner2.jpg');
+	background-size: 500px;
+	background-repeat: no-repeat;
+	background-position: center;	
+}
+
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style>
 	
 <body>
 	<!-- Header -->
@@ -45,33 +71,17 @@
 	<!-- Header -->
 	
 	<!-- Banner -->
-    <div class="charity-subheader">
-        <span class="black-transparent"></span>
+	    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h1>문의 하기</h1>
-                    <p>show your support</p>
+                <div class="col-md-12"> 
+                  
                 </div>
             </div>
         </div>
     </div>
-    <!-- Banner -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<!-- Banner -->
 
 
 	<!-- Content -->

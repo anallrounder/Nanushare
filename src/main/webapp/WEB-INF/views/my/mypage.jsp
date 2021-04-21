@@ -51,7 +51,8 @@
 <link rel="stylesheet" href="/resources/charity/css/style.css">
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
-<link rel="stylesheet" type="text/css" href="/resources/charity/css/imgblink_hj.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/charity/css/imgblink_hj.css">
 
 <link rel="stylesheet" href="/resources/charity/css/style_mypage_hj.css">
 
@@ -63,7 +64,7 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
-	
+
 <style>
 .maxmax {
 	position: relative;
@@ -75,7 +76,7 @@ li {
 
 .number2 {
 	text-align: center;
-	color: white;
+	color: 585858;
 	font-weight: bold;
 }
 
@@ -83,6 +84,20 @@ li {
 	color: white;
 	width: 190px;
 	height: 190px;
+	border-radius: 95px;
+	text-align: center;
+	margin: auto;
+	font-size: 14px;
+	vertical-align: middle;
+	line-height: 150px;
+	border-style: double;
+	border: white 10px padding;
+}
+
+.twobox {
+	text-color: 424242;
+	width: 190px;
+	height: 100px;
 	border-radius: 95px;
 	text-align: center;
 	margin: 0 auto;
@@ -97,8 +112,7 @@ li {
 <script type="text/JavaScript"
 	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
+	$(document).ready(
 					function() {
 						var barbar = jQuery('.progressbar');
 						var barProgress = <sec:authentication property="principal.member.dntcnt"/>;
@@ -146,6 +160,19 @@ li {
 						}
 					});
 </script>
+<script type="text/javascript">
+	$(function() {
+		$('.usre_img').each(
+						function(index, item) {
+							var imgUrl = '${pageContext.request.contextPath}/resources/users/user0'
+									+ Math.floor((Math.random() * 5) + 1)
+									+ '_sm.png';
+							console.log(imgUrl);
+							console.log($(item).attr("src"));
+							$(item).attr("src", imgUrl);
+						});
+	});
+</script>
 
 </head>
 <body>
@@ -171,69 +198,33 @@ li {
 		<div class="charity-main-section">
 
 			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
-			<div class="container">
+			<!--  col-md-10 으로 넓이 넓힘 -->
+			<div class="container col-md-10">
 				<div class="view-account">
 					<section class="module">
 						<div class="module-inner">
 
 							<!-- sidebar -->
 							<div class="side-bar">
-								<div class="user-info">
-									<img class="img-profile img-circle img-responsive center-block"
-										src="/resources/my/프로필사진.PNG" alt="">
-									<!-- 
-									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
-									<ul class="meta list list-unstyled">
-										<li class="name"><h2>
-												<sec:authentication property="principal.member.name" />
-											</h2></li>
-										<li class="email"><sec:authentication
-												property="principal.member.member_id" /></a></li>
-										<li class="activity"><sec:authentication
-												property="principal.member" var="buttonhidden" /> <sec:authorize
-												access="isAuthenticated()">
-
-												<c:if test="${buttonhidden.signuppath == 'home'}">
-
-													<button
-														class="charity-simple-blog-btn w-100 text-white stats"
-														type="submit"
-														onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-														프로필수정</button>
-
-												</c:if>
-											</sec:authorize> <sec:authentication property="principal.member"
-												var="buttonhidden" /> <sec:authorize
-												access="isAuthenticated()">
-
-												<c:if test="${buttonhidden.signuppath != 'home'}">
-
-													<button
-														class="charity-simple-blog-btn w-100 text-white stats"
-														type="submit"
-														onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
-														회원탈퇴</button>
-
-												</c:if>
-											</sec:authorize></li>
-									</ul>
-								</div>
+								<!-- profile -->
+								<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+								<!-- profile -->
 								<nav class="side-menu">
 									<ul class="nav">
 										<li class="active"><a href="mypage"><span
 												class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
 										<li><a href="ask"><span class="fa fa-question">
-											</span>&nbsp;&nbsp;나의문의내역</a></li>
+											</span>&nbsp;&nbsp;나의 문의 내역</a></li>
 										<li><a href="content"><span class="fa fa-file">
-											</span>&nbsp;&nbsp;나의인증내역</a></li>
+											</span>&nbsp;&nbsp;나의 인증 내역</a></li>
 										<li><a href="give"><span class="fa fa-handshake">
-											</span>&nbsp;&nbsp;나의나눔내역</a></li>
+											</span>&nbsp;&nbsp;나의 나눔 내역</a></li>
 										<li><a href="reply"><span class="fa fa-reply">
-											</span>&nbsp;&nbsp;나의댓글내역</a></li>
+											</span>&nbsp;&nbsp;나의 댓글 내역</a></li>
 										<li><a href="pay"><span class="fa fa-credit-card">
-											</span>&nbsp;&nbsp;나의결제내역</a></li>
+											</span>&nbsp;&nbsp;나의 결제 내역</a></li>
 										<li><a href="point"><span
-												class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
+												class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의 포인트 내역</a></li>
 
 									</ul>
 								</nav>
@@ -241,7 +232,7 @@ li {
 							<!-- sidebar -->
 
 							<div class="content-panel">
-								<h2 class="title">My Profile</h2>
+								<!-- <h2 class="title" >My Profile</h2>-->
 								<div>&nbsp;</div>
 								<div>&nbsp;</div>
 								<div>&nbsp;</div>
@@ -250,23 +241,13 @@ li {
 									<div class="charity-team charity-simple-team inner-wrap">
 										<div class="row">
 
-
-											<%-- <div id="circle1">
-												<li>나의포인트</li>
-												<li><c:forEach var="vo1" items="${memberInfo}">
-														<input type="hidden" value="${vo2.member_id} name=" member_id" />
-														<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}</c:forEach>
-													</c:forEach></li>
-											</div>
- --%>
-
 											<div class="threebox" class="col-md-4"
-												style="background-color: FFDB8E;">
-												<!-- <h6>&nbsp;</h6> -->
+												style="background-color: #FFDB8E;">
+												<h6>&nbsp;</h6>
 												<i class="far fa-parking-circle"
-													style="color: white; font-size: 30px;"></i>
-												<h4 style="color: white;">N.point</h4>
-												<h1>
+													style="color: 424242; font-size: 23px;"></i>
+												<h6 style="color: 424242;">N.point</h6>
+												<h2>
 													<%-- <form action="${pageContext.request.contextPath}/my/ask"
 														method="get"> ??--%>
 													<span class="number2"><c:forEach var="vo1"
@@ -274,46 +255,74 @@ li {
 															<input type="hidden" value="${vo2.member_id} name=" member_id" />
 															<c:forEach var="vo2" items="${vo1.pointList}">${vo2.nowpnt}pt</c:forEach>
 														</c:forEach></span>
-												</h1>
-												<button
-													class="charity-simple-blog-btn w-30 text-white stats"
-													type="button"
-													onClick="location.href='${pageContext.request.contextPath}/my/donation/money/point'">
-													기부하기</button>
+												</h2>
+
 											</div>
 											<div class="threebox" class="col-md-4"
-												style="background-color: FFAE73;">
+												style="background-color: #FFAE73;">
 												<h6>&nbsp;</h6>
 												<i class="fal fa-hand-holding-usd"
-													style="color: white; font-size: 30px;"></i>
-												<h4 style="color: white;">나의 기부횟수</h4>
-												<h1>
+													style="color: 424242; font-size: 23px;"></i>
+												<h6 style="color: 424242;">나의 기부횟수</h6>
+												<h2>
 													<span class="number2"><sec:authentication
 															property="principal.member.dntcnt" />회</span>
-												</h1>
+												</h2>
 											</div>
 											<div class="threebox" class="col-md-4"
-												style="background-color: FFC7A8;">
+												style="background-color: #FFC7A8;">
 												<h6>&nbsp;</h6>
 												<i class="fal fa-gift-card"
-													style="color: white; font-size: 30px;"></i>
-
-												<h4 style="color: white;">나의 나눔횟수</h4>
-												<h1>
+													style="color: 424242; font-size: 23px;"></i>
+												<h6 style="color: 424242;">나의 나눔횟수</h6>
+												<h2>
 													<span class="number2"><sec:authentication
 															property="principal.member.itemdntcnt" />회</span>
-												</h1>
+												</h2>
+											</div>
+										</div>
+
+
+										<div>&nbsp;</div>
+
+										<div class="row">
+
+											<div class="twobox" class="col-md-4">
+
+												<button
+													class="charity-donation-parallex-btn w-30 text-black stats"
+													type="button"
+													onClick="location.href='${pageContext.request.contextPath}/my/donation/money/point'">
+													포인트 기부</button>
+											</div>
+											<div class="twobox" class="col-md-4">
+
+												<button
+													class="charity-donation-parallex-btn w-30 text-black stats"
+													type="button"
+													onClick="location.href='${pageContext.request.contextPath}/my/donation/moneyDonationForm'">
+													후원 기부</button>
+											</div>
+											<div class="twobox" class="col-md-4">
+
+												<button
+													class="charity-donation-parallex-btn w-30 text-black stats"
+													type="button"
+													onClick="location.href='${pageContext.request.contextPath}/donation/item/main'">
+													물품 기부</button>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div>&nbsp;</div>
-								<div>&nbsp;</div>
-								<div>&nbsp;</div>
-								<div>&nbsp;</div>
+
+								<div class="mb-3">&nbsp;</div>
+
+								<div class="mb-3">&nbsp;</div>
 								<!-- 프로그래스바 -->
 								<div class="charity-cause-donate">
-									<h4 align="center">나의 기부 %는?</h4>
+									<h2 align="center"
+										style="font-weight: bold; /* text-shadow: 1px 1px 3px #424242; */ color: #424242">나의
+										기부 %는?</h2>
 									<div class="progressbar">
 										<img class="maxmax blinking" width="80" height="80">
 										<div class="progress-label"></div>
@@ -321,7 +330,9 @@ li {
 									<div
 										data-width='<sec:authentication property="principal.member.dntcnt"/>'
 										max='100' class="charity-cause-progressbar"></div>
-									<h6>*기부횟수 %따라 그림이 바뀌어요.</h6>
+									<h6>
+										<b>*기부횟수 %따라 그림이 바뀌어요.</b>
+									</h6>
 								</div>
 								<div>&nbsp;</div>
 								<div>&nbsp;</div>
@@ -358,26 +369,6 @@ li {
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
 
 
 	<!-- jQuery -->

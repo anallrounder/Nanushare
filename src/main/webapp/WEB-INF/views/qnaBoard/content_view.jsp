@@ -32,136 +32,172 @@
 	
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
-	    
+	
+	<!-- header  -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
     <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 	
 	<script type="text/javascript">
+	
+	// 댓글 수정 취소 
+	function cancleEdit(rNum) {
+		console.log("cancleEdit" + rNum);
 		
-	/* 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드  */
-	/* This script and many more are available free online at
-	The JavaScript Source!! http://javascript.internet.com
-	Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
+		document.location.reload(true);
 		
-		 	function answerEdit(bIndex,rid,rcontent,rNum) {
-				console.log(bIndex);
-				console.log(rid);
-				console.log(rcontent);
-				console.log(rNum);
-				
-				// csrf
-				var token = $("meta[name='_csrf']").attr("content");
-				var header = $("meta[name='_csrf_header']").attr("content");
-				$(document).ajaxSend(function(e, xhr, options) {
-					xhr.setRequestHeader(header, token);
-				});
-				
-		 			
-		 			$('#modify'+rNum).html( //1번
-		 					"<textarea id='edit_acontent'  style='width:100%;height:100;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
-		 					/* +"<style>#edit_acontent {width:640px; height:80px; resize:none;} </style>" */
-		 				);
-		 				
-		 				$('#abt').html( //2번
-		 					"<a href='javascript:void(0);'  onclick='answerEditSave("+bIndex+","+rNum+")' id='btnEdit'>완료</a> "
-		 					+"<a href='javascript:void(0);' onclick='location.href='qnaDetail.do?idx="+rNum+"' id='btnCancel'>취소</a>"
-		 				);
-		 			};
-
-		 			function answerEditSave(bIndex, rNum){ //3번
-		 				var rcontent = $("#edit_acontent").val();
-		 				//location.href='answerEdit.do?idx='+rid+"&acontent="+rcontent; //(4번)
-		 				var bindex = bIndex;
-		 				var form = {
-		 						rcontent : rcontent,
-		 						r_num : rNum
-		 				}
-		 				
-		 				$.ajax({
-		 					 type: 'put',
-		                     url: '${pageContext.request.contextPath}/board/shows/replyModify',
-		                     cache : false,
-		     				 dataType: 'text',
-		     				 data : JSON.stringify(form),
-		     				 contentType: 'application/json; charset=utf-8',
-		     				 success : function(result){
-		     					 if(result == "SUCCESS"){
-		     					
-		     						$(location).attr('href', "${pageContext.request.contextPath}/board/qna/" +bindex);
-			     					
-		     					 }
-		     					
-		     				 },
-		     				 error : function (e) {
-								console.log(e);
-							 }
-		 					
-		 				});
-		 			};
-		 			
-		 				function qBoardDelete(b_index) {
-		 					console.log(b_index);
-		 					
-		 					// csrf
-		 					var token = $("meta[name='_csrf']").attr("content");
-		 					var header = $("meta[name='_csrf_header']").attr("content");
-		 					$(document).ajaxSend(function(e, xhr, options) {
-		 						xhr.setRequestHeader(header, token);
-		 					});
-		 					
-		 					$.ajax({
-			 					type : 'DELETE',
-			 					url : '${pageContext.request.contextPath}/board/qna/delete/'+b_index,
-			 					cache : false,			 				
-			 					success: function(result){
-			 						console.log(result);
-			 						if(result == "SUCCESS"){
-			 							alert('삭제 완료'); 
-			 							$(location).attr('href', '${pageContext.request.contextPath}/board/qna') 
-			 						}
-			 					},
-			 					error:function(e){
-			 						console.log(e);
-			 			               alert('삭제 실패');
-			 			               location.reload(); // 실패시 새로고침하기
-			 					}
-			 				});
-						}
-		 			
-		 	
-		 function autoDate () {
-				
-				var tDay = new Date();
-				var tMonth = tDay.getMonth()+1;
-				var tDate = tDay.getDate();
-				if ( tMonth < 10) tMonth = "0"+tMonth;
-				if ( tDate < 10) tDate = "0"+tDate;
-				document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
-				//document.getElementById("rdate").value = tDay.getFullYear()+"/"+tMonth+"/"+tDate;
-			};
+		console.log("되는건가");
+	};  
+	
+	// 댓글 수정 창으로	
+ 	function answerEdit(bIndex,rid,rcontent,rNum) {
+		console.log(bIndex);
+		console.log(rid);
+		console.log(rcontent);
+		console.log(rNum);
+		
+		// csrf
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		
+ 			
+		$('#modify'+rNum).html( //1번
+				"<textarea id='edit_acontent'  style='width:100%;height:500%;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
+				/* +"<style>#edit_acontent {width:640px; height:80px; resize:none;} </style>" */
+		);
 			
-			// Multiple onload function created by: Simon Willison
-			// http://simonwillison.net/2004/May/26/addLoadEvent/
-			function addLoadEvent(func) {
-				var oldonload = window.onload;
-				if (typeof window.onload != 'function') {
-					window.onload = func;
-				} else {
-					window.onload = function() {
-						if (oldonload) {
-							oldonload();
-						}
-						func();
-					}
+		$('#abt'+rNum).html( //2번
+				"<b><a href='javascript:void(0);' onclick='answerEditSave("+bIndex+","+rNum+")' id='btnEdit' class='fa fa-edit' style='color:#937768'> 수정완료</a></b> &nbsp;" 
+				+ "<a href='javascript:void(0);'onclick='cancleEdit("+rNum+")' id='btnCancel' class='fa fa-eraser' style='color:#937768'><b>수정취소</b></a>"
+				/* $(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/" +bindex); */
+		);
+ 	}; //댓글 수정창 보기 end
+		 			
+	// 댓글 수정 send
+	function answerEditSave(bIndex, rNum){ //3번
+		var rcontent = $("#edit_acontent").val();
+		//location.href='answerEdit.do?idx='+rid+"&acontent="+rcontent; //(4번)
+		var bindex = bIndex;
+		var form = {
+				rcontent : rcontent,
+				r_num : rNum
+		}
+		
+		$.ajax({
+			type: 'put',
+			url: '${pageContext.request.contextPath}/board/shows/replyModify',
+			cache : false,
+  			dataType: 'text',
+  			data : JSON.stringify(form),
+  			contentType: 'application/json; charset=utf-8',
+  			success : function(result){
+  				if(result == "SUCCESS"){
+  					swal({
+  						title :"댓글 수정 완료" , 
+						icon : "success" , 
+  						button :"확인",
+  						//timer: 5000,
+  					})
+  					.then(function(){
+ 						//$(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/" +bindex+aaa); // 주소 이동
+ 							
+ 						// 페이지 새로고침지 원래 위치로 돌아오기 https://devonaws.com/front-end/javascript/javascript-%ED%98%84%EC%9E%AC-%EC%8A%A4%ED%81%AC%EB%A1%A4-%EC%9C%84%EC%B9%98%EC%97%90%EC%84%9C-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8/
+  						document.location.reload(true);
+  					});
+  				}
+  			}, //success end
+  			error : function (e) {
+				console.log(e);
+			}
+		}); //ajax end
+	}; // 댓글 수정 end
+	
+	// 게시글 삭제
+	function qBoardDelete(b_index) {
+		console.log(b_index);
+		
+		// csrf
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		
+		$.ajax({
+			type : 'DELETE',
+			url : '${pageContext.request.contextPath}/board/qna/delete/'+b_index,
+			cache : false,			 				
+			success: function(result){
+				console.log(result);
+				if(result == "SUCCESS"){
+					alert('삭제 완료'); 
+					$(location).attr('href', '${pageContext.request.contextPath}/board/qna') 
 				}
-			};
-			addLoadEvent(function() {
-				autoDate();
-			}); 
+			},
+			error:function(e){
+				console.log(e);
+	               alert('삭제 실패');
+	               location.reload(); // 실패시 새로고침하기
+			}
+		});  //ajax end
+		
+	} // 게시글삭제종료
+	
+/* 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드  */
+/* This script and many more are available free online at
+The JavaScript Source!! http://javascript.internet.com
+Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */			
+ function autoDate () {
+		
+		var tDay = new Date();
+		var tMonth = tDay.getMonth()+1;
+		var tDate = tDay.getDate();
+		if ( tMonth < 10) tMonth = "0"+tMonth;
+		if ( tDate < 10) tDate = "0"+tDate;
+		document.getElementById("rdate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
+		//document.getElementById("rdate").value = tDay.getFullYear()+"/"+tMonth+"/"+tDate;
+	};
+	
+	// Multiple onload function created by: Simon Willison
+	// http://simonwillison.net/2004/May/26/addLoadEvent/
+	function addLoadEvent(func) {
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') {
+			window.onload = func;
+		} else {
+			window.onload = function() {
+				if (oldonload) {
+					oldonload();
+				}
+				func();
+			}
+		}
+	};
+	addLoadEvent(function() {
+		autoDate();
+	}); 
 	
 	</script>
+<style>
+#forimg {
+	background-image: url('/resources/banner_imgs/qna_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
 	
+}
+.black-transparent {
+	opacity:50%;
+}
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style>		
 </head>
 
 <body>
@@ -170,13 +206,13 @@
 	<!-- Header -->
 
     <!-- Banner -->
-    <div class="charity-subheader">
+     <div id="forimg" class="charity-subheader">
         <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12"> 
-                    <h1>문의하기 상세보기</h1>
-                    <p>show your support</p>
+                    <!-- <h1>문의하기 상세보기</h1>
+                    <p>show your support</p> -->
                 </div>
             </div>
         </div>
@@ -184,6 +220,9 @@
     <!-- Banner -->
 
     <!-- Content -->
+	<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 1:1 문의 </h2>
+	</div> 
     <div class="charity-main-content">
 
 		<!-- Main Section -->
@@ -272,20 +311,14 @@
 	                                            <div><c:out value="${vo.rdate}"/></div><!-- 작성일 -->
 	                                            <p id="modify${vo.r_num}"><c:out value="${vo.rcontent}"/></p><!-- 댓글내용 -->	                                            
 	                                            
-	                                            
+	                                            <br>
 	                                            <sec:authentication property="principal" var="pinfo" />
 												<sec:authorize access="isAuthenticated()">
 												<c:if test="${pinfo.username eq vo.rid}"> 
-		                                            <div class="charity-blog-social" id="abt" >
-		                                            	
-		                                            <!-- href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}"  -->
-			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')"> <b>수정하기</b></a> 
-		                                    		   <%--  onClick="updateView('${vo.b_index}','${vo.rid}','${vo.rdate}','${vo.rcontent}')" --%>
-		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" ><b>삭제하기</b></a>
-		                                    		    <%--  onClick="del('${vo.b_index}','${vo.r_num}')" --%>
-		                                    		    
+		                                            <div class="charity-blog-social" id="abt${vo.r_num}" >
+			                                            <i class="fa fa-edit"></i><a style="color:black" class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')"> <b>수정하기</b></a> &nbsp; 
+		                                    		    <i class="fa fa-eraser"></i><a style="color:black" class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" ><b>삭제하기</b></a>
 	                                    		    </div>
-	                                    		    
                                     		    </c:if>
                                     		    </sec:authorize>
 	                                            <br> 
@@ -309,7 +342,7 @@
                         
                      	<c:if test="${ empty principalMember_id}">
                      		<c:set var="stop" value="false" /> <!-- 로그인한 유저가 없다면 아래 댓글 작성을 보여주지 않는다. -->
-                     		
+                     	</c:if>	
                         <!-- 관리자 체크 -->
                         <c:if test="${ !empty principalMember_id && principalMember_id.username eq content_view.member_id || principalMember_id.getmember().getAuthname() eq '관리자'  }">
                         
@@ -342,7 +375,7 @@
 	                            </form>
 	                        </div>
                         </c:if>
-                       </c:if>
+                       
                          <!-- Leave a Comment -->
                         <!--// 댓글 작성 영역 comment-respond \\-->
                         
@@ -478,8 +511,8 @@
     					htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
     					htmls += '<p>' + rcontent + '</p>'
 						htmls += '<div class="charity-blog-social">'
-						htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update_view/' + r_num + '" ><b>수정하기</b></a>'+'&nbsp;'
-						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + r_num + '" ><b>삭제하기</b></a></div>'
+						htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update_view/' + r_num + '" style="color:black"><b>수정하기</b></a>'+'&nbsp;'
+						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + r_num + '" style="color:black"><b>삭제하기</b></a></div>'
     					htmls += '</div>'
     					htmls += '</div>'
     					htmls += '</li>'

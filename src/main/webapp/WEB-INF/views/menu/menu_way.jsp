@@ -10,7 +10,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>myprofile_edit</title>
+<title>Nanushare</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<!-- 웹페이지 탭 로고이미지 삽입  -->
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -26,26 +29,37 @@
 <!-- font-awesome 부트스트랩 이모티콘 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+<!-- 상단 로그인버튼 위치 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 </head>
 
 <style>
 .charity-simple-blog-btn {
 	border: 0;
 }
+#forimg {
+	/* background-color: #e4edfe; */
+	background-image: url('/resources/banner_imgs/map_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;"
+}
+.black-transparent {
+	opacity:50%;
+}
 </style>
 <body>
 	<!-- Header -->
-		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
+	<div id="forimg" class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
+				<div class="col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -68,18 +82,24 @@
 
 									<div class="col-md-12">
 										<div class="charity-aboutus-text">
-											<i class="fas fa-phone fa-2x"> 연락처</i>
+											<i class="fas fa-phone"
+												style="color: #FFAE73; font-size: 25px;"> 연락처</i>
 
 											<h6>
-												<br>대표전화 02-722-1481 <br><br><br>
+												<br>대표전화 02-722-1481 <br>
+												<br>
+												<br>
 											</h6>
-											<br> <br> <i class="fas fa-clock fa-2x"> 영업시간</i>
+											<br> <br> <i class="fas fa-clock"
+												style="color: #FFAE73; font-size: 25px;"> 영업시간</i>
 											<h6>
 												<br>월-금 10:00 ~ 17:00 | 주말 및 공휴일 휴무 | 점심시간 오후 12:00 ~
-												13:00<br><br><br>
+												13:00<br>
+												<br>
+												<br>
 											</h6>
-											<br> <br> <i class="fas fa-map-marker-alt fa-2x">
-												주소</i>
+											<br> <br> <i class="fas fa-map-marker-alt"
+												style="color: #FFAE73; font-size: 25px;"> 주소</i>
 											<h6>
 												<br> 도로명 주소 : (우)03164 서울특별시 종로구 종로 2가 종로69<br>
 											</h6>
@@ -129,7 +149,7 @@
 	</div>
 
 
-		<!-- Footer -->
+	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
@@ -144,5 +164,6 @@
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
-	<script src="/resources/charity/script/functions-main.js"></script></body>
+	<script src="/resources/charity/script/functions-main.js"></script>
+</body>
 </html>
