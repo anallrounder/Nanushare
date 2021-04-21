@@ -62,7 +62,7 @@ body {
 }
 
 #forimg {
-	background-image: url('/resources/banner_imgs/qna_banner.jpg');
+	background-image: url('/resources/banner_imgs/admin_banner.png');
 	background-repeat:no-repeat;
 	background-position: center;
 	width:100%;
@@ -204,7 +204,7 @@ body {
 					<div class="col-md-12">
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="users">
-								<div class="charity-fancy-title " style=" margin-bottom:20px;">
+								<div class="charity-fancy-title " style=" margin:20px 0px 20px 0px;">
 									<h2> 회원 관리 </h2>
 								</div> 
 	
@@ -212,7 +212,7 @@ body {
 								<form id="boardForm" class="charity-volunteer-form">
 									<table class="table taWWble-striped projects">
 										<thead>
-											<tr bgcolor="#ccccc">
+											<tr bgcolor="a5a5a5">
 												<th style="border-left: none;">No.</th>
 												<th>아이디</th>
 												<th>이름</th>

@@ -16,9 +16,6 @@
 <html>
 <head>
 
-<!-- 헤더 안에 추가  -->
-<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
-<!-- js에서 csrf 토큰, 헤더등록 -->
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 
@@ -57,6 +54,30 @@
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
 
+<style>
+body {
+	background-color: f9f9fb;
+} 
+.charity-simple-blog-btn {
+	border: 0;
+}
+
+​h3 {
+	text-align: center;
+}
+
+#forimg {
+	background-image: url('/resources/banner_imgs/admin_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
+	
+}
+.black-transparent {
+	opacity:50%;
+}
+
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -64,19 +85,16 @@
    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp" %>
     
     <!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>관리자 페이지</h1>
-	                <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</p>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-	<!-- Banner -->
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner -->
 	
     <!-- Content -->
     <div class="charity-main-content">
@@ -190,16 +208,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <!--// volunteer-form \\-->
-                        
-                        <br>
-                        
-                        <div class="charity-volunteer-form" >
-							<div class="widget_title"><h2>회원 관리</h2></div>
+                    	<div class="charity-fancy-title " style=" margin:20px 0px 20px 0px;">
+							<h2> 회원 관리 </h2>
+						</div> 
+                    
 								<div class="container">
 									<div class="row">
 										<div class="col">
-											<ul class="nav nav-tabs">
+											<ul class="nav nav-tabs nav-justified">
 												<li class="nav-item">
 													<a class="nav-link" href="/admin/member_view?member_id=${pageMaker.member_id}">기본정보</a>
 												</li>
@@ -220,17 +236,20 @@
 											<div class="tab-content">
 												<div class="tab-pane fade show active" id="point">
 						                            <!--// volunteer-form \\-->
-						                            <form action="" method="post">
-							                          <table>
-							                          	<tr>
-							                              	<th>포인트 내역</th>
+						                            <form class="charity-volunteer-form" action="" method="post">
+							                          <table class="table taWWble-striped projects">
+							                          <thead>
+							                          	<tr bgcolor="a5a5a5">
+							                              	<th style="border-left: none;">포인트 내역</th>
 							                               	<th>포인트</th>
-							                               	<th>날짜</th>
+							                               	<th style="border-right: none;">날짜</th>
 							                            </tr>
+							                          </thead>
 							                            
+							                          <tbody>
 							                            <c:if test="${empty point}">
 														<tr>
-															<td colspan="3" align="center">포인트 내역이 없습니다</td>
+															<td colspan="3" align="center" style="border-left: none; border-right: none;">포인트 내역이 없습니다</td>
 														</tr>
 														</c:if>
 							                            
@@ -238,13 +257,14 @@
 							                            <c:forEach items="${point}" var="pointdao">
 							                            <c:forEach items="${pointdao.pointvo}" var="pdao">
 							                            <tr>
-							                               	<td>${pointdao.ename}</td> 
+							                               	<td style="border-left: none;">${pointdao.ename}</td> 
 							                               	<td>${pdao.prtpnt}</td>
-							                              	<td>${pdao.pdate}</td>
+							                              	<td style="border-right: none;">${pdao.pdate}</td>
 							                            </tr>
 							                           </c:forEach>
 							                           </c:forEach>
 							                           </c:if>
+							                           </tbody>
 							                           </table>
 						                            </form>
 						                                   
@@ -279,8 +299,6 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							
 							
 						</div>
 					 </div>

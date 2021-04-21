@@ -52,27 +52,48 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
+  	
+<style>
+body {
+	background-color: f9f9fb;
+} 
+.charity-simple-blog-btn {
+	border: 0;
+}
 
+​h3 {
+	text-align: center;
+}
+
+#forimg {
+	background-image: url('/resources/banner_imgs/admin_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
+	
+}
+.black-transparent {
+	opacity:50%;
+}
+
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini">
  
    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp" %>
-    
+   
+   <!-- Banner -->
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>관리자 페이지</h1>
-	                <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</p>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-	<!-- Banner -->
 	
     <!-- Content -->
     <div class="charity-main-content">
@@ -186,66 +207,73 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        
-                        <!--// volunteer-form \\-->
-                        <br>
-                        
-                        <div class="charity-volunteer-form" >
-									<div class="tab-content">
-										<div class="tab-pane fade show active" id="item_head">
-											<form action="/admin/itemupdate" method="post">
-											<div class="widget_title"><h2>입고 관리</h2></div>
-												<table>
-													<tr>
-														<th>No.</th>
-														<th>물품명</th>
-														<th>현재 보유량</th>
-														<th>입고량</th>
-														<!-- <th>입고일</th> -->
-													</tr>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="item_head">
+								<div class="charity-fancy-title " style="margin: 20px 0px 20px 0px;">
+									<h2> 입고 관리 </h2>
+								</div> 
+							
+								<form id="boardForm" class="charity-volunteer-form" action="/admin/itemupdate" method="post">
+									<table class="table taWWble-striped projects">
+										<thead>
+											<tr bgcolor="a5a5a5">
+												<th style="border-left: none;">No.</th>
+												<th>물품명</th>
+												<th>현재 보유량</th>
+												<th style="border-right: none;">입고량</th>
+											</tr>
+										</thead>
 	
-													<c:forEach items="${item}" var="headItem">
-													<tr>
-														<td><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
-														<td>${headItem.iname}</td> <!-- 물품명 출력  -->
-														<td>${headItem.iamount}</td> <!-- 현재 수량 출력 -->
-														<td> <!-- 입고량 -->
-															<select name="inputData">
-																<option value="0">0</option>
-																<option value="10">10</option>
-																<option value="20">20</option>
-																<option value="30">30</option>
-																<option value="40">40</option>
-																<option value="50">50</option>
-															</select>
-														</td>
-														<!-- <td><input type="text" class="datepicker" autocomplete="off" ></td> -->
-													</tr>
-													</c:forEach>
-												</table><br>
-												<button type="submit">업데이트</button>
-												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-												<br><br><br>
-												</form>
+										 <tbody>
+											<c:forEach items="${item}" var="headItem">
+											<tr>
+												<td style="border-left: none;"><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
+												<td>${headItem.iname}</td> <!-- 물품명 출력  -->
+												<td>${headItem.iamount}</td> <!-- 현재 수량 출력 -->
+												<td> <!-- 입고량 -->
+													<select name="inputData">
+														<option value="0">0</option>
+														<option value="10">10</option>
+														<option value="20">20</option>
+														<option value="30">30</option>
+														<option value="40">40</option>
+														<option value="50">50</option>
+													</select>
+												</td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									<div class="d-flex justify-content-center">
+									<button type="submit" class="charity-simple-blog-btn">업데이트</button>
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+									</div>
+								</form>
+								
+								<div class="charity-fancy-title " style=" margin-bottom:20px;">
+									<h2> 출고 관리 </h2>
+								</div> 
 												
-												<form action="${pageContext.request.contextPath}/admin/itemOutupdate" method="post">
-												<div class="widget_title"><h2>출고 관리</h2></div>
-												<c:forEach items="${vm}" var="vmvo">
-												</c:forEach>
-												<table>
-													<tr>
-														<th>No.</th>
+								<form class="charity-volunteer-form" action="${pageContext.request.contextPath}/admin/itemOutupdate" method="post">
+										<c:forEach items="${vm}" var="vmvo"></c:forEach>
+												<table class="table taWWble-striped projects">
+												<thead>
+													<tr bgcolor="a5a5a5">
+														<th style="border-left: none;">No.</th>
 														<th>물품명</th>
 														<th>현재 보유량</th>
 														<th>출고량</th>
 														<th>출고일</th>
 														<th>출고지점</th>
-														<th>출고 자판기</th>
+														<th style="border-right: none;">출고 자판기</th>
 													</tr>
-	
+												</thead>
+												
+												 <tbody>
 													<c:forEach items="${item}" var="headItem">
+													
 													<tr>
-														<td><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
+														<td style="border-left: none;"><input type="hidden" value="${headItem.icat_num}" name="icat_num">${headItem.icat_num}</td>
 														<td><input type="hidden" value="${headItem.iname}" name="iname">${headItem.iname}</td> <!-- 물품명 출력  -->
 														<td>${headItem.iamount}</td><!-- 현재 수량 출력 -->
 														<td>
@@ -268,7 +296,7 @@
 															</c:forEach> 
 															</select>
 														</td>
-														<td>
+														<td style="border-right: none;">
 														<!-- 출고 자판기 번호 -->
 															<select name="vm_num"> 
 															<c:forEach items="${vm}" var="vmvo">
@@ -278,32 +306,19 @@
 														</td>
 													</tr>
 													</c:forEach>
+													</tbody>
 												</table>
-												
-												<button type="submit">업데이트</button>
-												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+												<div class="d-flex justify-content-center">
+													<button type="submit" class="charity-simple-blog-btn">업데이트</button>
+													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+												</div>
 											</form>
 										</div>
 									</div>
 						
 
-                        </div>
                         <!--// volunteer-form \\-->
-                        <div class="charity-team-contactus">
-                       
-                            <ul>
-                                <li>
-                                    <i class="fa fa-envelope"></i>
-                                    <h5>돌아가기</h5>
-                                <!--     <a href="mailto:name@email.com">info@example.com</a> -->
-                                </li>
-                                <li>
-                                    <i class="fa fa-phone"></i>
-                                    <h5>회원 삭제</h5>
-                                    <!-- <span>+(091)61 3146 8728</span> -->
-                                </li>
-                            </ul>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

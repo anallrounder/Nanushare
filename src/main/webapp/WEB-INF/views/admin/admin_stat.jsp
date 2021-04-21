@@ -50,6 +50,30 @@
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
 
+<style>
+body {
+	background-color: f9f9fb;
+} 
+.charity-simple-blog-btn {
+	border: 0;
+}
+
+​h3 {
+	text-align: center;
+}
+
+#forimg {
+	background-image: url('/resources/banner_imgs/admin_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
+	
+}
+.black-transparent {
+	opacity:50%;
+}
+
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -57,19 +81,16 @@
    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp" %>
     
     <!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>관리자 페이지</h1>
-	                <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</p>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-	<!-- Banner -->
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner -->
 	
     <!-- Content -->
     <div class="charity-main-content">
@@ -81,28 +102,15 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
-      <!-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li> -->
     </ul>
   </nav>
-  <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-
   <aside class="main-sidebar sidebar-dark-primary elevation-4">  
-    <!-- Brand Logo -->
-   <!--  <a href="/resources/AdminLTE-master/index3.html" class="brand-link">
-      <img src="/resources/AdminLTE-master/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a> -->
 
     <!-- Sidebar -->
     <div class="sidebar">
+    
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <img src="/resources/AdminLTE-master/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
@@ -194,15 +202,16 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-                        
-					<!--// volunteer-form \\-->
-					<br>
-					
-					<!-- <button type="button" id="test-btn">월별에 따른 일별 테스트btn</button> -->
-					<div class="charity-volunteer-form" >
+				
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="m_day">
+							
+								<div class="charity-fancy-title " style=" margin:20px 0px 20px 0px;">
+									<h2> 후원금 통계 </h2>
+								</div>
 								<!-- 월 선택 -->
+								
+								<div class="charity-volunteer-form" >
 								<h4>월을 선택하세요</h4>
 						          <select class="form-control" id="choice-month" style="width:200px">
 						          	<c:forEach var="i" begin="1" end="12">
@@ -271,10 +280,10 @@
 							       
 							   </div>
 							   <!-- /.card -->
-							   
+							   </div>
 							</div>
 						</div>
-					</div>
+				
 					<!-- chart End -->
               </div>
            </div>

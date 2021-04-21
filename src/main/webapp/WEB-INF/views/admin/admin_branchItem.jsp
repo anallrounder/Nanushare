@@ -48,7 +48,31 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
+  	
+<style>
+body {
+	background-color: f9f9fb;
+} 
+.charity-simple-blog-btn {
+	border: 0;
+}
 
+​h3 {
+	text-align: center;
+}
+
+#forimg {
+	background-image: url('/resources/banner_imgs/admin_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
+	
+}
+.black-transparent {
+	opacity:50%;
+}
+
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -56,19 +80,16 @@
    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp" %>
     
     <!-- Banner -->
-	<div class="charity-subheader">
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>관리자 페이지</h1>
-	                <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</p>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-	<!-- Banner -->
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner -->
 	
     <!-- Content -->
     <div class="charity-main-content">
@@ -169,9 +190,7 @@
               </li>
              </ul>
           </li>
-             </ul>
-          </li>
-        </ul>
+		</ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -183,42 +202,42 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        
-                        <!--// volunteer-form \\-->
-                        <br>
-                        
-                        <div class="charity-volunteer-form" >
-									<div class="tab-content">
-										<div class="tab-pane fade show active" id="item_branch">
-											<form>
-											<div class="widget_title"><h2>지점 재고</h2></div>
-												<table class="branchI">
-													<br>
-													<tr>
-														<th>No.</th>
-														<th>지점명</th>
-														<th>마스크</th>
-														<th>기저귀</th>
-														<th>생리대</th>
-														<th>문구류</th>
-														<th>손세정제</th>
-													</tr>
-	
-													<c:forEach items="${vvam}" var="vmdao" varStatus="status">
-													<tr>
-														<td>${status.count}</td> <!-- index  -->
-														<td>${vmdao.branch}</td> <!-- 지점명 -->
-														<c:forEach items="${vmdao.vmamlist}" var="list">
-																<td>${list.vm_amount}</td>
-														</c:forEach>
-													</tr>
-													</c:forEach>
-												</table>
-											</form>
-										</div>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="item_branch">
+								<div class="charity-fancy-title " style=" margin:20px 0px 20px 0px;">
+									<h2> 지점 재고 </h2>
+								</div> 
 											
-									</div>
-                        </div>
+								<!--// volunteer-form \\-->
+								<form id="boardForm" class="charity-volunteer-form">
+									<table class="table taWWble-striped projects">
+										<thead>
+											<tr bgcolor="a5a5a5">
+												<th style="border-left: none;">No.</th>
+												<th>지점명</th>
+												<th>마스크</th>
+												<th>기저귀</th>
+												<th>생리대</th>
+												<th>문구류</th>
+												<th style="border-right: none;">손세정제</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<c:forEach items="${vvam}" var="vmdao" varStatus="status">
+											<tr>
+												<td style="border-left: none;">${status.count}</td> <!-- index  -->
+												<td>${vmdao.branch}</td> <!-- 지점명 -->
+												<c:forEach items="${vmdao.vmamlist}" var="list">
+													<td style="border-right: none;">${list.vm_amount}</td>
+												</c:forEach>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
                         <!--// volunteer-form \\-->
                     </div>
                 </div>
