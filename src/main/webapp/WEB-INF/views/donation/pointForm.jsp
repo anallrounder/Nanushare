@@ -9,60 +9,65 @@
 
 <head>
 
-    <!-- meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-   	<title>포인트 기부</title>
+<!-- meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
-    <link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
-    
-    <!-- 웹페이지 탭 로고이미지 삽입  -->
-	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
-	
-	<!-- point input box 입력시 공백일 경우와 1000포인트 미만일 경우 검증 -->
-    <!-- <script>
-	/* alert띄우는 방법 */
-	 function dd(bool){
-		if(boll.value.length==0){
-			alert("기부할 포인트를 입력해주세요.")
-			return false;
-		}
-		return true;
-	} 
-	
-	/* 인풋박스 오른쪽에 빨간글씨로 검증 내용 띄우는 방법 */
-	function dd(bool){
-		var check = document.getElementById("selectDirect");
-		if(bool.value.length==0){
-			check.innerHTML = "기부할 포인트를 입력해주세요.";
-			return false;
-		}
-		
-		return true;
+<title>포인트 기부</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
+<link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+
+<!-- 웹페이지 탭 로고이미지 삽입  -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+
+<!-- new korean font from google -->
+<!-- NotoSansKR, Gothic A1 -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- point input box 입력시 공백일 경우와 1000포인트 미만일 경우 검증 -->
+   <!-- <script>
+/* alert띄우는 방법 */
+ function dd(bool){
+	if(boll.value.length==0){
+		alert("기부할 포인트를 입력해주세요.")
+		return false;
+	}
+	return true;
+} 
+
+/* 인풋박스 오른쪽에 빨간글씨로 검증 내용 띄우는 방법 */
+function dd(bool){
+	var check = document.getElementById("selectDirect");
+	if(bool.value.length==0){
+		check.innerHTML = "기부할 포인트를 입력해주세요.";
+		return false;
 	}
 	
-	/* 4자리 이상 숫자인지 확인 */
-		function(data){
-		var check = document.getElementById("selectDirect");
-		if(data.value.lenth! = 4){
-			check.innerHTML = "1000point부터 기부할 수 있습니다.";
-			return false;
-		}
-		return true; 
-	} 
-	</script>  -->
-		<!-- validation 경고문구 스타일 -->
+	return true;
+}
+
+/* 4자리 이상 숫자인지 확인 */
+	function(data){
+	var check = document.getElementById("selectDirect");
+	if(data.value.lenth! = 4){
+		check.innerHTML = "1000point부터 기부할 수 있습니다.";
+		return false;
+	}
+	return true; 
+} 
+</script>  -->
+	<!-- validation 경고문구 스타일 -->
 <style type="text/css">
 .error {
     color: red;
@@ -80,67 +85,66 @@
 }
 </style>
 
-    <!-- Banner -->
-	<!-- 셀렉트 박스에서 직접입력 및 인풋박스에 셀렉트한 값이 입력되어 넘어가도록 하는 자바스크립트 코드 -->
-	<script type="text/javascript"> 
-		function changeSelection(){
-			if(document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value == '0'){
-				 document.donatePoint.dntpnt.disabled = true;
-				 document.donatePoint.dntpnt.value = "";
-			}
-			if(document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value == '9'){
-				 document.donatePoint.dntpnt.disabled = false;
-				 document.donatePoint.dntpnt.value = "";
-				 document.donatePoint.dntpnt.focus();
-			} else{
-				 document.donatePoint.dntpnt.disabled = true;
-				 document.donatePoint.dntpnt.value = document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value;
-			}
-		} 
-		
-		$(document).ready(function() {
-			$('#selectDirect').attr('disabled', 'disabled');
-			// submit으로 form 전송시 disabled된 input box값은 전달되지 않아 'submit'버튼 클릭시 해당 컨트롤의 disabled 속성을 제거하도록 해야한다.
-			$('#btnSend').click(function(){
-				$('#selectDirect').removeAttr('disabled');
-			});
+<!-- 셀렉트 박스에서 직접입력 및 인풋박스에 셀렉트한 값이 입력되어 넘어가도록 하는 자바스크립트 코드 -->
+<script type="text/javascript"> 
+	function changeSelection(){
+		if(document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value == '0'){
+			 document.donatePoint.dntpnt.disabled = true;
+			 document.donatePoint.dntpnt.value = "";
+		}
+		if(document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value == '9'){
+			 document.donatePoint.dntpnt.disabled = false;
+			 document.donatePoint.dntpnt.value = "";
+			 document.donatePoint.dntpnt.focus();
+		} else{
+			 document.donatePoint.dntpnt.disabled = true;
+			 document.donatePoint.dntpnt.value = document.donatePoint.amount.options[document.donatePoint.amount.selectedIndex].value;
+		}
+	} 
+	
+	$(document).ready(function() {
+		$('#selectDirect').attr('disabled', 'disabled');
+		// submit으로 form 전송시 disabled된 input box값은 전달되지 않아 'submit'버튼 클릭시 해당 컨트롤의 disabled 속성을 제거하도록 해야한다.
+		$('#btnSend').click(function(){
+			$('#selectDirect').removeAttr('disabled');
 		});
-	</script>
+	});
+</script>
+
+<!-- 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드 -->
+<script type="text/javascript">
+/* This script and many more are available free online at
+The JavaScript Source!! http://javascript.internet.com
+Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
 	
-	<!-- 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드 -->
-	<script type="text/javascript">
-	/* This script and many more are available free online at
-	The JavaScript Source!! http://javascript.internet.com
-	Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
-		
-	function autoDate () {
-		var tDay = new Date();
-		var tMonth = tDay.getMonth()+1;
-		var tDate = tDay.getDate();
-		if ( tMonth < 10) tMonth = "0"+tMonth;
-		if ( tDate < 10) tDate = "0"+tDate;
-		document.getElementById("tDate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
-	}
-	
-	// Multiple onload function created by: Simon Willison
-	// http://simonwillison.net/2004/May/26/addLoadEvent/
-	function addLoadEvent(func) {
-		var oldonload = window.onload;
-		if (typeof window.onload != 'function') {
-			window.onload = func;
-		} else {
-			window.onload = function() {
-				if (oldonload) {
-					oldonload();
-				}
-				func();
+function autoDate () {
+	var tDay = new Date();
+	var tMonth = tDay.getMonth()+1;
+	var tDate = tDay.getDate();
+	if ( tMonth < 10) tMonth = "0"+tMonth;
+	if ( tDate < 10) tDate = "0"+tDate;
+	document.getElementById("tDate").value = tDay.getFullYear()+"년 "+tMonth+"월 "+tDate+"일";
+}
+
+// Multiple onload function created by: Simon Willison
+// http://simonwillison.net/2004/May/26/addLoadEvent/
+function addLoadEvent(func) {
+	var oldonload = window.onload;
+	if (typeof window.onload != 'function') {
+		window.onload = func;
+	} else {
+		window.onload = function() {
+			if (oldonload) {
+				oldonload();
 			}
+			func();
 		}
 	}
-	addLoadEvent(function() {
-		autoDate();
-	}); 
-	</script>
+}
+addLoadEvent(function() {
+	autoDate();
+}); 
+</script>
 	
 </head>
 
@@ -202,7 +206,7 @@
                         
                         
                         <!--// volunteer-form \\-->
-                        <div class="widget_title mt-4"><h2>포인트 나눔 신청서</h2></div>
+                        <div class="widget_title mt-4"><h2 style="font-size:22px;">포인트 나눔 신청서</h2></div>
                        
                         <div class="charity-volunteer-form"> <!-- .charity-volunteer-form > form > ul > li > #text-calendar -->
 						<form id="donatePoint" name="donatePoint" method="post" action="${pageContext.request.contextPath}/my/donation/money/point/pointAction">
@@ -222,11 +226,11 @@
                                        <label>이름:</label>
 									   <input type="text" name="name" value="${vo1.name}" readonly />
 								</li>
-                                   <li>
-                                       <label>신청 날짜:</label>    
-                                       <div class="chrity-full-form"> <!-- class="charity-select-date" -->
+									<li>
+										<label>신청 날짜:</label>    
+										<div class="chrity-full-form"> <!-- class="charity-select-date" -->
                                        	<!-- readonly 작성시 수정은 불가하고 읽기만 가능하다. -->
-                                   		<input name="tName" type="text" id="tDate" readonly>
+										<input name="tName" type="text" id="tDate" readonly>
                                    		
                                    	</div> 
                                    </li>
@@ -280,7 +284,7 @@
                          
 	                    <!--  지침: 확인 사항 리스트 -->
 	                   <!--  내용 참고 : https://www.donorpoints.com/ -->
-	                    <div class="widget_title mt-5"><h2>포인트 나눔 전 반드시 확인해 주세요!</h2></div>
+	                    <div class="widget_title mt-5"><h2 style="font-size:22px;">포인트 나눔 전 반드시 확인해 주세요!</h2></div>
 	                    <div class="charity-campaign-content">
 	                        <div class="row">
 	                            <div class="col-md-12">
@@ -327,7 +331,7 @@
                                 }
                             },
                             messages: {
-                                /* rules에서 설정한 규칙을 위배할시 나오는 메세지 */
+                                // rules에서 설정한 규칙을 위배할시 나오는 메세지
                                 amount: { 		// 기부 포인트 select
                                     required: '기부할 포인트를 선택해 주세요.'
                                 },
@@ -339,8 +343,8 @@
                                     min: '1000포인트 부터 기부가 가능합니다.'
                                 }
                             },
-                            errorElement: 'span',			/* 디폴트는 lable 태그 lable->span 으로 수정 */
-                            errorClass: 'error',			/* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
+                            errorElement: 'span',			// 디폴트는 lable 태그 lable->span 으로 수정 
+                            errorClass: 'error',			// 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.
 
                             errorPlacement: function(error, element) {
                                 if (element.is(":text") ) {
@@ -357,13 +361,13 @@
                             //false 리턴 시 messages에 선언된 내용들 띄워줌
                             return $(element).val().indexOf(" ") = -1 ? true : false;
                         });
-                        //출처: https://devhong.tistory.com/3 [주니어를 탈출하고 싶은 개발자의 블로그]
+                        //출처: https://devhong.tistory.com/3 
                     </script> 
 					<!-- form validation end -->
 	                    
 	                    
 	                    <!--// 연락처 이메일 \\-->
-                        <div class="charity-team-contactus">
+                        <!-- <div class="charity-team-contactus">
                             <ul>
                            		<li>
                                     <i class="fa fa-phone"></i>
@@ -376,7 +380,7 @@
                                     <a href="mailto:name@email.com">info@example.com</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                         <!--\\ 연락처 이메일 //-->
                     
                     </div>
