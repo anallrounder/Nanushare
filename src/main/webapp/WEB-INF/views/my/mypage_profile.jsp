@@ -130,7 +130,7 @@ li {
 </head>
 <body>
 
-	<div class="user-info">
+	<div class="user-info" >
 		<figure>
 			<img id="introImg" class="usre_img"
 				src="${pageContext.request.contextPath}/resources/users/user01_sm.png">
