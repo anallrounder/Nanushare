@@ -39,6 +39,9 @@
 	<!-- 새로고침 시 스크롤이 상단으로 manual = 복원안함 auto  = 복원 https://okky.kr/article/684414?note=1915071 -->
 <!-- 	<script>history.scrollRestoration = "auto"</script> -->
 	
+	<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
 	<script type="text/javascript">
 	
 	// 댓글 수정 취소 

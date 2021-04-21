@@ -35,6 +35,8 @@
 	<!-- ckeditor -->
 	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	
+	<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
