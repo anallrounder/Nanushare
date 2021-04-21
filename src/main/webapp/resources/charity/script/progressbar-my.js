@@ -6,7 +6,7 @@
 		var defaults = {
 			height : "50",
 			backgroundColor : "#272625",
-			barColor : "#ffb607",
+			barColor : "FFAE73", /*"#ffb607",*/
 			targetBarColor : "",
 			percentage : true,
 			shadow : false,

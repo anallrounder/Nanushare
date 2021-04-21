@@ -35,6 +35,9 @@
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 	
+	<!-- header  -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
 	<!-- ckeditor -->
 	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 	

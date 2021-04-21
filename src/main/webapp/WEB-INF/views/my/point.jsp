@@ -67,7 +67,7 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
-	
+
 
 </head>
 <style>
@@ -103,46 +103,9 @@ li {
 					<section class="module">
 					<div class="module-inner">
 						<div class="side-bar">
-							<div class="user-info">
-								<img class="img-profile img-circle img-responsive center-block"
-									src="/resources/my/프로필사진.PNG" alt="">
-								<!-- 
-									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
-								<ul class="meta list list-unstyled">
-									<li class="name"><h2>
-											<sec:authentication property="principal.member.name" />
-										</h2></li>
-									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></a></li>
-									<li class="activity"><sec:authentication
-											property="principal.member" var="buttonhidden" /> <sec:authorize
-											access="isAuthenticated()">
-
-											<c:if test="${buttonhidden.signuppath == 'home'}">
-
-												<button
-													class="charity-simple-blog-btn w-100 text-white stats"
-													type="submit"
-													onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-													프로필수정</button>
-
-											</c:if>
-										</sec:authorize> <sec:authentication property="principal.member"
-											var="buttonhidden" /> <sec:authorize
-											access="isAuthenticated()">
-
-											<c:if test="${buttonhidden.signuppath != 'home'}">
-
-												<button
-													class="charity-simple-blog-btn w-100 text-white stats"
-													type="submit"
-													onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
-													회원탈퇴</button>
-
-											</c:if>
-										</sec:authorize></li>
-								</ul>
-							</div>
+							<!-- profile -->
+							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+							<!-- profile -->
 							<nav class="side-menu">
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
@@ -152,63 +115,72 @@ li {
 									</span>&nbsp;&nbsp;나의인증내역</a></li>
 								<li><a href="give"><span class="fa fa-handshake">
 									</span>&nbsp;&nbsp;나의나눔내역</a></li>
-								<li><a href="reply"><span
-										class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
+								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
 								<li><a href="pay"><span class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
-								<li class="active"><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
-
-
+								<li class="active"><a href="point"><span
+										class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
 							</ul>
 							</nav>
 						</div>
+
 						<div class="content-panel">
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
+
 							<div class="charity-fancy-title">
 								<h2>나의 포인트 내역</h2>
 							</div>
-							<div>&nbsp;</div>
-							<table>
-								<div>
-									<br>
-								</div>
-								<tr>
-									<th>날짜</th>
-									<th>얻은 포인트</th>
-									<th>기부 포인트</th>
-									<th>현재 포인트</th>
-									<!-- <th>이벤트</th> -->
-									
 
-								</tr>
+							<form id="boardForm" class="charity-volunteer-form"
+								name="boardForm"
+								style="margin-bottom: 0px; padding-bottom: 10px;">
 
-								<c:if test="${empty list6}">
-									<tr>
-										<td colspan="5" align="center">작성된 댓글이 없습니다</td>
-									</tr>
-								</c:if>
+								<table class="table taWWble-striped projects">
 
-								<!-- 나의댓글내역 -->
-								<c:if test="${! empty list6}">
-									<c:forEach items="${list6}" var="list6" varStatus="status">
-										<tr>
-											<td>${list6.pdate}</td>
-											<td style="color:blue;"><c:if test="${list6.prtpnt != 0}">${list6.prtpnt}</c:if>
-											<c:if test="${list6.prtpnt == 0}">&nbsp;</c:if></td>
-											<td style="color:red;"><c:if test="${list6.dntpnt != 0}">${list6.dntpnt}</c:if>
-											<c:if test="${list6.dntpnt == 0}">&nbsp;</c:if>
-											</td>
-											<td>${list6.nowpnt}</td>
-											<%-- <td>${list6.ecat_num}</td> --%>
+									<thead>
+										<tr bgcolor="a5a5a5">
+											<th>날짜</th>
+											<th>적립 포인트</th>
+											<th>기부 포인트</th>
+											<th>현재 포인트</th>
+											<!-- <th>이벤트</th> -->
+
+
+										</tr>
+									</thead>
+									<tbody>
+										<c:if test="${empty list6}">
+											<tr>
+												<td colspan="5" align="center">포인트 내역이 없습니다</td>
 											</tr>
+										</c:if>
 
-									</c:forEach>
-								</c:if>
-							</table>
-
+										<!-- 나의댓글내역 -->
+										<c:if test="${! empty list6}">
+											<c:forEach items="${list6}" var="list6" varStatus="status">
+												<tr>
+													<td>${list6.pdate}</td>
+													<td style="color: #2E2EFE;"><c:if
+															test="${list6.prtpnt != 0}">${list6.prtpnt}</c:if> <c:if
+															test="${list6.prtpnt == 0}">
+															<i class="far fa-smile"
+																style="color: lightgrey; line-height: 40px; vertical-align: middle;"></i>
+														</c:if></td>
+													<td style="color: #FE2E2E;"><c:if
+															test="${list6.dntpnt != 0}">${list6.dntpnt}</c:if> <c:if
+															test="${list6.dntpnt == 0}">
+															<i class="far fa-smile"
+																style="color: lightgrey; line-height: 40px; vertical-align: middle;"></i>
+														</c:if></td>
+													<td>${list6.nowpnt}</td>
+													<%-- <td>${list6.ecat_num}</td> --%>
+												</tr>
+											</c:forEach>
+										</c:if>
+									</tbody>
+								</table>
+							</form>
 							<!-- 페이징 -->
 							<c:if test="${! empty list6}">
 								<div class="charity-pagination">
@@ -233,14 +205,8 @@ li {
 												</a>
 											</c:if></li>
 									</ul>
-
 								</div>
-
 							</c:if>
-
-
-
-
 						</div>
 					</div>
 					</section>
