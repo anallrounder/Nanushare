@@ -126,8 +126,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>문의 하기</h1>
-                    <p>show your support</p>
+                   <!--  <h1>문의 하기</h1>
+                    <p>show your support</p> -->
                 </div>
             </div>
         </div>
@@ -135,6 +135,9 @@
     <!-- Banner -->
 
     <!-- Content -->
+	<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 1:1 문의 </h2>
+	</div> 
     <div class="charity-main-content">
 
         <!-- Main Section -->
