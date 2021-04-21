@@ -57,39 +57,35 @@
 			var bcontent = CKEDITOR.instances.bcontent.getData();
 			var getMemberId = $("#getMemberId").val();
 			
-			/* var formData = new FormData();
-			formData.append("btitle", btitle);
-			formData.append("bcontent", bcontent);
-			formData.append("getMemberId", getMemberId); */
-		
+			console.log(btitle);
+			console.log(bcontent);
+			console.log(getMemberId);
+			
 			
 			var form = {
-				getMemberId : getMemberId,				
+				member_id : getMemberId,				
 				btitle : btitle,
 				bcontent : bcontent
 			}
 			
 			$.ajax({
-				type : 'post',				
-				enctype: 'multipart/form-data',	
-				contentType: false, /* application/json; charset=utf-8 */
-				processData : false,				
+				type : 'POST',													
 				url : $(this).attr("action"),
+				contentType: 'application/json; charset=utf-8',
 				cache : false,
-				dataType: 'json',
-				data : JSON.stringify(form) , /* JSON.stringify(form) */
+				dataType: 'TEXT',
+				data : JSON.stringify(form) ,
 				success : function(result){
 					console.log("result : " + result );
-						if(result == "SUCCESS") {
-							
-							window.location.href='${pageContext.request.contextPath}/board/shows/content_view/'+ result;
 							
 							swal({
 								title : "글 작성 완료" , 
 								icon : "success" , 
 								button : true 
 							});
-						}
+							$(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/"+result);
+							
+						
 				},
 				error : function(e){
 					//alert("오류가 발생했습니다.");
@@ -141,7 +137,7 @@
                 <div class="row">
               		 <div class="col-md-9">
                
-                       <form id="write" action="${pageContext.request.contextPath}/my/board/shows/write" method="post" enctype="multipart/form-data" >
+                       <form id="write" action="${pageContext.request.contextPath}/my/board/shows/write" method="post"  >
                      	   <sec:authentication property="principal" var="getMemberId"/>
                      	   
 	                       <div class="charity-contact-form">
@@ -149,13 +145,12 @@
 	                           <h4><span>Title</span></h4>
 	                           <input type="text" id="btitle" name="btitle" placeholder="제목을 작성하세요." >
 	                           <br>
-	                           <br>
-	                           <h4>Images</h4>
-	                           <%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
+	                           
+	                          <!--  <h4>Images</h4>	                        
 	                           <p>썸네일 이미지 첨부하기 :
 	                           	<br/>
 							   		<input id="thumNail" type="file" name="file" multiple="multiple"/>
-	                            </p>
+	                            </p> -->
 	                            <!-- <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 이미지 저장</i></button> -->
 	                           <br><br>
 	                           <h4>Content</h4>
