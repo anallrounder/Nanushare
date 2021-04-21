@@ -81,7 +81,7 @@ li {
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	<!-- Sub Header -->
-	<div class="charity-subheader">
+<%-- 	<div class="charity-subheader">
 		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
 		<span class="black-transparent"></span>
 		<div class="container">
@@ -102,7 +102,7 @@ li {
 				<div class="view-account">
 					<section class="module">
 					<div class="module-inner">
-						<div class="side-bar">
+						<div class="side-bar"> --%>
 							<!-- profile -->
 							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
 							<!-- profile -->
@@ -174,7 +174,6 @@ li {
 														</c:if></td>
 
 													<td>${list6.nowpnt}</td>
-													<%-- <td>${list6.ecat_num}</td> --%>
 												</tr>
 											</c:forEach>
 										</c:if>
