@@ -112,14 +112,13 @@
 					<!-- <div class="card-body"> -->
 						
 						<!-- 문의하기 버튼 -->
-						<div class="col-md-2" style="float: right; padding-right:30px;">
+						<div class="col-md-3" style="float: right; padding-right:30px;">
 							<button type="button" class="charity-sub-btn" onclick="location.href ='${pageContext.request.contextPath}/board/qna/write'" 
 							style="width:100px; height:40px; font-size:16px; mrgin-top:0px;"><i class="fa fa-question" ></i>  문의하기</button>	
 					    </div>
 						<!-- 문의하기 버튼 -->
-					
 						
-		        		<form id="boardForm" class="charity-volunteer-form" name="boardForm" style="margin-bottom:0px; padding-bottom:10px;">
+		        		<form id="boardForm" class="charity-volunteer-form" name="boardForm" style="margin-bottom:0px; padding-bottom:10px; background-color:white;">
 							<table class="table taWWble-striped projects" >
 							<!-- <table class="table table-light table-hover " > -->
 								<colgroup>
@@ -201,7 +200,6 @@
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
-
 	<!-- jQuery -->
 	<script src="/resources/charity/script/jquery.js"></script>
 	<script src="/resources/charity/script/popper.min.js"></script>
@@ -214,9 +212,7 @@
 	<script src="/resources/charity/script/jquery.jplayer.js"></script>
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
-		
 	    
 </body>
-
 
 </html>

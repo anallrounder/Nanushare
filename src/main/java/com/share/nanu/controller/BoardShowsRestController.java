@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -63,9 +64,9 @@ public class BoardShowsRestController {
 	public ModelAndView boardShowPaging(Criteria cri, ModelAndView mav, AttachmentVO avo,
 			@AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("인증게시판 컨트롤러 페이징 리스트" + cri);
-		
+
 		mav.addObject("list", service.getlist(cri));
-		
+
 		// 절대경로 -> 상대경로
 		List<AttachmentVO> attach = service.getAttachment(avo);
 		log.info("path : " + attach.get(0).getPath());
@@ -103,22 +104,21 @@ public class BoardShowsRestController {
 			log.info("로그인한 사람 이름 - " + md.getmember().getName());
 			mav.addObject("username", md.getmember().getName());
 		}
-		
+
 		mav.setViewName("board_show/yourSupportList");
-		
+
 		return mav;
 	}
-	
-	
+
 	// 인증게시판 게시글 컨텐트뷰 + 댓글 보기
 	@GetMapping("/board/shows/content_view/{b_index}")
 	public ModelAndView content_view(BoardVO boardVO, BoardreplyVO rvo, ModelAndView mav,
 			@AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("controller -- content_view -- 호출");
 		service.uphit(boardVO);
-		
+
 		mav.addObject("list", service.getlist());
-		
+
 		mav.setViewName("board_show/yourSupportContent"); // 이동할 웹페이지 주소
 
 		mav.addObject("content_view", service.getBoard(boardVO.getB_index())); // 게시판 글 불러오기
@@ -126,10 +126,10 @@ public class BoardShowsRestController {
 
 		mav.addObject("listComment", service.listComment(rvo)); // 게시판글의 댓글 리스트 불러오기
 		log.info("컨트롤러 댓글 리스트 테스트 service.listComment(rvo)= " + rvo); // 확인
-		
-		mav.addObject("replyCount", service.replyCount(rvo)); //댓글 수 카운트
-		log.info("컨트롤러 댓글 수 확인 service.replyCount(rvo) = " + service.replyCount(rvo)); //확인
-		
+
+		mav.addObject("replyCount", service.replyCount(rvo)); // 댓글 수 카운트
+		log.info("컨트롤러 댓글 수 확인 service.replyCount(rvo) = " + service.replyCount(rvo)); // 확인
+
 		// mav.addObject("getComment", service.getComment(rvo)); // 로그인한사람의 댓글 확인
 
 		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
@@ -141,14 +141,14 @@ public class BoardShowsRestController {
 		}
 		return mav;
 	}
-	
+
 	// 글작성 페이지
 	@GetMapping("/my/board/shows/write_view")
 	public ModelAndView vsWriteView(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("인증게시판 컨트롤러  -- write_view() -- 호출");
-		
+
 		mav.setViewName("board_show/ysWriteView");
-		
+
 		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		// model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate()));
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
@@ -158,8 +158,7 @@ public class BoardShowsRestController {
 		}
 		return mav;
 	}
-	
-	
+
 	// 수정창 보기 - 체크
 	@GetMapping("/my/board/shows/modify_view/{b_index}")
 	public ModelAndView bsModiview(BoardVO boardVO, ModelAndView mav) throws Exception {
@@ -168,28 +167,27 @@ public class BoardShowsRestController {
 		mav.setViewName("board_show/ysModifyView");
 		return mav;
 	}
-	
+
 	// 인증게시판 게시글 수정
 	@PutMapping("/board/shows/modify")
 	public ResponseEntity<String> bsModify(@RequestBody BoardVO boardVO) throws Exception {
 		log.info("인증게시판 컨트롤러  -- modify() -- 호출");
-		log.info("boardVO"+boardVO);
-		 
+		log.info("boardVO" + boardVO);
+
 		ResponseEntity<String> entity = null;
-		
+
 		try {
-			service.modifyBoard(boardVO); //수정 업데이트
-			
-	        entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-	        
-	      }catch(Exception e){
-	         e.printStackTrace();
-	         entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-	      }
-		
-		return entity;  
+			service.modifyBoard(boardVO); // 수정 업데이트
+
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
 	}
-	
 
 	// 인증게시판 게시글 삭제
 	// ck에디터로 저장되어지는 이미지는 디비에 저장히자 않아서..... 이미지의 경로를 모른다....
@@ -204,42 +202,38 @@ public class BoardShowsRestController {
 
 		// ck 에디터로 올리는 이미지 삭제는 잠시 보류.. 게시판 글번호를 가져올 수 없어서 찾을 수 없다.
 		log.info("인증게시판 글 삭제");
-	
-		//1. 썸네일 로컬에서 삭제
-		String path = service.getAttachmentBindex(bvo.getB_index()); // attachment 에서 삭제할 썸네일 이미지 경로 가져오기		
+
+		// 1. 썸네일 로컬에서 삭제
+		String path = service.getAttachmentBindex(bvo.getB_index()); // attachment 에서 삭제할 썸네일 이미지 경로 가져오기
 		if (path != null) {
-			
+
 			File deleteFile = new File(path);
-			if(deleteFile.exists()) { //파일의 유뮤 체크
+			if (deleteFile.exists()) { // 파일의 유뮤 체크
 				deleteFile.delete();
-				
+
 				log.info("썸네일 삭제");
-			}else {
+			} else {
 				log.info("삭제할 썸네일이 업습니다.");
 			}
-			
+
 			service.deleteAttachment(bvo.getB_index());
 			log.info("썸네일 저장 테이블에서 삭제");
-			
+
 		}
-		
-		//2. 댓글 테이블에서 해당 게시판 글번호로 댓글 전부 삭제
-		service.deleteReply(bvo.getB_index());		
+
+		// 2. 댓글 테이블에서 해당 게시판 글번호로 댓글 전부 삭제
+		service.deleteReply(bvo.getB_index());
 		log.info("인증게시판 댓글 삭제");
-		
-		
-		//3. board 테이블에서 인증글 삭제
+
+		// 3. board 테이블에서 인증글 삭제
 		service.deleteCertificationBoard(bvo.getB_index());
 		log.info("인증게시판 글 삭제");
-		
-		
+
 		mav.setViewName("/board_show/yourSupportList");
 		return mav;
 
 	}
 
-	
-	
 	/* 댓글 */
 
 	// 댓글 입력 insert
@@ -281,8 +275,8 @@ public class BoardShowsRestController {
 		// 삭제 처리 HTTP 상태 메시지 리턴
 		return entity;
 	}
-	
-	//댓글 수정
+
+	// 댓글 수정
 	@PutMapping("board/shows/replyModify")
 	public ResponseEntity<String> relpyModify(ModelAndView mav, @RequestBody BoardreplyVO brvo) {
 		log.info("댓글 수정");
@@ -298,14 +292,14 @@ public class BoardShowsRestController {
 		}
 		return entity;
 	}
-	
+
 	// ck 에디터
 	@PostMapping("/my/board/shows/imageUpload")
-	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam MultipartFile upload) throws Exception {
+	public void imgUpLoad(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload)
+			throws Exception {
 
 		log.info("로컬이미지 업로드");
-		//log.info("bvo : " + bvo);
+		// log.info("bvo : " + bvo);
 		OutputStream out = null;
 		PrintWriter writer = null;
 		JsonObject json = new JsonObject();
@@ -325,9 +319,9 @@ public class BoardShowsRestController {
 		String uid = UUID.randomUUID().toString();
 
 		try {
-			String fileName = upload.getOriginalFilename(); //원본이름
-			fileName = uid + "_" + fileName; //중복방지 랜덤 문자열
-			log.info("파일 이름 : " + fileName);			
+			String fileName = upload.getOriginalFilename(); // 원본이름
+			fileName = uid + "_" + fileName; // 중복방지 랜덤 문자열
+			log.info("파일 이름 : " + fileName);
 			byte[] bytes = upload.getBytes();
 
 			// String ckEditorUpLoadPath = uploadPath +"\\" + uid + "_" + fileName ;
@@ -338,7 +332,7 @@ public class BoardShowsRestController {
 			}
 
 			writer = response.getWriter();
-			String fileUrl = "/resources/attachment" + "/" + datefolder + "/" + fileName; //path
+			String fileUrl = "/resources/attachment" + "/" + datefolder + "/" + fileName; // path
 			// 업로드시 이미지 정보에 표시 되어 지는 url, 파일이 저장되어 있는 위치, 이름이 같아야 한다!!!!, resources 에서부터
 			// 설정하지 않으면 views아래에서 찾는다.
 
@@ -354,7 +348,7 @@ public class BoardShowsRestController {
 			// \"url\":\"" + fileUrl + "\"}");
 
 			writer.flush();
-			
+
 		} catch (Exception e) { // TODO: handle exception
 			e.printStackTrace();
 		} finally {
@@ -379,120 +373,36 @@ public class BoardShowsRestController {
 	// 서비스에 boardVO를 넘겨주고 DB에 저장
 	@ResponseBody
 	@PostMapping("/my/board/shows/write")
-	public int bsWrite(MultipartHttpServletRequest multiple, @RequestBody BoardVO boardVO, 
-			AttachmentVO attachmentVO) throws Exception {
+	public int bsWrite(@RequestBody BoardVO boardVO) throws Exception {
 
 		log.info("인증게시판 컨트롤러  -- write() -- 호출");
-
-		final int THUMNAIL_WIDTH = 264;
-		final int THUMNAIL_HEIGHT = 300; // 336 
-		UUID uuid = UUID.randomUUID();
-
-		
+		log.info("boardvo : " + boardVO);
 		service.writeBoard(boardVO);
 		// 멤버아이디를 이렇게 가져오는게 맞을까? 아니다. 받아올수가 없네. 로그인한 사용자 정보를 받아와야함. 일단 테스트는 쿼리문에서 써야겠다.
 		// model.addAttribute("getMember_id",
 		// nbsService.getBoard(boardVO.getMember_id()));
 
-		log.info("fileUpload");
-		// 이미지 저장 절대경로
-	
-		String path = multiple.getSession().getServletContext().getRealPath("/resources/attachment");
-		log.info("attachment Path : " + path);
-
-		Date dt = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String datefolder = sdf.format(dt).toString();
-		log.info("오늘날짜로 생성한 폴더 이름 : " + datefolder);
-
-		path = path + "\\" + datefolder;
-		log.info("오늘날짜로 생성한 폴더 경로 : " + path);
-
-		File dir = new File(path);
-		log.info("오늘날짜로 폴더 생성 확인 : " + dir);
-		if (!dir.isDirectory()) {
-			dir.mkdir();
-		}
-
-		List<MultipartFile> mf = multiple.getFiles("file");
-		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
-			log.info("썸네일이 없습니다.");
-		} else {
-			for (int i = 0; i < mf.size(); i++) { // 파일명 중복 처리
-
-				// 본래 파일명
-				String originalfileName = mf.get(i).getOriginalFilename();// 원본이름
-				String uuidName = uuid + "_" + originalfileName;// 랜덤문자열 파일이름 중복 방지
-				String extension = FilenameUtils.getExtension(originalfileName);// 확장자
-				// 저장 될 파일명
-				// String savefileName=uuid+"."+ext;
-
-				String savePath = path + "\\" + uuidName; // 저장 될 파일 경로
-
-				mf.get(i).transferTo(new File(savePath)); // 파일 저장
-
-				// 썸네일
-
-				File originFile = new File(savePath);
-
-				String thumNailName = "thumNail_" + uuid + "_" + originalfileName;
-				savePath = path + "\\" + thumNailName;
-				log.info("썸네일 경로 : " + savePath);
-				File thumNail = new File(path + "\\" + thumNailName);
-
-				BufferedImage originalImage = ImageIO.read(originFile);
-				BufferedImage thumNailImage = new BufferedImage(THUMNAIL_WIDTH, THUMNAIL_HEIGHT,
-						BufferedImage.TYPE_3BYTE_BGR);
-				Graphics2D graphic = thumNailImage.createGraphics();
-				graphic.drawImage(originalImage, 0, 0, THUMNAIL_WIDTH, THUMNAIL_HEIGHT, null);
-
-				if (extension.equals("jpg")) {
-					ImageIO.write(thumNailImage, "jpg", thumNail);
-				} else {
-					ImageIO.write(thumNailImage, "png", thumNail); // png만 나옴
-				}
-				log.info("썸네일 생성");
-
-				
-
-				attachmentVO.setOriginname(originalfileName);
-				attachmentVO.setPath(savePath);
-				attachmentVO.setExtension(extension);
-				attachmentVO.setB_index(service.getBindex(boardVO));
-				attachmentVO.setUuidName(thumNailName);
-				service.fileUpload(attachmentVO);
-			}
-		}
 		int bIndex = service.getBindex(boardVO);
 		log.info("bindex : " + bIndex);
 		return bIndex;
 	}
-	
-	
-	
-	
+
 	////////////////////////////////////////////////////////////////////
-	
-	@ResponseBody
-	//@PostMapping("/my/board/shows/write")
-	public int test(MultipartHttpServletRequest multiple, @RequestBody BoardVO boardVO, 
-			AttachmentVO attachmentVO) throws Exception {
+
+	@PostMapping("/my/board/shows/upLoadThumNail")
+	public void multipartUpload(
+			 AttachmentVO attachmentVO, MultipartHttpServletRequest multiple
+			) throws Exception {
 
 		log.info("인증게시판 컨트롤러  -- write() -- 호출");
 
 		final int THUMNAIL_WIDTH = 264;
-		final int THUMNAIL_HEIGHT = 300; // 336 
+		final int THUMNAIL_HEIGHT = 336;
 		UUID uuid = UUID.randomUUID();
 
-		
-		service.writeBoard(boardVO);
-		// 멤버아이디를 이렇게 가져오는게 맞을까? 아니다. 받아올수가 없네. 로그인한 사용자 정보를 받아와야함. 일단 테스트는 쿼리문에서 써야겠다.
-		// model.addAttribute("getMember_id",
-		// nbsService.getBoard(boardVO.getMember_id()));
-
 		log.info("fileUpload");
-		// 이미지 저장 절대경로
-	
+		
+
 		String path = multiple.getSession().getServletContext().getRealPath("/resources/attachment");
 		log.info("attachment Path : " + path);
 
@@ -538,7 +448,7 @@ public class BoardShowsRestController {
 
 				BufferedImage originalImage = ImageIO.read(originFile);
 				BufferedImage thumNailImage = new BufferedImage(THUMNAIL_WIDTH, THUMNAIL_HEIGHT,
-						BufferedImage.TYPE_3BYTE_BGR);
+				BufferedImage.TYPE_3BYTE_BGR);
 				Graphics2D graphic = thumNailImage.createGraphics();
 				graphic.drawImage(originalImage, 0, 0, THUMNAIL_WIDTH, THUMNAIL_HEIGHT, null);
 
@@ -549,20 +459,18 @@ public class BoardShowsRestController {
 				}
 				log.info("썸네일 생성");
 
-				
+				// 로그 기록을 system.out.println에서 log.info로수정시 로딩속도 향상 그래도 아직 조금 느림
 
 				attachmentVO.setOriginname(originalfileName);
 				attachmentVO.setPath(savePath);
 				attachmentVO.setExtension(extension);
-				attachmentVO.setB_index(service.getBindex(boardVO));
+				//attachmentVO.setB_index(boardVO.getB_index());
 				attachmentVO.setUuidName(thumNailName);
 				service.fileUpload(attachmentVO);
 			}
 		}
-		int bIndex = service.getBindex(boardVO);
-		log.info("bindex : " + bIndex);
-		return bIndex;
+		
+		
 	}
-
 
 }

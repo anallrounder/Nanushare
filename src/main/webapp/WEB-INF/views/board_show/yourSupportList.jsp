@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 
 <!doctype html>
 <html lang="ko">
@@ -14,10 +19,17 @@
 	
 	<head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+	
 	<!-- meta tags -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<meta name="_csrf" content="${_csrf.token}"/>
+	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	
 	<title>나누셰어 - 나눔인증</title>
 	
@@ -34,6 +46,9 @@
 	
 	 <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+	
+	<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 	<script type="text/javascript">
 	
@@ -102,6 +117,58 @@
 			
 		}); */
 		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		
+		//썸네이 업로드	
+		function thumNailUpload(bIndex) {
+					
+			
+			var formData = new FormData();
+			formData.append("b_index",bIndex);
+			formData.append("file",$("#file")[0].files[0]);
+			
+			
+			console.log(formData.get("file"));
+			console.log(formData.get("b_index"));
+			
+			
+
+			$.ajax({
+				type : 'POST',
+				//enctype: 'multipart/form-data',
+				url : '${pageContext.request.contextPath}/my/board/shows/upLoadThumNail',
+				processData : false,
+				contentType: false,				
+				//cache : false,			
+				data : formData,				
+				success : function(){						
+						swal({
+							title : "썸네일 등록 완료" , 
+							icon : "success" , 
+							button : true 
+						});
+							
+					$(location).attr('href', "${pageContext.request.contextPath}/board/shows/list");							
+				},
+				error : function(e){
+					
+					swal({
+						title : "오류가 발생했습니다." , 
+						icon : "error" , 
+						button : false 
+					});
+					console.log(e);
+				}
+			}); // ajax end
+		
+		}; //function thumNailUpload end
+		
+		
 	</script>
 <style>
 #forimg {
@@ -128,6 +195,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12"> 
+                <p style="text-align:right; margin:0; padding:0;" ><a style="font-size:1px;" href='https://www.freepik.com/vectors/blue'>Blue vector created by vectorjuice - www.freepik.com</a></p>
                    <!--  <h1>1:1 문의</h1> -->
                    <!--  <p>show your support</p> -->
                 </div>
@@ -162,6 +230,7 @@
 					<!-- search start  -->
 					<div style="float: right;" class="widget widget_search ">
 						<form id="searchForm" action="/board/shows/list" method="get" ><!-- class="navbar-form serchForm" -->
+							
 							<div class="input-group">
 								<%-- <div class="form-group col-md-2">
 									<select name="type"  class="charity-select-form">
@@ -264,7 +333,41 @@
 												인생에 어디 아니다. 인간이 것은 싶이 고행을 대한 않는 별과 부패뿐이다. 천자만홍이 인생에 과실이 같이 꽃
 												것이다. 두손을 투명하되 낙원을 약동하다. 소금이라 미묘한 청춘의 꽃이 바이며, 쓸쓸하랴? 목숨이 거선의
 												관현악이며, 현저하게 피고 보라. --> </p>--%>
-											<a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}" class="charity-simple-blog-btn mt-3">더보기</a> 
+												
+												<%-- <a href="${pageContext.request.contextPath}/my/board/shows/thumNail" class="charity-simple-blog-btn mt-3">썸네일 업로드</a>  --%>
+												
+												
+												<button type="button"  class="charity-simple-blog-btn mt-3" data-toggle="modal" data-target="#exampleModal">
+													  썸네일
+													</button>
+												<!-- Modal -->
+												<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												  <div class="modal-dialog modal-dialog-centered" role="document">
+												    <div class="modal-content">
+												      <div class="modal-header">
+												        <h5 class="modal-title" id="exampleModalLabel"><b>ThumNail Upload</b></h5>
+												        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												          <span aria-hidden="true">&times;</span>
+												        </button>
+												      </div>
+												      <div class="modal-body">
+												           
+								                           	<br/>
+														   	<input id="file" type="file" name="file"  multiple="multiple"/>
+								                            
+												      </div>
+												      <br/>
+												      <div class="modal-footer">
+												        <button type="button"  class="charity-simple-blog-btn" data-dismiss="modal">Close</button>
+												        <button id="thumnail" onclick="thumNailUpload('${vo.b_index}')" type="button" class="charity-simple-blog-btn">Save ThumNail</button>
+												      </div>
+												    </div>
+												  </div>
+												</div>
+													
+												
+											
+											<%-- <a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}" class="charity-simple-blog-btn mt-3">더보기</a>  --%>
 											<%-- ${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index} --%>
 										</div>
 									</li>
@@ -314,12 +417,12 @@
 						
 						
 						<!-- Pagination + SEARCH -->
-						<form id='actionForm' action="/board/shows/list" method='get'>
+						<%-- <form id='actionForm' action="/board/shows/list" method='get'>
 							<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 							<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 							<input type="hidden" name="type" value="${pageMaker.cri.type}"><!-- 추가 -->
 						  	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"><!-- 추가 -->
-						</form>
+						</form> --%>
 						
 						<!-- Pagination -->
 						<div class="charity-pagination">

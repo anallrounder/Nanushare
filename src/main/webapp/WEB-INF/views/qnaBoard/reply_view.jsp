@@ -11,7 +11,6 @@
 <head>
 
 <!-- meta tags -->
-<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -52,7 +51,20 @@
 	text-align: center;
 }
 
-</style>
+#forimg {
+	background-image: url('/resources/banner_imgs/qna_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	width:100%;
+	
+}
+.black-transparent {
+	opacity:50%;
+}
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style>	
 
  
 <body>

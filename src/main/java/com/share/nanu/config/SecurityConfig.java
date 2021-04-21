@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/my/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
 				//access("hasRole('USER')")
-				.antMatchers("/sendQR/**").access("hasRole('USER')")
+				.antMatchers("/sendQR/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
+				//.antMatchers("/sendQR/**").access("hasRole('USER')")
 				.antMatchers("/admin/**").access("hasRole('ADMIN')")
 				//.requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // cors설정 https://oddpoet.net/blog/2017/04/27/cors-with-spring-security/
 				.antMatchers("/**").permitAll()
