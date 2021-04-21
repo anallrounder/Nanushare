@@ -98,44 +98,9 @@ li {
 					<section class="module">
 					<div class="module-inner">
 						<div class="side-bar">
-							<div class="user-info">
-								<img class="img-profile img-circle img-responsive center-block"
-									src="/resources/my/프로필사진.PNG" alt="">
-								<ul class="meta list list-unstyled">
-									<li class="name"><h2>
-											<sec:authentication property="principal.member.name" />
-										</h2></li>
-									<li class="email"><sec:authentication
-											property="principal.member.member_id" /></li>
-									<li class="activity"><sec:authentication
-											property="principal.member" var="buttonhidden" /> <sec:authorize
-											access="isAuthenticated()">
-
-											<c:if test="${buttonhidden.signuppath == 'home'}">
-
-												<button
-													class="charity-simple-blog-btn w-100 text-white stats"
-													type="submit"
-													onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
-													프로필수정</button>
-
-											</c:if>
-										</sec:authorize> <sec:authentication property="principal.member"
-											var="buttonhidden" /> <sec:authorize
-											access="isAuthenticated()">
-
-											<c:if test="${buttonhidden.signuppath != 'home'}">
-
-												<button
-													class="charity-simple-blog-btn w-100 text-white stats"
-													type="submit"
-													onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
-													회원탈퇴</button>
-
-											</c:if>
-										</sec:authorize></li>
-								</ul>
-							</div>
+							<!-- profile -->
+							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+							<!-- profile -->
 							<nav class="side-menu">
 							<ul class="nav">
 								<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
@@ -156,45 +121,50 @@ li {
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
+
 							<div class="charity-fancy-title">
 								<h2>나의 문의 내역</h2>
 							</div>
-							<div>&nbsp;</div>
-							<table>
-								<div>
-									<br>
-								</div>
-								<tr>
-									<th>글번호</th>
-									<th>문의제목</th>
-									<th>조회수</th>
-									<th>날짜</th>
 
-								</tr>
+							<form id="boardForm" class="charity-volunteer-form"
+								name="boardForm"
+								style="margin-bottom: 0px; padding-bottom: 10px;">
 
-								<c:if test="${empty list1}">
-									<tr>
-										<td colspan="5" align="center">작성된 글이 없습니다</td>
-									</tr>
-								</c:if>
+								<table class="table taWWble-striped projects">
 
-								<!-- 로그인한 회원의 글 정보만 받아오기 -->
-								<!-- 나의문의내역 -->
-								<c:if test="${! empty list1}">
-									<c:forEach items="${list1}" var="list1">
-										<tr>
-											<td>${list1.b_index}</td>
-											<td><a id="a-content"
-												href="${pageContext.request.contextPath}/board/qna/${list1.b_index}">${list1.btitle}</a></td>
-											<!-- 제목누르면 해당 글내용으로 이동링크 -->
-											<td>${list1.bhit}</td>
-											<td>${list1.bdate}</td>
+									<thead>
+										<tr bgcolor="a5a5a5">
+											<th>글번호</th>
+											<th>문의제목</th>
+											<th>조회수</th>
+											<th>날짜</th>
+
 										</tr>
-									</c:forEach>
-								</c:if>
-							</table>
+									</thead>
+									<tbody>
+										<c:if test="${empty list1}">
+											<tr>
+												<td colspan="5" align="center">작성된 글이 없습니다</td>
+											</tr>
+										</c:if>
+
+										<!-- 로그인한 회원의 글 정보만 받아오기 -->
+										<!-- 나의문의내역 -->
+										<c:if test="${! empty list1}">
+											<c:forEach items="${list1}" var="list1">
+												<tr>
+													<td>${list1.b_index}</td>
+													<td><a id="a-content"
+														href="${pageContext.request.contextPath}/board/qna/${list1.b_index}">${list1.btitle}</a></td>
+													<!-- 제목누르면 해당 글내용으로 이동링크 -->
+													<td>${list1.bhit}</td>
+													<td>${list1.bdate}</td>
+												</tr>
+											</c:forEach>
+										</c:if>
+									</tbody>
+								</table>
+							</form>
 
 							<!-- 페이징 -->
 

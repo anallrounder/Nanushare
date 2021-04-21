@@ -10,7 +10,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>myprofile_edit</title>
+<title>Nanushare</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<!-- 웹페이지 탭 로고이미지 삽입  -->
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -93,7 +96,7 @@
 									<div>
 										<div class="charity-aboutus-text">
 											<br> <br> <br> <br> <i
-												class="fas fa-hand-holding-heart fa-2x">나누셰어 의미</i>
+												class="fas fa-hand-holding-heart" style="color: #FFAE73; font-size: 25px;">나누셰어 의미</i>
 											<h6>
 												<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나눔이란 가진 것을 공유하는 것으로 나누면 두 배가 되는 사회를 꿈꾸는 사람들이 모여
 												"나누셰어" 프로젝트가 시작되었습니다.</h6>
@@ -106,7 +109,7 @@
 									</div>
 									<div class="col-md-5">
 										<div class="charity-aboutus-text">
-											<i class="fas fa-hand-holding-heart fa-2x"> 나누셰어 로고</i> <img
+											<i class="fas fa-hand-holding-heart" style="color: #FFAE73; font-size: 25px;"> 나누셰어 로고</i> <img
 												src="/resources/menu/나누셰어 그림.png" alt="">
 											</figure>
 										</div>
