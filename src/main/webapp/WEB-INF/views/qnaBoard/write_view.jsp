@@ -33,7 +33,7 @@ $(document).ready(function(){
           console.log("글쓰기 전송 함수 들어왔나?")
          
           var btitle = $("#btitle").val();
-          var bcontent = $("#bcontent").val();
+          var bcontent = CKEDITOR.instances.bcontent.getData();
           
           var form = {
        		 btitle: btitle,
