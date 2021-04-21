@@ -35,13 +35,23 @@
 .charity-simple-blog-btn {
 	border: 0;
 }
+#forimg {
+	/* background-color: #e4edfe; */
+	background-image: url('/resources/banner_imgs/map_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+}
+.black-transparent {
+	opacity:50%;
+}
 </style>
+
 <body>
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	<!-- Sub Header -->
-	<div class="charity-subheader">
+	 <div id="forimg" class="charity-subheader">
 		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
 		<span class="black-transparent"></span>
 		<div class="container">

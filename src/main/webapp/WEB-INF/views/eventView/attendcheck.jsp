@@ -55,7 +55,18 @@
 <link href='/resources/calendar/main.css' rel='stylesheet' />
 <script src='/resources/calendar/main.js'></script>
 
+<style>
 
+#forimg {
+	/* background-color: #e4edfe; */
+	background-image: url('/resources/banner_imgs/check_banner.png');
+	background-repeat:no-repeat;
+	background-position: center;
+}
+.black-transparent {
+	opacity:50%;
+}
+</style>
 
 </head>
 
@@ -246,7 +257,7 @@ console.log(c);
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	<!-- Sub Header -->
-	<div class="charity-subheader">
+	<div id="forimg" class="charity-subheader">
 		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
 		<span class="black-transparent"></span>
 		<div class="container">
