@@ -23,7 +23,7 @@ time {
  	background-image: url('/resources/banner_imgs/people_banner.png');  
 }
 .charity-events {
-	width:200px;
+	width:230px;
 }
 .charity-events h6 a{
 	color: #464646;
@@ -57,38 +57,35 @@ font-family: 'NotoSansKR', sans-serif;
             <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
             <li><a href="${pageContext.request.contextPath}/board/shows/list">나눔인증</a></li>
             <li><a href="${pageContext.request.contextPath}/my/event/check">출석체크</a></li>
-            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
-            <li><a href="${pageContext.request.contextPath}/restful/qna">1:1문의</a></li>
+            <li><a href="${pageContext.request.contextPath}/board/notice">공지사항</a></li>
+            <li><a href="${pageContext.request.contextPath}/board/qna">1:1문의</a></li>
         </ul>
     </div>
     <!-- Widget Archive 퀵링크 연결 -->
     
-    <!-- Widget Event -->
+    <!-- Widget Event 최근 공지사항 -->
    	<div class="widget widget_events">
        <div class="widget_title"> <h2>최근 공지사항</h2> </div>
 		<ul>
-			<c:if test="${empty asidelist}">
+			<c:if test="${empty nlist}">
 				<p id="nothing" align="center">작성된 글이 없습니다</p>
 			</c:if>
-                        	<c:if test="${! empty asidelist}">
-			<c:forEach var="vo" items="${asidelist}" >
+                        	<c:if test="${! empty nlist}">
+			<c:forEach var="vo" items="${nlist}" >
             <li>
                <%-- <time datetime="2008-02-14 20:00" style="width:70px;">
                	<img src="${pageContext.request.contextPath}/resources/donation/item/mask_sm.png" alt=""></time> --%>
                 <div class="charity-events"> 
-					<h6><a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}">${vo.b_index}. ${vo.btitle}</a></h6> 
-				<%-- 	<a href="event-detail.html" style="margin:0px;"><i class="fa fa-calendar"></i>${vo.bdate}</a><br> --%>
-					<%-- <a href="event-detail.html" ><i class="fa fa-user-circle"></i>${vo.member_id}</a>&nbsp;  --%>
-                   <!-- <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a> -->
+					<h6><a href="${pageContext.request.contextPath}/board/notice/content_view/${vo.b_index}"> ${vo.btitle}</a></h6> <%-- ${vo.b_index}. --%>
                 </div>
             </li>
             </c:forEach>
             </c:if>
 		</ul> 
     </div>  
-    <!-- Widget Event -->
+    <!-- Widget Event 최근 공지사항  -->
 	
-	<!-- Widget Event -->
+	<!-- Widget Event 인증게시판 -->
    	<div class="widget widget_events">
        <div class="widget_title"> <h2>인증게시판</h2> </div>
 			
@@ -96,7 +93,8 @@ font-family: 'NotoSansKR', sans-serif;
 			<c:if test="${empty asidelist}">
 				<p id="nothing" align="center">작성된 글이 없습니다</p>
 			</c:if>
-                        	<c:if test="${! empty asidelist}">
+			
+            <c:if test="${! empty asidelist}">
 			<c:forEach var="vo" items="${asidelist}" >
             <li>
                <time datetime="2008-02-14 20:00" style="width:70px;">
@@ -110,32 +108,7 @@ font-family: 'NotoSansKR', sans-serif;
             </c:if>
 		</ul> 
     </div>  
-    <!-- Widget Event -->
-    
-    <!-- Widget Gallery -->
-<%--     <div class="widget widget_gallery">
-        <div class="widget_title"> <h2>인증게시판</h2> </div>
-        <c:if test="${! empty list}">
-           <c:set var="listComment" value="${list}" />
-           <c:forEach var="vo" items="${list}" begin="1" end="12">
-        
-	        <ul>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}"><img src="${pageContext.request.contextPath}/resources/users/user01_sm.png" alt=""> <i class="fa fa-plus"></i> </a></li>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-2.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-2.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-3.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-3.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-4.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-4.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-5.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-5.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-7.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-7.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-8.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-8.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-	            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-	        </ul>
-	        
-        </c:forEach>
-           </c:if>
-    </div> --%>
-    <!-- Widget Gallery -->
-	
+	<!-- Widget Event 인증게시판 -->
 </aside>
 <!-- aside end -->
 

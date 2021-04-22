@@ -4,13 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.share.nanu.mapper.NoticeBoardMapper;
-import com.share.nanu.paging.Criteria;
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
-import com.share.nanu.VO.BoardreplyVO;
+import com.share.nanu.mapper.NoticeBoardMapper;
+import com.share.nanu.paging.Criteria;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -95,6 +93,12 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	@Override
 	public void fileUpload(AttachmentVO attachmentVO) {
 		//mapper.uploadFile(attachmentVO);
+	}
+
+	// aside에 뿌려줄 최신 공지사항
+	@Override
+	public List<BoardVO> asideNlist() {
+		return mapper.asideNlist();
 	}
 
 
