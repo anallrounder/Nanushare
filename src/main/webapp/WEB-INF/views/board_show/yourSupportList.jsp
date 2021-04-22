@@ -160,8 +160,8 @@
 							icon : "success" , 
 							button : true 
 						});
-							
-					$(location).attr('href', "${pageContext.request.contextPath}/board/shows/list");							
+						//로딩속도 원인 리스트를 뿌릴때 전부 다시 뿌리기 때문	
+						$(location).attr('href', "${pageContext.request.contextPath}/board/shows/list");							
 					}
 				},
 				error : function(e){
