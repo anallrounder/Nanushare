@@ -68,12 +68,23 @@
 .charity-volunteer-form {
 	background-color: #f9f9fb;
 }
+.charity-blog-social ul {
+	margin:0px;
+}
+.charity-sub-btn {
+	cursor: pointer;
+}
+.charity-sub-btn:hover {
+	background-color: #78665A;
+}
 </style>
 
-<body style="background-color: f9f9fb">
+<body style="background-color: #f9f9fb">
+
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
+	
 	<!-- Banner -->
 	<div id="forimg" class="charity-subheader">
 		<span class="black-transparent"></span>
@@ -87,8 +98,7 @@
 
 	<!-- Main Section -->
 	<!-- Content -->
-	<div class="charity-fancy-title "
-		style="margin-top: 70px; margin-bottom: 20px;">
+	<div class="charity-fancy-title " style="margin-top: 70px; margin-bottom: 20px;">
 		<h2>공지사항</h2>
 	</div>
 
@@ -96,11 +106,18 @@
 		<div class="row">
 
 			<div class="container" style="height: 90%">
-
 				<div class="col-12">
 
-					<form id="boardForm" class="charity-volunteer-form"
-						name="boardForm" style="margin-bottom: 0px; padding-bottom: 10px;">
+					<!-- 글쓰기 버튼 -->
+					<sec:authorize access="hasRole('ADMIN')">
+					<div class="col-md-3" style="float: right; padding-right:30px;">
+						<button type="button" class="charity-sub-btn" onclick="location.href ='${pageContext.request.contextPath}/board/notice/write_view'" 
+						style="width:100px; height:40px; font-size:16px; mrgin-top:0px;">글작성</button>	
+				    </div>
+				    </sec:authorize>
+					<!-- 글쓰기 버튼 -->
+
+					<form id="boardForm" class="charity-volunteer-form" name="boardForm" style="margin-bottom: 0px; padding-bottom: 10px;">
 						<table class="table taWWble-striped projects">
 							<!-- <table class="table table-light table-hover " > -->
 							<colgroup>
@@ -110,56 +127,22 @@
 								<col width="20%" />
 								<col width="10%" />
 							</colgroup>
-
 							<thead>
-
 								<tr bgcolor="a5a5a5">
-
 									<th style="border-left: none;">글번호</th>
 									<th>제목</th>
 									<th>작성자</th>
 									<th>날짜</th>
 									<th style="border-right: none;">조회수</th>
-
-
 								</tr>
 							</thead>
-							<!-- 공지 -->
-							<tbody>
-								<c:forEach items="${list}" var="dto">
-								 <c:if test="${dto.b_index == 258}"> 
-									<tr style=" font-weight:bold;">
-										<td style="border-left: none;"><i class="fas fa-bell" style="color: red; line-height: 40px; vertical-align: middle;"></i></td>
-										<td style="text-align:left;  line-height: 40px; vertical-align: middle; padding: 0 0 0 25px;"><a
-											href="${pageContext.request.contextPath}/board/notice/${dto.b_index}">${dto.btitle}</a></td>
-										<td>관리자</td>
-										<td>${dto.bdate}</td>
-										<td style="border-right: none;">${dto.bhit}</td>
-									</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-							<tbody>
-								<c:forEach items="${list}" var="dto">
-								 <c:if test="${dto.b_index == 260}"> 
-									<tr style=" font-weight:bold;">
-										<td style="border-left: none;"><i class="fas fa-bell" style="color: red; line-height: 40px; vertical-align: middle;"></i></td>
-										<td style="text-align:left;  line-height: 40px; vertical-align: middle; padding: 0 0 0 25px;"><a
-											href="${pageContext.request.contextPath}/board/notice/${dto.b_index}">${dto.btitle}</a></td>
-										<td>관리자</td>
-										<td>${dto.bdate}</td>
-										<td style="border-right: none;">${dto.bhit}</td>
-									</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-							<!-- 공지 -->
 							<tbody>
 								<c:forEach items="${list}" var="dto">
 									<tr>
 										<td style="border-left: none;">${dto.b_index}</td>
-										<td style="text-align:left;  line-height: 40px; vertical-align: middle; padding: 0 0 0 25px;"><a
-											href="${pageContext.request.contextPath}/board/notice/${dto.b_index}">${dto.btitle}</a></td>
+										<td style="text-align:left;  line-height: 40px; vertical-align: middle; padding: 0 0 0 25px;">
+											<a href="${pageContext.request.contextPath}/board/notice/${dto.b_index}">${dto.btitle}</a>
+										</td>
 										<td>관리자</td>
 										<td>${dto.bdate}</td>
 										<td style="border-right: none;">${dto.bhit}</td>

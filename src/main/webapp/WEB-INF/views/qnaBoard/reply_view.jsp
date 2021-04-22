@@ -67,19 +67,18 @@
 </style>	
 
  
-<body>
+<body style="background-color: #f9f9fb">
 	<!-- Header -->
-		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-		<!-- Main Section -->
+	<!-- Main Section -->
 		
-		<!-- 문의게시판 - START -->
+	<!-- 문의게시판 - START -->
     <div id="containerr">
    	<form id="writeForm" action="${pageContext.request.contextPath}/board/qna/reply" method="post">
    	
 		<table class="table">
-			
 			<tr>
 				<td>아이디</td>
 				<td><sec:authentication property="principal.member.member_id" /></td>
@@ -115,7 +114,6 @@
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
-
 	<!-- jQuery -->
 	<script src="/resources/charity/script/jquery.js"></script>
 	<script src="/resources/charity/script/popper.min.js"></script>
@@ -129,7 +127,5 @@
 	<script src="/resources/charity/script/jplayer.playlist.js"></script>
 	<script src="/resources/charity/script/functions-main.js"></script>
 	
-	
-    
 </body>
 </html>

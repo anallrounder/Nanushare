@@ -116,17 +116,21 @@
 .charity-volunteer-form {
 	background-color: #f9f9fb;
 }
+
 .charity-blog-social ul {
 	margin:0px;
 }
 .charity-sub-btn {
 	cursor: pointer;
 }
+.charity-sub-btn:hover {
+	background-color: #78665A;
+}
 </style>	
 	
 </head>
 
-<body>
+<body style="background-color: #f9f9fb">
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
@@ -177,11 +181,8 @@
 		                            CKEDITOR.replace('bcontent', ckeditor_config);
 		                        </script>
 		                        
-							<!-- 글삭제는 첨부파일,댓글 다 지워야 가능하다. 수정해야함 -->
-	                          <%--  <button type="button" class="charity-sub-btn"><i class="fa fa-eraser" onclick="location.href='delete?b_index=${modify_view.b_index}'"> 글삭제</i></button> --%>
 							   <button type="submit" id="modify" class="charity-sub-btn"><i class="fa fa-save"> 수정완료</i></button>
 							   <button type="button" class="charity-sub-btn"><i class="fa fa-arrow-left"  onclick="location.href='${pageContext.request.contextPath}/board/qna/${modify_view.b_index}'"> 수정취소</i></button>
-							  <!--  <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시수정하기</i></button> -->
 							   <!-- charity-main-btn -->
 							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 	                          
@@ -192,9 +193,6 @@
                     	<!--   a href="plist" -->
                         <div style="float: right; margin-right:5px; text-color:2a786b;" class="mb-3"> <a href="${pageContext.request.contextPath}/board/qna" class="fa fa-list-alt" style="color:#333" > 1:1 문의 목록으로  </a></div>
                        
-                        <!-- 댓글 보일지 말지 고민중  -->
-                        <!-- 댓글 보일지 말지 고민중  -->
-                        
                     </div>
 
                     <!-- 우측 배너  aside -->

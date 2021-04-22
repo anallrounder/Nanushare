@@ -31,8 +31,6 @@
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	
-	
-	
 	<title>나누셰어 - 나눔인증</title>
 	
 	<!-- CSS -->
@@ -45,6 +43,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+	
 	<!-- header -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	

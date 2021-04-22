@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -12,8 +12,7 @@
 
 
 <meta name="_csrf" content="${_csrf.token}">
-<meta id="_csrf_header" name="_csrf_header"
-	content="${_csrf.headerName}">
+<meta id="_csrf_header" name="_csrf_header"	content="${_csrf.headerName}">
 
 <title>myprofile_content</title>
 
@@ -29,10 +28,8 @@
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet"	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <!-- 상단 로그인버튼 위치 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -100,23 +97,23 @@
 	background-color: #f9f9fb;
 }
 </style>
-<body>
+
+<body style="background-color: #f9f9fb">
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-<!-- Banner -->
-	    <div id="forimg" class="charity-subheader">
+	
+	<!-- Banner -->
+	<div id="forimg" class="charity-subheader">
        <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12"> 
-                  
                 </div>
             </div>
         </div>
     </div>
 	<!-- Banner -->
-
 
 	<!-- Content -->
 	<div class="charity-main-content">
@@ -129,63 +126,38 @@
 						<div class="widget_title">
 							<h2>공지사항</h2>
 						</div>
+						
 						<div class="charity-rich-editor charity-cause-detail">
-
 							<div class="charity-rich-editor">
-
-								<h1>
-									<input type="hidden" id="b_index"
-										value="${content_view.btitle}"> ${content_view.btitle}
-								</h1>
-								<!-- <hr> -->
+								<h1><input type="hidden" id="b_index" value="${content_view.btitle}"> ${content_view.btitle}</h1>
+								<hr>
 								<%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
 								<div class="charity-blog-options">
 									<ul style="float: right">
-										<li><i class="fa fa-folder-open"></i> No.
-											${content_view.b_index}</li>
-										<li style="text-indent: 0.3em"><i class="fa fa-calendar"></i>
-										<time datetime="2008-02-14 20:00">
-											${content_view.bdate}</time></li>
-										<li style="text-indent: 0.3em"><i
-											class="fa fa-mouse-pointer"></i> 조회수 <input type="hidden"
-											id="b_index" value="${content_view.bhit}">
-											${content_view.bhit}</li>
+										<li><i class="fa fa-folder-open"></i> No. ${content_view.b_index}</li>
+										<li style="text-indent: 0.3em"><i class="fa fa-calendar"></i><time datetime="2008-02-14 20:00">	${content_view.bdate}</time></li>
+										<li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 <input type="hidden" id="b_index" value="${content_view.bhit}"> ${content_view.bhit}</li>
 									</ul>
 								</div>
-								<input type="hidden" id="b_index"
-									value="${content_view.bcontent}">
-								${content_view.bcontent}
-
-								<hr>
-
-								<div class="charity-post-tags">
+								<input type="hidden" id="b_index" value="${content_view.bcontent}"> ${content_view.bcontent}
+							
+								<br>
+								<div class="charity-post-tags mt-5">
 									<div class="charity-blog-social">
 										<span></span>
 										<ul>
-											<li><a
-												href="${pageContext.request.contextPath}/board/notice"
-												class="fa fa-list-alt"> 목록</a></li>
+											<li><a href="${pageContext.request.contextPath}/board/notice" class="fa fa-list-alt"> 목록</a></li>
 											<sec:authorize access="hasRole('ADMIN')">
-													<li><a
-														href="${pageContext.request.contextPath}/board/notice/modify/${content_view.b_index}"
-														class="fa fa-edit"> 수정</a></li>
-													<li><a id="del_btn"
-														href="${pageContext.request.contextPath}/board/notice/delete"
-														class="fa fa-eraser"> 삭제</a></li>
-											
+											<li><a href="${pageContext.request.contextPath}/board/notice/modify/${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
+											<li><a id="del_btn" href="${pageContext.request.contextPath}/board/notice/delete" class="fa fa-eraser"> 삭제</a></li>
 											</sec:authorize>
 										</ul>
-
 									</div>
 								</div>
 							</div>
-
-
-
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <input type="hidden"
-								id="_csrf_header" name="_csrf_header"
-								value="${_csrf.headerName}" />
+							
+							<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" /> 
+							<input type="hidden" id="_csrf_header" name="_csrf_header" value="${_csrf.headerName}" />
 						</div>
 					</div>
 				</div>
@@ -196,13 +168,9 @@
 	</div>
 	<!-- Content -->
 
-
-
-
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
-
 
 	<!-- jQuery -->
 	<script src="/resources/charity/script/jquery.js"></script>
@@ -218,10 +186,8 @@
 	<script src="/resources/charity/script/functions-main.js"></script>
 
 	<!-- 자주묻는질문 -->
-	<script type="text/javascript"
-		src="/resources/faq/js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript"
-		src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript"	src="/resources/faq/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript"	src="/resources/faq/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -2,10 +2,9 @@ package com.share.nanu.service;
 
 import java.util.List;
 
-import com.share.nanu.paging.Criteria;
 import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
-import com.share.nanu.VO.BoardreplyVO;
+import com.share.nanu.paging.Criteria;
 
 public interface NoticeBoardService {
 		
@@ -33,6 +32,9 @@ public interface NoticeBoardService {
 		
 		//게시판 글번호 가져오기
 		public int getBindex(BoardVO boardVO);
+		
+		// aside에 뿌려줄 최신 공지사항
+		public List<BoardVO> asideNlist();
 		
 		
 		

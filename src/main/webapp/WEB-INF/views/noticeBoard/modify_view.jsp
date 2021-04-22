@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -12,8 +12,7 @@
 
 
 <meta name="_csrf" content="${_csrf.token}">
-<meta id="_csrf_header" name="_csrf_header"
-	content="${_csrf.headerName}">
+<meta id="_csrf_header" name="_csrf_header"	content="${_csrf.headerName}">
 
 <title>myprofile_edit</title>
 
@@ -29,18 +28,14 @@
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
 <!-- 부트스트랩 아이콘 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-
+<link rel="stylesheet"	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <!-- ckeditor -->
-	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 
 <!-- 상단 로그인버튼 위치 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	
 	
 </head>
 
@@ -71,18 +66,25 @@
 .charity-volunteer-form {
 	background-color: #f9f9fb;
 }
+.charity-sub-btn {
+	cursor: pointer;
+}
+.charity-sub-btn:hover {
+	background-color: #78665A;
+}
 </style>
-<body>
+
+<body style="background-color: #f9f9fb">
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-<!-- Banner -->
-	    <div id="forimg" class="charity-subheader">
+	
+	<!-- Banner -->
+	<div id="forimg" class="charity-subheader">
        <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12"> 
-                
                 </div>
             </div>
         </div>
@@ -97,25 +99,19 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-					 <form id="updateForm"
-				action="${pageContext.request.contextPath}/board/notice/modify" method="post">
+					
+					 <form id="updateForm" action="${pageContext.request.contextPath}/board/notice/modify" method="post">
 							<!-- <form action="/board/shows/modify" id="modify" method="post" > -->
 							<input type="hidden" id="b_index" name="b_index" value="${modify_view.b_index}" >
-	                       <div class="charity-contact-form">
-	                           <h4><span>Title</span><input type="text" id="btitle" name="btitle" value="${modify_view.btitle}"></h4><hr><br>
-	                           <%-- <h4>Images</h4>
-	                           <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
-	                           <div class="charity-blog-options">
-	                                <ul style="float:right">
-	                                	<li><i class="fa fa-folder-open"></i>  No. ${modify_view.b_index}</li> 
-	                                    <li style="text-indent: 0.3em"><i class="fa fa-calendar"></i><time datetime="2008-02-14 20:00">  ${modify_view.bdate}</time></li>
-	                                   <!--  <li style="text-indent: 0.3em"><i class="fa fa-comments"></i><a href="404.html">  23 comments</a></li> -->
-	                                    <li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 ${modify_view.bhit}</li>
-	                                </ul>
-	                           </div>
-	                           <h4>Content</h4>
+							<div class="charity-contact-form">
+	                           <h4><span>Title</span></h4>
+	                           <input type="text" id="btitle" name="btitle" value="${modify_view.btitle}" >
+	                         	
+	                           <br>
+	                           
+	                           <h4 class="mt-5">Content</h4>
 	                           <%-- <p><textarea class="form-control" name="bcontent" rows="20" style="width:100%;">${modify_view.bcontent}</textarea></p><br> --%>
-	                           <p><textarea id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></p><br><br>
+	                           <p><textarea id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></p>
 							  
 							   <!-- 에디터 -->
 							   <script type="text/javascript">
@@ -129,21 +125,13 @@
 		                            CKEDITOR.replace('bcontent', ckeditor_config);
 		                        </script>
 		                        
-							   <br><hr>
-								<!-- 글삭제는 첨부파일,댓글 다 지워야 가능하다. 수정해야함 -->
-	                           
 							   <button type="submit" id="modify" class="charity-sub-btn"><i class="fa fa-save"> 수정완료</i></button>
 							   <button type="button" class="charity-sub-btn"><i class="fa fa-arrow-left"  onclick="location.href='${pageContext.request.contextPath}/board/notice/${modify_view.b_index}'">수정취소</i></button>							 
 	                        </div>
 	                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         </form>
                         
-                    	<!--   a href="plist" -->
-                        <div style="float: right; margin-right:5px; text-color:2a786b;"><a href="list" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>
-                        <br><br>
-                       
-                        <!-- 댓글 보일지 말지 고민중  -->
-                        <!-- 댓글 보일지 말지 고민중  -->
+                        <div style="float: right; margin-right:5px; text-color:2a786b;"><a href="${pageContext.request.contextPath}/board/notice" class="fa fa-list-alt" style="color:#333" > 공지사항 목록으로 </a></div>
                         
                     </div>
 

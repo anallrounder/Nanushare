@@ -82,7 +82,7 @@
 </head>
 
 
-<body style="background-color: f9f9fb">
+<body style="background-color: #f9f9fb">
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	
@@ -190,7 +190,6 @@
 							</ul>
 						</div>
 						</div>
-						
 						
 						<!-- 	이부분 공백 더 줘야하는데 방법 찾아야함 -->
 						

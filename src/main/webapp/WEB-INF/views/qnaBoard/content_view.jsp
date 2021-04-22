@@ -204,10 +204,17 @@ Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
 .charity-blog-social ul {
 	margin:0px;
 }
+#resubmit.submit{
+	cursor: pointer;
+}
+#resubmit.submit:hover{
+	color:white;
+	background-color: #78665A;
+}
 </style>		
 </head>
 
-<body>
+<body style="background-color: #f9f9fb">
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
@@ -437,8 +444,6 @@ Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
 	</script>
 
     <script type="text/javascript">
-    	
-	   	 
    		// 랜덤 이미지 불러오기 (슬비씨 깃허브 참고: https://github.com/seulpi/TIL/blob/cfae84682eb65d8e85f76de11de663a17f14f22f/Quiz/spring_Answer11.md#5-view )
 		$(function(){
 	    	$('.usre_img').each(function (index, item) {	        	

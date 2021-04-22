@@ -59,6 +59,9 @@ public class BoardShowsRestController {
 	@Autowired
 	private BoardShowsService service;
 	
+	@Autowired 
+	private NoticeBoardService nservice;
+	
 	/* 게시글 */
 	// 인증게시판 페이징 list
 	@GetMapping("/board/shows/list")
@@ -118,8 +121,8 @@ public class BoardShowsRestController {
 		log.info("controller -- content_view -- 호출");
 		service.uphit(boardVO);
 		
-		mav.addObject("list", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
-		//mav.addObject("nlist", service.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("asidelist", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
 		
 		mav.setViewName("board_show/yourSupportContent"); // 이동할 웹페이지 주소
 
