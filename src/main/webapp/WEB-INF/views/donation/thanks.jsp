@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
@@ -12,39 +11,31 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Charity About Us</title>
+<title>나누셰어 - 물품나눔</title>
 
 <!-- CSS -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
-<link
-	href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/color.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+<link rel="stylesheet" 	href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/style.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/color.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
 
 <!-- 웹페이지 탭 로고이미지 삽입  -->
-<link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+
+
+<!-- header -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 <!-- new korean font from google -->
 <!-- NotoSansKR, Gothic A1 -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
+<link	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+rel="stylesheet">
 
 <style type="text/css">
 #forimg {
@@ -104,12 +95,9 @@ canvas {
 		<div class="charity-main-section charity-aboutus-text-full">
 			<div class="container">
 				<div class="row">
-
-
 			
 					<canvas id="canvas"></canvas>
-
-
+			
 					<div class="col-md-7">
 						<div class="charity-aboutus-text">
 							<h1 style="text-align: center;">나눔해주셔서 감사합니다.</h1>
@@ -153,9 +141,6 @@ canvas {
 	  		
 	  	}, 2000);
 	  }
-	  
-	  
-	    
 	 
 }); 
 </script>
@@ -164,30 +149,21 @@ canvas {
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
-<!-- 꽃가루 -->
-<script src="${pageContext.request.contextPath}/resources/menu/confetti_v2.js"></script>
+	<!-- 꽃가루 -->
+	<script src="${pageContext.request.contextPath}/resources/menu/confetti_v2.js"></script>
+	
 	<!-- jQuery -->
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/slick.slider.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/progressbar.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/fancybox.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/jquery.countdown.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/popper.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/bootstrap.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/slick.slider.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/progressbar.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/fancybox.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/jquery.countdown.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
 
 </body>
 

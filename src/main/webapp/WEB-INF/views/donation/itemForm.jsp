@@ -21,7 +21,7 @@
 	<!-- NotoSansKR, Gothic A1 -->
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <title>물품나눔 신청서</title>
+    <title>나누셰어 - 물품나눔</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
@@ -36,6 +36,9 @@
     
     <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+	
+	<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	
     <!-- 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드 -->
     <script type="text/javascript">

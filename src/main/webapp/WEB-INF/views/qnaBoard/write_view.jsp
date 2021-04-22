@@ -122,7 +122,7 @@ $(document).ready(function(){
 
 </head>
 
-<body>
+<body style="background-color: #f9f9fb">
 
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
@@ -177,8 +177,6 @@ $(document).ready(function(){
 			        				};
 			                        CKEDITOR.replace('bcontent', ckeditor_config);
 								</script>
-		                        
-	                     
 
 							   <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 작성완료</i></button>
 							   <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시쓰기</i></button>

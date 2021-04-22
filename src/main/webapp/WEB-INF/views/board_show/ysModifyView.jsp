@@ -43,6 +43,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	
+	<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
@@ -120,7 +123,7 @@
 </style>
 </head>
 
-<body>
+<body style="background-color: #f9f9fb">
     <!-- Header -->
     <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
     <!-- Header -->
@@ -155,8 +158,7 @@
                        <input type="hidden" id="b_index" name="b_index" value="${modify_view.b_index}" >
 	                       <div class="charity-contact-form">
 	                           <h4><span>Title</span><input type="text" id="btitle" name="btitle" value="${modify_view.btitle}"></h4><hr><br>
-	                           <%-- <h4>Images</h4>
-	                           <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
+	                          
 	                           <div class="charity-blog-options">
 	                                <ul style="float:right">
 	                                	<li><i class="fa fa-folder-open"></i>  No. ${modify_view.b_index}</li> 
@@ -197,7 +199,6 @@
                         <div style="float: right; margin-right:5px; "> <a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt" style="color:#333"> 나눔 인증 목록으로 </a></div>
                         <br><br>
                        
-                        <!-- 댓글 보일지 말지 고민중  -->
                         
                     </div>
 

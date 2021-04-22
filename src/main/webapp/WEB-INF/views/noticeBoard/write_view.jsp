@@ -65,7 +65,7 @@
 }
 </style>
 	
-<body>
+<body style="background-color: #f9f9fb">
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
@@ -121,8 +121,6 @@
 		</div>
 	</div>
 	<!-- Content -->
-
-	
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
