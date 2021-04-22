@@ -152,6 +152,9 @@ public class BoardShowsRestController {
 	public ModelAndView vsWriteView(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("인증게시판 컨트롤러  -- write_view() -- 호출");
 
+		mav.addObject("asidelist", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		mav.setViewName("board_show/ysWriteView");
 
 		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
@@ -169,6 +172,10 @@ public class BoardShowsRestController {
 	public ModelAndView bsModiview(BoardVO boardVO, ModelAndView mav) throws Exception {
 		log.info("인증게시판 컨트롤러 컨텐트뷰");
 		mav.addObject("modify_view", service.getBoard(boardVO.getB_index()));
+		
+		mav.addObject("asidelist", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		mav.setViewName("board_show/ysModifyView");
 		return mav;
 	}

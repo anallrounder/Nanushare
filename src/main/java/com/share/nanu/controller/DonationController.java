@@ -15,7 +15,9 @@ import com.share.nanu.VO.MemberPointVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.PointVO;
 import com.share.nanu.security.MemberDetails;
+import com.share.nanu.service.BoardShowsService;
 import com.share.nanu.service.DonationService;
+import com.share.nanu.service.NoticeBoardService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,10 +32,19 @@ public class DonationController {
 	@Autowired
 	private DonationService service;
 	
+	@Autowired
+	private BoardShowsService bservice;
+	
+	@Autowired 
+	private NoticeBoardService nservice;
+	
 	// 물품기부 메인
 	@GetMapping("/donation/item/main")
 	public String itemMain(Model model, @AuthenticationPrincipal MemberDetails md) {
 		log.info("item donation main page 호출");
+		
+		model.addAttribute("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		model.addAttribute("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
 		
 		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
@@ -61,6 +72,9 @@ public class DonationController {
 		log.debug("controller -- itemForm -- 호출");
 		model.addAttribute("list1", service.getMember());
 		
+		model.addAttribute("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		model.addAttribute("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
 		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
@@ -86,6 +100,9 @@ public class DonationController {
 	public String moneyMain(Model model, @AuthenticationPrincipal MemberDetails md) {
 		log.info("money donation main page 호출");
 		
+		model.addAttribute("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		model.addAttribute("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
 		if(md!=null) { //로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
@@ -101,6 +118,9 @@ public class DonationController {
 		log.debug("controller -- pointForm -- 호출");
 		mpvo.setMember_id(md.getUsername()); // 로그인한 사람 id정보를 mpvo member_id에 넣어줌
 		model.addAttribute("memberInfo", service.getMemberPoint(mpvo)); 
+		
+		model.addAttribute("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		model.addAttribute("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
 		
 		//@AuthenticationPrincipal MemberDetails md 유저정보 가져오기
 		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
