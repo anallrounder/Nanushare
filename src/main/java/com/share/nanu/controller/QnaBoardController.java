@@ -182,5 +182,11 @@ public class QnaBoardController {
 		
 		return mov;
 	}
+	
+	@PostMapping("/qna/replyModify")
+	public void name() {
+		
+	}
+	
 
 }

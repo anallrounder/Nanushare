@@ -458,6 +458,7 @@ public class BoardShowsRestController {
 					File thumNail = new File(path + "\\" + thumNailName);
 
 					BufferedImage originalImage = ImageIO.read(originFile);
+					
 					BufferedImage thumNailImage = new BufferedImage(THUMNAIL_WIDTH, THUMNAIL_HEIGHT,
 					BufferedImage.TYPE_3BYTE_BGR);
 					Graphics2D graphic = thumNailImage.createGraphics();

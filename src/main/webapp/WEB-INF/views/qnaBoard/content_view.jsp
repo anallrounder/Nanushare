@@ -518,8 +518,8 @@ Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
     					htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
     					htmls += '<p>' + rcontent + '</p>'
 						htmls += '<div class="charity-blog-social">'
-						htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="${pageContext.request.contextPath}/board/shows/update_view/' + r_num + '" style="color:black"><b>수정하기</b></a>'+'&nbsp;'
-						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + r_num + '" style="color:black"><b>삭제하기</b></a></div>'
+						htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick= " answerEdit( '+rid+ ' , '+rcontent+' , '+r_num+' ) " style="color:black"><b>수정하기</b></a>'+'&nbsp;'
+						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/ ' + r_num + ' " style="color:black"><b>삭제하기</b></a></div>'
     					htmls += '</div>'
     					htmls += '</div>'
     					htmls += '</li>'

@@ -77,10 +77,10 @@
 	
 	// 댓글 수정 창으로
 	function answerEdit(bIndex,rid,rcontent,rNum) {
-		console.log(bIndex);
-		console.log(rid);
-		console.log(rcontent);
-		console.log(rNum);
+		console.log("bIndex : "+bIndex);
+		console.log("rid : "+rid);
+		console.log("rcontent : "+rcontent);
+		console.log("rNum : "+rNum);
 		
 		// csrf
 		var token = $("meta[name='_csrf']").attr("content");
@@ -369,7 +369,7 @@
 	                                            <br>
 	                                            <sec:authentication property="principal" var="pinfo" />
 												<sec:authorize access="isAuthenticated()">
-												<c:if test="${pinfo.username eq vo.rid}"> 
+												<c:if test="${pinfo.username eq vo.rid || pinfo.getmember().getAuthname() eq '관리자'}">  
 		                                            <div class="charity-blog-social" id="abt${vo.r_num}" >
 		                                            	
 		                                            <!-- href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}"  -->
@@ -552,19 +552,20 @@
 						  icon : "success" , 
 						  button : true 
 						})
-    					
+    					/* answerEdit(bIndex,rid,rcontent,rNum) */
     					htmls = '';
-    					
+	    				
+	    				
     					htmls += '<li>'
     					htmls += '<div class="thumb-list">'
     					htmls += '<figure><img id="introImg" class="usre_img" src="${pageContext.request.contextPath}/resources/users/user02_sm.png"></figure>'
     					htmls += '<div class="text-holder">'
     					htmls += '<h6>' + rid + '</h6>'
     					htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
-    					htmls += '<p>' + rcontent + '</p>'
-						htmls += '<div class="charity-blog-social">'
-						htmls += '<i class="fa fa-edit"></i><b><a href="javascript:void(0);" onclick="answerEdit('+rid+','+rcontent+','+r_num+')" style="color:#333">수정하기 &nbsp;</a></b>'
-						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + r_num + '" style="color:#333"><b>삭제하기</b></a></div>'
+    					htmls += '<p id="modify'+r_num +'">' + rcontent + '</p>'
+						htmls += '<div class="charity-blog-social" id="abt'+r_num +'">'
+						htmls += '<i class="fa fa-edit"></i><b><a href="javascript:void(0);" onclick="answerEdit(\''+b_index+'\',\''+rid+'\',\''+rcontent+'\',\''+r_num+'\')" style="color:#333">수정하기 &nbsp;</a></b>'
+						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/'+r_num+'" style="color:#333"><b>삭제하기</b></a></div>'
     					htmls += '</div>'
     					htmls += '</div>'
     					htmls += '</li>'
