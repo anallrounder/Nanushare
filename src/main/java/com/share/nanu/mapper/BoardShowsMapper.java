@@ -13,7 +13,7 @@ import com.share.nanu.page.Criteria;
 public interface BoardShowsMapper {
 	
 	// aside 리스트
-	public List<BoardVO> asielist(); // 인증게시판 리스트
+	public List<BoardVO> asidelist(); // 인증게시판 리스트
 	
 	// 페이징 리스트
 	public List<BoardVO> getlistWithPaging(Criteria cri); // 페이징 리스트

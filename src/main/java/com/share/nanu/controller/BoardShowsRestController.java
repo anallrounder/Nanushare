@@ -44,6 +44,7 @@ import com.share.nanu.page.Criteria;
 import com.share.nanu.page.pageVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.BoardShowsService;
+import com.share.nanu.service.NoticeBoardService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +58,7 @@ public class BoardShowsRestController {
 
 	@Autowired
 	private BoardShowsService service;
-
+	
 	/* 게시글 */
 	// 인증게시판 페이징 list
 	@GetMapping("/board/shows/list")
@@ -116,9 +117,10 @@ public class BoardShowsRestController {
 			@AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("controller -- content_view -- 호출");
 		service.uphit(boardVO);
-
-		mav.addObject("list", service.getlist());
-
+		
+		mav.addObject("list", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		//mav.addObject("nlist", service.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		mav.setViewName("board_show/yourSupportContent"); // 이동할 웹페이지 주소
 
 		mav.addObject("content_view", service.getBoard(boardVO.getB_index())); // 게시판 글 불러오기

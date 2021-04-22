@@ -10,7 +10,7 @@ import com.share.nanu.page.Criteria;
 public interface BoardShowsService {
 	
 	// 기본 리스트
-	public List<BoardVO> asielist(); // 인증게시판 리스트 불러오기
+	public List<BoardVO> asidelist(); // 인증게시판 리스트 불러오기
 	
 	// 페이징
 	public List<BoardVO> getlist(Criteria cri); // 인증게시판 페이징 리스트 
