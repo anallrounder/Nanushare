@@ -60,7 +60,7 @@ public class BoardShowsRestController {
 
 	/* 게시글 */
 	// 인증게시판 페이징 list
-	@RequestMapping("/board/shows/list")
+	@GetMapping("/board/shows/list")
 	public ModelAndView boardShowPaging(Criteria cri, ModelAndView mav, AttachmentVO avo,
 			@AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("인증게시판 컨트롤러 페이징 리스트" + cri);
@@ -395,7 +395,9 @@ public class BoardShowsRestController {
 			) throws Exception {
 
 		log.info("인증게시판 컨트롤러  -- write() -- 호출");
-
+		log.info(multiple.getParameter("b_index"));
+		log.info("attachmentVO : " + attachmentVO);
+		
 		final int THUMNAIL_WIDTH = 264;
 		final int THUMNAIL_HEIGHT = 336;
 		UUID uuid = UUID.randomUUID();
@@ -464,7 +466,7 @@ public class BoardShowsRestController {
 				attachmentVO.setOriginname(originalfileName);
 				attachmentVO.setPath(savePath);
 				attachmentVO.setExtension(extension);
-				//attachmentVO.setB_index(boardVO.getB_index());
+				attachmentVO.setB_index(Integer.parseInt(multiple.getParameter("b_index")));
 				attachmentVO.setUuidName(thumNailName);
 				service.fileUpload(attachmentVO);
 			}

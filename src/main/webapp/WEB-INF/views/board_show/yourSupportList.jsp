@@ -31,6 +31,8 @@
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	
+	
+	
 	<title>나누셰어 - 나눔인증</title>
 	
 	<!-- CSS -->
@@ -43,6 +45,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+	<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	
 	 <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
@@ -120,13 +124,14 @@
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});
+		
 		
 		//썸네이 업로드	
 		function thumNailUpload(bIndex) {
 					
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
 			
 			var formData = new FormData();
 			formData.append("b_index",bIndex);
@@ -140,11 +145,11 @@
 
 			$.ajax({
 				type : 'POST',
-				//enctype: 'multipart/form-data',
+				enctype: 'multipart/form-data',
 				url : '${pageContext.request.contextPath}/my/board/shows/upLoadThumNail',
 				processData : false,
 				contentType: false,				
-				//cache : false,			
+				cache : false,			
 				data : formData,				
 				success : function(){						
 						swal({
@@ -279,7 +284,7 @@
 									<li class="col-md-6">
 										<figure>
 											<a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}">
-											
+											<!-- 썸네일 랜덤 이미지 관련 -->
 												<c:set var="doneLoop" value="false"/>
 												<c:set var="attachMentCount"  value="${attachMentCount}" />
 												<c:set var="i" value="1" />
@@ -336,12 +341,12 @@
 												
 												<%-- <a href="${pageContext.request.contextPath}/my/board/shows/thumNail" class="charity-simple-blog-btn mt-3">썸네일 업로드</a>  --%>
 												
-												
-												<button type="button"  class="charity-simple-blog-btn mt-3" data-toggle="modal" data-target="#exampleModal">
-													  썸네일
+												<!-- 썸네일 등록 -->
+												<button type="button"  class="charity-simple-blog-btn mt-3" data-toggle="modal" data-target="#exampleModal${vo.b_index }">
+													  <b>썸네일</b> 
 													</button>
 												<!-- Modal -->
-												<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal fade" id="exampleModal${vo.b_index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												  <div class="modal-dialog modal-dialog-centered" role="document">
 												    <div class="modal-content">
 												      <div class="modal-header">
