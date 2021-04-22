@@ -73,6 +73,9 @@
 </head>
 
 <style>
+.charity-blog-social ul {
+   margin:0px;
+}
 .charity-simple-blog-btn {
 	border: 0;
 }

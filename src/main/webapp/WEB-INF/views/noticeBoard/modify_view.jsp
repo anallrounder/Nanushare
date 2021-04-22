@@ -48,6 +48,9 @@
 .charity-simple-blog-btn {
 	border: 0;
 }
+.charity-blog-social ul {
+   margin:0px;
+}
 
 ​h3 {
 	text-align: center;

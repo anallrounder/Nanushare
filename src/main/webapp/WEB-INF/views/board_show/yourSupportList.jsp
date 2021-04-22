@@ -31,6 +31,8 @@
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	
+	
+	
 	<title>나누셰어 - 나눔인증</title>
 	
 	<!-- CSS -->
@@ -43,6 +45,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+	<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	
 	 <!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
@@ -120,33 +124,38 @@
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});
+		
 		
 		//썸네이 업로드	
 		function thumNailUpload(bIndex) {
 					
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+			
+			//var modalBindex = $('#modalBindex').val();
 			
 			var formData = new FormData();
 			formData.append("b_index",bIndex);
-			formData.append("file",$("#file")[0].files[0]);
+			formData.append("file",$("#file"+bIndex)[0].files[0]);
 			
 			
-			console.log(formData.get("file"));
-			console.log(formData.get("b_index"));
+			console.log("2." + formData.get("file"));
+			console.log("3." + formData.get("b_index"));
 			
 			
 
 			$.ajax({
 				type : 'POST',
-				//enctype: 'multipart/form-data',
+				enctype: 'multipart/form-data',
 				url : '${pageContext.request.contextPath}/my/board/shows/upLoadThumNail',
 				processData : false,
 				contentType: false,				
-				//cache : false,			
+				cache : false,			
 				data : formData,				
-				success : function(){						
+				success : function(result){
+					if(result =="SUCCESS"){
+						alert(result);
 						swal({
 							title : "썸네일 등록 완료" , 
 							icon : "success" , 
@@ -154,6 +163,7 @@
 						});
 							
 					$(location).attr('href', "${pageContext.request.contextPath}/board/shows/list");							
+					}
 				},
 				error : function(e){
 					
@@ -279,7 +289,7 @@
 									<li class="col-md-6">
 										<figure>
 											<a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}">
-											
+											<!-- 썸네일 랜덤 이미지 관련 -->
 												<c:set var="doneLoop" value="false"/>
 												<c:set var="attachMentCount"  value="${attachMentCount}" />
 												<c:set var="i" value="1" />
@@ -305,6 +315,8 @@
 													</c:if>																																																																																									
 												</c:forEach>											
 											</a>
+											
+											
 												
 											<figcaption>
 												<time datetime="2008-02-14 20:00" class="charity-bgcolor">나눔<span>인증</span></time>
@@ -337,11 +349,15 @@
 												<%-- <a href="${pageContext.request.contextPath}/my/board/shows/thumNail" class="charity-simple-blog-btn mt-3">썸네일 업로드</a>  --%>
 												
 												
-												<button type="button"  class="charity-simple-blog-btn mt-3" data-toggle="modal" data-target="#exampleModal">
-													  썸네일
-													</button>
+												<!-- 썸네일 등록 -->
+						
+												<button type="button"  class="charity-simple-blog-btn mt-3" data-toggle="modal" data-target="#exampleModal${vo.b_index }">
+													 <b>썸네일</b></button>
+													
+												 
+													  
 												<!-- Modal -->
-												<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal fade" id="exampleModal${vo.b_index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												  <div class="modal-dialog modal-dialog-centered" role="document">
 												    <div class="modal-content">
 												      <div class="modal-header">
@@ -351,20 +367,22 @@
 												        </button>
 												      </div>
 												      <div class="modal-body">
-												           
+												            
 								                           	<br/>
-														   	<input id="file" type="file" name="file"  multiple="multiple"/>
+														   	<input id="file${vo.b_index }" type="file" name="file"  multiple="multiple"/>
 								                            
 												      </div>
 												      <br/>
 												      <div class="modal-footer">
 												        <button type="button"  class="charity-simple-blog-btn" data-dismiss="modal">Close</button>
-												        <button id="thumnail" onclick="thumNailUpload('${vo.b_index}')" type="button" class="charity-simple-blog-btn">Save ThumNail</button>
+												        <button id="thumnail" onclick="thumNailUpload('${vo.b_index }')" type="button" class="charity-simple-blog-btn">Save ThumNail</button>
 												      </div>
 												    </div>
 												  </div>
 												</div>
+											
 													
+											
 												
 											
 											<%-- <a href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}" class="charity-simple-blog-btn mt-3">더보기</a>  --%>
