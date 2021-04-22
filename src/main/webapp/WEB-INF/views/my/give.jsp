@@ -98,133 +98,137 @@ li {
 					<section class="module">
 					<div class="module-inner">
 						<div class="side-bar"> --%>
-							<!-- profile -->
-							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
-							<!-- profile -->
-							<nav class="side-menu">
-							<ul class="nav">
-								<li><a href="mypage"><span class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
-								<li><a href="ask"><span class="fa fa-question">
-									</span>&nbsp;&nbsp;나의 문의 내역</a></li>
-								<li><a href="content"><span class="fa fa-file">
-									</span>&nbsp;&nbsp;나의 인증 내역</a></li>
-								<li class="active"><a href="give"><span
-										class="fa fa-handshake"> </span>&nbsp;&nbsp;나의 나눔 내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의
-										댓글 내역</a></li>
-								<li><a href="pay"><span class="fa fa-credit-card">
-									</span>&nbsp;&nbsp;나의 결제 내역</a></li>
-								<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의
-										포인트 내역</a></li>
+	<!-- profile -->
+	<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+	<!-- profile -->
+	<nav class="side-menu">
+	<ul class="nav">
+		<li><a href="mypage"><span class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
+		<li><a href="ask"><span class="fa fa-question"> </span>&nbsp;&nbsp;나의
+				문의 내역</a></li>
+		<li><a href="content"><span class="fa fa-file"> </span>&nbsp;&nbsp;나의
+				인증 내역</a></li>
+		<li class="active"><a href="give"><span
+				class="fa fa-handshake"> </span>&nbsp;&nbsp;나의 나눔 내역</a></li>
+		<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의
+				댓글 내역</a></li>
+		<li><a href="pay"><span class="fa fa-credit-card"> </span>&nbsp;&nbsp;나의
+				결제 내역</a></li>
+		<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의
+				포인트 내역</a></li>
 
-							</ul>
-							</nav>
-						</div>
-						<div class="content-panel">
-							<script
-								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div class="charity-fancy-title">
-								<h2>나의 나눔 내역</h2>
-							</div>
+	</ul>
+	</nav>
+	</div>
+	<div class="content-panel">
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
+		<div class="charity-fancy-title">
+			<h2>나의 나눔 내역</h2>
+		</div>
 
-							<form id="boardForm" class="charity-volunteer-form"
-								name="boardForm"
-								style="margin-bottom: 0px; padding-bottom: 10px; background-color: white;">
+		<form id="boardForm" class="charity-volunteer-form" name="boardForm"
+			style="margin-bottom: 0px; padding-bottom: 10px; background-color: white;">
 
-								<table class="table taWWble-striped projects">
+			<table class="table taWWble-striped projects">
+				<colgroup>
+					<col width="30%" />
+					<col width="40%" />
+					<col width="30%" />
+					
 
-									<thead>
-										<tr bgcolor="a5a5a5">
-											<th>날짜</th>
-											<th>물품이름</th>
+				</colgroup>
+				<thead>
+					<tr bgcolor="a5a5a5">
+						<th>날짜</th>
+						<th>물품이름</th>
 
-											<th>수량</th>
-											<!-- <th>아이디</th> -->
+						<th>수량</th>
+						<!-- <th>아이디</th> -->
+
+					</tr>
+					<c:if test="${empty list3}">
+						<tr>
+							<td colspan="5" align="center">나눔 내역이 없습니다</td>
+						</tr>
+					</c:if>
+				</thead>
+				<tbody>
+					<!-- 나의나눔내역 -->
+					<c:if test="${! empty list3}">
+						<c:set var="list3" value="${list3}" />
+						<c:forEach items="${list3}" var="dao3" varStatus="status">
+							<c:forEach items="${dao3.dona}" var="dto3" varStatus="status">
+								<sec:authentication property="principal" var="pinfo" />
+								<sec:authorize access="isAuthenticated()">
+									<c:if test="${pinfo.username eq dto3.member_id}">
+										<tr>
+											<td>${dto3.idntdate}</td>
+											<td>${dao3.iname}</td>
+											<!-- 제목누르면 해당 글내용으로 이동링크 -->
+											<td>${dto3.donaamount}</td>
+											<%-- <td>${dto3.member_id}</td> --%>
 
 										</tr>
-										<c:if test="${empty list3}">
-											<tr>
-												<td colspan="5" align="center">나눔 내역이 없습니다</td>
-											</tr>
-										</c:if>
-									</thead>
-									<tbody>
-										<!-- 나의나눔내역 -->
-										<c:if test="${! empty list3}">
-											<c:set var="list3" value="${list3}" />
-											<c:forEach items="${list3}" var="dao3" varStatus="status">
-												<c:forEach items="${dao3.dona}" var="dto3"
-													varStatus="status">
-													<sec:authentication property="principal" var="pinfo" />
-													<sec:authorize access="isAuthenticated()">
-														<c:if test="${pinfo.username eq dto3.member_id}">
-															<tr>
-																<td>${dto3.idntdate}</td>
-																<td>${dao3.iname}</td>
-																<!-- 제목누르면 해당 글내용으로 이동링크 -->
-																<td>${dto3.donaamount}</td>
-																<%-- <td>${dto3.member_id}</td> --%>
-
-															</tr>
-														</c:if>
-													</sec:authorize>
-												</c:forEach>
-											</c:forEach>
-										</c:if>
-									</tbody>
-								</table>
-							</form>
+									</c:if>
+								</sec:authorize>
+							</c:forEach>
+						</c:forEach>
+					</c:if>
+				</tbody>
+			</table>
+		</form>
 
 
-							<c:if test="${! empty list3}">
-								<div class="charity-pagination">
-									<ul class="page-numbers">
-										<li class="page-item"><c:if test="${pageMaker.prev}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-											</c:if></li>
+		<c:if test="${! empty list3}">
+			<div class="charity-pagination">
+				<ul class="page-numbers">
+					<li class="page-item"><c:if test="${pageMaker.prev}">
+							<a class="page-link"
+								href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+						</c:if></li>
 
-										<li class="page-item"><c:forEach
-												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-												var="idx">
-												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-												<a
-													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(idx)}">${idx}</a>
-											</c:forEach></li>
+					<li class="page-item"><c:forEach
+							begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+							var="idx">
+							<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+							<a
+								href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(idx)}">${idx}</a>
+						</c:forEach></li>
 
 
-										<li class="page-item"><c:if
-												test="${pageMaker.next && pageMaker.endPage > 0}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-												</a>
-											</c:if></li>
+					<li class="page-item"><c:if
+							test="${pageMaker.next && pageMaker.endPage > 0}">
+							<a class="page-link"
+								href="${pageContext.request.contextPath}/my/give${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+							</a>
+						</c:if></li>
 
-									</ul>
-								</div>
-
-							</c:if>
-						</div>
-					</div>
-					</section>
-				</div>
+				</ul>
 			</div>
 
-			<script>
-				$("#mytabs>ul>li>a").each(function(i) {
-					$(this).attr("href", "#mytab" + i)
-				})
-				$("#mytabs>div>div").each(function(i) {
-					$(this).attr("id", "mytab" + i)
-				})
-			</script>
+		</c:if>
+	</div>
+	</div>
+	</section>
+	</div>
+	</div>
 
-			<!-- Main Section -->
+	<script>
+		$("#mytabs>ul>li>a").each(function(i) {
+			$(this).attr("href", "#mytab" + i)
+		})
+		$("#mytabs>div>div").each(function(i) {
+			$(this).attr("id", "mytab" + i)
+		})
+	</script>
 
-		</div>
-		<!-- Content -->
+	<!-- Main Section -->
+
+	</div>
+	<!-- Content -->
 	</div>
 
 	<!-- Footer -->

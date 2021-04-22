@@ -11,7 +11,7 @@
 <html>
 
 <head>
-    <!-- 이건무조건 여기있어야함 -->
+<!-- 이건무조건 여기있어야함 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- jquery validation cdn 이거 두개 안되면 폼태그 끝나는 시점 바로 밑에 넣기-->
@@ -66,104 +66,126 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <script type='text/javascript' src='https://www.jestina.co.kr/content/js/swiper.3.4.1/swiper.jquery.min.js'></script>
-    <link rel="stylesheet" type="text/css" href="https://www.jestina.co.kr/content/css/reset2.css">
-    <link rel="stylesheet" type="text/css" href="https://www.jestina.co.kr/content/ux/content/css/common.css">
-    <link rel="stylesheet" type="text/css" href="https://www.jestina.co.kr/content/css/swiper.min.css">
-    <!--이벤트/기획 공통-->
-    <script type="text/javascript" src="https://webimg.jestina.co.kr/UpData/jestina/event/@assets/sub.common.version.02.js"></script>
-    <link rel="stylesheet" href="https://webimg.jestina.co.kr/UpData/jestina/event/@assets/sub.common.version.01.css">
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type='text/javascript'
+	src='https://www.jestina.co.kr/content/js/swiper.3.4.1/swiper.jquery.min.js'></script>
+<link rel="stylesheet" type="text/css"
+	href="https://www.jestina.co.kr/content/css/reset2.css">
+<link rel="stylesheet" type="text/css"
+	href="https://www.jestina.co.kr/content/ux/content/css/common.css">
+<link rel="stylesheet" type="text/css"
+	href="https://www.jestina.co.kr/content/css/swiper.min.css">
+<!--이벤트/기획 공통-->
+<script type="text/javascript"
+	src="https://webimg.jestina.co.kr/UpData/jestina/event/@assets/sub.common.version.02.js"></script>
+<link rel="stylesheet"
+	href="https://webimg.jestina.co.kr/UpData/jestina/event/@assets/sub.common.version.01.css">
 
 
 <script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						var prize = 'product03';
+						// roulette_product_end = 이벤트 종료 : 룰렛엔 없어용
 
-$(document).ready(function () {
-    var prize = 'product03';
-    // roulette_product_end = 이벤트 종료 : 룰렛엔 없어용
+						// product01 = 조엘 컬러바
+						// product02 = 크리스피기프티콘
+						// product03 = 스타벅스 기프티콘
+						// product04 = 더블 5,000원 쿠폰번호 1397
+						// product05 = 더블 3,000원 쿠폰번호 1396
+						// product06 = 더블 1,000원 쿠폰번호 1395
 
-    // product01 = 조엘 컬러바
-    // product02 = 크리스피기프티콘
-    // product03 = 스타벅스 기프티콘
-    // product04 = 더블 5,000원 쿠폰번호 1397
-    // product05 = 더블 3,000원 쿠폰번호 1396
-    // product06 = 더블 1,000원 쿠폰번호 1395
+						// product07 = 이미참여하셨습니다
 
-    // product07 = 이미참여하셨습니다
+						$('#start-rotate')
+								.click(
+										function() {
+											if (prize == 'product01') {
+												var degrees = 65;
+												rotate(degrees);
+												$('#resultImg')
+														.attr(
+																'src',
+																'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_01.png');
+												window.setTimeout(resultLayer,
+														5400);
+											} else if (prize == 'product02') {
+												var degrees = 120;
+												rotate(degrees);
+												$('#resultImg')
+														.attr(
+																'src',
+																'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_02.png');
+												window.setTimeout(resultLayer,
+														5400);
+											} else if (prize == 'product03') {
+												var degrees = 0;
+												rotate(degrees);
+												$('#resultImg')
+														.attr(
+																'src',
+																'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_03.png');
+												window.setTimeout(resultLayer,
+														5400);
+											} else if (prize == 'product04') {
+												var degrees = 220;
+												rotate(degrees);
+												$('#resultImg')
+														.attr(
+																'src',
+																'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_04.png');
+												window.setTimeout(resultLayer,
+														5400);
+											} else if (prize == 'product05') {
+												var degrees = 290;
+												rotate(degrees);
+												$('#resultImg')
+														.attr(
+																'src',
+																'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_05.png');
+												window.setTimeout(resultLayer,
+														5400);
+											} else if (prize == 'product06') {
+												var degrees = 160;
+												rotate(degrees);
+												$('#resultImg')
+														.attr(
+																'src',
+																'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_06.png');
+												window.setTimeout(resultLayer,
+														5400);
+											}
+										});
 
-    $('#start-rotate').click(function () {
-        if (prize == 'product01') {
-            var degrees = 65;
-            rotate(degrees);
-            $('#resultImg').attr('src',
-                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_01.png'
-            );
-            window.setTimeout(resultLayer, 5400);
-        } else if (prize == 'product02') {
-            var degrees = 120;
-            rotate(degrees);
-            $('#resultImg').attr('src',
-                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_02.png'
-            );
-            window.setTimeout(resultLayer, 5400);
-        } else if (prize == 'product03') {
-            var degrees = 0;
-            rotate(degrees);
-            $('#resultImg').attr('src',
-                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_03.png'
-            );
-            window.setTimeout(resultLayer, 5400);
-        } else if (prize == 'product04') {
-            var degrees = 220;
-            rotate(degrees);
-            $('#resultImg').attr('src',
-                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_04.png'
-            );
-            window.setTimeout(resultLayer, 5400);
-        } else if (prize == 'product05') {
-            var degrees = 290;
-            rotate(degrees);
-            $('#resultImg').attr('src',
-                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_05.png'
-            );
-            window.setTimeout(resultLayer, 5400);
-        } else if (prize == 'product06') {
-            var degrees = 160;
-            rotate(degrees);
-            $('#resultImg').attr('src',
-                'http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_06.png'
-            );
-            window.setTimeout(resultLayer, 5400);
-        }
-    });
+						function rotate(degrees) {
+							$("#roulette-gift").rotate({
+								angle : 0,
+								animateTo : 360 * 5 + degrees,
+								easing : $.easing.easeInOutElastic,
+								duration : 5000
+							});
+						}
+						;
 
-    function rotate(degrees) {
-        $("#roulette-gift").rotate({
-            angle: 0,
-            animateTo: 360 * 5 + degrees,
-            easing: $.easing.easeInOutElastic,
-            duration: 5000
-        });
-    };
+						function resultLayer() {
+							$('.resultLayer').css('display', 'block');
+						}
+						;
 
-    function resultLayer() {
-        $('.resultLayer').css('display', 'block');
-    };
+						$('#closeLayer').click(function() {
+							$('.resultLayer').css('display', 'none');
 
-    $('#closeLayer').click(function () {
-        $('.resultLayer').css('display', 'none');
-
-        $("#roulette-gift").rotate({
-            angle: 0,
-            duration: 0
-        });
-    });
-});
-
+							$("#roulette-gift").rotate({
+								angle : 0,
+								duration : 0
+							});
+						});
+					});
 </script>
- <style type="text/css">
- 
- /*룰렛*/
+<style type="text/css">
+
+/*룰렛*/
 .roulette-wrapper {
 	position: absolute;
 	left: 0;
@@ -234,56 +256,84 @@ $(document).ready(function () {
 	margin: 0 auto;
 	left: -9px;
 }
-
 </style>
 
 </head>
 
 <body>
-<div class="jestina-sub-project__wrap">
+	<!-- Header -->
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<!-- Header -->
+
+	<!-- Sub Header -->
+	<div class="charity-subheader">
+		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+		<span class="black-transparent"></span>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Sub Header -->
 
 
-    <section class="jestina-sub-project-02" id="02">
-        <div class="jestina-sub-project__inner">
-    
-            <div class="roulette-wrapper">
+	<!-- Content -->
+	<div class="charity-main-content">
 
-                <div class="resultLayer">
-                    <!--이벤트 종료되었을 경우-->
-                    <img id="resultImg" src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_end.png" alt="이벤트종료">
+		<!-- Main Section -->
+		<div class="charity-main-section">
 
-                    <!--이미 응모했을 경우-->
-                    <!--<img id="resultImg" src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product_07.png" alt="이미참여하셨습니다/">-->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="jestina-sub-project__wrap">
+							<section class="jestina-sub-project-02" id="02">
+								<div class="jestina-sub-project__inner">
+									<div class="roulette-wrapper">
+										<!--룰렛 맨뒷판  -->
+										<img id="roulette-bg"
+											src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_bg.png">
+										<!-- 포인트 종류 -->
+										<img id="roulette-gift"
+											src="/resources/menu/roulette_product.png">
+										<!-- 룰렛핀 -->
+										<img id="roulette-niddle"
+											src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_niddle.png">
+										<!-- 버튼 -->
+										<button id="start-rotate">
+											<img id="roulette-startBtn"
+												src="/resources/menu/roulette_btn.png">
+										</button>
+									</div>
+								</div>
+							</section>
+						</div>
+						<!-- 룰렛끝 -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                    <button id="closeLayer">
-                        <img src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/popup_close__btn.png" alt="닫기">
-                    </button>
-
-                </div>
-
-                <img id="roulette-bg"
-                     src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_bg.png">
-                <img id="roulette-gift"
-                     src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_product.png">
-
-                <img id="roulette-niddle"
-                     src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_niddle.png">
-
-                <button id="start-rotate">
-                    <img id="roulette-startBtn"
-                         src="http://webimg.jestina.co.kr/UpData/jestina/event/201201_jWeek/roulette_btn.png">
-                </button>
-            </div>
-
-           
-
-            <script type='text/javascript' src='http://php-jestina2.azurewebsites.net/scripts/jQueryRotate.js'></script>
+	<!-- Footer -->
+	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
+	<!-- Footer -->
+	<script type='text/javascript'
+		src='http://php-jestina2.azurewebsites.net/scripts/jQueryRotate.js'></script>
+	<!-- jQuery -->
+	<script src="/resources/charity/script/jquery.js"></script>
+	<script src="/resources/charity/script/popper.min.js"></script>
+	<script src="/resources/charity/script/bootstrap.min.js"></script>
+	<script src="/resources/charity/script/slick.slider.min.js"></script>
+	<script src="/resources/charity/script/progressbar.js"></script>
+	<script src="/resources/charity/script/fancybox.min.js"></script>
+	<script src="/resources/charity/script/jquery.countdown.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<script src="/resources/charity/script/jquery.jplayer.js"></script>
+	<script src="/resources/charity/script/jplayer.playlist.js"></script>
+	<script src="/resources/charity/script/functions-main.js"></script>
 
 
-        </div>
-        
-    </section>
-
-</div>
 </body>
 </html>

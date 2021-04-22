@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -74,52 +74,52 @@
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
 
-<!-- <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script> -->
-<!-- jQuery CDN --->
-
-
 <script type="text/javascript">
 	//결제취소 
 	function cancle(paynum, price) {
 
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
-		$(document).ajaxSend(function(e, xhr, options) {
-			xhr.setRequestHeader(header, token);
-		});
+		if (confirm("결제를 취소하시겠습니까?") == true) {//결제 취소여부 다시 확인
+			
 
-		console.log(paynum);
-		console.log(price);
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
 
-		jQuery.ajax({// 클라이언트가 가맹점 서버(Nanushare)로 환불 요청
-			url : "${pageContext.request.contextPath}/my/payments/cancel",
-			type : "POST",
-			contentType : "application/json",
-			data : JSON.stringify({
+			console.log(paynum);
+			console.log(price);
 
-				merchant_uid : paynum, // 주문번호
-				cancel_request_amount : price, // 환불금액
-				reason : "후원금 결제 취소" // 환불사유
+			jQuery.ajax({// 클라이언트가 가맹점 서버(Nanushare)로 환불 요청
+				url : "${pageContext.request.contextPath}/my/payments/cancel",
+				type : "POST",
+				contentType : "application/json",
+				data : JSON.stringify({
 
-			}),
-			dataType : "text", //데이터 타입을 제이슨 으로 지정시 statusText: "parsererror" 발생
-			success : function(result) {
-				console.log(result);
-				if (result == "SUCCESS") {
-					alert("결제가 취소 되었습니다.");
-					$(location).attr('href',
-							"${pageContext.request.contextPath}/my/pay");
+					merchant_uid : paynum, // 주문번호
+					cancel_request_amount : price, // 환불금액
+					reason : "후원금 결제 취소" // 환불사유
+
+				}),
+				dataType : "text", //데이터 타입을 제이슨 으로 지정시 statusText: "parsererror" 발생
+
+				success : function(result) {
+					console.log(result);
+
+					if (result == "SUCCESS") {
+						alert("결제가 취소 되었습니다.");
+						$(location).attr('href',
+								"${pageContext.request.contextPath}/my/pay");
+					}
+				},// success end
+				error : function(e) {
+					console.log(e);
+					console.log("실패");
 				}
-
-			},// success end
-			error : function(e) {
-				console.log(e);
-				console.log("실패");
-			}
-		}); // ajax end			
+			});// ajax end
+		} else { //결제 취소 여부 확인 end
+			return;
+		}
 	}//cancle function end
 </script>
 
@@ -127,6 +127,26 @@
 <style>
 li {
 	list-style: none;
+}
+
+/* 취소버튼 */
+.charity-simple-blog-butn {
+	display: inline-block;
+	padding: 10px 20px 12px;
+	border-radius: 4px;
+	line-height: 1;
+	color: #78665A; /* #272625; */
+	font-weight: 500;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.charity-simple-blog-butn:hover, ul li:hover .charity-simple-blog-btn {
+	color: #ffffff;
+	background-color: #272625; /* #78665A; */ /* 222 */
 }
 </style>
 
@@ -164,148 +184,140 @@ li {
 					<section class="module">
 					<div class="module-inner">
 						<div class="side-bar"> --%>
-							<!-- profile -->
-							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
-							<!-- profile -->
-							<nav class="side-menu">
-							<ul class="nav">
-								<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
-								<li><a href="ask"><span class="fa fa-question">
-									</span>&nbsp;&nbsp;나의문의내역</a></li>
-								<li><a href="content"><span class="fa fa-file">
-									</span>&nbsp;&nbsp;나의인증내역</a></li>
-								<li><a href="give"><span class="fa fa-handshake">
-									</span>&nbsp;&nbsp;나의나눔내역</a></li>
-								<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
-								<li class="active"><a href="pay"><span
-										class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
-								<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
+	<!-- profile -->
+	<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+	<!-- profile -->
+	<nav class="side-menu">
+	<ul class="nav">
+		<li><a href="mypage"><span class="fa fa-user"></span>&nbsp;&nbsp;Profile</a></li>
+		<li><a href="ask"><span class="fa fa-question"> </span>&nbsp;&nbsp;나의문의내역</a></li>
+		<li><a href="content"><span class="fa fa-file"> </span>&nbsp;&nbsp;나의인증내역</a></li>
+		<li><a href="give"><span class="fa fa-handshake"> </span>&nbsp;&nbsp;나의나눔내역</a></li>
+		<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의댓글내역</a></li>
+		<li class="active"><a href="pay"><span
+				class="fa fa-credit-card"></span>&nbsp;&nbsp;나의결제내역</a></li>
+		<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의포인트내역</a></li>
 
 
-							</ul>
-							</nav>
-						</div>
-						<div class="content-panel">
-							<script
-								src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-							<div>&nbsp;</div>
-							<div>&nbsp;</div>
-							<div class="charity-fancy-title">
-								<h2>나의 결제 내역</h2>
-							</div>
+	</ul>
+	</nav>
+	</div>
+	<div class="content-panel">
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
+		<div class="charity-fancy-title">
+			<h2>나의 결제 내역</h2>
+		</div>
 
-							<form id="boardForm" class="charity-volunteer-form"
-								name="boardForm"
-								style="margin-bottom: 0px; padding-bottom: 10px; background-color: white;">
+		<form id="boardForm" class="charity-volunteer-form" name="boardForm"
+			style="margin-bottom: 0px; padding-bottom: 10px; background-color: white;">
 
-								<table class="table taWWble-striped projects">
+			<table class="table taWWble-striped projects">
 
-									<thead>
-										<tr bgcolor="a5a5a5">
-											<th>결제날짜</th>
-											<th>결제번호</th>
-											<th>금액</th>
-											<th>결제방법</th>
-											<th>처리상태</th>
-											<th>결제취소</th>
-										</tr>
-									</thead>
-									<tbody>
+				<thead>
+					<tr bgcolor="a5a5a5">
+						<th>결제 날짜</th>
+						<th>결제 번호</th>
+						<th>금액</th>
+						<th>결제 수단</th>
+						<th>처리 상태</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
 
-										<c:if test="${empty list5}">
-											<tr>
-												<td colspan="6" align="center">결제 내역이 없습니다</td>
-											</tr>
+					<c:if test="${empty list5}">
+						<tr>
+							<td colspan="6" align="center">결제 내역이 없습니다</td>
+						</tr>
 
-										</c:if>
+					</c:if>
 
 
-										<!-- 로그인한 회원의 글 정보만 받아오기 -->
-										<!-- 나의문의내역 -->
-										<c:if test="${! empty list5}">
-											<c:forEach items="${list5}" var="list5" varStatus="status">
-												<tr>
-													<td>${list5.dntdate}</td>
-													<td>${list5.dnt_paynum}</td>
-													<td>￦${list5.dntprice}</td>
-													<td><c:if test="${list5.paymethod == 'card'}">카드
-														</c:if>
-														<c:if test="${list5.paymethod == 'trans'}">계좌이체
-														</c:if>
-														<c:if test="${list5.paymethod == 'vbank'}">가상계좌
-														</c:if>
-														<c:if test="${list5.paymethod == 'phone'}">휴대폰결제
-														</c:if>
-														<c:if test="${list5.paymethod == 'point'}">페이코
-														</c:if>
-														<c:if test="${list5.paymethod == 'pay'}">카카오페이
+					<!-- 로그인한 회원의 글 정보만 받아오기 -->
+					<!-- 나의문의내역 -->
+					<c:if test="${! empty list5}">
+						<c:forEach items="${list5}" var="list5" varStatus="status">
+							<tr>
+								<td>${list5.dntdate}</td>
+								<td>${list5.dnt_paynum}</td>
+								<td>￦${list5.dntprice}</td>
+								<td><c:if test="${list5.paymethod == 'card'}">카드
+														</c:if> <c:if test="${list5.paymethod == 'trans'}">계좌이체
+														</c:if> <c:if test="${list5.paymethod == 'vbank'}">가상계좌
+														</c:if> <c:if test="${list5.paymethod == 'phone'}">휴대폰결제
+														</c:if> <c:if test="${list5.paymethod == 'point'}">페이코
+														</c:if> <c:if test="${list5.paymethod == 'pay'}">카카오페이
 														</c:if></td>
-													<td><c:if test="${list5.dntstat == 'cancelled'}"><span style="color: #FF3636;">취소완료</span>
-														</c:if>
-														<c:if test="${list5.dntstat == 'paid'}"><span style="color: #5586EB;">정상</span>
-														</c:if></td>
-													<td><c:if test="${list5.dntstat == 'cancelled'}"><button class="charity-simple-blog-btn" class="paycc"
-															type="button"
-															onclick="alert('이미 취소된 결제 건입니다.')">취소완료</button></c:if>
-														
-														<c:if test="${list5.dntstat == 'paid'}"><button class="charity-simple-blog-btn" class="paycc"
-															type="button"
-															onclick="cancle('${list5.dnt_paynum}','${list5.dntprice}')">결제취소</button></c:if>
-															</td>
-												</tr>
-											</c:forEach>
-										</c:if>
-									</tbody>
-								</table>
-							</form>
+								<td><c:if test="${list5.dntstat == 'cancelled'}">
+										<span style="color: #FF3636;">취소완료</span>
+									</c:if> <c:if test="${list5.dntstat == 'paid'}">
+										<span style="color: #5586EB;">정상</span>
+									</c:if></td>
+								<td><c:if test="${list5.dntstat == 'cancelled'}">
+										<button class="charity-simple-blog-butn" class="paycc"
+											type="button" onclick="alert('이미 취소된 결제 건입니다.')">취소완료</button>
+									</c:if> <c:if test="${list5.dntstat == 'paid'}">
+										<button class="charity-simple-blog-btn" class="paycc"
+											type="button"
+											onclick="cancle('${list5.dnt_paynum}','${list5.dntprice}')">결제취소</button>
+									</c:if></td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</tbody>
+			</table>
+		</form>
 
-							<!-- 페이징 -->
-							<c:if test="${! empty list5}">
-								<div class="charity-pagination">
-									<ul class="page-numbers">
-										<li class="page-item"><c:if test="${pageMaker.prev}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-											</c:if></li>
+		<!-- 페이징 -->
+		<c:if test="${! empty list5}">
+			<div class="charity-pagination">
+				<ul class="page-numbers">
+					<li class="page-item"><c:if test="${pageMaker.prev}">
+							<a class="page-link"
+								href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
+						</c:if></li>
 
-										<li class="page-item"><c:forEach
-												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-												var="idx">
-												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-												<a
-													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(idx)}">${idx}</a>
-											</c:forEach></li>
+					<li class="page-item"><c:forEach
+							begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
+							var="idx">
+							<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+							<a
+								href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(idx)}">${idx}</a>
+						</c:forEach></li>
 
-										<li class="page-item"><c:if
-												test="${pageMaker.next && pageMaker.endPage > 0}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-												</a>
-											</c:if></li>
-									</ul>
+					<li class="page-item"><c:if
+							test="${pageMaker.next && pageMaker.endPage > 0}">
+							<a class="page-link"
+								href="${pageContext.request.contextPath}/my/pay${pageMaker.makeQuery(pageMaker.endPage +1) }">next
+							</a>
+						</c:if></li>
+				</ul>
 
-								</div>
-
-							</c:if>
-						</div>
-					</div>
-					</section>
-				</div>
 			</div>
 
-			<script>
-				$("#mytabs>ul>li>a").each(function(i) {
-					$(this).attr("href", "#mytab" + i)
-				})
-				$("#mytabs>div>div").each(function(i) {
-					$(this).attr("id", "mytab" + i)
-				})
-			</script>
+		</c:if>
+	</div>
+	</div>
+	</section>
+	</div>
+	</div>
 
-			<!-- Main Section -->
+	<script>
+		$("#mytabs>ul>li>a").each(function(i) {
+			$(this).attr("href", "#mytab" + i)
+		})
+		$("#mytabs>div>div").each(function(i) {
+			$(this).attr("id", "mytab" + i)
+		})
+	</script>
 
-		</div>
-		<!-- Content -->
+	<!-- Main Section -->
+
+	</div>
+	<!-- Content -->
 	</div>
 
 	<!-- Footer -->

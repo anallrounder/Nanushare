@@ -157,6 +157,8 @@ input {
 	/* To harmonize the look & feel of text field border */
 	border: 1px solid #999;
 }
+
+
 </style>
 <body>
 	<!-- Header -->
@@ -237,26 +239,6 @@ input {
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
-	<!-- Search Modal -->
-	<div class="modal fade searchmodal" id="searchModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<a href="/resources/charity/#" class="charity-close-btn"
-						data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></a>
-					<form>
-						<input type="text" value="Type Your Keyword"
-							onblur="if(this.value == '') { this.value ='Type Your Keyword'; }"
-							onfocus="if(this.value =='Type Your Keyword') { this.value = ''; }">
-						<input type="submit" value=""> <i class="fa fa-search"></i>
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
 
 
 	<!-- jQuery -->

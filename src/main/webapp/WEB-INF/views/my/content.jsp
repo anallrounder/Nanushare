@@ -104,126 +104,132 @@ li {
 				<section class="module">
 				<div class="module-inner">
 					<div class="side-bar"> --%>
-						<!-- profile -->
-						<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
-						<!-- profile -->
-						<nav class="side-menu">
-						<ul class="nav">
-							<li><a href="mypage"><span class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
-							<li><a href="ask"><span class="fa fa-question"> </span>&nbsp;&nbsp;나의
-									문의 내역</a></li>
-							<li class="active"><a href="content"><span
-									class="fa fa-file"> </span>&nbsp;&nbsp;나의 인증 내역</a></li>
-							<li><a href="give"><span class="fa fa-handshake">
-								</span>&nbsp;&nbsp;나의 나눔 내역</a></li>
-							<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의
-									댓글 내역</a></li>
-							<li><a href="pay"><span class="fa fa-credit-card">
-								</span>&nbsp;&nbsp;나의 결제 내역</a></li>
-							<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의
-									포인트 내역</a></li>
+	<!-- profile -->
+	<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+	<!-- profile -->
+	<nav class="side-menu">
+	<ul class="nav">
+		<li><a href="mypage"><span class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
+		<li><a href="ask"><span class="fa fa-question"> </span>&nbsp;&nbsp;나의
+				문의 내역</a></li>
+		<li class="active"><a href="content"><span class="fa fa-file">
+			</span>&nbsp;&nbsp;나의 인증 내역</a></li>
+		<li><a href="give"><span class="fa fa-handshake"> </span>&nbsp;&nbsp;나의
+				나눔 내역</a></li>
+		<li><a href="reply"><span class="fa fa-reply"> </span>&nbsp;&nbsp;나의
+				댓글 내역</a></li>
+		<li><a href="pay"><span class="fa fa-credit-card"> </span>&nbsp;&nbsp;나의
+				결제 내역</a></li>
+		<li><a href="point"><span class="fa fa-parking-circle"></span>&nbsp;&nbsp;나의
+				포인트 내역</a></li>
 
-						</ul>
-						</nav>
-					</div>
-					<div class="content-panel">
-						<script
-							src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-						<div>&nbsp;</div>
-						<div>&nbsp;</div>
-						<div class="charity-fancy-title">
-							<h2>나의 인증 내역</h2>
-						</div>
-
-						<form id="boardForm" class="charity-volunteer-form"
-							name="boardForm"
-							style="margin-bottom: 0px; padding-bottom: 10px; background-color: white;">
-
-							<table class="table taWWble-striped projects">
-
-								<thead>
-									<tr bgcolor="a5a5a5">
-										<th>날짜</th>
-										<th>글번호</th>
-										<!-- <th>아이디</th> -->
-										<th>인증제목</th>
-										<th>조회수</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:if test="${empty list2}">
-										<tr>
-											<td colspan="5" align="center">작성된 글이 없습니다</td>
-										</tr>
-									</c:if>
-
-									<!-- 나의인증내역 -->
-									<c:if test="${! empty list2}">
-										<c:forEach items="${list2}" var="list2">
-											<%-- <sec:authentication property="principal" var="pinfo" />
-									<sec:authorize access="isAuthenticated()">
-										<c:if test="${pinfo.username eq list2.member_id}"> --%>
-											<%-- <c:if test="${sessionScope.member_id = principal.member_id}"> --%>
-											<tr>
-												<td>${list2.bdate}</td>
-												<td>${list2.b_index}</td>
-												<td><a id="a-content"
-													href="${pageContext.request.contextPath}/board/shows/content_view/${list2.b_index}">${list2.btitle}</a></td>
-												<!-- 제목누르면 해당 글내용으로 이동링크 -->
-												<td>${list2.bhit}</td>
-											</tr>
-										</c:forEach>
-									</c:if>
-								</tbody>
-							</table>
-						</form>
-
-
-						<!-- 페이징 -->
-						<!-- 	<div class="container" align="center"> -->
-						<!--  -->
-						<c:if test="${! empty list2}">
-							<div class="charity-pagination">
-								<ul class="page-numbers">
-									<c:if test="${pageMaker.prev}">
-										<li class="page-item"><a
-											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
-										</li>
-									</c:if>
-
-									<c:forEach begin="${pageMaker.startPage}"
-										end="${pageMaker.endPage}" var="idx">
-										<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-										<li class="page-item"><a
-											href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
-										</li>
-									</c:forEach>
-
-									<li class="page-item"><c:if
-											test="${pageMaker.next && pageMaker.endPage > 0}">
-											<a
-												href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
-
-										</c:if></li>
-								</ul>
-							</div>
-						</c:if>
-					</div>
-				</div>
-				<!-- </div> --> </section>
-			</div>
+	</ul>
+	</nav>
+	</div>
+	<div class="content-panel">
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
+		<div class="charity-fancy-title">
+			<h2>나의 인증 내역</h2>
 		</div>
 
-		<script>
-			$("#mytabs>ul>li>a").each(function(i) {
-				$(this).attr("href", "#mytab" + i)
-			})
-			$("#mytabs>div>div").each(function(i) {
-				$(this).attr("id", "mytab" + i)
-			})
-		</script>
+		<form id="boardForm" class="charity-volunteer-form" name="boardForm"
+			style="margin-bottom: 0px; padding-bottom: 10px; background-color: white;">
 
-		<!-- Main Section -->
+			<table class="table taWWble-striped projects">
+				<colgroup>
+					<col width="20%" />
+					<col width="15%" />
+					<col width="50%" />
+					<col width="15%" />
+					
+				</colgroup>
+				<thead>
+					<tr bgcolor="a5a5a5">
+						<th>날짜</th>
+						<th>글번호</th>
+						<!-- <th>아이디</th> -->
+						<th>인증제목</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${empty list2}">
+						<tr>
+							<td colspan="5" align="center">작성된 글이 없습니다</td>
+						</tr>
+					</c:if>
+
+					<!-- 나의인증내역 -->
+					<c:if test="${! empty list2}">
+						<c:forEach items="${list2}" var="list2">
+							<%-- <sec:authentication property="principal" var="pinfo" />
+									<sec:authorize access="isAuthenticated()">
+										<c:if test="${pinfo.username eq list2.member_id}"> --%>
+							<%-- <c:if test="${sessionScope.member_id = principal.member_id}"> --%>
+							<tr>
+								<td>${list2.bdate}</td>
+								<td>${list2.b_index}</td>
+								<td><a id="a-content"
+									href="${pageContext.request.contextPath}/board/shows/content_view/${list2.b_index}">${list2.btitle}</a></td>
+								<!-- 제목누르면 해당 글내용으로 이동링크 -->
+								<td>${list2.bhit}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</tbody>
+			</table>
+		</form>
+
+
+		<!-- 페이징 -->
+		<!-- 	<div class="container" align="center"> -->
+		<!--  -->
+		<c:if test="${! empty list2}">
+			<div class="charity-pagination">
+				<ul class="page-numbers">
+					<c:if test="${pageMaker.prev}">
+						<li class="page-item"><a
+							href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a>
+						</li>
+					</c:if>
+
+					<c:forEach begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}" var="idx">
+						<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+						<li class="page-item"><a
+							href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(idx)}">${idx}</a>
+						</li>
+					</c:forEach>
+
+					<li class="page-item"><c:if
+							test="${pageMaker.next && pageMaker.endPage > 0}">
+							<a
+								href="${pageContext.request.contextPath}/my/content${pageMaker.makeQuery(pageMaker.endPage +1)}">다음</a>
+
+						</c:if></li>
+				</ul>
+			</div>
+		</c:if>
+	</div>
+	</div>
+	<!-- </div> -->
+	</section>
+	</div>
+	</div>
+
+	<script>
+		$("#mytabs>ul>li>a").each(function(i) {
+			$(this).attr("href", "#mytab" + i)
+		})
+		$("#mytabs>div>div").each(function(i) {
+			$(this).attr("id", "mytab" + i)
+		})
+	</script>
+
+	<!-- Main Section -->
 
 	</div>
 	<!--Content -->
