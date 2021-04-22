@@ -503,31 +503,28 @@ Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
     			contentType:'application/json; charset=UTF-8',
     			data: JSON.stringify(form),
     			success : function(r_num) {
-    					//alert(r_num)
-    					//alert(result.replyVO.r_num)
-    					//alert(result.rvo.b_index)
     					
 	    				swal({
 						  title : "댓글 입력 완료" , 
 						  icon : "success" , 
 						  button : true 
-						})
+						});
 					
     					htmls = '';
     					
-    					htmls += '<li>'
-    					htmls += '<div class="thumb-list">'
-    					htmls += '<figure><img id="introImg" class="usre_img" src="${pageContext.request.contextPath}/resources/users/user02_sm.png"></figure>'
-    					htmls += '<div class="text-holder">'
-    					htmls += '<h6>' + rid + '</h6>'
-    					htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
-    					htmls += '<p>' + rcontent + '</p>'
-						htmls += '<div class="charity-blog-social">'
-						htmls += '<i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick= " answerEdit( '+rid+ ' , '+rcontent+' , '+r_num+' ) " style="color:black"><b>수정하기</b></a>'+'&nbsp;'
-						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/ ' + r_num + ' " style="color:black"><b>삭제하기</b></a></div>'
-    					htmls += '</div>'
-    					htmls += '</div>'
-    					htmls += '</li>'
+	    				htmls += '<li>'
+	    				htmls += '<div class="thumb-list">'
+	    				htmls += '<figure><img id="introImg" class="usre_img" src="${pageContext.request.contextPath}/resources/users/user02_sm.png"></figure>'
+	    				htmls += '<div class="text-holder">'
+	    				htmls += '<h6>' + rid + '</h6>'
+	    				htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
+	    				htmls += '<p id="modify'+r_num +'">' + rcontent + '</p>'
+						htmls += '<div class="charity-blog-social" id="abt'+r_num +'">'
+						htmls += '<i class="fa fa-edit"></i><b><a href="javascript:void(0);" onclick="answerEdit(\''+b_index+'\',\''+rid+'\',\''+rcontent+'\',\''+r_num+'\')" style="color:#333">수정하기 &nbsp;</a></b>'
+						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/'+r_num+'" style="color:#333"><b>삭제하기</b></a></div>'
+	    				htmls += '</div>'
+	    				htmls += '</div>'
+	    				htmls += '</li>'
     					
     					$("#listComment").prepend(htmls); // 작성 결과 입력
     					

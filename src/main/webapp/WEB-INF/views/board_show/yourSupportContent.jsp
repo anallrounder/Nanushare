@@ -553,7 +553,7 @@
 						  icon : "success" , 
 						  button : true 
 						})
-    					/* answerEdit(bIndex,rid,rcontent,rNum) */
+    					
     					htmls = '';
 	    				
 	    				
