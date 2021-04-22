@@ -118,7 +118,7 @@
 					    </div>
 						<!-- 문의하기 버튼 -->
 						
-		        		<form id="boardForm" class="charity-volunteer-form" name="boardForm" style="margin-bottom:0px; padding-bottom:10px; background-color:white;">
+		        		<form id="boardForm" class="charity-volunteer-form mt-3" name="boardForm" style="margin-bottom:0px; padding-bottom:10px;" ><!-- background-color:white; -->
 							<table class="table taWWble-striped projects" >
 							<!-- <table class="table table-light table-hover " > -->
 								<colgroup>
@@ -130,7 +130,7 @@
 			                    </colgroup>
 								
 								<thead><!-- table-dark -->
-									<tr bgcolor="#ccccc">
+									<tr bgcolor="#a5a5a5">
 									<!-- <tr ffd7b9 bgcolor="#d1c997"> --><!-- ffd7b9 bgcolor="#d1c997" style="opacity:70%"--> 
 										<th style="border-left: none;" >글번호</th>
 										<th>제목</th >

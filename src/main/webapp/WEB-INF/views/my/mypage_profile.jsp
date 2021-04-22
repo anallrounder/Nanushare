@@ -118,7 +118,7 @@ li {
 				.each(
 						function(index, item) {
 							var imgUrl = '${pageContext.request.contextPath}/resources/users/user0'
-									+ Math.floor((Math.random() * 5) + 1)
+									+ Math.floor((Math.random() * 1) + 1)
 									+ '_sm.png';
 							console.log(imgUrl);
 							console.log($(item).attr("src"));
@@ -126,10 +126,56 @@ li {
 						});
 	});
 </script>
+<style>
+#forimg {
+	background-color: white;
+	background-image: url('/resources/charity/qna/mypage2.png');
+	background-size: 1600px;
+	background-repeat: repeat;
+	background-position: center;	
+}
 
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style>
 </head>
 <body>
 
+<!-- include를 위해 잘림 -->
+<!-- Banner -->
+	    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Banner -->
+	<!-- Content -->
+	<!-- Content와 MainSection은 무조건 있어야함 -->
+	<div class="charity-main-content">
+		<!-- Main Section -->
+		<div class="charity-main-section">
+
+			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
+			<!--  col-md-10 으로 넓이 넓힘 -->
+			<div class="container col-md-10">
+				<div class="view-account">
+					<section class="module">
+						<div class="module-inner">
+<!-- include를 위해 잘림 -->
+
+
+							<!-- sidebar -->
+							<div class="side-bar">
 	<div class="user-info" >
 		<figure>
 			<img id="introImg" class="usre_img"

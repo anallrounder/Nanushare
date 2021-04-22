@@ -150,15 +150,7 @@
 	                       <div class="charity-contact-form">
 	                           <h4><span>Title</span><input type="text" id="btitle" name="btitle" value="${modify_view.btitle}"></h4><hr><br>
 	                           
-	                           <div class="charity-blog-options">
-	                                <ul style="float:right">
-	                                	<li><i class="fa fa-folder-open"></i>  No. ${modify_view.b_index}</li> 
-	                                    <li style="text-indent: 0.3em"><i class="fa fa-calendar"></i><time datetime="2008-02-14 20:00">  ${modify_view.bdate}</time></li>
-	                                    <li style="text-indent: 0.3em"><i class="fa fa-comments"></i><a href="404.html">  23 comments</a></li>
-	                                    <li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 ${modify_view.bhit}</li>
-	                                </ul>
-	                           </div>
-	                           <h4>Content</h4>
+	                           <h4 class="mt-3">Content</h4>
 	                           
 	                           <p><textarea id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></p><br><br>
 							  
@@ -174,7 +166,6 @@
 		                            CKEDITOR.replace('bcontent', ckeditor_config);
 		                        </script>
 		                        
-							   <br><hr>
 								<!-- 글삭제는 첨부파일,댓글 다 지워야 가능하다. 수정해야함 -->
 	                           <button type="button" class="charity-sub-btn"><i class="fa fa-eraser" onclick="location.href='delete?b_index=${modify_view.b_index}'"> 글삭제</i></button>
 							   <button type="submit" id="modify" class="charity-sub-btn"><i class="fa fa-save"> 수정완료</i></button>
@@ -188,7 +179,7 @@
                         </form>
                         
                     	<!--   a href="plist" -->
-                        <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="${pageContext.request.contextPath}/board/qna" class="fa fa-list-alt" > 문의하기 게시판 돌아가기 </a></div>
+                        <div style="float: right; margin-right:5px; text-color:2a786b;" class="mb-3"> <a href="${pageContext.request.contextPath}/board/qna" class="fa fa-list-alt" style="color:#333" > 1:1 문의 리스트로  </a></div>
                         <br><br>
                        
                         <!-- 댓글 보일지 말지 고민중  -->
@@ -211,7 +202,6 @@
     <!-- Footer -->
     <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
     <!-- Footer -->
-
 
     <!-- jQuery -->
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.js"></script>

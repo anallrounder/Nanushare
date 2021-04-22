@@ -45,24 +45,39 @@
 ​h3 {
 	text-align: center;
 }
+
+#forimg {
+	background-color: white;
+	background-image: url('/resources/charity/qna/mypage1.png');
+	background-size: 1000px;
+	background-repeat: repeat;
+	background-position: center;	
+}
+
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
 </style>
 <body>
 	<!-- Header -->
 		<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-<!-- Sub Header -->
-	<div class="charity-subheader" >
-		  <!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent" ></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Sub Header -->
+<!-- Banner -->
+	    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Banner -->
 	
 	<!-- Content -->
 	<div class="charity-main-content">
@@ -95,12 +110,12 @@
 									<div>
 										<div class="charity-aboutus-text">
 											<br> <br> <br> <br> <i
-												class="fas fa-hand-holding-heart" style="color: #FFAE73; font-size: 25px;">나누셰어 의미</i>
-											<h6>
-												<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나눔이란 가진 것을 공유하는 것으로 나누면 두 배가 되는 사회를 꿈꾸는 사람들이 모여
-												"나누셰어" 프로젝트가 시작되었습니다.</h6>
-											<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나눔과 더불어 사는 것을 더 많은 사람들과 함께 실천해 좀 더 나은
-												사회를 만들어 가기를 바랍니다.</h6>
+												class="fas fa-hand-holding-heart" style="color: #FFAE73; font-size: 25px;"> 나누셰어 의미</i>
+											<h5>
+												<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나눔이란 가진 것을 공유하는 것으로 나누면 두 배가 되는 사회를 꿈꾸는 사람들이 모여
+												"나누셰어" 프로젝트가 시작되었습니다.</b></h5>
+											<h5><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;나눔과 더불어 사는 것을 더 많은 사람들과 함께 실천해 좀 더 나은
+												사회를 만들어 가기를 바랍니다.</b></h5>
 											
 
 
