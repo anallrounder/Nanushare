@@ -37,6 +37,12 @@
 	
 	<!-- header -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
+	<!-- new korean font from google -->
+	<!-- NotoSansKR, Gothic A1 -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
@@ -105,6 +111,12 @@
 .black-transparent {
 	opacity:50%;
 }
+.charity-blog-social ul {
+	margin:0px;
+}
+.charity-sub-btn {
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -131,6 +143,7 @@
     <div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
 		<h2> 나눔 인증 </h2>
 	</div> 
+	
     <div class="charity-main-content">
 
         <!-- Main Section -->
@@ -154,7 +167,7 @@
 	                           </div>
 	                           <h4>Content</h4>
 	                           <%-- <p><textarea class="form-control" name="bcontent" rows="20" style="width:100%;">${modify_view.bcontent}</textarea></p><br> --%>
-	                           <p><textarea id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></p><br><br>
+	                           <p><textarea id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></p>
 							  
 							   <!-- 에디터 -->
 							   <script type="text/javascript">
@@ -167,8 +180,7 @@
 		        					};
 		                            CKEDITOR.replace('bcontent', ckeditor_config);
 		                        </script>
-		                        
-							   <br><hr>
+							  
 								<!-- 글삭제는 첨부파일,댓글 다 지워야 가능하다. 수정해야함 -->
 	                           <button type="button" class="charity-sub-btn"><i class="fa fa-eraser" onclick="location.href='delete?b_index=${modify_view.b_index}'"> 글삭제</i></button>
 							   <button type="submit" id="modify" class="charity-sub-btn"><i class="fa fa-save"> 수정완료</i></button>
@@ -182,7 +194,7 @@
                         </form>
                         
                     	<!--   a href="plist" -->
-                        <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="list" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>
+                        <div style="float: right; margin-right:5px; "> <a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt" style="color:#333"> 나눔 인증 목록으로 </a></div>
                         <br><br>
                        
                         <!-- 댓글 보일지 말지 고민중  -->

@@ -101,10 +101,28 @@
 	}); // ready end
 </script>
 
+<style>
+#forimg {
+	background-color: #eaf0fe;
+	background-image: url('/resources/banner_imgs/donation_banner.jpg');
+	background-repeat:no-repeat;
+	background-position: center;
+	background-height:100%;
+}
+.black-transparent {
+	opacity:50%;
+}
+.charity-blog-social ul {
+	margin:0px;
+}
+.charity-sub-btn {
+	cursor: pointer;
+}
+#nothing {
+	margin:0px;
+}
+</style>
 </head>
-
-
-
 
 <body>
 
@@ -114,13 +132,13 @@
     <!-- Header -->
     
     <!-- Banner -->
-    <div class="charity-subheader">
+    <div id="forimg" class="charity-subheader">
         <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>나눔 인증</h1>
-                    <p>show your support</p>
+                   <!--  <h1>나눔 인증</h1>
+                    <p>show your support</p> -->
                 </div>
             </div>
         </div>
@@ -129,6 +147,10 @@
     
 
     <!-- Content -->
+    <div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
+		<h2> 나눔 인증 </h2>
+	</div>
+    
     <div class="charity-main-content">
 
         <!-- Main Section -->
@@ -155,24 +177,21 @@
 	                           <br><br>
 	                           <h4>Content</h4>
 	                           <p><textarea id="bcontent" placeholder="내용을 작성하세요."></textarea></p>
-	                             <script type="text/javascript">
-                        
-			                        var ckeditor_config = {
-			        						resize_enaleb : false, //에디터 크기조절 x
-			        						height:"450",
-			        						enterMode : CKEDITOR.ENTER_BR,
-			        						shiftEnterMode : CKEDITOR.ENTER_P,
-			        						filebrowserUploadUrl : '<c:url value="${pageContext.request.contextPath}/my/board/shows/imageUpload" />?${_csrf.parameterName}=${_csrf.token}'
-			        					};
-			                            CKEDITOR.replace('bcontent', ckeditor_config);
-			                            
+	                           
+	                           <script type="text/javascript">
+		                        var ckeditor_config = {
+		        						resize_enaleb : false, //에디터 크기조절 x
+		        						height:"450",
+		        						enterMode : CKEDITOR.ENTER_BR,
+		        						shiftEnterMode : CKEDITOR.ENTER_P,
+		        						filebrowserUploadUrl : '<c:url value="${pageContext.request.contextPath}/my/board/shows/imageUpload" />?${_csrf.parameterName}=${_csrf.token}'
+		        					};
+		                            CKEDITOR.replace('bcontent', ckeditor_config);
 		                        </script>
-	                           <br><br>
-							   <br><hr>
 
 	                          <%--  <button type="button" class="charity-sub-btn"><i class="fa fa-eraser" onclick="location.href='delete?b_index=${modify_view.b_index}'"> 글삭제</i></button> --%>
 							   <button type="submit" class="charity-sub-btn"><i class="fa fa-save"> 작성완료</i></button>
-							   <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시쓰기</i></button>
+							  <!--  <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시쓰기</i></button> -->
 							   <!-- charity-main-btn -->
 							   <!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 	                        </div>
@@ -180,14 +199,9 @@
 	                        <input type="hidden" id="_csrf_header" name="_csrf_header" value="${_csrf.headerName}" />
                         </form>
                       
-                       
-
-
-                        
                       	<!--   a href="plist" -->
-                        <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="plist" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>
-                        <br><br>
-                 
+                        <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>
+                   
                     </div>		     
 		
 			        <!-- aside -->

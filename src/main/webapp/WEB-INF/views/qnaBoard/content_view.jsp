@@ -17,7 +17,7 @@
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
-    <title>나누셰어 - 문의하기 상세보기</title>
+    <title>나누셰어 - 1:1문의</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
@@ -39,6 +39,10 @@
     <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
+	<!-- new korean font from google -->
+	<!-- NotoSansKR, Gothic A1 -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	
 	<script type="text/javascript">
 	
@@ -197,6 +201,9 @@ Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
 .charity-volunteer-form {
 	background-color: #f9f9fb;
 }
+.charity-blog-social ul {
+	margin:0px;
+}
 </style>		
 </head>
 
@@ -237,7 +244,7 @@ Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
 							
 							<!-- 대표 이미지(썸네일 등록한거는) 컨텐트 뷰 에서는 사용 안하기로 -->
 							<%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
-							
+							<hr>
 							<!-- 넘버링, 계산들 -->
 							<div class="charity-blog-options">
                                 <ul style="float:right">
@@ -253,7 +260,7 @@ Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
                             <!-- 글 내용 -->
                             <p>${content_view.bcontent}</p><br>
                            
-							<hr>
+							
                             
                             <!-- 버튼 -->
                             <div class="charity-post-tags">

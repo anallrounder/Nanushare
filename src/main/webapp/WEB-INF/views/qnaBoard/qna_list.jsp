@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title> 나누셰어 - 공지사항 </title>
+<title>나누셰어 - 1:1문의</title>
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -41,6 +41,10 @@
 <!-- header  -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+<!-- new korean font from google -->
+<!-- NotoSansKR, Gothic A1 -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
 <style>
 /* body {
@@ -53,7 +57,6 @@
 ​h3 {
 	text-align: center;
 }
-
 #forimg {
 	background-image: url('/resources/banner_imgs/qna_banner.jpg');
 	background-repeat:no-repeat;
@@ -66,6 +69,12 @@
 }
 .charity-volunteer-form {
 	background-color: #f9f9fb;
+}
+.charity-sub-btn {
+	cursor: pointer;
+}
+.charity-sub-btn:hover {
+	background-color: #78665A;
 }
 
 </style>

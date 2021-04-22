@@ -9,17 +9,41 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- ckeditor -->
-<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
-   
 <!-- meta tags -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
 <meta name="_csrf" content="${_csrf.token}">
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
+
+<title>나누셰어 - 1:1문의</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
+<link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+
+<!-- 웹페이지 탭 로고이미지 삽입  -->
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+
+<!-- header  -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<!-- ckeditor -->
+<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+   
+<!-- new korean font from google -->
+<!-- NotoSansKR, Gothic A1 -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
 
 <!-- 작성 폼 스크립트 -->
 <script type="text/javascript">
@@ -88,26 +112,14 @@ $(document).ready(function(){
 .charity-volunteer-form {
 	background-color: #f9f9fb;
 }
+.charity-sub-btn {
+	cursor: pointer;
+}
+.charity-sub-btn:hover {
+	background-color: #78665A;
+}
 </style>	
 
-<title>나누셰어 - 문의하기</title>
-
-<!-- CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
-<link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
-
-<!-- 웹페이지 탭 로고이미지 삽입  -->
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
-
-<!-- header  -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -209,7 +221,7 @@ $(document).ready(function(){
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.countdown.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/functions-main.js"></script>
 </body>
 
 </html>

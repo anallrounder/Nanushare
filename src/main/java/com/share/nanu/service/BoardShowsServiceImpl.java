@@ -24,9 +24,9 @@ public class BoardShowsServiceImpl implements BoardShowsService {
 	
 	// 인증게시판 리스트
 	@Override
-	public List<BoardVO> getlist() {
-		log.info("인증게시판 서비스 getlist()");
-		return mapper.getlist();
+	public List<BoardVO> asielist() {
+		log.info("인증게시판 서비스 asielist(bvo)");
+		return mapper.asielist();
 	}
 
 	// 페이징 리스트

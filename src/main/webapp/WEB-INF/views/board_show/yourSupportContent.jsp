@@ -42,6 +42,11 @@
 	<!-- header -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	
+	<!-- new korean font from google -->
+	<!-- NotoSansKR, Gothic A1 -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	
 	<script type="text/javascript">
 	
 	// 댓글 수정 취소 
@@ -176,6 +181,7 @@
 </script>
 
 <style>
+
 #forimg {
 	background-color: #e4edfe;
 	background-image: url('/resources/banner_imgs/people_banner.png');
@@ -185,6 +191,17 @@
 .black-transparent {
 	opacity:50%;
 }
+.charity-blog-social ul {
+	margin:0px;
+}
+#resubmit.submit{
+	cursor: pointer;
+}
+#resubmit.submit:hover{
+	color:white;
+	background-color: #78665A;
+}
+
 </style>
 
 </head>
@@ -223,13 +240,13 @@
 						<div class="charity-rich-editor">
                           
                             <!-- 글 제목 -->
-							<h1>${content_view.btitle}</h1><!-- <hr> -->
-							
+							<h1>${content_view.btitle}</h1> 
+							<hr> 
 							<!-- 대표 이미지(썸네일 등록한거는) 컨텐트 뷰 에서는 사용 안하기로 -->
 							<%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
 							
 							<!-- 넘버링, 계산들 -->
-							<div class="charity-blog-options">
+							<div class="charity-blog-options" style="height:30px;">
                                 <ul style="float:right">
                                 	<li><i class="fa fa-user"></i>  ${content_view.member_id} &nbsp;  </li> <!-- 작성자 -->
                                 	<li><i class="fa fa-folder-open"></i>  No. ${content_view.b_index} </li> <!-- 게시판 글번호 -->
@@ -243,16 +260,16 @@
                             <!-- 글 내용 -->
                             <p>${content_view.bcontent}</p><br>
                            
-							<hr>
-                            
+							
+                             
                             <!-- 버튼 -->
                             <div class="charity-post-tags" >
                               	<div class="charity-tags">
                               		<sec:authorize access="hasRole('ADMIN')">
-	                            	<span style="color:orange;">관리자: </span>
+	                            	<span style="color:orange;">관리자:</span>
 	                            	<%-- <a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 수정 </a> --%>
-	                            	<a href="/my/board/shows/modify_view/${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 수정 </a>
-	                            	<a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser" style="color:orange;"> 삭제</a>
+	                            	<a href="/my/board/shows/modify_view/${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 글수정&nbsp; </a> 
+	                            	<a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser" style="color:orange;"> 글삭제</a>
 	                            	</sec:authorize>
 	                           	</div>
                                 <div class="charity-blog-social">
@@ -356,9 +373,9 @@
 		                                            <div class="charity-blog-social" id="abt${vo.r_num}" >
 		                                            	
 		                                            <!-- href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}"  -->
-			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')" style="color:black" > <b>수정하기</b></a> &nbsp;  
+			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')" style="color:#333" > <b>수정하기&nbsp;</b></a>   
 		                                    		   <%--  onClick="updateView('${vo.b_index}','${vo.rid}','${vo.rdate}','${vo.rcontent}')" --%>
-		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" style="color:black"  ><b>삭제하기</b></a>
+		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" style="color:#333"  ><b> 삭제하기</b></a>
 		                                    		    <%--  onClick="del('${vo.b_index}','${vo.r_num}')" --%>
 		                                    		    
 	                                    		    </div>
@@ -415,130 +432,13 @@
                             </form>
                         </div>
                         <!--// 댓글 작성 영역 comment-respond \\-->
+                        <div style="float: right; margin-right:5px; "> <a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt" style="color:#333"> 나눔 인증 목록으로 </a></div>
                         
                     </div>
  					<!-- aside 제외한 왼쪽 컨텐츠 div 끝 -->
 
 					<!-- 우측 배너  aside -->
-						<%-- <%@ include file="/WEB-INF/views/board_show/aside.jsp"%>  --%>
-						<aside class="col-md-3">
-						<div style="height:30px"></div>
-					    
-					    <!-- Widget Archive 퀵링크 연결 -->
-					    <div class="widget widget_archive">
-					        <div class="widget_title"><h2>바로가기</h2></div>
-					        <ul>
-						        <li><a href="${pageContext.request.contextPath}/main">나눔함 안내</a></li>
-					            <li><a href="${pageContext.request.contextPath}/donation/item/main">물품 나누기</a></li>
-					            <li><a href="${pageContext.request.contextPath}/donation/money/main">돈기부여하기</a></li>
-					            <li><a href="${pageContext.request.contextPath}/board/shows/list">나눔 인증</a></li>
-					            <li><a href="${pageContext.request.contextPath}/restful/notice">공지사항</a></li>
-					        </ul>
-					    </div>
-					    <!-- Widget Archive 퀵링크 연결 -->
-					    
-					    <!-- Widget Event -->
-					   	<div class="widget widget_events">
-					        <div class="widget_title"><h2>최근 공지사항</h2></div>
-					        <ul>
-					            <li>
-					                <time datetime="2008-02-14 20:00">22 Aug</time>
-					                <div class="charity-events">
-					                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-					                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-					                </div>
-					            </li>
-					            <li>
-					                <time datetime="2008-02-14 20:00">13 Sep</time>
-					                <div class="charity-events">
-					                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-					                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-					                </div>
-					            </li>
-					            <li>
-					                <time datetime="2008-02-14 20:00">07 Dec</time>
-					                <div class="charity-events">
-					                   <h6><a href="event-detail.html">Fusce fibus purus cos vulputate</a></h6>
-					                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-					                </div>
-					            </li>
-					         </ul>
-					    </div> 
-					    <!-- Widget Event -->
-					    
-					    		
-				<%-- <c:forEach var="attachment" items="${attachment}">
-					${attachment.path }
-					<c:set var="i" value="${i+1 }" />
-					
-					${vo.b_index},${attachment.b_index}
-					<c:if test="${doneLoop ne true}">
-						<c:choose>
-							<c:when test="${vo.b_index eq attachment.b_index }">
-								<img alt="" src="${attachment.path }">
-								<img src="${pageContext.request.contextPath}${attachment.path}">
-								<c:set var="doneLoop" value="true"/>
-							</c:when>
-							
-							<c:when test="${i+1 > attachMentCount }">															
-								<img id="introImg"  class="boardShow_img" src="${pageContext.request.contextPath}/resources/board_thumbnail/bslist07.png">
-								<c:set var="doneLoop" value="true"/>
-							</c:when>															
-						</c:choose>													
-					</c:if>																																																																																									
-				</c:forEach>			 --%>
-					    
-					    
-					    <!-- Widget Gallery -->
-					<%--     <div class="widget widget_gallery">
-					        <div class="widget_title"> <h2>인증게시판</h2> </div>
-					        <c:if test="${! empty list}">
-				            <c:set var="listComment" value="${list}" />
-				            <c:forEach var="vo" items="${list}" begin="1" end="12">
-					        
-						        <ul>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/board/shows/content_view/${vo.b_index}"><img src="${pageContext.request.contextPath}/resources/users/user01_sm.png" alt=""> <i class="fa fa-plus"></i> </a></li>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-2.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-2.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-3.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-3.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-4.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-4.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-5.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-5.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-7.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-7.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-8.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-8.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-						            <li><a data-fancybox="gallery" href="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/widget-gallery-6.jpg" alt=""> <i class="fa fa-plus"></i> </a></li>
-						        </ul>
-						        
-					        </c:forEach>
-				            </c:if>
-					    </div> --%>
-					    <!-- Widget Gallery -->
-						
-						
-						  <!-- Widget Event -->
-					   	<div class="widget widget_events">
-					       <div class="widget_title"> <h2>인증게시판</h2> </div>
-					        <c:if test="${! empty list}">
-				            <c:set var="listComment" value="${list}" />
-				            
-							<ul>
-								<c:forEach var="vo" items="${list}" begin="1" end="5">
-					            <li>
-					                <time datetime="2008-02-14 20:00">22 Aug</time>
-					                <div class="charity-events">
-					                   <h6><a href="event-detail.html">fff<%-- ${vo.title} --%></a></h6>
-					                   <a href="event-detail.html"><i class="fa fa-map-marker-alt"></i> 1403 Blackwell Street 9976</a>
-					                </div>
-					            </li>
-					            </c:forEach>
-							</ul> 
-					        
-				            </c:if>
-					    </div> 
-					    <!-- Widget Event -->
-						
-						
-						
-					</aside>
+					<%@ include file="/WEB-INF/views/board_show/aside.jsp"%>
 					<!-- aside end -->
 					
                 </div>
@@ -663,8 +563,8 @@
     					htmls += '<div>' + date + '</div>' /* rdate를 뿌리면 Mon Apr 12 2021 09:00:00 GMT+0900 (대한민국 표준시)가 나옴  */             
     					htmls += '<p>' + rcontent + '</p>'
 						htmls += '<div class="charity-blog-social">'
-						htmls += '<i class="fa fa-edit"></i><b><a href="javascript:void(0);" onclick="answerEdit('+rid+','+rcontent+','+r_num+')">수정하기</a></b>'
-						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + r_num + '" ><b>삭제하기</b></a></div>'
+						htmls += '<i class="fa fa-edit"></i><b><a href="javascript:void(0);" onclick="answerEdit('+rid+','+rcontent+','+r_num+')" style="color:#333">수정하기 &nbsp;</a></b>'
+						htmls += '<i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/' + r_num + '" style="color:#333"><b>삭제하기</b></a></div>'
     					htmls += '</div>'
     					htmls += '</div>'
     					htmls += '</li>'
@@ -673,9 +573,6 @@
     					
     					$('#rcontent').val(''); //인풋박스 초기화
     					$('#nothing').hide();
-    					
-    					// 댓글 수정 창으로
-    					
     					
     					
     					$(".a-del").click(function(event) { //id는 한번만 calss는 여러번 선택 가능
@@ -715,10 +612,7 @@
     			    				console.log(e);
     			    			}
     			    		}); //end of ajax
-    			    		
     			     	}); // 삭제 종료
-    			     	
-    				 	
 	   					
     			     	
     				},
@@ -729,11 +623,9 @@
     				
     		}); //ajax end
     		
-    		
     	});//#insertForm end
     	
     	// 댓글 삭제
-    	
     	$(".a-del").click(function(event) { //id는 한번만 calss는 여러번 선택 가능.
     		//하나의 id는 한 문서에서 한 번만 사용이 가능(가장 마지막 혹은 처음게 선택). 
     		event.preventDefault(); 
@@ -773,7 +665,6 @@
     		}); //end of ajax
     		
      	}); // 삭제 종료
-    	
      
     });
     </script>	

@@ -19,7 +19,7 @@
 	 <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
-    <title>나누셰어 - 문의하기수정</title>
+    <title>나누셰어 - 1:1문의</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
@@ -40,6 +40,11 @@
 	
 	<!-- ckeditor -->
 	<script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+	
+	<!-- new korean font from google -->
+	<!-- NotoSansKR, Gothic A1 -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	
 	<script type="text/javascript">
 	
@@ -111,6 +116,12 @@
 .charity-volunteer-form {
 	background-color: #f9f9fb;
 }
+.charity-blog-social ul {
+	margin:0px;
+}
+.charity-sub-btn {
+	cursor: pointer;
+}
 </style>	
 	
 </head>
@@ -152,7 +163,7 @@
 	                           
 	                           <h4 class="mt-3">Content</h4>
 	                           
-	                           <p><textarea id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></p><br><br>
+	                           <p><textarea id="bcontent" name="bcontent">${modify_view.bcontent}</textarea></p>
 							  
 							   <!-- 에디터 -->
 							   <script type="text/javascript">
@@ -166,8 +177,8 @@
 		                            CKEDITOR.replace('bcontent', ckeditor_config);
 		                        </script>
 		                        
-								<!-- 글삭제는 첨부파일,댓글 다 지워야 가능하다. 수정해야함 -->
-	                           <button type="button" class="charity-sub-btn"><i class="fa fa-eraser" onclick="location.href='delete?b_index=${modify_view.b_index}'"> 글삭제</i></button>
+							<!-- 글삭제는 첨부파일,댓글 다 지워야 가능하다. 수정해야함 -->
+	                          <%--  <button type="button" class="charity-sub-btn"><i class="fa fa-eraser" onclick="location.href='delete?b_index=${modify_view.b_index}'"> 글삭제</i></button> --%>
 							   <button type="submit" id="modify" class="charity-sub-btn"><i class="fa fa-save"> 수정완료</i></button>
 							   <button type="button" class="charity-sub-btn"><i class="fa fa-arrow-left"  onclick="location.href='${pageContext.request.contextPath}/board/qna/${modify_view.b_index}'"> 수정취소</i></button>
 							  <!--  <button type="reset" class="charity-sub-btn"><i class="fa fa-undo"> 다시수정하기</i></button> -->
@@ -179,8 +190,7 @@
                         </form>
                         
                     	<!--   a href="plist" -->
-                        <div style="float: right; margin-right:5px; text-color:2a786b;" class="mb-3"> <a href="${pageContext.request.contextPath}/board/qna" class="fa fa-list-alt" style="color:#333" > 1:1 문의 리스트로  </a></div>
-                        <br><br>
+                        <div style="float: right; margin-right:5px; text-color:2a786b;" class="mb-3"> <a href="${pageContext.request.contextPath}/board/qna" class="fa fa-list-alt" style="color:#333" > 1:1 문의 목록으로  </a></div>
                        
                         <!-- 댓글 보일지 말지 고민중  -->
                         <!-- 댓글 보일지 말지 고민중  -->
@@ -214,7 +224,7 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jquery.jplayer.js"></script>
     <script src="${pageContext.request.contextPath}/resources/charity/script/jplayer.playlist.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/charity/script/functions.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/charity/script/functions-main.js"></script>
 </body>
 
 </html>

@@ -12,8 +12,8 @@ import com.share.nanu.page.Criteria;
 @Mapper
 public interface BoardShowsMapper {
 	
-	// 일반 리스트
-	public List<BoardVO> getlist(); // 인증게시판 리스트
+	// aside 리스트
+	public List<BoardVO> asielist(); // 인증게시판 리스트
 	
 	// 페이징 리스트
 	public List<BoardVO> getlistWithPaging(Criteria cri); // 페이징 리스트
