@@ -325,7 +325,7 @@
 										</figure>
 
 										<div class="charity-simple-blog-text">
-											<h2><a href="/board/shows/content_view?b_index=${vo.b_index}">제목: ${vo.btitle}</a></h2>
+											<h2><a href="/board/shows/content_view/${vo.b_index}">제목: ${vo.btitle}</a></h2>
 											<br>
 											<ul class="charity-simple-blog-options">
 												<li><i class="fa fa-folder-open"></i>글번호 ${vo.b_index}</li>
