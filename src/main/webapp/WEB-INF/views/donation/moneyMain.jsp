@@ -37,6 +37,11 @@
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 
 <style>
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
+
 #forimg {
 	background-color: #eaf0fe;
 	background-image: url('/resources/banner_imgs/donation_banner.jpg');

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.share.nanu.service.BoardShowsService;
+import com.share.nanu.service.NoticeBoardService;
 import com.share.nanu.service.QnaBoardService;
 import com.share.nanu.controller.QnaBoardController;
 import com.share.nanu.paging.Criteria;
@@ -34,7 +36,13 @@ public class QnaBoardController {
 
 	@Autowired
 	private QnaBoardService qService;
-
+	
+	@Autowired
+	private BoardShowsService bservice;
+	
+	@Autowired 
+	private NoticeBoardService nservice;
+	
 	// FAQ 게시판 리스트
 	@GetMapping("/faq")
 	public ModelAndView faqList(ModelAndView mov, @AuthenticationPrincipal MemberDetails md) {
@@ -77,6 +85,9 @@ public class QnaBoardController {
 			mov.addObject("username", md.getmember().getName());
 		}
 		
+		mov.addObject("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mov.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		mov.setViewName("qnaBoard/write_view");
 		
 		return mov;
@@ -108,7 +119,8 @@ public class QnaBoardController {
 		if (md != null) { 
 			mov.addObject("username", md.getmember().getName());
 		}
-		
+		mov.addObject("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mov.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
 		
 		qService.uphit(boardVO);
 		mov.addObject("content_view", qService.getBoard(boardVO.getB_index()));
@@ -125,7 +137,9 @@ public class QnaBoardController {
 		if (md != null) {
 			mov.addObject("username", md.getmember().getName());
 		}
-
+		
+		mov.addObject("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mov.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
 		
 		mov.addObject("modify_view", qService.getBoard(boardVO.getB_index()));
 		mov.setViewName("qnaBoard/modify_view");

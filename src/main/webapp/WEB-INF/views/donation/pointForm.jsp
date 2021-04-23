@@ -38,44 +38,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-<!-- point input box 입력시 공백일 경우와 1000포인트 미만일 경우 검증 -->
-   <!-- <script>
-/* alert띄우는 방법 */
- function dd(bool){
-	if(boll.value.length==0){
-		alert("기부할 포인트를 입력해주세요.")
-		return false;
-	}
-	return true;
-} 
-
-/* 인풋박스 오른쪽에 빨간글씨로 검증 내용 띄우는 방법 */
-function dd(bool){
-	var check = document.getElementById("selectDirect");
-	if(bool.value.length==0){
-		check.innerHTML = "기부할 포인트를 입력해주세요.";
-		return false;
-	}
-	
-	return true;
-}
-
-/* 4자리 이상 숫자인지 확인 */
-	function(data){
-	var check = document.getElementById("selectDirect");
-	if(data.value.lenth! = 4){
-		check.innerHTML = "1000point부터 기부할 수 있습니다.";
-		return false;
-	}
-	return true; 
-} 
-</script>  -->
-	<!-- validation 경고문구 스타일 -->
 <style type="text/css">
+/*  validation 경고문구 스타일 */
 .error {
     color: red;
-    
-    
+}
+
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
 }
 
 #forimg {

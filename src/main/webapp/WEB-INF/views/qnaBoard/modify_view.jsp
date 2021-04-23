@@ -103,6 +103,11 @@
 	}); // ready end
 </script>
 <style>
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
+
 #forimg {
 	background-image: url('/resources/banner_imgs/qna_banner.jpg');
 	background-repeat:no-repeat;
