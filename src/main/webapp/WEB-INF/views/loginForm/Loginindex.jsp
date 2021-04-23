@@ -6,6 +6,7 @@
 
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+	
     <title>로그인</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,27 +16,19 @@
     <link rel="shortcut icon" type="image/x-icon" 
     	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> <!-- 웹페이지 탭 로고이미지 삽입  -->
     
-    <script type="text/javascript">
+    <style type="text/css">
+    	body {
+			background-image: url("https://source.unsplash.com/user/upcastle1/likes");
+			background-size: cover;	
+		}
     
-   /*  $(function() {
-		//랜덤 이미지 불러오기 
-		$('.boardShow_img').each(function (index, item) {	        	
-	       	var imgUrl = '${pageContext.request.contextPath}/resources/board_thumbnail/bslist0'+Math.floor((Math.random()*6) + 1)+'.png';
-	       	
-	       	$(item).attr("src", imgUrl);
-		});
-    }); */
-    
-	   
-    
-    </script>
-    
+    </style>
     
     
 </head>
 
 
-<body  class="img js-fullheight" style="background-image: url(/resources/loginform/images/img_2.jpg);" >
+<body  class="img js-fullheight"  >
 	
 	
 	  <section  class="ftco-section">
@@ -98,6 +91,7 @@
         </div>
        
     </section>
+    
 
     <script src="/resources/loginform/js/jquery.min.js"></script>
     <script src="/resources/loginform/js/popper.js"></script>

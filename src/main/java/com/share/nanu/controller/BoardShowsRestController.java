@@ -59,6 +59,9 @@ public class BoardShowsRestController {
 	@Autowired
 	private BoardShowsService service;
 	
+	@Autowired 
+	private NoticeBoardService nservice;
+	
 	/* 게시글 */
 	// 인증게시판 페이징 list
 	@GetMapping("/board/shows/list")
@@ -118,8 +121,8 @@ public class BoardShowsRestController {
 		log.info("controller -- content_view -- 호출");
 		service.uphit(boardVO);
 		
-		mav.addObject("list", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
-		//mav.addObject("nlist", service.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("asidelist", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
 		
 		mav.setViewName("board_show/yourSupportContent"); // 이동할 웹페이지 주소
 
@@ -149,6 +152,9 @@ public class BoardShowsRestController {
 	public ModelAndView vsWriteView(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) throws Exception {
 		log.info("인증게시판 컨트롤러  -- write_view() -- 호출");
 
+		mav.addObject("asidelist", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		mav.setViewName("board_show/ysWriteView");
 
 		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
@@ -166,6 +172,10 @@ public class BoardShowsRestController {
 	public ModelAndView bsModiview(BoardVO boardVO, ModelAndView mav) throws Exception {
 		log.info("인증게시판 컨트롤러 컨텐트뷰");
 		mav.addObject("modify_view", service.getBoard(boardVO.getB_index()));
+		
+		mav.addObject("asidelist", service.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		mav.setViewName("board_show/ysModifyView");
 		return mav;
 	}
@@ -458,6 +468,7 @@ public class BoardShowsRestController {
 					File thumNail = new File(path + "\\" + thumNailName);
 
 					BufferedImage originalImage = ImageIO.read(originFile);
+					
 					BufferedImage thumNailImage = new BufferedImage(THUMNAIL_WIDTH, THUMNAIL_HEIGHT,
 					BufferedImage.TYPE_3BYTE_BGR);
 					Graphics2D graphic = thumNailImage.createGraphics();

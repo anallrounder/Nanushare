@@ -38,6 +38,9 @@
 
 <!-- ckeditor -->
 <script src = "${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+
+<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
    
 <!-- new korean font from google -->
 <!-- NotoSansKR, Gothic A1 -->
@@ -76,8 +79,17 @@ $(document).ready(function(){
            		},
 	            success: function (result) {       
 					if(result == "SUCCESS") {
-						alert("성공")
-						$(location).attr('href', '${pageContext.request.contextPath}/board/qna')                            
+						swal({
+	  						title :"문의글 작성이 완료되었습니다." , 
+							icon : "success" , 
+	  						button :"확인",
+	  						text: '관리자 확인 후 답변드리겠습니다.',
+	  						//timer: 5000,
+	  					})
+	  					.then(function(){
+	  						$(location).attr('href', '${pageContext.request.contextPath}/board/qna');        // 주소 이동
+	  					});
+						//alert("성공")
 					}                       
 				},
            		error: function (e) {

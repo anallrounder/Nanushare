@@ -118,6 +118,15 @@
 .black-transparent {
 	opacity:50%;
 }
+.charity-sub-btn {
+	cursor: pointer;
+}
+.charity-sub-btn:hover {
+	background-color: #78665A;
+}
+.chaity-contact-info {
+	margin-bottom: 0px;
+}
 </style>
 </head>
 

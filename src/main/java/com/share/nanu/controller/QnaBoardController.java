@@ -182,5 +182,6 @@ public class QnaBoardController {
 		
 		return mov;
 	}
+	
 
 }

@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.share.nanu.paging.Criteria;
-import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
-import com.share.nanu.VO.BoardreplyVO;
+import com.share.nanu.paging.Criteria;
 
 @Mapper
 public interface NoticeBoardMapper {
@@ -36,8 +34,8 @@ public interface NoticeBoardMapper {
 
 	// 게시판 글번호
 	public int getBindex(BoardVO boardVO);
-
-	// 이미지 업로드
-	// public void uploadFile(AttachmentVO attachmentVO);
+	
+	// aside에 뿌려줄 최신 공지사항
+	public List<BoardVO> asideNlist();
 
 }

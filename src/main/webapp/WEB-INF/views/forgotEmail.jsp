@@ -45,10 +45,17 @@
     <link rel="stylesheet" href="/resources/signUpForm/css/style.css">
     
     <style type="text/css">
+    	body {
+			background-image: url("https://source.unsplash.com/user/upcastle1/likes");
+			background-size: cover;	
+		}
+		
     	.error {
     		color : red;   	
     	}
     </style>
+    
+   
 
    <script type="text/javascript">
         $(function() {
@@ -96,7 +103,7 @@
 
 </head>
 
-<body class="img" style="background-image: url(/resources/signUpForm/images/img_7.jpg);">
+<body>
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
