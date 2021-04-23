@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- meta tags -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -74,6 +74,8 @@ function dd(bool){
 <style type="text/css">
 .error {
     color: red;
+    
+    
 }
 
 #forimg {
@@ -248,9 +250,11 @@ addLoadEvent(function() {
 								<%-- </c:if>
 								</sec:authorize>  --%>
                               		<li>
-                                   	<label>나눌 포인트:</label>
-                                  		<input type="text" name="dntpnt" id="selectDirect" disabled />
-                                   </li>
+	                                   	<label>나눌 포인트:</label>
+	                                  	<input type="text" name="dntpnt" id="selectDirect" disabled />                                 			
+                                    </li>
+                                    
+                                   
                                    <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 										자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
 										결국 input box에 입력된 값이 form을 넘길 때 수량값으로 넘어가게 된다. -->
@@ -258,7 +262,7 @@ addLoadEvent(function() {
                                    <li class="charity-select-form">   
                                    	<label>(select)</label>
 									<div class="charity-select-two"> 
-										<select id="selectBox" name="amount" onchange="changeSelection()">
+										<select id="selectBox" name="amount"  onchange="changeSelection()">
 											<option value="0"> 나눌 포인트 </option>
 											<option value="9">*직접입력*</option>
 											<option value="1000"> 1,000 point</option>
@@ -271,9 +275,14 @@ addLoadEvent(function() {
 											<option value="30000">30,000 point</option>
 											<option value="50000">50,000 point</option>
 										</select>
+										
 									</div>
+									
                                    </li>
+                                  
+                                   
 							</c:forEach>
+							
                                </ul>
                                
                                 <div class="charity-team-contactus mt-3">
@@ -350,8 +359,8 @@ addLoadEvent(function() {
                             errorClass: 'error',			// 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.
 
                             errorPlacement: function(error, element) {
-                                if (element.is(":text") ) {
-                                    element.parent().after(error);
+                                if (element.is(":text")  ) {
+                                    element.parent().parent().after(error);
                                 } else {
                                     element.after(error);
                                 }

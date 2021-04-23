@@ -161,7 +161,7 @@
 											msg += '에러내용 : ' + rsp.error_msg;
 										}
 										alert(msg);
-										$(location).attr('href', "${pageContext.request.contextPath}my/donation/money/point/pointAction");
+										$(location).attr('href', "${pageContext.request.contextPath}/my/donation/money/point/pointAction");
 									});
 					},
 					error : function(e) {
