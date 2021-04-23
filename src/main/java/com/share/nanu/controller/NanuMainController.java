@@ -1,11 +1,14 @@
 package com.share.nanu.controller;
 
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +48,6 @@ public class NanuMainController {
 			mov.addObject("username",md.getmember().getName());
 		}
 		
-
 		SimpleDateFormat yy = new SimpleDateFormat("yyyy");
 		SimpleDateFormat mm = new SimpleDateFormat("MM"); /* 소문자 mm로 쓰면 달로 표기되는게 아니라 시간으로 읽혀서 month처리 할때는 MM를 사용해야함 */
 		SimpleDateFormat dd = new SimpleDateFormat("dd");
@@ -66,8 +68,6 @@ public class NanuMainController {
 		mov.addObject("monthSale", mainService.getMonthSales(year, month)); // 월별
 		mov.addObject("yearSale", mainService.getYearSales(year)); // 년별
 		
-		System.out.println("뭔데에에에에에" + mainService.getDailySales(year, month, day));
-
 		mov.setViewName("mainMap/mainContent"); 
 		mov.addObject("mapvm", mainService.getvm()); // vm, vmam VO
 		return mov;
@@ -97,6 +97,12 @@ public class NanuMainController {
 		mov.setViewName("mainMap/vm"); 
 		mov.addObject("vmcat", mainService.getvmcat()); //vm 종류(카테고리)
 		mov.addObject("vminven", mainService.getvminven());
+		
+		//현재 ip 주소 리턴
+		InetAddress myIP = InetAddress.getLocalHost();
+		mov.addObject("ip", myIP.getHostAddress());
+		log.info("My IP Address is:" + myIP.getHostAddress());
+		
 		return mov;
 	}
 	
@@ -120,8 +126,4 @@ public class NanuMainController {
 
 		return "mainMap/itemoutResult";
 	}
-	
-	
-	
-
 }
