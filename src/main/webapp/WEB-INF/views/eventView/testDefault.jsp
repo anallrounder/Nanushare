@@ -82,7 +82,7 @@
                                             <ul class="charity-grid-prayer-location">
                                             </ul>
                                             <p> 동물상에는 고양이상 강아지상 늑대상 호랑이상 여우상 원숭이상 그냥 이상..</p>
-                                            <a href="#" class="charity-grid-prayer-btn"> 보러 가기 </a>
+                                            <a href="${pageContext.request.contextPath}/my/event/test/animalFaceTest" class="charity-grid-prayer-btn"> 보러 가기 </a>
                                             <ul class="charity-sermon-social">
                                                 <li><a href="#" data-toggle="tooltip" data-placement="top" title="Notes"><i class="fa fa-sticky-note"></i></a></li>
                                                 <li><a href="#" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-download"></i></a></li>
