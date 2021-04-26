@@ -210,8 +210,12 @@ public class DonationImportController {
 	
 					
 	@GetMapping("/my/donation/thank")
-	public ModelAndView thank(ModelAndView mav) { //감사페이지 이동
+	public ModelAndView thank(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) { //감사페이지 이동
 		log.info("감사페이지로 이동");
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+			mav.addObject("username", md.getmember().getName());
+		}
 		mav.setViewName("donation/thanks");
 		return mav;
 	}

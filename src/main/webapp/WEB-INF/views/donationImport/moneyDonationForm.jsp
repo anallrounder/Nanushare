@@ -11,6 +11,9 @@
 <script type="text/javascript"	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
+	<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <%-- <sec:csrfMetaTags/> --%>
 <!-- 헤더 안에 추가  -->
 <!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
@@ -163,7 +166,14 @@
 											var msg = '결제에 실패하였습니다.';
 											msg += '에러내용 : ' + rsp.error_msg;
 										}
-										alert(msg);
+										swal({
+											title :msg , 
+											icon : "success" , 
+											button : true 
+										});
+										
+										
+										//alert(msg);
 										$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
 									});
 					},
