@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.share.nanu.VO.MgetitemVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.AdminPageService;
 import com.share.nanu.service.MainService;
@@ -108,10 +108,14 @@ public class NanuMainController {
 	
 	// QR로 수량 빼기
 	@GetMapping("/sendQR/{vm_num}/{iname}")  //객체를 전달받기 때문에 POST(?), json ->controller 일땐 post?
-	public String sendQR (@PathVariable String vm_num, @PathVariable String iname, Model model) throws Exception {//@RequestParam String machine, @RequestParam String item
+	public String sendQR (@PathVariable String vm_num, @PathVariable String iname, Model model, MgetitemVO mgetItem, @AuthenticationPrincipal MemberDetails md) throws Exception {//@RequestParam String machine, @RequestParam String item
 		
 		//수량 체크
 		int remainAmount = mainService.vmCount(vm_num, iname);
+		
+		//회원 물품 가져가는것 업데이트
+		mgetItem.setMember_id(md.getUsername());
+		mainService.memberOut(mgetItem);
 		
 		if (remainAmount < 2) {
 			model.addAttribute("message", "잔여 수량이 부족합니다.");

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.share.nanu.VO.DonationVO;
+import com.share.nanu.VO.MgetitemVO;
 import com.share.nanu.VO.VmVO;
 import com.share.nanu.VO.VmVmamVO;
 import com.share.nanu.VO.Vmam;
@@ -78,6 +79,12 @@ public class MainServiceImpl implements MainService {
 	public List<Vmam> getVmItem(String vmNum) {
 		// TODO Auto-generated method stub
 		return mainmapper.getVmItem(vmNum);
+	}
+
+	@Override
+	public void memberOut(MgetitemVO mgetItem) {
+		// TODO Auto-generated method stub
+		mainmapper.memberItemOut(mgetItem);
 	}
 
 	

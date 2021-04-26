@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.share.nanu.VO.DonationVO;
+import com.share.nanu.VO.MgetitemVO;
 import com.share.nanu.VO.VmVO;
 import com.share.nanu.VO.VmVmamVO;
 import com.share.nanu.VO.Vmam;
@@ -35,5 +36,7 @@ public interface MainMapper {
 	public int getYear(String year);
 
 	public List<Vmam> getVmItem(String vmNum);
+
+	public void memberItemOut(MgetitemVO mgetItem);
 
 }

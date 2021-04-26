@@ -3,6 +3,7 @@ package com.share.nanu.service;
 import java.util.List;
 
 import com.share.nanu.VO.DonationVO;
+import com.share.nanu.VO.MgetitemVO;
 import com.share.nanu.VO.VmVO;
 import com.share.nanu.VO.VmVmamVO;
 import com.share.nanu.VO.Vmam;
@@ -28,5 +29,8 @@ public interface MainService {
 
 	
 	public List<Vmam> getVmItem(String vmNum);
+	
+	//회원 물건 수령 out
+	public void memberOut(MgetitemVO mgetItem);
 
 }
