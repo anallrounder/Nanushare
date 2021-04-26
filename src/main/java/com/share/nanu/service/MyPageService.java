@@ -63,5 +63,11 @@ public interface MyPageService {
 
 	// 달력 //시험중
 	public void getMypoint2(PointVO pointVO, String member_id);
+	
+	//동물상 테스트 1일1회 카운트
+	public int myAnimalFaceTestCount(PointVO pointVO, String member_id);
+	
+	//동물상 테스트 포인트 입력
+	public void getMyAnimalFacePoint(PointVO pointVO, String member_id);
 
 }

@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
+<!-- 헤더 안에 추가  -->
+<!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
+<!-- js에서 csrf 토큰, 헤더등록 -->
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 
 <!-- CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
@@ -29,6 +33,9 @@
 	
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+	
+	<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <head>
     <meta charset="UTF-8">
@@ -537,9 +544,43 @@
                 	//console.log("test");
                 	predict();
                 	$('#loading').hide();
+                	
+                	var token = $("meta[name='_csrf']").attr("content");
+              		var header = $("meta[name='_csrf_header']").attr("content");
+              		$(document).ajaxSend(function(e, xhr, options) {
+              			xhr.setRequestHeader(header, token);
+              		});
+                	
+                	
                 	$.ajax({
                 		//포인트 추가, 하루한번
-                		
+                		 type :"post",
+                	     url :"/my/event/test/animalFacePoint",
+                	     contentType: 'application/json',               	     
+                	     async: "false",
+                   	     datatype : 'json',
+                   	     success: function(result) {
+							if(result == "SUCCESS"){
+								//alert("10포인트 적립하셨습니다.")
+								swal({
+									title : "10포인트 적립하셨습니다." , 
+									icon : "success" , 
+									button : true 
+								});
+								
+								
+							}else{
+								//alert("오늘은 이미 포인트를 적립하셨습니다.")
+								swal({
+									title : "오늘은 이미 포인트를 적립하셨습니다." , 
+									icon : "success" , 
+									button : true 
+								});
+							}
+						},
+						error : function (e) {
+							console.log(e);
+						}
                 		
                 	});
                 }); 

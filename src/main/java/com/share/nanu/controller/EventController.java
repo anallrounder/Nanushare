@@ -1,12 +1,18 @@
 package com.share.nanu.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.share.nanu.VO.PointVO;
 import com.share.nanu.security.MemberDetails;
+import com.share.nanu.service.MyPageService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Controller
 public class EventController {
+	
+	@Autowired
+	private MyPageService mgservice;
 
 	// 출석체크(event default)
 //	@RequestMapping("/event/check")
@@ -50,7 +59,27 @@ public class EventController {
 		return mav;
 	}
 	
-	
+	@PostMapping("/my/event/test/animalFacePoint")
+	public ResponseEntity<String> animalFaceTestPoint(ModelAndView mav, PointVO pointVO, @AuthenticationPrincipal MemberDetails md) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			int count = mgservice.myAnimalFaceTestCount(pointVO, md.getUsername());
+			log.info("count" + count);
+
+			if (count >= 1) {
+				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
+			} else {
+				mgservice.getMyAnimalFacePoint(pointVO, md.getUsername());
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 	
 	
 	

@@ -175,5 +175,18 @@ public class MyPageServiceImpl implements MyPageService {
 
 			return mgmapper.mypnt(pointVO);
 		}
+		
+		//동물상 테스트 카운트
+		@Override
+		public int myAnimalFaceTestCount(PointVO pointVO, String member_id) {
+			
+			return mgmapper.myAnimalFaceTestCount(pointVO, member_id);
+		}
+		
+		//동물상 테스트 포인트 입력
+		@Override
+		public void getMyAnimalFacePoint(PointVO pointVO, String member_id) {
+			mgmapper.getMyAnimalFacePoint(pointVO, member_id);
+		}
 
 	}

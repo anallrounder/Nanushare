@@ -214,5 +214,23 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 			select * from (select * from point where member_id = #{member_id} and ecat_num=1 order by pnt_num desc) where rownum = 1
 	   ]]>
 	</select>
+	
+	<!-- 동물상 테스트 카운트 -->
+	<select id="myAnimalFaceTestCount" resultType="int">
+		<![CDATA[
+			
+	   select count(*) as count from point where member_id = #{member_id} and pdate>=TO_CHAR(SYSDATE, 'YYYYMMDD') and ecat_num=3
+	    
+	   ]]>
+	</select>
+	
+	<!-- 동물상 테스트 포인트 입력 -->
+	<insert id="getMyAnimalFacePoint">
+		<![CDATA[
+	       insert into point (pnt_num, member_id, pdate, prtpnt, dntpnt, totalpnt, e_idx, nowpnt, ecat_num) 
+	       values(POINT_SEQ.nextval, #{member_id}, sysdate, #{pointVO.prtpnt},0, #{pointVO.totalpnt}+#{pointVO.prtpnt}, null,#{pointVO.nowpnt}+#{pointVO.prtpnt}, 3)
+	   ]]>
+	</insert>
+	
 
 </mapper>
