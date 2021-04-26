@@ -108,24 +108,11 @@
 			
 		});
 		
-		// 추가
-	/* 	$(".move").on("click", function(e) {
-
-			e.preventDefault();
-			actionForm
-				.append("<input type='hidden' name='bid' value='"
-					+ $(this).attr("href") + "'>");
-			actionForm.attr("action", "/board/get");
-			actionForm.submit();
-			
-		}); */
-		
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 
 		
-		
-		//썸네이 업로드	
+		//썸네일 업로드	
 		function thumNailUpload(bIndex) {
 					
 			$(document).ajaxSend(function(e, xhr, options) {
@@ -138,12 +125,9 @@
 			formData.append("b_index",bIndex);
 			formData.append("file",$("#file"+bIndex)[0].files[0]);
 			
-			
 			console.log("2." + formData.get("file"));
 			console.log("3." + formData.get("b_index"));
 			
-			
-
 			$.ajax({
 				type : 'POST',
 				enctype: 'multipart/form-data',
@@ -193,6 +177,52 @@ a:hover {
 .black-transparent {
 	opacity:50%;
 }
+.charity-click-btn {
+ 	color: white;
+ 	font-weight:bold;
+ 	float: right;
+}
+#write {
+	padding-right:0px;
+}
+.charity-simple-blog-options {
+	padding-left:0px;
+}
+.charity-simple-blog-text > h2 > a:hover {
+	color: #FFAE73;
+}
+.charity-simple-blog-btn {
+	color: white;
+ 	font-weight:bold;
+ 	opacity:60%;
+}
+.charity-select-two:before {
+	background-color: #f6f6f6;
+	border-radius: 6px;	
+	height: 50px; 
+/* 	 padding-right:22px;
+	 margin-right:12px; */
+}
+.charity-select-two select {
+	background-color: #f6f6f6;
+    border-radius: 6px;
+    height: 50px;
+}
+.charity-select-two {
+	width:50%;
+	margin-bottom:5px;
+}
+#search {
+	/* background-color: #f6f6f6;
+    border-radius: 6px;
+    height: 50px; */
+   /*  padding-right:12px; */
+}
+#inputsearch {
+	width:104%;
+	margin-bottom:5px;
+} 
+
 </style>
 </head>
 
@@ -208,7 +238,7 @@ a:hover {
         <div class="container">
             <div class="row">
                 <div class="col-md-12"> 
-                <p style="text-align:right; margin:0; padding:0;" ><a style="font-size:1px;" href='https://www.freepik.com/vectors/blue'>Blue vector created by vectorjuice - www.freepik.com</a></p>
+               <!--  <p style="text-align:right; margin:0; padding:0;" ><a style="font-size:1px;" href='https://www.freepik.com/vectors/blue'>Blue vector created by vectorjuice - www.freepik.com</a></p> -->
                    <!--  <h1>1:1 문의</h1> -->
                    <!--  <p>show your support</p> -->
                 </div>
@@ -230,31 +260,12 @@ a:hover {
 			<div class="container">
 				<div class="row">
 				<div class="col-md-12">
-					<!-- Widget Search 참고 -->
-					<!-- 	<div class="widget_title"><h2>Search Here</h2></div> -->
-					<!-- <div style="float: right;" class="widget widget_search col-md-4">
-						<form>
-							<input type="text" placeholder="검색어를 입력하세요."> <input type="submit" value=""> <i class="fa fa-search"></i>
-						</form>
-					</div> -->
-					
-					<!-- Widget Search -->
 
 					<!-- search start  -->
 					<div style="float: right;" class="widget widget_search ">
 						<form id="searchForm" action="/board/shows/list" method="get" ><!-- class="navbar-form serchForm" -->
-							
 							<div class="input-group">
-								<%-- <div class="form-group col-md-2">
-									<select name="type"  class="charity-select-form">
-										<option value="">검색종류</option>
-										<option value="T" ${(pageMaker.cri.type == "T") ? "\"selected\"":"" }>제목</option>
-										<option value="C" ${(pageMaker.cri.type == "C") ? "\"selected\"":"" }>내용</option>
-										<option value="W" ${(pageMaker.cri.type == "W") ? "\"selected\"":"" }>작성자</option>
-										<option value="TC" ${(pageMaker.cri.type == "TC") ? "\"selected\"":"" }>제목과 내용</option>
-									</select>
-								</div> --%>
-								<div class="charity-select-two col-md-2">
+								<div class="charity-select-two col-md-3">
 									<select name="type">
 										<option value="">검색종류</option>
 										<option value="T" ${(pageMaker.cri.type == "T") ? "\"selected\"":"" }>제목</option>
@@ -264,8 +275,8 @@ a:hover {
 									</select>
 								</div>
 								<div class="form-group col-md-3">
-									<input type="text" name="keyword" class="form-control" placeholder="검색" value="${pageMaker.cri.keyword}"/>
-									<input type="submit" value="" class="btn btn-default"/><i class="fa fa-search"></i>
+									<input type="text" name="keyword" id="inputsearch" class="form-control" placeholder="검색" value="${pageMaker.cri.keyword}"/>
+									<input type="submit" value="" class="btn btn-default" /><i class="fa fa-search" id="search"></i>
 									<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 									<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 								</div> 
@@ -274,8 +285,8 @@ a:hover {
 					</div>
 					<!-- search end -->
 					
-					<div  style="float: right;" class="col-md-2">
-						<button  class="charity-click-btn mb-3" onclick="location.href='/my/board/shows/write_view'">나눔인증글작성</button><br>
+					<div  style="float: right;" class="col-md-2" id="write">
+						<button  class="charity-click-btn mb-3" onclick="location.href='/my/board/shows/write_view'">인증글작성</button><br>
 					</div>
 					<div class="col-md-6" style="float: right;"></div>
 				</div>
@@ -355,7 +366,7 @@ a:hover {
 												<!-- 썸네일 등록 -->
 						
 												<button type="button"  class="charity-simple-blog-btn mt-3" data-toggle="modal" data-target="#exampleModal${vo.b_index }">
-													 <b>썸네일</b></button>
+													 <b> ◀ 썸네일 등록</b></button>
 													
 												 
 													  

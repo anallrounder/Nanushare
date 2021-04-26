@@ -310,10 +310,8 @@ addLoadEvent(function() {
                                     required: true,			/* 필수인가? true는 yes를 의미 */
                                     digits: true,			/* (양수)숫자만 입력가능 -number와 다른점은 소수와 음수일 경우 false 작동함 */
                                     spaceCheck: true,		/* 내가 추가한 validate 메소드 */
-                                    minlength: 1,			/* 최소글자 수 */
-                                    min: 1					/* 최소 값 */
-                                    //minlength: 4,			/* 최소글자 수*/
-                                    //min: 1000				/* 최소 값 */
+                                    minlength: 4,			/* 최소글자 수*/
+                                    min: 1000				/* 최소 값 */
                                 }
                             },
                             messages: {
@@ -351,24 +349,6 @@ addLoadEvent(function() {
                     </script> 
 					<!-- form validation end -->
 	                    
-	                    
-	                    <!--// 연락처 이메일 \\-->
-                        <!-- <div class="charity-team-contactus">
-                            <ul>
-                           		<li>
-                                    <i class="fa fa-phone"></i>
-                                    <h5>포인트나눔 관련:</h5>
-                                    <span>02 1234 5678</span>
-                                </li>
-                                <li>
-                                    <i class="fa fa-envelope"></i>
-                                    <h5>Email:</h5>
-                                    <a href="mailto:name@email.com">info@example.com</a>
-                                </li>
-                            </ul>
-                        </div> -->
-                        <!--\\ 연락처 이메일 //-->
-                    
                     </div>
                     <!-- aside 제외한 왼쪽 컨텐츠 div 끝 -->
                     
