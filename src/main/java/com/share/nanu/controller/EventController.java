@@ -27,7 +27,7 @@ public class EventController {
 		return mav;
 	}
 	
-	@GetMapping("/my/event/test/animalFaceTest")
+	@GetMapping("/my/event/test/animalFace")
 	public ModelAndView animalFaceTest(ModelAndView mav) {
 		mav.setViewName("/animalFace/animalFaceTest");
 		return mav;
