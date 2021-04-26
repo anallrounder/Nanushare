@@ -342,41 +342,44 @@
         </div>
     </div>
     
-   	
-   		<div class="charity-main-content">
-     	<div>
-	        <h1 align="center" >동물상 테스트</h1>
-	        <h2 align="center">얼굴로 보는 인공지능 동물상 테스트</h2>
-	        <h2 align="center">나는 어떤 동물과 닮았을까? 나의 동물상 찾기를 해보세요!</h2>
-       </div>
-    
-
-    <div class="file-upload">
-        
-        <div class="image-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-            <div class="drag-text">
-                <h3>얼굴 사진을 올려놓거나 업로드하세요.</h3>
-            </div>
-        </div>
-        <div class="file-upload-content">
-            <img class="file-upload-image" id="face-image" src="#" alt="your image" />
-            <div id="loading" class="animated bounce">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-                <p class="text-center">AI가 당신의 동물상을 분석중입니다.</p>
-            </div>
-            <p class = "result-message"> </p>
-            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
-            <div class="image-title-wrap">
-                <button type="button" onclick="window.location.reload();" class="remove-image">재시도 </button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div id="webcam-container"></div>
+   	<div class="charity-main-content">
+   			<div>
+		        <h1 align="center" >동물상 테스트</h1>
+		        <h2 align="center">얼굴로 보는 인공지능 동물상 테스트</h2>
+		        <h2 align="center">나는 어떤 동물과 닮았을까? 나의 동물상 찾기를 해보세요!</h2>
+	       </div>
+	       <br>
+	   	<div class="charity-main-section"  style="background-color:lightgrey;">
+	     	
+	    <br>
+	
+	    <div class="file-upload">
+	        
+	        <div class="image-upload-wrap">
+	            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+	            <div class="drag-text">
+	                <h3>얼굴 사진을 올려놓거나 업로드하세요.</h3>
+	            </div>
+	        </div>
+	        <div class="file-upload-content">
+	            <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+	            <div id="loading" class="animated bounce">
+	                <div class="spinner-border" role="status">
+	                    <span class="sr-only">Loading...</span>
+	                </div>
+	                <p class="text-center">AI가 당신의 동물상을 분석중입니다.</p>
+	            </div>
+	            <p class = "result-message"> </p>
+	            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
+	            <div class="image-title-wrap">
+	                <button type="button" onclick="window.location.reload();" class="remove-image">재시도 </button>
+	            </div>
+	        </div>
+	    </div>
+	    <br>
+	    </div>
+	    
+	    <div id="webcam-container"></div>
   </div>
     <!-- Footer -->
     <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
