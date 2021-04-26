@@ -20,6 +20,8 @@
 <!-- js에서 csrf 토큰, 헤더등록 -->
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
+<!-- header -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 
 <meta charset="UTF-8">
