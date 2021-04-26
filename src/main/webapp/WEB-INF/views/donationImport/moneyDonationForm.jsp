@@ -264,6 +264,10 @@
 </script>
 
 <style type="text/css">
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
 
 #forimg {
 	background-color: #eaf0fe;

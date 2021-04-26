@@ -41,7 +41,13 @@
 
 <!-- FONT AWSOME -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
+
+<style type="text/css">
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
+
 #forimg {
 	/* background-color: #db7a7c; */
 	background-color: #dfebe9;
@@ -52,8 +58,25 @@
 .black-transparent {
 	opacity:50%;
 }
+.charity-plan-btn {
+	cursor: pointer;
+}
+.charity-plan-btn:link { 
+ 	color: white; text-decoration: none;
+ }
+.charity-plan-btn:hover { 
+ 	color: white; 
+ 	text-decoration: none; /* underline */
+ 	background-color: #78665A;
+ }
+/*  a:visited { 
+ 	color: white; 
+ 	text-decoration: none;
+ } */
 
 </style>
+
+
 </head>
 
 <body>

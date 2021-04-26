@@ -106,6 +106,12 @@
 .error {
     color: red;
 }
+
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
+
 #forimg {
 	/* background-color: #db7a7c; */
 	background-color: #dfebe9;
@@ -227,10 +233,7 @@
 		                                        <label>이름:</label>
 		                                        <input type="text" name="name" value="${list1.name}" readonly>
 		                                    </li>
-		                                   <%--  <li class="chrity-full-form">
-		                                        <label>연락처:</label>
-		                                        <input type="text" name="phone" value="${list1.phone}" readonly>
-											</li> --%>
+		                            
 	                                    </c:if>
 									</sec:authorize>	
 								</c:forEach>
@@ -244,7 +247,7 @@
                                     </li>
                                     
                                     <!-- 물품선택 셀렉트 박스 -->
-                                    <li class="charity-select-form">
+                                    <li class="charity-select-form"  style="width:50%;">
                                         <!-- <label for="itemSelect">믈품선택:</label> -->
                                         <label for="icat_num">믈품선택:</label>
                                         <div class="charity-select-two">
@@ -269,7 +272,7 @@
                                     <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 										자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
 										결국 input box에 입력된 값이 form을 넘길 때 수량값으로 넘어가게 된다. -->
-                                    <li class="charity-select-form">
+                                    <li class="charity-select-form"  style="width:50%;">
                                         <label for="selectBox">(select)</label>
                                         <div class="charity-select-two">
                                             <select id="selectBox" name="amount" onchange="changeSelection()">

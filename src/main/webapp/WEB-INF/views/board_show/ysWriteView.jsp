@@ -106,6 +106,11 @@
 </script>
 
 <style>
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
+
 #forimg {
 	background-color: #eaf0fe;
 	background-image: url('/resources/banner_imgs/donation_banner.jpg');
@@ -204,7 +209,7 @@
                         </form>
                       
                       	<!--   a href="plist" -->
-                        <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt" > 나눔 인증 게시판 돌아가기 </a></div>
+                        <div style="float: right; margin-right:5px; text-color:2a786b;"> <a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt" style="color:#333;"> 나눔 인증 목록으로 </a></div>
                    
                     </div>		     
 		

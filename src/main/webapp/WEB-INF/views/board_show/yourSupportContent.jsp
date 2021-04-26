@@ -182,7 +182,10 @@
 </script>
 
 <style>
-
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
 #forimg {
 	background-color: #e4edfe;
 	background-image: url('/resources/banner_imgs/people_banner.png');
@@ -261,7 +264,6 @@
                             <!-- 글 내용 -->
                             <p>${content_view.bcontent}</p><br>
                            
-							
                              
                             <!-- 버튼 -->
                             <div class="charity-post-tags" >
@@ -290,28 +292,6 @@
                             </div>
                         </div>
                         <!-- 버튼 -->
-                        
-                          <!-- 관리자 버튼 -->
-                      <%--   <div class="charity-post-tags">
-                        
-	                        <div class="charity-tags">
-                               <span>관리자 기능</span>
-                               <!-- <a href="#">charity </a>
-                               <a href="#">/ donation</a>
-                               <a href="#"> / needy</a> -->
-                           </div> 
-	                        
-	                        <div class="charity-blog-social">
-						        <ul>             
-		                        <sec:authorize access="hasRole('ADMIN')">
-		                      		<li><a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
-		                        	<li><a id="del_btn" href="delete?b_index=${content_view.b_index}" class="fa fa-eraser"> 삭제</a></li>
-		                        </sec:authorize>
-		                        </ul>  
-	                        </div>
-                        </div> --%>
-                        <!-- 관리자 버튼 -->
-                        
                        
                         <!-- 이전, 다음글 보기 -->
                       <%--   <div class="charity-prenxt-post">
@@ -360,7 +340,6 @@
 	                                    <div class="thumb-list">
 	                                    <!-- 랜덤이미지:  class="usre_img" 사용해서 함수실행하고 랜덤 이미지를 돌려가면서 뿌려준다. -->
 	                                       <figure><img id="introImg" class="usre_img" src="${pageContext.request.contextPath}/resources/users/user01_sm.png"></figure> 
-	                                       <!-- 원래코드 <figure><img id="introImg" border="0"></figure> -->
 	                                        
 	                                        <div class="text-holder">
 	                                            <h6><c:out value="${vo.rid}"/></h6><!-- 작성자 -->
@@ -372,13 +351,8 @@
 												<sec:authorize access="isAuthenticated()">
 												<c:if test="${pinfo.username eq vo.rid || pinfo.getmember().getAuthname() eq '관리자'}">  
 		                                            <div class="charity-blog-social" id="abt${vo.r_num}" >
-		                                            	
-		                                            <!-- href="${pageContext.request.contextPath}/board/shows/update_view/${vo.r_num}"  -->
 			                                            <i class="fa fa-edit"></i><a class="a-updateView" href="javascript:void(0);" onclick="answerEdit('${vo.b_index}','${vo.rid}','${vo.rcontent}','${vo.r_num}')" style="color:#333" > <b>수정하기&nbsp;</b></a>   
-		                                    		   <%--  onClick="updateView('${vo.b_index}','${vo.rid}','${vo.rdate}','${vo.rcontent}')" --%>
 		                                    		    <i class="fa fa-eraser"></i><a class="a-del" href="${pageContext.request.contextPath}/board/shows/delete/${vo.r_num}" style="color:#333"  ><b> 삭제하기</b></a>
-		                                    		    <%--  onClick="del('${vo.b_index}','${vo.r_num}')" --%>
-		                                    		    
 	                                    		    </div>
 	                                    		    
                                     		    </c:if>
@@ -393,9 +367,6 @@
                                 </c:if>
                             </ul>
                             <!--// comments \\-->
-                            
-                            
-                            
                         </div>
                        
                         <!--// 댓글 작성 영역 comment-respond \\-->
@@ -423,11 +394,7 @@
                                     <textarea id="rcontent" name="rcontent" placeholder="댓글을 작성하세요." class="commenttextarea"></textarea>
                                 </p>
                                 <p class="form-submit">
-                                    <!-- <input name="comment_post_ID" value="99" id="comment_post_ID" type="hidden"> -->
                                 	<input id="resubmit" name="submit" class="submit" value="댓글작성" type="submit">
-                                	
-                                <!-- 여기서는 수정, 삭제를 할 필요가 없었잖아? <button type="button" class="btn btn-primary-sm m-2" onClick="rmodify()">삭제</button>
-									<button type="button" class="btn btn-primary-sm m-2" onClick="rmodify()">수정</button> -->
                                 </p>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             </form>
