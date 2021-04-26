@@ -356,7 +356,7 @@ a:hover {
 
                                     errorPlacement: function(error, element) {
                                         if (element.is(":text") ) {
-                                            element.parent().after(error);
+                                            element.parent().parent().after(error);
                                         } else {
                                             element.after(error);
                                         }

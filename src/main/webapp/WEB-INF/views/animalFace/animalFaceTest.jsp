@@ -15,18 +15,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
 
-<!-- header -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
 
  	<!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    
+    <!-- Bootstrap CSS -->   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 	
-	
+	<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
@@ -313,7 +312,7 @@
 		}
 		#forimg {
 			background-color: #e4edfe;
-			background-image: url('/resources/banner_imgs/people_banner.png');
+			background-image: url('/resources/banner_imgs/animalFaceTest.png');
 			background-repeat:no-repeat;
 			background-position: center;"
 		}
@@ -342,41 +341,44 @@
         </div>
     </div>
     
-   	
-   		<div class="charity-main-content">
-     	<div>
-	        <h1 align="center" >동물상 테스트</h1>
-	        <h2 align="center">얼굴로 보는 인공지능 동물상 테스트</h2>
-	        <h2 align="center">나는 어떤 동물과 닮았을까? 나의 동물상 찾기를 해보세요!</h2>
-       </div>
-    
-
-    <div class="file-upload">
-        
-        <div class="image-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-            <div class="drag-text">
-                <h3>얼굴 사진을 올려놓거나 업로드하세요.</h3>
-            </div>
-        </div>
-        <div class="file-upload-content">
-            <img class="file-upload-image" id="face-image" src="#" alt="your image" />
-            <div id="loading" class="animated bounce">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-                <p class="text-center">AI가 당신의 동물상을 분석중입니다.</p>
-            </div>
-            <p class = "result-message"> </p>
-            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
-            <div class="image-title-wrap">
-                <button type="button" onclick="window.location.reload();" class="remove-image">재시도 </button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div id="webcam-container"></div>
+   	<div class="charity-main-content">
+   			<div>
+		        <h1 align="center" >동물상 테스트</h1>
+		        <h2 align="center">얼굴로 보는 인공지능 동물상 테스트</h2>
+		        <h2 align="center">나는 어떤 동물과 닮았을까? 나의 동물상 찾기를 해보세요!</h2>
+	       </div>
+	       <br>
+	   	<div class="charity-main-section"  style="background-color:lightgrey;">
+	     	
+	    <br>
+	
+	    <div class="file-upload">
+	        
+	        <div class="image-upload-wrap">
+	            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+	            <div class="drag-text">
+	                <h3>얼굴 사진을 올려놓거나 업로드하세요.</h3>
+	            </div>
+	        </div>
+	        <div class="file-upload-content">
+	            <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+	            <div id="loading" class="animated bounce">
+	                <div class="spinner-border" role="status">
+	                    <span class="sr-only">Loading...</span>
+	                </div>
+	                <p class="text-center">AI가 당신의 동물상을 분석중입니다.</p>
+	            </div>
+	            <p class = "result-message"> </p>
+	            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
+	            <div class="image-title-wrap">
+	                <button type="button" onclick="window.location.reload();" class="remove-image">재시도 </button>
+	            </div>
+	        </div>
+	    </div>
+	    <br>
+	    </div>
+	    
+	    <div id="webcam-container"></div>
   </div>
     <!-- Footer -->
     <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
@@ -439,12 +441,12 @@
             		
             	case "fox" :
             		resultTitle ="여우상"
-            		resultExplain ="여우"
+            		resultExplain ="여우상은 고양이상과 강아지상이 적절히 융합되어 있는 듯함이 특징이며, 눈빛이 능글맞고 사소한 행동으로도 사람을 홀리는 재주가 있어 도화살이 끼는 경우가 많은 유형이다."
             		break;
             		
             	case "deer" :
-            		resultTitle ="사슴상"
-                	resultExplain ="사슴"
+            		resultTitle ="온순하고 우아한 사슴상"
+                	resultExplain ="맑고 영롱한 분위기의 당신은 사슴처럼 차분한 성격의 소유자다. 초롱초롱한 눈망울이 당신의 가장 큰 트레이드마크며 따스하고 온순한 눈빛을 가져 사랑스러움을 항상 머금고 있다! 부끄러움이 많아 애정표현이 낯설은 당신은 연인에게조차 신비한 존재지만 따뜻한 성격으로 연인의 마음을 사로잡는 능력을 가졌다."
                 	break;
                     
                     
@@ -527,7 +529,6 @@
                     $('#loading').show();
                     $('.file-upload-image').attr('src', e.target.result);
                     $('.file-upload-content').show();
-
                     $('.image-title').html(input.files[0].name);
                 };
 
@@ -536,6 +537,11 @@
                 	//console.log("test");
                 	predict();
                 	$('#loading').hide();
+                	$.ajax({
+                		//포인트 추가, 하루한번
+                		
+                		
+                	});
                 }); 
                 
             } else {
