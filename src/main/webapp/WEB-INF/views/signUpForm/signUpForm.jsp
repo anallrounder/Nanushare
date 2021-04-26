@@ -45,7 +45,7 @@
     
     <style type="text/css">
    	 body {
-			background-image: url("https://source.unsplash.com/user/upcastle1/likes");
+			background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
 			background-size: cover;	
 		}
     	.error {
@@ -181,18 +181,18 @@
 
 </head>
 
-<body >
+<body class="img js-fullheight">
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Nanushare Sign Up</h2>
+                    <h1 class="heading-section">Nanushare Sign Up</h1>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="login-wrap">
-                        <h3 class="text-center mb-4">Create Your Account</h3>
+                        
                         <form id="mjoin" action="${pageContext.request.contextPath}/memberJoin" 
                         	class="signup-form" method="post" onsubmit='submitCheck()' novalidate> <!-- onsubmit='submitCheck()' -->
                         	<!-- novalidate -> 브라우저에서 제공하는 validate를 끄겠다. 그리고 jquery validation plugin 사용 -->
@@ -408,6 +408,11 @@
     <script src="/resources/signUpForm/js/popper.js"></script>
     <script src="/resources/signUpForm/js/bootstrap.min.js"></script>
     <script src="/resources/signUpForm/js/main.js"></script>
+    
+    <script src="/resources/loginform/js/jquery.min.js"></script>
+    <script src="/resources/loginform/js/popper.js"></script>
+    <script src="/resources/loginform/js/bootstrap.min.js"></script>
+    <script src="/resources/loginform/js/main.js"></script>
 
 </body>
 

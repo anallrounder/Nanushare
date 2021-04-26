@@ -1,6 +1,7 @@
 package com.share.nanu.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +26,13 @@ public class EventController {
 		mav.setViewName("/eventView/testDefault");
 		return mav;
 	}
+	
+	@GetMapping("/my/event/test/animalFaceTest")
+	public ModelAndView animalFaceTest(ModelAndView mav) {
+		mav.setViewName("/animalFace/animalFaceTest");
+		return mav;
+	}
+	
 
 	// 게임 디폴트 뷰(test default)
 	@RequestMapping("/event/game")
