@@ -58,8 +58,9 @@ a:hover {
 .black-transparent {
 	opacity:50%;
 }
-
-
+.charity-plan-btn {
+	cursor: pointer;
+}
 .charity-plan-btn:link { 
  	color: white; text-decoration: none;
  }

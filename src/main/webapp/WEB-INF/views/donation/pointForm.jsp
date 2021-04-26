@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -192,45 +192,43 @@ addLoadEvent(function() {
 							<%-- <sec:authentication property="principal" var="pinfo" />
 								<sec:authorize access="isAuthenticated()">
 								<c:if test="${pinfo.username eq vo1.member_id}">  --%>
-                                   
-                                   <li>
-                                       <label>아이디(Email):</label>
-                                       <%-- <input type="text" value="<sec:authentication property="principal.member.member_id"/> "  readonly >  --%>
-                                       <input type="text" name="member_id" value="${vo1.member_id}" readonly /> 
-                                   </li>
-                                   <li>
-                                       <label>이름:</label>
-									   <input type="text" name="name" value="${vo1.name}" readonly />
+								<li>
+	                                <label>아이디(Email):</label>
+	                                <%-- <input type="text" value="<sec:authentication property="principal.member.member_id"/> "  readonly >  --%>
+	                                <input type="text" name="member_id" value="${vo1.member_id}" readonly /> 
 								</li>
-									<li>
-										<label>신청 날짜:</label>    
-										<div class="chrity-full-form"> <!-- class="charity-select-date" -->
-                                       	<!-- readonly 작성시 수정은 불가하고 읽기만 가능하다. -->
+                                <li>
+									<label>이름:</label>
+									<input type="text" name="name" value="${vo1.name}" readonly />
+								</li>
+								<li>
+									<label>신청 날짜:</label>    
+									<div class="chrity-full-form"> <!-- class="charity-select-date" -->
+	                                    <!-- readonly 작성시 수정은 불가하고 읽기만 가능하다. -->
 										<input name="tName" type="text" id="tDate" readonly>
-                                   		
                                    	</div> 
-                                   </li>
-                                  <c:forEach var="vo2" items="${vo1.pointList}">
+                                </li>
+                                <c:forEach var="vo2" items="${vo1.pointList}">
                                 
                                    <li>
                                        <label>보유 포인트:</label>
                                        <input type="text" name="nowpnt" value="${vo2.nowpnt}" readonly > 
-                                       <input type="hidden" name="totalpnt" value="${vo2.totalpnt}" readonly > 
+                                       <input type="hidden" name="totalpnt" value="${vo2.totalpnt}" readonly > <!-- 누적포인트는 받아서 전송만 한다. -->
                                    </li>
                                 </c:forEach> 
 								<%-- </c:if>
 								</sec:authorize>  --%>
+								<c:forEach var="vo2" items="${vo1.pointList}">
+								<c:if test="${vo2.nowpnt > 999}">  <!-- 보유포인트가 1000이상일때만 보임 -->
                               		<li>
 	                                   	<label>나눌 포인트:</label>
 	                                  	<input type="text" name="dntpnt" id="selectDirect" disabled />                                 			
                                     </li>
-                                    
-                                   
                                    <!-- disabled는 기본으로 인풋박스가 비활성화 되는 기능이다. 동시에 셀렉트 박스에서 입력한 값이 input box로 입력된다.
 										자바스크립트 jQuery 함수를 사용해 셀렉트 박스의 value가 9일 경우(숫자는 임의로 설정함) disabled를 해제하고 수량을 입력할 수 있도록 했다.
 										결국 input box에 입력된 값이 form을 넘길 때 수량값으로 넘어가게 된다. -->
                                    
-                                   <li class="charity-select-form">   
+                                   <li class="charity-select-form" style="width:50%;">   
                                    	<label>(select)</label>
 									<div class="charity-select-two"> 
 										<select id="selectBox" name="amount"  onchange="changeSelection()">
@@ -246,19 +244,24 @@ addLoadEvent(function() {
 											<option value="30000">30,000 point</option>
 											<option value="50000">50,000 point</option>
 										</select>
-										
 									</div>
-									
                                    </li>
-                                  
-                                   
+                                </c:if>  
+                                </c:forEach>   
 							</c:forEach>
 							
                                </ul>
                                
                                 <div class="charity-team-contactus mt-3">
-                               		 *포인트는 1000p 이상부터 나눔할 수 있습니다.
+                               		 *1000포인트 이상부터 나눔할 수 있습니다.
+                               		<c:forEach var="vo1" items="${memberInfo}">
+                               		<c:forEach var="vo2" items="${vo1.pointList}">
+									<c:if test="${vo2.nowpnt > 999}"> 
+									<!-- 보유포인트가 1000이상일때만 보임 -->
 	                                <button type="submit" class="charity-sub-btn" id="btnSend" ><i class="fa fa-save"> 포인트 나눔하기</i></button>
+	                               	</c:if>
+	                               	</c:forEach>
+	                               	</c:forEach>
 									<button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/money/main'"><i class="fa fa-arrow-left"> 이전화면으로</i></button>
                            		</div>
                            	

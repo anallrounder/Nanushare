@@ -76,7 +76,7 @@ font-family: 'NotoSansKR', sans-serif;
                <%-- <time datetime="2008-02-14 20:00" style="width:70px;">
                	<img src="${pageContext.request.contextPath}/resources/donation/item/mask_sm.png" alt=""></time> --%>
                 <div class="charity-events"> 
-					<h6><a href="${pageContext.request.contextPath}/board/notice/content_view/${vo.b_index}"> ${vo.btitle}</a></h6> <%-- ${vo.b_index}. --%>
+					<h6><a href="${pageContext.request.contextPath}/board/notice/${vo.b_index}"> ${vo.btitle}</a></h6> <%-- ${vo.b_index}. --%>
                 </div>
             </li>
             </c:forEach>
