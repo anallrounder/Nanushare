@@ -76,21 +76,15 @@ public class NoticeBoardController {
 			model.addAttribute("username", md.getmember().getName());
 		}
 		 ntService.writeInsert(boardVO);
-		//model.addAttribute("modify_view", ntService.writeInsert(boardVO.getB_index()));
-		//model.addAttribute("modify_view", ntService.writeInsert(boardVO.getB_index()));
-
-		//boardVO.setMember_id(md.getUsername());// 로그인한 사람 정보 가져오기
-
 		return "redirect:/board/notice";
 	}
 	
-
 	// 글 삭제
-	@GetMapping("/board/notice/delete")
+	@GetMapping("/board/notice/delete/{b_index}")
 	public String noticeDelete(BoardVO boardVO) throws Exception {
 		log.info("공지 게시판 delete");
 		ntService.deleteBoard(boardVO.getB_index());
-		return "redirect:";
+		return "redirect:/board/notice";
 	}
 
 	

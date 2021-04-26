@@ -14,7 +14,7 @@
 <meta name="_csrf" content="${_csrf.token}">
 <meta id="_csrf_header" name="_csrf_header"	content="${_csrf.headerName}">
 
-<title>myprofile_content</title>
+<title>NanuShare</title>
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -131,15 +131,14 @@
 							<div class="charity-rich-editor">
 								<h1><input type="hidden" id="b_index" value="${content_view.btitle}"> ${content_view.btitle}</h1>
 								<hr>
-								<%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
 								<div class="charity-blog-options">
 									<ul style="float: right">
 										<li><i class="fa fa-folder-open"></i> No. ${content_view.b_index}</li>
 										<li style="text-indent: 0.3em"><i class="fa fa-calendar"></i><time datetime="2008-02-14 20:00">	${content_view.bdate}</time></li>
-										<li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 <input type="hidden" id="b_index" value="${content_view.bhit}"> ${content_view.bhit}</li>
+										<li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수<input type="hidden" id="b_index" value="${content_view.bhit}">${content_view.bhit}</li>
 									</ul>
 								</div>
-								<input type="hidden" id="b_index" value="${content_view.bcontent}"> ${content_view.bcontent}
+								<input type="hidden" id="b_index" value="${content_view.bcontent}">${content_view.bcontent}
 							
 								<br>
 								<div class="charity-post-tags mt-5">
@@ -148,8 +147,8 @@
 										<ul>
 											<li><a href="${pageContext.request.contextPath}/board/notice" class="fa fa-list-alt"> 목록</a></li>
 											<sec:authorize access="hasRole('ADMIN')">
-											<li><a href="${pageContext.request.contextPath}/board/notice/modify/${content_view.b_index}" class="fa fa-edit"> 수정</a></li>
-											<li><a id="del_btn" href="${pageContext.request.contextPath}/board/notice/delete" class="fa fa-eraser"> 삭제</a></li>
+											<li><a href="${pageContext.request.contextPath}/board/notice/modify/${content_view.b_index}" class="fa fa-edit">수정</a></li>
+											<li><a id="del_btn" href="${pageContext.request.contextPath}/board/notice/delete/${content_view.b_index}" class="fa fa-eraser">삭제</a></li>
 											</sec:authorize>
 										</ul>
 									</div>
