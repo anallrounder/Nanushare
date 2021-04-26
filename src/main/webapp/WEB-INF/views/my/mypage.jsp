@@ -58,6 +58,8 @@
 
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	
+	
 
 <!--  -->
 <link rel="stylesheet"
@@ -233,6 +235,8 @@ a:hover {
 </script>
 
 
+<!-- header -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
 	<!-- Header -->
@@ -421,6 +425,11 @@ a:hover {
 								<div class="charity-cause-donate">
 									<h2 align="center" style="font-weight: bold; color: #424242">나의
 										기부 %는?</h2>
+										<button
+									class="charity-simple-blog-btn w-30 ml-2 text-white stats"
+									type="button" style="float:right;"
+									onClick="location.href='${pageContext.request.contextPath}/board/notice/188'">기부금
+									영수증</button>
 									<div class="progressbar">
 										<span><img class="maxPerson" width="80" height="80">
 										</span><span><img class="maxmax blinking" width="80"
@@ -430,17 +439,16 @@ a:hover {
 									<div
 										data-width='<sec:authentication property="principal.member.dntcnt"/>'
 										max='100' class="charity-cause-progressbar"></div>
+									<div>&nbsp;</div>
+									<div>
 									<h6>
 										<b>*기부횟수 %따라 그림이 바뀌어요.</b>
 									</h6>
+									</div>
 								</div>
 								<div>&nbsp;</div>
 								<div>&nbsp;</div>
-								<button
-									class="charity-simple-blog-btn w-30 ml-2 text-white stats"
-									type="button"
-									onClick="location.href='${pageContext.request.contextPath}/board/notice/188'">기부금
-									영수증</button>
+								
 							</div>
 							<hr>
 						</div>
