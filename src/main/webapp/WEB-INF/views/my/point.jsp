@@ -74,15 +74,38 @@
 li {
 	list-style: none;
 }
+
+a:hover { 
+    text-decoration: none;
+}
 </style>
+
+<style>
+#forimg {
+	background-color: white;
+	background-image: url('/resources/charity/qna/mypage2.png');
+	background-size: 1600px;
+	background-repeat: repeat;
+	background-position: center;
+}
+
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
+</style>
+
 
 <body>
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-	<!-- Sub Header -->
-<%-- 	<div class="charity-subheader">
-		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
+
+	<!-- Banner -->
+	<div id="forimg" class="charity-subheader">
 		<span class="black-transparent"></span>
 		<div class="container">
 			<div class="row">
@@ -90,7 +113,7 @@ li {
 			</div>
 		</div>
 	</div>
-	<!-- Sub Header -->
+	<!-- Banner -->
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
@@ -98,13 +121,56 @@ li {
 		<div class="charity-main-section">
 
 			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
+			<!--  col-md-10 으로 넓이 넓힘 -->
 			<div class="container col-md-10">
 				<div class="view-account">
 					<section class="module">
 					<div class="module-inner">
-						<div class="side-bar"> --%>
+
+						<!-- sidebar -->
+						<div class="side-bar">
 							<!-- profile -->
-							<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+
+
+							<div class="user-info">
+								<figure> <img id="introImg" class="usre_img"
+									src="${pageContext.request.contextPath}/resources/users/user01_sm.png">
+								</figure>
+								<ul class="meta list list-unstyled">
+									<li class="name"><h2>
+											<sec:authentication property="principal.member.name" />
+										</h2></li>
+									<li class="email"><sec:authentication
+											property="principal.member.member_id" /></a></li>
+									<li class="activity"><sec:authentication
+											property="principal.member" var="buttonhidden" /> <sec:authorize
+											access="isAuthenticated()">
+
+											<c:if test="${buttonhidden.signuppath == 'home'}">
+
+												<button
+													class="charity-simple-blog-btn w-100 text-white stats"
+													type="submit"
+													onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+													프로필수정</button>
+
+											</c:if>
+										</sec:authorize> <sec:authentication property="principal.member"
+											var="buttonhidden" /> <sec:authorize
+											access="isAuthenticated()">
+
+											<c:if test="${buttonhidden.signuppath != 'home'}">
+
+												<button
+													class="charity-simple-blog-btn w-100 text-white stats"
+													type="submit"
+													onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
+													회원탈퇴</button>
+
+											</c:if>
+										</sec:authorize></li>
+								</ul>
+							</div>
 							<!-- profile -->
 							<nav class="side-menu">
 							<ul class="nav">
@@ -145,8 +211,6 @@ li {
 											<th>적립/기부 포인트</th>
 											<th>현재 포인트</th>
 											<!-- <th>이벤트</th> -->
-
-
 										</tr>
 									</thead>
 									<tbody>
@@ -163,8 +227,8 @@ li {
 													<td>${list6.pdate}</td>
 													<td><c:if test="${list6.ecat_num == 1}">룰렛</c:if> <c:if
 															test="${list6.ecat_num == 0}">포인트기부</c:if> <c:if
-															test="${list6.ecat_num == 7}">출석체크</c:if></td>
-													<td><c:if test="${list6.prtpnt != 0}">
+															test="${list6.ecat_num == 3}">동물상테스트</c:if></td>
+													<td><c:if test="${list6.prtpnt >= 0}">
 															<span style="color: #5586EB;">(+)${list6.prtpnt} P</span>
 														</c:if> <%-- <c:if test="${list6.prtpnt == 0}">
 															<i class="far fa-smile"
@@ -180,32 +244,43 @@ li {
 									</tbody>
 								</table>
 							</form>
-							<!-- 페이징 -->
+
+							<!-- Pagination -->
 							<c:if test="${! empty list6}">
 								<div class="charity-pagination">
 									<ul class="page-numbers">
-										<li class="page-item"><c:if test="${pageMaker.prev}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-											</c:if></li>
 
-										<li class="page-item"><c:forEach
-												begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-												var="idx">
-												<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-												<a
-													href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(idx)}">${idx}</a>
-											</c:forEach></li>
+										<!-- 이전페이지 버튼 -->
+										<c:if test="${pageMaker.prev}">
+											<li><a class="previous page-umbers"
+												href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(pageMaker.startPage-1)}"><span
+													aria-label="Next"><i class="fa fa-angle-left"></i>Previous
+														Post</span></a></li>
+										</c:if>
 
-										<li class="page-item"><c:if
-												test="${pageMaker.next && pageMaker.endPage > 0}">
-												<a class="page-link"
-													href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-												</a>
-											</c:if></li>
+										<!-- 페이지 숫자 버튼들 -->
+										<c:forEach begin="${pageMaker.startPage}"
+											end="${pageMaker.endPage}" var="idx">
+											<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+											<li><a class="page-umbers"
+												href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(idx)}">${idx}</a></li>
+										</c:forEach>
+
+
+										<!-- 다음페이지 버튼 -->
+										<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+											<li><a class="next page-umbers"
+												href="${pageContext.request.contextPath}/my/point${pageMaker.makeQuery(pageMaker.endPage+1)}"><span
+													aria-label="Next">Next Post<i
+														class="fa fa-angle-right"></i></span></a></li>
+										</c:if>
 									</ul>
 								</div>
 							</c:if>
+							<!-- End of Pagination -->
+
+
+
 						</div>
 					</div>
 					</section>

@@ -53,7 +53,8 @@
 
 
 <!-- 상단 로그인버튼 위치 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 
 </head>
@@ -94,9 +95,11 @@
 	 	    		color: '#A9E2F3'
 	 	    	}    	
 	    	);
-	    	    
+	    
+	       
 	   var canvas = document.getElementById('canvas');
 	   var ctx = canvas.getContext('2d');
+	  
 	   /* 원점이동 */
 	   ctx.translate(500, 500);
 	   	
@@ -242,11 +245,17 @@ console.log(c);
 #forimg {
 	/* background-color: #e4edfe; */
 	background-image: url('/resources/banner_imgs/check_banner.png');
-	background-repeat:no-repeat;
-	background-position: center;"
+	background-repeat: no-repeat;
+	background-position: center;
+	"
 }
+
 .black-transparent {
-	opacity:50%;
+	opacity: 50%;
+}
+
+#canvas {
+	backgroung-img: url('/resources/banner_imgs/check_banner.png');
 }
 </style>
 
@@ -270,38 +279,42 @@ console.log(c);
 	<div class="charity-main-content">
 
 		<!-- Main Section -->
-		<div class="charity-fancy-title " style="margin-top:70px; margin-bottom:20px;">
-			<h2> 매일 나눔 룰렛 돌리고 <br> 포인트를 적립하세요!! </h2>
-		</div> 
-		
-		<div class="charity-main-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-9 bottom-spacer">
+		<div class="charity-fancy-title "
+			style="margin-top: 70px; margin-bottom: 20px;">
+			<h2>
+				매일 나눔 룰렛 돌리고 <br> 포인트를 적립하세요!!
+			</h2>
+		</div>
+
+		<div class="charity-main-section"  style="background-color:lightgrey;">
+			<div class="container" >
+				<div class="row" >
+					<div class="col-md-12 bottom-spacer" >
 
 						<!-- <div class="charity-event-rich-editor">
 							<h1 style="text-align: center;">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								매일 나눔 룰렛 돌리고 포인트를 적립하세요!</h1>
 						</div> -->
-						
-						<!-- 전에있던 totalpnt를 넘겨주기 위해 -->
-				<input type="hidden" id="totalpnt" name="totalpnt" value="${pointvo.totalpnt}">
-				<input type="hidden" id="nowpnt" name="nowpnt" value="${pointvo.nowpnt}">
-				
 
-						<div id="판">
-							<div id="핀"></div>
-							<canvas id="canvas" width="1000px" height="1000px" ></canvas>
-							
-						</div>
-						<!-- <button type="button" class="btn btn-success">룰렛 돌리기</button> -->
+						<!-- 전에있던 totalpnt를 넘겨주기 위해 -->
+						<input type="hidden" id="totalpnt" name="totalpnt"
+							value="${pointvo.totalpnt}"> <input type="hidden"
+							id="nowpnt" name="nowpnt" value="${pointvo.nowpnt}">
+
+						
+							<div id="판">
+								<div id="핀"></div>
+								<canvas id="canvas" width="1000px" height="1000px"></canvas>
+							</div>
+							<!-- <button type="button" class="btn btn-success">룰렛 돌리기</button> -->
+						
 					</div>
 				</div>
 			</div>
 		</div>
-			<button id='button' type="button" onClick="location.href='/event/check3'">출석하기</button>
-				
+		
+
 		<!-- Main Section -->
 	</div>
 	<!-- Content -->
@@ -311,7 +324,7 @@ console.log(c);
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
 	<!-- Footer -->
 
-	
+
 
 	<!-- jQuery -->
 	<script src="/resources/charity/script/jquery.js"></script>

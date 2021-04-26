@@ -66,8 +66,9 @@
 	crossorigin="anonymous" />
 
 <style>
-.maxmax {
+.maxmax, .maxPerson {
 	position: relative;
+	border-radius: 50%;
 }
 
 li {
@@ -105,69 +106,14 @@ li {
 	vertical-align: middle;
 	line-height: 150px;
 }
-
 </style>
-
-<script type="text/JavaScript"
-	src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/JavaScript"
-	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">
-	$(document).ready(
-					function() {
-						var barbar = jQuery('.progressbar');
-						var barProgress = <sec:authentication property="principal.member.dntcnt"/>;
-						var test = Number(barProgress + 0);
-						getresource(test);
-
-						//console.log(pg);
-						console.log(typeof (test));
-
-						function getresource(test) {
-
-							console.log(test);
-							if (test >= 0 && test <= 20) {
-								$(".maxmax").attr('src',
-										'/resources/my/그림1.png').css("left",
-										"0%");
-								console.log(barProgress);
-							}
-							if (test > 20 && test <= 40) {
-
-								$(".maxmax").attr("src",
-										"/resources/my/그림2.png").css("left",
-										"17%");
-							}
-							if (test > 40 && test <= 60) {
-
-								$(".maxmax").attr("src",
-										"/resources/my/그림3.png").css("left",
-										"47%");
-
-							}
-							if (test > 60 && test <= 80) {
-
-								$(".maxmax").attr("src",
-										"/resources/my/그림4.png").css("left",
-										"67%");
-
-							}
-							if (test > 80 && test <= 100) {
-
-								$(".maxmax").attr("src",
-										"/resources/my/그림5.png").css("left",
-										"87%");
-							}
-						}
-					});
-</script>
-<!-- <style>
+<style>
 #forimg {
 	background-color: white;
 	background-image: url('/resources/charity/qna/mypage2.png');
 	background-size: 1600px;
 	background-repeat: repeat;
-	background-position: center;	
+	background-position: center;
 }
 
 .black-transparent {
@@ -177,7 +123,115 @@ li {
 .charity-volunteer-form {
 	background-color: #f9f9fb;
 }
-</style> -->
+
+a:hover {
+	text-decoration: none;
+}
+</style>
+
+<script type="text/JavaScript"
+	src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/JavaScript"
+	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ <script type="text/javascript">
+	$(document).ready(function() {
+						var barbar = jQuery('.progressbar');
+						var barProgress = <sec:authentication property="principal.member.dntcnt"/>;
+						var myPer = Number(barProgress + 0);
+						getresource(myPer);
+
+						//console.log(pg);
+						console.log(typeof (myPer));
+
+						function getresource(myPer) {
+
+							console.log(myPer);
+						
+							if (myPer >= 0 && myPer <= 20) {
+								$(".maxPerson").attr('src',
+										'/resources/my/running.gif').css(
+										"left", "0%");
+								console.log(barProgress);
+							}
+							if (myPer > 20 && myPer <= 40) {
+								 $(".maxmax").attr("src",
+										"/resources/my/running.gif").css(
+										"left", "17%");
+								
+							}
+							if (myPer > 40 && myPer <= 60) {
+
+								$(".maxPerson").attr("src",
+										"/resources/my/running.gif").css("left","37%");
+
+							}
+							if (myPer > 60 && myPer <= 80) {
+							
+								 $(".maxPerson").attr("src",
+										"/resources/my/running.gif").css("left",
+										"57%");
+
+							}
+							if (myPer > 80 && myPer <= 100) {
+
+								$(".maxPerson").attr("src",
+										"/resources/my/running.gif").css("left",
+										"87%");
+							}
+						}
+					});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+						var barbar = jQuery('.progressbar');
+						var barProgress = <sec:authentication property="principal.member.dntcnt"/>;
+						var myNum = Number(barProgress + 0);
+						getresource(myNum);
+
+						//console.log(pg);
+						console.log(typeof (myNum));
+
+						function getresource(myNum) {
+
+							console.log(myNum);
+							if (myNum >= 0 && myNum <= 20) {
+								$(".maxmax").attr('src',
+										'/resources/my/그림1.png').css(
+										"left", "0%");
+								console.log(barProgress);
+							}
+							if (myNum > 20 && myNum <= 40) {
+
+								$(".maxmax").attr("src",
+										"/resources/my/그림2.png").css(
+										"left", "17%"); 
+							}
+							if (myNum > 40 && myNum <= 60) {
+
+								$(".maxmax").attr("src",
+										"/resources/my/그림3.png").css("left","37%");
+
+							}
+							if (myNum > 60 && myNum <= 80) {
+							
+								 $(".maxmax").attr("src",
+										"/resources/my/그림4.png").css("left",
+										"57%"); 
+
+							}
+							if (myNum > 80 && myNum <= 100) {
+
+								$(".maxmax").attr("src",
+										"/resources/my/그림5.png").css("left",
+										"87%");
+							}
+							
+							
+						}
+					});
+</script>
+
 
 </head>
 <body>
@@ -185,17 +239,15 @@ li {
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 
-	<%-- <!-- Banner -->
-	    <div id="forimg" class="charity-subheader">
-       <span class="black-transparent"></span>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12"> 
-                  
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Banner -->
+	<div id="forimg" class="charity-subheader">
+		<span class="black-transparent"></span>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12"></div>
+			</div>
+		</div>
+	</div>
 	<!-- Banner -->
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
@@ -211,9 +263,50 @@ li {
 						<div class="module-inner">
 
 							<!-- sidebar -->
-							<div class="side-bar"> --%>
+							<div class="side-bar">
 								<!-- profile -->
-								<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
+
+
+								<div class="user-info">
+									<figure>
+										<img id="introImg" class="usre_img"
+											src="${pageContext.request.contextPath}/resources/users/user01_sm.png">
+									</figure>
+									<ul class="meta list list-unstyled">
+										<li class="name"><h2>
+												<sec:authentication property="principal.member.name" />
+											</h2></li>
+										<li class="email"><sec:authentication
+												property="principal.member.member_id" /></a></li>
+										<li class="activity"><sec:authentication
+												property="principal.member" var="buttonhidden" /> <sec:authorize
+												access="isAuthenticated()">
+
+												<c:if test="${buttonhidden.signuppath == 'home'}">
+
+													<button
+														class="charity-simple-blog-btn w-100 text-white stats"
+														type="submit"
+														onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+														프로필수정</button>
+
+												</c:if>
+											</sec:authorize> <sec:authentication property="principal.member"
+												var="buttonhidden" /> <sec:authorize
+												access="isAuthenticated()">
+
+												<c:if test="${buttonhidden.signuppath != 'home'}">
+
+													<button
+														class="charity-simple-blog-btn w-100 text-white stats"
+														type="submit"
+														onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
+														회원탈퇴</button>
+
+												</c:if>
+											</sec:authorize></li>
+									</ul>
+								</div>
 								<!-- profile -->
 								<nav class="side-menu">
 									<ul class="nav">
@@ -326,11 +419,12 @@ li {
 								<div class="mb-3">&nbsp;</div>
 								<!-- 프로그래스바 -->
 								<div class="charity-cause-donate">
-									<h2 align="center"
-										style="font-weight: bold; /* text-shadow: 1px 1px 3px #424242; */ color: #424242">나의
+									<h2 align="center" style="font-weight: bold; color: #424242">나의
 										기부 %는?</h2>
 									<div class="progressbar">
-										<img class="maxmax blinking" width="80" height="80">
+										<span><img class="maxPerson" width="80" height="80">
+										</span><span><img class="maxmax blinking" width="80"
+											height="80"> </span>
 										<div class="progress-label"></div>
 									</div>
 									<div

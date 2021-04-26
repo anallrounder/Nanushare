@@ -158,6 +158,9 @@ input {
 	border: 1px solid #999;
 }
 
+a:hover { 
+    text-decoration: none;
+}
 
 </style>
 <body>

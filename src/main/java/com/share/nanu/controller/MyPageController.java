@@ -42,9 +42,6 @@ public class MyPageController {
 	private MyPageService mgservice;
 
 	@Autowired
-	private MemberService mservice;
-
-	@Autowired
 	private DonationService ndservice;
 
 	@Autowired
@@ -344,7 +341,7 @@ public class MyPageController {
 	public ResponseEntity<String> event(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
 			ModelAndView mav) {
 
-		System.out.println("이벤트룰렛 도나요");
+		System.out.println("이벤트룰렛");
 		ResponseEntity<String> entity = null;
 		try {
 			int count = mgservice.mycount(pointVO, md.getUsername());
@@ -354,49 +351,6 @@ public class MyPageController {
 				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
 			} else {
 				mgservice.getMypoint(pointVO, md.getUsername());
-				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		return entity;
-	}
-
-//		@PostMapping("/event/check/mypoint")
-//		public ResponseEntity<List<Date>> mypoint(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
-//				Model model) {
-	//
-//			// final List<Date> list = mgse
-//			List<Date> list = mgservice.getMypointList(pointVO, md.getUsername());
-//			model.addAttribute("cal", pointVO);
-//			return new ResponseEntity<List<Date>>(list, HttpStatus.OK);
-//		}
-
-	@GetMapping("/event/check3")
-	public ModelAndView attendance1(ModelAndView mov) {
-		System.out.println("그냥출첵페이지");
-
-		mov.setViewName("/eventView/attendcheck3");
-		return mov;
-	}
-
-	// 출첵 포인트 부여
-	@PostMapping("/event/check3/getpoint")
-	public ResponseEntity<String> event2(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
-			ModelAndView mav) {
-
-		System.out.println("이벤트출첵되나여");
-		ResponseEntity<String> entity = null;
-		try {
-			int count = mgservice.mycount2(pointVO, md.getUsername());
-			log.info("count" + count);
-			log.info("id  " + md.getUsername());
-
-			if (count >= 1) {
-				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
-			} else {
-				mgservice.getMypoint2(pointVO, md.getUsername());
 				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			}
 		} catch (Exception e) {

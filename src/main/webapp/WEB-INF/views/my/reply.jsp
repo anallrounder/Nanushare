@@ -74,23 +74,46 @@
 li {
 	list-style: none;
 }
+
+a:hover { 
+    text-decoration: none;
+}
+</style>
+<style>
+#forimg {
+	background-color: white;
+	background-image: url('/resources/charity/qna/mypage2.png');
+	background-size: 1600px;
+	background-repeat: repeat;
+	background-position: center;	
+}
+
+.black-transparent {
+	opacity: 50%;
+}
+
+.charity-volunteer-form {
+	background-color: #f9f9fb;
+}
 </style>
 
 <body>
-	<!-- Header -->
+		<!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
-	<!-- Sub Header -->
-	<%-- <div class="charity-subheader">
-		<!--  style="background-image: url(/resources/loginform/images/bg.jpg);"  -->
-		<span class="black-transparent"></span>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12"></div>
-			</div>
-		</div>
-	</div>
-	<!-- Sub Header -->
+
+	 <!-- Banner -->
+	    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Banner -->
 	<!-- Content -->
 	<!-- Content와 MainSection은 무조건 있어야함 -->
 	<div class="charity-main-content">
@@ -98,14 +121,54 @@ li {
 		<div class="charity-main-section">
 
 			<!-- https://www.bootdey.com/snippets/view/Update-user-profile#preview -->
+			<!--  col-md-10 으로 넓이 넓힘 -->
 			<div class="container col-md-10">
 				<div class="view-account">
 					<section class="module">
-					<div class="module-inner">
-						<div class="side-bar"> --%>
-	<!-- profile -->
-	<%@ include file="/WEB-INF/views/my/mypage_profile.jsp"%>
-	<!-- profile -->
+						<div class="module-inner">
+
+							<!-- sidebar -->
+							<div class="side-bar"> 
+								<!-- profile -->
+								
+
+	<div class="user-info" >
+		<figure>
+			<img id="introImg" class="usre_img"
+				src="${pageContext.request.contextPath}/resources/users/user01_sm.png">
+		</figure>
+		<ul class="meta list list-unstyled">
+			<li class="name"><h2>
+					<sec:authentication property="principal.member.name" />
+				</h2></li>
+			<li class="email"><sec:authentication
+					property="principal.member.member_id" /></a></li>
+			<li class="activity"><sec:authentication
+					property="principal.member" var="buttonhidden" /> <sec:authorize
+					access="isAuthenticated()">
+
+					<c:if test="${buttonhidden.signuppath == 'home'}">
+
+						<button class="charity-simple-blog-btn w-100 text-white stats"
+							type="submit"
+							onclick="location.href ='${pageContext.request.contextPath}/my/myprofile'">
+							프로필수정</button>
+
+					</c:if>
+				</sec:authorize> <sec:authentication property="principal.member" var="buttonhidden" />
+				<sec:authorize access="isAuthenticated()">
+
+					<c:if test="${buttonhidden.signuppath != 'home'}">
+
+						<button class="charity-simple-blog-btn w-100 text-white stats"
+							type="submit"
+							onclick="location.href ='${pageContext.request.contextPath}/my/drop'">
+							회원탈퇴</button>
+
+					</c:if>
+				</sec:authorize></li>
+		</ul>
+	</div>
 	<nav class="side-menu">
 	<ul class="nav">
 		<li><a href="mypage"><span class="fa fa-user"> </span>&nbsp;&nbsp;Profile</a></li>
@@ -188,32 +251,32 @@ li {
 		</form>
 
 
-		<c:if test="${! empty list4}">
-			<div class="charity-pagination">
-				<ul class="page-numbers">
-					<li class="page-item"><c:if test="${pageMaker.prev}">
-							<a class="page-link"
-								href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.startPage - 1) }">prev</a>
-						</c:if></li>
+<!-- Pagination -->
+ <c:if test="${! empty list4}">
+						<div class="charity-pagination">
+							<ul class="page-numbers">
+								
+								<!-- 이전페이지 버튼 -->
+								<c:if test="${pageMaker.prev}">
+									<li><a class="previous page-umbers" href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.startPage-1)}"><span aria-label="Next"><i class="fa fa-angle-left"></i>Previous Post</span></a></li>
+								</c:if>
+								
+								<!-- 페이지 숫자 버튼들 -->
+								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+									<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
+									<li><a class="page-umbers" href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(idx)}">${idx}</a></li>
+								</c:forEach>
+							
+						                       	
+								<!-- 다음페이지 버튼 -->
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+									<li><a class="next page-umbers" href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.endPage+1)}"><span aria-label="Next">Next Post<i class="fa fa-angle-right"></i></span></a></li>
+								</c:if>
+							</ul>
+						</div>
+						</c:if>
+						<!-- End of Pagination -->
 
-					<li class="page-item"><c:forEach
-							begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
-							var="idx">
-							<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-							<a
-								href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(idx)}">${idx}</a>
-						</c:forEach></li>
-
-
-					<li class="page-item"><c:if
-							test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a class="page-link"
-								href="${pageContext.request.contextPath}/my/reply${pageMaker.makeQuery(pageMaker.endPage +1) }">next
-							</a>
-						</c:if></li>
-				</ul>
-			</div>
-		</c:if>
 	</div>
 	</div>
 	</section>

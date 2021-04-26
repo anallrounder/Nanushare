@@ -60,6 +60,10 @@ li {
 table {
 	width: 400px;
 }
+
+a:hover { 
+    text-decoration: none;
+}
 </style>
 
 <script>

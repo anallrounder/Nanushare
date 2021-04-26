@@ -5,7 +5,7 @@
 		//Default values for progress_bar
 		var defaults = {
 			height : "50",
-			backgroundColor : "#272625",
+			backgroundColor : "#424242",
 			barColor : "FFAE73", /*"#ffb607",*/
 			targetBarColor : "",
 			percentage : true,

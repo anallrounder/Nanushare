@@ -39,6 +39,10 @@
 .error {
 	color: red;
 }
+
+a:hover { 
+    text-decoration: none;
+}
 </style>
 
 <!-- <script type="text/javascript">
