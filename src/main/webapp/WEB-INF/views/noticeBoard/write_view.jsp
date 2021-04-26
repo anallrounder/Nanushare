@@ -4,8 +4,6 @@
 <!DOCTYPE html >
 <html>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- ckeditor -->
 <script
@@ -103,8 +101,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-						<form
-							action="${pageContext.request.contextPath}/board/notice/write"
+						<form action="${pageContext.request.contextPath}/board/notice/write"
 							method="post">
 							<div class="charity-contact-form">
 								<h4>
@@ -143,16 +140,17 @@
 								<button type="submit" class="charity-sub-btn">
 									<i class="fa fa-save"> 작성완료</i>
 								</button>
+								
 								<button type="reset" class="charity-sub-btn">
 									<i class="fa fa-undo"> 다시쓰기</i>
 								</button>
 								<!-- charity-main-btn -->
 								<!-- 버튼에 링크걸기 https://m.blog.naver.com/rain483/220529222723 -->
 							</div>
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <input type="hidden"
-								id="_csrf_header" name="_csrf_header"
-								value="${_csrf.headerName}" />
+							<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" /> 
+							<input type="hidden" id="_csrf_header" name="_csrf_header" value="${_csrf.headerName}" />
+						
+							
 						</form>
 
 						<!--   a href="plist" -->
