@@ -38,6 +38,11 @@
 </head>
 
 <style>
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
+
 .charity-simple-blog-btn {
 	border: 0;
 }
