@@ -38,6 +38,11 @@
 rel="stylesheet">
 
 <style type="text/css">
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
+
 #forimg {
 	/* background-color: #db7a7c; */
 	background-color: #dfebe9;
@@ -51,10 +56,18 @@ rel="stylesheet">
 .black-transparent {
 	opacity: 50%;
 }
+.charity-about-btn {
+	cursor: pointer;
+}
+.charity-about-btn:hover {
+	color:white;
+	background-color: #78665A;
+	text-decoration : none;
+}
 </style>
 
 <!-- 꽃가루 -->
-<style>
+<!-- <style>
 canvas {
 	z-index: 10;
 	/* pointer-events: none; */
@@ -62,8 +75,40 @@ canvas {
 	top: 0;
 	transform: scale(1.1);
 }
+</style> -->
+<style>
+canvas {
+   z-index: 100;/* 맨뒤로 */
+   pointer-events: none;
+   position: fixed;
+   top: 0;
+   transform: scale(1.1);
+}
 </style>
 
+
+<!-- 꽃가루  -->
+<script type="text/javascript">
+/* $(function(){  */
+ 	reAction();
+	
+	function reAction(){ 
+		console.log("여기까지 오나?")
+		
+		setTimeout(function() {
+ 			console.log('canvas hide!');
+ 			$('#flower').fadeOut();
+		}, 10000); 
+		/* $('#flower').hide().slideDown();
+		
+		setTimeout(function(){
+			console.log('canvas hide!');
+			$('#flower').fadeOut();        
+		}, 20000) */
+  	} 
+	 
+/* });  */
+</script>
 
 </head>
 
@@ -95,8 +140,8 @@ canvas {
 		<div class="charity-main-section charity-aboutus-text-full">
 			<div class="container">
 				<div class="row">
-			
-					<canvas id="canvas"></canvas>
+					
+					<div id="flower"><canvas id="canvas"></canvas></div>
 			
 					<div class="col-md-7">
 						<div class="charity-aboutus-text">
@@ -111,17 +156,16 @@ canvas {
 								<div>&nbsp;</div>
 								<div>&nbsp;</div>
 								<div>&nbsp;</div>
-								<h5>*나눔 내역은 마이페이지에서 확인하실 수 있습니다.*</h5>
+								<h5><b>*나눔 내역은 마이페이지에서 확인하실 수 있습니다.*</b></h5>
 							</ul>
-							<!-- <h6>Donation So Far: <span>$ 6000</span></h6> -->
-							<br> <a href="/main" class="charity-about-btn m-2">메인페이지</a><a
-								href="/my/mypage" class="charity-about-btn m-2">마이페이지</a> <br>
+							<br> 
+							<a href="/main" class="charity-about-btn m-2">메인페이지</a>
+							<a href="/my/mypage" class="charity-about-btn m-2">마이페이지</a> 
+							<br>
 						</div>
 					</div>
 					<div class="col-md-5">
-						<img
-							src="${pageContext.request.contextPath}/resources/donation/money_teamwork.jpg"
-							alt="">
+						<img src="${pageContext.request.contextPath}/resources/donation/money_teamwork.jpg" alt="">
 					</div>
 
 				</div>
@@ -131,19 +175,8 @@ canvas {
 
 	</div>
 	<!-- Content -->
-<!-- 꽃가루  -->
-<script type="text/javascript">
- $(document).ready(function(){  
-	   reAction();
-	  function reAction(){
-	  
-	  	setTimeout(function(){
-	  		
-	  	}, 2000);
-	  }
-	 
-}); 
-</script>
+	
+
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>

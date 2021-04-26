@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <!-- meta tags -->
@@ -33,10 +33,15 @@
 <!-- header -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
  
- <!-- 웹페이지 탭 로고이미지 삽입  -->
+<!-- 웹페이지 탭 로고이미지 삽입  -->
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 
 <style>
+/*  a 태그 후버시 밑줄 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+}
+
 #forimg {
 	background-color: #eaf0fe;
 	background-image: url('/resources/banner_imgs/donation_banner.jpg');
@@ -47,6 +52,21 @@
 .black-transparent {
 	opacity:50%;
 }
+.charity-plan-btn {
+	cursor: pointer;
+}
+.charity-plan-btn:link { 
+ 	color: white; text-decoration: none;
+ }
+.charity-plan-btn:hover { 
+ 	color: white; 
+ 	text-decoration: none; /* underline */
+ 	background-color: #78665A;
+ }
+/*  a:visited { 
+ 	color: white; 
+ 	text-decoration: none;
+ } */
 </style>
 </head>
 
@@ -89,24 +109,6 @@
 								<img id="introImg" class="money_img" src="${pageContext.request.contextPath}/resources/donation/money_community.jpg">
 							</figure><br>
                             
-                         <!--    <ul class="charity-cause-options">
-                                <li>
-                                    <i class="fa fa-clock"></i>
-                                    <h6>Remaining Time:</h6>
-                                    <span>19 days left</span>
-                                </li>
-                                <li>
-                                    <i class="fa fa-heart"></i>
-                                    <h6>Donors:</h6>
-                                    <span>23</span>
-                                </li>
-                                <li>
-                                    <i class="fa fa-map-marker-alt"></i>
-                                    <h6>Location:</h6>
-                                    <span>Cairo,Africa</span>
-                                </li>
-                                <li></li>
-                            </ul> -->
                             <h5 style="font-size:18px;"><b>회원 여러분들의 후원은 지속 가능한 나눔 활동을 가능케 하여 도움이 필요한 이웃들의 삶에 의미있는 변화를 가져옵니다. 지금, 그 변화의 시작에 함께하세요.</b></h5>
                             <br>
                             
@@ -142,42 +144,6 @@
                                 </div> <!-- col-md-5 -->
                             </div> <!-- row -->
                         </div> <!-- charity-campaign-content -->
-                        
-                        
-                       <!--  <div class="charity-rich-editor">
-                            <div class="charity-post-tags">
-                              
-                                <div class="charity-tags">
-                                    <span>Tags:</span>
-                                    <a href="404.html">charity </a>
-                                    <a href="404.html">/ donation</a>
-                                    <a href="404.html"> / needy</a>
-                                </div> charity-tags
-                               
-                                <div class="charity-blog-social">
-                                    <span>Share:</span>
-                                    <ul>
-                                        <li>
-                                            <a href="https://www.facebook.com/" class="fab fa-facebook"></a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.twitter.com/" class="fab fa-twitter"></a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.youtube.com/" class="fab fa-youtube"></a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.vimeo.com/" class="fab fa-vimeo"></a>
-                                        </li>
-                                    </ul>
-                                </div> charity-blog-social
-                                
-                            </div> charity-post-tags
-                        </div> --> <!--charity-rich-editor -->
-                        
                         
                     </div><!-- col-md-9 -->
                     
