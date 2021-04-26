@@ -343,11 +343,11 @@
     </div>
     
    	
-   		
+   		<div class="charity-main-content">
      	<div>
-	        <h1>동물상 테스트</h1>
-	        <h2>얼굴로 보는 인공지능 동물상 테스트</h2>
-	        <h2>나는 어떤 동물과 닮았을까? 나의 동물상 찾기를 해보세요!</h2>
+	        <h1 align="center" >동물상 테스트</h1>
+	        <h2 align="center">얼굴로 보는 인공지능 동물상 테스트</h2>
+	        <h2 align="center">나는 어떤 동물과 닮았을까? 나의 동물상 찾기를 해보세요!</h2>
        </div>
     
 
@@ -377,7 +377,7 @@
     
     
     <div id="webcam-container"></div>
-  
+  </div>
     <!-- Footer -->
     <%@ include file="/WEB-INF/views/mainMap/mainFooter.jsp"%>
     <!-- Footer -->
