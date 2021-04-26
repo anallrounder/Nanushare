@@ -178,10 +178,16 @@
         </div>
         <div class="file-upload-content">
             <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+            <div id="loading" class="animated bounce">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="text-center">AI가 당신의 동물상을 분석중입니다.</p>
+            </div>
             <p class = "resultMessage"> </p>
-            <div id="label-container"></div>
+            <div id="label-container" class="d-flex flex-column justify-content-around"></div>
             <div class="image-title-wrap">
-                <button type="button" onclick="removeUpload()" class="remove-image">재시도 </button>
+                <button type="button" onclick="window.location.reload();" class="remove-image">재시도 </button>
             </div>
         </div>
     </div>
@@ -209,26 +215,22 @@
         // Load the image model and setup the webcam
         async function init() {
             const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-
-            // load the model and metadata
-            // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-            // or files from your local hard drive
-            // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+            const metadataURL = URL + "metadata.json";     
             model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
-
-            // append elements to the DOM
+            maxPredictions = model.getTotalClasses();   
             labelContainer = document.getElementById("label-container");
             for (let i = 0; i < maxPredictions; i++) { // and class labels
-                labelContainer.appendChild(document.createElement("div"));
+            	var element = document.createElement("div")
+                element.classList.add("d-flex");
+                labelContainer.appendChild(element);
+            	
+               /*  labelContainer.appendChild(document.createElement("div")); */
             }
         }
-
-        // run the webcam image through the image model
+     
         async function predict() {
-            // predict can take in an image, video or canvas html element
-            var image = document.getElementById("face-image");
+            
+            var image = document.getElementById("face-image");            
             const prediction = await model.predict(image,false);
             prediction.sort((a,b)=>parseFloat(b.probability) - parseFloat(a.probability));
             
