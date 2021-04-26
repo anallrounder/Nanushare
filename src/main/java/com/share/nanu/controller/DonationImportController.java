@@ -200,10 +200,10 @@ public class DonationImportController {
 	}
 	
 					
-	@GetMapping("/thank")
+	@GetMapping("/my/donation/thank")
 	public ModelAndView thank(ModelAndView mav) { //감사페이지 이동
 		log.info("감사페이지로 이동");
-		mav.setViewName("donationImport/thank");
+		mav.setViewName("donation/thanks");
 		return mav;
 	}
 		

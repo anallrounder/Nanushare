@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/color.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
 
+<!-- header -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
  	<!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +25,8 @@
     <!-- Bootstrap CSS -->
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-	<!-- header -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
+	
 	
 	<!-- 웹페이지 탭 로고이미지 삽입  -->
 	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
@@ -305,14 +308,39 @@
 		  display: none;
 		}
 		
+		a:hover { 
+		 	text-decoration: none;
+		}
+		#forimg {
+			background-color: #e4edfe;
+			background-image: url('/resources/banner_imgs/people_banner.png');
+			background-repeat:no-repeat;
+			background-position: center;"
+		}
+		.black-transparent {
+			opacity:50%;
+		}
+				
     </style>
 </head>
 
 <body>
     <!-- Header -->
-    <%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
-    <!-- Header -->
+	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
+	<!-- Header -->
     
+    <div id="forimg" class="charity-subheader">
+       <span class="black-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                <p style="text-align:right; margin:0; padding:0;" ></p>
+                   <!--  <h1>1:1 문의</h1> -->
+                   <!--  <p>show your support</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
     
    	
    		
