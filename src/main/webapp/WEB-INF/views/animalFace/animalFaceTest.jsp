@@ -234,25 +234,31 @@
             const prediction = await model.predict(image,false);
             prediction.sort((a,b)=>parseFloat(b.probability) - parseFloat(a.probability));
             
-            var resultMessage;
+            var resultMessage,resultTitle, resultExplain;
             switch (prediction[0].className){
             	case "고양이":
-            		resultMessage = "고양이상"
+            		resultTitle =  "츤데레 매력쟁이 고양이상"
+            		resultExplain = "무뚝뚝한 당신의 첫인상은 차가워 보이지만 묘한 매력을 풍겨 언제나 인기가 넘친다. 자존심이 세계 1등과 맞먹지만 관심 받는 것을 좋아하고 연인에게는 은근히 애교쟁이다. 시크한 츤데레로 연인에게 끊임없이 설렘을 안겨주는 당신은 고양이와 닮았다!"
             		break;
             	case "강아지":
-            		resultMessage = "강아지상"
+            		resultTitle = "귀여운 순둥이 강아지상"
+            		resultExplain = "다정다감하고 귀여운 당신은 모든 사람들에게 즐거움을 주는 호감형이다! 친절하고 활발한 성격으로 어디에서도 인기폭발이며 애교와 웃음이 많아 연인에게 특히나 사랑스럽다. 당신은 애인바라기로 애인의 관심이 부족하면 시무룩해지고 외로움을 타는 모습이 마치 강아지와 똑 닮았다!"
             		break;
             	case "판다":
-            		resultMessage = "판다상"
+            		resultTitle =  "포근한 매력의 판다상"
+            		resultExplain = "꼼꼼하고 섬세한 성격으로 연인을 헌신적으로 챙겨주는 당신은 연인에게 듬직한 존재!"
             		break;
             	case "레서판다":
-            		resultMessage = "레서판다상"
+            		resultTitle = "천진난만한 매력의 레서판다상"
+            		resultExplain = "천진난만하고 귀여운 당신은 주변 사람들에게 기쁨을 주는 행복바이러스다! 호기심이 많아 활발하며 귀엽고 순수한 외모로 연인의 보호본능을 자극한다. 존재 자체가 상큼한 당신은 특별한 애교 없이도 연인에게 너무나도 사랑스럽다!"
             		break;
             	default :
-            		resultMessage = "알수없음"
+            		resultTitle = "알수없음"
+            		resultExplain=""
 
             }
-            $('.resultMessage').html(resultMessage);
+           
+            $('.resultMessage').html(resultTitle);
             
             
             for (let i = 0; i < maxPredictions; i++) {
