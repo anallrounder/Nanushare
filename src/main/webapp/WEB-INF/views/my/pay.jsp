@@ -41,6 +41,8 @@
 	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
 <!-- 웹페이지 탭 로고이미지 삽입  -->
 
+<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <!-- 탭처리 -->
@@ -106,7 +108,12 @@
 					console.log(result);
 
 					if (result == "SUCCESS") {
-						alert("결제가 취소 되었습니다.");
+						swal({
+							title : "결제가 취소 되었습니다." , 
+							icon : "success" , 
+							button : true 
+						});
+						//alert("결제가 취소 되었습니다.");
 						$(location).attr('href',
 								"${pageContext.request.contextPath}/my/pay");
 					}
