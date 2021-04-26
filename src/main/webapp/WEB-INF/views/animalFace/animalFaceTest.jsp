@@ -312,7 +312,7 @@
 		}
 		#forimg {
 			background-color: #e4edfe;
-			background-image: url('/resources/banner_imgs/people_banner.png');
+			background-image: url('/resources/banner_imgs/animalFaceTest.png');
 			background-repeat:no-repeat;
 			background-position: center;"
 		}
@@ -441,12 +441,12 @@
             		
             	case "fox" :
             		resultTitle ="여우상"
-            		resultExplain ="여우"
+            		resultExplain ="여우상은 고양이상과 강아지상이 적절히 융합되어 있는 듯함이 특징이며, 눈빛이 능글맞고 사소한 행동으로도 사람을 홀리는 재주가 있어 도화살이 끼는 경우가 많은 유형이다."
             		break;
             		
             	case "deer" :
-            		resultTitle ="사슴상"
-                	resultExplain ="사슴"
+            		resultTitle ="온순하고 우아한 사슴상"
+                	resultExplain ="맑고 영롱한 분위기의 당신은 사슴처럼 차분한 성격의 소유자다. 초롱초롱한 눈망울이 당신의 가장 큰 트레이드마크며 따스하고 온순한 눈빛을 가져 사랑스러움을 항상 머금고 있다! 부끄러움이 많아 애정표현이 낯설은 당신은 연인에게조차 신비한 존재지만 따뜻한 성격으로 연인의 마음을 사로잡는 능력을 가졌다."
                 	break;
                     
                     
@@ -529,7 +529,6 @@
                     $('#loading').show();
                     $('.file-upload-image').attr('src', e.target.result);
                     $('.file-upload-content').show();
-
                     $('.image-title').html(input.files[0].name);
                 };
 
@@ -538,6 +537,11 @@
                 	//console.log("test");
                 	predict();
                 	$('#loading').hide();
+                	$.ajax({
+                		//포인트 추가, 하루한번
+                		
+                		
+                	});
                 }); 
                 
             } else {

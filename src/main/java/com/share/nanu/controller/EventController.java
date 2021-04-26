@@ -9,7 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.share.nanu.security.MemberDetails;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 @Controller
 public class EventController {
@@ -26,7 +28,7 @@ public class EventController {
 	@RequestMapping("/event/test")
 	public ModelAndView testdefault(ModelAndView mav,@AuthenticationPrincipal MemberDetails md) throws Exception {
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
-			
+			log.info("테스트 디폴트 주소");
 			mav.addObject("username", md.getmember().getName());
 			mav.addObject("member_id", md.getUsername());
 		}
@@ -36,6 +38,7 @@ public class EventController {
 	
 	@GetMapping("/my/event/test/animalFace")
 	public ModelAndView animalFaceTest(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {
+		log.info("동물상 테스트 뷰");
 		mav.setViewName("/animalFace/animalFaceTest");
 		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
 			
@@ -46,6 +49,11 @@ public class EventController {
 		
 		return mav;
 	}
+	
+	
+	
+	
+	
 	
 
 	// 게임 디폴트 뷰(test default)
