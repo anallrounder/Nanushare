@@ -58,6 +58,8 @@
 
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	
+	
 
 <!--  -->
 <link rel="stylesheet"
@@ -233,6 +235,8 @@ a:hover {
 </script>
 
 
+<!-- header -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
 	<!-- Header -->
