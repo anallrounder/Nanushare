@@ -10,18 +10,18 @@ public class MgetitemVO {
 	private String member_id; // 아이디
 	private int getamount; // 가져간수량
 	private Date getdate; // 가져간 날짜
-	private int vmindex; // 자판기...
+	private String vm_num; //기계번호
+	private String iname; //물품명
 
 	public MgetitemVO() {
-		super();
 	}
 
-	public MgetitemVO(String member_id, int getamount, Date getdate, int vmindex) {
-		super();
+	public MgetitemVO(String member_id, int getamount, Date getdate, String vm_num, String iname) {
 		this.member_id = member_id;
 		this.getamount = getamount;
 		this.getdate = getdate;
-		this.vmindex = vmindex;
+		this.vm_num = vm_num;
+		this.iname = iname;
 	}
 
 	public String getMember_id() {
@@ -48,12 +48,20 @@ public class MgetitemVO {
 		this.getdate = getdate;
 	}
 
-	public int getVmindex() {
-		return vmindex;
+	public String getVm_num() {
+		return vm_num;
 	}
 
-	public void setVmindex(int vmindex) {
-		this.vmindex = vmindex;
+	public void setVm_num(String vm_num) {
+		this.vm_num = vm_num;
+	}
+
+	public String getIname() {
+		return iname;
+	}
+
+	public void setIname(String iname) {
+		this.iname = iname;
 	}
 
 }

@@ -84,5 +84,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	</select>
 	
+	<insert id="memberItemOut">
+	<![CDATA[ 
+		insert into mgetitem(member_id, getamount, getdate, vm_num, iname) values (#{member_id}, 2, sysdate, #{vm_num}, #{iname})
+	]]>
+	</insert>
 
 </mapper>
