@@ -12,10 +12,4 @@ public interface NanuService {
 
 	public MemberVO findEmail(String mail); //이메일 찾기
 
-	
-
-	
-
-	
-
 }
