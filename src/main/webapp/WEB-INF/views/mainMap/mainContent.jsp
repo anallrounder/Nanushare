@@ -287,40 +287,12 @@ width: 270px;
                             <div class="widget_title"><h2>Current ShareBox</h2></div>
                             <c:forEach items="${mapvm}" var="cat">
                             	<span class="branches" data-lng="${cat.lng}" data-lat="${cat.lat}">
-                            	<h4><i class="fa fa-map-marker-alt"></i>&nbsp;${cat.branch}</h4></span>
+                            	<h5><i class="fa fa-map-marker-alt"></i>&nbsp;${cat.branch}</h5></span>
                            </c:forEach>
                            
                         </div>
                         <!-- Widget Archive -->
                         
-                          <!-- Widget Event -->
-                        <div class="widget widget_events">
-                            <div class="widget_title"><h2>Upcoming ShareBox</h2></div>
-                            <ul>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">22 Jun</time>
-                                    <div class="charity-events">
-                                       <h6>강남역점</h6>
-                                       <p><i class="fa fa-map-marker-alt"></i> 서울 서초구 서초동 1318-10</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">13 July</time>
-                                    <div class="charity-events">
-                                       <h6>용산역점</h6>
-                                       <p><i class="fa fa-map-marker-alt"></i> 서울 용산구 한강대로 23길 55</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <time datetime="2008-02-14 20:00">20 July</time>
-                                    <div class="charity-events">
-                                       <h6>시청역점</h6>
-                                      <p><i class="fa fa-map-marker-alt"></i> 서울 중구 태평로 1가 54-3</p>
-                                    </div>
-                                </li>
-                             </ul>
-                        </div>
-                        <!-- Widget Event -->
                     </aside>
                 </div>
             </div>
