@@ -232,7 +232,11 @@ a:hover {
 															test="${list6.ecat_num == 3}">동물상테스트</c:if></td>
 													<td><c:if test="${list6.prtpnt != 0}">
 															<span style="color: #5586EB;">(+)${list6.prtpnt} P</span>
-														</c:if> <c:if test="${list6.dntpnt != 0}">
+														</c:if>
+														<c:if test="${list6.prtpnt == 0 && list6.dntpnt == 0}">
+															<i class="far fa-smile" style="color: lightgrey; line-height: 40px; vertical-align: middle;">
+														</c:if>
+														 <c:if test="${list6.dntpnt != 0}">
 															<span style="color: #FF3636;">(-)${list6.dntpnt} P</span>
 														</c:if></td>
 

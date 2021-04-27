@@ -66,7 +66,7 @@ body {
 <body>
    
 
-       <!-- Header -->
+    <!-- Header -->
 	<%@ include file="/WEB-INF/views/mainMap/mainHeader.jsp"%>
 	<!-- Header -->
 	

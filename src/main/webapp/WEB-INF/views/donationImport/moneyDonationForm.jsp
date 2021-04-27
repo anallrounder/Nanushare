@@ -11,6 +11,9 @@
 <script type="text/javascript"	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
+	<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <%-- <sec:csrfMetaTags/> --%>
 <!-- 헤더 안에 추가  -->
 <!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
@@ -22,7 +25,7 @@
 <!-- NotoSansKR, Gothic A1 -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-	
+
 <meta charset="UTF-8">
 <title>Nanushare</title>
 
@@ -37,6 +40,9 @@
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/color.css">
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
 
+<!-- header -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
 <!-- 웹페이지 탭 로고이미지 삽입 -->
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
 
@@ -160,7 +166,14 @@
 											var msg = '결제에 실패하였습니다.';
 											msg += '에러내용 : ' + rsp.error_msg;
 										}
-										alert(msg);
+										swal({
+											title :msg , 
+											icon : "success" , 
+											button : true 
+										});
+										
+										
+										//alert(msg);
 										$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
 									});
 					},
@@ -246,7 +259,7 @@
 									var msg = '결제에 실패하였습니다.';
 									msg += '에러내용 : '+ rsp.error_msg;
 								}
-								alert(msg);
+								
 								$(location).attr('href',"${pageContext.request.contextPath}my/donation/money/point/pointAction");
 						});
 				},

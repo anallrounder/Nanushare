@@ -27,7 +27,7 @@ public interface NoticeBoardMapper {
 	public void delete(int b_index); // 게시글 삭제
 
 	// 글 입력
-	public BoardVO insert(BoardVO boardVO); // 게시글 입력
+	public void insert(BoardVO boardVO); // 게시글 입력
 
 	// 글 수정
 	public void modify(BoardVO boardVO); // 게시글 수정

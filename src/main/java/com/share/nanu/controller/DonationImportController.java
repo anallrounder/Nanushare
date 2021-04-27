@@ -55,9 +55,16 @@ public class DonationImportController {
 	private DonationService ndservice;
 	
 	@GetMapping("/moneyDonationForm") //후원금 기부페이지 이동
-	public ModelAndView moneyForm(ModelAndView mav) {		
+	public ModelAndView moneyForm(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {		
 		log.info("후원금 기부 페이지 이동");
 		mav.setViewName("donationImport/moneyDonationForm");
+		
+		// @AuthenticationPrincipal MemberDetails md 유저정보 가져오기
+		/* model.addAttribute("daymoney", mainService.getContent(dnvo.getDntdate())); */
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+			mav.addObject("username", md.getmember().getName());
+		}
 		return mav;
 	}
 	
@@ -122,6 +129,8 @@ public class DonationImportController {
 		  if((String)(resultMap.get(0).get("status")) == "paid") { //결제 상태가 paid(결제완료)면 카운트
 			  ndservice.updateDntcnt(donavo.getMember_id());
 		  }
+		  
+		  
 		
 	}
 	
@@ -201,8 +210,12 @@ public class DonationImportController {
 	
 					
 	@GetMapping("/my/donation/thank")
-	public ModelAndView thank(ModelAndView mav) { //감사페이지 이동
+	public ModelAndView thank(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) { //감사페이지 이동
 		log.info("감사페이지로 이동");
+		if (md != null) { // 로그인을 해야만 md가 null이 아님, 일반회원, 관리자 ,소셜로그인 정상 적용
+			log.info("로그인한 사람 이름 - " + md.getmember().getName());
+			mav.addObject("username", md.getmember().getName());
+		}
 		mav.setViewName("donation/thanks");
 		return mav;
 	}
