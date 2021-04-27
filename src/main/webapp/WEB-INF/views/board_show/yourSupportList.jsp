@@ -161,6 +161,56 @@
 		
 		}; //function thumNailUpload end
 		
+		//////////////////////////////////////////////////////////////
+		//썸네일 업로드	
+		function thumNailUpload() {
+					
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+			
+			
+			
+			var formData = new FormData();
+			//formData.append("b_index",bIndex);
+			formData.append("file",$("#file"+bIndex)[0].files[0]);
+			
+			//console.log("2." + formData.get("file"));
+			//console.log("3." + formData.get("b_index"));
+			
+			$.ajax({
+				type : 'POST',
+				enctype: 'multipart/form-data',
+				url : '${pageContext.request.contextPath}/board/shows/upLoadThumNail2',
+				processData : false,
+				contentType: false,				
+				cache : false,			
+				data : formData,				
+				success : function(result){
+					if(result =="SUCCESS"){
+						alert(result);
+						swal({
+							title : "썸네일 등록 완료" , 
+							icon : "success" , 
+							button : true 
+						});
+						//로딩속도 원인 리스트를 뿌릴때 전부 다시 뿌리기 때문	
+						$(location).attr('href', "${pageContext.request.contextPath}/board/shows/list");							
+					}
+				},
+				error : function(e){
+					
+					swal({
+						title : "오류가 발생했습니다." , 
+						icon : "error" , 
+						button : false 
+					});
+					console.log(e);
+				}
+			}); // ajax end
+		
+		}; //function thumNailUpload end
+		
 		
 	</script>
 <style>
@@ -389,7 +439,8 @@ a:hover {
 												      <br/>
 												      <div class="modal-footer">
 												        <button type="button"  class="charity-simple-blog-btn" data-dismiss="modal">Close</button>
-												        <button id="thumnail" onclick="thumNailUpload('${vo.b_index }')" type="button" class="charity-simple-blog-btn">Save ThumNail</button>
+												        <%-- <button id="thumnail" onclick="thumNailUpload('${vo.b_index }')" type="button" class="charity-simple-blog-btn">Save ThumNail</button> --%>
+												        <button id="thumnail" onclick="thumNailUpload()" type="button" class="charity-simple-blog-btn">Save ThumNail</button>
 												      </div>
 												    </div>
 												  </div>

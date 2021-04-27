@@ -19,12 +19,12 @@ public class mockControllerTest {
 	private MockMvc mockMvc;
 	
 	
-	@Test
-	public void signUpFormTest() throws Exception {
-		
-		mockMvc.perform(MockMvcRequestBuilders.get("/loginPage").accept(MediaType.TEXT_HTML))
-			.andExpect(MockMvcResultMatchers.status().isOk())
-			.andDo(MockMvcResultHandlers.print());
-	}
+	/*
+	 * @Test public void signUpFormTest() throws Exception {
+	 * 
+	 * mockMvc.perform(MockMvcRequestBuilders.get("/loginPage").accept(MediaType.
+	 * TEXT_HTML)) .andExpect(MockMvcResultMatchers.status().isOk())
+	 * .andDo(MockMvcResultHandlers.print()); }
+	 */
 
 }

@@ -40,9 +40,7 @@ public class DataSourceTest {
 		mvo.setEnable('1');
 		mvo.setSubemail("as2@naver.com");
 
-		nservice.memberJoin(mvo); 
-		//assertNull(mvo);
-
+		nservice.memberJoin(mvo); 	
 	}
 
 }

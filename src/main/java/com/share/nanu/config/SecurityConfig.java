@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.web.cors.CorsConfiguration;
@@ -46,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http
+			.csrf().disable()
 			.authorizeRequests()
 				.antMatchers("/my/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
 				//access("hasRole('USER')")
@@ -58,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				/*
 				 * .and() .cors().configurationSource(corsConfiguration())
 				 */			 
+			
 			.and()
 				.formLogin()
 				.loginPage("/loginPage")// 인증이 필요하면 로그인으로 이동
