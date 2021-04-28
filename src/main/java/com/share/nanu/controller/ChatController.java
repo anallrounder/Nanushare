@@ -23,7 +23,7 @@ public class ChatController {
 	@GetMapping("/chat")
 	public ModelAndView chatUser(ModelAndView mov) {
 		
-		mov.setViewName("/chat/chatUser");
+		mov.setViewName("/chat/chatUser2");
 		
 		return mov;
 	}
