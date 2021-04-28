@@ -34,7 +34,7 @@ public class MyPageServiceImpl implements MyPageService {
 
 	// 1.마이페이지-나의문의
 		@Override
-		public List<BoardVO> myList1(Criteria cri, String member_id) {
+		public List<BoardVO> ask(Criteria cri, String member_id) {
 
 			return mgmapper.mygetlist1(cri, member_id);
 		}
@@ -46,7 +46,7 @@ public class MyPageServiceImpl implements MyPageService {
 
 		// 2.마이페이지-나의인증
 		@Override
-		public List<BoardVO> myList2(Criteria cri, String member_id) {
+		public List<BoardVO> content(Criteria cri, String member_id) {
 			return mgmapper.mygetlist2(cri, member_id);
 		}
 
@@ -57,7 +57,7 @@ public class MyPageServiceImpl implements MyPageService {
 
 		// 3.마이페이지-나의나눔
 		@Override
-		public List<IteminvenVO> myList3(Criteria cri, String member_id) {
+		public List<IteminvenVO> give(Criteria cri, String member_id) {
 			return mgmapper.mygetlist3(cri, member_id);
 		}
 
@@ -68,7 +68,7 @@ public class MyPageServiceImpl implements MyPageService {
 
 		//  4.마이페이지-나의댓글
 		@Override
-		public List<BoardreplyVO> myList4(Criteria cri, String member_id) {
+		public List<BoardreplyVO> reply(Criteria cri, String member_id) {
 
 			return mgmapper.mygetlist4(cri, member_id);
 		}
@@ -81,7 +81,7 @@ public class MyPageServiceImpl implements MyPageService {
 
 		// 5.마이페이지 - 결제내역
 		@Override
-		public List<BoardreplyVO> myList5(Criteria cri, String member_id) {
+		public List<BoardreplyVO> pay(Criteria cri, String member_id) {
 
 			return mgmapper.mygetlist5(cri, member_id);
 		}
@@ -94,7 +94,7 @@ public class MyPageServiceImpl implements MyPageService {
 
 		// 6.마이페이지 - 포인트내역
 		@Override
-		public List<PointVO> myList6(Criteria cri, String member_id) {
+		public List<PointVO> point(Criteria cri, String member_id) {
 
 			return mgmapper.mygetlist6(cri, member_id);
 		}
@@ -141,52 +141,4 @@ public class MyPageServiceImpl implements MyPageService {
 			}
 
 		}
-
-		// 출첵 포인트 카운트
-		@Override
-		public int mycount(PointVO pointVO, String member_id) {
-
-			return mgmapper.mycount(pointVO, member_id);
-		}
-
-		// 출첵 포인트 넣기
-		@Override
-		public void getMypoint(PointVO pointVO, String member_id) {
-			mgmapper.getMypoint(pointVO, member_id);
-
-		}
-
-		// 출첵 포인트 카운트
-		@Override
-		public int mycount2(PointVO pointVO, String member_id) {
-
-			return mgmapper.mycount2(pointVO, member_id);
-		}
-
-		// 출첵 포인트 넣기
-		@Override
-		public void getMypoint2(PointVO pointVO, String member_id) {
-			mgmapper.getMypoint2(pointVO, member_id);
-
-		}
-
-		@Override
-		public PointVO mypnt(PointVO pointVO) {
-
-			return mgmapper.mypnt(pointVO);
-		}
-		
-		//동물상 테스트 카운트
-		@Override
-		public int myAnimalFaceTestCount(PointVO pointVO, String member_id) {
-			
-			return mgmapper.myAnimalFaceTestCount(pointVO, member_id);
-		}
-		
-		//동물상 테스트 포인트 입력
-		@Override
-		public void getMyAnimalFacePoint(PointVO pointVO, String member_id) {
-			mgmapper.getMyAnimalFacePoint(pointVO, member_id);
-		}
-
 	}

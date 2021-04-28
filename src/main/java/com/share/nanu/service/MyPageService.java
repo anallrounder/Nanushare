@@ -14,32 +14,32 @@ import com.share.nanu.security.MemberDetails;
 public interface MyPageService {
 
 	// 1.마이페이지-나의문의
-	public List<BoardVO> myList1(Criteria cri, String member_id);
+	public List<BoardVO> ask(Criteria cri, String member_id);
 
 	public int getTotalCount1(Criteria cri, String member_id);
 
 	// 2.마이페이지-나의인증
-	public List<BoardVO> myList2(Criteria cri, String member_id);
+	public List<BoardVO> content(Criteria cri, String member_id);
 
 	public int getTotalCount2(Criteria cri, String member_id);
 
 	// 3.마이페이지-나의나눔
-	public List<IteminvenVO> myList3(Criteria cri, String member_id);
+	public List<IteminvenVO> give(Criteria cri, String member_id);
 
 	public int getTotalCount3(Criteria cri, String member_id);
 
 	// 4.마이페이지-나의댓글
-	public List<BoardreplyVO> myList4(Criteria cri, String rid);
+	public List<BoardreplyVO> reply(Criteria cri, String rid);
 
 	public int getTotalCount4(Criteria cri, String rid);
 
 	// 5.마이페이지-나의결제
-	public List<BoardreplyVO> myList5(Criteria cri, String member_id);
+	public List<BoardreplyVO> pay(Criteria cri, String member_id);
 
 	public int getTotalCount5(Criteria cri, String member_id);
 
 	// 6.마이페이지-나의포인트
-	public List<PointVO> myList6(Criteria cri, String username);
+	public List<PointVO> point(Criteria cri, String username);
 
 	public int getTotalCount6(Criteria cri, String member_id);
 
@@ -48,26 +48,5 @@ public interface MyPageService {
 
 	// 회원탈퇴페이지
 	public void memberDelete(MemberVO mvo, MemberDetails md);
-
-	// 이벤트 포인트 불러오기
-	public PointVO mypnt(PointVO pointVO);
-
-	// 이벤트 - 1일1회 카운트
-	public int mycount(PointVO pointVO, String member_id);
-
-	// 룰렛 포인트 쌓기
-	public void getMypoint(PointVO pointVO, String member_id);
-
-	// 달력 - 이벤트 - 1일1회 카운트 //시험중
-	public int mycount2(PointVO pointVO, String member_id);
-
-	// 달력 //시험중
-	public void getMypoint2(PointVO pointVO, String member_id);
-	
-	//동물상 테스트 1일1회 카운트
-	public int myAnimalFaceTestCount(PointVO pointVO, String member_id);
-	
-	//동물상 테스트 포인트 입력
-	public void getMyAnimalFacePoint(PointVO pointVO, String member_id);
 
 }
