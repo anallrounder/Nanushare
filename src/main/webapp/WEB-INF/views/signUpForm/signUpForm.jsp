@@ -43,15 +43,33 @@
 
     <link rel="stylesheet" href="/resources/signUpForm/css/style.css">
     
-    <style type="text/css">
-   	 body {
-			background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
-			background-size: cover;	
-		}
-    	.error {
-    		color : red;   	
-    	}
-    </style>
+<style type="text/css">
+body {
+	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
+	background-size: cover;	
+}
+/* 바디 배경색 투명도 */
+::after{
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background:#000;
+	z-index: -1;
+	opacity:0;
+}
+.ftco-section {
+   /*  padding: 7em 0; */
+   padding: 1.5em 0;
+}
+.error {
+  	color : red;   	
+}
+
+
+</style>
 
     <script type="text/javascript">
         /*js에서 csrf토큰, 헤더 등록  */
