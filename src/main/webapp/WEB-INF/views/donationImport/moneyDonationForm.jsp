@@ -13,6 +13,16 @@
 
 	<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <!-- jQuery validation CDN form validation : form 태그 아래에 위치해야 작동한다. (왜 인지는 잘 모름) -->
+	<!-- jQuery 플러그인 이기때문에 jQuery가 있어야 한다. -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<!-- jQuery validation method CDN -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<!-- jQuery validation CDN form validation end-->
+    
+    
+    
 
 <%-- <sec:csrfMetaTags/> --%>
 <!-- 헤더 안에 추가  -->
@@ -163,8 +173,14 @@
 													} */
 											}) // success ajax end
 										} else { //결제 실패시 호출
-											var msg = '결제에 실패하였습니다.';
-											msg += '에러내용 : ' + rsp.error_msg;
+											
+											swal({
+												title :"결제에 실패하였습니다." , 
+												icon : "error" , 
+												button : true 
+											});
+											location.reload();
+										
 										}
 										swal({
 											title :msg , 
@@ -256,8 +272,12 @@
 
 									}) // success ajax end
 								} else { //결제 실패시 호출
-									var msg = '결제에 실패하였습니다.';
-									msg += '에러내용 : '+ rsp.error_msg;
+									swal({
+										title :"결제에 실패하였습니다." , 
+										icon : "error" , 
+										button : true 
+									});
+									location.reload();
 								}
 								
 								$(location).attr('href',"${pageContext.request.contextPath}my/donation/money/point/pointAction");
