@@ -189,9 +189,10 @@
 										});
 										
 										
-										//alert(msg);
-										$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
+										
 									});
+						//alert(msg);
+						$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
 					},
 					error : function(e) {
 
@@ -280,8 +281,9 @@
 									location.reload();
 								}
 								
-								$(location).attr('href',"${pageContext.request.contextPath}my/donation/money/point/pointAction");
+								
 						});
+				$(location).attr('href',"${pageContext.request.contextPath}my/donation/money/point/pointAction");
 				},
 				error : function(e) {
 		
