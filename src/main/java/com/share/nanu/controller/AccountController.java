@@ -49,14 +49,14 @@ public class AccountController {
 	private NanuService nservice;
 
 	@GetMapping("/signUpForm") // 가입페이지 이동
-	public ModelAndView jointest(ModelAndView mav) {
+	public ModelAndView signUpForm(ModelAndView mav) {
 		log.info("회원가입 폼으로 이동");
 		mav.setViewName("/signUpForm/signUpForm");
 		return mav;
 	}
 
 	@RequestMapping("/loginPage") // 로그인 페이지
-	public ModelAndView home(ModelAndView mav) {
+	public ModelAndView loginPage(ModelAndView mav) {
 		log.info("로그인 폼으로 이동");
 		//인증하기전 이전 주소를 기억 하는 로직
 		//String referrer = request.getHeader("Referer");//이전 페이지 주소

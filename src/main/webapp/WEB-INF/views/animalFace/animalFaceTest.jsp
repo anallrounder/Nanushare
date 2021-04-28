@@ -573,7 +573,7 @@
 								//alert("오늘은 이미 포인트를 적립하셨습니다.")
 								swal({
 									title : "오늘은 이미 포인트를 적립하셨습니다." , 
-									icon : "success" , 
+									icon : "error" , 
 									button : true 
 								});
 							}

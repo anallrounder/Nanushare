@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
     <%-- <sec:csrfMetaTags/> --%>
@@ -94,7 +97,12 @@
                         }
                     },
                     error: function(e) {
-                        alert("정보를 빠짐없이 입력해 주세요.");
+                    	swal({
+							title : "정보를 빠짐없이 입력해 주세요." , 
+							icon : "success" , 
+							button : true 
+						});
+                        
 
                         console.log(result);
                         console.log(e);
@@ -108,7 +116,12 @@
             $('#certification').click(function() { // 인증버튼 클릭시 입력한 이메일로 인증 번호를 해당 이메일로 전송
                 var mail = $("#member_id").val(); // 인증받을 이메일 주소
                 if (mail == "") {
-                    alert("메일 주소가 입력되지 않았습니다.");
+                	swal({
+						title : "메일 주소가 입력되지 않았습니다." , 
+						icon : "success" , 
+						button : true 
+					});
+                    
                 } else {
                     $.ajax({
                         type: 'post',
@@ -126,7 +139,12 @@
                     });
                 }
                 if (mail != "") {
-                    alert("인증번호가 해당 메일로 전송되었습니다.");
+                	swal({
+						title : "인증번호가 해당 메일로 전송되었습니다." , 
+						icon : "success" , 
+						button : true 
+					});
+                    
                 }
 
                 $("#compare").css("display", "block");
@@ -149,7 +167,13 @@
 
             $("#submit-btn").click(function submitCheck() { //폼에서 submit을 진행했을대 메일인증이 되어있지 않다면 페이지전환을 할 수 없다.
                 if (isCertification == false) {
-                    alert("메일 인증이 완료되지 않았습니다.");
+                	swal({
+						title : "메일 인증이 완료되지 않았습니다." , 
+						icon : "success" , 
+						button : true 
+					});
+                	
+                    
                     return false;
                 } else
                     true;
