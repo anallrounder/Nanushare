@@ -10,13 +10,11 @@ import com.share.nanu.VO.Vmam;
 
 public interface MainService {
 
-	public List<VmVmamVO> getvm();
+	public List<VmVmamVO> getVm();
 
-	public List<VmVO> getvmcat();
+	public List<VmVO> getVmCat();
 
-	public List<Vmam> getvminven();
-
-	public List<VmVO> getoffvm(Vmam vmamvo);
+	public List<Vmam> getVmInven();
 
 	public void itemOut(String vm_num, String iname);
 

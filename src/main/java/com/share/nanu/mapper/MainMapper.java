@@ -17,17 +17,15 @@ public interface MainMapper {
 
 	public List<DonationVO> weekMoney();
 
-	public List<VmVmamVO> getvm();
+	public List<VmVmamVO> getVm();
 
-	public List<VmVO> getvmcat();
+	public List<VmVO> getVmCat();
 
-	public List<Vmam> getvmiven();
-
-	public List<VmVO> getoffvm(Vmam vmamvo);
+	public List<Vmam> getVmInven();
 
 	public void outAmount(String vm_num, String iname);
 
-	public int vmcount(String vm_num, String iname);
+	public int vmCount(String vm_num, String iname);
 
 	public int getDay(String year, String month, String day);
 

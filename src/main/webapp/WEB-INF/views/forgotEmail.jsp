@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
     <%-- <sec:csrfMetaTags/> --%>
@@ -75,7 +78,12 @@
             $('#findEmail').click(function() { // 버튼 클릭시 입력한 이메일로 아이디에 해당하는 이메일을 해당 이메일로 전송
                 var mail = $("#subemail").val(); // 인증받을 이메일 주소
                 if (mail == "") {
-                    alert("메일 주소가 입력되지 않았습니다.");
+                	swal({
+						title : "메일 주소가 입력되지 않았습니다." , 
+						icon : "success" , 
+						button : true 
+					});
+                    
                 } else {
                     $.ajax({
                         type: 'post',
@@ -89,7 +97,12 @@
                             console.log(data.findEmail);
                             findEmail = data.findEmail;
                             if (mail != "") {
-                                alert("아이디가 해당 메일로 전송되었습니다.");
+                            	swal({
+            						title : "아이디가 해당 메일로 전송되었습니다." , 
+            						icon : "success" , 
+            						button : true 
+            					});
+                               
                             }
                         }
 

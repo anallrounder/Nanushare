@@ -400,6 +400,7 @@ a:hover {
                             </form>
                         </div>
                         <!--// 댓글 작성 영역 comment-respond \\-->
+                        
                         <div style="float: right; margin-right:5px; "> <a href="${pageContext.request.contextPath}/board/shows/list" class="fa fa-list-alt" style="color:#333"> 나눔 인증 목록으로 </a></div>
                         
                     </div>

@@ -204,7 +204,7 @@ public class BoardShowsRestController {
 	// 인증게시판 게시글 삭제
 	// ck에디터로 저장되어지는 이미지는 디비에 저장히자 않아서..... 이미지의 경로를 모른다....
 	@GetMapping("/my/board/shows/delete/{b_index}")
-	public ModelAndView bsDelete(ModelAndView mav, BoardVO bvo, AttachmentVO attvo, BoardreplyVO brvo)
+	public void bsDelete(ModelAndView mav,HttpServletResponse response, BoardVO bvo, AttachmentVO attvo, BoardreplyVO brvo)
 			throws Exception {
 		// 1. attachment 테이블에서 게시판 글번호 조회 -> 이미지 삭제 -> attachment 테이블에서 조회한 글번호로 첨부파일
 		// 데이터 삭제
@@ -240,9 +240,12 @@ public class BoardShowsRestController {
 		// 3. board 테이블에서 인증글 삭제
 		service.deleteCertificationBoard(bvo.getB_index());
 		log.info("인증게시판 글 삭제");
+		
+		response.sendRedirect("/board/shows/list");
 
-		mav.setViewName("/board_show/yourSupportList");
-		return mav;
+		/*
+		 * mav.setViewName("/board_show/yourSupportList"); return mav;
+		 */
 
 	}
 

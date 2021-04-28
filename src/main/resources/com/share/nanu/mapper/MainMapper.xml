@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper 
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- select sum(dntprice) from donation where TO_CHAR(dntdate,'yyyy-mm-dd') > sysdate-1 order by dnt_paynum asc -->
 <mapper namespace="com.share.nanu.mapper.MainMapper">
 	
@@ -20,27 +20,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="vmamlist" javaType="java.util.ArrayList" resultMap="vmamvo" />
 	</resultMap>
 	
-	<select id="getvm" resultMap="vmvo">
+	<select id="getVm" resultMap="vmvo">
 	<![CDATA[ 
 		select * from vm, vmam where vm.vm_num = vmam.vm_num
 	]]>
 	</select>
 	
-	<select id="getvmcat" resultType="com.share.nanu.VO.VmVO">
+	<select id="getVmCat" resultType="com.share.nanu.VO.VmVO">
 	<![CDATA[ 
 		select * from vm
 	]]>
 	</select>
 	
-	<select id="getvmiven" resultType="com.share.nanu.VO.Vmam">
+	<select id="getVmInven" resultType="com.share.nanu.VO.Vmam">
 	<![CDATA[ 
 		select iname from vmam group by iname 
-	]]>
-	</select>
-	
-	<select id="getoffvm" resultType="com.share.nanu.VO.Vmam">
-	<![CDATA[ 
-		select * from vmam where vm_num = #{vm_num} and iname =#{iname}
 	]]>
 	</select>
 	
@@ -51,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 항목에 대한 수량체크 -->
-	<select id="vmcount" resultType="int"> 
+	<select id="vmCount" resultType="int"> 
 	<![CDATA[ 
 		select vm_amount from vmam where vm_num = #{vm_num} and iname =#{iname}
 	]]>

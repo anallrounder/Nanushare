@@ -69,7 +69,7 @@ public class NanuMainController {
 		mov.addObject("yearSale", mainService.getYearSales(year)); // 년별
 		
 		mov.setViewName("mainMap/mainContent"); 
-		mov.addObject("mapvm", mainService.getvm()); // vm, vmam VO
+		mov.addObject("mapvm", mainService.getVm()); // vm, vmam VO
 		return mov;
 	}
 	
@@ -78,7 +78,7 @@ public class NanuMainController {
 	@ResponseBody
 	public Map<String, Object> vmInfos() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", mainService.getvm());
+		map.put("list", mainService.getVm());
 		return map; 
 	}
 	
@@ -95,8 +95,8 @@ public class NanuMainController {
 	@RequestMapping("/machine")
 	public ModelAndView offlineVm (ModelAndView mov) throws Exception {
 		mov.setViewName("mainMap/vm"); 
-		mov.addObject("vmcat", mainService.getvmcat()); //vm 종류(카테고리)
-		mov.addObject("vminven", mainService.getvminven());
+		mov.addObject("vmcat", mainService.getVmCat()); //vm 종류(카테고리)
+		mov.addObject("vminven", mainService.getVmInven());
 		
 		//현재 ip 주소 리턴
 		InetAddress myIP = InetAddress.getLocalHost();

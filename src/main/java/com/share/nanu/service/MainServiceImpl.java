@@ -22,27 +22,21 @@ public class MainServiceImpl implements MainService {
 	MainMapper mainmapper;
 
 	@Override
-	public List<VmVmamVO> getvm() {
+	public List<VmVmamVO> getVm() {
 		// TODO Auto-generated method stub
-		return mainmapper.getvm();
+		return mainmapper.getVm();
 	}
 
 	@Override
-	public List<VmVO> getvmcat() {
+	public List<VmVO> getVmCat() {
 		// TODO Auto-generated method stub
-		return mainmapper.getvmcat();
+		return mainmapper.getVmCat();
 	}
 
 	@Override
-	public List<Vmam> getvminven() {
+	public List<Vmam> getVmInven() {
 		// TODO Auto-generated method stub
-		return mainmapper.getvmiven();
-	}
-
-	@Override
-	public List<VmVO> getoffvm(Vmam vmamvo) {
-		// TODO Auto-generated method stub
-		return mainmapper.getoffvm(vmamvo);
+		return mainmapper.getVmInven();
 	}
 
 	@Override
@@ -54,7 +48,7 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public int vmCount(String vm_num, String iname) {
 		// TODO Auto-generated method stub
-		return mainmapper.vmcount(vm_num, iname);
+		return mainmapper.vmCount(vm_num, iname);
 	}
 
 	@Override

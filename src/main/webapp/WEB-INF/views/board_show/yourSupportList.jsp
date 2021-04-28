@@ -138,7 +138,7 @@
 				data : formData,				
 				success : function(result){
 					if(result =="SUCCESS"){
-						alert(result);
+						
 						swal({
 							title : "썸네일 등록 완료" , 
 							icon : "success" , 
