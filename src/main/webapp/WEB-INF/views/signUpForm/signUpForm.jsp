@@ -192,13 +192,14 @@ body {
 	height:150%;
 } 
 /* 바디 배경색 투명도 */
-body::after{
-	position: absolute;
+.img::after{
+	/* position: absolute; */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     content: '';
+    height:120%;
     background:#000;
 	z-index: -1;
 	opacity:0.6;
@@ -351,6 +352,9 @@ css에서 찾음...!
     color: #333 !important;
     font-weight: bold;
      text-transform: uppercase; 
+}
+.img {
+max-height:897.34;
 }
 </style>
 
