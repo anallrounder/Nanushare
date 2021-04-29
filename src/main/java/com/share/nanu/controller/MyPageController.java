@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,6 @@ import com.share.nanu.mypaging.Criteria;
 import com.share.nanu.mypaging.pageVO;
 import com.share.nanu.security.MemberDetails;
 import com.share.nanu.service.DonationService;
-import com.share.nanu.service.MemberService;
 import com.share.nanu.service.MyPageService;
 
 import lombok.AllArgsConstructor;

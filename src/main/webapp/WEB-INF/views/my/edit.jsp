@@ -19,6 +19,9 @@
 	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
 <!-- 웹페이지 탭 로고이미지 삽입  -->
 
+<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
 <link rel="stylesheet" href="/resources/charity/css/fontawesome-all.css">
@@ -354,18 +357,32 @@ input {
 																							console.log(result);
 																							if (result == true) {
 																								console.log("success");
-																								alert("회원 정보가 수정되었습니다. 다시 로그인해주세요.");
+																								swal({
+																									title : "회원 정보가 수정되었습니다. 다시 로그인해주세요." , 
+																									icon : "success" , 
+																									button : true 
+																								});
+																								
 																								$(location).attr('href',
 																												"${pageContext.request.contextPath}/my/mypage");
 																								/* 성공했을때 넘어가는 페이지 */
 																							}else{
-																								alert("정보를 알맞게 다시 입력해주세요");
-																								
+																								swal({
+																									title : "정보를 알맞게 다시 입력해주세요", 
+																									icon : "error" , 
+																									button : true 
+																								});
+																																																
 																							}
 																						},
 
 																						error : function(e) {
-																							alert("필수 입력 사항을 입력해주세요.");
+																							
+																							swal({
+																								title : "필수 입력 사항을 입력해주세요.", 
+																								icon : "error" , 
+																								button : true 
+																							});
 																							console.log(e);
 																						}
 

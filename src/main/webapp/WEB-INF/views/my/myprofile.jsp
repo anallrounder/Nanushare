@@ -37,6 +37,8 @@
 	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
 <!-- 웹페이지 탭 로고이미지 삽입  -->
 
+<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <!-- 탭처리 -->

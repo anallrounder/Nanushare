@@ -39,6 +39,9 @@
 	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
 <!-- 웹페이지 탭 로고이미지 삽입  -->
 
+<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 <!-- CSS -->
 <link rel="stylesheet" href="/resources/charity/css/bootstrap.css">
@@ -199,13 +202,22 @@ console.log(c);
 	   	    	if(result == "SUCCESS"){
 		    		console.log(result); 
 		    		setTimeout(function(){
-		    			alert("오늘의 나누셰어 포인트는 "+prtpnt+" point");
-				/* 여기에 데이터를 전부 넣어주던지... */		
+		    			swal({
+							title : "오늘의 나누셰어 포인트는 "+prtpnt+" point", 
+							icon : "success" , 
+							button : true 
+						});
+		    			
 		  	    
 		    		},5000);
 		        }else if(result == "FAIL"){
 	   	    		console.log(result);
-	   	    		alert("1일 1회 참여가 가능합니다.");
+	   	    		
+	   	    		swal({
+						title : "1일 1회 참여가 가능합니다.", 
+						icon : "error" , 
+						button : true 
+					});
 	   	    	}
 		    },
 		    error: function (e) {
