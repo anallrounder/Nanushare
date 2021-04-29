@@ -189,18 +189,18 @@ body {
 	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
 	background-size: cover;	
 	width:auto;
-	height:150%;
+	height:170%;
 } 
 /* 바디 배경색 투명도 */
-.img::after{
+body::after{
 	/* position: absolute; */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     content: '';
-    height:120%;
-    background:#000;
+  /*   height:120%; */
+    background:black;
 	z-index: -1;
 	opacity:0.6;
 }
@@ -225,9 +225,6 @@ body {
     min-height: 100%;
     padding: 50px 0 122px;
     box-sizing: border-box;
-}
-.img js-fullheight {
-	
 }
 
 .form-group mb-3 {
@@ -331,9 +328,7 @@ css에서 찾음...!
     background-color: #96361D;
     border-color: #96361D;
 }
-#submit-btn{
-	
-}
+
 
 /* signup btn */
 .btn.btn-primary {
@@ -356,11 +351,14 @@ css에서 찾음...!
 .img {
 max-height:897.34;
 }
+html {
+overflow:overlay;
+}
 </style>
 
 </head>
 
-<body class="img">
+<body class="img js-fullheight">
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
