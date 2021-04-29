@@ -119,6 +119,7 @@ public class QnaBoardController {
 		if (md != null) { 
 			mov.addObject("username", md.getmember().getName());
 		}
+		
 		mov.addObject("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
 		mov.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
 		
@@ -150,8 +151,6 @@ public class QnaBoardController {
 	// 문의글 수정
 	@PutMapping("/qna/modify")
 	public ResponseEntity<String> qnaModify(@RequestBody BoardVO boardVO, @AuthenticationPrincipal MemberDetails md) {
-		log.info("문의글 수정");
-		log.info("boardVO : " + boardVO);
 		ResponseEntity<String> entity = null;
 
 		try {
@@ -166,7 +165,7 @@ public class QnaBoardController {
 	}
 	
 	//글 삭제
-	@DeleteMapping("/qna/delete/{b_index}")
+	@DeleteMapping("/qna/{b_index}")
 	public ResponseEntity<String> qnaDelete(BoardVO boardVO, BoardreplyVO replyVO) {
 		ResponseEntity<String> entity = null;
 
@@ -196,4 +195,5 @@ public class QnaBoardController {
 		
 		return mov;
 	}
+
 }

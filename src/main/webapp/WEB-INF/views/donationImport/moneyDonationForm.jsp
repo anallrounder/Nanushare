@@ -161,17 +161,15 @@
 													contentType : 'application/json; charset=utf-8',
 													dataType : 'json',
 													data : JSON.stringify(arr)
-													//https://docs.iamport.kr/tech/imp?lang=ko#param 데이터는 import 문서 참조
-													/* data : { //필요정보 : 결제번호, 아이디, 결제금액,결제날짜,pg, 결제방법
-													   merchant_uid : rsp.merchant_uid, //결제번호
-													   buyer_email : rsp.buyer_email, //결제자 이메일
-													   amount : rsp.paid_amount,//결제 금액
-													   paid_at : rsp.paid_at,//결제 승인시각, UNIX timestamp로 출력
-													   pg : rsp.pg, //pg사,pg사 고유번호
-													   pay_method : rsp.pay_method //결제방법
-													   
-													} */
+													
 											}) // success ajax end
+											swal({
+												title :msg , 
+												icon : "success" , 
+												button : true 
+											});
+											
+											$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
 										} else { //결제 실패시 호출
 											
 											swal({
@@ -182,15 +180,7 @@
 											location.reload();
 										
 										}
-										swal({
-											title :msg , 
-											icon : "success" , 
-											button : true 
-										});
 										
-										
-										//alert(msg);
-										$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
 									});
 					},
 					error : function(e) {
@@ -259,18 +249,16 @@
 											contentType : 'application/json; charset=utf-8',
 											dataType : 'json',
 											data : JSON.stringify(arr)
-											//https://docs.iamport.kr/tech/imp?lang=ko#param 데이터는 import 문서 참조
-											/* data : { //필요정보 : 결제번호, 아이디, 결제금액,결제날짜,pg, 결제방법
-											   merchant_uid : rsp.merchant_uid, //결제번호
-											   buyer_email : rsp.buyer_email, //결제자 이메일
-											   amount : rsp.paid_amount,//결제 금액
-											   paid_at : rsp.paid_at,//결제 승인시각, UNIX timestamp로 출력
-											   pg : rsp.pg, //pg사,pg사 고유번호
-											   pay_method : rsp.pay_method //결제방법
-											   
-											} */
+											
 
 									}) // success ajax end
+									swal({
+										title :msg , 
+										icon : "success" , 
+										button : true 
+									});
+									
+									$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
 								} else { //결제 실패시 호출
 									swal({
 										title :"결제에 실패하였습니다." , 
@@ -280,7 +268,7 @@
 									location.reload();
 								}
 								
-								$(location).attr('href',"${pageContext.request.contextPath}my/donation/money/point/pointAction");
+								
 						});
 				},
 				error : function(e) {
@@ -311,6 +299,9 @@ a:hover {
 }
 .black-transparent {
 	opacity:50%;
+}
+.error {
+    color: red;
 }
 </style>
 
@@ -390,7 +381,7 @@ a:hover {
 							<h2 style="font-size:22px;">카드결제</h2>
 						</div>
 						<div class="charity-volunteer-form">
-						 <form>
+						 <form id = "cardVali">
 							<ul class="mt-4">
 								
 								<li>
@@ -422,7 +413,7 @@ a:hover {
 						<h2 style="font-size:22px;">계좌이체</h2>
 					</div>
 					<div class="charity-volunteer-form">	
-						<form>
+						<form id="transVali">
 							<ul class="mt-4">
 								<li>
 									<label>결제금액:</label>
@@ -451,6 +442,100 @@ a:hover {
 					<div class="charity-team-contactus mt-3">
 						<button type="button" class="charity-sub-btn" onclick="location.href='${pageContext.request.contextPath}/donation/money/main'"><i class="fa fa-arrow-left"> 이전화면으로</i></button>
 					</div>
+					<!-- jQuery validation CDN form validation : form 태그 아래에 위치해야 작동한다. (왜 인지는 잘 모름) -->
+					<!-- jQuery 플러그인 이기때문에 jQuery가 있어야 한다. -->
+					<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+					<!-- jQuery validation method CDN -->
+					<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	                <!-- jQuery validation CDN form validation end-->	
+					
+					<script type="text/javascript">
+					 $("#cardVali").validate({
+						rules:{
+							selectCardDirect : {
+								required: true,
+								digits: true,			/* (양수)숫자만 입력가능 -number와 다른점은 소수와 음수일 경우 false*/
+                                spaceCheck: true                            
+                                		
+							},
+							donaTransSelect : {
+								required: true
+							}
+							
+							
+						},
+						messages : {
+							selectCardDirect : {
+								required : "필수 작성내용 입니다.",
+								digits : "숫자만 입력이 가능합니다.",
+								spaceCheck : "공백없이 입력해주세요."								
+								
+                               
+							},
+							donaTransSelect : {
+								required : "필수 작성내용 입니다."
+							}
+							
+						},
+						 errorElement: 'span',			/* 디폴트는 lable 태그 lable->span 으로 수정 */
+                         errorClass: 'error',			/* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
+
+                         errorPlacement: function(error, element) {
+                             if (element.is(":text") ) {
+                                 element.parent().parent().after(error);
+                             } else {
+                                 element.after(error);
+                             }
+                         }
+						
+						 
+					 })
+					
+					
+					</script>
+					
+					<script type="text/javascript">
+					 $("#transVali").validate({
+						rules:{
+							selectTransDirect : {
+								required: true,
+								digits: true,			/* (양수)숫자만 입력가능 -number와 다른점은 소수와 음수일 경우 false*/
+                                spaceCheck: true,                              
+							},
+							donaCardSelect : {
+								required: true
+							}
+							
+							
+						},
+						messages : {
+							selectTransDirect : {
+								required : "필수 작성내용 입니다.",
+								digits : "숫자만 입력이 가능합니다.",
+								spaceCheck : "공백없이 입력해주세요.",								
+							},
+							donaCardSelect : {
+								required : "필수 작성내용 입니다."
+							}
+							
+						},
+						 errorElement: 'span',			/* 디폴트는 lable 태그 lable->span 으로 수정 */
+                         errorClass: 'error',			/* 디폴트 클래스 이름은 error, 클래스 이름을 변경할 수 있다.*/
+
+                         errorPlacement: function(error, element) {
+                             if (element.is(":text") ) {
+                                 element.parent().parent().after(error);
+                             } else {
+                                 element.after(error);
+                             }
+                         }
+						
+						 
+					 })
+					
+					
+					</script>		
+						
 						
 					<script>
 						function chk_Number(object) {
