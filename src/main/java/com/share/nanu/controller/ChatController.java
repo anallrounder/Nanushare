@@ -23,7 +23,7 @@ public class ChatController {
 	@GetMapping("/chat")
 	public ModelAndView chatUser(ModelAndView mov) {
 		
-		mov.setViewName("/chat/chatUser2");
+		mov.setViewName("/chat/chatUser");
 		
 		return mov;
 	}
@@ -38,12 +38,18 @@ public class ChatController {
 		return mov;
 	}
 	
-	@GetMapping("/room")
-	public ModelAndView room (ModelAndView mov) {
+	@GetMapping("/admin/room")
+	public ModelAndView room (ModelAndView mov, @AuthenticationPrincipal MemberDetails md) {
+		
+		if (md != null) {
+			mov.addObject("username", md.getmember().getName());
+		}
+			
+		
 		log.info("==========현재 채팅방의 수 : " + String.valueOf(roomList.size())+ "==============");
 		
 		mov.addObject("roomList", roomList);
-		mov.setViewName("/chat/room");
+		mov.setViewName("/admin/admin_chatRoom");
 		
 		return mov;
 	}

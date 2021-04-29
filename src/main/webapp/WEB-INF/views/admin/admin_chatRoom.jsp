@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/resources/AdminLTE-master/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/resources/AdminLTE-master/dist/css/adminlte.min.css">
-  
+     <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 
 <html>
 <head>
@@ -54,12 +54,12 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
-  	   <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 
 <style>
 body {
 	background-color: f9f9fb;
-} 
+}
+
 .charity-simple-blog-btn {
 	border: 0;
 }
@@ -70,13 +70,89 @@ body {
 
 #forimg {
 	background-image: url('/resources/banner_imgs/admin_banner.png');
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-position: center;
-	width:100%;
-	
+	width: 100%;
 }
+
 .black-transparent {
-	opacity:50%;
+	opacity: 50%;
+}
+
+.twobox {
+	text-color: 424242;
+	width: 200px;
+	height: 100px;
+	border-radius: 95px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 14px;
+	vertical-align: middle;
+	line-height: 150px;
+}
+
+
+.container h1 {
+	text-align: left;
+	padding: 5px 5px 5px 15px;
+	color: #FFBB00;
+	border-left: 3px solid #FFBB00;
+	margin-bottom: 20px;
+}
+
+.roomContainer {
+	background-color: #F6F6F6;
+	overflow: auto;
+}
+
+.roomList {
+	border: none;
+}
+
+.roomList th {
+	border: 1px solid #FFBB00;
+	background-color: #fff;
+	color: #FFBB00;
+}
+
+.roomList td {
+	border: 1px solid #FFBB00;
+	background-color: #fff;
+	text-align: left;
+	color: #FFBB00;
+}
+
+.roomList .num {
+	width: 75px;
+	text-align: center;
+}
+
+.roomList .room {
+	width: 425px;
+}
+
+.roomList .go {
+	width: 71px;
+	text-align: center;
+}
+
+button {
+	background-color: #FFBB00;
+	font-size: 14px;
+	color: #000;
+	border: 1px solid #000;
+	border-radius: 5px;
+	padding: 3px;
+	margin: 3px;
+}
+
+.inputTable th {
+	padding: 5px;
+}
+
+.inputTable input {
+	width: 330px;
+	height: 25px;
 }
 
 .user-panel img {
@@ -84,8 +160,100 @@ body {
 	margin: 0px 0px 0px 15px;
 }
 
-
 </style>
+
+<script type="text/javascript">
+	var ws;
+
+	$(document).ready(function() {
+		getRoom();
+		wsOpen();
+	})
+
+	function getRoom() {
+		$
+				.ajax({
+					url : "/room/list",
+					type : "get",
+					success : function(result) {
+						if ($(result).length) {
+							var content = "<tr><th class='room'>채팅 문의 아이디</th><th class='go'>답변 버튼</th></tr>";
+							$(result)
+									.each(
+											function() {
+												content += "<tr id='" + this + "'>";
+												content += "<td class='room'>"
+														+ this + "</td>";
+												content += "<td class='go'><button type='button' onclick='join(\""
+														+ String(this)
+														+ "\")'>채팅 문의 응대</button></td>";
+												content += "</tr>";
+											})
+							$("#roomList").empty().append(content);
+						} else {
+							
+							var content = "";
+							content += "<tr><td class='room' align='center'>채팅 문의내역이 없습니다</td></tr>";
+							$("#roomList").append(content);
+							
+							
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				});
+	}
+
+	function wsOpen() {
+		ws = new WebSocket("ws://" + location.host + "/chatting/admin");
+		wsEvt();
+	}
+
+	function wsEvt() {
+		ws.onopen = function(data) {
+		}
+
+		ws.onmessage = function(data) {
+			//메시지를 받으면 동작
+			var msg = data.data;
+			console.log(msg);
+			if (msg != null && msg.trim() != '') {
+				var d = JSON.parse(msg);
+				if (d.type == "getId") {
+					var si = d.sessionId != null ? d.sessionId : "";
+					if (si != '') {
+						$("#sessionId").val(si);
+					}
+				} else if (d.type == "alert") {
+					if (d.msg == "enter") {
+						if (d.sessionId == $("#sessionId").val()) {
+							
+						} else {
+							var content = "";
+							content += "<tr id=" + d.username + ">";
+							content += "	<td class='room'>" + d.username
+									+ "</td>";
+							content += "	<td class='go'><button type='button' onclick='join(\""
+									+ d.username + "\")'>참여</button></td>";
+							content += "</tr>";
+							$("#roomList").append(content);
+						}
+					} else {
+						$("#" + d.username).remove();
+					}
+
+				} else {
+					console.warn("unknown type!")
+				}
+			}
+		}
+	}
+
+	function join(username) {
+		window.open("/chat/" + username, username, "width=560px, height=800px");
+	}
+</script>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -127,7 +295,7 @@ body {
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <img src="/resources/AdminLTE-master/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        <img src="/resources/AdminLTE-master/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         <div class="info">
         <sec:authorize access="hasRole('ADMIN')"> 
 	          <c:forEach items="${username}" var="username">
@@ -150,21 +318,21 @@ body {
           </li>
           
           <li class="nav-item">
-            <a href="/admin/member" class="nav-link active">
+            <a href="/admin/member" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>회원 관리</p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="/admin/room" class="nav-link">
-              <i class="fas fa-comment-dots nav-icon"></i>
+            <a href="#" class="nav-link active" data-toggle="tab">
+              <i class="fas fa-comment-dots nav-icon"></i> 
               <p>채팅 관리</p>
             </a>
           </li>
           
           <li class="nav-item"><%-- ${pageContext.request.contextPath}/admin/item --%>
-            <a href="#" class="nav-link" data-toggle="tab">
+            <a href="#chat" class="nav-link" data-toggle="tab">
               <i class="nav-icon fas fa-box-open"></i>
               <p>재고 관리<i class="right fas fa-angle-left"></i></p>
             </a>
@@ -223,107 +391,25 @@ body {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-							<div class="charity-fancy-title " style=" margin:60px 0px 60px 0px;">
-									<h2> 회원 관리 </h2>
-							</div>
-								<div class="container">
-									<div class="row">
-										<div class="col">
-											<ul class="nav nav-tabs nav-justified">
-												<li class="nav-item">
-													<a class="nav-link" href="/admin/member_view?member_id=${pageMaker.member_id}">기본정보</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" href="/admin/member/itemdona?member_id=${pageMaker.member_id}">물품기부내역</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link active" data-toggle="tab" href="#money">돈기부역내역</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" href="/admin/member/point?member_id=${pageMaker.member_id}">포인트내역</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" href="/admin/member/qna?member_id=${pageMaker.member_id}">문의내역</a>
-												</li>
-											</ul>
-											
-											<div class="tab-content">
-												<div class="tab-pane fade show active" id="money">
-						                            <!--// volunteer-form \\-->
-						                            <form action="" method="post" class="charity-volunteer-form">
-							                          <table class="table taWWble-striped projects">
-														<thead>
-							                          	<tr bgcolor="a5a5a5">
-							                              	<th style="border-left: none;">기부날짜</th>
-							                               	<th>금액</th>
-							                               	<th>결제방식</th>
-							                               	<th style="border-right: none;">처리상태</th>
-							                            </tr>
-							                            </thead>
-							                            
-							                            <tbody>
-							                            <c:if test="${empty moneyDona}">
-														<tr>
-															<td colspan="4" align="center" style="border-left: none; border-right: none;">후원 기부 내역이 없습니다</td>
-														</tr>
-														</c:if>
-														
-							                            <c:if test="${! empty moneyDona}">
-							                            <c:forEach items="${moneyDona}" var="moneydao" >
-							                            <tr>
-							                               	<td style="border-left: none;">${moneydao.dntdate}</td> 
-							                               	<td>${moneydao.dntprice}</td>
-							                              	<td>${moneydao.paymethod}</td>
-							                              	<td style="border-right: none;">${moneydao.dntstat}</td> 
-							                            </tr>
-							                           </c:forEach>
-							                           </c:if>
-							                           </tbody>
-							                           </table>
-						                            </form>
-						                                   
-						                        <!--// volunteer-form \\-->
-						                        
-						                        <!-- Pagination -->
-											<div class="charity-pagination">
-												<ul class="page-numbers">
-													<li>
-													<c:if test="${pageMaker.prev}">
-														<a class="previous pages-numbers" href="${pageContext.request.contextPath}/admin/member/moneydona${pageMaker.makeQuery(pageMaker.startPage - 1) }"><i class="fa fa-angle-left"></i>prev</a>
-													</c:if>
-													</li>
-				
-													<li>
-														<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-															<c:out value="${pageMaker.cri.pageNum == idx?'':''}" />
-																<a href="${pageContext.request.contextPath}/admin/member/moneydona${pageMaker.makeQuery(idx)}">${idx}</a>
-														</c:forEach>
-													</li>
-				
-													<li>
-														<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-															<a class="next page-numbers" href="${pageContext.request.contextPath}/admin/member/moneydona${pageMaker.makeQuery(pageMaker.endPage +1) }">next<i class="fa fa-angle-right"></i></a>
-														</c:if>
-													</li>
-												</ul>
-											</div>
-											<!-- Pagination -->
-												</div>
-											</div>
-										</div>
+                    	<div class="tab-content">
+                    		<div class="tab-pane fade show active" id="chat">
+								<div class="charity-fancy-title " style=" margin:60px 0px 60px 0px;">
+									<h2> 채팅방 관리 </h2>
+								</div> 
+						        <!--// volunteer-form \\-->
+						        <form class="charity-volunteer-form">
+						        <div id="roomContainer" class="roomContainer">
+									<table class="table taWWble-striped projects" id="roomList" class="roomList">
+									</table>
 									</div>
-								</div>
-							
-							
+						        </form>
+						<!--// volunteer-form \\-->
+							</div>
 						</div>
-					 </div>
-					 
-					 
-					<div class="charity-team-contactus">
-       					<button type="button" onClick="history.back()" class="charity-donation-parallex-btn center"> <i class="fa fa-angle-double-left">&nbsp;&nbsp;이전 페이지</i></button>
 					</div>
 				</div>
 			</div>
+		</div>
         <!-- Main Section -->
 
     </div>
