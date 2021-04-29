@@ -79,16 +79,8 @@
 <script type="text/javascript">
 	//결제취소 
 	function cancle(paynum, price) {
-		swal({
-			title:"결제를 취소하시겠습니까?",
-			type:"warning",
-			showCancelButton:true,
-			confirmButtonText:"네",
-			cancelButtonText:"아니오",
-			closeOnCnfirm: false,
-			closeOnCancel:false			
-})
-		if (swal("결제를 취소하시겠습니까?","","warning") == true) {//결제 취소여부 다시 확인
+	
+	/* 	if (swal("결제를 취소하시겠습니까?","","warning") == true) {//결제 취소여부 다시 확인 - 보류 */
 
 			var token = $("meta[name='_csrf']").attr("content");
 			var header = $("meta[name='_csrf_header']").attr("content");
@@ -132,9 +124,9 @@
 					console.log("실패");
 				}
 			});// ajax end
-		} else { //결제 취소 여부 확인 end
+		/* } else { //결제 취소 여부 확인 end - 보류
 			return;
-		}
+		} */
 	}//cancle function end
 </script>
 
