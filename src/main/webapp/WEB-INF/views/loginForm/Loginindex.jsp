@@ -39,25 +39,25 @@ body::after{
     content: '';
     background:#000;
 	z-index: -1;
-	opacity:0.4;
+	opacity:0.5;
 }
 
 /* sign in btn radius 변경 -> 어떤게 좋을지 결정하면 바꾸기 */ 
 .btn {
-	border-radius: 0.25rem !important;  
-	/* border-radius: 40px; */
+	/* border-radius: 0.25rem !important; */  
+	border-radius: 40px;
 	text-transform: uppercase;  /* sign in 혹시 소문자로 쓰고싶으면 이거 변경 */
 }
 .form-control {
-	border-radius: 0.25rem !important; 
-	/* border-radius: 40px; */
+	/* border-radius: 0.25rem !important;  */
+	border-radius: 40px;
 }
 
 .btn.btn-primary {
 	background: #fbceb5 !important; 
     border: 1px solid #fbceb5 !important;
     color: #000 !important;
-    /* border-radius: 40px; */
+    border-radius: 40px; 
 }
 /* sign in hover 못찾음 */
 .btn-primary:hover {
@@ -66,8 +66,8 @@ body::after{
 }
 /* sign-up btn radius */
 .rounded {
-	border-radius: 0.25rem !important;/
-    /* border-radius: 4rem !important; */
+	/* border-radius: 0.25rem !important; */
+    border-radius: 4rem !important; 
 }
 .login-wrap .social a:hover {
 	background: #fbceb5 !important;
