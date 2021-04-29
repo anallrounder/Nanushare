@@ -48,21 +48,15 @@
 	
 	// 댓글 수정 취소 
 	function cancleEdit(rNum) {
-		console.log("cancleEdit" + rNum);
 		
 		document.location.reload(true);
 		
-		console.log("되는건가");
 	};  
 	
 	// 댓글 수정 창으로	
  	function answerEdit(bIndex,rid,rcontent,rNum) {
-		console.log(bIndex);
-		console.log(rid);
-		console.log(rcontent);
-		console.log(rNum);
 		
-		// csrf
+	
 		var token = $("meta[name='_csrf']").attr("content");
 		var header = $("meta[name='_csrf_header']").attr("content");
 		$(document).ajaxSend(function(e, xhr, options) {
@@ -70,22 +64,19 @@
 		});
 		
  			
-		$('#modify'+rNum).html( //1번
+		$('#modify'+rNum).html(
 				"<textarea id='edit_acontent'  style='width:100%;height:500%;border:1;overflow:visible;text-overflow:ellipsis;'>"+rcontent+"</textarea>"
-				/* +"<style>#edit_acontent {width:640px; height:80px; resize:none;} </style>" */
 		);
 			
-		$('#abt'+rNum).html( //2번
+		$('#abt'+rNum).html(
 				"<b><a href='javascript:void(0);' onclick='answerEditSave("+bIndex+","+rNum+")' id='btnEdit' class='fa fa-edit' style='color:#937768'> 수정완료</a></b> &nbsp;" 
 				+ "<a href='javascript:void(0);'onclick='cancleEdit("+rNum+")' id='btnCancel' class='fa fa-eraser' style='color:#937768'><b>수정취소</b></a>"
-				/* $(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/" +bindex); */
 		);
- 	}; //댓글 수정창 보기 end
+ 	}; 
 		 			
 	// 댓글 수정 send
-	function answerEditSave(bIndex, rNum){ //3번
+	function answerEditSave(bIndex, rNum){
 		var rcontent = $("#edit_acontent").val();
-		//location.href='answerEdit.do?idx='+rid+"&acontent="+rcontent; //(4번)
 		var bindex = bIndex;
 		var form = {
 				rcontent : rcontent,
@@ -105,21 +96,17 @@
   						title :"댓글 수정 완료" , 
 						icon : "success" , 
   						button :"확인",
-  						//timer: 5000,
   					})
   					.then(function(){
- 						//$(location).attr('href', "${pageContext.request.contextPath}/board/shows/content_view/" +bindex+aaa); // 주소 이동
- 							
- 						// 페이지 새로고침지 원래 위치로 돌아오기 https://devonaws.com/front-end/javascript/javascript-%ED%98%84%EC%9E%AC-%EC%8A%A4%ED%81%AC%EB%A1%A4-%EC%9C%84%EC%B9%98%EC%97%90%EC%84%9C-%EC%83%88%EB%A1%9C%EA%B3%A0%EC%B9%A8/
   						document.location.reload(true);
   					});
   				}
-  			}, //success end
+  			},
   			error : function (e) {
 				console.log(e);
 			}
-		}); //ajax end
-	}; // 댓글 수정 end
+		});
+	}; 
 	
 	// 게시글 삭제
 	function qBoardDelete(b_index) {
@@ -134,7 +121,7 @@
 		
 		$.ajax({
 			type : 'DELETE',
-			url : '${pageContext.request.contextPath}/board/qna/delete/'+b_index,
+			url : '${pageContext.request.contextPath}/board/qna/'+b_index,
 			cache : false,			 				
 			success: function(result){
 				console.log(result);
@@ -146,16 +133,13 @@
 			error:function(e){
 				console.log(e);
 	               alert('삭제 실패');
-	               location.reload(); // 실패시 새로고침하기
+	               location.reload();
 			}
 		});  //ajax end
 		
 	} // 게시글삭제종료
 	
-/* 인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드  */
-/* This script and many more are available free online at
-The JavaScript Source!! http://javascript.internet.com
-Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */			
+//인풋박스에 신청 날짜가 오늘 날짜로 입력되도록 하는 자바스크립트 코드
  function autoDate () {
 		
 		var tDay = new Date();
@@ -188,7 +172,7 @@ Created by: Jean P. May, Jr. | http://www.wideopenwest.com/~thebearmay */
 	
 	</script>
 <style>
-/*  a 태그 후버시 밑줄 속성 제거 */
+
 a:hover { 
  	text-decoration: none;
 }
@@ -229,10 +213,7 @@ a:hover {
         <span class="black-transparent"></span>
         <div class="container">
             <div class="row">
-                <div class="col-md-12"> 
-                    <!-- <h1>문의하기 상세보기</h1>
-                    <p>show your support</p> -->
-                </div>
+                <div class="col-md-12"></div>
             </div>
         </div>
     </div>
@@ -254,8 +235,6 @@ a:hover {
                             <!-- 글 제목 -->
 							<h1>${content_view.btitle}</h1><!-- <hr> -->
 							
-							<!-- 대표 이미지(썸네일 등록한거는) 컨텐트 뷰 에서는 사용 안하기로 -->
-							<%-- <figure class="charity-postthumb"><img src="${pageContext.request.contextPath}/resources/charity/extra-images/blog-detail-img.png" alt=""></figure> --%>
 							<hr>
 							<!-- 넘버링, 계산들 -->
 							<div class="charity-blog-options">
@@ -264,24 +243,15 @@ a:hover {
                                 	<li><i class="fa fa-folder-open"></i>  No. ${content_view.b_index} </li> <!-- 게시판 글번호 -->
                                     <li style="text-indent: 0.3em"><i class="fa fa-calendar"></i>  ${content_view.bdate}</li> <!-- 작성일 -->
                                     <li style="text-indent: 0.3em"><i class="fa fa-comments"></i> 댓글수 ${replyCount} </li> <!-- 댓글수 -->
-                                    													<!-- 댓글 수 카운트는 아직 새로고침 해야 반영된다. -->
                                     <li style="text-indent: 0.3em"><i class="fa fa-mouse-pointer"></i> 조회수 ${content_view.bhit}</li> <!-- 글 조회수 -->
                                 </ul>
                             </div>
                             
                             <!-- 글 내용 -->
                             <p>${content_view.bcontent}</p><br>
-                           
-							
-                            
+                                                       
                             <!-- 버튼 -->
                             <div class="charity-post-tags">
-                                <!-- <div class="charity-tags">
-                                    <span>Tags:</span>
-                                    <a href="#">charity </a>
-                                    <a href="#">/ donation</a>
-                                    <a href="#"> / needy</a>
-                                </div> -->
                                 <div class="charity-blog-social">
                                  	<span></span>
                                     <ul>
@@ -293,7 +263,6 @@ a:hover {
                                         	<li><a id="del_btn"  href="javascript:void(0)" onclick="qBoardDelete('${content_view.b_index}')"  class="fa fa-eraser"> 삭제</a></li>
                                         </c:if>
                                         </sec:authorize>
-                                        <!-- onClick="bcontent_del();" -->
                                     </ul>
                                 
                                 </div>
@@ -316,7 +285,6 @@ a:hover {
 								</c:if>
                              
                              	<c:if test="${! empty reply_view}">
-                             	<%-- <c:set var="listComment" value="${listComment}" /> --%> <!-- 이건 왜 쓰는건지 잘 모르겠당 -->
                              	<c:forEach var="vo" items="${reply_view}">
 	                                
 	                                <li class="rlist">
@@ -424,7 +392,6 @@ a:hover {
 		var rid = $("#rid").val();
 		function checkLogin() {
 			if (rid == undefined) {
-				// 예쁜 alert창
 				// 주소이동하는방법 참고: https://onecutwook.tistory.com/3
 				// .then키워드는 확인 버튼을 클릭하고 나서 이후의 동작을 정의할 수 있다. => 이 화살표 연산자는 익스플로러에서 작동이 되지 않는다고한다.
 				swal({
@@ -436,7 +403,6 @@ a:hover {
 				.then(function(){
 					location.href = '/loginPage'
 				});
-				//alert("로그인 후 글을 작성해주세요.");
 			};
 		};
 		
@@ -462,14 +428,10 @@ a:hover {
     	 $("#insertForm").submit(function(event){
     		event.preventDefault();
     		
-    		//alert("insert 시작");
     		// 전달할 값 넣기
     		var b_index = $("#b_index").val();
     		var rid = $("#rid").val();
     		var rcontent = $("#rcontent").val();
-    		
-    		// 작성된 댓글이 없습니다.
-    		//var nothing = $('#nothing').val();
     		
     		// 오늘날짜 받기
             var tDay = new Date();
@@ -479,9 +441,9 @@ a:hover {
     		if ( tMonth < 10) tMonth = "0"+tMonth;
     		if ( tDate < 10) tDate = "0"+tDate;
           	
-    		var date = (tDay.getFullYear()+"-"+tMonth+"-"+tDate); // 이거를 바로 쏴주면 sql에러가 났었다.
+    		var date = (tDay.getFullYear()+"-"+tMonth+"-"+tDate); 
           
-          	var rdate = new Date(date); //그래서 이렇게 변환해서 서버로 넣으니까 잘 들어간다. 하지만 ajax로 뷰단에 쏴줄때는 위의 date를 뿌려줘야 yyyy-mm-dd형식으로 잘 뿌려진다.
+          	var rdate = new Date(date); 
     		console.log("rdate= " + rdate + "date= " + date ) ;
     		
     		console.log(b_index,  rid, rcontent, rdate);
@@ -536,13 +498,10 @@ a:hover {
     					$('#rcontent').val(''); //인풋박스 초기화
     					$('#nothing').hide();
     					
-    					$(".a-del").click(function(event) { //id는 한번만 calss는 여러번 선택 가능.
-    			    		//하나의 id는 한 문서에서 한 번만 사용이 가능(가장 마지막 혹은 처음게 선택). 
-    			    		event.preventDefault(); 
+    					$(".a-del").click(function(event) {
+
+    						event.preventDefault(); 
     			    	
-    			    		//alert("replyDel click");
-    			    		console.log("replyDel click");
-    			    		
     			    		// csrf
     			    	    var token = $("meta[name='_csrf']").attr("content");
     			            var header = $("meta[name='_csrf_header']").attr("content");
@@ -550,18 +509,18 @@ a:hover {
     			                xhr.setRequestHeader(header, token);
     			            });
     			            
-    			    		var tr = $(this).parent().parent().parent().parent();//자바스크립트 클로저
+    			    		var tr = $(this).parent().parent().parent().parent();
     			    		
     			    		$.ajax({
     			    			type : 'DELETE', //method
-    			    			url : $(this).attr("href"), //주소를 받아오는 것이 두 번째 포인트.
+    			    			url : $(this).attr("href"), 
     			    			cache : false,
     			    			success : function(result) {
     			    				console.log("result: " + result); 
     			    				
     			    					if (result == "SUCCESS") {
     			    					$(tr).remove();
-    			    					//alert("삭제되었습니다.");
+
     			    					swal({
     									  title : "댓글이 삭제되었습니다." , 
     									  icon : "success" , 
@@ -578,25 +537,16 @@ a:hover {
     			    	
     				},
     				error : function(request, status, error) {
-    					//alert("code:" + request.status + "\n" + "message:"
-    					//		+ request.responseText + "\n" + "error:" + error);
-    				} // ajax 에러 시 end
+    				} 
     				
-    		}); //ajax end
-    		 
+    		});     		 
     		
-    		
-    	});//#insertForm end
+    	});
     	
     	// 댓글 삭제
-    	
-    	$(".a-del").click(function(event) { //id는 한번만 calss는 여러번 선택 가능.
-    		//하나의 id는 한 문서에서 한 번만 사용이 가능(가장 마지막 혹은 처음게 선택). 
+    	$(".a-del").click(function(event) {
     		event.preventDefault(); 
     	
-    		//alert("replyDel click");
-    		console.log("replyDel click");
-    		
     		// csrf
     	    var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
