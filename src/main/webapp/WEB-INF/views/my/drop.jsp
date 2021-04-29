@@ -12,6 +12,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+   <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- meta tags -->
 <meta charset="utf-8">
@@ -50,7 +52,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <!-- 상단 로그인버튼 위치 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 <style>
 li {
@@ -61,8 +64,12 @@ table {
 	width: 400px;
 }
 
-a:hover { 
-    text-decoration: none;
+a:hover {
+	text-decoration: none;
+}
+
+.error {
+	color: red;
 }
 </style>
 
@@ -71,7 +78,12 @@ a:hover {
 	function Checkform() {
 		if (secession.agree.checked != true) {
 
-			alert("개인정보 수집에 동의해 주세요.");
+			swal({
+				title : "개인정보 수집에 동의해 주세요." , 
+				icon : "error" , 
+				button : true 
+			});
+			/* alert("개인정보 수집에 동의해 주세요."); */
 			frm.confirm.focus();
 			return false;
 		}
@@ -91,8 +103,7 @@ a:hover {
 							xhr.setRequestHeader(header, token);
 						});
 
-						$('#secession')
-								.submit(
+						$('#secession').submit(
 										function(event) { //탈퇴 처리
 											event.preventDefault();
 
@@ -113,37 +124,49 @@ a:hover {
 														url : "${pageContext.request.contextPath}/my/drop/check",
 														contentType : "application/json", /* charset=utf-8' */
 														cache : false,
-														data : JSON
-																.stringify(check),
-														async : "false",
+														data : JSON.stringify(check),
+														/* async : "false", */
 														datatype : 'text',
 														success : function(Checkform) {
 															console.log(Checkform);
-
+															
 															if (Checkform == true) {
 																console.log("success");
 
-																alert("탈퇴되었습니다. 그동안 이용해주셔서 감사합니다. ");
-
-																$(location).attr('href',
+																/* alert("탈퇴되었습니다. 그동안 이용해주셔서 감사합니다. "); */
+																swal({
+								            						title : "탈퇴되었습니다. 그동안 이용해주셔서 감사합니다. " , 
+								            						icon : "success" , 
+								            						button : true 
+								            					});
+																$(location).attr(
+																				'href',
 																				"${pageContext.request.contextPath}/deleteCooki");
 																/* $(location)
 																.attr(
 																		'href',
 																		"${pageContext.request.contextPath}/member/logout"); */
 
-															}else{
-																alert("정보를 알맞게 다시 입력해주세요");
-																
+															} else {
+																/* alert("정보를 알맞게 다시 입력해주세요"); */
+																swal({
+								            						title : "정보를 알맞게 다시 입력해주세요" , 
+								            						icon : "error" , 
+								            						button : true 
+								            					});
+
 															}
 														},
 
 														error : function(error) {
 
-															alert("필수 사항을 입력해주세요.");
-
-															console.log("에러 : "
-																	+ error);
+															/* alert("필수 사항을 입력해주세요."); */
+															swal({
+									    						title : "필수 사항을 입력해주세요." , 
+									    						icon : "success" , 
+									    						button : true 
+									    					});
+															console.log("에러 : " + error);
 														}
 
 													}); //ajax end
@@ -243,7 +266,8 @@ a:hover {
 
 
 								<script>
-									$("#secession").validate(
+									$("#secession")
+											.validate(
 													{
 														rules : {
 															/* 각 태그의 규칙을 설정 */
@@ -294,14 +318,7 @@ a:hover {
 															}
 														}
 
-													}); //validate end
-									/* $.validator.addMethod(
-													"passwordCK",
-													function(value, element) {
-														return this.optional(element)
-												|| /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/
-												.test(value);
-													}); */
+													});
 								</script>
 							</div>
 						</div>

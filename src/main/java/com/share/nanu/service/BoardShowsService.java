@@ -76,8 +76,6 @@ public interface BoardShowsService {
 	//이미지 첨부
 	public void fileUpload(AttachmentVO attachmentVO);
 
-
-	
 	
 	/* 게시판 삭제 + 댓글 + 첨부파일 삭제 */
 
@@ -92,8 +90,5 @@ public interface BoardShowsService {
 	
 	//인증글 삭제
 	public void deleteCertificationBoard(int b_index);
-		
-		
-	
 
 }
