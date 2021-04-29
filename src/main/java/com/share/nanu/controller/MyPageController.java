@@ -77,7 +77,7 @@ public class MyPageController {
 		// log.info(mvo.getMember_id().toString());
 		mav.setViewName("/my/ask");
 		System.out.println("1.나의문의내역 +" + md.getUsername());
-		mav.addObject("list1", mgservice.myList1(cri, md.getUsername()));// 나의문의내역
+		mav.addObject("list1", mgservice.ask(cri, md.getUsername()));// 나의문의내역
 
 		// 페이징
 		int total = mgservice.getTotalCount1(cri, md.getUsername());
@@ -97,7 +97,7 @@ public class MyPageController {
 		// mav.addObject("memberid", md.getUsername(mvo));
 
 		System.out.println("2.인증내역 +" + md.getUsername());
-		mav.addObject("list2", mgservice.myList2(cri, md.getUsername()));// 나의인증내역
+		mav.addObject("list2", mgservice.content(cri, md.getUsername()));// 나의인증내역
 
 		// 페이징
 		int total = mgservice.getTotalCount2(cri, md.getUsername());
@@ -118,7 +118,7 @@ public class MyPageController {
 		// mav.addObject("mycon", md.getmember().getMember_id());//id만 넘겨줌
 		// mav.addObject("mycon", md.getUsername());
 
-		mav.addObject("list3", mgservice.myList3(cri, md.getUsername()));// 나의나눔내역
+		mav.addObject("list3", mgservice.give(cri, md.getUsername()));// 나의나눔내역
 		// 페이징
 		int total = mgservice.getTotalCount3(cri, md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
@@ -134,7 +134,7 @@ public class MyPageController {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.setViewName("/my/reply");
-		mav.addObject("list4", mgservice.myList4(cri, md.getUsername()));// 나의문의내역
+		mav.addObject("list4", mgservice.reply(cri, md.getUsername()));// 나의문의내역
 		// 페이징
 		int total = mgservice.getTotalCount4(cri, md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
@@ -148,7 +148,7 @@ public class MyPageController {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.setViewName("/my/pay");
-		mav.addObject("list5", mgservice.myList5(cri, md.getUsername()));// 나의문의내역
+		mav.addObject("list5", mgservice.pay(cri, md.getUsername()));// 나의문의내역
 		// 페이징
 		int total = mgservice.getTotalCount5(cri, md.getUsername());
 
@@ -164,7 +164,7 @@ public class MyPageController {
 			mav.addObject("username", md.getmember().getName());
 		}
 		mav.setViewName("/my/point");
-		mav.addObject("list6", mgservice.myList6(cri, md.getUsername()));// 나의문의내역
+		mav.addObject("list6", mgservice.point(cri, md.getUsername()));// 나의문의내역
 		// 페이징
 		int total = mgservice.getTotalCount6(cri, md.getUsername());
 
@@ -319,45 +319,5 @@ public class MyPageController {
 
 	}
 
-	// 출석체크(event default)
-	@GetMapping("/my/event/check")
-	public ModelAndView attendance(ModelAndView mav, @AuthenticationPrincipal MemberDetails md, PointVO pointVO)
-			throws Exception {
-		if (md != null) {
-			mav.addObject("username", md.getmember().getName());
-		}
-		
-		System.out.println("룰렛출첵페이지");
-		pointVO.setMember_id(md.getUsername());// 로그인한회원정보 불러오려고
-		mav.addObject("pointvo", mgservice.mypnt(pointVO));
-		System.out.println(mgservice.mypnt(pointVO));
-
-		mav.setViewName("/eventView/attendcheck");
-		return mav;
-	}
-
-	// 이벤트 포인트 부여
-	@PutMapping("/my/event/check/getpoint")
-	public ResponseEntity<String> event(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
-			ModelAndView mav) {
-
-		System.out.println("이벤트룰렛");
-		ResponseEntity<String> entity = null;
-		try {
-			int count = mgservice.mycount(pointVO, md.getUsername());
-			log.info("count" + count);
-
-			if (count >= 1) {
-				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
-			} else {
-				mgservice.getMypoint(pointVO, md.getUsername());
-				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		return entity;
-	}
 
 }

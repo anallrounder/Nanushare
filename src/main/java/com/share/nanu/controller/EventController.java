@@ -7,11 +7,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.share.nanu.VO.PointVO;
 import com.share.nanu.security.MemberDetails;
+import com.share.nanu.service.EventService;
 import com.share.nanu.service.MyPageService;
 
 import lombok.AllArgsConstructor;
@@ -23,15 +26,9 @@ import lombok.extern.slf4j.Slf4j;
 public class EventController {
 	
 	@Autowired
-	private MyPageService mgservice;
+	private EventService eventService;
 
-	// 출석체크(event default)
-//	@RequestMapping("/event/check")
-//	public ModelAndView attendance(ModelAndView mav) throws Exception {
-//			
-//		mav.setViewName("/eventView/attendcheck"); 
-//		return mav;
-//	}
+	
 
 	// 테스트 디폴트 뷰(test default)
 	@RequestMapping("/event/test")
@@ -43,6 +40,48 @@ public class EventController {
 		}
 		mav.setViewName("/eventView/testDefault");
 		return mav;
+	}
+	
+	
+	// 출석체크(event default)
+	@GetMapping("/my/event/check")
+	public ModelAndView attendance(ModelAndView mav, @AuthenticationPrincipal MemberDetails md, PointVO pointVO)
+			throws Exception {
+		if (md != null) {
+			mav.addObject("username", md.getmember().getName());
+		}
+		
+		System.out.println("룰렛출첵페이지");
+		pointVO.setMember_id(md.getUsername());// 로그인한회원정보 불러오려고
+		mav.addObject("pointvo", eventService.mypnt(pointVO));
+		System.out.println(eventService.mypnt(pointVO));
+
+		mav.setViewName("/eventView/attendcheck");
+		return mav;
+	}
+
+	// 출석체크 이벤트 포인트 부여
+	@PutMapping("/my/event/check/getpoint")
+	public ResponseEntity<String> event(@RequestBody PointVO pointVO, @AuthenticationPrincipal MemberDetails md,
+			ModelAndView mav) {
+
+		System.out.println("이벤트룰렛");
+		ResponseEntity<String> entity = null;
+		try {
+			int count = eventService.mycount(pointVO, md.getUsername());
+			log.info("count" + count);
+
+			if (count >= 1) {
+				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
+			} else {
+				eventService.getMypoint(pointVO, md.getUsername());
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 	
 	@GetMapping("/my/event/test/animalFace")
@@ -64,13 +103,13 @@ public class EventController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			int count = mgservice.myAnimalFaceTestCount(pointVO, md.getUsername());
+			int count = eventService.myAnimalFaceTestCount(pointVO, md.getUsername());
 			log.info("count" + count);
 
 			if (count >= 1) {
 				entity = new ResponseEntity<String>("FAIL", HttpStatus.OK);
 			} else {
-				mgservice.getMyAnimalFacePoint(pointVO, md.getUsername());
+				eventService.getMyAnimalFacePoint(pointVO, md.getUsername());
 				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 			}
 		} catch (Exception e) {
@@ -80,10 +119,6 @@ public class EventController {
 		
 		return entity;
 	}
-	
-	
-	
-	
 
 	// 게임 디폴트 뷰(test default)
 	@RequestMapping("/event/game")

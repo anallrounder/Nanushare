@@ -79,8 +79,16 @@
 <script type="text/javascript">
 	//결제취소 
 	function cancle(paynum, price) {
-
-		if (confirm("결제를 취소하시겠습니까?") == true) {//결제 취소여부 다시 확인
+		swal({
+			title:"결제를 취소하시겠습니까?",
+			type:"warning",
+			showCancelButton:true,
+			confirmButtonText:"네",
+			cancelButtonText:"아니오",
+			closeOnCnfirm: false,
+			closeOnCancel:false			
+})
+		if (swal("결제를 취소하시겠습니까?","","warning") == true) {//결제 취소여부 다시 확인
 
 			var token = $("meta[name='_csrf']").attr("content");
 			var header = $("meta[name='_csrf_header']").attr("content");
@@ -111,6 +119,7 @@
 						swal({
 							title : "결제가 취소 되었습니다." , 
 							icon : "success" , 
+							timer : 2000,
 							button : true 
 						});
 						//alert("결제가 취소 되었습니다.");
@@ -334,7 +343,7 @@ a:hover {
 															</c:if></td>
 														<td><c:if test="${list5.dntstat == 'cancelled'}">
 																<button class="charity-simple-blog-butn" class="paycc"
-																	type="button" onclick="alert('이미 취소된 결제 건입니다.')">취소완료</button>
+																	type="button" onclick="swal('이미 취소된 결제 건입니다.','','error')">취소완료</button>
 															</c:if> <c:if test="${list5.dntstat == 'paid'}">
 																<button class="charity-simple-blog-btn" class="paycc"
 																	type="button"
