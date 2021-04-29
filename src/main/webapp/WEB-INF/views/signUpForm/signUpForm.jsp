@@ -356,7 +356,7 @@ css에서 찾음...!
 
 </head>
 
-<body class="img js-fullheight">
+<body class="img">
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
