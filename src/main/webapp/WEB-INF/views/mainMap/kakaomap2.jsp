@@ -162,7 +162,7 @@
 			success: function(data) {
 				
 				var content = '';
-				content += '<div>';
+				content += '<div style="width: 200px;">';
 				content += '<h4 class="infowindow-title"><i class="fas fa-heart"></i>' + branch + '</h4>';
 				content += '<div class="infowindow-item">';
 				
