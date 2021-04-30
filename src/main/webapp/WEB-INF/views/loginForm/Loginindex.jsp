@@ -20,8 +20,9 @@
 <style type="text/css">
 /* 랜덤 이미지 */
 body {
-	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
-	background-size: cover;	
+	/* background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900"); */
+	background-image : url("/resources/loginform/images/img_8.jpg");
+	background-size: cover;	  
 }
 
 /* 바디 아래부분 흰색 줄어들게 패딩 줄이기 */

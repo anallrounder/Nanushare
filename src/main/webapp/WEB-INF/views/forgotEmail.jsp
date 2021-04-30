@@ -50,7 +50,8 @@
     
     <style type="text/css">
     	body{
-			background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
+    		background-image : url("/resources/loginform/images/img_10.jpg");
+			/* background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900"); */
 			background-size: cover;
 			/*opacity: 0.7; */
 			/* background-color: rgba(255,255,255,0.1); */

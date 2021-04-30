@@ -51,7 +51,8 @@
     
     <style type="text/css">
     body {
-			background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
+    		background-image : url("/resources/loginform/images/img_11.jpg");
+			/* background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900"); */
 			background-size: cover;	
 			
 			
