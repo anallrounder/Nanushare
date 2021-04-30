@@ -12,9 +12,6 @@ import com.share.nanu.mapper.QnaBoardMapper;
 
 public interface QnaBoardService {
 
-	// 기본 리스트
-	public List<BoardVO> getlist(); 
-
 	// 페이징
 	public List<BoardVO> getlist(Criteria cri); 
 	public int getTotal(Criteria cri); 
