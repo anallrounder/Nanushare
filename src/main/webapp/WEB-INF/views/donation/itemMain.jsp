@@ -43,9 +43,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style type="text/css">
-/*  a 태그 후버시 밑줄 속성 제거 */
+/*  a 태그 후버시 밑줄, 파랑 속성 제거 */
 a:hover { 
  	text-decoration: none;
+ 	color:#333;
 }
 
 #forimg {

@@ -27,7 +27,6 @@
     <!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
     <%-- <sec:csrfMetaTags/> --%>
     <!-- 헤더 안에 추가  -->
     <!-- csrf 관련이슈 해결방법 : jsp에 meta 태그추가(csrf값 얻기위해) -->
@@ -37,29 +36,151 @@
 
     <title>비밀번호 찾기</title>
 
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <link rel="stylesheet" href="/resources/signUpForm/css/style.css">
     
     
     
-    <style type="text/css">
-    body {
-			background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
-			background-size: cover;	
-			
-			
-		}
-    	.error {
-    		color : red;   	
-    	}
-    </style>
+<style type="text/css">
+body {
+	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
+	background-size: cover;	
+}
+.error {
+    color : red;   	
+}
+
+body{
+	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
+	background-size: cover;
+	/*opacity: 0.7; */
+	/* background-color: rgba(255,255,255,0.1); */
+}
+/* 바디 배경색 투명도 */
+body::after{
+	/* position: absolute; */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+  /*   height:120%; */
+    background:black;
+	z-index: -1;
+	opacity:0.6;
+}
+.heading-section {
+	color:white;
+}
+
+.error {
+  	color : red;   	
+}
+
+/* 인풋박스 스타일 */
+.form-control {
+    background: transparent;
+    border: none;
+    height: 55px;
+    color: white;
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+}
+.form-control::-webkit-input-placeholder {
+   /* Chrome/Opera/Safari */
+   color: rgba(255, 255, 255, 0.8) !important;
+   font-size: 14px;
+  /*  font-family: 'YiSunShinDotumM';  */
+}
+
+/* placeholder color */
+.form-control::-moz-placeholder {
+   /* Firefox 19+ */
+   color: rgba(255, 255, 255, 0.8) !important; 
+   font-size: 14px;
+}
+.form-control:-ms-input-placeholder {
+   /* IE 10+ */
+   color: rgba(255, 255, 255, 0.8) !important; 
+   font-size: 14px;
+}
+.form-control:-moz-placeholder {
+   /* Firefox 18- */
+   color: rgba(255, 255, 255, 0.8) !important;
+   font-size: 14px; 
+}
+.form-group .icon {
+    position: absolute;
+    top: 50%;
+    left: 17px;
+    margin-top: 7px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 인풋박스 제목 */
+.form-group label {
+	font-family: 'YiSunShinDotumM';
+/*     text-transform: uppercase; */
+    /* font-weight: bold; */
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: white;
+    display:inline;
+    margin-left:17px;
+}
+
+/* 인증번호 전송버튼 */
+.btn-warning {
+    color: white;
+    font-weight:bold;
+    background-color: #E85832;
+    border-color: #E85832;
+    display:inline;
+    margin-top:-2px;
+}
+.btn {
+	cursor: pointer;
+    border-radius: 40px;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    font-size: 12px;
+    
+}
+.btn-warning:hover {
+	display:inline;
+    color: #C1AFAB;
+    background-color: #96361D;
+    border-color: #96361D;
+}
+
+/* Find Email btn */
+.btn.btn-primary {
+	margin-top:10px;
+	font-weight: bold;
+	font-size:14px;
+	text-transform: uppercase;
+    background: #FFAE73 !important;
+    border: 1px solid #FFAE73 !important;
+    color: white !important;
+}
+.btn.btn-primary:hover {
+    /* background: #C1AFAB !important; */
+    background: #fbceb5 !important;
+    border: 1px solid #fbceb5 !important;
+    color: #333 !important;
+    font-weight: bold;
+     text-transform: uppercase; 
+}
+a:hover { 
+ 	text-decoration: none;
+}
+</style>
 
    <script type="text/javascript">
         $(function() {
@@ -109,7 +230,6 @@
                     }
                 }); //ajax			
             });
-            
         	
             var isCertification = false;
             var key = "";
@@ -188,8 +308,11 @@
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Nanushare Change Password</h2>
+                <div class="col-md-6 text-center mt-5 mb-2">
+                    <h2 class="heading-section">
+                    	<img src="/resources/nanulogo_ico_convert.ico" style="width:8%; margin-bottom:10px; margin-right:5px;">
+                    	 Nanushare Change Password
+                    </h2>
                 </div>
             </div>
             <div class="row justify-content-center">

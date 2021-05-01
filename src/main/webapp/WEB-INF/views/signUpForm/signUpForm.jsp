@@ -215,7 +215,6 @@ body::after{
    position: relative;
    /* display: table-cell; */
   /*  max-height:885px; */
-  
 }
 /* 모르겠다.ㅠ 따라해볼려고했는데 카카오는 이미지를 바디에 안넣었... */
 @media (max-width: 580px)
@@ -330,20 +329,20 @@ css에서 찾음...!
 }
 
 
-/* signup btn */
+/* sign up btn */
 .btn.btn-primary {
 	margin-top:10px;
 	font-weight: bold;
 	font-size:14px;
 	text-transform: uppercase;
-    background: #fbceb5 !important;
-    border: 1px solid #fbceb5 !important;
-    color: #333 !important;
+    background: #FFAE73 !important;
+    border: 1px solid #FFAE73 !important;
+    color: white !important;
 }
 .btn.btn-primary:hover {
     /* background: #C1AFAB !important; */
-    background: white !important;
-    border: 1px solid white !important;
+    background: #fbceb5 !important;
+    border: 1px solid #fbceb5 !important;
     color: #333 !important;
     font-weight: bold;
      text-transform: uppercase; 
@@ -351,8 +350,11 @@ css에서 찾음...!
 .img {
 max-height:897.34;
 }
-html {
+/* html {
 overflow:overlay;
+} */
+#submit-btn:hover{
+	background: white !important;
 }
 </style>
 

@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html >
 <html>
 <head>
 
 <!-- ckeditor -->
-<script
-	src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 
 <!-- meta tags -->
 <meta charset="utf-8">
@@ -16,43 +14,35 @@
 
 <!-- csrf -->
 <meta name="_csrf" content="${_csrf.token}">
-<meta id="_csrf_header" name="_csrf_header"
-	content="${_csrf.headerName}">
+<meta id="_csrf_header" name="_csrf_header"	content="${_csrf.headerName}">
 
 <title>나누셰어 - 문의하기</title>
 
 <!-- CSS -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
-<link
-	href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/color.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/bootstrap.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/fontawesome-all.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/flaticon.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/slick-slider.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/fancybox.css">
+<link href="${pageContext.request.contextPath}/resources/charity/css/jplayer.css"	rel="stylesheet">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/style.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/color.css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/charity/css/responsive.css">
 
 <!-- 웹페이지 탭 로고이미지 삽입  -->
-<link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
+<link rel="shortcut icon" type="image/x-icon"	href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico">
 
 <!-- 상단 로그인버튼 위치 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 
 </head>
 <style>
+/*  a 태그 후버시 밑줄, 파랑 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+ 	color:#333;
+}
 .charity-simple-blog-btn {
 	border: 0;
 }
