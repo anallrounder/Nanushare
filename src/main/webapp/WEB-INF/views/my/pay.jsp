@@ -113,10 +113,12 @@
 							icon : "success" , 
 							timer : 2000,
 							button : true 
+						}).then(function () {
+							$(location).attr('href',
+							"${pageContext.request.contextPath}/my/pay");
 						});
-						//alert("결제가 취소 되었습니다.");
-						$(location).attr('href',
-								"${pageContext.request.contextPath}/my/pay");
+						
+						
 					}
 				},// success end
 				error : function(e) {

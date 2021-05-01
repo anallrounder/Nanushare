@@ -72,6 +72,11 @@
 .charity-sub-btn:hover {
 	background-color: #78665A;
 }
+/*  a 태그 후버시 밑줄, 파랑 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+ 	color:#333;
+}
 </style>
 
 <body style="background-color: #f9f9fb">
