@@ -6,14 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.share.nanu.mapper.QnaBoardMapper">
 	
-	<!-- 공지게시판 리스트 -->
-	<select id="getlist" resultType="com.share.nanu.VO.BoardVO">
-		<![CDATA[ 
-			select * from board where bcat_num = 1
-		]]>
-	</select>
-	
-	<!-- /*+ INDEX_DESC(board pk_board) */ -->
 	<!-- 공지게시판 페이징 리스트 -->
 	<select id="getlistWithPaging" resultType="com.share.nanu.VO.BoardVO">
 		<![CDATA[

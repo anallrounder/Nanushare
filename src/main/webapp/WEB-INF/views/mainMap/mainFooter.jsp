@@ -58,7 +58,6 @@
                             <li><a href="${pageContext.request.contextPath}/board/shows/list">나눔인증</a></li>
                             <li><a href="${pageContext.request.contextPath}/my/event/check">이벤트</a></li>
                             <li><a href="${pageContext.request.contextPath}/board/notice">공지사항</a></li>
-                            <li><a href="${pageContext.request.contextPath}/board/faq">FAQ</a></li>
                             <li><a href="${pageContext.request.contextPath}/board/qna">문의하기</a></li>
                         </ul>
                     </aside>

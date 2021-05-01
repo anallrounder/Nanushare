@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/resources/AdminLTE-master/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/resources/AdminLTE-master/dist/css/adminlte.min.css">
-
+  
  <!-- meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,6 +49,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
+  	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
 
 <style>
 body {
@@ -72,6 +73,12 @@ body {
 .black-transparent {
 	opacity:50%;
 }
+
+.user-panel img {
+
+	margin: 0px 0px 0px 15px;
+}
+
 
 </style>
 
@@ -139,6 +146,13 @@ body {
             <a href="/admin/member" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>회원 관리</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="/admin/room" class="nav-link">
+              <i class="fas fa-comment-dots nav-icon"></i>
+              <p>채팅 관리</p>
             </a>
           </li>
           
@@ -516,8 +530,8 @@ body {
 	              {
 	                  ticks: {
 	                      beginAtZero: true,
-	                      stepSize: 200,
-	                      max: 2000
+	                      stepSize: 1000,
+	                      max: 10000
 	                  }
 	              }
 	          ]

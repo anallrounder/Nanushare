@@ -86,7 +86,6 @@ width: 270px;
 						<li><a href="${pageContext.request.contextPath}/board/notice">더하기</a>
 							<ul class="children">
 								<li><a href="${pageContext.request.contextPath}/board/notice">공지사항</a></li>
-								<li><a href="${pageContext.request.contextPath}/board/faq">FAQ</a></li>
 								<li><a href="${pageContext.request.contextPath}/board/qna">문의하기</a></li>
 							</ul>
 						</li>	

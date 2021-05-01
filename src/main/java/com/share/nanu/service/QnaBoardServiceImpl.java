@@ -23,13 +23,6 @@ public class QnaBoardServiceImpl implements QnaBoardService {
 	@Autowired
 	private QnaBoardMapper mapper;
 	
-	//리스트
-	@Override
-	public List<BoardVO> getlist() {
-		
-		return mapper.getlist();
-	}
-
 	// 페이징 리스트
 	@Override
 	public List<BoardVO> getlist(Criteria cri) {

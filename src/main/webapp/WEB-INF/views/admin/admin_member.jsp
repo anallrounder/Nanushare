@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <!-- Admin style -->
 <link rel="stylesheet" href="/resources/admin/admin_style.css">
+   <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
   	
 <style>
 body {
@@ -71,6 +72,12 @@ body {
 .black-transparent {
 	opacity:50%;
 }
+
+.user-panel img {
+
+	margin: 0px 0px 0px 15px;
+}
+
 
 </style>
 
@@ -130,17 +137,24 @@ body {
 		               with font-awesome or any other icon font library -->
 		          <li class="nav-item">
 		            <a href="/admin/stat" class="nav-link">
-		             <i class="nav-icon fas fa-donate"></i>
+						<i class="nav-icon fas fa-donate"></i>
 		              <p>후원금 관리</p>
 		            </a>
 		          </li>
 		          
 		          <li class="nav-item">
 		            <a href="#users" class="nav-link active" data-toggle="tab">
-		              <i class="nav-icon fas fa-users"></i>
+						<i class="nav-icon fas fa-users"></i>
 		              <p>회원 관리</p>
 		            </a>
 		          </li>
+		          
+		          <li class="nav-item">
+           			<a href="/admin/room" class="nav-link">
+              			<i class="fas fa-comment-dots nav-icon"></i>
+             			 <p>채팅 관리</p>
+           			</a>
+         		 </li>
 		          
 		          <li class="nav-item"><%-- ${pageContext.request.contextPath}/admin/item --%>
 		            <a href="#" class="nav-link" data-toggle="tab">

@@ -52,6 +52,10 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
+  	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+  	
+  	<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   	
 <style>
 body {
@@ -75,6 +79,12 @@ body {
 .black-transparent {
 	opacity:50%;
 }
+
+.user-panel img {
+
+	margin: 0px 0px 0px 15px;
+}
+
 
 </style>
 
@@ -144,6 +154,13 @@ body {
             <a href="/admin/member" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>회원 관리</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="/admin/room" class="nav-link">
+              <i class="fas fa-comment-dots nav-icon"></i>
+              <p>채팅 관리</p>
             </a>
           </li>
           
@@ -245,7 +262,7 @@ body {
 										</tbody>
 									</table>
 									<div class="d-flex justify-content-center">
-									<button type="submit" class="charity-simple-blog-btn">업데이트</button>
+									<button type="submit" class="charity-simple-blog-btn" >업데이트</button>
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 									</div>
 								</form>
@@ -360,6 +377,18 @@ https://stackoverflow.com/questions/36207203/uncaught-typeerror-datepicker-is-no
 <script>
 $(document).ready(function() { 
 	$('.datepicker').datepicker();
+	
+	$(".charity-simple-blog-btn").click(function(event){
+		event.preventDefault();
+		
+		swal({
+		title: "업데이트 완료!",
+		text: "물품 수량이 변경되었습니다",
+		type: "success",
+		}).then(function(){ 
+			document.getElementsByClassName('charity-volunteer-form').submit();
+			});
+	});
   });
 	
 	/* dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.

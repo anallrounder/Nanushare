@@ -53,6 +53,10 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<!-- Admin style -->
   	<link rel="stylesheet" href="/resources/admin/admin_style.css">
+  	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/nanulogo_ico_convert.ico"> 
+  	
+  	<!-- sweet alert cdn : https://sweetalert.js.org/guides/ -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 body {
@@ -88,6 +92,12 @@ body {
 	vertical-align: middle;
 	line-height: 150px;
 }
+
+.user-panel img {
+
+	margin: 0px 0px 0px 15px;
+}
+
 
 </style>
 
@@ -157,6 +167,13 @@ body {
             <a href="/admin/member" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>회원 관리</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="/admin/room" class="nav-link">
+              <i class="fas fa-comment-dots nav-icon"></i>
+              <p>채팅 관리</p>
             </a>
           </li>
           
@@ -359,11 +376,11 @@ https://stackoverflow.com/questions/36207203/uncaught-typeerror-datepicker-is-no
 
 $(document).ready(function() {
 	$("#bklistCheck").click(function(event){
-			alert("블랙리스트로 변경되었습니다");
+		swal("블랙리스트로 변경되었습니다");
 	});
 	
 	$("#nonebklist").click(function(event){
-		alert("블랙리스트가 해제되었습니다");
+		swal("블랙리스트가 해제되었습니다");
 });
 
    

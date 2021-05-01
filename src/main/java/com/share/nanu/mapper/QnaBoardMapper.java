@@ -11,9 +11,6 @@ import com.share.nanu.VO.BoardreplyVO;
 @Mapper
 public interface QnaBoardMapper {
 
-	// 일반 리스트
-	public List<BoardVO> getlist();
-
 	// 페이징 리스트
 	public List<BoardVO> getlistWithPaging(Criteria cri);
 	public int getTotalCount(Criteria cri);

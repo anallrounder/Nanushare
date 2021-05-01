@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.share.nanu.VO.MgetitemVO;
@@ -93,7 +97,7 @@ public class NanuMainController {
 	
 	//오프라인 기계 실시간 test
 	@RequestMapping("/machine")
-	public ModelAndView offlineVm (ModelAndView mov) throws Exception {
+	public ModelAndView offlineVm (ModelAndView mov, HttpServletRequest request) throws Exception {
 		mov.setViewName("mainMap/vm"); 
 		mov.addObject("vmcat", mainService.getVmCat()); //vm 종류(카테고리)
 		mov.addObject("vminven", mainService.getVmInven());
@@ -102,6 +106,10 @@ public class NanuMainController {
 		InetAddress myIP = InetAddress.getLocalHost();
 		mov.addObject("ip", myIP.getHostAddress());
 		log.info("My IP Address is:" + myIP.getHostAddress());
+		//String ip = null;
+		//request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		//ip = request.getRemoteAddr();
+		//mov.addObject("ip", ip);
 		
 		return mov;
 	}
