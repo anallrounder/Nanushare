@@ -252,6 +252,13 @@ a:hover {
                                                        
                             <!-- 버튼 -->
                             <div class="charity-post-tags">
+                            	<div class="charity-tags">
+                              		<sec:authorize access="hasRole('ADMIN')">
+	                            	<span style="color:orange;">관리자:</span>
+	                            	<%-- <a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 수정 </a> --%>
+	                            	<a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser" style="color:orange;"> 글삭제</a>
+	                            	</sec:authorize>
+	                           	</div>
                                 <div class="charity-blog-social">
                                  	<span></span>
                                     <ul>

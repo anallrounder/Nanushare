@@ -13,7 +13,7 @@
     font-weight: normal;
     font-style: normal;
 }
-
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css); /* 스포카 한 산스 네오 */
 /* 
 @font-face적용방법 https://webclub.tistory.com/261 
 이순신체 웹폰트 가져온 주소 https://noonnu.cc/font_page/66
@@ -85,14 +85,16 @@
 body {
 	background-color: #ffffff;
 	color: #313539;
-	font-family: 'Ubuntu', sans-serif;
+	/* font-family: 'Ubuntu', sans-serif;  */
+	font-family: "Noto Sans KR";
+	
 	font-size: 16px;
 	line-height: 24px;
 }
 
 body h1, body h2, body h3, body h4, body h5, body h6 {
 	color: #333333;
-	font-family: 'Montserrat', 'YiSunShinDotumM', sans-serif;
+	font-family: 'YiSunShinDotumM', 'Montserrat', sans-serif;
 	font-style: normal;
 	line-height: 1.5;
 	letter-spacing: 1.1px;
@@ -141,11 +143,15 @@ p {
 	line-height: 26px;
 	margin-bottom: 10px;
 	letter-spacing: 0.8px;
+	/* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
+	font-family: "Noto Sans KR";
 }
 
 a {
 	color: #333333;
 	text-decoration: none;
+	/* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
+	font-family: "Noto Sans KR";
 }
 
 a:hover, a:focus, a:active {
@@ -332,6 +338,7 @@ address {
 	float: left;
 	width: 100%;
 	font-family: 'Montserrat', sans-serif;
+	font-family: 'YiSunShinDotumM';
 }
 /* TopStrip */
 .charity-top-strip {
@@ -692,6 +699,7 @@ a.menu-link {
 	text-align: center;
 	margin-top: -100px;
 	font-family: 'Montserrat', sans-serif;
+	font-family: 'YiSunShinDotumM';
 }
 
 .align-left-caption.charity-banner-caption {
@@ -1158,7 +1166,8 @@ small.charity-cause-raised {
 
 .charity-counter small {
 	font-size: 20px;
-	font-family: 'Montserrat', 'YiSunShinDotumM', sans-serif;
+	font-family: 'Montserrat', sans-serif;
+	font-family: 'YiSunShinDotumM';
 	font-style: normal;
 	display: inline-block;
 	color: #333;
@@ -3438,7 +3447,9 @@ blockquote {
 	font-size: 13px;
 	color: #fff;
 	position: relative;
-	font-family: 'Gothic A1', sans-serif;
+	/* font-family: 'Gothic A1', sans-serif; */
+	/* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
+	font-family: "Noto Sans KR";
 	padding: 6px 10px;
 	border-radius: 3px;
 	margin: 15px 0 0 5px;
@@ -3449,7 +3460,9 @@ blockquote {
 	font-size: 12px;
 	color: #fff;
 	position: relative;
-	font-family: 'Gothic A1', sans-serif;
+	/* font-family: 'Gothic A1', sans-serif; */
+	/* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
+	font-family: "Noto Sans KR";
 	padding: 5px 10px;
 	border-radius: 3px;
 	margin: 15px 0 0 9px;
@@ -3884,6 +3897,7 @@ blockquote {
 	font-size: 18px;
 	color: #fff;
 	font-family: 'Montserrat', sans-serif;
+	font-family: 'YiSunShinDotumM';
 }
 
 .charity-join-btn {
@@ -4352,14 +4366,16 @@ blockquote {
 	margin: 0 0 0 133px;
 }
 .charity-item-text h6 {
-	font-family: "Noto Sans KR";
+	font-family: "Noto Sans KR"; 
+	/* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
 	font-weight: 500;
 	font-size: 18px;
 	margin-bottom: 7px;
 }
 
 .charity-item-text p {
-	font-family: "Noto Sans KR";
+	font-family: "Noto Sans KR"; 
+	/* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
 	font-weight: 300;
 	font-size: 15px;
 	display: inline-block;
