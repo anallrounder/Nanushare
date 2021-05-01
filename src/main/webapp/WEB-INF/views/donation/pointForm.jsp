@@ -169,11 +169,11 @@ addLoadEvent(function() {
                                 <ul class="chaity-contact-info">
                                     <li>
                                         <h6>포인트 나눔 관련:</h6>
-                                        <span>+123 45 678</span>
+                                        <span>02-722-1481</span>
                                     </li>
                                     <li>
                                         <h6>Email:</h6>
-                                        <a href="mailto:name@email.com">info@example.com</a>
+                                        <a href="mailto:name@email.com">info@nanushare.com</a>
                                     </li>
                                 </ul>
                             </div> <!-- charity-team-contact -->

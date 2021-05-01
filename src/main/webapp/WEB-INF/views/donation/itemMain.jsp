@@ -119,7 +119,7 @@ a:hover {
                             
                             <figure class="charity-cause-thumb"><img src="/resources/extra-images/cause-detail-img.png" alt=""></figure>
                             <h3 style="font-size:26px;">물품 나누기 소개 및 신청 방법 안내</h3>
-                           
+                            <br>
                            <!-- 수정필요한 부분 -->
                           <!--   <ul class="charity-cause-options">
                                 <li>
