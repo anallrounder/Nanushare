@@ -28,7 +28,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.share.nanu.VO.DonationVO;
 import com.share.nanu.security.MemberDetails;
+import com.share.nanu.service.BoardShowsService;
 import com.share.nanu.service.DonationService;
+import com.share.nanu.service.NoticeBoardService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,11 +50,15 @@ public class DonationImportController {
 	private final static String IMP_TOKEN = "https://api.iamport.kr/users/getToken";
 	//아임포트 결제 취소 요청 url
 	private final static String IMP_CANCELURL = "https://api.iamport.kr/payments/cancel";
-		
-	
-	
+
 	@Autowired
 	private DonationService ndservice;
+	
+	@Autowired
+	private BoardShowsService bservice; // 인증게시판 aisde용
+	
+	@Autowired 
+	private NoticeBoardService nservice;  // 공지사항 게시판 aisde용
 	
 	@GetMapping("/moneyDonationForm") //후원금 기부페이지 이동
 	public ModelAndView moneyForm(ModelAndView mav, @AuthenticationPrincipal MemberDetails md) {		
@@ -65,6 +71,10 @@ public class DonationImportController {
 			log.info("로그인한 사람 이름 - " + md.getmember().getName());
 			mav.addObject("username", md.getmember().getName());
 		}
+		
+		mav.addObject("asidelist", bservice.asidelist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		mav.addObject("nlist", nservice.asideNlist()); // 인증게시판 aisde에 최신순 뿌려주는 리스트
+		
 		return mav;
 	}
 	
