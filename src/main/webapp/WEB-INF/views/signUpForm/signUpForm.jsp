@@ -463,9 +463,9 @@ overflow:overlay;
 									member_id :{
 										required : true, /* 필수인가? true는 yes를 의미 */
 										email : true, /* 이메일 형식인가? */
-										remote : "${pageContext.request.contextPath}/IdCheck",
+										remote : "${pageContext.request.contextPath}/IdCheck"
 										/* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
-										spaceCheck : true
+										/* spaceCheck : true */
 									},
 									subemail : {
 										required : true,
@@ -508,8 +508,8 @@ overflow:overlay;
 									member_id :{
 										required : '이메일을 입력해 주세요.',
 										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
-										remote :'이미 사용중인 이메일 입니다.',
-										spaceCheck: '공백없이 입력해주세요.'
+										remote :'이미 사용중인 이메일 입니다.'
+										/* spaceCheck: '공백없이 입력해주세요.' */
 									},
 									subemail : {
 										required : '이메일을 입력해 주세요.',
