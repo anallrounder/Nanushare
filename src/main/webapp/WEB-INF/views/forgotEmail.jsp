@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/resources/signUpForm/css/style.css">
 
+<<<<<<< HEAD
 <script type="text/javascript">
     $(function() {
     	var token = $("meta[name='_csrf']").attr("content");
@@ -76,6 +77,68 @@
         						button : true 
         					});
                            
+=======
+    <link rel="stylesheet" href="/resources/signUpForm/css/style.css">
+    
+    
+    <style type="text/css">
+    	body{
+    		background-image : url("/resources/loginform/images/img_10.jpg");
+			/* background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900"); */
+			background-size: cover;
+			/*opacity: 0.7; */
+			/* background-color: rgba(255,255,255,0.1); */
+			
+		}
+		
+    	.error {
+    		color : red;   	
+    	}
+    </style>
+    
+   
+
+   <script type="text/javascript">
+        $(function() {
+        	
+        	var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            $(document).ajaxSend(function(e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+            });
+            
+        	
+            
+            $('#findEmail').click(function() { // 버튼 클릭시 입력한 이메일로 아이디에 해당하는 이메일을 해당 이메일로 전송
+                var mail = $("#subemail").val(); // 인증받을 이메일 주소
+                if (mail == "") {
+                	swal({
+						title : "메일 주소가 입력되지 않았습니다." , 
+						icon : "success" , 
+						button : true 
+					});
+                    
+                } else {
+                    $.ajax({
+                        type: 'post',
+                        url: '${pageContext.request.contextPath}/sendFindEmail',
+                        data: {
+                            mail: mail
+                        },
+                        dataType: 'json',
+                        async: "false",
+                        success: function(data) {
+                            console.log(data.findEmail);
+                            findEmail = data.findEmail;
+                            if (mail != "") {
+                            	swal({
+            						title : "아이디가 해당 메일로 전송되었습니다." , 
+            						icon : "success" , 
+            						button : true 
+            					});
+                               
+                            }
+>>>>>>> #dev_si_donaValidation
                         }
                     }
 

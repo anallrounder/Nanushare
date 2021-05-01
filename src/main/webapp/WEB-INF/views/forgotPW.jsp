@@ -45,6 +45,7 @@
     
     
     
+<<<<<<< HEAD
 <style type="text/css">
 body {
 	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
@@ -181,6 +182,20 @@ a:hover {
  	text-decoration: none;
 }
 </style>
+=======
+    <style type="text/css">
+    body {
+    		background-image : url("/resources/loginform/images/img_11.jpg");
+			/* background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900"); */
+			background-size: cover;	
+			
+			
+		}
+    	.error {
+    		color : red;   	
+    	}
+    </style>
+>>>>>>> #dev_si_donaValidation
 
    <script type="text/javascript">
         $(function() {

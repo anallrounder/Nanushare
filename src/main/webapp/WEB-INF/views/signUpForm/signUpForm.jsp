@@ -186,7 +186,8 @@
 }
 
 body {
-	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
+	background-image : url("/resources/loginform/images/img_9.jpg");
+	/* background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900"); */
 	background-size: cover;	
 	width:auto;
 	height:170%;
