@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.BoardreplyVO;
+import com.share.nanu.VO.DonationVO;
 import com.share.nanu.VO.IteminvenVO;
 import com.share.nanu.VO.MemberVO;
 import com.share.nanu.VO.PointVO;
@@ -36,73 +37,73 @@ public class MyPageServiceImpl implements MyPageService {
 		@Override
 		public List<BoardVO> ask(Criteria cri, String member_id) {
 
-			return mgmapper.mygetlist1(cri, member_id);
+			return mgmapper.ask(cri, member_id);
 		}
 
 		@Override
-		public int getTotalCount1(Criteria cri, String member_id) {
-			return mgmapper.getTotalCnt1(cri, member_id);
+		public int getTotalCount_ask(Criteria cri, String member_id) {
+			return mgmapper.getTotalCount_ask(cri, member_id);
 		}
 
 		// 2.마이페이지-나의인증
 		@Override
 		public List<BoardVO> content(Criteria cri, String member_id) {
-			return mgmapper.mygetlist2(cri, member_id);
+			return mgmapper.content(cri, member_id);
 		}
 
 		@Override
-		public int getTotalCount2(Criteria cri, String member_id) {
-			return mgmapper.getTotalCnt2(cri, member_id);
+		public int getTotalCount_content(Criteria cri, String member_id) {
+			return mgmapper.getTotalCount_content(cri, member_id);
 		}
 
 		// 3.마이페이지-나의나눔
 		@Override
 		public List<IteminvenVO> give(Criteria cri, String member_id) {
-			return mgmapper.mygetlist3(cri, member_id);
+			return mgmapper.give(cri, member_id);
 		}
 
 		@Override
-		public int getTotalCount3(Criteria cri, String member_id) {
-			return mgmapper.getTotalCnt3(cri, member_id);
+		public int getTotalCount_give(Criteria cri, String member_id) {
+			return mgmapper.getTotalCount_give(cri, member_id);
 		}
 
 		//  4.마이페이지-나의댓글
 		@Override
 		public List<BoardreplyVO> reply(Criteria cri, String member_id) {
 
-			return mgmapper.mygetlist4(cri, member_id);
+			return mgmapper.reply(cri, member_id);
 		}
 
 		@Override
-		public int getTotalCount4(Criteria cri, String rid) {
+		public int getTotalCount_reply(Criteria cri, String rid) {
 
-			return mgmapper.getTotalCnt4(cri, rid);
+			return mgmapper.getTotalCount_reply(cri, rid);
 		}
 
 		// 5.마이페이지 - 결제내역
 		@Override
-		public List<BoardreplyVO> pay(Criteria cri, String member_id) {
+		public List<DonationVO> pay(Criteria cri, String member_id) {
 
-			return mgmapper.mygetlist5(cri, member_id);
+			return mgmapper.pay(cri, member_id);
 		}
 
 		@Override
-		public int getTotalCount5(Criteria cri, String member_id) {
+		public int getTotalCount_pay(Criteria cri, String member_id) {
 
-			return mgmapper.getTotalCnt5(cri, member_id);
+			return mgmapper.getTotalCount_pay(cri, member_id);
 		}
 
 		// 6.마이페이지 - 포인트내역
 		@Override
 		public List<PointVO> point(Criteria cri, String member_id) {
 
-			return mgmapper.mygetlist6(cri, member_id);
+			return mgmapper.point(cri, member_id);
 		}
 
 		@Override
-		public int getTotalCount6(Criteria cri, String member_id) {
+		public int getTotalCount_point(Criteria cri, String member_id) {
 
-			return mgmapper.getTotalCnt6(cri, member_id);
+			return mgmapper.getTotalCount_point(cri, member_id);
 		}
 
 		// 회원수정

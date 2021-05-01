@@ -128,7 +128,7 @@ a:hover {
 									</div>
 									<div class="col-md-5">
 										<div class="charity-aboutus-text">
-											<i class="fas fa-hand-holding-heart" style="color: #FFAE73; font-size: 25px;"> 나누셰어 로고</i> <img
+											<i class="fas fa-hand-holding-heart" style="color: #FFAE73; font-size: 25px;"> 나누셰어 로고</i><div>&nbsp;</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
 												src="/resources/menu/나누셰어 그림.png" alt="">
 											</figure>
 										</div>
