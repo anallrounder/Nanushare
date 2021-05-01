@@ -167,17 +167,20 @@
 												title :msg , 
 												icon : "success" , 
 												button : true 
+											}).then(function () {
+												$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
 											});
 											
-											$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
+											
 										} else { //결제 실패시 호출
 											
 											swal({
 												title :"결제에 실패하였습니다." , 
 												icon : "error" , 
 												button : true 
+											}).then(function () {
+												location.reload();
 											});
-											location.reload();
 										
 										}
 										
@@ -256,16 +259,20 @@
 										title :msg , 
 										icon : "success" , 
 										button : true 
+									}).then(function () {
+										$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
 									});
 									
-									$(location).attr('href', "${pageContext.request.contextPath}/my/donation/thank");
+									
 								} else { //결제 실패시 호출
 									swal({
 										title :"결제에 실패하였습니다." , 
 										icon : "error" , 
 										button : true 
+									}).then(function () {
+										location.reload();
 									});
-									location.reload();
+									
 								}
 								
 								
@@ -285,9 +292,10 @@
 </script>
 
 <style type="text/css">
-/*  a 태그 후버시 밑줄 속성 제거 */
+/*  a 태그 후버시 밑줄, 파랑 속성 제거 */
 a:hover { 
  	text-decoration: none;
+ 	color:#333;
 }
 
 #forimg {

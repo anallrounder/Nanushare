@@ -20,8 +20,9 @@
 <style type="text/css">
 /* 랜덤 이미지 */
 body {
-	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
-	background-size: cover;	
+	/* background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900"); */
+	background-image : url("/resources/loginform/images/img_8.jpg");
+	background-size: cover;	  
 }
 
 /* 바디 아래부분 흰색 줄어들게 패딩 줄이기 */
@@ -59,20 +60,44 @@ body::after{
     color: #000 !important;
     border-radius: 40px; 
 }
-/* sign in hover 못찾음 */
-.btn-primary:hover {
-	background-color:white;
-	color:#fbceb5;
+
+/* Sign In btn */
+.btn.btn-primary {
+	margin-top:10px;
+	font-weight: bold;
+	font-size:14px;
+	text-transform: uppercase;
+    background: #FFAE73 !important;
+    border: 1px solid #FFAE73 !important;
+    color: white !important;
 }
+.btn.btn-primary:hover {
+    /* background: #C1AFAB !important; */
+    background: #fbceb5 !important;
+    border: 1px solid #fbceb5 !important;
+    color: #333 !important;
+    font-weight: bold;
+    text-transform: uppercase; 
+}
+
 /* sign-up btn radius */
 .rounded {
 	/* border-radius: 0.25rem !important; */
-    border-radius: 4rem !important; 
+   border-radius: 4rem !important; 
+}
+.login-wrap .social a {
+	background: white !important;
+    border: 1px solid white !important;
+    color: #333 !important;
+    font-weight: bold;
+    text-transform: uppercase; 
 }
 .login-wrap .social a:hover {
 	background: #fbceb5 !important;
-	border: 1px solid #fbceb5 !important;
-	color:#333;
+    border: 1px solid #fbceb5 !important;
+    color: #333 !important;
+    font-weight: bold;
+    text-transform: uppercase; 
 }
 </style>
        

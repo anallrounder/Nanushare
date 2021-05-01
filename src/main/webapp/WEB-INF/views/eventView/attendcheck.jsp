@@ -54,14 +54,10 @@
 <link rel="stylesheet" href="/resources/charity/css/color.css">
 <link rel="stylesheet" href="/resources/charity/css/responsive.css">
 
-
 <!-- 상단 로그인버튼 위치 -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 </head>
-
 
 <script type="text/javascript">
  /* https://m.blog.naver.com/sgj4958/221865512339 */ 
@@ -230,6 +226,12 @@ console.log(c);
    </script>
 
 <style>
+/*  a 태그 후버시 밑줄, 파랑 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+ 	color:#333;
+}
+
 #판 {
 	width: 1000px;
 	height: 1000px;

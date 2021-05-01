@@ -186,7 +186,8 @@
 }
 
 body {
-	background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900");
+	background-image : url("/resources/loginform/images/img_9.jpg");
+	/* background-image: url("https://source.unsplash.com/user/upcastle1/likes/1600x900"); */
 	background-size: cover;	
 	width:auto;
 	height:170%;
@@ -215,7 +216,6 @@ body::after{
    position: relative;
    /* display: table-cell; */
   /*  max-height:885px; */
-  
 }
 /* 모르겠다.ㅠ 따라해볼려고했는데 카카오는 이미지를 바디에 안넣었... */
 @media (max-width: 580px)
@@ -330,20 +330,20 @@ css에서 찾음...!
 }
 
 
-/* signup btn */
+/* sign up btn */
 .btn.btn-primary {
 	margin-top:10px;
 	font-weight: bold;
 	font-size:14px;
 	text-transform: uppercase;
-    background: #fbceb5 !important;
-    border: 1px solid #fbceb5 !important;
-    color: #333 !important;
+    background: #FFAE73 !important;
+    border: 1px solid #FFAE73 !important;
+    color: white !important;
 }
 .btn.btn-primary:hover {
     /* background: #C1AFAB !important; */
-    background: white !important;
-    border: 1px solid white !important;
+    background: #fbceb5 !important;
+    border: 1px solid #fbceb5 !important;
     color: #333 !important;
     font-weight: bold;
      text-transform: uppercase; 
@@ -351,8 +351,11 @@ css에서 찾음...!
 .img {
 max-height:897.34;
 }
-html {
+/* html {
 overflow:overlay;
+} */
+#submit-btn:hover{
+	background: white !important;
 }
 </style>
 
@@ -460,9 +463,9 @@ overflow:overlay;
 									member_id :{
 										required : true, /* 필수인가? true는 yes를 의미 */
 										email : true, /* 이메일 형식인가? */
-										remote : "${pageContext.request.contextPath}/IdCheck",
+										remote : "${pageContext.request.contextPath}/IdCheck"
 										/* 인증할때 다른 파일이나 url을 통해 인증을 받고 싶을때 이용, ajax형태, remote는 리턴타입이 boolean  */
-										spaceCheck : true
+										/* spaceCheck : true */
 									},
 									subemail : {
 										required : true,
@@ -505,8 +508,8 @@ overflow:overlay;
 									member_id :{
 										required : '이메일을 입력해 주세요.',
 										email : '이메일 형식으로 입력해 주세요. ex)xxxx@gmail.com',
-										remote :'이미 사용중인 이메일 입니다.',
-										spaceCheck: '공백없이 입력해주세요.'
+										remote :'이미 사용중인 이메일 입니다.'
+										/* spaceCheck: '공백없이 입력해주세요.' */
 									},
 									subemail : {
 										required : '이메일을 입력해 주세요.',
