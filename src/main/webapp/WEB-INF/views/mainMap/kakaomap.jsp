@@ -8,9 +8,17 @@
 <head>
 <title>Home</title>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<!-- 네이티브앱키가 아닌 자바스크립트키를 가져와야함 -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1c9fe3add9f7bb894ed0cd276c423fff"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- 네이티브앱키가 아닌 자바스크립트키를 가져와야함 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1c9fe3add9f7bb894ed0cd276c423fff"></script>
+	
+<style>
+.branches {
+  cursor:pointer;
+}
+	
+</style>
 </head>
 <body>
 <div id="map" style="width:500px;height:400px;"></div>
