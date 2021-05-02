@@ -49,6 +49,11 @@
 	rel="stylesheet">
 
 <style type="text/css">
+/*  a 태그 후버시 밑줄, 파랑 속성 제거 */
+a:hover { 
+ 	text-decoration: none;
+ 	color:#333;
+}
 #forimg {
 	/* background-color: #db7a7c; */
 	background-color: #dfebe9;
