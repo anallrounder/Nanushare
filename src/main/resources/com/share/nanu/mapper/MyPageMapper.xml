@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.share.nanu.mapper.MyPageMapper">
 	<!-- 1.나의문의내역 -->
-	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist1">
+	<select resultType="com.share.nanu.VO.BoardVO" id="ask">
 
 	<![CDATA[
 	select * from (
@@ -16,14 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 ]]>
 	</select>
 
-	<select resultType="int" id="getTotalCnt1">
+	<select resultType="int" id="getTotalCount_ask">
 		 <![CDATA[select count(*) from board where
 		bcat_num=1 and member_id = #{member_id}]]>
 	</select>
 
 
 	<!-- 2.나의인증내역 -->
-	<select resultType="com.share.nanu.VO.BoardVO" id="mygetlist2">
+	<select resultType="com.share.nanu.VO.BoardVO" id="content">
 
 	<![CDATA[
 	select * from (
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	]]>
 	</select>
 
-	<select resultType="int" id="getTotalCnt2">
+	<select resultType="int" id="getTotalCount_content">
 		<![CDATA[
 		select count(*) from board where
 		bcat_num=2 and member_id = #{member_id}
@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- resultType : 결과반환 Object, parameterType : 조회결과 Object -->
 
 
-	<select resultMap="iteminvenVO" id="mygetlist3">
+	<select resultMap="iteminvenVO" id="give">
  
 	<![CDATA[
 	
@@ -79,7 +79,7 @@ from iteminven a, itemdonation b where a.icat_num = b.icat_num and b.member_id =
 	]]>
 	</select>
 
-	<select resultType="int" id="getTotalCnt3">
+	<select resultType="int" id="getTotalCount_give">
 		<![CDATA[select count(*) from itemdonation a, iteminven b where a.icat_num = b.icat_num and member_id = #{member_id} ]]>
 	</select>
 
@@ -102,7 +102,7 @@ from iteminven a, itemdonation b where a.icat_num = b.icat_num and b.member_id =
 	</resultMap>
 
 
-	<select resultMap="boardVO" id="mygetlist4">
+	<select resultMap="boardVO" id="reply">
 
 	<![CDATA[
 	select * from (  
@@ -114,7 +114,7 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 ]]>
 	</select>
 
-	<select resultType="int" id="getTotalCnt4">
+	<select resultType="int" id="getTotalCount_reply">
 		select count(*) from board a,
 		boardreply b where a.b_index = b.b_index and rid=#{rid}
 
@@ -123,7 +123,7 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 
 	<!-- 5.나의결제내역 -->
 	<select resultType="com.share.nanu.VO.DonationVO"
-		id="mygetlist5">
+		id="pay">
 
 	<![CDATA[
 	select * from (
@@ -135,12 +135,12 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 	]]>
 	</select>
 
-	<select resultType="int" id="getTotalCnt5">
+	<select resultType="int" id="getTotalCount_pay">
 		 <![CDATA[select count(*) from donation where member_id=#{member_id}]]>
 	</select>
 
 	<!-- 6.나의포인트내역 -->
-	<select id="mygetlist6" resultType="com.share.nanu.VO.PointVO">
+	<select id="point" resultType="com.share.nanu.VO.PointVO">
 
 <![CDATA[
 	select * from (
@@ -153,7 +153,7 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 	</select>
 
 
-	<select id="getTotalCnt6" resultType="int">
+	<select id="getTotalCount_point" resultType="int">
 
 <![CDATA[select count(*) from point where member_id=#{member_id}]]>
 	</select>

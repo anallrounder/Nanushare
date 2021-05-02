@@ -78,7 +78,7 @@ public class MyPageController {
 		mav.addObject("list1", mgservice.ask(cri, md.getUsername()));// 나의문의내역
 
 		// 페이징
-		int total = mgservice.getTotalCount1(cri, md.getUsername());
+		int total = mgservice.getTotalCount_ask(cri, md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
 	}
@@ -98,7 +98,7 @@ public class MyPageController {
 		mav.addObject("list2", mgservice.content(cri, md.getUsername()));// 나의인증내역
 
 		// 페이징
-		int total = mgservice.getTotalCount2(cri, md.getUsername());
+		int total = mgservice.getTotalCount_content(cri, md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
 
 		return mav;
@@ -118,7 +118,7 @@ public class MyPageController {
 
 		mav.addObject("list3", mgservice.give(cri, md.getUsername()));// 나의나눔내역
 		// 페이징
-		int total = mgservice.getTotalCount3(cri, md.getUsername());
+		int total = mgservice.getTotalCount_give(cri, md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
 
 		return mav;
@@ -134,7 +134,7 @@ public class MyPageController {
 		mav.setViewName("/my/reply");
 		mav.addObject("list4", mgservice.reply(cri, md.getUsername()));// 나의문의내역
 		// 페이징
-		int total = mgservice.getTotalCount4(cri, md.getUsername());
+		int total = mgservice.getTotalCount_reply(cri, md.getUsername());
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
 	}
@@ -148,7 +148,7 @@ public class MyPageController {
 		mav.setViewName("/my/pay");
 		mav.addObject("list5", mgservice.pay(cri, md.getUsername()));// 나의문의내역
 		// 페이징
-		int total = mgservice.getTotalCount5(cri, md.getUsername());
+		int total = mgservice.getTotalCount_pay(cri, md.getUsername());
 
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
@@ -164,7 +164,7 @@ public class MyPageController {
 		mav.setViewName("/my/point");
 		mav.addObject("list6", mgservice.point(cri, md.getUsername()));// 나의문의내역
 		// 페이징
-		int total = mgservice.getTotalCount6(cri, md.getUsername());
+		int total = mgservice.getTotalCount_point(cri, md.getUsername());
 
 		mav.addObject("pageMaker", new pageVO(cri, total));
 		return mav;
