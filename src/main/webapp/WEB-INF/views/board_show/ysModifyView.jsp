@@ -208,7 +208,7 @@ a:hover {
                     </div>
 
                     <!-- 우측 배너  aside -->
-					<%-- <%@ include file="/WEB-INF/views/board_show/aside.jsp"%> --%>
+					 <%@ include file="/WEB-INF/views/board_show/aside.jsp"%> 
 					<!-- aside end -->
 					
                 </div>
