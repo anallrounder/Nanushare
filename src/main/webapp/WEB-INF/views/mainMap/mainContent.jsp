@@ -274,7 +274,7 @@ width: 270px;
                         <div class="charity-event-map">
                             <div class="widget_title"><h2><i class="fa fa-inbox"></i>&nbsp; NanuShare Box Location</h2></div>
                             <div id="map" style="height: 600px;">
-                            <c:import url="kakaomap2.jsp"/> </div>
+                            <c:import url="kakaomap.jsp"/> </div>
                         </div>
 
                        

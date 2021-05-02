@@ -252,7 +252,7 @@ body {
 													<a class="nav-link" href="/admin/member/itemdona?member_id=${memberView.member_id}">물품기부내역</a> 
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" href="/admin/member/moneydona?member_id=${memberView.member_id}">돈기부역내역</a>
+													<a class="nav-link" href="/admin/member/moneydona?member_id=${memberView.member_id}">돈기부여내역</a>
 												</li>
 												<li class="nav-item">
 													<a class="nav-link" href="/admin/member/point?member_id=${memberView.member_id}">포인트내역</a>
