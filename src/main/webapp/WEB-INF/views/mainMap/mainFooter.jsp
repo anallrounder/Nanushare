@@ -83,10 +83,10 @@
                     <aside class="col-md-4 widget widget_gallery">
                         <div class="charity-footer-title"> <h2>Our Share</h2> </div>
                         <ul>
-                            <li><a data-fancybox="gallery" href="/resources/picture/sb.png"><img src="/resources/picture/sb.png" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/picture/ji.png"> <img src="/resources/picture/ji.png" alt=""><i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/picture/hj.png"><img src="/resources/picture/hj.png" alt=""> <i class="fa fa-plus"></i> </a></li>
-                            <li><a data-fancybox="gallery" href="/resources/picture/hs.png"><img src="/resources/picture/hs.png" alt=""> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/picture/sb.png"><img src="/resources/picture/sb.png" alt="" style="wisth: 80px; height: 90px;"> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/picture/si.png"> <img src="/resources/picture/si.png" alt="" style="wisth: 80px; height: 90px;"><i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/picture/hj.png"><img src="/resources/picture/hj.png" alt="" style="wisth: 80px; height: 90px;"> <i class="fa fa-plus"></i> </a></li>
+                            <li><a data-fancybox="gallery" href="/resources/picture/hs.png"><img src="/resources/picture/hs.png" alt="" style="wisth: 80px; height: 90px;"> <i class="fa fa-plus"></i> </a></li>
                         </ul>
                     </aside>
                 </div>
