@@ -272,7 +272,7 @@ a:hover {
                               		<sec:authorize access="hasRole('ADMIN')">
 	                            	<span style="color:orange;">관리자:</span>
 	                            	<%-- <a href="/my/board/shows/modify_view?b_index=${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 수정 </a> --%>
-									<%-- <a href="/my/board/shows/modify_view/${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 글수정&nbsp; </a>  --%>
+									<%-- <a href="/my/board/shows/modify_view/${content_view.b_index}" class="fa fa-edit" style="color:orange;"> 글수정&nbsp; </a>   --%>
 	                            	<a id="del_btn" href="/my/board/shows/delete/${content_view.b_index}" class="fa fa-eraser" style="color:orange;"> 글삭제</a>
 	                            	</sec:authorize>
 	                           	</div>

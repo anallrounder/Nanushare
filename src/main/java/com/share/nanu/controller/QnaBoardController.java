@@ -1,5 +1,9 @@
 package com.share.nanu.controller;
 
+import java.io.File;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +26,7 @@ import com.share.nanu.controller.QnaBoardController;
 import com.share.nanu.paging.Criteria;
 import com.share.nanu.paging.PageVO;
 import com.share.nanu.security.MemberDetails;
+import com.share.nanu.VO.AttachmentVO;
 import com.share.nanu.VO.BoardVO;
 import com.share.nanu.VO.BoardreplyVO;
 
@@ -180,5 +185,54 @@ public class QnaBoardController {
 		
 		return mov;
 	}
+	
+	// 인증게시판 게시글 삭제
+		// ck에디터로 저장되어지는 이미지는 디비에 저장히자 않아서..... 이미지의 경로를 모른다....
+		@GetMapping("/qnaboard/shows/delete/{b_index}")
+		public void bsDelete(ModelAndView mav,HttpServletResponse response, BoardVO bvo, AttachmentVO attvo, BoardreplyVO brvo)
+				throws Exception {
+			// 1. attachment 테이블에서 게시판 글번호 조회 -> 이미지 삭제 -> attachment 테이블에서 조회한 글번호로 첨부파일
+			// 데이터 삭제
+			// 2. 댓글 테이블에서 게시판 글번호로 댓글 삭제
+			// 3. board 테이블에서 b_index 조회 -> 마지막으로 board테이블에서 글삭제
+			// 4. 리스트로 이동
+
+			// ck 에디터로 올리는 이미지 삭제는 잠시 보류.. 게시판 글번호를 가져올 수 없어서 찾을 수 없다.
+			log.info("인증게시판 글 삭제");
+			log.info("getbIndex : " + bvo.getB_index());
+			// 1. 썸네일 로컬에서 삭제
+			String path = bservice.getAttachmentBindex(bvo.getB_index()); // attachment 에서 삭제할 썸네일 이미지 경로 가져오기
+			if (path != null) {
+
+				File deleteFile = new File(path);
+				if (deleteFile.exists()) { // 파일의 유뮤 체크
+					deleteFile.delete();
+
+					log.info("썸네일 삭제");
+				} else {
+					log.info("삭제할 썸네일이 업습니다.");
+				}
+
+				bservice.deleteAttachment(bvo.getB_index());
+				log.info("썸네일 저장 테이블에서 삭제");
+
+			}
+
+			// 2. 댓글 테이블에서 해당 게시판 글번호로 댓글 전부 삭제
+			bservice.deleteReply(bvo.getB_index());
+			log.info("인증게시판 댓글 삭제");
+
+			// 3. board 테이블에서 인증글 삭제
+			bservice.deleteCertificationBoard(bvo.getB_index());
+			log.info("인증게시판 글 삭제");
+			
+			response.sendRedirect("/board/qna");
+
+			/*
+			 * mav.setViewName("/board_show/yourSupportList"); return mav;
+			 */
+
+		}
+	
 
 }

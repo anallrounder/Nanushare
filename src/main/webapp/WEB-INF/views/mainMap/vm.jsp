@@ -230,7 +230,7 @@ option:hover {
 				<select class="machine" > 
 					 <option value="" hidden>자판기를 선택하세요</option>
 					<c:forEach items="${vmcat}" var="cat">
-						<option value="${cat.vm_num}" >${cat.vm_num}</option>
+						<option value="${cat.vm_num}" > &nbsp; ${cat.vm_num} &nbsp; (${cat.branch})</option>
 					</c:forEach>
 					
 				</select>

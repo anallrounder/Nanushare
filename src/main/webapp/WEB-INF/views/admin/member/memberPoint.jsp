@@ -238,7 +238,7 @@ body {
 													<a class="nav-link" href="/admin/member/itemdona?member_id=${pageMaker.member_id}">물품기부내역</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" href="/admin/member/moneydona?member_id=${pageMaker.member_id}">돈기부역내역</a>
+													<a class="nav-link" href="/admin/member/moneydona?member_id=${pageMaker.member_id}">돈기부여내역</a>
 												</li>
 												<li class="nav-item">
 													<a class="nav-link active" data-toggle="tab" href="#point">포인트내역</a>

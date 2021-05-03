@@ -214,7 +214,7 @@ public class BoardShowsRestController {
 
 		// ck 에디터로 올리는 이미지 삭제는 잠시 보류.. 게시판 글번호를 가져올 수 없어서 찾을 수 없다.
 		log.info("인증게시판 글 삭제");
-
+		log.info("getbIndex : " + bvo.getB_index());
 		// 1. 썸네일 로컬에서 삭제
 		String path = service.getAttachmentBindex(bvo.getB_index()); // attachment 에서 삭제할 썸네일 이미지 경로 가져오기
 		if (path != null) {
