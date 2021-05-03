@@ -377,7 +377,7 @@ https://stackoverflow.com/questions/36207203/uncaught-typeerror-datepicker-is-no
 <script>
 $(document).ready(function() { 
 	$('.datepicker').datepicker();
-	
+	/* 
 	$(".charity-simple-blog-btn").click(function(event){
 		event.preventDefault();
 		
@@ -386,9 +386,9 @@ $(document).ready(function() {
 		text: "물품 수량이 변경되었습니다",
 		type: "success",
 		}).then(function(){ 
-			document.getElementsByClassName('charity-volunteer-form').submit();
+			document.getElementsById('boardForm').submit();
 			});
-	});
+	}); */
   });
 	
 	/* dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
