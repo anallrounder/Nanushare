@@ -129,7 +129,7 @@ from boardreply a, board b where a.b_index = b.b_index and a.rid = #{rid} order 
 	select * from (
 						select rownum as rnum, a.* 
 		  		from ( 
-		    		select * from donation where member_id=#{member_id} order by dntdate desc
+		    		select * from donation where member_id=#{member_id} order by dnt_paynum desc
 		   	    )a where rownum <= #{cri.pageNum} * #{cri.amount}
 		 	) where rnum >  (#{cri.pageNum}-1) * #{cri.amount} 
 	]]>
