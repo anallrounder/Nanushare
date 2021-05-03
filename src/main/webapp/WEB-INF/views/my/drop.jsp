@@ -127,10 +127,10 @@ a:hover {
 														data : JSON.stringify(check),
 														/* async : "false", */
 														datatype : 'text',
-														success : function(Checkform) {
+														success : function(result) {
 															console.log(Checkform);
 															
-															if (Checkform == true) {
+															if (result == "SUCCESS") {
 																console.log("success");
 
 																/* alert("탈퇴되었습니다. 그동안 이용해주셔서 감사합니다. "); */
