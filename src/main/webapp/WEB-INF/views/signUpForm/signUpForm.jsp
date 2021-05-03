@@ -146,7 +146,7 @@
         
         $('#compare').on("propertychange change keyup paste input", function() {
     		if ($("#compare").val() == key) {
-    				$("#compare-text").text("인증에 성공하셨습니다.").css("color","black");
+    				$("#compare-text").text("인증에 성공하셨습니다.").css("color","red");
     				isCertification = true;
     		} else {
     			$("#compare-text").text("인증에 실패하셨습니다.").css("color","red");
@@ -350,6 +350,9 @@ css에서 찾음...!
 }
 .img {
 max-height:897.34;
+}
+#compare-text{
+	color: red;
 }
 /* html {
 overflow:overlay;
