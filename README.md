@@ -74,7 +74,7 @@
   기존 부트스트랩 css코드에서 통일성 있는 웹페이지 디자인을 위해 코드 색상 및 기능 통일을 위한 작업들을 진행했습니다.
   <br/>
 
-## 링크 (수정중)
+## 링크
 
 - [프로젝트 일정표](https://docs.google.com/spreadsheets/d/1ME5_bBikOx7_cQHwPiANDGv5_HBU7tCQ_JnezfY6In8/edit#gid=0)
 - [요구사항 명세서](https://docs.google.com/spreadsheets/d/1ME5_bBikOx7_cQHwPiANDGv5_HBU7tCQ_JnezfY6In8/edit#gid=639719371)
