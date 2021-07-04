@@ -2,7 +2,7 @@
 <br>
 
 # 나누셰어 Nanushare 
-<img src="https://user-images.githubusercontent.com/43713628/124374352-94f28a80-dcd5-11eb-9fac-66a491b711c2.png" width="320px" height="auto" align="left"> <br> - 생필품을 필요로 하는 이웃에게 기부를 통해 일상생활이 편리해지도록 돕고  **작은것부터 나누기 시작하자**는 기부 문화를 만들어 나가기 위한 공유 플랫폼을 기획했습니다. <br/> - 누구든지 쉽게 나눔을 받을 수 있도록 **접근성과 편의성을 고려**해 지하철역 위주로 나눔자판기를 배치하고 **지도에서 실시간으로 잔여수량을 확인할 수 있도록**했습니다. 
+<img src="https://user-images.githubusercontent.com/43713628/124374352-94f28a80-dcd5-11eb-9fac-66a491b711c2.png" width="320px" height="auto" align="left"> <br> - 생필품을 필요로 하는 이웃에게 기부를 통해 일상생활이 편리해지도록 돕고  **작은것부터 나누기 시작하자**는 기부 문화를 만들어 나가기 위한 공유 플랫폼을 기획했습니다. <br/> - 누구든지 쉽게 나눔을 받을 수 있도록 **접근성과 편의성을 고려**해 지하철역 위주로 나눔자판기를 배치하고 **지도에서 실시간으로 잔여수량을 확인할 수 있도록**했습니다.
 <br clear="left">
 <br>
 
@@ -41,9 +41,15 @@
 
 ### 물품 나눔
 
+![화면 캡처 2021-07-04 150720](https://user-images.githubusercontent.com/43713628/124374878-b190c180-dcd9-11eb-986c-659e748ccb41.png)
+![화면 캡처 2021-07-04 150757](https://user-images.githubusercontent.com/43713628/124374880-b2295800-dcd9-11eb-87a9-9d413b928eb2.png)
+
 가입한 회원이 <u>기부할 물품과 수량을 선택</u> 하여 오늘 날짜로 물품나눔 <u>신청서를 작성</u> 할 수 있도록 했습니다. 기부 내역을 DB에 저장하여 회원이 마이페이지에서 확인 가능하고, 관리자도 확인할 수 있도록 했습니다.
 
 ### 돈기부여 (포인트 나눔)
+
+![화면 캡처 2021-07-04 150952](https://user-images.githubusercontent.com/43713628/124374932-23690b00-dcda-11eb-8185-3dee09a0270a.png)
+![화면 캡처 2021-07-04 151123](https://user-images.githubusercontent.com/43713628/124374933-249a3800-dcda-11eb-80b1-9c3f8784dbc0.png)
 
 가입한 회원이 출석체크, 게임 등을 통해 모은 <u>포인트를 나눔</u>할 수 있도록 했습니다. <u>변동 내역을 DB에 저장</u>하여 마이페이지에서 기부내역 및 포인트 정보를 확인할 수 있도록 했습니다.
 
@@ -51,7 +57,8 @@
 
 ![화면 캡처 2021-07-03 154905](https://user-images.githubusercontent.com/43713628/124374445-311c9180-dcd6-11eb-8f0e-d3fc6384515d.png)  <br/>
 ![화면 캡처 2021-07-03 155135](https://user-images.githubusercontent.com/43713628/124374447-3548af00-dcd6-11eb-8d7a-961f2bd17fda.png)  <br/>
-
+![화면 캡처 2021-07-04 150601](https://user-images.githubusercontent.com/43713628/124374964-498eab00-dcda-11eb-874b-4826be35a4d6.png)
+![화면 캡처 2021-07-04 150656](https://user-images.githubusercontent.com/43713628/124374965-4abfd800-dcda-11eb-9705-4b7e92547562.png)
 
 - 작성자, 제목, 글내용으로 검색할 수 있도록 <u>검색기능을 동적 SQL을 통해 구현</u>했습니다.
 - 게시판의 <u>페이징 기능을 구현</u>했습니다.
