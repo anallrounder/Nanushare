@@ -14,7 +14,12 @@
 
 ## 개발 환경
 
+![나누셰어-Project-최종ppt-0505_페이지_09](https://user-images.githubusercontent.com/43713628/124374120-93c05e00-dcd3-11eb-9666-f7e9e9035336.jpg)  
+![나누셰어-Project-최종ppt-0505_페이지_10](https://user-images.githubusercontent.com/43713628/124374122-958a2180-dcd3-11eb-93b5-b176971c1af4.jpg)
+
 ## ERD
+
+![erd](https://user-images.githubusercontent.com/43713628/124374204-3e388100-dcd4-11eb-880a-8960ae63c0ae.png)
 
 ## 나의 역할
 
