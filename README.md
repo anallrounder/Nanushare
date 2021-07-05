@@ -83,7 +83,7 @@
 - [화면 설계서](https://documentcloud.adobe.com/link/track?uri=urn:aaid:scds:US:9dcac066-eef4-4b5d-9f68-3fcd91389ca6)
 - [테스트 문서](https://docs.google.com/presentation/d/1dbqVaYyNHt3PsqDUZKz1kVKeShTPsPwaOvBca1moK5A/edit#slide=id.gd083f20291_2_0)
 
-## 조원 (깃허브)
+## 조원
 
 - [심혜선](https://github.com/anallrounder)
 - [이슬비](https://github.com/seulpi)
